@@ -36,13 +36,22 @@ Ngoài phạm vi: UpAcademy · Admin · Super Admin — xem `.claude/_shared-kno
 | Cần gì | Lấy ở đâu |
 |---|---|
 | Business rule, luồng nghiệp vụ | KB `01`–`11` |
-| Bảng, khoá ngoại, quan hệ | KB `12` + `UpLnD DB Diagram.html` |
+| Bảng, khoá ngoại, quan hệ | KB `12` → nguồn gốc: [Lark `Data Architecture`](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd) |
 | **Field, kiểu dữ liệu, required, enum** | Swagger `components.schemas` — nguồn tốt nhất cho field-level |
 | Endpoint | `lms-be.staging.upbase.asia/api/v1/docs-json` · `ops-be.staging.upbase.asia/api/v1/docs-json` |
-| Mail tự động theo event | KB `13` |
+| Mail tự động theo event | KB `13` — 📌 bản chốt, không còn file gốc |
 | **Vùng KB chưa phủ** | KB `14` §1–2 — **đọc trước khi kết luận "không ảnh hưởng"** |
 
 > ⚠️ **KB chỉ phủ khoảng một nửa hệ thống.** Ops có 25 nhóm API và LMS có 8 nhóm không có trong User Guide (lịch dạy · phòng học · thi cử · phòng ban · phân quyền). Vùng thuộc phần chưa phủ → ghi `❓BA`, không kết luận.
+
+### KB là bản chụp — biết khi nào phải đọc lại nguồn
+
+| Loại | Gồm | Quy tắc |
+|---|---|---|
+| 🔄 **Nguồn sống** | Schema DB (Lark) · Swagger staging · GitBook UG | Yêu cầu **chạm tới vùng đó** → đọc lại nguồn, không tin bản chép. Quá **1 tháng** kể từ "Đối chiếu lần cuối" → đọc lại trước khi dùng |
+| 📌 **Bản chốt** | 30 mail event (KB `13`) · SIS | Không còn file gốc. Nghi ngờ → **hỏi người dùng**, không tự suy |
+
+Đọc lại thấy **khác KB** → cập nhật KB và sửa ngày "Đối chiếu lần cuối" ngay, đừng dùng tạm rồi bỏ qua.
 
 ## Cách làm việc
 

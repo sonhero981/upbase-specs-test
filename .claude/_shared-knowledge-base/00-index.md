@@ -8,13 +8,16 @@ KB này là **bản chắt lọc** từ nhiều nguồn, dùng làm đầu vào 
 
 ## Nguồn
 
-| Nguồn | Phạm vi | Ngày |
-|---|---|---|
-| GitBook `uplms` + `uplms-ops` | 57 page User Guide | 22/09/2026 |
-| `Danh sách mail UpLMS.xlsx` | 30 mail event tự động | 23/09/2026 |
-| `UpLnD DB Diagram.html` | 85 bảng, 173 quan hệ (chỉ PK/FK) | 23/09/2026 |
-| Swagger LMS + Ops (staging) | 555 + 153 operation, 267 DTO | 23/09/2026 |
-| BA xác nhận trực tiếp | SIS, trạng thái mail | 23/09/2026 |
+| Nguồn | Phạm vi | Loại | Đối chiếu lần cuối |
+|---|---|---|---|
+| GitBook `uplms` + `uplms-ops` | 57 page User Guide | 🔄 nguồn sống | 22/09/2026 |
+| [Lark → Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd) | 85 bảng, 173 quan hệ (chỉ PK/FK) | 🔄 nguồn sống | 23/09/2026 |
+| Swagger LMS + Ops (staging) | 555 + 153 operation, 267 DTO | 🔄 nguồn sống | 23/09/2026 |
+| BA cung cấp + xác nhận trực tiếp | 30 mail event · SIS · trạng thái mail | 📌 bản chốt | 23/09/2026 |
+
+> **🔄 nguồn sống** = có bản gốc ở ngoài, đọc lại được khi nghi ngờ. **Định kỳ mỗi tháng kiểm một lượt**; quá hạn mà yêu cầu chạm tới vùng đó thì đọc lại trước.
+>
+> **📌 bản chốt** = không còn file gốc, KB chính là nguồn. Nghi ngờ → **hỏi người dùng**, không tự suy.
 
 ---
 

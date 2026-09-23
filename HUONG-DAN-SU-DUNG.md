@@ -84,11 +84,11 @@ git config --global user.email "email@upbase.vn"
 
 ### 2.3 Mở đúng thư mục
 
-**Bắt buộc:** File → Open Folder → chọn thư mục **`ba-ai-upbase`**.
+**Bắt buộc:** File → Open Folder → chọn thư mục **`po-workflow-upbase`**.
 
 Claude Code chỉ đọc được file trong thư mục đang mở. Mở sai thì AI không tìm thấy KB và các lệnh sẽ không chạy đúng.
 
-Kiểm tra: panel Explorer bên trái hiện `ba-ai-upbase`, bên dưới có `.claude/` và `CLAUDE.md`.
+Kiểm tra: panel Explorer bên trái hiện `po-workflow-upbase`, bên dưới có `.claude/` và `CLAUDE.md`.
 
 ### 2.4 Chụp màn hình cho User Guide (tuỳ chọn)
 
@@ -99,11 +99,9 @@ Kiểm tra: panel Explorer bên trái hiện `ba-ai-upbase`, bên dưới có `.
 ## 3. Cấu trúc thư mục
 
 ```
-ba-ai-upbase/
+po-workflow-upbase/
 ├── CLAUDE.md                      ← AI đọc mỗi phiên: phạm vi, quy ước, nguồn tra cứu
 ├── HUONG-DAN-SU-DUNG.md           ← file này
-├── UpLnD DB Diagram.html          ← 85 bảng, mở bằng browser để xem
-├── Danh sách mail UpLMS.xlsx      ← 30 mail tự động
 └── .claude/
     ├── commands/                  ← 11 lệnh
     ├── checklist/                 ← tiêu chí AI tự kiểm trước khi trả kết quả
@@ -270,11 +268,20 @@ AI sửa nhắm đích, không viết lại cả PRD.
 | `[suy ra]` | AI suy luận, không phải câu chữ trực tiếp |
 | **Hidden** | Tính năng **đã có code nhưng tạm ẩn** — vẫn phải xét khi phân tích |
 
-### Hai giới hạn cần nhớ
+### Ba giới hạn cần nhớ
 
 **KB chỉ phủ khoảng một nửa hệ thống.** Ops có 25 nhóm chức năng và LMS có 8 nhóm không có trong User Guide — lịch dạy, phòng học, thi cử, phòng ban, phân quyền. Trước khi tin "vùng này không bị ảnh hưởng", xem `14-api-surface.md` §1–2.
 
 **Rule `KB-*` chưa được duyệt.** 110 rule loại này do AI trích ra, cần bạn xác nhận trước khi dùng làm ràng buộc trong PRD.
+
+**KB là bản chụp, không phải bản gốc.** Repo không giữ file nguồn — xem bảng `Nguồn` trong `00-index.md`:
+
+| Loại | Nghĩa | Khi nghi ngờ |
+|---|---|---|
+| 🔄 **Nguồn sống** — schema DB ([Lark `Data Architecture`](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd)), Swagger staging, GitBook | Có bản gốc ngoài repo | Bảo AI **đọc lại nguồn**. Yêu cầu chạm tới dữ liệu thì AI tự đọc lại, không cần nhắc |
+| 📌 **Bản chốt** — 30 mail event, SIS | Không còn file gốc, KB chính là nguồn | AI sẽ **hỏi bạn**, không tự suy |
+
+Nguồn sống nên **kiểm lại mỗi tháng một lượt**: mở phiên mới và bảo *"đọc lại schema DB trên Lark, đối chiếu với KB 12"*. Lệch thì AI cập nhật KB và sửa ngày "Đối chiếu lần cuối".
 
 ---
 

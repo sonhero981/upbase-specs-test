@@ -38,7 +38,7 @@ Dùng sau khi BRD được Gate 1 duyệt, để phân tích đầy đủ ảnh 
 | Cần gì | Nguồn |
 |---|---|
 | Business rule, luồng nghiệp vụ, tính năng ẩn | KB `01`–`11` |
-| Bảng, khoá ngoại, quan hệ | KB `12-data-model.md` + `UpLnD DB Diagram.html` |
+| Bảng, khoá ngoại, quan hệ | KB `12-data-model.md` — **chạm tới dữ liệu thì đọc lại nguồn Lark**, xem §Nguồn sống trong KB 12 |
 | **Field, kiểu dữ liệu, required, enum** | Swagger `components.schemas` — **nguồn tốt nhất cho field-level** |
 | Endpoint đã có | `lms-be.staging.upbase.asia/api/v1/docs-json` · `ops-be.staging.upbase.asia/api/v1/docs-json` |
 | Mail tự động theo event | KB `13-mail-events.md` |

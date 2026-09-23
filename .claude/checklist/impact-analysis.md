@@ -7,7 +7,9 @@
 
 ## Nguồn đã tra
 - [ ] KB `01`–`11` — business rule, luồng nghiệp vụ
-- [ ] KB `12` + DB Diagram — bảng, khoá ngoại
+- [ ] KB `12` — bảng, khoá ngoại
+- [ ] **[BLOCK]** Yêu cầu **chạm tới dữ liệu** → đã đọc lại schema gốc trên [Lark `Data Architecture`](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd), không dựa vào bản chép trong KB
+- [ ] Bản KB `12` quá **1 tháng** kể từ "Đối chiếu lần cuối" → đã đọc lại nguồn và cập nhật ngày
 - [ ] **Swagger `components.schemas`** — field, kiểu, required, enum
 - [ ] KB `13` — mail event bị chạm, có cái nào **đang tắt**
 - [ ] **[BLOCK]** KB `14` §1–2 — đã kiểm vùng nào **KB chưa phủ** trước khi kết luận "không ảnh hưởng"

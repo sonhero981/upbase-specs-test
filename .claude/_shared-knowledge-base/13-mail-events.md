@@ -4,7 +4,12 @@
 |---|---|
 | Hệ | UpLMS + UpLMS Ops + Cronjob |
 | Trạng thái | 🟢 **Hệ thống gửi mail tự động ĐANG CHẠY** |
-| Nguồn | `Danh sách mail UpLMS.xlsx` (30 mail) · BA xác nhận 23/09/2026 |
+| Nguồn | BA cung cấp danh sách 30 mail + xác nhận trực tiếp — **23/09/2026** |
+| Loại nguồn | 📌 **Bản chốt** — không còn file gốc, KB này chính là nguồn |
+
+> 📌 **Không có nguồn sống để đối chiếu.** Danh sách 30 mail dưới đây được chốt lại từ file BA cung cấp ngày 23/09/2026; file đó không lưu trong repo.
+>
+> Nghi ngờ nội dung mail, trạng thái bật/tắt, hay có mail mới → **hỏi người dùng**, đừng tự suy từ code hay từ API. Cần đối chiếu kỹ thuật thì dùng nhóm API `Mail Log Management` ([14-api-surface.md](14-api-surface.md)).
 
 > ✅ **Đính chính quan trọng (23/09/2026).** Bản KB đầu tiên kết luận "module Email đang ẩn → luồng nghiệp vụ đứt ở mắt xích thông báo" — **sai**.
 >

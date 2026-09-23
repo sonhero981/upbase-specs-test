@@ -2,9 +2,34 @@
 
 | | |
 |---|---|
-| Nguồn | `UpLnD DB Diagram.html` (cung cấp 23/09/2026) |
-| Quy mô | **85 bảng · 173 quan hệ khoá ngoại** |
+| Nguồn | **Lark wiki → `Data Architecture`** — https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd |
+| File | `UpLnd DB Full.html` (node con của trang trên) |
+| Đối chiếu lần cuối | **23/09/2026** — 85 bảng · 173 quan hệ, khớp với bản KB này |
+| Quy mô | **85 bảng · 173 quan hệ khoá ngoại · 320 cột được khai** |
 | Giới hạn | ⚠️ Diagram **chỉ chứa PK và FK**, không có danh sách cột đầy đủ, không có kiểu dữ liệu, không có index |
+
+> ## 🔄 Nguồn sống — phải đọc lại, không tin bản chép
+>
+> Schema nằm trên Lark và **thay đổi theo hệ thống**. KB này chỉ là bản chụp tại ngày đối chiếu ở trên.
+>
+> **Đọc lại khi:**
+> - Yêu cầu chạm tới bảng / quan hệ dữ liệu — **bắt buộc**, trước khi kết luận trong Impact Analysis
+> - Người dùng báo DB có thay đổi
+> - **Định kỳ mỗi tháng** — quá 1 tháng kể từ "Đối chiếu lần cuối" thì đọc lại trước khi dùng
+>
+> Đọc lại xong mà **khác** bản này → cập nhật KB và sửa ngày, **đừng chỉ dùng tạm rồi bỏ qua**.
+
+<details>
+<summary><b>Cách lấy file từ Lark</b> (node con là <code>file</code>, không phải docx — không mở bằng tool đọc doc thường)</summary>
+
+1. `wiki/v2/spaces/get_node?token=MaFpweI68iKNMvkTioLlJ1uJgQd` → lấy `space_id`
+2. `wiki/v2/spaces/{space_id}/nodes?parent_node_token=MaFpweI68iKNMvkTioLlJ1uJgQd` → node con, lấy `obj_token`
+3. `drive/v1/files/{obj_token}/download` → file HTML
+4. Dữ liệu nằm trong biến JS `RAW` trong HTML: `{tables, edges, layout}`
+
+Cần `user_access_token` (scope `wiki:wiki` + `drive:drive`) — `tenant_access_token` **không đọc được wiki**.
+
+</details>
 
 > Đây là nguồn đầu tiên cho tầng dữ liệu. KB trước đó dựng hoàn toàn từ UG nên không có gì về data model.
 

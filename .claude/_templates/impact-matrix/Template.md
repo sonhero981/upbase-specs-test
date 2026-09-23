@@ -5,7 +5,7 @@
 | **Project** | |
 | **Version** | v0.1 |
 | **Ngày** | |
-| **Nguồn input** | `brd-v*.md` (Gate 1) · KB · DB Diagram · Swagger |
+| **Nguồn input** | `brd-v*.md` (Gate 1) · KB · schema Lark `Data Architecture` · Swagger |
 | **Trạng thái** | `Draft` / `Pending Confirmation` / `Approved` |
 
 > Bản phân tích **nội bộ**, không phải mục trong PRD. Kết quả chảy vào PRD ở: `Solution` · `Database` · `API` · `Acceptance criteria → Data Field` · `Out of scope`.
