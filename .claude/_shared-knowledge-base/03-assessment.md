@@ -30,13 +30,19 @@
 | **Manual Grading** | `Yes` \| `No` | — | **Chỉ hiện khi Type = Constructed hoặc Mixed.** No → Mixed chấm tự động phần trắc nghiệm; Constructed toàn phần thì không chấm |
 | **Graded Assignment** | `Yes` \| `No` | — | Có tính điểm cho toàn khoá hay không |
 | **Grading Preference** | `After each question` \| `After all questions` | After all questions | Thời điểm hiện đáp án + lời giải |
-| **Pass Point** | `Auto 50%` \| `Manual` | Auto 50% | Manual → Admin nhập số |
+| **Pass Point** | `Auto 50%` \| `Manual` | Auto 50% | **Chỉ hiện khi `Graded Assignment = Yes`.** Manual → Admin nhập số |
 | **Attempt** | `Unlimited` \| `Limited` | Unlimited | |
 | **Total Score** | Number | — | **> 0**, thập phân tối đa **2 chữ số**, có thể khác thang 100 |
 
 ### Ràng buộc liên trường — quan trọng
 
 > **Manual Grading = Yes** → hệ thống ép **Graded Assignment = Yes** và **Attempt = 1**.
+>
+> ✅ **Bổ sung 23/09/2026 — PO xác nhận:** **`Pass Point` chỉ tồn tại khi `Graded Assignment = Yes`.** Chọn `No` thì bài Test **không có ngưỡng đạt** — không có khái niệm đạt/trượt, chỉ có làm xong hay chưa.
+>
+> Ghép hai ràng buộc: `Manual Grading = Yes` → ép `Graded Assignment = Yes` → **luôn có `Pass Point`**. Nên mọi bài chấm tay đều có ngưỡng đạt.
+>
+> Kết hợp `BR-EDIT-07` (Test đã có người làm thì **không sửa** được `Graded Assignment` và `Pass Point`): một bài Test **không thể đổi giữa "có ngưỡng đạt" và "không có ngưỡng đạt"** sau khi đã có học viên làm. Đây là tính chất quan trọng cho mọi cơ chế đếm dựa trên kết quả bài Test.
 
 Đây là ràng buộc cascade duy nhất được ghi rõ trong UG. Mọi thay đổi chạm tới 3 trường này phải xét cùng nhau.
 
@@ -100,6 +106,8 @@ Thứ tự ở **Setup Score** và **Reorder** kế thừa thứ tự chọn ở
 | ID | Rule | Nguồn |
 |---|---|---|
 | KB-TEST-01 | Manual Grading = Yes → **ép** Graded Assignment = Yes và Attempt = 1. | tao-bai-test mục II + III |
+| **KB-TEST-01a** | **`Pass Point` chỉ tồn tại khi `Graded Assignment = Yes`.** `Graded Assignment = No` → bài Test **không có ngưỡng đạt**, không có khái niệm đạt/trượt. ✅ PO xác nhận 23/09/2026 | PO xác nhận |
+| **KB-TEST-01b** | **Quiz và Case Study không có ngưỡng đạt** — không dùng để xác định đạt/trượt. ✅ PO xác nhận 23/09/2026 | PO xác nhận |
 | KB-TEST-02 | Chỉ di chuyển được nhiều câu hỏi cùng lúc khi các câu **liền kề nhau**. | tao-bai-test mục III |
 | KB-TEST-03 | Quiz **chỉ có dạng trắc nghiệm**. | tao-bai-test mục II |
 | KB-TEST-04 | Quiz tồn tại trong hoạt động học **và trong Video** của hoạt động học. | tao-bai-test mục II |

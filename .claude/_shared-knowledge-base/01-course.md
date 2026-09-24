@@ -177,7 +177,7 @@ Course-level: Midterm Test, Final Test
 | BR-EDIT-04 | Đã có học viên học, chưa học xong → được phép kéo thả cấu phần học. |
 | BR-EDIT-05 | Đã có học viên học, chưa học xong → được thêm cấu phần học và bài Test. |
 | BR-EDIT-06 | Test/Quiz/Case Study **đã có người làm** → không được xoá bài đó và **không được xoá cấu phần chứa nó**. |
-| BR-EDIT-07 | Test/Quiz đã có người làm → **không sửa** được Type of Test, Test Mode, Graded Assignment, Grading Preference, Pass Point, Attempt. |
+| BR-EDIT-07 | Test/Quiz đã có người làm → **không sửa** được Type of Test, Test Mode, Graded Assignment, Grading Preference, Pass Point, Attempt.<br>⚠️ **Ngoại lệ (PO xác nhận 23/09/2026): không áp cho lượt làm bài của `Test Account`** — khoá vẫn sửa tiếp được. Xem [06-user-account.md](06-user-account.md) §8b `KB-USER-TA-02`. |
 | BR-EDIT-08 | Test/Quiz đã có người làm → danh sách câu hỏi **chỉ xem**, không thêm/xoá/sửa tại Add Question. |
 | BR-EDIT-09 | Test/Quiz chưa có người làm → sửa được toàn bộ Setting, thêm/xoá câu hỏi, xoá bài test. |
 | BR-EDIT-10 | Đã có học viên **học xong** → được thêm cấu phần học nhưng **không được thêm Test/Quiz/Case Study**. |

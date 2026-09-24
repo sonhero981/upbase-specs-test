@@ -149,6 +149,31 @@ Học viên chỉ **xem**, không có thao tác đăng xuất từ xa. Phát hi�
 
 ---
 
+---
+
+## 8b. 🔑 `Test Account` — tài khoản kiểm thử nội bộ
+
+✅ **PO xác nhận 23/09/2026.**
+
+| | |
+|---|---|
+| **Mục đích** | **L&D và QA dùng để vào kiểm tra khoá học sau khi soạn** — giao diện đã ổn chưa, nội dung có sai gì không |
+| **Bản chất** | Là **tài khoản học viên thật**, có tiến độ học thật, xuất hiện trong mọi truy vấn học viên thông thường |
+
+### Quy tắc — rất dễ bỏ sót khi phân tích
+
+| ID | Rule |
+|---|---|
+| **KB-USER-TA-01** | **`Test Account` được bỏ qua ở mọi logic nghiệp vụ.** Đây là nguyên tắc chung, không phải ngoại lệ lẻ tẻ |
+| **KB-USER-TA-02** | **`Test Account` vào học thì khoá học KHÔNG bị khoá chỉnh sửa** — vẫn sửa tiếp được nếu cần. Tức là `BR-EDIT-07` (*"Test đã có người làm → không sửa được cấu hình"*) **không áp cho lượt làm bài của `Test Account`** |
+| **KB-USER-TA-03** | Thành viên nhóm **Comment Replier bắt buộc là `Test Account = Yes`** (`KB-CR-01`) — nên nhóm nhân sự trả lời bình luận **đều là tài khoản kiểm thử** |
+
+> ⚠️ **Áp dụng khi phân tích bất kỳ tính năng nào đếm, xếp hạng, thống kê hay khoá dữ liệu theo hành vi học viên:** phải hỏi *"`Test Account` có bị loại trừ không?"* — mặc định là **có**.
+>
+> Vì `Test Account` là học viên thật về mặt dữ liệu, mọi truy vấn không lọc sẽ **tính cả người của công ty vào số liệu học viên**.
+
+---
+
 ## 9. Điểm cần BA xác nhận
 
 | # | Câu hỏi |
@@ -156,7 +181,7 @@ Học viên chỉ **xem**, không có thao tác đăng xuất từ xa. Phát hi�
 | Q1 | **Danh sách Role đầy đủ là gì?** UG chỉ nói "quyền truy cập nhóm chức năng X" — chưa có ma trận Role × Chức năng. Đây là khoảng trống lớn nhất của KB. |
 | Q2 | Hệ thống nhân sự UpBase là hệ nào (tên, cơ chế đồng bộ, tần suất)? |
 | Q3 | Đồng bộ HRIS là một chiều hay hai chiều? Username sửa trên UpLMS có bị ghi đè ở lần sync sau không? |
-| Q4 | `Test Account` là trường của Student — nằm ở đâu, ai set? |
+| ~~Q4~~ | ~~`Test Account` là trường của Student — nằm ở đâu, ai set?~~ ✅ **Đã trả lời phần mục đích và quy tắc — xem §8b.** Còn lại: nằm ở màn nào, ai set? |
 | Q5 | `Type User` trong file export có những giá trị nào? |
 | Q6 | Staff có bị ảnh hưởng bởi HRIS không, hay hoàn toàn quản lý thủ công? |
 | Q7 | Trang Staff có mục "Tạo tài khoản" và "Chỉnh sửa" nhưng **nội dung để trống** trong UG — quy trình thực tế thế nào? |

@@ -62,6 +62,25 @@ Hàm ý: hệ thống quản lý **buổi học thực tế** (lecture/session),
 
 Ba loại bài kiểm tra **nằm ngoài khoá học**: kỳ thi (Examination), bài test theo sự kiện (Event Test), bài kiểm tra đầu vào (Entrance Test). KB [03-assessment.md](03-assessment.md) chỉ mô tả Test/Quiz **bên trong** khoá.
 
+> ❌ **PO xác nhận 23/09/2026: `Examination` và `Entrance Test` — hệ thống tạm thời KHÔNG CÓ hai chức năng này.**
+>
+> Endpoint vẫn tồn tại trong Swagger nhưng **chức năng không được dùng**. Đây là bằng chứng cho thấy **bề mặt API không đồng nghĩa với tính năng đang chạy** — có endpoint không có nghĩa là có tính năng.
+>
+> ⚠️ **Áp dụng khi phân tích:** thấy một nhóm API lạ thì **hỏi PO trước khi kết luận tính năng đó tồn tại**. `Event Test Management` và `Event Management` chưa được xác nhận — vẫn `❓BA`.
+
+### 🔁 Danh sách endpoint có nhưng tính năng KHÔNG có
+
+Cập nhật dần. Mỗi dòng là một lần suýt kết luận sai.
+
+| Endpoint / nhóm API | Trạng thái thật | Xác nhận |
+|---|---|---|
+| `Examination` (Ops, 8 op) | ❌ Không có tính năng | PO 23/09/2026 |
+| `Entrance Test` (LMS, 3 op) | ❌ Không có tính năng | PO 23/09/2026 |
+| `POST /api/v1/courses/{id}/trial/upgrade-now` (LMS) | ❌ **Không có khoá Trial** | PO 23/09/2026 |
+| `Event Test Management` (Ops, 10 op) · `Event Management` (Ops, 1 op) | `❓BA` — chưa xác nhận | — |
+
+> **Ba lần trong một buổi phân tích.** Tỷ lệ endpoint "chết" trong hệ này đủ cao để **không bao giờ suy ra tính năng từ sự tồn tại của endpoint**.
+
 ### 2.3 Tổ chức & phân quyền
 
 | Nhóm API | Ops | Nội dung |

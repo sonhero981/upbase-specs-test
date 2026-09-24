@@ -53,13 +53,19 @@ Hoạt động học được tính **Hoàn thành** khi icon Check chuyển **x
 | Nội dung trong Activity | Điều kiện hoàn thành |
 |---|---|
 | Chứa **Quiz** | Phải **hoàn thành Quiz** |
-| Chứa **Video** | Phải **play video** |
+| Chứa **Video** | Phải **xem tối thiểu 80% thời lượng video** |
 | Chứa **Text / Ảnh** | Chỉ cần **mở hiển thị** |
+
+> ✅ **Đã đính chính (23/09/2026) — PO xác nhận.** User Guide ghi điều kiện với Video là *"phải play video"*. Hệ thống **đã cập nhật thành xem tối thiểu 80% thời lượng**. UG chưa được cập nhật theo.
+>
+> ⚠️ **Text / Ảnh vẫn tính hoàn thành ngay khi mở hiển thị** — PO xác nhận giữ nguyên, không sửa. Đây là ràng buộc phải tính đến khi thiết kế bất kỳ cơ chế nào cộng thưởng theo số Activity hoàn thành.
 
 > **Mức độ ưu tiên: Quiz → Video → Text/Ảnh.**
 > Activity có **nhiều Tab** → phải học hết tất cả các Tab mới tính Hoàn thành.
 
-Hoạt động đánh dấu **`Graded Activity`** là hoạt động bắt buộc hoàn thành để tính điểm hoàn thành khoá học.
+> ❌ **Đã bỏ (PO xác nhận 23/09/2026):** ~~Hoạt động đánh dấu `Graded Activity` là hoạt động bắt buộc hoàn thành để tính điểm hoàn thành khoá học.~~
+>
+> **Hệ thống không còn khái niệm `Graded Activity`.** User Guide còn mô tả — đã lạc hậu. Mọi hoạt động học nay đồng hạng về mặt tính hoàn thành khoá.
 
 ---
 
@@ -153,7 +159,10 @@ Cả hai đều lọc được theo Section → Activity, mặc định sắp x�
 | KB-LX-01 | Tiến độ học = số Activity hoàn thành / tổng Activity của khoá. | danh-sach-khoa-hoc mục III |
 | KB-LX-02 | Khoá Flexible hết hạn sau N ngày **kể từ khi học viên bấm Activate**. | hoat-dong-hoc mục III |
 | KB-LX-03 | Logic hoàn thành Activity theo ưu tiên **Quiz → Video → Text/Ảnh**; nhiều Tab thì phải học hết mọi Tab. | hoat-dong-hoc mục II |
-| KB-LX-04 | `Graded Activity` là hoạt động **bắt buộc** hoàn thành để tính điểm khoá học. | hoat-dong-hoc mục III |
+| **KB-LX-03a** | Activity chứa **Video** hoàn thành khi **xem tối thiểu 80% thời lượng**. ✅ PO xác nhận 23/09/2026 — UG còn ghi *"phải play video"*, đã lạc hậu. | PO xác nhận |
+| **KB-LX-03b** | Activity chứa **Text / Ảnh** hoàn thành khi **mở hiển thị**, không có điều kiện thời gian. ✅ PO xác nhận 23/09/2026 — giữ nguyên, không sửa. | PO xác nhận |
+| ~~KB-LX-04~~ | ~~`Graded Activity` là hoạt động **bắt buộc** hoàn thành để tính điểm khoá học.~~ ❌ **Đã bỏ — hệ thống không còn khái niệm này.** PO xác nhận 23/09/2026 | ~~hoat-dong-hoc mục III~~ |
+| **KB-LX-08** | **Học viên đã học ít nhất 1 hoạt động trong khoá → KHÔNG huỷ ghi danh (`un-enroll`) được nữa.** ✅ PO xác nhận 23/09/2026 | PO xác nhận |
 | KB-LX-05 | **Câu hỏi trong Video không tính điểm** khoá học và **Skip được**. | thao-tac-voi-video mục III |
 | KB-LX-06 | Timeline video **chỉ hiện với video đã cấu hình mốc thời gian**. | thao-tac-voi-video mục III |
 | KB-LX-07 | Dashboard khoá **chỉ hiện khi Status = Resume hoặc Review**; `Ready to learn` chưa có Dashboard. | dashboard-khoa-hoc mục I |
