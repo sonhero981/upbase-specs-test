@@ -1,0 +1,25 @@
+flowchart TD
+    ST["Học viên bắt đầu ở HẠNG 1"] --> CFG["Vận hành đặt 3 bội số
+mỗi cái bật tắt độc lập"]
+    CFG --> P["Mỗi 3.000 điểm
+lên 1 hạng"]
+    CFG --> Q["Mỗi 5 khoá hoàn thành
+lên 1 hạng"]
+    CFG --> R["Mỗi 5 huy hiệu
+lên 1 hạng"]
+    P --> SUM["CỘNG DỒN cả ba
+tiêu chí nào đạt trước
+thì lên trước"]
+    Q --> SUM
+    R --> SUM
+    SUM --> EX["Ví dụ: 9.000 điểm · 10 khoá · 5 huy hiệu
+Hạng = 1 + 3 + 2 + 1 = HẠNG 7"]
+    EX --> CAP{"Vượt trần hạng
+vận hành đặt?"}
+    CAP -->|"Có"| CAPPED["Dừng ở trần
+ẩn thanh tiến độ"]
+    CAP -->|"Không"| OK["Lên hạng mới
+ghi vào lịch sử"]
+    OK --> RULE["HẠNG CHỈ LÊN, KHÔNG TỤT
+đổi cấu hình chỉ áp dụng
+từ thời điểm đổi trở đi"]

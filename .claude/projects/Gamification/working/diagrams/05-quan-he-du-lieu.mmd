@@ -1,0 +1,30 @@
+flowchart LR
+    subgraph A["1 · CẤU HÌNH — vận hành đặt"]
+        direction TB
+        C1["Cấu hình gamification<br/>2 công tắc chung<br/>4 công tắc chức năng"]
+        C2["Quy tắc cộng điểm<br/>4 hành động"]
+        C3["Huy hiệu<br/>4 loại x 8 mốc"]
+        C4["Cấu hình hạng<br/>3 bội số + trần"]
+    end
+    subgraph B["2 · GHI NHẬN — hệ thống ghi"]
+        direction TB
+        L2["Dấu nội dung đã tính điểm<br/>khử trùng theo lượt ghi danh"]
+        L3["Ngày có mặt của học viên<br/>1 người 1 ngày 1 bản ghi"]
+        L1["Sổ giao dịch điểm<br/>từng lần cộng kèm thời điểm"]
+        L4["Huy hiệu đã đạt<br/>kèm thời điểm đạt"]
+    end
+    subgraph C["3 · ĐỌC — màn hình đọc"]
+        direction TB
+        R1["Thành tích của học viên<br/>điểm - hạng hiện tại"]
+        R2["Bảng xếp hạng tính sẵn<br/>ghi đè mỗi 8 tiếng"]
+    end
+    TN["tenant — SỬA<br/>thêm cột múi giờ<br/>dùng để cắt biên ngày"]
+    A --> B
+    B --> C
+    TN --> B
+    L2 -.->|"chặn cộng trùng"| L1
+    L3 --> L1
+    L1 --> L4
+    L1 --> R1
+    L4 --> R1
+    L1 --> R2

@@ -1,0 +1,14 @@
+flowchart TD
+    subgraph TT["NHỊP TỨC THÌ"]
+        A["Học viên hoàn thành<br/>hoạt động · khoá · bài Test"] --> B["Cộng điểm<br/>ghi vào sổ giao dịch"]
+        V["Học viên vào hệ thống<br/>lần đầu trong ngày"] --> B
+        B --> C["Xét huy hiệu"]
+        C --> D["Xét hạng"]
+        D --> E["Thông báo đẩy<br/>nếu đang online"]
+        E --> H["Học viên thấy điểm<br/>NGAY LẬP TỨC"]
+    end
+    subgraph CK["NHỊP 8 TIẾNG"]
+        F["Tác vụ nền đọc<br/>sổ giao dịch"] --> G["Tính bảng xếp hạng<br/>ghi đè kết quả cũ"]
+        G --> I["Thứ hạng đổi ở<br/>lần cập nhật sau"]
+    end
+    B -.->|"nguồn dữ liệu"| F

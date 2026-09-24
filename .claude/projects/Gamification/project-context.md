@@ -142,6 +142,8 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 
 > Publish lại thì **ghi đè vào đúng node trên**, đừng import file mới — import mới sinh node khác và người đọc sẽ giữ link cũ.
 >
+> ⚠️ **PRD trên Lark có 5 sơ đồ mà file `.md` nguồn không có.** Import lại từ `.md` là mất hết. Mã nguồn sơ đồ và cách chèn lại nằm ở `working/diagrams/README.md`.
+>
 > Cách import: `drive/v1/files/upload_all` → `drive/v1/import_tasks` → chờ `job_status = 0` → `wiki/v2/spaces/{space}/nodes/move_docs_to_wiki`. Token user nằm ở scratchpad, hết hạn thì chạy `lark_refresh.py`.
 
 ## Jira
