@@ -138,11 +138,11 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 
 | Artifact | Node token | URL | Lần publish gần nhất |
 |---|---|---|---|
-| `[PRD] Gamification v0.2` | `VOZewDD8ainZlYkjmKXlOOLegGe` | https://upbasevn.sg.larksuite.com/wiki/VOZewDD8ainZlYkjmKXlOOLegGe | 24/09/2026 |
+| `[PRD] Gamification v0.2` | `J4NGwHIlmijgZBkqxpWlNS4qgxe` | https://upbasevn.sg.larksuite.com/wiki/J4NGwHIlmijgZBkqxpWlNS4qgxe | 24/09/2026 |
 
 > Publish lại thì **ghi đè vào đúng node trên**, đừng import file mới — import mới sinh node khác và người đọc sẽ giữ link cũ.
 >
-> ⚠️ **PRD trên Lark có 5 sơ đồ mà file `.md` nguồn không có.** Import lại từ `.md` là mất hết. Mã nguồn sơ đồ và cách chèn lại nằm ở `working/diagrams/README.md`.
+> **5 sơ đồ nằm trong chính file `.md`** dưới dạng khối ` ```mermaid `. Sau khi import phải chạy `.claude/scripts/lark-mermaid-to-whiteboard.py <doc_token>` để đổi chúng thành bảng trắng — Lark không tự dựng.
 >
 > Cách import: `drive/v1/files/upload_all` → `drive/v1/import_tasks` → chờ `job_status = 0` → `wiki/v2/spaces/{space}/nodes/move_docs_to_wiki`. Token user nằm ở scratchpad, hết hạn thì chạy `lark_refresh.py`.
 

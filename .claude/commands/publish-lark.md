@@ -79,6 +79,36 @@ Quy tắc **fidelity 1:1** — không tóm tắt, không gộp section, không l
 
 ---
 
+## B2b — Sơ đồ: code block → bảng trắng
+
+Sơ đồ sống trong file `.md` dưới dạng khối ` ```mermaid `, **đặt sẵn đúng vị trí từ lúc soạn ở Bước 9**, không phải vẽ thêm sau khi publish. File nguồn là bản duy nhất; người dùng duyệt đúng thứ sẽ lên Lark.
+
+**Lark không tự dựng ` ```mermaid `** — import xong nó ra code block `Plaintext`. Phải chạy bước đổi:
+
+```bash
+export PATH="$HOME/.local/node/bin:$PATH"
+python3 .claude/scripts/lark-mermaid-to-whiteboard.py <doc_token>
+```
+
+Script đọc lại tài liệu, tìm code block mở đầu bằng từ khoá Mermaid (`flowchart`, `sequenceDiagram`, `erDiagram`…), thay từng cái bằng block `whiteboard`, rồi đọc lại lần nữa để xác nhận không còn sót. Thêm `--dry-run` để xem trước.
+
+**Duyệt sơ đồ trước khi publish** — render ở máy rồi đưa người dùng xem:
+
+```bash
+npx -y @mermaid-js/mermaid-cli@latest -i so-do.mmd -o so-do.png
+```
+
+### Hai chỗ Mermaid trên Lark dựng sai
+
+| Hiện tượng | Cách tránh |
+|---|---|
+| `stateDiagram-v2` **mất hết dòng mô tả** kiểu `Tên: nội dung`, chỉ còn tên trạng thái | Dùng `flowchart`, đưa mô tả vào nhãn node bằng `<br/>` |
+| `<br/>` trong **nhãn mũi tên** bị tách thành node rác trôi lơ lửng | Nhãn mũi tên viết một dòng |
+
+Tiếng Việt có dấu hiển thị bình thường. Hai chỗ cần ngắn gọn: **tiêu đề `subgraph`** (khung không giãn theo tiêu đề) và **chữ trong node hình thoi `{...}`** (cắt chữ sớm hơn hình chữ nhật).
+
+---
+
 ## B3 — Tạo / cập nhật (idempotent)
 
 Tra node đã lưu ở `project-context.md` mục `Lark → Đã publish`:
@@ -100,8 +130,11 @@ API trả `200` **không có nghĩa nội dung vào đúng chỗ**. Sau khi publ
 2. Đối chiếu:
    - Số heading trên Lark khớp số heading trong file
    - Số dòng của từng bảng khớp
+   - **Số bảng trắng khớp số khối ` ```mermaid ` trong file, và không còn code block mermaid nào sót**
    - Không mục nào bị gộp hoặc mất
 3. Lệch → **báo cụ thể mục nào thiếu** trước khi kết thúc
+
+> ⚠️ **Script đếm bảng dễ sai, đừng tin số đầu tiên.** Hai chỗ đã cắn: bảng có **header rỗng** (`| | |`) bị bỏ qua khi tách theo ô, và bảng nằm trong **blockquote thụt lề** (`  > |`) không khớp mẫu `^>`. Lệch một hai dòng thì soi đúng bảng đó trước khi kết luận mất nội dung.
 
 ---
 

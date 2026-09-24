@@ -150,6 +150,25 @@ Hai factor còn lại (**Happiness**) **xoá vì chưa có cách đo** — khôn
 
 ### Bốn luồng
 
+```mermaid
+flowchart TD
+    subgraph TT["NHỊP TỨC THÌ"]
+        A["Học viên hoàn thành<br/>hoạt động · khoá · bài Test"] --> B["Cộng điểm<br/>ghi vào sổ giao dịch"]
+        V["Học viên vào hệ thống<br/>lần đầu trong ngày"] --> B
+        B --> C["Xét huy hiệu"]
+        C --> D["Xét hạng"]
+        D --> E["Thông báo đẩy<br/>nếu đang online"]
+        E --> H["Học viên thấy điểm<br/>NGAY LẬP TỨC"]
+    end
+    subgraph CK["NHỊP 8 TIẾNG"]
+        F["Tác vụ nền đọc<br/>sổ giao dịch"] --> G["Tính bảng xếp hạng<br/>ghi đè kết quả cũ"]
+        G --> I["Thứ hạng đổi ở<br/>lần cập nhật sau"]
+    end
+    B -.->|"nguồn dữ liệu"| F
+```
+
+*Hai nhịp chạy song song: mọi thứ học viên tự làm thì ghi nhận tức thì, riêng bảng xếp hạng tính nền 8 tiếng một lần.*
+
 | # | Luồng | Cách chạy | Nhịp |
 |---|---|---|---|
 | 1 | **Cộng điểm khi hoàn thành hoạt động / khoá / bài Test** | Trong luồng | Tức thì |
@@ -196,6 +215,41 @@ Mỗi chỗ **tự tính** — huy hiệu và hạng đếm trọn đời, bản
 | **Số huy hiệu** | Huy hiệu đã đạt, giữ vĩnh viễn |
 
 ## Database
+
+```mermaid
+flowchart LR
+    subgraph A["1 · CẤU HÌNH — vận hành đặt"]
+        direction TB
+        C1["Cấu hình gamification<br/>2 công tắc chung<br/>4 công tắc chức năng"]
+        C2["Quy tắc cộng điểm<br/>4 hành động"]
+        C3["Huy hiệu<br/>4 loại x 8 mốc"]
+        C4["Cấu hình hạng<br/>3 bội số + trần"]
+    end
+    subgraph B["2 · GHI NHẬN — hệ thống ghi"]
+        direction TB
+        L2["Dấu nội dung đã tính điểm<br/>khử trùng theo lượt ghi danh"]
+        L3["Ngày có mặt của học viên<br/>1 người 1 ngày 1 bản ghi"]
+        L1["Sổ giao dịch điểm<br/>từng lần cộng kèm thời điểm"]
+        L4["Huy hiệu đã đạt<br/>kèm thời điểm đạt"]
+    end
+    subgraph C["3 · ĐỌC — màn hình đọc"]
+        direction TB
+        R1["Thành tích của học viên<br/>điểm - hạng hiện tại"]
+        R2["Bảng xếp hạng tính sẵn<br/>ghi đè mỗi 8 tiếng"]
+    end
+    TN["tenant — SỬA<br/>thêm cột múi giờ<br/>dùng để cắt biên ngày"]
+    A --> B
+    B --> C
+    TN --> B
+    L2 -.->|"chặn cộng trùng"| L1
+    L3 --> L1
+    L1 --> L4
+    L1 --> R1
+    L4 --> R1
+    L1 --> R2
+```
+
+*Mười thực thể mới chia ba tầng. Sổ giao dịch điểm là gốc — mọi con số hiển thị đều truy được về đây.*
 
 **10 thực thể mới. Bảng hiện hữu duy nhất bị sửa là `tenant`, thêm một cột.**
 
@@ -1090,6 +1144,36 @@ Mỗi lần cộng điểm đều kéo theo một lần xét huy hiệu cho bố
 
 ## US10: Cấu hình hạng
 
+```mermaid
+flowchart TD
+    ST["Học viên bắt đầu ở HẠNG 1"] --> CFG["Vận hành đặt 3 bội số
+mỗi cái bật tắt độc lập"]
+    CFG --> P["Mỗi 3.000 điểm
+lên 1 hạng"]
+    CFG --> Q["Mỗi 5 khoá hoàn thành
+lên 1 hạng"]
+    CFG --> R["Mỗi 5 huy hiệu
+lên 1 hạng"]
+    P --> SUM["CỘNG DỒN cả ba
+tiêu chí nào đạt trước
+thì lên trước"]
+    Q --> SUM
+    R --> SUM
+    SUM --> EX["Ví dụ: 9.000 điểm · 10 khoá · 5 huy hiệu
+Hạng = 1 + 3 + 2 + 1 = HẠNG 7"]
+    EX --> CAP{"Vượt trần hạng
+vận hành đặt?"}
+    CAP -->|"Có"| CAPPED["Dừng ở trần
+ẩn thanh tiến độ"]
+    CAP -->|"Không"| OK["Lên hạng mới
+ghi vào lịch sử"]
+    OK --> RULE["HẠNG CHỈ LÊN, KHÔNG TỤT
+đổi cấu hình chỉ áp dụng
+từ thời điểm đổi trở đi"]
+```
+
+*Ba tiêu chí cộng dồn, không phải lấy cái lớn nhất. Đạt mốc nào trước thì lên hạng trước.*
+
 ### 1/ User story
 
 Là nhân sự vận hành, tôi cần đặt mỗi bao nhiêu điểm, bao nhiêu khoá, bao nhiêu huy hiệu thì học viên lên một hạng, và đặt trần hạng, để phân tầng mức độ tham gia.
@@ -1349,6 +1433,25 @@ Danh sách đọc theo trang. Không tính lại hạng hay đếm lại huy hi�
 
 ## US13: Điểm phản ánh việc học thật
 
+```mermaid
+flowchart TD
+    S["Bản ghi tiến độ chuyển<br/>trạng thái sang hoàn thành"] --> T1{"Test Account?"}
+    T1 -->|"Có"| X1["Bỏ qua hoàn toàn<br/>không ghi gì"]
+    T1 -->|"Không"| T2{"Gamification bật?"}
+    T2 -->|"Tắt"| X2["Không ghi nhận"]
+    T2 -->|"Bật"| T3{"Hành động này<br/>bật tính điểm?"}
+    T3 -->|"Tắt"| X3["Không cộng điểm"]
+    T3 -->|"Bật"| T4{"Đã cộng điểm<br/>nội dung này<br/>trong lượt học này?"}
+    T4 -->|"Rồi"| X4["Không cộng lại<br/>khử trùng theo C5"]
+    T4 -->|"Chưa"| T5{"Chạm trần<br/>điểm trong ngày?"}
+    T5 -->|"Chạm trần"| X5["Ghi vào lịch sử với<br/>0 điểm, kèm lý do"]
+    T5 -->|"Chưa"| W["Cộng điểm<br/>ghi sổ giao dịch"]
+    W --> B1["Xét huy hiệu"]
+    B1 --> B2["Xét hạng"]
+```
+
+*Năm cửa kiểm trước khi cộng một điểm. Trượt ở cửa nào thì dừng ở đó.*
+
 ### 1/ User story
 
 Là nhân sự vận hành, tôi cần điểm phản ánh việc học thật, không bị đẩy lên bằng thao tác đối phó, để cơ chế còn đáng tin.
@@ -1451,6 +1554,22 @@ Bốn cửa kiểm chạy trong cùng thao tác với việc hoàn thành hoạt
 ---
 
 ## US14: Bật tắt gamification và hiển thị
+
+```mermaid
+flowchart LR
+    T["TẮT HẲN<br/>Gamification = OFF<br/>Không ghi nhận gì<br/>Học viên không thấy gì"]
+    N["CHẠY NGẦM<br/>Gamification = ON<br/>Visibility = OFF<br/>CÓ ghi nhận điểm<br/>Học viên chưa thấy"]
+    M["MỞ ĐẦY ĐỦ<br/>Gamification = ON<br/>Visibility = ON<br/>Ghi nhận và hiển thị"]
+    T -->|"bật Gamification"| N
+    N -->|"bật Visibility"| M
+    M -->|"tắt Visibility"| N
+    N -->|"tắt Gamification"| T
+    M -->|"tắt Gamification, tắt luôn Visibility"| T
+    NOTE["Bật Visibility thì học viên thấy ngay<br/>điểm đã tích được trong lúc chạy ngầm.<br/>KHÔNG có tính bù cho giai đoạn<br/>trước khi bật Gamification."]
+    N -.-> NOTE
+```
+
+*Ba trạng thái và đường đi giữa chúng. Chạy ngầm là trạng thái để chạy thử trước khi mở cho học viên.*
 
 ### 1/ User story
 

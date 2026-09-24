@@ -118,6 +118,34 @@ Cột `Yêu cầu` trong bảng UI phải đủ: **định dạng · placeholder
 
 Rule chạm tính năng có sẵn → **dẫn mã rule trong KB**: `BR-EDIT-07`, `KB-CLASS-03`.
 
+### Sơ đồ — viết ở đây, không vẽ sau khi publish
+
+Template có mục `Giải pháp nghiệp vụ: User flow, screen flow, BPMN, Activity diagram` nhưng nó hay bị bỏ trống vì "tài liệu chữ không vẽ được". Vẽ được: đặt khối ` ```mermaid ` thẳng vào file `.md`, đúng chỗ nó thuộc về. Lúc publish, `/publish-lark` tự đổi thành bảng trắng.
+
+**File `.md` là bản duy nhất.** Không tách "bản duyệt" và "bản đẹp cho Lark" — thứ người dùng duyệt ở Gate 4 phải đúng là thứ lên Lark.
+
+Vẽ chỗ nào thì đáng:
+
+| Nên vẽ | Đừng vẽ |
+|---|---|
+| Luồng nhiều cửa kiểm nối tiếp — người đọc không dựng lại được thứ tự từ các rule rời | Thứ bảng đã nói đủ |
+| Cơ chế chạy **song song ở hai nhịp khác nhau** | Quan hệ hai ba thực thể |
+| Công thức **cộng dồn nhiều tiêu chí** — chỗ dễ đọc "HOẶC" thành "lấy cái lớn nhất" | Danh sách tuần tự |
+| Máy trạng thái vài trạng thái và đường đi giữa chúng | |
+| Quan hệ **nhiều thực thể phân tầng** | |
+
+Sơ đồ nào cũng kèm **một dòng chú thích bên dưới** nói ý chính, để người đọc lướt không phải giải mã hình.
+
+**Duyệt trước khi publish:** render ra ảnh cho người dùng xem, đừng bắt họ đọc mã Mermaid.
+
+```bash
+npx -y @mermaid-js/mermaid-cli@latest -i so-do.mmd -o so-do.png
+```
+
+Hai chỗ Mermaid trên Lark dựng sai và cách né: xem `/publish-lark` mục `B2b`.
+
+---
+
 **5/ Out of scope** — những gì US này **không** làm, dù người đọc có thể tưởng là có.
 
 **6/ Conner case** — **để trống. QA điền.** PO/BA không viết mục này.
