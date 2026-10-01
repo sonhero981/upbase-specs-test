@@ -75,25 +75,6 @@ Quy tắc **fidelity 1:1** — không tóm tắt, không gộp section, không l
 | **Link** | Giữ nguyên, đặc biệt link Figma và tài liệu đối tác trong `Preferences` |
 | **Mục đã xoá** | Không tự thêm lại. Mục bị xoá là xoá có chủ đích |
 
-## B2c — Ảnh design
-
-**Ảnh đẩy được, nhưng chỉ qua `lark-cli`.** MCP thiếu tool upload media; CLI có scope `docs:document.media:upload`.
-
-Ảnh là file nhị phân nên **không nằm được trong `.md`**. Mỗi lần import tạo một doc mới là mất sạch ảnh, phải chèn lại. Khác với sơ đồ — sơ đồ sống trong nguồn dưới dạng mermaid, ảnh thì không.
-
-```bash
-export PATH="$HOME/.local/node/bin:$PATH"
-python3 .claude/scripts/lark-insert-design-images.py <doc_token> <thư mục ảnh>
-```
-
-Script đọc `order.txt` trong thư mục ảnh (`<tên file>|<chú thích>` mỗi dòng), chèn từng ảnh kèm caption, rồi kéo cả cụm vào mục `Design`. Cuối cùng đọc lại đếm xem đủ ảnh và đúng chỗ chưa. Thêm `--dry-run` để xem trước.
-
-**Tài liệu phải có heading `Design`** làm điểm neo. Không có thì script dừng.
-
-`docs +media-insert` luôn ghi vào **cuối tài liệu**, không có tham số vị trí — đó là lý do phải có bước kéo cụm.
-
----
-
 ## B2b — Sơ đồ: code block → bảng trắng
 
 Sơ đồ sống trong file `.md` dưới dạng khối ` ```mermaid `, **đặt sẵn đúng vị trí từ lúc soạn ở Bước 9**, không phải vẽ thêm sau khi publish. File nguồn là bản duy nhất; người dùng duyệt đúng thứ sẽ lên Lark.
@@ -137,6 +118,25 @@ npx -y @mermaid-js/mermaid-cli@latest -i so-do.mmd -o so-do.png
 | `<br/>` trong **nhãn mũi tên** bị tách thành node rác trôi lơ lửng | Nhãn mũi tên viết một dòng |
 
 Tiếng Việt có dấu hiển thị bình thường. Hai chỗ cần ngắn gọn: **tiêu đề `subgraph`** (khung không giãn theo tiêu đề) và **chữ trong node hình thoi `{...}`** (cắt chữ sớm hơn hình chữ nhật).
+
+---
+
+## B2c — Ảnh design
+
+**Ảnh đẩy được, nhưng chỉ qua `lark-cli`.** MCP thiếu tool upload media; CLI có scope `docs:document.media:upload`.
+
+Ảnh là file nhị phân nên **không nằm được trong `.md`**. Mỗi lần import tạo một doc mới là mất sạch ảnh, phải chèn lại. Khác với sơ đồ — sơ đồ sống trong nguồn dưới dạng mermaid, ảnh thì không.
+
+```bash
+export PATH="$HOME/.local/node/bin:$PATH"
+python3 .claude/scripts/lark-insert-design-images.py <doc_token> <thư mục ảnh>
+```
+
+Script đọc `order.txt` trong thư mục ảnh (`<tên file>|<chú thích>` mỗi dòng), chèn từng ảnh kèm caption, rồi kéo cả cụm vào mục `Design`. Cuối cùng đọc lại đếm xem đủ ảnh và đúng chỗ chưa. Thêm `--dry-run` để xem trước.
+
+**Tài liệu phải có heading `Design`** làm điểm neo. Không có thì script dừng.
+
+`docs +media-insert` luôn ghi vào **cuối tài liệu**, không có tham số vị trí — đó là lý do phải có bước kéo cụm.
 
 ---
 
@@ -188,7 +188,7 @@ Cập nhật `project-context.md`:
 
 - Node đã **tạo / cập nhật** + **link Lark**
 - Đối chiếu sau publish: khớp hay lệch chỗ nào
-- **Ảnh phải chèn tay** (nếu có) — liệt kê đường dẫn
+- **Số ảnh design đã chèn** và chúng nằm ở mục nào
 - Người dùng **skip** → ghi rõ *"chưa publish lên Lark"*, không coi là lỗi
 
 Tự kiểm theo `.claude/checklist/publish-lark.md` trước khi báo kết quả.
