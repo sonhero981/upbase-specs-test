@@ -150,7 +150,7 @@ Nơi ghi mọi quyết định đã chốt. AI tra file này để **không hỏ
 
 ## ✅ GATE 4 — `Approved with Notes` (23/09/2026)
 
-**`prd-gamification-v0.3-20261001.md` là bản được duyệt.** 15 US viết chi tiết, 132 business rule.
+**`prd-gamification-v0.4-20261001.md` là bản được duyệt.** 15 US viết chi tiết, 132 business rule.
 
 | Ngày | Quyết định | Lý do | Người quyết |
 | --- | --- | --- | --- |
@@ -183,4 +183,17 @@ Trước đó `BR-13.10` viết chung là *"lượt học mới được tính �
 | 01/10/2026 | **Đổi thuật ngữ: "khử trùng" → "chống cộng trùng"** ở toàn bộ tài liệu, 67 chỗ trên 15 file | "Khử trùng" trong tiếng Việt nghĩa là sát khuẩn, không liên quan tới deduplication | PO phát hiện | CR-009 |
 
 **Bốn rủi ro PO đã nghe và chấp nhận:** chuỗi theo đăng nhập thưởng đúng nhóm 45% vào mà không học · nghỉ cuối tuần đứt chuỗi nên chuỗi hiếm vượt 5 ngày · nghỉ phép và công tác bị phạt như nhau · bảng xếp hạng khó giải thích khi hai người học bằng nhau mà điểm chênh vì nhịp vào khác nhau.
+
+## CR-010 — Bỏ trần điểm ngày, làm rõ logic lên hạng (01/10/2026)
+
+| Ngày | Quyết định | Lý do | Người quyết | Gate |
+| --- | --- | --- | --- | --- |
+| 01/10/2026 | **Bỏ trần điểm mỗi ngày.** Không còn giới hạn tổng điểm một học viên nhận trong ngày | PO chốt khi review design | PO | CR-010 |
+| 01/10/2026 | **Bỏ sự kiện `No points` khỏi lịch sử.** Chạm trần là lý do duy nhất sinh ra nó. Lịch sử còn ba loại sự kiện | Hệ quả trực tiếp | PO | CR-010 |
+| 01/10/2026 | **Giữ trần điểm chuỗi** (`BR-8.5c`) — khác với trần điểm ngày, nó chặn mức điểm cao nhất của một lần check-in | Hai tham số khác nhau, tên gần giống | Phân tích | CR-010 |
+| 01/10/2026 | **Logic lên hạng chốt phương án A:** mỗi mốc chạm được ở bất kỳ tiêu chí nào đều cho một hạng. Không phải lấy tiêu chí cao nhất | Với cách lấy cao nhất, hai trong ba tiêu chí không có tác dụng và các công tắc ở `US10` mất ý nghĩa | PO | CR-010 |
+| 01/10/2026 | **Bỏ chữ "cộng dồn"** khỏi `BR-10.2` và sơ đồ. Diễn đạt lại theo trình tự thời gian | Chữ cũ gây hiểu nhầm thành phải gộp ba chỉ số lại | PO phát hiện | CR-010 |
+| 01/10/2026 | **Màn lịch sử tên `Achievement history`**, là panel trượt từ cạnh phải. Bộ chuỗi tiếng Anh đã định nghĩa đủ bảy mẫu câu | Design chốt | PO | CR-010 |
+
+**Rủi ro PO chấp nhận:** bỏ trần ngày làm mất một trong hai lớp chặn mà `OQ-A2` từng dựa vào. Hoạt động chỉ có Text/Ảnh hoàn thành ngay khi mở, nên học viên bấm qua loạt vẫn nhận đủ điểm. Hoạt động chứa Video không bị vì phải xem đủ 80% thời lượng.
 

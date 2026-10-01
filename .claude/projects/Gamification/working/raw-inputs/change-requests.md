@@ -7,6 +7,7 @@
 | **CR-004** | 2026-09-23 | **Gate 1 `Need Revision`.** Đổi cơ chế điểm đăng nhập · định nghĩa lại loại huy hiệu · ngưỡng lên hạng theo nhiều chỉ số · thu hẹp thông báo · tách stakeholder | PO phản hồi tại Gate 1 | ✅ **Đã áp dụng** — BRD v0.4 |
 | **CR-007** | 2026-09-23 | **Bỏ hẳn chiến dịch, kỳ lịch và cơ chế chốt kỳ.** Thay bằng **bộ chọn khoảng ngày tự do** trên bảng xếp hạng. Chấp nhận kết quả sống.<br>**Khoá mốc huy hiệu sau khi tạo**, nên huy hiệu đã nhận không bao giờ mất | PO nêu tại 9C, khi viết `US8` | 🔄 **Đang áp dụng** |
 | **CR-009** | 2026-10-01 | **Điểm check-in đổi từ mức cố định sang tăng dần theo chuỗi ngày đăng nhập liên tiếp.** Thêm khối chuỗi trên trang Thành tích. Chuỗi tính theo ngày đăng nhập, đếm mọi ngày dương lịch | PO yêu cầu, sau khi nghe phân tích rủi ro | 🔄 **Đang áp dụng** |
+| **CR-010** | 2026-10-01 | **Bỏ trần điểm mỗi ngày.** Kéo theo bỏ sự kiện `No points` trong lịch sử. Làm rõ logic lên hạng: mỗi mốc chạm được đều cho một hạng, không phải lấy tiêu chí cao nhất | PO review design và đính chính | 🔄 **Đang áp dụng** |
 
 ---
 
@@ -485,3 +486,55 @@ Hai cách:
 | **b** | **Mở lại kênh mail** riêng cho việc nhắc chuỗi | Đảo quyết định `CR-004` *(thu hẹp thông báo, không gửi mail)*, và là loại mail dễ gây khó chịu nhất |
 
 Đề xuất **a**, đã viết vào bảng hiển thị ở trên. PO phản đối thì nói, tôi đổi sang **b**.
+
+---
+
+# CR-010 — Bỏ trần điểm ngày, làm rõ logic lên hạng
+
+## Nguyên văn PO
+
+> *"không có trần điểm ngày"*
+>
+> *"Every 3,000 points đúng là cứ 3000 điểm lên hạng 1 lần mà, có phải cộng dồn đâu, tiêu chí nào đến trước thì lên hạng trước"*
+
+## 1. Bỏ trần điểm mỗi ngày
+
+`BR-8.6` và `BR-13.3` bị bỏ. Kéo theo:
+
+| Chỗ | Thay đổi |
+|---|---|
+| `US8` | Bỏ ô nhập trần, bỏ `BR-8.6` và `BR-8.7`, bỏ trường dữ liệu |
+| `US3` | Bỏ sự kiện `No points` — chạm trần là lý do duy nhất sinh ra nó. Còn **ba** loại sự kiện |
+| `US5` | `BR-5.10` viết lại: **trần điểm chuỗi** chỉ chặn mức điểm của riêng một ngày check-in, không phải trần cho tổng điểm trong ngày |
+| `US13` | Từ bốn cửa kiểm còn **ba**. US này nay không có tham số cấu hình nào |
+| `C9` | Chỉ còn áp cho biên ngày của check-in |
+
+> ⚠️ **Đừng nhầm hai cái tên gần giống nhau.** *Trần điểm mỗi ngày* (bỏ) chặn tổng điểm một học viên nhận trong ngày. *Trần điểm chuỗi* (giữ, `BR-8.5c`) chặn mức điểm cao nhất của một lần check-in khi chuỗi dài ra.
+
+### Rủi ro phải nêu
+
+`OQ-A2` ngày 23/09 chốt **không làm chống cày riêng cho hoạt động chỉ có Text/Ảnh**, với lý do *"chống cộng trùng (`C5`) và trần điểm/ngày (`S8`) vẫn áp cho mọi loại"*. Bỏ trần ngày thì **một trong hai lớp phòng vệ đó mất**.
+
+Hoạt động chỉ có Text hoặc Ảnh hoàn thành ngay khi mở hiển thị (`KB-LX-03b`). Học viên bấm qua 50 hoạt động như vậy trong mười phút thì nhận đủ 50 lần điểm, và chống cộng trùng **không chặn được** vì mỗi hoạt động là một nội dung khác nhau.
+
+Lớp còn lại: hoạt động chứa Video phải xem đủ **80% thời lượng** (`KB-LX-03a`) nên không bấm qua được. Rủi ro chỉ nằm ở hoạt động thuần Text/Ảnh.
+
+PO chấp nhận.
+
+## 2. Làm rõ logic lên hạng
+
+`BR-10.2` giữ nguyên cơ chế nhưng **đổi cách diễn đạt**. Chữ *"các tiêu chí cộng dồn với nhau"* gây hiểu nhầm thành phải gộp ba chỉ số lại rồi mới tính.
+
+Cách viết mới: **mỗi lần bất kỳ tiêu chí nào chạm thêm một mốc, học viên lên một hạng ngay lúc đó.** Tiêu chí nào chạm trước thì lên trước.
+
+PO xác nhận phương án **A** sau khi so hai cách tính trên cùng một ví dụ:
+
+| | Cách A *(chọn)* | Cách B *(loại)* |
+|---|---|---|
+| Quy tắc | Đếm mọi mốc đã chạm của cả ba tiêu chí | Chỉ lấy tiêu chí có nhiều mốc nhất |
+| `9.000` điểm · `10` khoá · `5` huy hiệu | `1 + 3 + 2 + 1` = **hạng 7** | `1 + 3` = hạng 4 |
+
+Lý do loại B: học viên chạm mốc ở tiêu chí không dẫn đầu thì hạng đứng im, nên hai trong ba tiêu chí gần như không có tác dụng, và các công tắc bật tắt từng tiêu chí ở `US10` mất ý nghĩa.
+
+`BR-10.2` nay có **ví dụ theo dòng thời gian** sáu tháng thay cho phép tính gộp, để người đọc thấy hạng lên dần theo từng mốc chạm được.
+

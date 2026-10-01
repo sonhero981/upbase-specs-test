@@ -1,8 +1,8 @@
 # Project Context
 
 **Project:** Gamification
-**Ngày tạo:** 23/09/2026 · **Cập nhật:** 01/10/2026, sau `CR-009`
-**Trạng thái:** 🔄 **Đang áp `CR-009`** vào PRD v0.3 (điểm check-in tăng dần theo chuỗi). Bản v0.2 đã duyệt và đã publish lên Lark
+**Ngày tạo:** 23/09/2026 · **Cập nhật:** 01/10/2026, sau `CR-010`
+**Trạng thái:** 🔄 **PRD v0.3 mang `CR-009` và `CR-010`**, chờ PO review lại. Bản v0.2 đã duyệt Gate 4 và vẫn còn trên Lark
 **Cỡ yêu cầu:** **L** — đủ 9 bước, đủ 4 Gate
 
 > ⚠️ **File này đã được viết lại toàn bộ sau `CR-007`.** Bản trước viết ở Bước 2 và lệch khá xa sau bảy change request. Nếu thấy mâu thuẫn với tài liệu khác, tin file này và `change-requests.md`.
@@ -42,9 +42,9 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 | **Vào hệ thống hằng ngày** | Mỗi ngày vào hệ thống được điểm một lần. **Điểm tăng dần theo chuỗi ngày liên tiếp** (`CR-009`): điểm nền, bước tăng, trần. Bỏ trọn một ngày thì chuỗi về `0`, đếm mọi ngày dương lịch nên nghỉ cuối tuần cũng đứt |
 | **Huy hiệu** | Bốn loại đo bằng chỉ số đếm: Tích cực (số ngày có mặt) · Học tập (số hoạt động) · Test (số bài Test) · Course (số khoá).<br>**Mốc khoá sau khi tạo. Không có thao tác xoá huy hiệu.** Huy hiệu đã nhận không bị lấy lại bởi việc đổi cấu hình |
 | **Bật/tắt huy hiệu** | Tắt được **cả chức năng huy hiệu**, và tắt được **từng huy hiệu riêng**. Tắt thì không hiện nữa nhưng **dữ liệu giữ nguyên**, bật lại là hiện lại đầy đủ |
-| **Hạng** | Ngưỡng theo ba chỉ số: điểm · huy hiệu · số khoá. **Logic HOẶC** — đạt mốc nào trước thì lên hạng. Hạng **không tụt** |
-| **Chống cày điểm** | Trần điểm mỗi ngày · chống cộng trùng nội dung đã hoàn thành trong một lượt ghi danh |
-| **Lịch sử ghi nhận** | Điểm, huy hiệu, lên hạng. **Giữ toàn bộ, không dọn** |
+| **Hạng** | Ngưỡng theo ba chỉ số: điểm · huy hiệu · số khoá. **Mỗi mốc chạm được ở bất kỳ tiêu chí nào đều cho một hạng**, không phải lấy tiêu chí cao nhất. Hạng **không tụt** |
+| **Chống cày điểm** | Chống cộng trùng nội dung đã hoàn thành trong một lượt ghi danh. **Không có trần điểm ngày** (`CR-010`) |
+| **Lịch sử ghi nhận** | `Achievement history` — panel trượt từ phải. Ba loại sự kiện: điểm, huy hiệu, lên hạng. **Giữ toàn bộ, không dọn** |
 | **Thông báo thành tích** | Chỉ đẩy trong hệ thống khi học viên đang online. Không gửi mail, không gộp |
 | **Trang Thành tích của tôi** | Điểm · hạng · toàn bộ huy hiệu kèm mốc và tiến độ |
 | **Bảng xếp hạng** | **Bộ chọn khoảng ngày tự do** · bốn chỉ số · top 3 nổi bật · danh sách đầy đủ · vị trí của tôi |
@@ -117,11 +117,11 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 | Loại | Nguồn |
 |---|---|
 | Yêu cầu gốc | `working/raw-inputs/yeu-cau-goc-20260923.md` |
-| **Change requests** | `working/raw-inputs/change-requests.md` — **CR-001 đến CR-009** |
+| **Change requests** | `working/raw-inputs/change-requests.md` — **CR-001 đến CR-010** |
 | BRD | `docs/brd/brd-v0.6-20260923.md` — ⚠️ có dấu CR-007 ở đầu, một số mục hết hiệu lực |
 | Impact Matrix | `working/impact-analysis/impact-matrix-v0.2-20260923.md` — ⚠️ tương tự |
 | Solution | `working/solution-options/solution-comparison-v0.1-20260923.md` — ⚠️ tương tự |
-| **PRD** | `docs/prd/prd-gamification-v0.3-20261001.md` — **trạng thái đúng nhất**, đang mang `CR-009` |
+| **PRD** | `docs/prd/prd-gamification-v0.4-20261001.md` — **trạng thái đúng nhất**, đang mang `CR-009` |
 | Quyết định | `project-decisions.md` |
 | KB chính | `03-assessment.md` (`BR-TEST`) · `06-user-account.md` §8b (`Test Account`) · `07-learning-experience.md` · `12-data-model.md` · `14-api-surface.md` · `15-product-direction.md` |
 | Schema DB | [Lark → Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd) |
@@ -138,7 +138,8 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 
 | Artifact | Node token | URL | Lần publish gần nhất |
 |---|---|---|---|
-| `[PRD] Gamification v0.3` | `XKOMwSFSliYoSkkAKE4lWR0Gg3b` | https://upbasevn.sg.larksuite.com/wiki/XKOMwSFSliYoSkkAKE4lWR0Gg3b | 01/10/2026 |
+| `[PRD] Gamification v0.4` | `N0SIw62VjikFnvkKbpelWC8xgtb` | https://upbasevn.sg.larksuite.com/wiki/N0SIw62VjikFnvkKbpelWC8xgtb | 01/10/2026 · **bản mới nhất** |
+| `[PRD] Gamification v0.3` | `XKOMwSFSliYoSkkAKE4lWR0Gg3b` | https://upbasevn.sg.larksuite.com/wiki/XKOMwSFSliYoSkkAKE4lWR0Gg3b | 01/10/2026 · thay bởi v0.4, nên xoá |
 | `[PRD] Gamification v0.2` | `J4NGwHIlmijgZBkqxpWlNS4qgxe` | https://upbasevn.sg.larksuite.com/wiki/J4NGwHIlmijgZBkqxpWlNS4qgxe | 24/09/2026 · bản đã duyệt Gate 4, giữ để đối chiếu |
 
 > Publish lại thì **ghi đè vào đúng node trên**, đừng import file mới — import mới sinh node khác và người đọc sẽ giữ link cũ.
