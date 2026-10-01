@@ -94,12 +94,12 @@ FR/NFR đã có trong BRD: `C1`–`C9` · `BR-TEST` · `BR-REGRADE` · `BR-SKIP`
 | 1 | **Business process** | ✅ Có | **Quy trình chấm bài phải chấm hết tồn trước khi chốt kỳ** — ràng buộc mới lên team chấm, không phải yêu cầu chức năng. Thêm quy trình vận hành: cấu hình gamification · tạo chiến dịch · công bố kết quả và trao thưởng ngoài hệ thống | **Medium** | `BA-02` · `TR-5` |
 | 2 | **Module / function** | ✅ Có | Module mới. Các module hiện hữu thành **nguồn sự kiện chỉ đọc**. My Learning **bị sửa** | **High** | `BA-08` · BRD §8 |
 | 3 | **Screen / report** | ✅ Có | 9 màn mới (4 LMS + 5 Ops) · **1 màn existing bị sửa: My Learning** | **Medium** | `BA-08` |
-| 4 | **Data** | ✅ Có | 10 thực thể mới. **`tenant` phải thêm tham số múi giờ** — đây là thay đổi bảng hiện hữu duy nhất | **High** | `S21` `C6` · bảng `tenant` |
+| 4 | **Data** | ✅ Có | 10 thực thể mới. **`tenant` phải thêm tham số múi giờ** — đây là thay đổi bảng hiện hữu duy nhất | **High** | `S21` · `C6` · bảng `tenant` |
 | 5 | **API** | ✅ Có | Toàn bộ API gamification là mới. **`GET /api/v1/courses/my-learnings` phải trả thêm điểm và hạng** — thêm field, không phá contract cũ | **Medium** | `BA-08` |
 | 6 | **Role / permission** | ✅ Có | Thêm resource Casbin cho cấu hình gamification. L&D/Mentor/Giáo viên xử lý bằng phân quyền thường (`BA-11`) | **Low** | `casbin_rule` · `BA-11` |
 | 7 | **Business rule** | ✅ Có | 3 rule mới (`BR-TEST` `BR-REGRADE` `BR-SKIP`). **2 rule hiện hữu vừa được đính chính** trong đợt này (`KB-LX-04` bị gỡ, `KB-TEST-01a` thêm mới) | **High** | KB `03` · `07` |
-| 8 | **NFR** | ✅ Có | Bảng xếp hạng tính từ sổ giao dịch theo khoảng ngày, toàn tổ chức, nhiều kỳ lồng nhau, ba chỉ số. Sổ giao dịch tăng tuyến tính theo hoạt động học | **High** | `OQ-B9` · `C3` `C7` |
-| 9 | **Notification / Email** | ⚠️ Rất ít | Gamification **không dùng** cơ chế thông báo hiện có, **không gửi mail** (`S10` `N5`). Chạm duy nhất: mail #10/#29 (hoàn thành khoá) bắn cùng thời điểm với sự kiện cộng điểm — hai kênh khác nhau nên không trùng lặp thật | **Low** | KB `13` · `S10` |
+| 8 | **NFR** | ✅ Có | Bảng xếp hạng tính từ sổ giao dịch theo khoảng ngày, toàn tổ chức, nhiều kỳ lồng nhau, ba chỉ số. Sổ giao dịch tăng tuyến tính theo hoạt động học | **High** | `OQ-B9` · `C3` · `C7` |
+| 9 | **Notification / Email** | ⚠️ Rất ít | Gamification **không dùng** cơ chế thông báo hiện có, **không gửi mail** (`S10` · `N5`). Chạm duy nhất: mail #10/#29 (hoàn thành khoá) bắn cùng thời điểm với sự kiện cộng điểm — hai kênh khác nhau nên không trùng lặp thật | **Low** | KB `13` · `S10` |
 | 10 | **Reporting** | ❌ Không | **SIS độc lập** (`BA-07`). Gamification không đẩy dữ liệu vào dashboard nào. ⚠️ Nhưng L&D là stakeholder và **chưa có báo cáo nào phục vụ họ** — xem `CG-14` | **Low** | `BA-07` |
 | 11 | **Test** | ✅ Có | Vùng phải kiểm lại: luồng hoàn thành Activity · luồng hoàn thành khoá · luồng chấm bài (`finish`) · màn My Learning · quy trình bật/tắt hai công tắc | **Medium** | — |
 | 12 | **Release** | ✅ Có | Thứ tự: cấu hình → dữ liệu → job nền → màn Ops → màn LMS. **Hai công tắc cho phép ra mắt an toàn** — bật `Gamification` chạy ngầm trước, `Visibility` sau | **Medium** | `S12` · `TR-7` |
@@ -243,7 +243,7 @@ FR/NFR đã có trong BRD: `C1`–`C9` · `BR-TEST` · `BR-REGRADE` · `BR-SKIP`
 | R3 | **Tài khoản công ty trên bảng xếp hạng công khai** | 🔴 Cao | `CF-1` — PO quyết |
 | R4 | **Nhóm học viên chăm nhất bị kẹt ở đáy bảng** vì đã học hết nội dung | 🟠 Vừa | `BI-6` — PO quyết chấp nhận hay xử lý |
 | R5 | **Hai hệ thống nói hai điều khác nhau** khi học viên học lại ở lớp khác | 🟠 Vừa | `CF-2` — PO quyết |
-| R6 | **Đổi cấu hình tạo ra hai chuẩn** cho cùng một hạng/huy hiệu | 🟠 Vừa | `CF-3` `CF-4` — PO quyết |
+| R6 | **Đổi cấu hình tạo ra hai chuẩn** cho cùng một hạng/huy hiệu | 🟠 Vừa | `CF-3` · `CF-4` — PO quyết |
 | R7 | **Sổ giao dịch điểm tăng tuyến tính** theo hoạt động học, không có cơ chế dọn | 🟠 Vừa | Cần chính sách lưu trữ — `OQ-C5` |
 | R8 | Xoá tài nguyên làm hỏng ảnh huy hiệu đã trao | 🟡 Thấp | `CF-5` |
 
@@ -263,8 +263,8 @@ FR/NFR đã có trong BRD: `C1`–`C9` · `BR-TEST` · `BR-REGRADE` · `BR-SKIP`
 | `OQ-B2` | Dữ liệu tiến độ học có dấu thời gian không | Cần cho `C5`, `C7`, trần điểm/ngày, `TR-2` | Dev | **Yes** |
 | `OQ-B9` | Bảng xếp hạng chịu tải được không | `R1` | Dev | **Yes** |
 | `OQ-B12` | Thời điểm đạt huy hiệu / hoàn thành khoá / bài Test có lưu được không | `C8`, `S22` | Dev | **Yes** |
-| `OQ-B11` | Múi giờ tổ chức khai ở đâu | `C6` `C9` `TR-3` | PO + Dev | No |
-| `A24` `A25` | Hai giả định từ Bước 5 chưa được xác nhận | Xem `related-map-v0.2` §10 | PO | No |
+| `OQ-B11` | Múi giờ tổ chức khai ở đâu | `C6` · `C9` · `TR-3` | PO + Dev | No |
+| `A24` · `A25` | Hai giả định từ Bước 5 chưa được xác nhận | Xem `related-map-v0.2` §10 | PO | No |
 
 ---
 

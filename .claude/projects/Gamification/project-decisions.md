@@ -150,7 +150,7 @@ Nơi ghi mọi quyết định đã chốt. AI tra file này để **không hỏ
 
 ## ✅ GATE 4 — `Approved with Notes` (23/09/2026)
 
-**`prd-gamification-v0.6-20261001.md` là bản được duyệt.** 15 US viết chi tiết, 132 business rule.
+**`prd-gamification-v0.7-20261001.md` là bản được duyệt.** 15 US viết chi tiết, 132 business rule.
 
 | Ngày | Quyết định | Lý do | Người quyết |
 | --- | --- | --- | --- |

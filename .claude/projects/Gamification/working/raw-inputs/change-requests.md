@@ -67,7 +67,7 @@ Vì mốc huy hiệu nay **khoá sau khi tạo**, tình huống nâng ngưỡng 
 
 | Đã quyết trước | Nay |
 |---|---|
-| `BR-4.6` `BR-4.7` — hạ ngưỡng thì cấp bù, nâng ngưỡng thì gỡ | ❌ **Bỏ.** Mốc không sửa được |
+| `BR-4.6` · `BR-4.7` — hạ ngưỡng thì cấp bù, nâng ngưỡng thì gỡ | ❌ **Bỏ.** Mốc không sửa được |
 | `BR-1.4` sửa 23/09 — huy hiệu bám cấu hình, gỡ được | 🔄 **Trả lại bản gốc: huy hiệu đã nhận giữ vĩnh viễn** |
 | `A5` bị bác bỏ | ✅ **Có hiệu lực trở lại** |
 | `C4` chỉ áp cho điểm | ✅ **Áp lại cho mọi thứ** |

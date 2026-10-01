@@ -16,7 +16,7 @@
 | --- | --- | --- | --- |
 | v0.1 | Bản đầu | — | 23/09/2026 |
 | v0.2 | Đưa bảng xếp hạng vào phạm vi · tách kỳ lịch khỏi chiến dịch · bác bỏ `A8` · thêm `C6`, `C7` | `CR-001` | 23/09/2026 |
-| **v0.3** | **Chốt 4 quyết định Gate 1.** Hai công tắc có tên rõ · bỏ chống cày riêng cho hoạt động Text/Ảnh · **bỏ phạm vi xếp hạng theo lớp** · **thêm chỉ số xếp hạng chọn được cho chiến dịch** + luật chỉnh sửa chiến dịch | `CR-002` `CR-003` + quyết định `OQ-A1`, `OQ-A2` | 23/09/2026 |
+| **v0.3** | **Chốt 4 quyết định Gate 1.** Hai công tắc có tên rõ · bỏ chống cày riêng cho hoạt động Text/Ảnh · **bỏ phạm vi xếp hạng theo lớp** · **thêm chỉ số xếp hạng chọn được cho chiến dịch** + luật chỉnh sửa chiến dịch | `CR-002` · `CR-003` + quyết định `OQ-A1`, `OQ-A2` | 23/09/2026 |
 
 **Nguồn input:** `working/raw-inputs/yeu-cau-goc-20260923.md` · `working/raw-inputs/change-requests.md` (CR-001…003) · `working/ai-drafts/clarified-requirements-20260923.md` · `project-decisions.md`
 

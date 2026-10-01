@@ -6,7 +6,7 @@
 | **Epic** | ❓ *link Jira* |
 | **Story** | ❓ *link Jira* |
 | **Related** | `brd-v0.6-20260923.md` · `impact-matrix-v0.2-20260923.md` · `solution-comparison-v0.1-20260923.md` |
-| **Document status** | 🔄 **v0.6 chờ PO review lại** — mang `CR-009`, `CR-010` và design đã chốt. Bản v0.2 đã được PO duyệt 23/09/2026 |
+| **Document status** | 🔄 **v0.7 chờ PO review lại** — mang `CR-009`, `CR-010` và design đã chốt. Bản v0.2 đã được PO duyệt 23/09/2026 |
 | **Document owner** | Bùi Đức Huy (PO) |
 | **Designer** | ❓ *cần điền* |
 | **Tech lead** | ❓ *cần điền* |
@@ -20,11 +20,12 @@
 | Version | Người cập nhật | Nội dung | Impact | Ngày cập nhật |
 | --- | --- | --- | --- | --- |
 | v0.1 | Bùi Đức Huy | Bản khung: bối cảnh, giải pháp tổng thể và danh sách US | — | 23/09/2026 |
-| v0.2 | Bùi Đức Huy | Viết chi tiết `US1` đến `US15`. Bỏ chiến dịch và kỳ lịch, thay bằng bộ chọn khoảng ngày (`CR-007`). Tách cấu hình thành bốn màn, khoá mốc huy hiệu, hạng thành số tịnh tiến, bảng xếp hạng tách theo chỉ số (`CR-008`) | `CR-007` `CR-008` | 23/09/2026 |
+| v0.2 | Bùi Đức Huy | Viết chi tiết `US1` đến `US15`. Bỏ chiến dịch và kỳ lịch, thay bằng bộ chọn khoảng ngày (`CR-007`). Tách cấu hình thành bốn màn, khoá mốc huy hiệu, hạng thành số tịnh tiến, bảng xếp hạng tách theo chỉ số (`CR-008`) | `CR-007` · `CR-008` | 23/09/2026 |
 | v0.3 | Bùi Đức Huy | Điểm check-in tăng dần theo chuỗi ngày đăng nhập liên tiếp, thêm khối chuỗi trên trang Thành tích (`CR-009`). Đổi thuật ngữ "khử trùng" thành "chống cộng trùng". Làm rõ `C5` bằng định nghĩa lượt ghi danh | `CR-009` | 01/10/2026 |
 | v0.4 | Bùi Đức Huy | Bỏ trần điểm mỗi ngày, kéo theo bỏ sự kiện `No points`. Làm rõ logic lên hạng: mỗi mốc chạm được đều cho một hạng. Màn lịch sử thành panel `Achievement history` kèm bộ chuỗi tiếng Anh đầy đủ (`CR-010`) | `CR-010` | 01/10/2026 |
 | v0.5 | Bùi Đức Huy | Áp design đã chốt: bước tăng chuỗi cố định `5`, trần `40` chạm đúng ngày thứ 7, bỏ chuỗi dài nhất. Danh sách huy hiệu chuyển sang `My Profile` → tab `Badges`. Thêm hành vi trỏ và bấm trên dải tóm tắt. Viết lại cột `Nguồn` thành nội dung đọc được | Design chốt 01/10 | 01/10/2026 |
 | v0.6 | Bùi Đức Huy | Gộp bốn màn cấu hình Ops thành một trang bốn khối. Thêm mục **Design** kèm sáu ảnh màn đã chốt. Tooltip cho ô chuỗi | Design chốt 01/10 | 01/10/2026 |
+| v0.7 | Bùi Đức Huy | Bỏ viết tắt: `Giải O2` thành `Giải quyết mục tiêu O2`, mã ràng buộc trần thành mã kèm nội dung. Thêm dấu phân cách giữa các mã đứng liền nhau | — | 01/10/2026 |
 
 > ✅ **`Approved with Notes` — PO duyệt ngày 23/09/2026.** Còn **8 câu hỏi mở** ở mục `Vấn đề tồn đọng`, không câu nào chặn bàn giao.
 
@@ -142,12 +143,12 @@ Sáu màn đã chốt ngày 01/10/2026. Ảnh gốc nằm trong repo ở `.claud
 
 | Màn | Thuộc US | Chốt gì ở đây |
 |---|---|---|
-| **Gamification** | `US1` `US6` `US7` | Dải tóm tắt bốn ô · bảng xếp hạng bốn tab · khối vị trí của tôi với đường kẻ `Show All` |
+| **Gamification** | `US1` · `US6` · `US7` | Dải tóm tắt bốn ô · bảng xếp hạng bốn tab · khối vị trí của tôi với đường kẻ `Show All` |
 | **How to collect points** | `US1` | Panel trượt từ phải, bốn dòng theo bốn hành động tính điểm |
-| **How to level up** | `US1` `US10` | Panel trượt từ phải, ba tiêu chí lên hạng |
+| **How to level up** | `US1` · `US10` | Panel trượt từ phải, ba tiêu chí lên hạng |
 | **Achievement history** | `US3` | Panel trượt từ phải, nội dung dạng câu văn |
 | **User Profile — Badges** | `US4` | Tab trong `My Profile`, bộ đếm `({đã đạt}/{tổng mốc})`, huy hiệu chưa đạt hiện xám |
-| **Ops — Enable Setting** | `US8` `US9` `US10` `US11` `US14` | Một trang bốn khối, mốc huy hiệu chỉ đọc |
+| **Ops — Enable Setting** | `US8` · `US9` · `US10` · `US11` · `US14` | Một trang bốn khối, mốc huy hiệu chỉ đọc |
 | **Ops — Disable** | `US14` | `Gamification` tắt thì mọi khối khác biến mất |
 
 # Solution
@@ -200,16 +201,16 @@ flowchart TD
 
 | # | Ràng buộc |
 |---|---|
-| `C1` | Cấu hình gắn với **tổ chức**, không đóng cứng |
-| `C2` | Mọi danh mục **mở rộng được bằng cấu hình** |
-| `C3` | Lưu **từng lần cộng điểm kèm thời điểm**, không chỉ lưu tổng |
-| `C4` | Đổi cấu hình điểm → **áp dụng từ thời điểm đổi**, không tính lại quá khứ |
-| `C5` | Chống cộng trùng trong phạm vi **một lượt ghi danh**. Chỉ cộng điểm khi bản ghi tiến độ **chuyển trạng thái** sang hoàn thành, tính từ lúc bật |
-| `C6` | **Biên kỳ cắt theo múi giờ tổ chức**, không theo giờ máy chủ |
-| `C7` | Một lần cộng điểm thuộc **mọi khoảng ngày bao trùm nó**, nên bảng xếp hạng luôn tính từ sổ giao dịch theo khoảng ngày |
-| `C8` | **Mọi mốc dùng để xếp hạng phải lưu thời điểm đạt** |
-| `C9` | **"Ngày"** trong check-in cắt theo **múi giờ tổ chức** |
-| `C10` | **`Test Account` bị loại khỏi TOÀN BỘ logic gamification** — lọc ngay từ tầng ghi nhận, không ghi rồi lọc sau |
+| Ràng buộc `C1` — cấu hình gắn `tenant_id`, không đóng cứng trong mã | Cấu hình gắn với **tổ chức**, không đóng cứng |
+| Ràng buộc `C2` — mọi danh mục mở rộng được bằng cấu hình | Mọi danh mục **mở rộng được bằng cấu hình** |
+| Ràng buộc `C3` — lưu từng lần cộng điểm kèm thời điểm | Lưu **từng lần cộng điểm kèm thời điểm**, không chỉ lưu tổng |
+| Ràng buộc `C4` — đổi cấu hình chỉ áp dụng từ thời điểm đổi | Đổi cấu hình điểm → **áp dụng từ thời điểm đổi**, không tính lại quá khứ |
+| Ràng buộc `C5` — chống cộng trùng trong phạm vi một lượt ghi danh | Chống cộng trùng trong phạm vi **một lượt ghi danh**. Chỉ cộng điểm khi bản ghi tiến độ **chuyển trạng thái** sang hoàn thành, tính từ lúc bật |
+| Ràng buộc `C6` — biên khoảng cắt theo múi giờ tổ chức | **Biên kỳ cắt theo múi giờ tổ chức**, không theo giờ máy chủ |
+| Ràng buộc `C7` — một lần cộng điểm thuộc mọi khoảng ngày bao trùm nó | Một lần cộng điểm thuộc **mọi khoảng ngày bao trùm nó**, nên bảng xếp hạng luôn tính từ sổ giao dịch theo khoảng ngày |
+| Ràng buộc `C8` — mọi mốc dùng để xếp hạng phải lưu thời điểm đạt | **Mọi mốc dùng để xếp hạng phải lưu thời điểm đạt** |
+| Ràng buộc `C9` — biên ngày cắt theo múi giờ tổ chức | **"Ngày"** trong check-in cắt theo **múi giờ tổ chức** |
+| Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification | **`Test Account` bị loại khỏi TOÀN BỘ logic gamification** — lọc ngay từ tầng ghi nhận, không ghi rồi lọc sau |
 
 #### `C5` nói gì
 
@@ -348,13 +349,13 @@ flowchart LR
 
 | ID | User Story | Nguồn |
 | --- | --- | --- |
-| **US1** | Là học viên, tôi cần xem điểm, hạng và huy hiệu đã đạt để biết nỗ lực học của mình được ghi nhận tới đâu | Giải `O2` — nỗ lực học được ghi nhận ngay lúc nó xảy ra |
-| **US2** | Là học viên, tôi cần được báo ngay khi nhận điểm, đạt huy hiệu hoặc lên hạng, trong lúc đang dùng hệ thống | Giải `O2` — nỗ lực học được ghi nhận ngay lúc nó xảy ra |
-| **US3** | Là học viên, tôi cần tra được từng lần cộng điểm đến từ đâu để tin vào con số của mình | Giải `O5` — điểm số đáng tin, mỗi con số truy được nguồn.<br>Dựa trên `C3` — lưu từng lần cộng điểm kèm thời điểm |
-| **US4** | Là học viên, tôi cần biết huy hiệu nào sắp đạt và còn thiếu gì để có mục tiêu ngắn hạn | Giải `O3` — học viên có mốc ngắn hạn để nhắm tới |
-| **US5** | Là học viên, tôi cần việc vào hệ thống mỗi ngày được ghi nhận thành điểm để có lý do mở ứng dụng hằng ngày | Giải `O1` — học viên quay lại học đều đặn mà không cần nhắc thủ công.<br>**Nhắm thẳng vào Activation 40.2%**, chỉ số yếu nhất trong `Analytics` |
-| **US6** | Là học viên, tôi cần xem bảng xếp hạng của kỳ tôi chọn để biết mình đứng ở đâu so với người khác | Yêu cầu bổ sung ở `CR-001` — đưa bảng xếp hạng vào phạm vi đợt này |
-| **US7** | Là học viên, tôi cần luôn thấy vị trí của chính mình kèm vài người liền kề, kể cả khi không ở nhóm đầu | Yêu cầu bổ sung ở `CR-001`.<br>Là cơ chế giảm nhẹ chính cho bảng xếp hạng toàn tổ chức: người hạng thấp vẫn thấy được mình |
+| **US1** | Là học viên, tôi cần xem điểm, hạng và huy hiệu đã đạt để biết nỗ lực học của mình được ghi nhận tới đâu | Giải quyết mục tiêu `O2` — nỗ lực học được ghi nhận ngay lúc nó xảy ra |
+| **US2** | Là học viên, tôi cần được báo ngay khi nhận điểm, đạt huy hiệu hoặc lên hạng, trong lúc đang dùng hệ thống | Giải quyết mục tiêu `O2` — nỗ lực học được ghi nhận ngay lúc nó xảy ra |
+| **US3** | Là học viên, tôi cần tra được từng lần cộng điểm đến từ đâu để tin vào con số của mình | Giải quyết mục tiêu `O5` — điểm số đáng tin, mỗi con số truy được nguồn.<br>Dựa trên ràng buộc `C3` — lưu từng lần cộng điểm kèm thời điểm |
+| **US4** | Là học viên, tôi cần biết huy hiệu nào sắp đạt và còn thiếu gì để có mục tiêu ngắn hạn | Giải quyết mục tiêu `O3` — học viên có mốc ngắn hạn để nhắm tới |
+| **US5** | Là học viên, tôi cần việc vào hệ thống mỗi ngày được ghi nhận thành điểm để có lý do mở ứng dụng hằng ngày | Giải quyết mục tiêu `O1` — học viên quay lại học đều đặn mà không cần nhắc thủ công.<br>**Nhắm thẳng vào Activation 40.2%**, chỉ số yếu nhất trong mục `Analytics` |
+| **US6** | Là học viên, tôi cần xem bảng xếp hạng của kỳ tôi chọn để biết mình đứng ở đâu so với người khác | Yêu cầu bổ sung ở change request `CR-001` — đưa bảng xếp hạng vào phạm vi đợt này |
+| **US7** | Là học viên, tôi cần luôn thấy vị trí của chính mình kèm vài người liền kề, kể cả khi không ở nhóm đầu | Yêu cầu bổ sung ở change request `CR-001`.<br>Là cơ chế giảm nhẹ chính cho bảng xếp hạng toàn tổ chức: người hạng thấp vẫn thấy được mình |
 
 ### Phía vận hành (UpLMS Ops) — 8 US
 
@@ -365,11 +366,11 @@ flowchart LR
 | ID | User Story | Nguồn |
 | --- | --- | --- |
 | **US8** | Là nhân sự vận hành, tôi cần bật/tắt cơ chế điểm và khai mỗi hành động được bao nhiêu điểm, để điều chỉnh theo mục tiêu từng giai đoạn | Nền của mọi cơ chế còn lại. Không khai được điểm thì không có gì để xếp hạng |
-| **US9** | Là nhân sự vận hành, tôi cần bật/tắt từng loại huy hiệu và **đặt tên cùng hình cho từng mốc**, để bộ huy hiệu mang ngôn ngữ của tổ chức mình | Chốt ở `CR-008` — mốc do hệ thống định sẵn, vận hành chỉ đặt tên và hình |
-| **US10** | Là nhân sự vận hành, tôi cần đặt mỗi bao nhiêu điểm, bao nhiêu khoá, bao nhiêu huy hiệu thì học viên lên một hạng, và đặt trần hạng | Chốt ở `CR-008` — hạng là số thứ tự tịnh tiến, không có tên và hình |
-| **US11** | Là nhân sự vận hành, tôi cần chọn bảng xếp hạng hiện những cột nào, để kiểm soát học viên nhìn thấy gì về nhau | Chốt ở `CR-008` — mỗi chỉ số một bảng riêng, bật tắt độc lập |
-| **US12** | Là nhân sự vận hành, tôi cần xem danh sách học viên kèm hạng của họ, để nắm tình hình chung | Chốt ở `CR-008` — vận hành cần tra cứu hạng của từng người |
-| **US13** | Là nhân sự vận hành, tôi cần điểm phản ánh việc học thật, không bị đẩy lên bằng thao tác đối phó | Giải `O5` — điểm không bị thổi lên bằng thao tác đối phó |
+| **US9** | Là nhân sự vận hành, tôi cần bật/tắt từng loại huy hiệu và **đặt tên cùng hình cho từng mốc**, để bộ huy hiệu mang ngôn ngữ của tổ chức mình | Đã chốt ở change request `CR-008` — mốc do hệ thống định sẵn, vận hành chỉ đặt tên và hình |
+| **US10** | Là nhân sự vận hành, tôi cần đặt mỗi bao nhiêu điểm, bao nhiêu khoá, bao nhiêu huy hiệu thì học viên lên một hạng, và đặt trần hạng | Đã chốt ở change request `CR-008` — hạng là số thứ tự tịnh tiến, không có tên và hình |
+| **US11** | Là nhân sự vận hành, tôi cần chọn bảng xếp hạng hiện những cột nào, để kiểm soát học viên nhìn thấy gì về nhau | Đã chốt ở change request `CR-008` — mỗi chỉ số một bảng riêng, bật tắt độc lập |
+| **US12** | Là nhân sự vận hành, tôi cần xem danh sách học viên kèm hạng của họ, để nắm tình hình chung | Đã chốt ở change request `CR-008` — vận hành cần tra cứu hạng của từng người |
+| **US13** | Là nhân sự vận hành, tôi cần điểm phản ánh việc học thật, không bị đẩy lên bằng thao tác đối phó | Giải quyết mục tiêu `O5` — điểm không bị thổi lên bằng thao tác đối phó |
 | **US14** | Là nhân sự vận hành, tôi cần bật/tắt gamification và bật/tắt hiển thị phía học viên riêng biệt, để chạy thử cơ chế trước khi mở | Cần giai đoạn chạy ngầm để thử cơ chế trước khi mở cho học viên |
 | **US15** | Là quản trị, tôi cần phân quyền để chỉ vai trò vận hành phù hợp mới sửa được cấu hình gamification | `[suy ra]` — không có trong yêu cầu gốc, nhưng mọi cấu hình đều cần kiểm soát ai sửa được |
 
@@ -397,9 +398,9 @@ Là học viên, tôi cần xem điểm, hạng và huy hiệu đã đạt của
 
 | Điều kiện | Nguồn |
 |---|---|
-| `Gamification` đang bật và `Visibility in UpLMS` đang bật ở cấp tổ chức | `S12` |
+| `Gamification` đang bật và `Visibility in UpLMS` đang bật ở cấp tổ chức | Hai công tắc `Gamification` và `Visibility in UpLMS`, cấu hình ở `US14` |
 | Học viên đăng nhập được vào UpLMS | KB `06` |
-| Tài khoản không phải `Test Account` | `C10` · `KB-USER-TA-01` |
+| Tài khoản không phải `Test Account` | Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification.<br>Chi tiết ở KB `06-user-account.md` quy tắc `KB-USER-TA-01` |
 | Vận hành đã tạo ít nhất một hạng. Chưa có hạng nào thì khối hạng không hiện | `US11` |
 
 ### 3/ Scenario
@@ -504,9 +505,9 @@ Là học viên, tôi cần được báo ngay khi nhận điểm, đạt huy hi
 
 | Điều kiện | Nguồn |
 |---|---|
-| `Gamification` bật và `Visibility in UpLMS` bật | `S12` · `A19` |
-| Học viên **đang mở UpLMS** tại thời điểm thành tích phát sinh | `S10` |
-| Tài khoản không phải `Test Account` | `C10` |
+| `Gamification` bật và `Visibility in UpLMS` bật | Hai công tắc `Gamification` và `Visibility in UpLMS`, cấu hình ở `US14` |
+| Học viên **đang mở UpLMS** tại thời điểm thành tích phát sinh | Bảng xếp hạng tính sẵn theo chu kỳ 8 tiếng, xem `BR-6.12` |
+| Tài khoản không phải `Test Account` | Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification |
 | Vận hành đã khai ít nhất một hành động tính điểm | `US9` |
 
 ### 3/ Scenario
@@ -582,8 +583,8 @@ Là học viên, tôi cần tra được từng lần cộng điểm đến từ
 
 | Điều kiện | Nguồn |
 |---|---|
-| `Gamification` bật và `Visibility in UpLMS` bật | `S12` |
-| Tài khoản không phải `Test Account` | `C10` |
+| `Gamification` bật và `Visibility in UpLMS` bật | Hai công tắc `Gamification` và `Visibility in UpLMS`, cấu hình ở `US14` |
+| Tài khoản không phải `Test Account` | Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification |
 
 ### 3/ Scenario
 
@@ -693,9 +694,9 @@ Là học viên, tôi cần biết huy hiệu nào mình sắp đạt và còn t
 
 | Điều kiện | Nguồn |
 |---|---|
-| `Gamification` bật và `Visibility in UpLMS` bật | `S12` |
+| `Gamification` bật và `Visibility in UpLMS` bật | Hai công tắc `Gamification` và `Visibility in UpLMS`, cấu hình ở `US14` |
 | Vận hành đã tạo ít nhất một huy hiệu | `US10` |
-| Tài khoản không phải `Test Account` | `C10` |
+| Tài khoản không phải `Test Account` | Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification |
 
 ### 3/ Scenario
 
@@ -790,10 +791,10 @@ Là học viên, tôi cần việc vào hệ thống mỗi ngày được ghi nh
 
 | Điều kiện | Nguồn |
 |---|---|
-| `Gamification` bật ở cấp tổ chức | `S12` |
+| `Gamification` bật ở cấp tổ chức | Hai công tắc `Gamification` và `Visibility in UpLMS`, cấu hình ở `US14` |
 | Vận hành đã bật hành động **vào hệ thống hằng ngày** và khai ba tham số điểm chuỗi | `US8` |
-| Tài khoản không phải `Test Account` | `C10` |
-| Tổ chức đã khai tham số **múi giờ** | `C9` · `S21` |
+| Tài khoản không phải `Test Account` | Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification |
+| Tổ chức đã khai tham số **múi giờ** | Ràng buộc `C9` — biên ngày cắt theo múi giờ tổ chức. Tham số múi giờ khai ở `US14` |
 
 > `Visibility in UpLMS` tắt thì **vẫn ghi nhận và vẫn cộng điểm**, chỉ không hiện gì cho học viên. Đây là giai đoạn chạy ngầm.
 
@@ -840,7 +841,7 @@ Học viên bỏ trọn một ngày không vào thì chuỗi về `0`. Lần và
 |---|---|---|---|---|
 | Học viên | Khoá ngoại tới `users` | Có | | Mới |
 | Ngày có mặt | Ngày | Có | Cắt theo múi giờ tổ chức | Mới. Không lưu giờ phút, chỉ lưu ngày |
-| `tenant_id` | Khoá ngoại | Có | | `C1` |
+| `tenant_id` | Khoá ngoại | Có | | Ràng buộc `C1` — cấu hình gắn `tenant_id`, không đóng cứng trong mã |
 
 Một học viên một ngày chỉ có **một bản ghi**. Đây cũng là cách chặn cộng điểm hai lần khi học viên mở hai thiết bị cùng lúc, xử lý luôn `CG-7`.
 
@@ -890,9 +891,9 @@ Là học viên, tôi cần xem bảng xếp hạng của kỳ tôi chọn, đ�
 
 | Điều kiện | Nguồn |
 |---|---|
-| `Gamification` bật và `Visibility in UpLMS` bật | `S12` |
-| Tổ chức đã khai tham số **múi giờ** | `C6` · `S21` |
-| Tài khoản không phải `Test Account` | `C10` |
+| `Gamification` bật và `Visibility in UpLMS` bật | Hai công tắc `Gamification` và `Visibility in UpLMS`, cấu hình ở `US14` |
+| Tổ chức đã khai tham số **múi giờ** | Ràng buộc `C6` — biên khoảng cắt theo múi giờ tổ chức. Tham số múi giờ khai ở `US14` |
+| Tài khoản không phải `Test Account` | Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification |
 
 ### 3/ Scenario
 
@@ -964,7 +965,7 @@ Bảng hiện thứ hạng, tên và chỉ số của từng học viên, kèm n
 | Thời điểm đạt mức hiện tại | Thời gian | Có | Nền của `BR-6.4`. Theo `C8` |
 | Thứ hạng | Số nguyên | Không | Để trống với học viên chưa có chỉ số, theo `BR-6.6` |
 | Thời điểm tính | Thời gian | Có | Nguồn của nhãn `Last updated` |
-| `tenant_id` | Khoá ngoại | Có | `C1` |
+| `tenant_id` | Khoá ngoại | Có | Ràng buộc `C1` — cấu hình gắn `tenant_id`, không đóng cứng trong mã |
 
 Bảng này bị **ghi đè mỗi chu kỳ tính**. Không có bảng kết quả đóng băng nào.
 
@@ -1011,8 +1012,8 @@ Là học viên, tôi cần luôn thấy vị trí của chính mình kèm vài 
 | Điều kiện | Nguồn |
 |---|---|
 | Học viên đang mở trang Bảng xếp hạng (`US6`) | |
-| `Gamification` bật và `Visibility in UpLMS` bật | `S12` |
-| Tài khoản không phải `Test Account` | `C10` |
+| `Gamification` bật và `Visibility in UpLMS` bật | Hai công tắc `Gamification` và `Visibility in UpLMS`, cấu hình ở `US14` |
+| Tài khoản không phải `Test Account` | Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification |
 
 ### 3/ Scenario
 
@@ -1135,7 +1136,7 @@ Sửa xong thì lưu. Cấu hình mới áp dụng cho các lần cộng điểm
 | Mã hành động | Danh mục | Có | Bốn giá trị cố định ở phạm vi này | Mới. Chịu `C2` |
 | Hành động bật hay tắt | Đúng/sai | Có | Mặc định **tắt** | Mới |
 | Số điểm | Số nguyên | Có | `>= 1` | Mới |
-| `tenant_id` | Khoá ngoại | Có | | `C1` |
+| `tenant_id` | Khoá ngoại | Có | | Ràng buộc `C1` — cấu hình gắn `tenant_id`, không đóng cứng trong mã |
 
 **NFR**
 
@@ -1220,7 +1221,7 @@ Ví dụ loại Course có mốc `1, 2, 4, 8, 16, 32, 64, 128`. Vận hành đ�
 | Tên mốc | Chuỗi | Có | Có mặc định | Mới |
 | Hình mốc | Khoá ngoại tới `resources` | Có | Có mặc định | Mới. Tài nguyên bị xoá thì rơi về hình mặc định, theo `BR-1.7` |
 | Mô tả mốc | Chuỗi | Không | | Mới |
-| `tenant_id` | Khoá ngoại | Có | | `C1` |
+| `tenant_id` | Khoá ngoại | Có | | Ràng buộc `C1` — cấu hình gắn `tenant_id`, không đóng cứng trong mã |
 
 **NFR**
 
@@ -1349,7 +1350,7 @@ Cuối màn là trần hạng, con số cao nhất học viên có thể đạt 
 | Trần hạng | Số nguyên | Không | `>= 2`. Rỗng nghĩa là không giới hạn | Mới |
 | Hạng hiện tại của học viên | Số nguyên | Có | `>= 1` | Mới. Nằm ở bảng thành tích của học viên |
 | Thời điểm lên hạng gần nhất | Thời gian | Có | | Mới. Cần cho `C8` và cho sự kiện `Rank up` ở `US3` |
-| `tenant_id` | Khoá ngoại | Có | | `C1` |
+| `tenant_id` | Khoá ngoại | Có | | Ràng buộc `C1` — cấu hình gắn `tenant_id`, không đóng cứng trong mã |
 
 **NFR**
 
@@ -1434,7 +1435,7 @@ Bên dưới là bốn công tắc chọn cột hiện ra: hạng, điểm, huy 
 | Hiện cột điểm | Đúng/sai | Có | | Mới |
 | Hiện cột huy hiệu | Đúng/sai | Có | | Mới |
 | Hiện cột số khoá | Đúng/sai | Có | | Mới |
-| `tenant_id` | Khoá ngoại | Có | | `C1` |
+| `tenant_id` | Khoá ngoại | Có | | Ràng buộc `C1` — cấu hình gắn `tenant_id`, không đóng cứng trong mã |
 
 **NFR**
 
@@ -1723,7 +1724,7 @@ Cách dùng thông thường: bật công tắc thứ nhất, chạy ngầm hai 
 | `Gamification` bật hay tắt | Đúng/sai | Có | Mặc định **tắt** | Mới |
 | `Visibility in UpLMS` bật hay tắt | Đúng/sai | Có | Mặc định **tắt** | Mới |
 | Múi giờ tổ chức | Múi giờ | Có | Chuẩn múi giờ quốc tế | **Thêm cột vào bảng `tenant`** — bảng hiện hữu duy nhất bị sửa trong cả tính năng |
-| `tenant_id` | Khoá ngoại | Có | | `C1` |
+| `tenant_id` | Khoá ngoại | Có | | Ràng buộc `C1` — cấu hình gắn `tenant_id`, không đóng cứng trong mã |
 
 **NFR**
 

@@ -28,7 +28,7 @@
 | Version | Nội dung |
 |---|---|
 | v0.1 | Bản đầu — 6 conflict, 14 coverage gap, 9 FR bổ sung |
-| **v0.2** | **PO quyết toàn bộ 6 conflict.** `CF-2` biến mất · `C5` phải sửa · thêm `C10` loại trừ `Test Account` · gỡ `R2` `R4` · gỡ khoá Trial khỏi phạm vi · chốt `A24` `A25` |
+| **v0.2** | **PO quyết toàn bộ 6 conflict.** `CF-2` biến mất · `C5` phải sửa · thêm `C10` loại trừ `Test Account` · gỡ `R2` · `R4` · gỡ khoá Trial khỏi phạm vi · chốt `A24` · `A25` |
 | **v0.2.1** | **Ba câu Dev đã có đáp án.** `OQ-B2` ✅ có dấu thời gian · `OQ-B9` ✅ chịu được — **`R1` hạ từ 🔴 xuống 🟡**, xem §11.1 · `OQ-B12` ✅ lưu hết. `A27` PO xác nhận. **Không còn câu hỏi chặn Gate 3** |
 
 ---

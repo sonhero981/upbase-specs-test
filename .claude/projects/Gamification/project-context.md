@@ -94,7 +94,7 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 | `C3` | Lưu **từng lần cộng điểm kèm thời điểm**, không chỉ lưu tổng |
 | `C4` | Đổi cấu hình → **áp dụng từ thời điểm đổi**, không tính lại quá khứ. Áp cho cả điểm, huy hiệu và hạng |
 | `C5` | Chống cộng trùng trong phạm vi **một lượt ghi danh**. Chỉ cộng điểm khi bản ghi tiến độ **chuyển trạng thái** sang hoàn thành |
-| `C6` `C9` | Biên ngày và biên khoảng cắt theo **múi giờ tổ chức** |
+| `C6` · `C9` | Biên ngày và biên khoảng cắt theo **múi giờ tổ chức** |
 | `C7` | Một lần cộng điểm thuộc **mọi khoảng ngày bao trùm nó** |
 | `C8` | Mọi mốc dùng để xếp hạng phải lưu **thời điểm đạt** |
 | `C10` | **`Test Account` bị loại khỏi toàn bộ logic gamification** |
@@ -121,7 +121,7 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 | BRD | `docs/brd/brd-v0.6-20260923.md` — ⚠️ có dấu CR-007 ở đầu, một số mục hết hiệu lực |
 | Impact Matrix | `working/impact-analysis/impact-matrix-v0.2-20260923.md` — ⚠️ tương tự |
 | Solution | `working/solution-options/solution-comparison-v0.1-20260923.md` — ⚠️ tương tự |
-| **PRD** | `docs/prd/prd-gamification-v0.6-20261001.md` — **trạng thái đúng nhất**, đang mang `CR-009` |
+| **PRD** | `docs/prd/prd-gamification-v0.7-20261001.md` — **trạng thái đúng nhất**, đang mang `CR-009` |
 | Quyết định | `project-decisions.md` |
 | KB chính | `03-assessment.md` (`BR-TEST`) · `06-user-account.md` §8b (`Test Account`) · `07-learning-experience.md` · `12-data-model.md` · `14-api-surface.md` · `15-product-direction.md` |
 | Schema DB | [Lark → Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd) |
@@ -138,7 +138,7 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 
 | Artifact | Node token | URL | Ghi chú |
 |---|---|---|---|
-| `[PRD] Gamification v0.6` | *(xem wiki)* | https://upbasevn.sg.larksuite.com/docx/NnwVdxtyZoaow0xhzzAla0bHgJD | **Bản mới nhất** — 01/10/2026, có 7 ảnh design |
+| `[PRD] Gamification v0.7` | *(xem wiki)* | https://upbasevn.sg.larksuite.com/docx/Hjuxd3my6oG0UuxBGNOllABAgye | **Bản mới nhất** — 01/10/2026, có 7 ảnh design |
 | `[PRD] Gamification v0.2` | `J4NGwHIlmijgZBkqxpWlNS4qgxe` | https://upbasevn.sg.larksuite.com/wiki/J4NGwHIlmijgZBkqxpWlNS4qgxe | Bản duyệt Gate 4, giữ để đối chiếu |
 
 > **Publish lại thì nhớ chèn lại ảnh** bằng `.claude/scripts/lark-insert-design-images.py` — ảnh không nằm trong `.md` nên import mới là mất.

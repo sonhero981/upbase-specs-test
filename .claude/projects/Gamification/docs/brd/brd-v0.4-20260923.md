@@ -16,7 +16,7 @@
 | --- | --- | --- | --- |
 | v0.1 | Bản đầu | — | 23/09/2026 |
 | v0.2 | Đưa bảng xếp hạng vào phạm vi · tách kỳ lịch khỏi chiến dịch · bác bỏ `A8` | `CR-001` | 23/09/2026 |
-| v0.3 | Chốt 4 quyết định Gate 1 · bỏ phạm vi xếp hạng theo lớp · thêm chỉ số xếp hạng cho chiến dịch | `CR-002` `CR-003` | 23/09/2026 |
+| v0.3 | Chốt 4 quyết định Gate 1 · bỏ phạm vi xếp hạng theo lớp · thêm chỉ số xếp hạng cho chiến dịch | `CR-002` · `CR-003` | 23/09/2026 |
 | **v0.4** | **Gate 1 `Need Revision`.** Tách stakeholder L&D và Quản lý · **đổi cơ chế điểm đăng nhập** từ chuỗi ngày sang mỗi lần + chống spam · **định nghĩa lại 4 loại huy hiệu theo chỉ số đếm** · **ngưỡng lên hạng dùng nhiều chỉ số** · thông báo chỉ đẩy khi đang online, không gửi mail · bỏ US hiệu quả chiến dịch và US tính bù · chiến dịch không chồng lấn ở đợt này | `CR-004` + phản hồi Gate 1 | 23/09/2026 |
 
 **Nguồn input:** `working/raw-inputs/yeu-cau-goc-20260923.md` · `working/raw-inputs/change-requests.md` (CR-001…004) · `working/ai-drafts/clarified-requirements-20260923.md` · `project-decisions.md`

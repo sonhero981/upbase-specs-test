@@ -29,7 +29,7 @@
 | --- | --- | --- | --- |
 | v0.1 | Bản đầu | — | 23/09 |
 | v0.2 | Đưa bảng xếp hạng vào phạm vi · tách kỳ lịch khỏi chiến dịch | `CR-001` | 23/09 |
-| v0.3 | Chốt 4 quyết định Gate 1 · bỏ phạm vi xếp hạng theo lớp · thêm chỉ số xếp hạng chiến dịch | `CR-002` `CR-003` | 23/09 |
+| v0.3 | Chốt 4 quyết định Gate 1 · bỏ phạm vi xếp hạng theo lớp · thêm chỉ số xếp hạng chiến dịch | `CR-002` · `CR-003` | 23/09 |
 | v0.4 | Gate 1 `Need Revision` · định nghĩa lại huy hiệu · thu hẹp thông báo | `CR-004` | 23/09 |
 | v0.5 | Gate 1 `Approved with Notes` · điểm khi vào hệ thống tính theo ngày · gỡ phụ thuộc Keycloak | `CR-005` | 23/09 |
 | **v0.6** | 🔧 **Đính chính `BR-TEST`.** `Pass Point` chỉ tồn tại khi `Graded Assignment = Yes`. **Quiz và Case Study không tính.** Đóng `OQ-B16`.<br>🗑️ **Bỏ hành động tính điểm "đạt điểm cao"** — PO chốt tạm thời không có rule này. Gỡ `A23` và `OQ-B17` | `CR-006` | 23/09 |

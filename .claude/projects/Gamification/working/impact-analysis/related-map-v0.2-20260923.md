@@ -229,6 +229,6 @@ Chỉ thành vấn đề thật khi có chiến dịch kết thúc đúng lúc c
 | `OQ-B9` | Bảng xếp hạng chịu tải được không | Dev |
 | `OQ-B12` | Thời điểm đạt huy hiệu / hoàn thành khoá / hoàn thành bài Test có lưu được không | Dev |
 | `OQ-B11` | Múi giờ tổ chức khai ở đâu trong đợt này | PO + Dev |
-| `A24` `A25` | Hai giả định ở §10 | PO |
+| `A24` · `A25` | Hai giả định ở §10 | PO |
 
 **Chốt xong là chạy `/compact` rồi dựng Impact Matrix (Bước 6).**

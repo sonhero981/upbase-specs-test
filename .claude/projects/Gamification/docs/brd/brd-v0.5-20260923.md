@@ -14,7 +14,7 @@
 | --- | --- | --- | --- |
 | v0.1 | Bản đầu | — | 23/09 |
 | v0.2 | Đưa bảng xếp hạng vào phạm vi · tách kỳ lịch khỏi chiến dịch | `CR-001` | 23/09 |
-| v0.3 | Chốt 4 quyết định Gate 1 · bỏ phạm vi xếp hạng theo lớp · thêm chỉ số xếp hạng chiến dịch | `CR-002` `CR-003` | 23/09 |
+| v0.3 | Chốt 4 quyết định Gate 1 · bỏ phạm vi xếp hạng theo lớp · thêm chỉ số xếp hạng chiến dịch | `CR-002` · `CR-003` | 23/09 |
 | v0.4 | Gate 1 `Need Revision` · đổi cơ chế điểm đăng nhập · định nghĩa lại huy hiệu · thu hẹp thông báo | `CR-004` | 23/09 |
 | **v0.5** | ✅ **Gate 1 `Approved with Notes`.** Điểm đăng nhập đổi thành **mỗi ngày một lần** · huy hiệu Test **chỉ tính bài đạt** · riêng tư bảng xếp hạng đã chốt · **phụ thuộc Keycloak giảm mạnh** | `CR-005` | 23/09 |
 
