@@ -75,7 +75,22 @@ Quy tắc **fidelity 1:1** — không tóm tắt, không gộp section, không l
 | **Link** | Giữ nguyên, đặc biệt link Figma và tài liệu đối tác trong `Preferences` |
 | **Mục đã xoá** | Không tự thêm lại. Mục bị xoá là xoá có chủ đích |
 
-**Ảnh:** server Lark hiện chưa bật tool upload media. Có ảnh → đẩy phần chữ, rồi **báo rõ ảnh nào phải chèn tay** kèm đường dẫn file ở máy. **Không lặng lẽ bỏ ảnh.**
+## B2c — Ảnh design
+
+**Ảnh đẩy được, nhưng chỉ qua `lark-cli`.** MCP thiếu tool upload media; CLI có scope `docs:document.media:upload`.
+
+Ảnh là file nhị phân nên **không nằm được trong `.md`**. Mỗi lần import tạo một doc mới là mất sạch ảnh, phải chèn lại. Khác với sơ đồ — sơ đồ sống trong nguồn dưới dạng mermaid, ảnh thì không.
+
+```bash
+export PATH="$HOME/.local/node/bin:$PATH"
+python3 .claude/scripts/lark-insert-design-images.py <doc_token> <thư mục ảnh>
+```
+
+Script đọc `order.txt` trong thư mục ảnh (`<tên file>|<chú thích>` mỗi dòng), chèn từng ảnh kèm caption, rồi kéo cả cụm vào mục `Design`. Cuối cùng đọc lại đếm xem đủ ảnh và đúng chỗ chưa. Thêm `--dry-run` để xem trước.
+
+**Tài liệu phải có heading `Design`** làm điểm neo. Không có thì script dừng.
+
+`docs +media-insert` luôn ghi vào **cuối tài liệu**, không có tham số vị trí — đó là lý do phải có bước kéo cụm.
 
 ---
 
@@ -147,6 +162,7 @@ API trả `200` **không có nghĩa nội dung vào đúng chỗ**. Sau khi publ
    - Số heading trên Lark khớp số heading trong file
    - Số dòng của từng bảng khớp
    - **Số bảng trắng khớp số khối ` ```mermaid ` trong file, và không còn code block mermaid nào sót**
+   - **Số ảnh khớp số dòng trong `order.txt`, và nằm đúng trong mục `Design`**
    - Không mục nào bị gộp hoặc mất
 3. Lệch → **báo cụ thể mục nào thiếu** trước khi kết thúc
 

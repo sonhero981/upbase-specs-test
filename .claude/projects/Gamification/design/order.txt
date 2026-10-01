@@ -1,0 +1,8 @@
+# Thứ tự chèn ảnh vào mục Design của PRD. Mỗi dòng: <tên file>|<chú thích>
+Gamification.png|Màn Gamification — dải tóm tắt bốn ô, bảng xếp hạng bốn tab, khối vị trí của tôi
+Gamification - How to collect points_.png|Panel How to collect points — bốn dòng theo bốn hành động tính điểm
+Gamification - How to level up_.png|Panel How to level up — ba tiêu chí lên hạng
+Gamification - Achievement history.png|Panel Achievement history — nội dung dạng câu văn, mới nhất lên trước
+User Profile - Badges.png|My Profile tab Badges — bộ đếm theo loại, huy hiệu chưa đạt hiện xám
+Gamification - Enable - Setting.png|Ops khi bật — một trang bốn khối Points, Badges, Levels, Leaderboard
+Gamification - Disable.png|Ops khi tắt — mọi khối khác biến mất, chỉ còn một công tắc

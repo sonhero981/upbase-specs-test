@@ -6,7 +6,7 @@
 | **Epic** | ❓ *link Jira* |
 | **Story** | ❓ *link Jira* |
 | **Related** | `brd-v0.6-20260923.md` · `impact-matrix-v0.2-20260923.md` · `solution-comparison-v0.1-20260923.md` |
-| **Document status** | 🔄 **v0.5 chờ PO review lại** — mang `CR-009`, `CR-010` và design đã chốt. Bản v0.2 đã được PO duyệt 23/09/2026 |
+| **Document status** | 🔄 **v0.6 chờ PO review lại** — mang `CR-009`, `CR-010` và design đã chốt. Bản v0.2 đã được PO duyệt 23/09/2026 |
 | **Document owner** | Bùi Đức Huy (PO) |
 | **Designer** | ❓ *cần điền* |
 | **Tech lead** | ❓ *cần điền* |
@@ -24,6 +24,7 @@
 | v0.3 | Bùi Đức Huy | Điểm check-in tăng dần theo chuỗi ngày đăng nhập liên tiếp, thêm khối chuỗi trên trang Thành tích (`CR-009`). Đổi thuật ngữ "khử trùng" thành "chống cộng trùng". Làm rõ `C5` bằng định nghĩa lượt ghi danh | `CR-009` | 01/10/2026 |
 | v0.4 | Bùi Đức Huy | Bỏ trần điểm mỗi ngày, kéo theo bỏ sự kiện `No points`. Làm rõ logic lên hạng: mỗi mốc chạm được đều cho một hạng. Màn lịch sử thành panel `Achievement history` kèm bộ chuỗi tiếng Anh đầy đủ (`CR-010`) | `CR-010` | 01/10/2026 |
 | v0.5 | Bùi Đức Huy | Áp design đã chốt: bước tăng chuỗi cố định `5`, trần `40` chạm đúng ngày thứ 7, bỏ chuỗi dài nhất. Danh sách huy hiệu chuyển sang `My Profile` → tab `Badges`. Thêm hành vi trỏ và bấm trên dải tóm tắt. Viết lại cột `Nguồn` thành nội dung đọc được | Design chốt 01/10 | 01/10/2026 |
+| v0.6 | Bùi Đức Huy | Gộp bốn màn cấu hình Ops thành một trang bốn khối. Thêm mục **Design** kèm sáu ảnh màn đã chốt. Tooltip cho ô chuỗi | Design chốt 01/10 | 01/10/2026 |
 
 > ✅ **`Approved with Notes` — PO duyệt ngày 23/09/2026.** Còn **8 câu hỏi mở** ở mục `Vấn đề tồn đọng`, không câu nào chặn bàn giao.
 
@@ -109,7 +110,7 @@ Vấn đề tách thành **ba tầng riêng biệt**, mỗi tầng một nguyên
 
 ❓ **Cần bổ sung trước khi bàn giao** — đây là nơi Dev và QA tìm mọi thứ để bắt đầu.
 
-- **UX:** ❓ *link Figma — chưa có*
+- **UX:** ❓ *link Figma — chưa có*. Ảnh design chốt ngày 01/10 nằm ở mục **Design** ngay dưới
 - **Luồng giải pháp:** `working/solution-options/solution-comparison-v0.1-20260923.md` §9
 - **Phân tích ảnh hưởng:** `working/impact-analysis/impact-matrix-v0.2-20260923.md`
 - **Tài liệu nền:** `docs/brd/brd-v0.6-20260923.md` · `project-decisions.md`
@@ -134,6 +135,20 @@ Vấn đề tách thành **ba tầng riêng biệt**, mỗi tầng một nguyên
 Hai factor còn lại (**Happiness**) **xoá vì chưa có cách đo** — không có khảo sát hài lòng trong phạm vi này.
 
 ---
+
+# Design
+
+Sáu màn đã chốt ngày 01/10/2026. Ảnh gốc nằm trong repo ở `.claude/projects/Gamification/design/`.
+
+| Màn | Thuộc US | Chốt gì ở đây |
+|---|---|---|
+| **Gamification** | `US1` `US6` `US7` | Dải tóm tắt bốn ô · bảng xếp hạng bốn tab · khối vị trí của tôi với đường kẻ `Show All` |
+| **How to collect points** | `US1` | Panel trượt từ phải, bốn dòng theo bốn hành động tính điểm |
+| **How to level up** | `US1` `US10` | Panel trượt từ phải, ba tiêu chí lên hạng |
+| **Achievement history** | `US3` | Panel trượt từ phải, nội dung dạng câu văn |
+| **User Profile — Badges** | `US4` | Tab trong `My Profile`, bộ đếm `({đã đạt}/{tổng mốc})`, huy hiệu chưa đạt hiện xám |
+| **Ops — Enable Setting** | `US8` `US9` `US10` `US11` `US14` | Một trang bốn khối, mốc huy hiệu chỉ đọc |
+| **Ops — Disable** | `US14` | `Gamification` tắt thì mọi khối khác biến mất |
 
 # Solution
 
@@ -343,7 +358,9 @@ flowchart LR
 
 ### Phía vận hành (UpLMS Ops) — 8 US
 
-> Cấu hình tách thành **bốn màn riêng, mỗi màn một chức năng có công tắc riêng**: Points · Badges · Levels · Leaderboard.
+> Cấu hình nằm trên **một trang duy nhất trong Ops, chia bốn khối, mỗi khối một chức năng có công tắc riêng**: Points · Badges · Levels · Leaderboard. `US8` đến `US11` mô tả bốn khối đó.
+>
+> `CR-008` ban đầu chốt tách bốn màn. Design chốt ngày 01/10 gộp lại một trang vì lượng cấu hình ít, bắt vận hành nhảy bốn màn thì bất tiện hơn.
 
 | ID | User Story | Nguồn |
 | --- | --- | --- |
@@ -414,7 +431,7 @@ Học viên chưa có điểm nào vẫn vào được trang. Lúc đó điểm 
 
 | Ô | Hiện gì | Trỏ chuột vào | Bấm vào |
 |---|---|---|---|
-| **Chuỗi** | `5 Streaks` | *(chưa định nghĩa)* | *(chưa định nghĩa)* |
+| **Chuỗi** | `5 Streaks` | Tooltip `Days you've signed in without a break.` | Không có hành động. Ô này chỉ để xem |
 | **Điểm** | `475 Points` | Gợi ý `How to collect points?` | Mở panel `How to collect points?` trượt từ phải |
 | **Huy hiệu** | `3 Badges` | Gợi ý `Go to badge gallery` | **Chuyển màn** sang `My Profile` → tab `Badges` (`US4`) |
 | **Hạng** | `Level 1` | Gợi ý `How to level up?` | Mở panel `How to level up?` trượt từ phải |
@@ -1754,8 +1771,8 @@ Quản trị gán quyền cho vai trò phù hợp. Vai trò không có quyền t
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
 | Phân quyền (màn hiện có) | Danh sách quyền | Nhóm `Gamification` | Xuất hiện như một nhóm quyền mới. **Không làm màn phân quyền riêng** |
-| Phân quyền (màn hiện có) | Quyền | `Xem cấu hình gamification` | Mở được bốn màn cấu hình và danh sách học viên, nhưng không sửa được |
-| Phân quyền (màn hiện có) | Quyền | `Sửa cấu hình gamification` | Sửa được bốn màn cấu hình ở `US8` đến `US11` và công tắc chung ở `US14` |
+| Phân quyền (màn hiện có) | Quyền | `Xem cấu hình gamification` | Mở được trang cấu hình và danh sách học viên, nhưng không sửa được |
+| Phân quyền (màn hiện có) | Quyền | `Sửa cấu hình gamification` | Sửa được cả bốn khối cấu hình ở `US8` đến `US11` và công tắc chung ở `US14` |
 | Phân quyền (màn hiện có) | Quyền | `Xem danh sách học viên và hạng` | Mở được màn ở `US12` và xuất file |
 | Menu Ops | Khu vực Gamification | Hiển thị | Không có quyền xem thì **không thấy khu vực này trong menu**, và mở thẳng đường dẫn cũng không vào được |
 
@@ -1781,7 +1798,7 @@ Không có yêu cầu riêng. Theo chuẩn của hệ phân quyền hiện có.
 | Không làm ở US này | Lý do |
 |---|---|
 | Làm màn phân quyền riêng cho gamification | `BR-15.1`. Dùng màn hiện có |
-| Phân quyền tới từng màn cấu hình, ví dụ chỉ sửa được huy hiệu mà không sửa được điểm | Chưa yêu cầu. Bốn màn cấu hình dùng chung một quyền sửa |
+| Phân quyền tới từng khối cấu hình, ví dụ chỉ sửa được huy hiệu mà không sửa được điểm | Chưa yêu cầu. Cả bốn khối dùng chung một quyền sửa |
 | Quy trình duyệt trước khi cấu hình có hiệu lực | Chưa yêu cầu |
 | Ghi lại ai đã đổi cấu hình gì | PO chốt không cần, xem `OQ-34` |
 

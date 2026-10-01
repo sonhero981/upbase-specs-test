@@ -121,7 +121,7 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 | BRD | `docs/brd/brd-v0.6-20260923.md` — ⚠️ có dấu CR-007 ở đầu, một số mục hết hiệu lực |
 | Impact Matrix | `working/impact-analysis/impact-matrix-v0.2-20260923.md` — ⚠️ tương tự |
 | Solution | `working/solution-options/solution-comparison-v0.1-20260923.md` — ⚠️ tương tự |
-| **PRD** | `docs/prd/prd-gamification-v0.5-20261001.md` — **trạng thái đúng nhất**, đang mang `CR-009` |
+| **PRD** | `docs/prd/prd-gamification-v0.6-20261001.md` — **trạng thái đúng nhất**, đang mang `CR-009` |
 | Quyết định | `project-decisions.md` |
 | KB chính | `03-assessment.md` (`BR-TEST`) · `06-user-account.md` §8b (`Test Account`) · `07-learning-experience.md` · `12-data-model.md` · `14-api-surface.md` · `15-product-direction.md` |
 | Schema DB | [Lark → Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd) |
@@ -138,10 +138,10 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 
 | Artifact | Node token | URL | Ghi chú |
 |---|---|---|---|
-| `[PRD] Gamification v0.5` | `RLpnw6ba4iTKackN2YqlvF9mg6i` | https://upbasevn.sg.larksuite.com/wiki/RLpnw6ba4iTKackN2YqlvF9mg6i | **Bản mới nhất** — 01/10/2026 |
+| `[PRD] Gamification v0.6` | *(xem wiki)* | https://upbasevn.sg.larksuite.com/docx/NnwVdxtyZoaow0xhzzAla0bHgJD | **Bản mới nhất** — 01/10/2026, có 7 ảnh design |
 | `[PRD] Gamification v0.2` | `J4NGwHIlmijgZBkqxpWlNS4qgxe` | https://upbasevn.sg.larksuite.com/wiki/J4NGwHIlmijgZBkqxpWlNS4qgxe | Bản duyệt Gate 4, giữ để đối chiếu |
 
-> 🧹 **Ba node cần xoá thủ công** vì `lark-cli` chưa có quyền `drive`: `XKOMwSFSliYoSkkAKE4lWR0Gg3b` (v0.3, đang hiện tên `[PRD] Gamification`) · `N0SIw62VjikFnvkKbpelWC8xgtb` (v0.4).
+> **Publish lại thì nhớ chèn lại ảnh** bằng `.claude/scripts/lark-insert-design-images.py` — ảnh không nằm trong `.md` nên import mới là mất.
 
 > Publish lại thì **ghi đè vào đúng node trên**, đừng import file mới — import mới sinh node khác và người đọc sẽ giữ link cũ.
 >
