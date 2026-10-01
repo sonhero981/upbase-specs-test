@@ -150,7 +150,7 @@ Nơi ghi mọi quyết định đã chốt. AI tra file này để **không hỏ
 
 ## ✅ GATE 4 — `Approved with Notes` (23/09/2026)
 
-**`prd-gamification-v0.4-20261001.md` là bản được duyệt.** 15 US viết chi tiết, 132 business rule.
+**`prd-gamification-v0.5-20261001.md` là bản được duyệt.** 15 US viết chi tiết, 132 business rule.
 
 | Ngày | Quyết định | Lý do | Người quyết |
 | --- | --- | --- | --- |
@@ -196,4 +196,16 @@ Trước đó `BR-13.10` viết chung là *"lượt học mới được tính �
 | 01/10/2026 | **Màn lịch sử tên `Achievement history`**, là panel trượt từ cạnh phải. Bộ chuỗi tiếng Anh đã định nghĩa đủ bảy mẫu câu | Design chốt | PO | CR-010 |
 
 **Rủi ro PO chấp nhận:** bỏ trần ngày làm mất một trong hai lớp chặn mà `OQ-A2` từng dựa vào. Hoạt động chỉ có Text/Ảnh hoàn thành ngay khi mở, nên học viên bấm qua loạt vẫn nhận đủ điểm. Hoạt động chứa Video không bị vì phải xem đủ 80% thời lượng.
+
+## Chốt design (01/10/2026)
+
+| Ngày | Quyết định | Lý do | Người quyết | Gate |
+| --- | --- | --- | --- | --- |
+| 01/10/2026 | **Bước tăng chuỗi cố định `5`**, không cho vận hành cấu hình ở đợt này | Giảm số tham số phải khai | PO | Design |
+| 01/10/2026 | **Trần điểm chuỗi `40`** — chạm đúng ngày thứ 7 | Người giữ chuỗi trọn một tuần kể cả T7 CN thì từ đó về sau luôn nhận mức cao nhất | PO | Design |
+| 01/10/2026 | **Bỏ chuỗi dài nhất** khỏi giao diện và khỏi dữ liệu | Chỉ số quá khứ không giúp học viên quyết định gì hôm nay | PO | Design |
+| 01/10/2026 | **Danh sách huy hiệu nằm ở `My Profile` → tab `Badges`**, không nằm trên màn Gamification. Màn Gamification chỉ hiện số lượng | Design chốt | PO | Design |
+| 01/10/2026 | **Ngày đạt huy hiệu tra ở `Achievement history`**, không hiện cạnh huy hiệu | Tránh lặp thông tin | PO | Design |
+| 01/10/2026 | **Tiến độ huy hiệu chưa đạt hiện khi trỏ chuột vào**, dạng `8 check-in` | Design chốt | PO | Design |
+| 01/10/2026 | **Cột `Nguồn` trong bảng US viết rõ nội dung**, không ghi `Yêu cầu gốc dòng N` | Tài liệu trên Lark không đếm dòng nên mã đó vô nghĩa với người đọc | PO | Design |
 

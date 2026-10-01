@@ -1,8 +1,8 @@
 # Project Context
 
 **Project:** Gamification
-**Ngày tạo:** 23/09/2026 · **Cập nhật:** 01/10/2026, sau `CR-010`
-**Trạng thái:** 🔄 **PRD v0.3 mang `CR-009` và `CR-010`**, chờ PO review lại. Bản v0.2 đã duyệt Gate 4 và vẫn còn trên Lark
+**Ngày tạo:** 23/09/2026 · **Cập nhật:** 01/10/2026, sau khi chốt design
+**Trạng thái:** 🔄 **PRD v0.5** mang `CR-009`, `CR-010` và design đã chốt. Chờ PO review lại từ đầu
 **Cỡ yêu cầu:** **L** — đủ 9 bước, đủ 4 Gate
 
 > ⚠️ **File này đã được viết lại toàn bộ sau `CR-007`.** Bản trước viết ở Bước 2 và lệch khá xa sau bảy change request. Nếu thấy mâu thuẫn với tài liệu khác, tin file này và `change-requests.md`.
@@ -121,7 +121,7 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 | BRD | `docs/brd/brd-v0.6-20260923.md` — ⚠️ có dấu CR-007 ở đầu, một số mục hết hiệu lực |
 | Impact Matrix | `working/impact-analysis/impact-matrix-v0.2-20260923.md` — ⚠️ tương tự |
 | Solution | `working/solution-options/solution-comparison-v0.1-20260923.md` — ⚠️ tương tự |
-| **PRD** | `docs/prd/prd-gamification-v0.4-20261001.md` — **trạng thái đúng nhất**, đang mang `CR-009` |
+| **PRD** | `docs/prd/prd-gamification-v0.5-20261001.md` — **trạng thái đúng nhất**, đang mang `CR-009` |
 | Quyết định | `project-decisions.md` |
 | KB chính | `03-assessment.md` (`BR-TEST`) · `06-user-account.md` §8b (`Test Account`) · `07-learning-experience.md` · `12-data-model.md` · `14-api-surface.md` · `15-product-direction.md` |
 | Schema DB | [Lark → Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd) |
@@ -136,11 +136,12 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 
 ### Đã publish
 
-| Artifact | Node token | URL | Lần publish gần nhất |
+| Artifact | Node token | URL | Ghi chú |
 |---|---|---|---|
-| `[PRD] Gamification v0.4` | `N0SIw62VjikFnvkKbpelWC8xgtb` | https://upbasevn.sg.larksuite.com/wiki/N0SIw62VjikFnvkKbpelWC8xgtb | 01/10/2026 · **bản mới nhất** |
-| `[PRD] Gamification v0.3` | `XKOMwSFSliYoSkkAKE4lWR0Gg3b` | https://upbasevn.sg.larksuite.com/wiki/XKOMwSFSliYoSkkAKE4lWR0Gg3b | 01/10/2026 · thay bởi v0.4, nên xoá |
-| `[PRD] Gamification v0.2` | `J4NGwHIlmijgZBkqxpWlNS4qgxe` | https://upbasevn.sg.larksuite.com/wiki/J4NGwHIlmijgZBkqxpWlNS4qgxe | 24/09/2026 · bản đã duyệt Gate 4, giữ để đối chiếu |
+| `[PRD] Gamification v0.5` | `RLpnw6ba4iTKackN2YqlvF9mg6i` | https://upbasevn.sg.larksuite.com/wiki/RLpnw6ba4iTKackN2YqlvF9mg6i | **Bản mới nhất** — 01/10/2026 |
+| `[PRD] Gamification v0.2` | `J4NGwHIlmijgZBkqxpWlNS4qgxe` | https://upbasevn.sg.larksuite.com/wiki/J4NGwHIlmijgZBkqxpWlNS4qgxe | Bản duyệt Gate 4, giữ để đối chiếu |
+
+> 🧹 **Ba node cần xoá thủ công** vì `lark-cli` chưa có quyền `drive`: `XKOMwSFSliYoSkkAKE4lWR0Gg3b` (v0.3, đang hiện tên `[PRD] Gamification`) · `N0SIw62VjikFnvkKbpelWC8xgtb` (v0.4).
 
 > Publish lại thì **ghi đè vào đúng node trên**, đừng import file mới — import mới sinh node khác và người đọc sẽ giữ link cũ.
 >

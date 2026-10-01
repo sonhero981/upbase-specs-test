@@ -6,7 +6,7 @@
 | **Epic** | ❓ *link Jira* |
 | **Story** | ❓ *link Jira* |
 | **Related** | `brd-v0.6-20260923.md` · `impact-matrix-v0.2-20260923.md` · `solution-comparison-v0.1-20260923.md` |
-| **Document status** | 🔄 **v0.4 chờ PO review lại** — mang `CR-009` và `CR-010`. Bản v0.2 đã được PO duyệt 23/09/2026 |
+| **Document status** | 🔄 **v0.5 chờ PO review lại** — mang `CR-009`, `CR-010` và design đã chốt. Bản v0.2 đã được PO duyệt 23/09/2026 |
 | **Document owner** | Bùi Đức Huy (PO) |
 | **Designer** | ❓ *cần điền* |
 | **Tech lead** | ❓ *cần điền* |
@@ -23,6 +23,7 @@
 | v0.2 | Bùi Đức Huy | Viết chi tiết `US1` đến `US15`. Bỏ chiến dịch và kỳ lịch, thay bằng bộ chọn khoảng ngày (`CR-007`). Tách cấu hình thành bốn màn, khoá mốc huy hiệu, hạng thành số tịnh tiến, bảng xếp hạng tách theo chỉ số (`CR-008`) | `CR-007` `CR-008` | 23/09/2026 |
 | v0.3 | Bùi Đức Huy | Điểm check-in tăng dần theo chuỗi ngày đăng nhập liên tiếp, thêm khối chuỗi trên trang Thành tích (`CR-009`). Đổi thuật ngữ "khử trùng" thành "chống cộng trùng". Làm rõ `C5` bằng định nghĩa lượt ghi danh | `CR-009` | 01/10/2026 |
 | v0.4 | Bùi Đức Huy | Bỏ trần điểm mỗi ngày, kéo theo bỏ sự kiện `No points`. Làm rõ logic lên hạng: mỗi mốc chạm được đều cho một hạng. Màn lịch sử thành panel `Achievement history` kèm bộ chuỗi tiếng Anh đầy đủ (`CR-010`) | `CR-010` | 01/10/2026 |
+| v0.5 | Bùi Đức Huy | Áp design đã chốt: bước tăng chuỗi cố định `5`, trần `40` chạm đúng ngày thứ 7, bỏ chuỗi dài nhất. Danh sách huy hiệu chuyển sang `My Profile` → tab `Badges`. Thêm hành vi trỏ và bấm trên dải tóm tắt. Viết lại cột `Nguồn` thành nội dung đọc được | Design chốt 01/10 | 01/10/2026 |
 
 > ✅ **`Approved with Notes` — PO duyệt ngày 23/09/2026.** Còn **8 câu hỏi mở** ở mục `Vấn đề tồn đọng`, không câu nào chặn bàn giao.
 
@@ -251,7 +252,7 @@ flowchart LR
     end
     subgraph C["3 · ĐỌC — màn hình đọc"]
         direction TB
-        R1["Thành tích của học viên<br/>điểm - hạng hiện tại<br/>chuỗi hiện tại - chuỗi dài nhất"]
+        R1["Thành tích của học viên<br/>điểm - hạng hiện tại<br/>chuỗi hiện tại"]
         R2["Bảng xếp hạng tính sẵn<br/>ghi đè mỗi 8 tiếng"]
     end
     TN["tenant — SỬA<br/>thêm cột múi giờ<br/>dùng để cắt biên ngày"]
@@ -281,7 +282,7 @@ flowchart LR
 | Huy hiệu | Mới | Bốn loại, mỗi loại tám mốc. **Giá trị mốc chỉ đọc sau khi khởi tạo** (`BR-9.2`). Tên, hình, mô tả sửa được. Công tắc bật tắt từng loại | ✅ Bắt buộc |
 | Huy hiệu đã đạt | Mới | Học viên nào đạt mốc nào, **kèm thời điểm đạt** (`C8`) | ✅ Bắt buộc |
 | Cấu hình hạng | Mới | Ba bội số lên hạng (điểm · số khoá · số huy hiệu), mỗi cái một công tắc, cộng trần hạng. **Không có tên hạng và hình hạng** — hạng là số thứ tự tịnh tiến | ✅ Bắt buộc |
-| **Thành tích của học viên** | Mới | Điểm tích luỹ · hạng hiện tại · thời điểm lên hạng gần nhất · **chuỗi hiện tại, chuỗi dài nhất, ngày có mặt gần nhất**. Đây là bảng `US1` và `US12` đọc | ✅ Bắt buộc |
+| **Thành tích của học viên** | Mới | Điểm tích luỹ · hạng hiện tại · thời điểm lên hạng gần nhất · **chuỗi hiện tại, ngày có mặt gần nhất**. Đây là bảng `US1` và `US12` đọc | ✅ Bắt buộc |
 | **Bảng xếp hạng tính sẵn** | Mới | Thứ hạng cho năm khoảng ngày của nút bấm nhanh, nhân bốn chỉ số. **Bị ghi đè mỗi chu kỳ 8 tiếng.** Khoảng ngày tự chọn không lưu ở đây, tính lúc chọn (`BR-6.12`) | ✅ Bắt buộc |
 
 > **Ảnh huy hiệu** dùng hạ tầng `resources` sẵn có. Tài nguyên bị xoá thì rơi về **ảnh mặc định** (`BR-1.7`). Hạng không có hình nên không dùng `resources`.
@@ -332,13 +333,13 @@ flowchart LR
 
 | ID | User Story | Nguồn |
 | --- | --- | --- |
-| **US1** | Là học viên, tôi cần xem điểm, hạng và huy hiệu đã đạt để biết nỗ lực học của mình được ghi nhận tới đâu | Yêu cầu gốc dòng 10 · `O2` |
-| **US2** | Là học viên, tôi cần được báo ngay khi nhận điểm, đạt huy hiệu hoặc lên hạng, trong lúc đang dùng hệ thống | Yêu cầu gốc dòng 9 · `O2` |
-| **US3** | Là học viên, tôi cần tra được từng lần cộng điểm đến từ đâu để tin vào con số của mình | Yêu cầu gốc dòng 8 · `O5` · `C3` |
-| **US4** | Là học viên, tôi cần biết huy hiệu nào sắp đạt và còn thiếu gì để có mục tiêu ngắn hạn | Yêu cầu gốc dòng 10 · `O3` |
-| **US5** | Là học viên, tôi cần việc vào hệ thống mỗi ngày được ghi nhận thành điểm để có lý do mở ứng dụng hằng ngày | Yêu cầu gốc dòng 2 · `O1` · **nhắm Activation 40.2%** |
-| **US6** | Là học viên, tôi cần xem bảng xếp hạng của kỳ tôi chọn để biết mình đứng ở đâu so với người khác | `CR-001` |
-| **US7** | Là học viên, tôi cần luôn thấy vị trí của chính mình kèm vài người liền kề, kể cả khi không ở nhóm đầu | `CR-001` · cơ chế giảm nhẹ chính cho bảng toàn tổ chức |
+| **US1** | Là học viên, tôi cần xem điểm, hạng và huy hiệu đã đạt để biết nỗ lực học của mình được ghi nhận tới đâu | Giải `O2` — nỗ lực học được ghi nhận ngay lúc nó xảy ra |
+| **US2** | Là học viên, tôi cần được báo ngay khi nhận điểm, đạt huy hiệu hoặc lên hạng, trong lúc đang dùng hệ thống | Giải `O2` — nỗ lực học được ghi nhận ngay lúc nó xảy ra |
+| **US3** | Là học viên, tôi cần tra được từng lần cộng điểm đến từ đâu để tin vào con số của mình | Giải `O5` — điểm số đáng tin, mỗi con số truy được nguồn.<br>Dựa trên `C3` — lưu từng lần cộng điểm kèm thời điểm |
+| **US4** | Là học viên, tôi cần biết huy hiệu nào sắp đạt và còn thiếu gì để có mục tiêu ngắn hạn | Giải `O3` — học viên có mốc ngắn hạn để nhắm tới |
+| **US5** | Là học viên, tôi cần việc vào hệ thống mỗi ngày được ghi nhận thành điểm để có lý do mở ứng dụng hằng ngày | Giải `O1` — học viên quay lại học đều đặn mà không cần nhắc thủ công.<br>**Nhắm thẳng vào Activation 40.2%**, chỉ số yếu nhất trong `Analytics` |
+| **US6** | Là học viên, tôi cần xem bảng xếp hạng của kỳ tôi chọn để biết mình đứng ở đâu so với người khác | Yêu cầu bổ sung ở `CR-001` — đưa bảng xếp hạng vào phạm vi đợt này |
+| **US7** | Là học viên, tôi cần luôn thấy vị trí của chính mình kèm vài người liền kề, kể cả khi không ở nhóm đầu | Yêu cầu bổ sung ở `CR-001`.<br>Là cơ chế giảm nhẹ chính cho bảng xếp hạng toàn tổ chức: người hạng thấp vẫn thấy được mình |
 
 ### Phía vận hành (UpLMS Ops) — 8 US
 
@@ -346,14 +347,14 @@ flowchart LR
 
 | ID | User Story | Nguồn |
 | --- | --- | --- |
-| **US8** | Là nhân sự vận hành, tôi cần bật/tắt cơ chế điểm và khai mỗi hành động được bao nhiêu điểm, để điều chỉnh theo mục tiêu từng giai đoạn | Yêu cầu gốc dòng 1, 2 |
-| **US9** | Là nhân sự vận hành, tôi cần bật/tắt từng loại huy hiệu và **đặt tên cùng hình cho từng mốc**, để bộ huy hiệu mang ngôn ngữ của tổ chức mình | Yêu cầu gốc dòng 3, 4 · `CR-008` |
-| **US10** | Là nhân sự vận hành, tôi cần đặt mỗi bao nhiêu điểm, bao nhiêu khoá, bao nhiêu huy hiệu thì học viên lên một hạng, và đặt trần hạng | Yêu cầu gốc dòng 5 · `CR-008` |
-| **US11** | Là nhân sự vận hành, tôi cần chọn bảng xếp hạng hiện những cột nào, để kiểm soát học viên nhìn thấy gì về nhau | `CR-008` |
-| **US12** | Là nhân sự vận hành, tôi cần xem danh sách học viên kèm hạng của họ, để nắm tình hình chung | `CR-008` |
-| **US13** | Là nhân sự vận hành, tôi cần điểm phản ánh việc học thật, không bị đẩy lên bằng thao tác đối phó | Yêu cầu gốc dòng 7 · `O5` |
-| **US14** | Là nhân sự vận hành, tôi cần bật/tắt gamification và bật/tắt hiển thị phía học viên riêng biệt, để chạy thử cơ chế trước khi mở | Yêu cầu gốc dòng 11 |
-| **US15** | Là quản trị, tôi cần phân quyền để chỉ vai trò vận hành phù hợp mới sửa được cấu hình gamification | `[suy ra]` |
+| **US8** | Là nhân sự vận hành, tôi cần bật/tắt cơ chế điểm và khai mỗi hành động được bao nhiêu điểm, để điều chỉnh theo mục tiêu từng giai đoạn | Nền của mọi cơ chế còn lại. Không khai được điểm thì không có gì để xếp hạng |
+| **US9** | Là nhân sự vận hành, tôi cần bật/tắt từng loại huy hiệu và **đặt tên cùng hình cho từng mốc**, để bộ huy hiệu mang ngôn ngữ của tổ chức mình | Chốt ở `CR-008` — mốc do hệ thống định sẵn, vận hành chỉ đặt tên và hình |
+| **US10** | Là nhân sự vận hành, tôi cần đặt mỗi bao nhiêu điểm, bao nhiêu khoá, bao nhiêu huy hiệu thì học viên lên một hạng, và đặt trần hạng | Chốt ở `CR-008` — hạng là số thứ tự tịnh tiến, không có tên và hình |
+| **US11** | Là nhân sự vận hành, tôi cần chọn bảng xếp hạng hiện những cột nào, để kiểm soát học viên nhìn thấy gì về nhau | Chốt ở `CR-008` — mỗi chỉ số một bảng riêng, bật tắt độc lập |
+| **US12** | Là nhân sự vận hành, tôi cần xem danh sách học viên kèm hạng của họ, để nắm tình hình chung | Chốt ở `CR-008` — vận hành cần tra cứu hạng của từng người |
+| **US13** | Là nhân sự vận hành, tôi cần điểm phản ánh việc học thật, không bị đẩy lên bằng thao tác đối phó | Giải `O5` — điểm không bị thổi lên bằng thao tác đối phó |
+| **US14** | Là nhân sự vận hành, tôi cần bật/tắt gamification và bật/tắt hiển thị phía học viên riêng biệt, để chạy thử cơ chế trước khi mở | Cần giai đoạn chạy ngầm để thử cơ chế trước khi mở cho học viên |
+| **US15** | Là quản trị, tôi cần phân quyền để chỉ vai trò vận hành phù hợp mới sửa được cấu hình gamification | `[suy ra]` — không có trong yêu cầu gốc, nhưng mọi cấu hình đều cần kiểm soát ai sửa được |
 
 ### Chưa làm trong phạm vi này — 3 US
 
@@ -401,20 +402,33 @@ Học viên chưa có điểm nào vẫn vào được trang. Lúc đó điểm 
 | Thành tích của tôi | Khối tổng quan | Điểm tích luỹ | Số nguyên, phân cách hàng nghìn bằng dấu chấm. Giá trị nhỏ nhất 0, không có số âm. Không kèm đơn vị sau số. Chưa có điểm thì hiện `0`, không hiện trạng thái rỗng |
 | Thành tích của tôi | Khối tổng quan | Hạng hiện tại | **Một con số thứ tự tịnh tiến**, bắt đầu từ `1`. **Không có tên hạng, không có hình hạng.** Học viên mới vào hệ thống ở hạng `1` |
 | Thành tích của tôi | Khối tổng quan | Tiến độ tới hạng kế tiếp | Thanh tiến độ kèm dòng nêu phần còn thiếu của **tiêu chí sắp chạm mốc nhất**. Chạm **trần hạng** rồi thì ẩn cả khối, không hiện thanh đầy |
-| Thành tích của tôi | Khối chuỗi | Chuỗi hiện tại | Số ngày vào hệ thống liên tiếp đang giữ. Chưa vào ngày nào thì hiện `0`. Chi tiết cách tính ở `US5` |
-| Thành tích của tôi | Khối chuỗi | Chuỗi dài nhất | Kỷ lục của chính học viên đó. Không giảm khi chuỗi hiện tại đứt |
-| Thành tích của tôi | Khối chuỗi | Điểm ngày mai | Mức điểm nhận được nếu ngày mai vào. Chạm trần rồi thì hiện mức trần kèm ghi chú đã tối đa |
-| Thành tích của tôi | Khối chuỗi | Dòng nhắc giữ chuỗi | Nói rõ không vào ngày mai là chuỗi về `0`. **Nhắc tĩnh trên trang, không phải thông báo đẩy** |
-| Thành tích của tôi | Khối chuỗi | Khi `Points` tắt | Ẩn cả khối chuỗi. Không còn điểm thì chuỗi mất ý nghĩa |
+| Gamification | Dải tóm tắt | `{n} Streaks` | **Chuỗi hiện tại** — số ngày vào hệ thống liên tiếp đang giữ. Chưa vào ngày nào thì hiện `0`. Cách tính ở `US5` |
+| Gamification | Dải tóm tắt | Chuỗi dài nhất | **Không hiện.** Chỉ số quá khứ không giúp học viên quyết định gì hôm nay |
+| Gamification | Dải tóm tắt | Khi `Points` tắt | Ẩn ô chuỗi. Không còn điểm thì chuỗi mất ý nghĩa |
 | Thành tích của tôi | Cách lên hạng | Rule chung | Ngoài tiêu chí gần nhất, hiện **đầy đủ ba tiêu chí lên hạng đang bật** kèm bội số của từng cái. Ví dụ: `Every 3,000 points` · `Every 5 completed courses` · `Every 5 badges`. Tiêu chí đang tắt thì không hiện |
 | Thành tích của tôi | Cách tính điểm | Rule chung | Hiện **bảng điểm đang áp dụng**: mỗi hành động đang bật được bao nhiêu điểm. Ví dụ: `Activity completion: 25` · `Course completion: 150` · `Successful test: 50`. Hành động đang tắt thì không hiện |
-| Thành tích của tôi | Cách tính điểm | Điểm check-in | Khai bằng ba tham số nên không hiện một con số. Hiện dạng bậc thang, ví dụ `Daily check-in: 25, +5 each day, up to 50` |
-| Thành tích của tôi | Danh sách huy hiệu | Hình huy hiệu | Ảnh vận hành tải lên ở `US10`. Ảnh gốc bị xoá khỏi kho tài nguyên thì hiện ảnh huy hiệu mặc định, không để trống |
-| Thành tích của tôi | Danh sách huy hiệu | Tên huy hiệu | Hiện dưới hình |
-| Thành tích của tôi | Danh sách huy hiệu | Mô tả huy hiệu | Hiện trong tooltip khi trỏ vào huy hiệu. Trên thiết bị cảm ứng thì bấm vào huy hiệu để mở |
-| Thành tích của tôi | Danh sách huy hiệu | Ngày đạt | `dd/mm/yyyy`, cắt theo múi giờ tổ chức |
-| Thành tích của tôi | Danh sách huy hiệu | Thứ tự | Theo **mốc trong cấu hình, mốc thấp hiện trước**. Không theo ngày học viên đạt, nên mọi học viên thấy cùng một thứ tự. Nhiều loại huy hiệu thì nhóm theo loại rồi mới tới mốc trong loại |
-| Thành tích của tôi | Danh sách huy hiệu | Trạng thái rỗng | Chưa đạt huy hiệu nào thì hiện dòng `No badges yet. Start learning to earn your first one.` |
+| Gamification | Panel `How to collect points?` | Dòng check-in | Nhãn `10–40 points`, mô tả `for each daily sign-in, +5 per day in a row up to day 7`. Hiện khoảng thay vì một số vì điểm thay đổi theo chuỗi |
+| Gamification | Dải tóm tắt | `{n} Badges` | **Chỉ hiện số lượng huy hiệu đã đạt.** Danh sách đầy đủ nằm ở màn khác, xem `US4` |
+
+**Bốn ô tóm tắt — trỏ vào và bấm**
+
+| Ô | Hiện gì | Trỏ chuột vào | Bấm vào |
+|---|---|---|---|
+| **Chuỗi** | `5 Streaks` | *(chưa định nghĩa)* | *(chưa định nghĩa)* |
+| **Điểm** | `475 Points` | Gợi ý `How to collect points?` | Mở panel `How to collect points?` trượt từ phải |
+| **Huy hiệu** | `3 Badges` | Gợi ý `Go to badge gallery` | **Chuyển màn** sang `My Profile` → tab `Badges` (`US4`) |
+| **Hạng** | `Level 1` | Gợi ý `How to level up?` | Mở panel `How to level up?` trượt từ phải |
+
+**Hai panel mở ra từ dải tóm tắt**
+
+| Màn hình | Giao diện | Field | Yêu cầu |
+|---|---|---|---|
+| Gamification | Panel `How to collect points?` | Bố cục | Trượt từ cạnh phải. Mỗi dòng gồm nhãn điểm bên trái và mô tả hành động bên phải |
+| Gamification | Panel `How to collect points?` | Ba dòng còn lại | `for each activity completion` · `for each course completion` · `for each successful test completion`. Số điểm lấy từ cấu hình đang áp dụng |
+| Gamification | Panel `How to collect points?` | Hành động đang tắt | Không hiện dòng tương ứng |
+| Gamification | Panel `How to level up?` | Nội dung | Ba tiêu chí đang bật, **mỗi dòng mở đầu bằng `Every`**: `Every 3,000 points` · `Every 5 completed courses` · `Every 5 badges`. Thiếu chữ `Every` thì học viên hiểu thành đạt mốc đó một lần là lên hạng, trong khi mỗi lần chạm thêm một mốc đều cho một hạng (`BR-10.2`) |
+| Gamification | Panel `How to level up?` | Tiêu chí đang tắt | Không hiện dòng tương ứng |
+| Gamification | Cả hai panel | Đóng | Nút `✕` ở góc phải tiêu đề |
 
 **Business requirement — Business rule**
 
@@ -668,11 +682,11 @@ Là học viên, tôi cần biết huy hiệu nào mình sắp đạt và còn t
 
 ### 3/ Scenario
 
-Học viên mở trang Thành tích của tôi. Dưới danh sách huy hiệu đã đạt là phần huy hiệu sắp đạt.
+Học viên bấm ô `{n} Badges` trên màn Gamification, hệ thống chuyển sang **`My Profile` → tab `Badges`**.
 
-Mỗi loại huy hiệu hiện **mốc chưa đạt gần nhất**, kèm số hiện tại, ngưỡng cần, và phần còn thiếu. Học viên nhìn vào biết ngay cần làm thêm bao nhiêu.
+Tab này hiện **toàn bộ huy hiệu của từng loại đang bật**, cả đã đạt lẫn chưa đạt. Huy hiệu đã đạt hiện màu, chưa đạt hiện xám. Tiêu đề mỗi loại kèm bộ đếm dạng `Check-in Badges (2/8)`.
 
-Loại nào học viên đã đạt hết mọi mốc thì không hiện. Loại nào vận hành chưa tạo huy hiệu nào cũng không hiện.
+Trỏ chuột vào một huy hiệu bất kỳ thì hiện **mốc của nó**, ví dụ `8 check-in`. Đó là cách học viên biết còn thiếu bao nhiêu.
 
 ### 4/ Acceptance criteria
 
@@ -680,7 +694,14 @@ Loại nào học viên đã đạt hết mọi mốc thì không hiện. Loại
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Thành tích của tôi | Điểm vào | Vị trí | Một phần trong trang Thành tích của tôi, đặt dưới khối tổng quan |
+| My Profile → Badges | Điểm vào | Vị trí | **Một tab trong màn `My Profile`**, cạnh `My profile` và `Security`. Vào từ ô `{n} Badges` trên màn Gamification |
+| My Profile → Badges | Tiêu đề loại | Bộ đếm | `{Tên loại} Badges ({đã đạt}/{tổng mốc})`, ví dụ `Check-in Badges (2/8)` |
+| My Profile → Badges | Huy hiệu | Hình | Đã đạt hiện màu, **chưa đạt hiện xám**. Ảnh vận hành tải lên ở `US9`. Ảnh gốc bị xoá thì rơi về ảnh mặc định |
+| My Profile → Badges | Huy hiệu | Tên | Hiện dưới hình |
+| My Profile → Badges | Huy hiệu | Mốc | Hiện khi **trỏ chuột vào huy hiệu**, dạng `{mốc} {đơn vị}` — ví dụ `8 check-in`. Đây là cách học viên biết còn thiếu bao nhiêu |
+| My Profile → Badges | Huy hiệu | Ngày đạt | **Không hiện ở đây.** Học viên tra trong `Achievement history` (`US3`), nơi có đủ thời điểm của mọi mốc |
+| My Profile → Badges | Huy hiệu | Thứ tự | Nhóm theo loại, trong mỗi loại sắp theo **mốc tăng dần**. Mọi học viên thấy cùng một thứ tự |
+| My Profile → Badges | Loại đang tắt | Hiển thị | Không hiện cả nhóm. Vận hành tắt loại nào ở `US9` thì loại đó biến mất khỏi tab |
 | Thành tích của tôi | Danh sách huy hiệu | Phạm vi hiển thị | **Hiện toàn bộ huy hiệu vận hành đã tạo**, cả đã đạt lẫn chưa đạt, kèm mốc của từng cái. Học viên thấy hết bản đồ để biết phấn đấu tới đâu |
 | Thành tích của tôi | Danh sách huy hiệu | Nhóm và thứ tự | Nhóm theo loại. Trong mỗi loại sắp theo mốc tăng dần, mốc thấp trước |
 | Thành tích của tôi | Danh sách huy hiệu | Huy hiệu đã đạt | Hình đầy đủ màu, kèm ngày đạt |
@@ -776,11 +797,8 @@ Học viên bỏ trọn một ngày không vào thì chuỗi về `0`. Lần và
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
 | Mọi màn UpLMS | Thông báo nhận điểm | Nội dung | Theo mẫu của `US2`, kèm độ dài chuỗi sau khi tăng. Chuỗi tiếng Anh: `❓BA`. Gợi ý: `+ {điểm} · {n}-day streak` |
-| Thành tích của tôi | Khối chuỗi | Chuỗi hiện tại | Số ngày liên tiếp đang giữ. Chưa vào ngày nào thì hiện `0` |
-| Thành tích của tôi | Khối chuỗi | Chuỗi dài nhất | Kỷ lục của chính học viên đó. Giá trị này không giảm, kể cả khi chuỗi hiện tại đứt |
-| Thành tích của tôi | Khối chuỗi | Điểm ngày mai | Mức điểm nhận được nếu ngày mai vào. Đã chạm trần thì hiện mức trần kèm ghi chú đã đạt tối đa |
-| Thành tích của tôi | Khối chuỗi | Dòng nhắc giữ chuỗi | Nói rõ **không vào ngày mai là chuỗi về `0`**. Đây là nhắc tĩnh trên trang, không phải thông báo đẩy. Câu tiếng Anh: `❓BA` |
-| Thành tích của tôi | Số ngày có mặt | Hiển thị | Tổng số ngày có mặt, dùng để xét huy hiệu loại Tích cực. Khác với chuỗi: con số này **không về `0`** khi nghỉ |
+| Gamification | Dải tóm tắt | `{n} Streaks` | Chuỗi hiện tại. Đứt thì về `0` |
+| Gamification | Dải tóm tắt | Số ngày có mặt | **Không hiện riêng.** Nó là chỉ số nền cho huy hiệu loại Check-in, học viên thấy qua tiến độ huy hiệu ở `US4`. Khác với chuỗi: con số này **không về `0`** khi nghỉ |
 | Toàn hệ thống | Thao tác của học viên | | **Không có thao tác nào.** Học viên không bấm nút check-in. Hệ thống tự ghi khi thấy học viên vào |
 
 **Business requirement — Business rule**
@@ -788,11 +806,10 @@ Học viên bỏ trọn một ngày không vào thì chuỗi về `0`. Lần và
 - `BR-5.1` Mỗi ngày ghi nhận **một lần duy nhất**, ở lần đầu tiên học viên vào hệ thống trong ngày đó. Vào nhiều lần trong ngày không cộng thêm điểm và không tăng chuỗi.
 - `BR-5.2` **Không có thao tác check-in thủ công.** Học viên không bấm gì. Hệ thống ghi nhận khi thấy học viên có mặt.
 - `BR-5.3` **"Ngày" cắt theo múi giờ tổ chức** (`C9`). Không dùng giờ máy chủ và không dùng múi giờ của thiết bị học viên.
-- `BR-5.4` **Điểm tăng dần theo độ dài chuỗi.** Gọi `n` là ngày thứ mấy của chuỗi đang giữ:<br>`điểm = min( điểm nền + (n − 1) × bước tăng , trần điểm chuỗi )`<br>Ba tham số do vận hành khai ở `US8`.
+- `BR-5.4` **Điểm tăng dần theo độ dài chuỗi.** Gọi `n` là ngày thứ mấy của chuỗi đang giữ:<br>`điểm = min( điểm nền + (n − 1) × 5 , trần điểm chuỗi )`<br>**Bước tăng cố định `5`, không cấu hình được.** Vận hành chỉ khai hai tham số ở `US8`: điểm nền và trần.<br>Với `10 / 40`: `10 · 15 · 20 · 25 · 30 · 35 · 40`, chạm trần đúng **ngày thứ 7**. Trọn một tuần được `175` điểm.
 - `BR-5.5` **Chuỗi tăng thêm một mỗi ngày có mặt.** Ngày mở đầu một chuỗi có `n = 1` và nhận đúng mức điểm nền.
 - `BR-5.6` **Bỏ trọn một ngày thì chuỗi về `0`.** Lần vào kế tiếp mở chuỗi mới từ `n = 1`. Hệ thống đếm **mọi ngày dương lịch**, nên thứ bảy, chủ nhật, ngày lễ và ngày nghỉ phép đều làm đứt chuỗi nếu học viên không vào.
 - `BR-5.7` **Đứt chuỗi không thu hồi điểm đã nhận.** Điểm nằm lại trong sổ giao dịch, chuỗi về `0` chỉ ảnh hưởng mức điểm của những ngày sau.
-- `BR-5.8` Hệ thống lưu **chuỗi dài nhất từng đạt** của mỗi học viên. Giá trị này chỉ tăng, không bao giờ giảm.
 - `BR-5.9` Đổi ba tham số ở `US8` **chỉ áp dụng từ thời điểm đổi** (`C4`). Chuỗi đang giữ không bị cắt và không bị tính lại; ngày kế tiếp dùng tham số mới với đúng `n` hiện có.
 - `BR-5.10` **Trần điểm chuỗi** ở `BR-5.4` chỉ chặn mức điểm của riêng một ngày check-in. Nó không phải trần cho tổng điểm trong ngày — hệ thống không có trần đó.
 - `BR-5.11` Ghi nhận ngày có mặt nằm trong cùng thao tác với việc học viên vào hệ thống. Lỗi ở đây **không được chặn học viên vào hệ thống**, theo `NFR-GAM-01`.
@@ -817,7 +834,6 @@ Trạng thái chuỗi **không lưu ở bảng này** mà lưu ở `Thành tích
 | Field | Kiểu | Bắt buộc | Giá trị hợp lệ | Ghi chú |
 |---|---|---|---|---|
 | Chuỗi hiện tại | Số nguyên | Có | `>= 0` | Mới. `0` nghĩa là chưa có chuỗi hoặc vừa đứt |
-| Chuỗi dài nhất | Số nguyên | Có | `>= 0` | Mới. Chỉ tăng |
 | Ngày có mặt gần nhất | Ngày | Không | Cắt theo múi giờ tổ chức | Mới. Dùng để biết chuỗi đã đứt chưa |
 
 Bảng `Ngày có mặt của học viên` giữ nguyên cấu trúc. Nó vẫn là nguồn để dựng lại chuỗi khi cần đối chiếu.
@@ -1067,11 +1083,10 @@ Sửa xong thì lưu. Cấu hình mới áp dụng cho các lần cộng điểm
 |---|---|---|---|
 | Cấu hình điểm | Đầu màn | Công tắc `Points` | Bật tắt cả cơ chế điểm. Tắt thì mọi hành động bên dưới **chuyển sang trạng thái không thao tác được**, nhưng giữ nguyên giá trị đã khai |
 | Cấu hình điểm | Đầu màn | Mô tả chức năng | `Award users with points for different learning activities and encourage healthy competition.` |
-| Cấu hình điểm | Danh sách hành động | `On each daily check-in` | Công tắc riêng. **Không có ô nhập một số điểm** như ba hành động kia, mà có ba ô của bảng điểm chuỗi ngay dưới. Ứng với `US5` |
-| Cấu hình điểm | Điểm chuỗi check-in | `Điểm nền` | Số điểm của ngày đầu tiên trong một chuỗi. Số nguyên dương, nhỏ nhất `1` |
-| Cấu hình điểm | Điểm chuỗi check-in | `Bước tăng` | Mỗi ngày giữ được chuỗi thì cộng thêm bấy nhiêu điểm. Số nguyên `>= 0`. Đặt `0` nghĩa là điểm cố định, chuỗi không làm tăng điểm |
-| Cấu hình điểm | Điểm chuỗi check-in | `Trần điểm chuỗi` | Mức cao nhất một ngày check-in có thể đạt, dù chuỗi dài tới đâu. Phải `>=` điểm nền. Bỏ trống nghĩa là không chặn |
-| Cấu hình điểm | Điểm chuỗi check-in | Bảng xem trước | Hiện mức điểm của bảy ngày đầu theo ba tham số vừa nhập, cập nhật ngay khi gõ. Giúp vận hành thấy ngay bảng điểm trước khi lưu |
+| Cấu hình điểm | Danh sách hành động | `On each daily check-in` | Công tắc riêng + **một ô nhập điểm nền**. Mô tả dưới tiêu đề: `Award points for signing in each day. Each day in a row adds 5 more, up to 40 on day 7.` Ứng với `US5` |
+| Cấu hình điểm | Điểm chuỗi check-in | Ô nhập | **Điểm nền** — số điểm của ngày đầu tiên trong một chuỗi. Số nguyên dương, nhỏ nhất `1`. Mặc định `10` |
+| Cấu hình điểm | Điểm chuỗi check-in | Bước tăng | **Cố định `5`, không hiện ô nhập.** Nêu trong câu mô tả |
+| Cấu hình điểm | Điểm chuỗi check-in | Trần điểm chuỗi | **Mặc định `40`**, chạm đúng ngày thứ 7. Chưa cho vận hành sửa ở đợt này, nêu trong câu mô tả |
 | Cấu hình điểm | Danh sách hành động | `On each activity completion` | Công tắc riêng + ô nhập số điểm |
 | Cấu hình điểm | Danh sách hành động | `On each course completion` | Công tắc riêng + ô nhập số điểm |
 | Cấu hình điểm | Danh sách hành động | `On each successful test completion` | Công tắc riêng + ô nhập số điểm. **Chỉ tính bài Test đạt**, theo `BR-TEST` |
@@ -1089,10 +1104,10 @@ Sửa xong thì lưu. Cấu hình mới áp dụng cho các lần cộng điểm
 - `BR-8.3` Tắt một hành động riêng lẻ thì chỉ hành động đó ngừng sinh điểm. Ba hành động còn lại chạy bình thường.
 - `BR-8.4` Đổi số điểm của một hành động thì **áp dụng từ thời điểm lưu trở đi**. Các lần cộng điểm trước đó **giữ nguyên số điểm đã ghi** trong lịch sử, theo `C4`.
 - `BR-8.5` Số điểm là **số nguyên dương**, nhỏ nhất `1`. Muốn một hành động không sinh điểm thì **tắt công tắc**, không đặt giá trị `0`.
-- `BR-8.5a` Check-in hằng ngày khai bằng **ba tham số** thay vì một số điểm: điểm nền, bước tăng, trần điểm chuỗi. Công thức tính nằm ở `BR-5.4`.
-- `BR-8.5b` **Bước tăng nhận giá trị `0`**, khác với ô điểm của ba hành động kia. Đặt `0` là cách quay về mức điểm cố định mà không phải tắt cả hành động.
-- `BR-8.5c` **Trần điểm chuỗi phải lớn hơn hoặc bằng điểm nền.** Nhỏ hơn thì không lưu được, báo lỗi ngay tại ô.
-- `BR-8.5d` Đổi ba tham số này **không cắt chuỗi của học viên nào**. Chuỗi đang giữ chạy tiếp, ngày kế tiếp tính theo tham số mới (`BR-5.9`).
+- `BR-8.5a` Check-in khai bằng **một ô điểm nền**. Bước tăng `5` và trần `40` là **hằng số của đợt này**, không hiện ô nhập.
+  > Hai hằng số này vẫn phải **lưu ở tầng dữ liệu chứ không đóng cứng trong mã**, theo `C2`. Đợt sau mở ô cho vận hành sửa thì chỉ cần hiện ô, không phải đổi cấu trúc.
+- `BR-8.5b` **Trần `40` chạm đúng ngày thứ 7** của chuỗi. Con số chọn theo chủ đích: người giữ chuỗi trọn một tuần, kể cả thứ bảy và chủ nhật, thì từ đó về sau luôn nhận mức cao nhất.
+- `BR-8.5c` Đổi điểm nền **không cắt chuỗi của học viên nào**. Chuỗi đang giữ chạy tiếp, ngày kế tiếp tính theo giá trị mới (`BR-5.9`).
 - `BR-8.8` Mọi giá trị trên màn này **gắn với tổ chức** (`C1`), không đóng cứng trong mã.
 
 **Data Field**
