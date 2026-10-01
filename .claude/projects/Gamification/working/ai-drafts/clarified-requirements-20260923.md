@@ -221,9 +221,9 @@ Mọi bảng tiến độ học đều treo vào `class_user_instances` (**một
 
 **Hệ quả cho RC-07 "không cộng điểm khi học lại nội dung đã hoàn thành":**
 
-Một học viên học **cùng một khoá qua hai lớp** sẽ có hai bản ghi tiến độ độc lập. Nếu khử trùng theo `class_user_id` thì vẫn được cộng điểm hai lần cho cùng một nội dung — đúng kịch bản cày điểm mà RC-07 muốn chặn, nhưng nguyên nhân là **cấu trúc dữ liệu**, không phải hành vi gian lận.
+Một học viên học **cùng một khoá qua hai lớp** sẽ có hai bản ghi tiến độ độc lập. Nếu chống cộng trùng theo `class_user_id` thì vẫn được cộng điểm hai lần cho cùng một nội dung — đúng kịch bản cày điểm mà RC-07 muốn chặn, nhưng nguyên nhân là **cấu trúc dữ liệu**, không phải hành vi gian lận.
 
-Khử trùng phải theo `(user_id, course_section_id)` hoặc `(user_id, activity_id)`, tức là **cắt ngang lớp**.
+Chống cộng trùng phải theo `(user_id, course_section_id)` hoặc `(user_id, activity_id)`, tức là **cắt ngang lớp**.
 
 Đây không phải tình huống hiếm: `KB-CR-03` cho thấy hệ thống **tự động thêm học viên vào lớp** khi thêm vào nhóm Comment Replier, mỗi khoá một lớp. Học viên có thể bị ghi danh nhiều lớp mà không chủ động.
 
@@ -307,7 +307,7 @@ Không phải blocking — nhưng sửa sau khi Dev đã code thì đắt. → `
 | Đổi data model / quan hệ | ✅ | Toàn bộ bảng gamification là mới; cần quan hệ cắt ngang lớp (§6) |
 | Có conflict | ✅ | §4 — chống cày điểm vs logic hoàn thành Activity |
 | Chạm tính năng `hidden` | ✅ | KB `09` §1 — 3/4 page Notification Ops đang ẩn |
-| Nhiều hướng giải quyết | ✅ | §4 ba hướng · §6 hai cách khử trùng · sinh điểm theo event vs theo batch |
+| Nhiều hướng giải quyết | ✅ | §4 ba hướng · §6 hai cách chống cộng trùng · sinh điểm theo event vs theo batch |
 
 Đạt **5/5** tiêu chí. Không có nghi ngờ về phân loại.
 
@@ -427,7 +427,7 @@ Nhưng theo ràng buộc xuyên suốt của repo (`CLAUDE.md`): **cờ phải n
 | RC-04 | Bỏ điều kiện **"đạt kỹ năng"** — thuộc tính năng Khung năng lực, làm sau (OQ-06). Còn **4/5** loại điều kiện |
 | RC-04 | Điều kiện "chuỗi ngày liên tiếp" **giữ lại** — nguồn dữ liệu là Keycloak (OQ-03) |
 | RC-06 | **Giữ nguyên** — "kỳ" = chiến dịch, hết kỳ **lưu lại**. Là nền cho leaderboard sau (OQ-04) |
-| RC-07 | Logic hoàn thành Activity **giữ nguyên**, không sửa (OQ-10). Gánh nặng chống cày dồn hết vào **trần điểm/ngày** và **khử trùng nội dung đã học** |
+| RC-07 | Logic hoàn thành Activity **giữ nguyên**, không sửa (OQ-10). Gánh nặng chống cày dồn hết vào **trần điểm/ngày** và **chống cộng trùng nội dung đã học** |
 | RC-11 | Thêm chiều thứ hai: công tắc hiển thị — xem §13 |
 | RC-12 | Bảng xếp hạng → **Potential scope**, làm sau (OQ-01) |
 | §4 | Xung đột đã được giải: PO chọn **không sửa** logic hiện tại. Video nay là **≥80% thời lượng**, đã cập nhật KB `07` (`KB-LX-03a`, `KB-LX-03b`) |

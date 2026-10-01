@@ -145,8 +145,8 @@ Rule mới: `BR-TEST` · `BR-REGRADE-01/02` · `BR-SKIP` · `S22` (tiêu chí ph
 
 | | |
 |---|---|
-| **Cũ (v0.1–v0.6)** | Khử trùng "đã học" tính theo **người học, cắt ngang lớp** |
-| **Mới (v0.6.1)** | Khử trùng trong phạm vi **một lượt ghi danh**. Được thêm lại → **lượt học mới tính điểm mới** |
+| **Cũ (v0.1–v0.6)** | Chống cộng trùng "đã học" tính theo **người học, cắt ngang lớp** |
+| **Mới (v0.6.1)** | Chống cộng trùng trong phạm vi **một lượt ghi danh**. Được thêm lại → **lượt học mới tính điểm mới** |
 
 **Lý do:** PO xác nhận một khoá chỉ ở một lớp tại một thời điểm, nên kịch bản học song song hai lớp — thứ sinh ra `C5` ban đầu — **không xảy ra được**.
 
@@ -154,7 +154,7 @@ Rule mới: `BR-TEST` · `BR-REGRADE-01/02` · `BR-SKIP` · `S22` (tiêu chí ph
 
 > **Chỉ cộng điểm khi bản ghi tiến độ CHUYỂN TRẠNG THÁI sang hoàn thành, tính từ thời điểm bật tính năng.**
 
-Nội dung đã hoàn thành từ trước không chuyển trạng thái nữa nên không phát sinh điểm. → **`TR-2` của v0.1 (nạp sẵn dấu khử trùng) không còn cần**, thay bằng một rule. Gỡ `R2`.
+Nội dung đã hoàn thành từ trước không chuyển trạng thái nữa nên không phát sinh điểm. → **`TR-2` của v0.1 (nạp sẵn dấu chống cộng trùng) không còn cần**, thay bằng một rule. Gỡ `R2`.
 
 ✅ **Đã áp vào BRD v0.6.1.**
 

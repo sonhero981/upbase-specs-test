@@ -113,7 +113,7 @@ Ba hệ quả:
 | `class_user_scores` | Điểm bài kiểm tra (1-1 với `class_user_instances`) | KB `12` |
 | `courses_users_certificates` | **Nguồn sự kiện "hoàn thành khoá"**. Là bảng duy nhất nối thẳng `users` | KB `12` |
 | `quizzes` | `Graded Assignment`, `Pass Point` → `BR-TEST` | KB `03` |
-| `courses` · `course_sections` | Đơn vị nội dung để khử trùng (`C5`) | KB `12` |
+| `courses` · `course_sections` | Đơn vị nội dung để chống cộng trùng (`C5`) | KB `12` |
 | `classes` | Không dùng trực tiếp ở đợt này | KB `12` |
 | `tenant` | Nơi gắn cấu hình (`C1`). **Không có trường múi giờ** → `S21` | KB `12` |
 | `casbin_rule` | Phân quyền cấu hình | KB `12` |
@@ -129,7 +129,7 @@ Ba hệ quả:
 | **Cấu hình gamification** | Hai công tắc · múi giờ · trần điểm/ngày | `C1`, `C6`, `C9`, `S12`, `S21` |
 | **Quy tắc cộng điểm** | Hành động → số điểm, bật/tắt | `C2`, `C4` |
 | **Sổ giao dịch điểm** | Từng lần cộng, kèm nguồn và thời điểm | `C3`, `C8` — **nền của gần như mọi thứ** |
-| **Dấu nội dung đã tính điểm** | Khử trùng theo người học | `C5` |
+| **Dấu nội dung đã tính điểm** | Chống cộng trùng theo người học | `C5` |
 | **Ngày có mặt của học viên** | Nguồn cho `S3` và huy hiệu Tích cực | `C9`, `❓BA-03` |
 | **Danh mục chỉ số đo lường** | Dùng chung cho huy hiệu · hạng · xếp hạng | `S23`, `C2` |
 | **Huy hiệu** + **huy hiệu đã đạt** | 4 loại, ngưỡng đếm | `S5`, `C8` |
@@ -146,7 +146,7 @@ Ba hệ quả:
 | Hệ | Endpoint | Vai trò | Ghi chú |
 |---|---|---|---|
 | LMS | `PUT /api/v1/course-sections/course/{class_id}/section/{section_id}/progress` | **Điểm móc chính** cho "hoàn thành hoạt động" | DTO `UpdateUserCourseSectionProgressDto` |
-| LMS | `PUT /api/v1/course-sections/{class_id}/storyline/{course_section_id}/retake` | ⚠️ **Học lại storyline** — liên quan trực tiếp tới khử trùng (`C5`) | `❓BA-04` |
+| LMS | `PUT /api/v1/course-sections/{class_id}/storyline/{course_section_id}/retake` | ⚠️ **Học lại storyline** — liên quan trực tiếp tới chống cộng trùng (`C5`) | `❓BA-04` |
 | LMS | ❌ *(không tìm thấy)* | Nộp bài kiểm tra | **`F1`** |
 | Ops | `PUT /api/v1/quiz-attempt-gradings/{id}/finish` | Chốt kết quả bài chấm tay | **`F2`** |
 | Ops | `POST /api/v1/quiz-attempt-gradings/question-gradings/{id}/grade` | Chấm từng câu | |
@@ -227,7 +227,7 @@ Toàn bộ API của gamification là mới: cấu hình · huy hiệu · hạng
 | **❓BA-01** | **Học viên nộp bài kiểm tra qua đâu?** Không tìm thấy endpoint ghi nào ở cả hai Swagger | Không thiết kế được lớp bắt sự kiện cho một trong ba hành động tính điểm | Dev |
 | **❓BA-02** | **Bài chấm tay: mốc ghi nhận là lúc nộp hay lúc chấm xong?** | `S22` bị méo; điểm rơi nhầm kỳ | PO + Dev |
 | **❓BA-03** | **Nguồn "ngày học viên có mặt"** — `GET /users/activities` có dùng được không? | `S3` và huy hiệu Tích cực không có nguồn | Dev |
-| **❓BA-04** | **Storyline có phải nguồn sự kiện riêng không?** Có endpoint `retake` — học lại thì khử trùng thế nào | Bỏ sót một loại nội dung học, hoặc cày điểm qua retake | PO + Dev |
+| **❓BA-04** | **Storyline có phải nguồn sự kiện riêng không?** Có endpoint `retake` — học lại thì chống cộng trùng thế nào | Bỏ sót một loại nội dung học, hoặc cày điểm qua retake | PO + Dev |
 | **❓BA-05** | **Chấm lại (`request-regrading`) thì điểm đã cộng xử lý sao?** Học viên từ đạt thành trượt hoặc ngược lại | Điểm và huy hiệu có thể phải thu hồi — mâu thuẫn `A5` | PO |
 | **❓BA-06** | **Examination / Entrance Test có tính là "bài Test" không?** Nằm trong vùng KB chưa phủ | Đếm thừa hoặc thiếu ở huy hiệu loại Test | PO |
 | **❓BA-07** | **Dashboard SIS có chồng lấn với dữ liệu gamification không?** | Hai chỗ cùng báo cáo mức độ tham gia, có thể lệch nhau | PO |

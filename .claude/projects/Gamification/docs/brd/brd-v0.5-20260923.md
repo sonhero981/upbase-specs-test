@@ -99,7 +99,7 @@ Hệ thống hiện tại **chỉ ghi nhận việc học, không phản hồi l
 | **S5** | 🔄 **Bốn loại huy hiệu, mỗi loại đo bằng một chỉ số đếm:**<br>• **Tích cực** — **số ngày có vào hệ thống**<br>• **Học tập** — số lần hoàn thành hoạt động học<br>• **Test** — **số bài kiểm tra đạt** (xem `BR-TEST` dưới)<br>• **Course** — số khoá đã hoàn thành |
 | S6 | **Hạng người học** — tên, hình, và **ngưỡng lên hạng dựa trên nhiều chỉ số**: điểm · số huy hiệu · số khoá hoàn thành |
 | S7 | **Hai loại điểm tách nhau**: điểm tích luỹ vĩnh viễn (xét hạng) và điểm theo kỳ (xếp hạng) |
-| S8 | **Chống cày điểm** — khử trùng nội dung đã hoàn thành, trần điểm tối đa mỗi ngày |
+| S8 | **Chống cày điểm** — chống cộng trùng nội dung đã hoàn thành, trần điểm tối đa mỗi ngày |
 | S9 | **Lịch sử điểm** — học viên tra được từng lần cộng đến từ đâu |
 | S10 | **Thông báo thành tích** — **chỉ đẩy trong hệ thống khi học viên đang online.** Không gửi mail. Offline thì không gửi, thành tích vẫn ghi nhận và tra được ở lịch sử |
 | S11 | **Trang "Thành tích của tôi"** — điểm, hạng, huy hiệu đã có, huy hiệu sắp đạt kèm phần còn thiếu |
@@ -133,7 +133,7 @@ Hệ thống hiện tại **chỉ ghi nhận việc học, không phản hồi l
 | # | Không làm | Vì sao |
 |---|---|---|
 | N1 | **Bộ lọc bảng xếp hạng theo nhóm** — gồm cả theo lớp và theo phòng ban | Chờ chức năng nhóm **đồng bộ từ HRM** |
-| N2 | **Chống cày riêng cho hoạt động chỉ có Text/Ảnh** | Khử trùng và trần điểm/ngày vẫn áp cho mọi loại |
+| N2 | **Chống cày riêng cho hoạt động chỉ có Text/Ảnh** | Chống cộng trùng và trần điểm/ngày vẫn áp cho mọi loại |
 | N3 | **Nhiều chiến dịch chạy song song** | Đợt này mỗi lần một chiến dịch. Sau này mới tạo nhiều chiến dịch cho nhiều nhóm |
 | N4 | **Điều kiện huy hiệu theo chuỗi ngày liên tiếp · mốc thời gian · nội dung cụ thể** | Thay bằng bốn loại đo bằng chỉ số đếm (S5) |
 | N5 | **Thông báo thành tích qua email** | Chỉ đẩy trong hệ thống. Không đụng tới 30 mail hiện có |
@@ -188,7 +188,7 @@ Nguyên tắc xuyên suốt: **gamification chỉ đọc, không sửa dữ li�
 | **C2** | **Mọi danh mục phải mở rộng được bằng cấu hình** | Lộ trình, kỹ năng, bộ lọc nhóm, nhiều chiến dịch song song đều sẽ thêm sau |
 | **C3** | Lưu **từng lần cộng điểm kèm thời điểm** | Nền của lịch sử điểm, xếp hạng theo kỳ, tiêu chí phụ khi đồng hạng, luật chống cày |
 | **C4** | Đổi cấu hình điểm → **áp dụng từ thời điểm đổi** | PO chốt |
-| **C5** | Khử trùng "đã học" tính theo **người học**, không theo lượt ghi danh lớp | Học viên có thể học cùng nội dung qua nhiều lớp |
+| **C5** | Chống cộng trùng "đã học" tính theo **người học**, không theo lượt ghi danh lớp | Học viên có thể học cùng nội dung qua nhiều lớp |
 | **C6** | **Biên kỳ cắt theo múi giờ của tổ chức**, không theo giờ máy chủ | Module Tenant chưa có → đợt này khai một tham số múi giờ cấp tổ chức |
 | **C7** | **Một lần cộng điểm thuộc về nhiều kỳ lịch cùng lúc** → điểm theo kỳ tính từ sổ giao dịch theo khoảng ngày. **Kết quả cuối kỳ lưu cứng** | Kỳ lịch lồng nhau theo bản chất |
 | **C8** | **Mọi mốc dùng để xếp hạng phải lưu được thời điểm đạt** | Cần cho S22 và cho mọi chỉ số đếm |
@@ -210,7 +210,7 @@ Nguyên tắc xuyên suốt: **gamification chỉ đọc, không sửa dữ li�
 
 ## 6.5 ✅ Chống cày điểm *(đã chốt)*
 
-Không làm cơ chế riêng cho hoạt động chỉ có Text/Ảnh. Hai cơ chế chung áp cho mọi loại: **khử trùng nội dung đã hoàn thành** (`C5`) và **trần điểm tối đa mỗi ngày** (`S8`).
+Không làm cơ chế riêng cho hoạt động chỉ có Text/Ảnh. Hai cơ chế chung áp cho mọi loại: **chống cộng trùng nội dung đã hoàn thành** (`C5`) và **trần điểm tối đa mỗi ngày** (`S8`).
 
 ## 6.6 ✅ Chỉ số xếp hạng chiến dịch và tiêu chí phụ *(đã chốt)*
 

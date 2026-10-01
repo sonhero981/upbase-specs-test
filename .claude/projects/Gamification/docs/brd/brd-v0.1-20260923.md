@@ -100,7 +100,7 @@ Ba câu hỏi cụ thể, trả lời được bằng dữ liệu đã có trong
 | S6 | **Hạng người học** — tên, hình, ngưỡng điểm từng hạng |
 | S7 | **Hai loại điểm tách nhau**: điểm tích luỹ vĩnh viễn (xét hạng) và điểm theo kỳ/chiến dịch |
 | S8 | **Quản lý chiến dịch** — tạo kỳ tính điểm; hết kỳ thì lưu lại kết quả, không xoá |
-| S9 | **Chống cày điểm** — khử trùng nội dung đã hoàn thành, trần điểm tối đa mỗi ngày |
+| S9 | **Chống cày điểm** — chống cộng trùng nội dung đã hoàn thành, trần điểm tối đa mỗi ngày |
 | S10 | **Lịch sử điểm** — học viên tra được từng lần cộng đến từ đâu |
 | S11 | **Thông báo thành tích** — khi nhận điểm, nhận huy hiệu, lên hạng |
 | S12 | **Trang "Thành tích của tôi"** — điểm, hạng, huy hiệu đã có, huy hiệu sắp đạt kèm phần còn thiếu |
@@ -154,7 +154,7 @@ Nguyên tắc xuyên suốt: **gamification chỉ đọc, không sửa dữ li�
 | **C2** | **Danh mục hành động tính điểm và danh mục điều kiện huy hiệu phải mở rộng được bằng cấu hình**, không đóng cứng danh sách trong code | Lộ trình (N2), kỹ năng (N3) và leaderboard (N1) đều sẽ thêm sau. Đóng cứng thì mỗi lần thêm một loại phải sửa cấu trúc dữ liệu và triển khai lại |
 | **C3** | Lưu **từng lần cộng điểm**, không chỉ lưu tổng | Yêu cầu gốc: *"Điểm không giải thích được thì không ai tin bảng xếp hạng"*. Không có sổ chi tiết thì không có lịch sử điểm (S10), và không kiểm được luật chống cày |
 | **C4** | Đổi cấu hình điểm → **áp dụng từ thời điểm đổi**, không tính lại quá khứ | PO chốt. Tính lại quá khứ khiến điểm học viên nhảy mỗi lần vận hành chỉnh cấu hình |
-| **C5** | Khử trùng "đã học" tính theo **người học**, không theo lượt ghi danh lớp | Một học viên có thể học cùng một nội dung qua nhiều lớp. Khử trùng theo lượt ghi danh sẽ cộng điểm nhiều lần cho cùng một nội dung — đúng kịch bản cày điểm mà S9 muốn chặn |
+| **C5** | Chống cộng trùng "đã học" tính theo **người học**, không theo lượt ghi danh lớp | Một học viên có thể học cùng một nội dung qua nhiều lớp. Chống cộng trùng theo lượt ghi danh sẽ cộng điểm nhiều lần cho cùng một nội dung — đúng kịch bản cày điểm mà S9 muốn chặn |
 
 > **C5 là ràng buộc dễ bỏ sót nhất.** Toàn bộ dữ liệu tiến độ học của hệ thống hiện gắn với *lượt ghi danh vào lớp* chứ không gắn với *người*. Chi tiết kỹ thuật ở `clarified-requirements-20260923.md` §6.
 
@@ -191,13 +191,13 @@ Nghĩa là trong ba cơ chế chống cày ở S9, cơ chế *"không cộng đi
 
 | Hướng | Nội dung | Đánh đổi |
 |---|---|---|
-| **A. Chấp nhận, dựa vào hai cơ chế còn lại** ⭐ | Trần điểm/ngày + khử trùng nội dung đã học. Thêm: **cho phép khai số điểm khác nhau theo loại hoạt động** | Không thêm cơ chế nào mới. Học viên bấm lướt vẫn được điểm, nhưng mỗi nội dung chỉ trả điểm **một lần duy nhất trong đời** và tổng mỗi ngày bị chặn trần |
+| **A. Chấp nhận, dựa vào hai cơ chế còn lại** ⭐ | Trần điểm/ngày + chống cộng trùng nội dung đã học. Thêm: **cho phép khai số điểm khác nhau theo loại hoạt động** | Không thêm cơ chế nào mới. Học viên bấm lướt vẫn được điểm, nhưng mỗi nội dung chỉ trả điểm **một lần duy nhất trong đời** và tổng mỗi ngày bị chặn trần |
 | **B. Gamification tự đo thời gian riêng** | Đo thời gian ở hoạt động chỉ để quyết định cộng điểm, không đụng trạng thái hoàn thành | Chính xác hơn. Nhưng tạo ra tình huống học viên thấy hoạt động ✅ hoàn thành mà không được điểm, **không hiểu vì sao** — và không có chỗ nào giải thích |
 | **C. Không cộng điểm cho hoạt động dạng Text/Ảnh** | Chỉ cộng cho Quiz, Video, và các mốc lớn | Đơn giản và an toàn. Nhưng mất phần lớn cơ hội cộng điểm thường xuyên — mà chính những lần cộng nhỏ đều đặn mới tạo thói quen (O1, O3) |
 
 `Recommendation` — **hướng A**, vì:
 
-- Khử trùng (C5) đã chặn được phần lớn thiệt hại: **mỗi nội dung chỉ trả điểm một lần**. Học viên bấm lướt qua một khoá chỉ lấy được đúng số điểm của khoá đó, không lặp lại được
+- Chống cộng trùng (C5) đã chặn được phần lớn thiệt hại: **mỗi nội dung chỉ trả điểm một lần**. Học viên bấm lướt qua một khoá chỉ lấy được đúng số điểm của khoá đó, không lặp lại được
 - Trần điểm/ngày chặn được việc một người dồn toàn bộ trong một buổi để vượt lên trong chiến dịch
 - Phần còn lại giải quyết được **bằng cấu hình chứ không cần cơ chế mới**: hệ thống đã phân biệt ba loại hoạt động (Learning Activity / Test Activity / Case Study Activity), nên có thể khai hoạt động dạng đọc ít điểm hơn hoạt động có bài kiểm tra
 - Hướng B tạo ra một mâu thuẫn hiển thị không giải thích được cho học viên — đúng loại vấn đề mà O6 (điểm đáng tin) muốn tránh
@@ -275,7 +275,7 @@ Nghĩa là trong ba cơ chế chống cày ở S9, cơ chế *"không cộng đi
 | A7 | Điểm là **số nguyên** | PO xác nhận |
 | A8 | **Các chiến dịch không chồng lấn thời gian** — tại một thời điểm chỉ có tối đa một kỳ đang chạy | PO xác nhận. Nếu chồng lấn được thì US9 phức tạp hơn hẳn |
 | A9 | Ảnh huy hiệu và ảnh hạng dùng hạ tầng quản lý tài nguyên sẵn có | Kiểm ở Gate 2 |
-| A10 | **Dữ liệu tiến độ học có dấu thời gian** — cần cho khử trùng theo thời gian và cho khả năng tính bù | Dev xác nhận — `OQ-B2` |
+| A10 | **Dữ liệu tiến độ học có dấu thời gian** — cần cho chống cộng trùng theo thời gian và cho khả năng tính bù | Dev xác nhận — `OQ-B2` |
 | A11 | **Keycloak có ghi và giữ được sự kiện đăng nhập** | Dev xác nhận — `OQ-B1` |
 | A12 | Vận hành **không cần sửa hay xoá điểm thủ công** của một học viên cụ thể | PO xác nhận. Nếu cần thì là một US nữa |
 
@@ -286,9 +286,9 @@ Nghĩa là trong ba cơ chế chống cày ở S9, cơ chế *"không cộng đi
 | # | Câu hỏi | Vì sao quan trọng | Người trả lời | Chặn bước sau? |
 | --- | --- | --- | --- | --- |
 | **OQ-A1** | **Chọn hướng nào cho "tắt gamification"?** A (một công tắc, dừng hẳn) · B (một công tắc, ẩn hiển thị) · C (hai công tắc) — xem §6.3 | Quyết định cấu trúc cấu hình và luật thông báo. Đổi sau khi đã triển khai thì phải sửa dữ liệu | PO | **Yes** — chốt tại Gate 1 |
-| **OQ-A2** | **Chọn hướng nào cho chống cày với hoạt động Text/Ảnh?** A (trần + khử trùng + phân biệt điểm theo loại) · B (tự đo thời gian) · C (không cộng điểm) — xem §6.4 | Ảnh hưởng tới cấu trúc cấu hình điểm và trải nghiệm học viên | PO | **Yes** — chốt tại Gate 1 |
+| **OQ-A2** | **Chọn hướng nào cho chống cày với hoạt động Text/Ảnh?** A (trần + chống cộng trùng + phân biệt điểm theo loại) · B (tự đo thời gian) · C (không cộng điểm) — xem §6.4 | Ảnh hưởng tới cấu trúc cấu hình điểm và trải nghiệm học viên | PO | **Yes** — chốt tại Gate 1 |
 | **OQ-B1** | **Keycloak có bật ghi sự kiện đăng nhập không, giữ được bao lâu, lấy ra bằng cách nào?** Keycloak mặc định **tắt** event logging và có hạn lưu riêng | Nếu không có thì US5 và điều kiện huy hiệu "chuỗi ngày liên tiếp" không làm được — phải bỏ hoặc tự ghi log riêng | Dev | **Yes** — trước Gate 2 |
-| **OQ-B2** | **Dữ liệu tiến độ học có dấu thời gian không?** | Cần cho khử trùng theo thời gian (C5), cho trần điểm/ngày, và cho khả năng tính bù sau này | Dev | **Yes** — trước Gate 2 |
+| **OQ-B2** | **Dữ liệu tiến độ học có dấu thời gian không?** | Cần cho chống cộng trùng theo thời gian (C5), cho trần điểm/ngày, và cho khả năng tính bù sau này | Dev | **Yes** — trước Gate 2 |
 | **OQ-B3** | **Đội truyền thông nội bộ cần gì để biết chiến dịch có tác dụng?** Hiện họ tạo được chiến dịch nhưng không có chỗ xem kết quả (US16) | O4 là một trong sáu mục tiêu. Không có gì phục vụ thì mục tiêu này không đạt được, dù mọi US khác đều xong | PO | No — nhưng ảnh hưởng phạm vi |
 | **OQ-B4** | **Ba con số ở §2** — tỷ lệ học viên đứng yên >14 ngày · phân bố thời điểm học · tỷ lệ hoàn thành khoá | Mục `Analytics` của PRD cần dữ liệu. Ba con số này lấy được từ hệ thống hiện tại | PO + Dev | No — trước khi viết PRD |
 | **OQ-B5** | **Thông báo thành tích chấp nhận trễ tới mức nào?** Cơ chế hiện tại gửi theo job nửa tiếng | Trễ 30 phút thì mất phần lớn tác dụng khích lệ của US2 | PO | No — Gate 2 |

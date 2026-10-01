@@ -99,7 +99,7 @@ Ba câu hỏi lấy được ngay từ dữ liệu hệ thống — `OQ-B4`:
 | S5 | **Bốn loại điều kiện huy hiệu**: số lượng hoàn thành · chuỗi ngày liên tiếp · mốc thời gian · hoàn thành một nội dung cụ thể |
 | S6 | **Hạng người học** — tên, hình, ngưỡng điểm |
 | S7 | **Hai loại điểm tách nhau**: điểm tích luỹ vĩnh viễn (xét hạng) và điểm theo kỳ (xếp hạng) |
-| S8 | **Chống cày điểm** — khử trùng nội dung đã hoàn thành, trần điểm tối đa mỗi ngày |
+| S8 | **Chống cày điểm** — chống cộng trùng nội dung đã hoàn thành, trần điểm tối đa mỗi ngày |
 | S9 | **Lịch sử điểm** — học viên tra được từng lần cộng đến từ đâu |
 | S10 | **Thông báo thành tích** — nhận điểm, nhận huy hiệu, lên hạng |
 | S11 | **Trang "Thành tích của tôi"** — điểm, hạng, huy hiệu đã có, huy hiệu sắp đạt kèm phần còn thiếu |
@@ -170,7 +170,7 @@ Cả hai đều bị chốt và đóng băng khi hết kỳ (S18), đều xem l�
 | **C2** | **Danh mục hành động tính điểm và danh mục điều kiện huy hiệu phải mở rộng được bằng cấu hình** | Lộ trình (N3), kỹ năng (N4), phòng ban (N1), giới hạn nội dung (N2) đều sẽ thêm sau |
 | **C3** | Lưu **từng lần cộng điểm kèm thời điểm**, không chỉ lưu tổng | Nền của lịch sử điểm (S9), của xếp hạng theo kỳ (C7), và của luật chống cày |
 | **C4** | Đổi cấu hình điểm → **áp dụng từ thời điểm đổi** | PO chốt |
-| **C5** | Khử trùng "đã học" tính theo **người học**, không theo lượt ghi danh lớp | Học viên có thể học cùng nội dung qua nhiều lớp |
+| **C5** | Chống cộng trùng "đã học" tính theo **người học**, không theo lượt ghi danh lớp | Học viên có thể học cùng nội dung qua nhiều lớp |
 | **C6** | 🆕 **Biên kỳ cắt theo múi giờ của tổ chức**, không theo giờ máy chủ | Yêu cầu CR-001. Module Tenant (`TNT.CFG.02`) chưa có → đợt này khai một tham số múi giờ cấp tổ chức, thiết kế để module Tenant sau tiếp quản |
 | **C7** | 🆕 **Một lần cộng điểm thuộc về nhiều kỳ cùng lúc** → điểm theo kỳ **tính từ sổ giao dịch theo khoảng ngày**, không cộng dồn vào một con số. **Nhưng kết quả cuối kỳ phải được lưu cứng**, không tính lại mỗi lần xem | Kỳ lịch lồng nhau (tuần ⊂ tháng ⊂ quý ⊂ năm) và chiến dịch chạy song song. Bác bỏ `A8` của v0.1 |
 
@@ -201,7 +201,7 @@ Video nay đã chặt (xem ≥80% thời lượng — `KB-LX-03a`), nhưng Text/
 
 | Hướng | Nội dung | Đánh đổi |
 |---|---|---|
-| **A** ⭐ | Trần điểm/ngày + khử trùng + **cho phép khai số điểm khác nhau theo loại hoạt động** | Không thêm cơ chế mới. Mỗi nội dung chỉ trả điểm **một lần duy nhất trong đời** |
+| **A** ⭐ | Trần điểm/ngày + chống cộng trùng + **cho phép khai số điểm khác nhau theo loại hoạt động** | Không thêm cơ chế mới. Mỗi nội dung chỉ trả điểm **một lần duy nhất trong đời** |
 | B | Gamification tự đo thời gian riêng | Chính xác hơn, nhưng học viên thấy hoạt động ✅ mà không được điểm, không hiểu vì sao |
 | C | Không cộng điểm cho hoạt động Text/Ảnh | An toàn nhưng mất phần lớn cơ hội cộng điểm đều đặn |
 

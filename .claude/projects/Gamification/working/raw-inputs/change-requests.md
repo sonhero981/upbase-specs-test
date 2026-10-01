@@ -6,6 +6,7 @@
 | **CR-002** | 2026-09-23 | **Chỉ số xếp hạng của chiến dịch chọn được** — theo điểm, theo huy hiệu, hoặc theo số khoá hoàn thành. Kèm **luật chỉnh sửa chiến dịch** (đang chạy thì không sửa được) | PO trả lời tại Gate 1 (OQ-A4) | ✅ **Đã áp dụng** — BRD v0.3 |
 | **CR-004** | 2026-09-23 | **Gate 1 `Need Revision`.** Đổi cơ chế điểm đăng nhập · định nghĩa lại loại huy hiệu · ngưỡng lên hạng theo nhiều chỉ số · thu hẹp thông báo · tách stakeholder | PO phản hồi tại Gate 1 | ✅ **Đã áp dụng** — BRD v0.4 |
 | **CR-007** | 2026-09-23 | **Bỏ hẳn chiến dịch, kỳ lịch và cơ chế chốt kỳ.** Thay bằng **bộ chọn khoảng ngày tự do** trên bảng xếp hạng. Chấp nhận kết quả sống.<br>**Khoá mốc huy hiệu sau khi tạo**, nên huy hiệu đã nhận không bao giờ mất | PO nêu tại 9C, khi viết `US8` | 🔄 **Đang áp dụng** |
+| **CR-009** | 2026-10-01 | **Điểm check-in đổi từ mức cố định sang tăng dần theo chuỗi ngày đăng nhập liên tiếp.** Thêm khối chuỗi trên trang Thành tích. Chuỗi tính theo ngày đăng nhập, đếm mọi ngày dương lịch | PO yêu cầu, sau khi nghe phân tích rủi ro | 🔄 **Đang áp dụng** |
 
 ---
 
@@ -377,3 +378,110 @@ Dùng bảng xếp hạng cho việc này là dùng sai công cụ — và chín
 **Vì sao vẫn nên có A:** tiêu chí phụ theo thời điểm rẻ hơn PO nghĩ. Ràng buộc `C3` đã bắt lưu từng lần cộng điểm kèm thời điểm, nên *"ai đạt mức điểm này sớm hơn"* chỉ là sắp xếp theo `(điểm giảm dần, thời điểm đạt tăng dần)` — không cần dữ liệu mới, không cần cơ chế mới.
 
 Và nó phục vụ đúng `Problem`: học viên học sớm xếp trên học viên học dồn sát hạn, dù cùng điểm.
+
+---
+
+# CR-009 — Điểm check-in tăng dần theo chuỗi
+
+## Nguyên văn PO
+
+> *"phần điểm checkin bạn đã làm đúng theo rule là daily check in, đăng nhập liên tục mới có điểm chưa nhỉ, đã theo logic đó chưa, hay đăng nhập cách ngày vẫn nhận đc điểm, t muốn làm theo dạng streak ấy"*
+>
+> *"hãy làm điểm tăng dần theo chuỗi và hiện chuỗi trên giao diện"*
+
+Hai lựa chọn PO chốt sau khi đọc phân tích rủi ro:
+
+| Câu hỏi | PO chọn |
+|---|---|
+| Chuỗi tăng khi nào | **Ngày có đăng nhập** — không cần học gì |
+| Ngày nghỉ xử lý sao | **Đếm mọi ngày dương lịch** — thứ 7, chủ nhật, ngày lễ không vào là đứt |
+
+## Trạng thái trước CR
+
+`US5` đang là check-in rời rạc: mỗi ngày vào hệ thống được một mức điểm **cố định**, ngày nào vào thì ngày đó có điểm, vào cách ngày vẫn được điểm bình thường. Scope ghi rõ *"Không có chuỗi ngày liên tiếp"*.
+
+Rule này đến từ chính `CR-004`, khi PO bác bỏ cơ chế chuỗi: *"sẽ có cơ chế chống spam chứ không phải nhiều ngày liên tiếp mới có điểm"*, rồi chốt lại ở `A21`: *"đổi thành đăng nhập hằng ngày, kiểu mỗi ngày vào thì sẽ được điểm"*.
+
+`CR-009` đảo lại quyết định đó.
+
+## Rule mới
+
+### Công thức điểm
+
+Điểm nhận được ở ngày thứ `n` của chuỗi:
+
+```
+điểm = min( điểm_nền + (n - 1) × bước_tăng , trần_điểm_chuỗi )
+```
+
+Ví dụ với `điểm_nền = 25`, `bước_tăng = 5`, `trần = 50`:
+
+| Ngày của chuỗi | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8+ |
+|---|---|---|---|---|---|---|---|---|
+| Điểm | 25 | 30 | 35 | 40 | 45 | 50 | 50 | 50 |
+
+Ba tham số đều do vận hành cấu hình, đặt cùng chỗ với bảng điểm hiện có.
+
+### Chuỗi tăng và đứt
+
+| # | Rule |
+|---|---|
+| 1 | Chuỗi **tăng 1** khi học viên đăng nhập, tính **một lần duy nhất trong ngày**. Đăng nhập nhiều lần trong ngày không tăng thêm |
+| 2 | **Không đăng nhập trọn một ngày dương lịch → chuỗi về `0`.** Lần đăng nhập kế tiếp bắt đầu chuỗi mới từ `1`, điểm về mức nền |
+| 3 | Biên ngày cắt theo **múi giờ tổ chức**, theo `C9` *("Ngày" trong check-in và trần điểm/ngày cắt theo múi giờ tổ chức)* |
+| 4 | **Điểm đã nhận không bị thu hồi khi đứt chuỗi.** Giữ nguyên tắc xuyên suốt: không lấy lại gì của học viên |
+| 5 | Hệ thống lưu **chuỗi dài nhất từng đạt**, không reset khi đứt |
+| 6 | Điểm chuỗi **vẫn chịu trần điểm mỗi ngày**. Chạm trần thì ghi vào lịch sử với `0` điểm kèm lý do, giống mọi nguồn điểm khác |
+| 7 | `Test Account` bị loại khỏi toàn bộ cơ chế chuỗi, theo `C10` *(`Test Account` bị loại khỏi toàn bộ logic gamification)* |
+| 8 | Đổi ba tham số cấu hình **chỉ áp dụng từ thời điểm đổi**, theo `C4`. Chuỗi đang chạy **không bị reset** khi đổi cấu hình |
+
+### Hiển thị
+
+Trang Thành tích của tôi thêm một khối:
+
+| Thành phần | Nội dung |
+|---|---|
+| Chuỗi hiện tại | Số ngày liên tiếp đang giữ |
+| Chuỗi dài nhất | Kỷ lục của chính học viên đó |
+| Điểm ngày mai | Mức điểm sẽ nhận nếu ngày mai vào, hoặc dòng báo đã chạm trần |
+| Nhắc giữ chuỗi | Một dòng nói rõ **không vào ngày mai là chuỗi về `0`** |
+
+Lịch sử ghi nhận hiện điểm check-in kèm **ngày thứ mấy của chuỗi**, để học viên đối chiếu được con số.
+
+## Tác động
+
+| Hạng mục | Thay đổi |
+|---|---|
+| `US5` *(Điểm khi vào hệ thống hằng ngày)* | **Viết lại phần tính điểm.** Mức cố định → công thức tăng dần, cộng 8 rule trên |
+| `US1` *(Trang Thành tích của tôi)* | Thêm khối chuỗi |
+| `US3` *(Lịch sử ghi nhận)* | Dòng điểm check-in thêm thông tin ngày thứ mấy của chuỗi |
+| `US8` *(Cấu hình điểm)* | Thêm ba tham số: điểm nền, bước tăng, trần điểm chuỗi |
+| Bảng `Thành tích của học viên` | Thêm `chuỗi hiện tại`, `chuỗi dài nhất`, `ngày có mặt gần nhất` |
+| Bảng `Ngày có mặt của học viên` | **Không đổi.** Đã đủ để dựng lại chuỗi khi cần đối chiếu |
+| Scope | Bỏ dòng *"Không có chuỗi ngày liên tiếp"* |
+
+Không phát sinh bảng mới.
+
+## Rủi ro PO chấp nhận
+
+Bốn điểm đã nêu trước khi PO quyết, ghi lại để sau này không phải tranh luận lại:
+
+| # | Rủi ro | Vì sao |
+|---|---|---|
+| 1 | **Thưởng hành vi mở ứng dụng, không thưởng việc học.** Số liệu General Launch cho thấy 53 người đăng nhập nhưng chỉ 29 người bắt đầu học — 45% vào mà không học. Chuỗi tính theo đăng nhập trả điểm cho đúng nhóm đó | Ăn vào `O5` *(điểm số đáng tin, không bị thổi lên bằng thao tác đối phó)* |
+| 2 | **Nghỉ cuối tuần là đứt chuỗi.** Học viên là nhân viên, không mở UpLMS thứ 7 chủ nhật. Chuỗi thực tế hiếm khi vượt 5 ngày, và người chăm nhất cũng đứt chuỗi mỗi tuần | Phần thưởng chuỗi dài gần như không ai với tới |
+| 3 | **Nghỉ phép, công tác, ốm đều bị phạt** như nhau | Phản tác dụng về quản trị nhân sự |
+| 4 | **Bảng xếp hạng khó giải thích.** Hai người cùng học 20 ngày, một người liền mạch một người ngắt quãng, điểm chênh đáng kể dù khối lượng học như nhau | Câu hỏi *"sao tôi học nhiều hơn mà điểm thấp hơn"* không có câu trả lời gọn |
+
+## Một mâu thuẫn phải xử lý khi viết `US5`
+
+Lựa chọn hiển thị của PO có nhắc **cảnh báo sắp đứt chuỗi**. Cảnh báo này chỉ hữu ích khi học viên **không** ở trong hệ thống — nhưng `BR-2.1` chốt *thông báo chỉ đẩy khi học viên đang mở UpLMS, không gửi mail, không xếp hàng gửi sau*. Người sắp đứt chuỗi theo định nghĩa là người không vào, nên họ sẽ không bao giờ thấy cảnh báo.
+
+Hai cách:
+
+| | Cách | Đánh đổi |
+|---|---|---|
+| **a** ⭐ | **Bỏ cảnh báo đẩy.** Thay bằng dòng nhắc tĩnh ngay trên trang Thành tích: *"Vào mỗi ngày để giữ chuỗi. Không vào ngày mai là chuỗi về 0."* Học viên đọc lúc đang xem thành tích | Không chặn được người đã nghỉ vài ngày |
+| **b** | **Mở lại kênh mail** riêng cho việc nhắc chuỗi | Đảo quyết định `CR-004` *(thu hẹp thông báo, không gửi mail)*, và là loại mail dễ gây khó chịu nhất |
+
+Đề xuất **a**, đã viết vào bảng hiển thị ở trên. PO phản đối thì nói, tôi đổi sang **b**.

@@ -33,7 +33,7 @@
 | v0.4 | Gate 1 `Need Revision` · định nghĩa lại huy hiệu · thu hẹp thông báo | `CR-004` | 23/09 |
 | v0.5 | Gate 1 `Approved with Notes` · điểm khi vào hệ thống tính theo ngày · gỡ phụ thuộc Keycloak | `CR-005` | 23/09 |
 | **v0.6** | 🔧 **Đính chính `BR-TEST`.** `Pass Point` chỉ tồn tại khi `Graded Assignment = Yes`. **Quiz và Case Study không tính.** Đóng `OQ-B16`.<br>🗑️ **Bỏ hành động tính điểm "đạt điểm cao"** — PO chốt tạm thời không có rule này. Gỡ `A23` và `OQ-B17` | `CR-006` | 23/09 |
-| **v0.6.1** | 🔁 **Feed ngược từ Impact Analysis (Gate 2).** Sửa `C5` — khử trùng trong phạm vi một lượt ghi danh, không cắt ngang lớp. Thêm `C10` loại trừ `Test Account`. Thêm `BR-REGRADE-02`. Chốt `A24`, `A25`. Bỏ khoá Trial khỏi phạm vi | `impact-matrix-v0.1` | 23/09 |
+| **v0.6.1** | 🔁 **Feed ngược từ Impact Analysis (Gate 2).** Sửa `C5` — chống cộng trùng trong phạm vi một lượt ghi danh, không cắt ngang lớp. Thêm `C10` loại trừ `Test Account`. Thêm `BR-REGRADE-02`. Chốt `A24`, `A25`. Bỏ khoá Trial khỏi phạm vi | `impact-matrix-v0.1` | 23/09 |
 
 **Nguồn input:** `working/raw-inputs/yeu-cau-goc-20260923.md` · `change-requests.md` (CR-001…006) · `clarified-requirements-20260923.md` · `project-decisions.md`
 
@@ -148,7 +148,7 @@ Ba chỉ số trên **đã có tiêu chí và có mốc nền** — dùng thẳn
 | **S5** | 🔧 **Bốn loại huy hiệu, mỗi loại đo bằng một chỉ số đếm:**<br>• **Tích cực** — số ngày có vào hệ thống<br>• **Học tập** — số lần hoàn thành hoạt động học<br>• **Test** — **số bài Test tính theo `BR-TEST`** *(không đếm Quiz, không đếm Case Study)*<br>• **Course** — số khoá đã hoàn thành |
 | S6 | **Hạng người học** — tên, hình, và **ngưỡng lên hạng dựa trên nhiều chỉ số**: điểm · số huy hiệu · số khoá hoàn thành |
 | S7 | **Hai loại điểm tách nhau**: điểm tích luỹ vĩnh viễn (xét hạng) và điểm theo kỳ (xếp hạng) |
-| S8 | **Chống cày điểm** — khử trùng nội dung đã hoàn thành, trần điểm tối đa mỗi ngày |
+| S8 | **Chống cày điểm** — chống cộng trùng nội dung đã hoàn thành, trần điểm tối đa mỗi ngày |
 | S9 | **Lịch sử điểm** — học viên tra được từng lần cộng đến từ đâu |
 | S10 | **Thông báo thành tích** — chỉ đẩy trong hệ thống khi học viên đang online. Không gửi mail. Offline thì không gửi, thành tích vẫn ghi nhận và tra được ở lịch sử |
 | S11 | **Trang "Thành tích của tôi"** — điểm, hạng, huy hiệu đã có, huy hiệu sắp đạt kèm phần còn thiếu |
@@ -185,7 +185,7 @@ Ba chỉ số trên **đã có tiêu chí và có mốc nền** — dùng thẳn
 | # | Không làm | Vì sao |
 |---|---|---|
 | N1 | **Bộ lọc bảng xếp hạng theo nhóm** — gồm cả theo lớp và theo phòng ban | Chờ chức năng nhóm **đồng bộ từ HRM** |
-| N2 | **Chống cày riêng cho hoạt động chỉ có Text/Ảnh** | Khử trùng và trần điểm/ngày vẫn áp cho mọi loại |
+| N2 | **Chống cày riêng cho hoạt động chỉ có Text/Ảnh** | Chống cộng trùng và trần điểm/ngày vẫn áp cho mọi loại |
 | N3 | **Nhiều chiến dịch chạy song song** | Đợt này mỗi lần một chiến dịch |
 | N4 | **Điều kiện huy hiệu theo chuỗi ngày liên tiếp · mốc thời gian · nội dung cụ thể** | Thay bằng bốn loại đo bằng chỉ số đếm (S5) |
 | N5 | **Thông báo thành tích qua email** | Chỉ đẩy trong hệ thống |
@@ -242,7 +242,7 @@ Nguyên tắc xuyên suốt: **gamification chỉ đọc, không sửa dữ li�
 | **C2** | **Mọi danh mục phải mở rộng được bằng cấu hình** | Lộ trình, kỹ năng, bộ lọc nhóm, nhiều chiến dịch song song, và **tính điểm từ Quiz/Case Study** đều có thể thêm sau |
 | **C3** | Lưu **từng lần cộng điểm kèm thời điểm** | Nền của lịch sử điểm, xếp hạng theo kỳ, tiêu chí phụ khi đồng hạng, luật chống cày |
 | **C4** | Đổi cấu hình điểm → **áp dụng từ thời điểm đổi** | PO chốt |
-| **C5** | 🔧 **Khử trùng "đã học" tính trong phạm vi MỘT LƯỢT GHI DANH.** Học viên bị xoá khỏi lớp rồi thêm lại → lượt học mới **được tính điểm mới**, coi như khoá mới.<br>Chỉ cộng điểm khi bản ghi tiến độ **chuyển trạng thái** sang hoàn thành, tính từ thời điểm bật tính năng | PO xác nhận 23/09: **một khoá chỉ ở một lớp tại một thời điểm**, nên không có kịch bản học song song hai lớp. *(Sửa từ "khử trùng cắt ngang lớp" của v0.1–v0.6 — xem Impact Matrix `CF-2`)* |
+| **C5** | 🔧 **Chống cộng trùng "đã học" tính trong phạm vi MỘT LƯỢT GHI DANH.** Học viên bị xoá khỏi lớp rồi thêm lại → lượt học mới **được tính điểm mới**, coi như khoá mới.<br>Chỉ cộng điểm khi bản ghi tiến độ **chuyển trạng thái** sang hoàn thành, tính từ thời điểm bật tính năng | PO xác nhận 23/09: **một khoá chỉ ở một lớp tại một thời điểm**, nên không có kịch bản học song song hai lớp. *(Sửa từ "chống cộng trùng cắt ngang lớp" của v0.1–v0.6 — xem Impact Matrix `CF-2`)* |
 | **C6** | **Biên kỳ cắt theo múi giờ của tổ chức**, không theo giờ máy chủ | Module Tenant chưa có → đợt này khai một tham số múi giờ cấp tổ chức |
 | **C7** | **Một lần cộng điểm thuộc về nhiều kỳ lịch cùng lúc** → điểm theo kỳ tính từ sổ giao dịch theo khoảng ngày. **Kết quả cuối kỳ lưu cứng** | Kỳ lịch lồng nhau theo bản chất |
 | **C8** | **Mọi mốc dùng để xếp hạng phải lưu được thời điểm đạt** | Cần cho S22 và mọi chỉ số đếm |
@@ -274,7 +274,7 @@ Nguyên tắc xuyên suốt: **gamification chỉ đọc, không sửa dữ li�
 
 ## 6.5 ✅ Chống cày điểm *(đã chốt)*
 
-Không làm cơ chế riêng cho hoạt động chỉ có Text/Ảnh. Hai cơ chế chung áp cho mọi loại: **khử trùng nội dung đã hoàn thành** (`C5`) và **trần điểm tối đa mỗi ngày** (`S8`).
+Không làm cơ chế riêng cho hoạt động chỉ có Text/Ảnh. Hai cơ chế chung áp cho mọi loại: **chống cộng trùng nội dung đã hoàn thành** (`C5`) và **trần điểm tối đa mỗi ngày** (`S8`).
 
 ## 6.6 ✅ Chỉ số xếp hạng chiến dịch và tiêu chí phụ *(đã chốt)*
 

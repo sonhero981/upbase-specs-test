@@ -38,7 +38,7 @@ Nơi ghi mọi quyết định đã chốt. AI tra file này để **không hỏ
 | Ngày | Quyết định | Lý do | Người quyết | Gate |
 | --- | --- | --- | --- | --- |
 | 23/09/2026 | **OQ-A1 ✅ Hai công tắc.** `Gamification` = bật/tắt **lưu dữ liệu**, bao gồm cả hiển thị. `Visibility in UpLMS` = **chỉ xuất hiện khi Gamification bật**, bật/tắt hiển thị phía học viên | Cần giai đoạn chạy thử trước khi mở cho học viên | PO | Gate 1 |
-| 23/09/2026 | **OQ-A2 ✅ Không làm chống cày riêng cho hoạt động chỉ có Text/Ảnh.** Khử trùng (`C5`) và trần điểm/ngày (`S8`) vẫn áp cho mọi loại | Rủi ro chấp nhận có chủ đích | PO | Gate 1 |
+| 23/09/2026 | **OQ-A2 ✅ Không làm chống cày riêng cho hoạt động chỉ có Text/Ảnh.** Chống cộng trùng (`C5`) và trần điểm/ngày (`S8`) vẫn áp cho mọi loại | Rủi ro chấp nhận có chủ đích | PO | Gate 1 |
 | 23/09/2026 | **OQ-A3 ✅ BỎ phạm vi/bộ lọc xếp hạng theo lớp.** Gộp cùng bộ lọc theo phòng ban thành một hạng mục hoãn: **bộ lọc theo nhóm** | Bộ lọc theo lớp sau này chính là bộ lọc theo nhóm — làm riêng bây giờ thì trùng mục đích, sau phải làm lại | PO | Gate 1 · CR-003 |
 | 23/09/2026 | **OQ-A4 ✅ Giới hạn nội dung chiến dịch — KHÔNG làm.** Thay vào đó: **chỉ số xếp hạng của chiến dịch chọn được** (điểm · số huy hiệu · số khoá hoàn thành) + **luật chỉnh sửa chiến dịch** (đang chạy thì không sửa) | PO làm rõ: điều cần là chọn *chỉ số xếp hạng*, không phải giới hạn *nội dung sinh điểm* | PO | Gate 1 · CR-002 |
 | 23/09/2026 | **Tiêu chí phụ khi đồng hạng (`S22`) thành BẮT BUỘC** — cùng chỉ số thì ai đạt sớm hơn xếp trên | Hệ quả của CR-002: xếp theo "số khoá hoàn thành" (0–5) hay "số huy hiệu" (0–10) gây đồng hạng hàng loạt | Phân tích | Gate 1 |
@@ -49,7 +49,7 @@ Nơi ghi mọi quyết định đã chốt. AI tra file này để **không hỏ
 | Ngày | Quyết định | Lý do | Người quyết | Gate |
 | --- | --- | --- | --- | --- |
 | 23/09/2026 | **Stakeholder tách L&D và Quản lý trực tiếp.** Quản lý trực tiếp = quản lý của học viên trong tổ chức | | PO | Gate 1 |
-| 23/09/2026 | **Điểm đăng nhập: mỗi lần login được điểm**, chống spam bằng khoảng cách thời gian tối thiểu (ví dụ dưới 2 tiếng không tính). **Bỏ cơ chế chuỗi ngày liên tiếp** | Đơn giản hơn, không phải tính và lưu chuỗi | PO | Gate 1 |
+| 23/09/2026 | ~~**Điểm đăng nhập: mỗi lần login được điểm**, chống spam bằng khoảng cách thời gian tối thiểu (ví dụ dưới 2 tiếng không tính). **Bỏ cơ chế chuỗi ngày liên tiếp**~~<br>⬅️ **`CR-009` ngày 01/10 đảo ngược phần chuỗi.** Nay điểm check-in tăng dần theo chuỗi ngày liên tiếp | Đơn giản hơn, không phải tính và lưu chuỗi | PO | Gate 1 |
 | 23/09/2026 | **Bốn loại huy hiệu đo bằng chỉ số đếm:** Tích cực (số lần login) · Học tập (số hoạt động hoàn thành) · Test (số bài test hoàn thành) · Course (số khoá hoàn thành) | | PO | Gate 1 |
 | 23/09/2026 | **Ngưỡng lên hạng dùng nhiều chỉ số**, không chỉ điểm — điểm, huy hiệu, số khoá hoàn thành | | PO | Gate 1 |
 | 23/09/2026 | **Từ vựng giữ nguyên: `Point` = điểm, `Level` = hạng học viên** | PO chốt, không đổi tên | PO | Gate 1 |
@@ -89,7 +89,7 @@ Nơi ghi mọi quyết định đã chốt. AI tra file này để **không hỏ
 | --- | --- | --- | --- | --- |
 | 23/09/2026 | **`CF-1` ✅ `Test Account` bị loại khỏi TOÀN BỘ logic gamification** — không điểm, huy hiệu, hạng, xếp hạng | Là tài khoản của L&D và QA dùng kiểm tra khoá học; về dữ liệu là học viên thật | PO | Gate 2 → `C10` |
 | 23/09/2026 | **`CF-2` ✅ Không tồn tại.** Một khoá chỉ ở **một lớp tại một thời điểm**. Xoá ra thêm lại → học lại → **tính như khoá mới, được điểm** | | PO | Gate 2 |
-| 23/09/2026 | **`C5` sửa:** khử trùng trong phạm vi **một lượt ghi danh**, không cắt ngang lớp. Kèm rule: **chỉ cộng điểm khi bản ghi tiến độ chuyển trạng thái sang hoàn thành, tính từ lúc bật** | Hệ quả của `CF-2` | PO + phân tích | Gate 2 → BRD v0.6.1 |
+| 23/09/2026 | **`C5` sửa:** chống cộng trùng trong phạm vi **một lượt ghi danh**, không cắt ngang lớp. Kèm rule: **chỉ cộng điểm khi bản ghi tiến độ chuyển trạng thái sang hoàn thành, tính từ lúc bật** | Hệ quả của `CF-2` | PO + phân tích | Gate 2 → BRD v0.6.1 |
 | 23/09/2026 | **`CF-3` ✅ Chấp nhận** — đổi ngưỡng hạng thì người cũ giữ hạng, người mới theo ngưỡng mới | | PO | Gate 2 |
 | 23/09/2026 | **`CF-5` ✅ Có huy hiệu mặc định** — mất ảnh thì rơi về ảnh mặc định | | PO | Gate 2 |
 | 23/09/2026 | **`CF-6` ✅ Đang có chiến dịch thì không tắt gamification được** — phải dừng chiến dịch trước | | PO | Gate 2 |
@@ -150,7 +150,7 @@ Nơi ghi mọi quyết định đã chốt. AI tra file này để **không hỏ
 
 ## ✅ GATE 4 — `Approved with Notes` (23/09/2026)
 
-**`prd-gamification-v0.2-20260923.md` là bản được duyệt.** 15 US viết chi tiết, 132 business rule.
+**`prd-gamification-v0.3-20261001.md` là bản được duyệt.** 15 US viết chi tiết, 132 business rule.
 
 | Ngày | Quyết định | Lý do | Người quyết |
 | --- | --- | --- | --- |
@@ -169,3 +169,18 @@ Nơi ghi mọi quyết định đã chốt. AI tra file này để **không hỏ
 Trước đó `BR-13.10` viết chung là *"lượt học mới được tính điểm mới, coi như khoá mới"*, áp cho cả hai hành động. Sai với hành động hoàn thành khoá.
 
 Đây cũng là **lớp bảo vệ thứ hai có sẵn trong hệ thống**: đường cày điểm bằng cách học lại một khoá nhiều lần đã bị chặn ở tầng chứng chỉ, không phải do gamification làm.
+
+## CR-009 — Điểm check-in tăng dần theo chuỗi (01/10/2026)
+
+| Ngày | Quyết định | Lý do | Người quyết | Gate |
+| --- | --- | --- | --- | --- |
+| 01/10/2026 | **Điểm check-in tăng dần theo chuỗi.** Công thức `min(nền + (n−1) × bước, trần)`. Đảo ngược `A21` ngày 23/09 và quyết định ở `CR-004` | PO muốn cơ chế streak | PO | CR-009 |
+| 01/10/2026 | **Chuỗi tăng theo ngày có ĐĂNG NHẬP**, không cần hoàn thành hoạt động nào | PO chọn sau khi nghe khuyến nghị tính theo ngày có học | PO | CR-009 |
+| 01/10/2026 | **Đếm mọi ngày dương lịch.** Thứ bảy, chủ nhật, ngày lễ, nghỉ phép đều làm đứt chuỗi | PO chọn sau khi nghe hai phương án còn lại (bỏ qua ngày nghỉ, quỹ bảo vệ) | PO | CR-009 |
+| 01/10/2026 | **Đứt chuỗi không thu hồi điểm đã nhận** | Giữ nguyên tắc xuyên suốt: không lấy lại gì của học viên | Phân tích | CR-009 |
+| 01/10/2026 | **Chạm trần điểm ngày thì chuỗi vẫn tăng.** Chuỗi đo việc có mặt, không đo điểm | Phân tích | CR-009 |
+| 01/10/2026 | **Bỏ cảnh báo đẩy sắp đứt chuỗi.** Thay bằng dòng nhắc tĩnh trên trang Thành tích | `BR-2.1` chỉ đẩy khi học viên đang online, mà người sắp đứt chuỗi là người không vào | Phân tích | CR-009 |
+| 01/10/2026 | **Đổi thuật ngữ: "khử trùng" → "chống cộng trùng"** ở toàn bộ tài liệu, 67 chỗ trên 15 file | "Khử trùng" trong tiếng Việt nghĩa là sát khuẩn, không liên quan tới deduplication | PO phát hiện | CR-009 |
+
+**Bốn rủi ro PO đã nghe và chấp nhận:** chuỗi theo đăng nhập thưởng đúng nhóm 45% vào mà không học · nghỉ cuối tuần đứt chuỗi nên chuỗi hiếm vượt 5 ngày · nghỉ phép và công tác bị phạt như nhau · bảng xếp hạng khó giải thích khi hai người học bằng nhau mà điểm chênh vì nhịp vào khác nhau.
+

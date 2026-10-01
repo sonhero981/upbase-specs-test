@@ -6,7 +6,7 @@
 | **Epic** | ❓ *link Jira* |
 | **Story** | ❓ *link Jira* |
 | **Related** | `brd-v0.6-20260923.md` · `impact-matrix-v0.2-20260923.md` · `solution-comparison-v0.1-20260923.md` |
-| **Document status** | ✅ **`Approved with Notes`** — PO duyệt 23/09/2026 |
+| **Document status** | 🔄 **v0.3 chờ PO review lại** — mang `CR-009`. Bản v0.2 đã được PO duyệt 23/09/2026 |
 | **Document owner** | Bùi Đức Huy (PO) |
 | **Designer** | ❓ *cần điền* |
 | **Tech lead** | ❓ *cần điền* |
@@ -21,6 +21,7 @@
 | --- | --- | --- | --- | --- |
 | v0.1 | Bùi Đức Huy | Bản khung: bối cảnh, giải pháp tổng thể và danh sách US | — | 23/09/2026 |
 | v0.2 | Bùi Đức Huy | Viết chi tiết `US1` đến `US15`. Bỏ chiến dịch và kỳ lịch, thay bằng bộ chọn khoảng ngày (`CR-007`). Tách cấu hình thành bốn màn, khoá mốc huy hiệu, hạng thành số tịnh tiến, bảng xếp hạng tách theo chỉ số (`CR-008`) | `CR-007` `CR-008` | 23/09/2026 |
+| v0.3 | Bùi Đức Huy | Điểm check-in tăng dần theo chuỗi ngày đăng nhập liên tiếp, thêm khối chuỗi trên trang Thành tích (`CR-009`). Đổi thuật ngữ "khử trùng" thành "chống cộng trùng". Làm rõ `C5` bằng định nghĩa lượt ghi danh | `CR-009` | 01/10/2026 |
 
 > ✅ **`Approved with Notes` — PO duyệt ngày 23/09/2026.** Còn **8 câu hỏi mở** ở mục `Vấn đề tồn đọng`, không câu nào chặn bàn giao.
 
@@ -186,12 +187,27 @@ flowchart TD
 | `C2` | Mọi danh mục **mở rộng được bằng cấu hình** |
 | `C3` | Lưu **từng lần cộng điểm kèm thời điểm**, không chỉ lưu tổng |
 | `C4` | Đổi cấu hình điểm → **áp dụng từ thời điểm đổi**, không tính lại quá khứ |
-| `C5` | Khử trùng trong phạm vi **một lượt ghi danh**. Chỉ cộng điểm khi bản ghi tiến độ **chuyển trạng thái** sang hoàn thành, tính từ lúc bật |
+| `C5` | Chống cộng trùng trong phạm vi **một lượt ghi danh**. Chỉ cộng điểm khi bản ghi tiến độ **chuyển trạng thái** sang hoàn thành, tính từ lúc bật |
 | `C6` | **Biên kỳ cắt theo múi giờ tổ chức**, không theo giờ máy chủ |
 | `C7` | Một lần cộng điểm thuộc **mọi khoảng ngày bao trùm nó**, nên bảng xếp hạng luôn tính từ sổ giao dịch theo khoảng ngày |
 | `C8` | **Mọi mốc dùng để xếp hạng phải lưu thời điểm đạt** |
 | `C9` | **"Ngày"** trong check-in và trần điểm/ngày cắt theo **múi giờ tổ chức** |
 | `C10` | **`Test Account` bị loại khỏi TOÀN BỘ logic gamification** — lọc ngay từ tầng ghi nhận, không ghi rồi lọc sau |
+
+#### `C5` nói gì
+
+**Lượt ghi danh** là một lần học viên được thêm vào một lớp chứa khoá học. Mỗi lần thêm vào sinh ra một bản ghi mới. Trong UpLnD, **toàn bộ tiến độ học treo vào bản ghi ghi danh chứ không treo vào con người** — hệ thống lưu *"lượt ghi danh số 1 đã xong bài 3"*, không lưu *"anh A đã học bài 3"*.
+
+`C5` gồm hai lớp chặn độc lập:
+
+| Lớp | Nội dung | Chặn được gì |
+|---|---|---|
+| **Chống cộng trùng** | Mỗi nội dung chỉ trả điểm **một lần trong một lượt ghi danh**. Trả rồi thì đóng dấu, lần sau thấy dấu là bỏ qua | Học viên mở lại bài đã xong để lấy thêm điểm |
+| **Chỉ bắt lúc chuyển trạng thái** | Chỉ cộng khi bản ghi tiến độ **vừa chuyển** từ chưa hoàn thành sang hoàn thành. Không nhìn trạng thái hiện tại | Nội dung đã hoàn thành **trước khi bật** tính năng tự nó không sinh điểm, nên không phải nạp sẵn dấu cho toàn bộ lịch sử học của mọi người |
+
+Dấu sống cùng lượt ghi danh, nên **xoá học viên khỏi lớp rồi thêm lại là lượt mới**: tiến độ về `0`, học lại từ đầu, và điểm được tính lại từ đầu. Chứng chỉ thì không, vì chứng chỉ cấp theo khoá chứ không theo lượt (`BR-13.12`).
+
+> Hệ quả cho Dev: **"số khoá hoàn thành"** dùng để xét huy hiệu và lên hạng phải đếm từ **sổ giao dịch điểm**, không đếm từ endpoint chứng chỉ. Học hai lượt thì có hai lần điểm nhưng chỉ một chứng chỉ.
 
 ### Ba rule nền
 
@@ -221,20 +237,20 @@ flowchart LR
     subgraph A["1 · CẤU HÌNH — vận hành đặt"]
         direction TB
         C1["Cấu hình gamification<br/>2 công tắc chung<br/>4 công tắc chức năng"]
-        C2["Quy tắc cộng điểm<br/>4 hành động"]
+        C2["Quy tắc cộng điểm<br/>4 hành động<br/>check-in: 3 tham số chuỗi"]
         C3["Huy hiệu<br/>4 loại x 8 mốc"]
         C4["Cấu hình hạng<br/>3 bội số + trần"]
     end
     subgraph B["2 · GHI NHẬN — hệ thống ghi"]
         direction TB
-        L2["Dấu nội dung đã tính điểm<br/>khử trùng theo lượt ghi danh"]
-        L3["Ngày có mặt của học viên<br/>1 người 1 ngày 1 bản ghi"]
+        L2["Dấu nội dung đã tính điểm<br/>chống cộng trùng theo lượt ghi danh"]
+        L3["Ngày có mặt của học viên<br/>1 người 1 ngày 1 bản ghi<br/>nguồn dựng lại chuỗi"]
         L1["Sổ giao dịch điểm<br/>từng lần cộng kèm thời điểm"]
         L4["Huy hiệu đã đạt<br/>kèm thời điểm đạt"]
     end
     subgraph C["3 · ĐỌC — màn hình đọc"]
         direction TB
-        R1["Thành tích của học viên<br/>điểm - hạng hiện tại"]
+        R1["Thành tích của học viên<br/>điểm - hạng hiện tại<br/>chuỗi hiện tại - chuỗi dài nhất"]
         R2["Bảng xếp hạng tính sẵn<br/>ghi đè mỗi 8 tiếng"]
     end
     TN["tenant — SỬA<br/>thêm cột múi giờ<br/>dùng để cắt biên ngày"]
@@ -257,14 +273,14 @@ flowchart LR
 | --- | --- | --- | --- |
 | `tenant` | **Sửa** | ➕ Thêm **tham số múi giờ** (`C6`, `C9`). Bảng hiện có 7 cột, không có trường này. Thuộc `TNT.CFG.02`, module Tenant chưa làm — đợt này khai tạm ở đây | *(là bảng gốc)* |
 | Cấu hình gamification | Mới | Hai công tắc chung (`Gamification` · `Visibility in UpLMS`) · **bốn công tắc chức năng** (`Points` · `Badges` · `Levels` · `Leaderboard`) · trần điểm mỗi ngày · bốn công tắc cột bảng xếp hạng | ✅ Bắt buộc |
-| Quy tắc cộng điểm | Mới | Bốn hành động, mỗi hành động một công tắc và một số điểm | ✅ Bắt buộc |
+| Quy tắc cộng điểm | Mới | Bốn hành động, mỗi hành động một công tắc và một số điểm. Riêng check-in khai bằng **ba tham số** điểm chuỗi thay vì một số (`BR-8.5a`) | ✅ Bắt buộc |
 | **Sổ giao dịch điểm** | Mới | **Từng lần cộng điểm kèm nguồn và thời điểm** (`C3`). Nền của lịch sử ghi nhận, bảng xếp hạng theo khoảng ngày, tiêu chí phụ khi đồng hạng, và chỉ số *số khoá hoàn thành* | ✅ **Bắt buộc — rò rỉ ở đây hậu quả nặng nhất** |
-| Dấu nội dung đã tính điểm | Mới | Khử trùng trong phạm vi lượt ghi danh (`C5`) | ✅ Bắt buộc |
+| Dấu nội dung đã tính điểm | Mới | Chống cộng trùng trong phạm vi lượt ghi danh (`C5`) | ✅ Bắt buộc |
 | Ngày có mặt của học viên | Mới | Nguồn cho điểm check-in và huy hiệu loại Check-in. Một học viên một ngày một bản ghi | ✅ Bắt buộc |
 | Huy hiệu | Mới | Bốn loại, mỗi loại tám mốc. **Giá trị mốc chỉ đọc sau khi khởi tạo** (`BR-9.2`). Tên, hình, mô tả sửa được. Công tắc bật tắt từng loại | ✅ Bắt buộc |
 | Huy hiệu đã đạt | Mới | Học viên nào đạt mốc nào, **kèm thời điểm đạt** (`C8`) | ✅ Bắt buộc |
 | Cấu hình hạng | Mới | Ba bội số lên hạng (điểm · số khoá · số huy hiệu), mỗi cái một công tắc, cộng trần hạng. **Không có tên hạng và hình hạng** — hạng là số thứ tự tịnh tiến | ✅ Bắt buộc |
-| **Thành tích của học viên** | Mới | Điểm tích luỹ · hạng hiện tại · thời điểm lên hạng gần nhất. Đây là bảng `US1` và `US12` đọc | ✅ Bắt buộc |
+| **Thành tích của học viên** | Mới | Điểm tích luỹ · hạng hiện tại · thời điểm lên hạng gần nhất · **chuỗi hiện tại, chuỗi dài nhất, ngày có mặt gần nhất**. Đây là bảng `US1` và `US12` đọc | ✅ Bắt buộc |
 | **Bảng xếp hạng tính sẵn** | Mới | Thứ hạng cho năm khoảng ngày của nút bấm nhanh, nhân bốn chỉ số. **Bị ghi đè mỗi chu kỳ 8 tiếng.** Khoảng ngày tự chọn không lưu ở đây, tính lúc chọn (`BR-6.12`) | ✅ Bắt buộc |
 
 > **Ảnh huy hiệu** dùng hạ tầng `resources` sẵn có. Tài nguyên bị xoá thì rơi về **ảnh mặc định** (`BR-1.7`). Hạng không có hình nên không dùng `resources`.
@@ -384,8 +400,14 @@ Học viên chưa có điểm nào vẫn vào được trang. Lúc đó điểm 
 | Thành tích của tôi | Khối tổng quan | Điểm tích luỹ | Số nguyên, phân cách hàng nghìn bằng dấu chấm. Giá trị nhỏ nhất 0, không có số âm. Không kèm đơn vị sau số. Chưa có điểm thì hiện `0`, không hiện trạng thái rỗng |
 | Thành tích của tôi | Khối tổng quan | Hạng hiện tại | **Một con số thứ tự tịnh tiến**, bắt đầu từ `1`. **Không có tên hạng, không có hình hạng.** Học viên mới vào hệ thống ở hạng `1` |
 | Thành tích của tôi | Khối tổng quan | Tiến độ tới hạng kế tiếp | Thanh tiến độ kèm dòng nêu phần còn thiếu của **tiêu chí sắp chạm mốc nhất**. Chạm **trần hạng** rồi thì ẩn cả khối, không hiện thanh đầy |
+| Thành tích của tôi | Khối chuỗi | Chuỗi hiện tại | Số ngày vào hệ thống liên tiếp đang giữ. Chưa vào ngày nào thì hiện `0`. Chi tiết cách tính ở `US5` |
+| Thành tích của tôi | Khối chuỗi | Chuỗi dài nhất | Kỷ lục của chính học viên đó. Không giảm khi chuỗi hiện tại đứt |
+| Thành tích của tôi | Khối chuỗi | Điểm ngày mai | Mức điểm nhận được nếu ngày mai vào. Chạm trần rồi thì hiện mức trần kèm ghi chú đã tối đa |
+| Thành tích của tôi | Khối chuỗi | Dòng nhắc giữ chuỗi | Nói rõ không vào ngày mai là chuỗi về `0`. **Nhắc tĩnh trên trang, không phải thông báo đẩy** |
+| Thành tích của tôi | Khối chuỗi | Khi `Points` tắt | Ẩn cả khối chuỗi. Không còn điểm thì chuỗi mất ý nghĩa |
 | Thành tích của tôi | Cách lên hạng | Rule chung | Ngoài tiêu chí gần nhất, hiện **đầy đủ ba tiêu chí lên hạng đang bật** kèm bội số của từng cái. Ví dụ: `Every 3,000 points` · `Every 5 completed courses` · `Every 5 badges`. Tiêu chí đang tắt thì không hiện |
-| Thành tích của tôi | Cách tính điểm | Rule chung | Hiện **bảng điểm đang áp dụng**: mỗi hành động đang bật được bao nhiêu điểm. Ví dụ: `Daily check-in: 25` · `Activity completion: 25` · `Course completion: 150` · `Successful test: 50`. Hành động đang tắt thì không hiện |
+| Thành tích của tôi | Cách tính điểm | Rule chung | Hiện **bảng điểm đang áp dụng**: mỗi hành động đang bật được bao nhiêu điểm. Ví dụ: `Activity completion: 25` · `Course completion: 150` · `Successful test: 50`. Hành động đang tắt thì không hiện |
+| Thành tích của tôi | Cách tính điểm | Điểm check-in | Khai bằng ba tham số nên không hiện một con số. Hiện dạng bậc thang, ví dụ `Daily check-in: 25, +5 each day, up to 50` |
 | Thành tích của tôi | Cách tính điểm | Trần điểm mỗi ngày | Hiện nếu có đặt trần, ví dụ `Daily cap: 300 points`. Không đặt trần thì không hiện dòng này |
 | Thành tích của tôi | Danh sách huy hiệu | Hình huy hiệu | Ảnh vận hành tải lên ở `US10`. Ảnh gốc bị xoá khỏi kho tài nguyên thì hiện ảnh huy hiệu mặc định, không để trống |
 | Thành tích của tôi | Danh sách huy hiệu | Tên huy hiệu | Hiện dưới hình |
@@ -553,11 +575,11 @@ Học viên cuộn xuống để xem các lần trước đó. Chưa có lần n
 | Lịch sử ghi nhận | Bảng | Trạng thái rỗng | `No activity yet. Start learning to earn your first points.` |
 | Lịch sử ghi nhận | Bảng | Thao tác | Chỉ đọc. Không sửa, không xoá, không có nút thao tác nào trên dòng |
 
-**Sáu loại sự kiện trong lịch sử**
+**Bốn loại sự kiện trong lịch sử**
 
 | `Event` | Khi nào sinh ra | `Detail` gồm gì |
 |---|---|---|
-| `Points earned` | Cộng điểm thành công | Số điểm, mô tả hành động, tên nội dung cụ thể.<br>Ví dụ: `+25 · Completing the unit · Password Safety` |
+| `Points earned` | Cộng điểm thành công | Số điểm, mô tả hành động, tên nội dung cụ thể.<br>Ví dụ: `+25 · Completing the unit · Password Safety`<br>Riêng check-in kèm **ngày thứ mấy của chuỗi**, để học viên đối chiếu được vì sao hôm nay nhiều điểm hơn hôm qua.<br>Ví dụ: `+35 · Daily check-in · Day 3 streak` |
 | `No points` | Xét cộng điểm nhưng không được, do chạm trần trong ngày | Lý do và nội dung. Ví dụ: `Daily limit reached · Completing the unit · Password Safety` |
 | `Badge unlocked` | Đạt huy hiệu | Tên huy hiệu |
 | `Rank up` | Lên hạng | Tên hạng mới |
@@ -713,7 +735,7 @@ Là học viên, tôi cần việc vào hệ thống mỗi ngày được ghi nh
 | Điều kiện | Nguồn |
 |---|---|
 | `Gamification` bật ở cấp tổ chức | `S12` |
-| Vận hành đã bật hành động **vào hệ thống hằng ngày** và khai số điểm cho nó | `US9` |
+| Vận hành đã bật hành động **vào hệ thống hằng ngày** và khai ba tham số điểm chuỗi | `US8` |
 | Tài khoản không phải `Test Account` | `C10` |
 | Tổ chức đã khai tham số **múi giờ** | `C9` · `S21` |
 
@@ -721,11 +743,13 @@ Là học viên, tôi cần việc vào hệ thống mỗi ngày được ghi nh
 
 ### 3/ Scenario
 
-Học viên mở UpLMS. Ở lần đầu tiên trong ngày, hệ thống ghi nhận ngày có mặt và cộng điểm một lần. Thông báo hiện lên theo `US2`.
+Học viên mở UpLMS. Ở lần đầu tiên trong ngày, hệ thống ghi nhận ngày có mặt, tăng chuỗi thêm một, rồi cộng điểm theo độ dài chuỗi mới. Thông báo hiện lên theo `US2`.
 
-Học viên vào lại lần thứ hai, thứ ba trong cùng ngày thì không cộng thêm và không có thông báo.
+Học viên vào lại lần thứ hai, thứ ba trong cùng ngày thì không cộng thêm, không tăng chuỗi, không có thông báo.
 
-Sang ngày mới, tính theo múi giờ tổ chức, lần vào đầu tiên lại được cộng.
+Sang ngày mới, tính theo múi giờ tổ chức, lần vào đầu tiên lại được cộng với mức điểm cao hơn hôm trước, cho tới khi chạm trần.
+
+Học viên bỏ trọn một ngày không vào thì chuỗi về `0`. Lần vào kế tiếp bắt đầu chuỗi mới, điểm quay về mức nền. Điểm đã nhận trong chuỗi cũ vẫn giữ nguyên.
 
 ### 4/ Acceptance criteria
 
@@ -733,21 +757,30 @@ Sang ngày mới, tính theo múi giờ tổ chức, lần vào đầu tiên l�
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Mọi màn UpLMS | Thông báo nhận điểm | Nội dung | Theo mẫu của `US2`. Chuỗi tiếng Anh cho hành động này: `❓BA`. Gợi ý: `+ {điểm} for signing in today` |
-| Thành tích của tôi | Số ngày có mặt | Hiển thị | Số ngày dùng để xét huy hiệu loại Tích cực. Có hiện riêng cho học viên xem không: `❓BA` |
+| Mọi màn UpLMS | Thông báo nhận điểm | Nội dung | Theo mẫu của `US2`, kèm độ dài chuỗi sau khi tăng. Chuỗi tiếng Anh: `❓BA`. Gợi ý: `+ {điểm} · {n}-day streak` |
+| Thành tích của tôi | Khối chuỗi | Chuỗi hiện tại | Số ngày liên tiếp đang giữ. Chưa vào ngày nào thì hiện `0` |
+| Thành tích của tôi | Khối chuỗi | Chuỗi dài nhất | Kỷ lục của chính học viên đó. Giá trị này không giảm, kể cả khi chuỗi hiện tại đứt |
+| Thành tích của tôi | Khối chuỗi | Điểm ngày mai | Mức điểm nhận được nếu ngày mai vào. Đã chạm trần thì hiện mức trần kèm ghi chú đã đạt tối đa |
+| Thành tích của tôi | Khối chuỗi | Dòng nhắc giữ chuỗi | Nói rõ **không vào ngày mai là chuỗi về `0`**. Đây là nhắc tĩnh trên trang, không phải thông báo đẩy. Câu tiếng Anh: `❓BA` |
+| Thành tích của tôi | Số ngày có mặt | Hiển thị | Tổng số ngày có mặt, dùng để xét huy hiệu loại Tích cực. Khác với chuỗi: con số này **không về `0`** khi nghỉ |
 | Toàn hệ thống | Thao tác của học viên | | **Không có thao tác nào.** Học viên không bấm nút check-in. Hệ thống tự ghi khi thấy học viên vào |
 
 **Business requirement — Business rule**
 
-- `BR-5.1` Mỗi ngày ghi nhận **một lần duy nhất**, ở lần đầu tiên học viên vào hệ thống trong ngày đó. Vào nhiều lần không cộng thêm.
+- `BR-5.1` Mỗi ngày ghi nhận **một lần duy nhất**, ở lần đầu tiên học viên vào hệ thống trong ngày đó. Vào nhiều lần trong ngày không cộng thêm điểm và không tăng chuỗi.
 - `BR-5.2` **Không có thao tác check-in thủ công.** Học viên không bấm gì. Hệ thống ghi nhận khi thấy học viên có mặt.
-- `BR-5.3` **"Ngày" cắt theo múi giờ tổ chức**, cùng quy tắc với biên kỳ (`C6`) và với trần điểm mỗi ngày (`C9`). Không dùng giờ máy chủ và không dùng múi giờ của thiết bị học viên.
-- `BR-5.4` **Không có khái niệm chuỗi ngày liên tiếp.** Học viên nghỉ một ngày rồi vào lại thì vẫn được điểm bình thường, không mất gì.
-- `BR-5.5` Điểm của hành động này **tính vào trần điểm mỗi ngày** như mọi hành động khác.
-- `BR-5.6` Ghi nhận ngày có mặt nằm trong cùng thao tác với việc học viên vào hệ thống. Lỗi ở đây **không được chặn học viên vào hệ thống**, theo `NFR-GAM-01`.
-- `BR-5.7` `Gamification` tắt thì **không ghi nhận gì**. Bật lại chỉ tính từ thời điểm bật, không dựng lại những ngày đã qua.
-- `BR-5.8` `Visibility in UpLMS` tắt thì **vẫn ghi nhận và vẫn cộng điểm**, chỉ không hiện và không thông báo.
-- `BR-5.9` Tài khoản có `Test Account = Yes` không được ghi nhận ngày có mặt.
+- `BR-5.3` **"Ngày" cắt theo múi giờ tổ chức**, cùng quy tắc với trần điểm mỗi ngày (`C9`). Không dùng giờ máy chủ và không dùng múi giờ của thiết bị học viên.
+- `BR-5.4` **Điểm tăng dần theo độ dài chuỗi.** Gọi `n` là ngày thứ mấy của chuỗi đang giữ:<br>`điểm = min( điểm nền + (n − 1) × bước tăng , trần điểm chuỗi )`<br>Ba tham số do vận hành khai ở `US8`.
+- `BR-5.5` **Chuỗi tăng thêm một mỗi ngày có mặt.** Ngày mở đầu một chuỗi có `n = 1` và nhận đúng mức điểm nền.
+- `BR-5.6` **Bỏ trọn một ngày thì chuỗi về `0`.** Lần vào kế tiếp mở chuỗi mới từ `n = 1`. Hệ thống đếm **mọi ngày dương lịch**, nên thứ bảy, chủ nhật, ngày lễ và ngày nghỉ phép đều làm đứt chuỗi nếu học viên không vào.
+- `BR-5.7` **Đứt chuỗi không thu hồi điểm đã nhận.** Điểm nằm lại trong sổ giao dịch, chuỗi về `0` chỉ ảnh hưởng mức điểm của những ngày sau.
+- `BR-5.8` Hệ thống lưu **chuỗi dài nhất từng đạt** của mỗi học viên. Giá trị này chỉ tăng, không bao giờ giảm.
+- `BR-5.9` Đổi ba tham số ở `US8` **chỉ áp dụng từ thời điểm đổi** (`C4`). Chuỗi đang giữ không bị cắt và không bị tính lại; ngày kế tiếp dùng tham số mới với đúng `n` hiện có.
+- `BR-5.10` Điểm của hành động này **tính vào trần điểm mỗi ngày** như mọi hành động khác. Chạm trần thì ghi vào lịch sử với `0` điểm kèm lý do, nhưng **chuỗi vẫn tăng** vì chuỗi đo việc có mặt chứ không đo điểm.
+- `BR-5.11` Ghi nhận ngày có mặt nằm trong cùng thao tác với việc học viên vào hệ thống. Lỗi ở đây **không được chặn học viên vào hệ thống**, theo `NFR-GAM-01`.
+- `BR-5.12` `Gamification` tắt thì **không ghi nhận gì**. Bật lại chỉ tính từ thời điểm bật: chuỗi mở lại từ `n = 1`, không dựng lại những ngày đã qua.
+- `BR-5.13` `Visibility in UpLMS` tắt thì **vẫn ghi nhận, vẫn cộng điểm, vẫn tăng chuỗi**, chỉ không hiện và không thông báo.
+- `BR-5.14` Tài khoản có `Test Account = Yes` không được ghi nhận ngày có mặt và không có chuỗi.
 
 **Data Field**
 
@@ -759,20 +792,35 @@ Sang ngày mới, tính theo múi giờ tổ chức, lần vào đầu tiên l�
 
 Một học viên một ngày chỉ có **một bản ghi**. Đây cũng là cách chặn cộng điểm hai lần khi học viên mở hai thiết bị cùng lúc, xử lý luôn `CG-7`.
 
-Số ngày có mặt dùng ở hai nơi: hành động tính điểm này, và **huy hiệu loại Tích cực** (`US4`, `US10`).
+Số ngày có mặt dùng ở hai nơi: hành động tính điểm này, và **huy hiệu loại Tích cực** (`US4`, `US9`).
+
+Trạng thái chuỗi **không lưu ở bảng này** mà lưu ở `Thành tích của học viên`, vì nó là trạng thái của một người chứ không phải của một ngày:
+
+| Field | Kiểu | Bắt buộc | Giá trị hợp lệ | Ghi chú |
+|---|---|---|---|---|
+| Chuỗi hiện tại | Số nguyên | Có | `>= 0` | Mới. `0` nghĩa là chưa có chuỗi hoặc vừa đứt |
+| Chuỗi dài nhất | Số nguyên | Có | `>= 0` | Mới. Chỉ tăng |
+| Ngày có mặt gần nhất | Ngày | Không | Cắt theo múi giờ tổ chức | Mới. Dùng để biết chuỗi đã đứt chưa |
+
+Bảng `Ngày có mặt của học viên` giữ nguyên cấu trúc. Nó vẫn là nguồn để dựng lại chuỗi khi cần đối chiếu.
 
 **NFR**
 
 Việc ghi nhận chạy ở lần vào đầu tiên trong ngày. Những lần vào sau trong cùng ngày không được tạo thêm thao tác ghi.
 
+Việc xác định chuỗi đã đứt hay chưa đọc từ `Ngày có mặt gần nhất`, không quét lại bảng `Ngày có mặt của học viên`.
+
 ### 5/ Out of scope
 
 | Không làm ở US này | Lý do |
 |---|---|
-| Chuỗi ngày liên tiếp, và thưởng thêm cho chuỗi dài | PO chốt bỏ. Đã cân nhắc và loại ở BRD `v0.4` |
+| Miễn trừ thứ bảy, chủ nhật, ngày lễ và nghỉ phép khỏi việc đứt chuỗi | `BR-5.6` đếm mọi ngày dương lịch. PO chốt ở `CR-009` sau khi cân nhắc phương án theo lịch làm việc |
+| Quỹ bảo vệ chuỗi, cho phép vắng vài ngày mỗi tháng mà không đứt | Đã nêu ở `CR-009`, PO không chọn |
+| Thông báo đẩy cảnh báo sắp đứt chuỗi | `BR-2.1` chỉ đẩy thông báo khi học viên **đang mở UpLMS**. Người sắp đứt chuỗi theo định nghĩa là người không vào, nên sẽ không bao giờ nhận được. Thay bằng dòng nhắc tĩnh trên trang Thành tích |
+| Huy hiệu trao theo độ dài chuỗi | Chưa yêu cầu. Huy hiệu loại Tích cực vẫn đo tổng số ngày có mặt |
 | Nút check-in cho học viên tự bấm | `BR-5.2`. Vào hệ thống là đủ |
 | Lấy dữ liệu từ sự kiện đăng nhập của Keycloak | Học viên dùng SSO Lark, phiên sống nhiều ngày nên có thể không sinh sự kiện đăng nhập mới. Người chăm nhất lại là người ít sinh sự kiện nhất |
-| Dựng lại số ngày có mặt trước khi bật tính năng | `BR-5.7`. Không tính bù |
+| Dựng lại số ngày có mặt trước khi bật tính năng | `BR-5.12`. Không tính bù, và chuỗi cũng mở lại từ đầu |
 | Phân biệt vào hệ thống bằng máy tính hay điện thoại | Chưa yêu cầu |
 
 ### 6/ Conner case
@@ -1001,7 +1049,11 @@ Sửa xong thì lưu. Cấu hình mới áp dụng cho các lần cộng điểm
 |---|---|---|---|
 | Cấu hình điểm | Đầu màn | Công tắc `Points` | Bật tắt cả cơ chế điểm. Tắt thì mọi hành động bên dưới **chuyển sang trạng thái không thao tác được**, nhưng giữ nguyên giá trị đã khai |
 | Cấu hình điểm | Đầu màn | Mô tả chức năng | `Award users with points for different learning activities and encourage healthy competition.` |
-| Cấu hình điểm | Danh sách hành động | `On each daily check-in` | Công tắc riêng + ô nhập số điểm. Ứng với `US5` |
+| Cấu hình điểm | Danh sách hành động | `On each daily check-in` | Công tắc riêng. **Không có ô nhập một số điểm** như ba hành động kia, mà có ba ô của bảng điểm chuỗi ngay dưới. Ứng với `US5` |
+| Cấu hình điểm | Điểm chuỗi check-in | `Điểm nền` | Số điểm của ngày đầu tiên trong một chuỗi. Số nguyên dương, nhỏ nhất `1` |
+| Cấu hình điểm | Điểm chuỗi check-in | `Bước tăng` | Mỗi ngày giữ được chuỗi thì cộng thêm bấy nhiêu điểm. Số nguyên `>= 0`. Đặt `0` nghĩa là điểm cố định, chuỗi không làm tăng điểm |
+| Cấu hình điểm | Điểm chuỗi check-in | `Trần điểm chuỗi` | Mức cao nhất một ngày check-in có thể đạt, dù chuỗi dài tới đâu. Phải `>=` điểm nền. Bỏ trống nghĩa là không chặn |
+| Cấu hình điểm | Điểm chuỗi check-in | Bảng xem trước | Hiện mức điểm của bảy ngày đầu theo ba tham số vừa nhập, cập nhật ngay khi gõ. Giúp vận hành thấy ngay bảng điểm trước khi lưu |
 | Cấu hình điểm | Danh sách hành động | `On each activity completion` | Công tắc riêng + ô nhập số điểm |
 | Cấu hình điểm | Danh sách hành động | `On each course completion` | Công tắc riêng + ô nhập số điểm |
 | Cấu hình điểm | Danh sách hành động | `On each successful test completion` | Công tắc riêng + ô nhập số điểm. **Chỉ tính bài Test đạt**, theo `BR-TEST` |
@@ -1021,6 +1073,10 @@ Sửa xong thì lưu. Cấu hình mới áp dụng cho các lần cộng điểm
 - `BR-8.3` Tắt một hành động riêng lẻ thì chỉ hành động đó ngừng sinh điểm. Ba hành động còn lại chạy bình thường.
 - `BR-8.4` Đổi số điểm của một hành động thì **áp dụng từ thời điểm lưu trở đi**. Các lần cộng điểm trước đó **giữ nguyên số điểm đã ghi** trong lịch sử, theo `C4`.
 - `BR-8.5` Số điểm là **số nguyên dương**, nhỏ nhất `1`. Muốn một hành động không sinh điểm thì **tắt công tắc**, không đặt giá trị `0`.
+- `BR-8.5a` Check-in hằng ngày khai bằng **ba tham số** thay vì một số điểm: điểm nền, bước tăng, trần điểm chuỗi. Công thức tính nằm ở `BR-5.4`.
+- `BR-8.5b` **Bước tăng nhận giá trị `0`**, khác với ô điểm của ba hành động kia. Đặt `0` là cách quay về mức điểm cố định mà không phải tắt cả hành động.
+- `BR-8.5c` **Trần điểm chuỗi phải lớn hơn hoặc bằng điểm nền.** Nhỏ hơn thì không lưu được, báo lỗi ngay tại ô.
+- `BR-8.5d` Đổi ba tham số này **không cắt chuỗi của học viên nào**. Chuỗi đang giữ chạy tiếp, ngày kế tiếp tính theo tham số mới (`BR-5.9`).
 - `BR-8.6` **Trần điểm mỗi ngày** áp cho tổng điểm một học viên nhận trong một ngày, cắt theo **múi giờ tổ chức** (`C9`). Chạm trần rồi thì các lần xét tiếp theo trong ngày ghi vào lịch sử với `0` điểm kèm lý do, theo `BR-3.2`.
 - `BR-8.7` Trần điểm nhỏ hơn số điểm của một hành động đang bật là **cấu hình hợp lệ nhưng đáng ngờ** — học viên làm việc đó một lần là chạm trần ngay. Cảnh báo trước khi lưu, không chặn.
 - `BR-8.8` Mọi giá trị trên màn này **gắn với tổ chức** (`C1`), không đóng cứng trong mã.
@@ -1442,7 +1498,7 @@ flowchart TD
     T2 -->|"Bật"| T3{"Hành động này<br/>bật tính điểm?"}
     T3 -->|"Tắt"| X3["Không cộng điểm"]
     T3 -->|"Bật"| T4{"Đã cộng điểm<br/>nội dung này<br/>trong lượt học này?"}
-    T4 -->|"Rồi"| X4["Không cộng lại<br/>khử trùng theo C5"]
+    T4 -->|"Rồi"| X4["Không cộng lại<br/>chống cộng trùng theo C5"]
     T4 -->|"Chưa"| T5{"Chạm trần<br/>điểm trong ngày?"}
     T5 -->|"Chạm trần"| X5["Ghi vào lịch sử với<br/>0 điểm, kèm lý do"]
     T5 -->|"Chưa"| W["Cộng điểm<br/>ghi sổ giao dịch"]
@@ -1488,16 +1544,16 @@ Không có màn hình riêng. Ba chỗ US này lộ ra với người dùng:
 
 **Bốn cửa kiểm trước khi cộng điểm**
 
-- `BR-13.1` **Khử trùng nội dung.** Mỗi nội dung chỉ trả điểm **một lần trong một lượt ghi danh**. Học viên mở lại hoạt động đã hoàn thành thì không cộng thêm.
+- `BR-13.1` **Chống cộng trùng nội dung.** Mỗi nội dung chỉ trả điểm **một lần trong một lượt ghi danh**. Học viên mở lại hoạt động đã hoàn thành thì không cộng thêm.
 - `BR-13.2` **Chỉ cộng khi chuyển trạng thái.** Điểm chỉ sinh ra khi bản ghi tiến độ **chuyển từ chưa hoàn thành sang hoàn thành**, và chỉ tính các lần chuyển xảy ra **từ thời điểm bật tính năng trở đi**.
-  > Đây là rule thay cho việc phải nạp sẵn dữ liệu khử trùng khi ra mắt. Nội dung học viên đã hoàn thành từ trước không chuyển trạng thái nữa nên không phát sinh điểm, kể cả khi họ mở lại vào ngày đầu tiên.
+  > Đây là rule thay cho việc phải nạp sẵn dữ liệu chống cộng trùng khi ra mắt. Nội dung học viên đã hoàn thành từ trước không chuyển trạng thái nữa nên không phát sinh điểm, kể cả khi họ mở lại vào ngày đầu tiên.
 - `BR-13.3` **Trần điểm mỗi ngày.** Tổng điểm một học viên nhận trong một ngày không vượt quá trần đặt ở `US8`. Ngày cắt theo **múi giờ tổ chức** (`C9`).
 - `BR-13.4` **Loại trừ tài khoản kiểm thử.** Tài khoản có `Test Account = Yes` không phát sinh điểm, và **lọc ngay từ tầng ghi nhận**, không ghi rồi lọc sau. Theo `C10`.
 
 **Chống cộng trùng khi thao tác song song**
 
 - `BR-13.5` Học viên mở hai thiết bị hoặc hai tab và hoàn thành cùng một hoạt động gần như đồng thời thì **chỉ cộng điểm một lần**. Việc kiểm và ghi phải là một thao tác không tách rời.
-  > Điểm cộng ngay trong luồng (`Option C`) nên hai thao tác song song đều có thể chạy tới bước cộng điểm cùng lúc. Nếu chỉ dựa vào khử trùng ở `BR-13.1` thì cả hai đều thấy "chưa trả điểm" và cùng cộng.
+  > Điểm cộng ngay trong luồng (`Option C`) nên hai thao tác song song đều có thể chạy tới bước cộng điểm cùng lúc. Nếu chỉ dựa vào chống cộng trùng ở `BR-13.1` thì cả hai đều thấy "chưa trả điểm" và cùng cộng.
 - `BR-13.6` Với **điểm khi vào hệ thống hằng ngày**, ràng buộc một học viên một ngày một bản ghi ở `US5` đã tự chặn trùng. Không cần cơ chế thêm.
 
 **Khi cộng điểm gặp lỗi**
@@ -1508,7 +1564,7 @@ Không có màn hình riêng. Ba chỗ US này lộ ra với người dùng:
 **Những gì KHÔNG chặn, có chủ đích**
 
 - `BR-13.9` Hoạt động chỉ có **Text hoặc Ảnh** được tính hoàn thành ngay khi mở hiển thị, theo `KB-LX-03b`. Học viên bấm lướt vẫn nhận điểm. **Không làm cơ chế chống cày riêng cho loại này.**
-  > Rủi ro chấp nhận có chủ đích. Thiệt hại bị chặn bởi hai lớp: khử trùng khiến mỗi nội dung chỉ trả điểm một lần, và trần ngày chặn việc dồn toàn bộ trong một buổi. Hoạt động chứa Video đã chặt sẵn vì phải xem đủ 80% thời lượng (`KB-LX-03a`).
+  > Rủi ro chấp nhận có chủ đích. Thiệt hại bị chặn bởi hai lớp: chống cộng trùng khiến mỗi nội dung chỉ trả điểm một lần, và trần ngày chặn việc dồn toàn bộ trong một buổi. Hoạt động chứa Video đã chặt sẵn vì phải xem đủ 80% thời lượng (`KB-LX-03a`).
 - `BR-13.10` **Học viên bị xoá khỏi lớp rồi thêm lại thì lượt học mới được tính điểm mới**, cho cả hoàn thành hoạt động lẫn hoàn thành khoá. Coi như một khoá mới.
 
   Vận hành thêm lại học viên vào lớp thì chọn **ghi nhận đã xong khoá** hoặc **học lại từ đầu**. Chọn ghi nhận đã xong thì không có tiến độ nào chuyển trạng thái, nên **không phát sinh điểm nào**.
@@ -1529,7 +1585,7 @@ Không có field mới. US này dùng ba thứ đã khai ở nơi khác:
 
 | Cần gì | Ở đâu |
 |---|---|
-| Dấu nội dung đã tính điểm | Bảng khử trùng, `US3` |
+| Dấu nội dung đã tính điểm | Bảng chống cộng trùng, `US3` |
 | Trần điểm mỗi ngày | Cấu hình điểm, `US8` |
 | Tổng điểm đã nhận trong ngày | Tính từ sổ giao dịch điểm theo ngày, `US3` |
 
@@ -1734,7 +1790,7 @@ Không có yêu cầu riêng. Theo chuẩn của hệ phân quyền hiện có.
 | **OQ-18** | Lịch sử điểm có cần **lọc theo khoảng ngày hoặc theo loại hành động** không? Hiện tôi để ngoài phạm vi | PO | `US3` |
 | **OQ-19** | Số dòng mỗi trang của lịch sử điểm | PO | `US3` |
 | ~~OQ-20~~ | ✅ **Đã chốt 23/09: hạ ngưỡng thì quét lại cấp bù, nâng ngưỡng thì gỡ huy hiệu.** Xem `BR-4.6`, `BR-4.7` | PO | — |
-| ~~OQ-22~~ | ✅ **Đã chốt 23/09: không báo khi gỡ huy hiệu.** Hiện ở lịch sử là đủ. Xem `BR-3.0` và sự kiện `Badge removed` | PO | — |
+| ~~OQ-22~~ | ✅ **Đã chốt 23/09: không báo khi gỡ huy hiệu.** Sau `CR-008` thì tình huống này không còn phát sinh — mốc huy hiệu khoá sau khi tạo nên không có thao tác gỡ, và lịch sử cũng không có sự kiện `Badge removed`. Xem `BR-1.4` | PO | — |
 | ~~OQ-23~~ | ✅ **Đã chốt 23/09: hạng KHÔNG tụt.** Đổi ngưỡng hạng chỉ áp từ thời điểm đổi trở đi. Khác với huy hiệu, cố ý. Xem `BR-1.3` | PO | — |
 | ~~OQ-21~~ | ✅ **Đã làm rõ 23/09: chứng chỉ cấp theo KHOÁ, không theo lượt ghi danh.** Một học viên một chứng chỉ cho một khoá, học lại không cấp thêm. Xem `BR-13.12`. *(Còn lại một chi tiết cho Dev: endpoint đếm chứng chỉ đã loại khoá bỏ qua theo `BR-SKIP` chưa — kiểm lúc làm.)* | PO | — |
 | ~~OQ-25~~ | ✅ **Đã chốt 23/09: vẫn hiện, nhưng cột thứ hạng để trống.** Xem `BR-6.6` | PO | — |

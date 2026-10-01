@@ -90,7 +90,7 @@ Hệ thống hiện tại **chỉ ghi nhận việc học, không phản hồi l
 | S5 | **Bốn loại điều kiện huy hiệu**: số lượng hoàn thành · chuỗi ngày liên tiếp · mốc thời gian · hoàn thành một nội dung cụ thể |
 | S6 | **Hạng người học** — tên, hình, ngưỡng điểm |
 | S7 | **Hai loại điểm tách nhau**: điểm tích luỹ vĩnh viễn (xét hạng) và điểm theo kỳ (xếp hạng) |
-| S8 | **Chống cày điểm** — khử trùng nội dung đã hoàn thành, trần điểm tối đa mỗi ngày |
+| S8 | **Chống cày điểm** — chống cộng trùng nội dung đã hoàn thành, trần điểm tối đa mỗi ngày |
 | S9 | **Lịch sử điểm** — học viên tra được từng lần cộng đến từ đâu |
 | S10 | **Thông báo thành tích** — nhận điểm, nhận huy hiệu, lên hạng |
 | S11 | **Trang "Thành tích của tôi"** — điểm, hạng, huy hiệu đã có, huy hiệu sắp đạt kèm phần còn thiếu |
@@ -111,7 +111,7 @@ Hệ thống hiện tại **chỉ ghi nhận việc học, không phản hồi l
 | # | Không làm | Vì sao |
 |---|---|---|
 | **N1** | 🔄 **Bộ lọc bảng xếp hạng theo nhóm** — gồm cả **theo lớp** và **theo phòng ban** | PO chốt gộp làm một hạng mục hoãn. Làm riêng cho lớp bây giờ thì trùng mục đích với bộ lọc theo nhóm sau này, phải làm lại. Phòng ban = chức năng nhóm, **đồng bộ từ HRM** — chưa làm |
-| **N2** | 🔄 **Chống cày riêng cho hoạt động chỉ có Text/Ảnh** | PO chốt không cần. Khử trùng (`C5`) và trần điểm/ngày (`S8`) vẫn áp cho mọi loại hoạt động |
+| **N2** | 🔄 **Chống cày riêng cho hoạt động chỉ có Text/Ảnh** | PO chốt không cần. Chống cộng trùng (`C5`) và trần điểm/ngày (`S8`) vẫn áp cho mọi loại hoạt động |
 | N3 | **Giới hạn nội dung được tính trong chiến dịch** | PO không yêu cầu — xem `CR-002`, tôi từng hỏi nhầm hướng |
 | N4 | **Tính năng Lộ trình học** và hành động "hoàn thành lộ trình" | Tính năng riêng, làm sau |
 | N5 | **Tính năng Khung năng lực / Skills** và điều kiện huy hiệu "đạt kỹ năng" | Tính năng riêng, làm sau |
@@ -165,7 +165,7 @@ Cả hai đều bị chốt và đóng băng khi hết kỳ (S19), đều xem l�
 | **C2** | **Danh mục hành động tính điểm, danh mục điều kiện huy hiệu, và danh mục chỉ số xếp hạng phải mở rộng được bằng cấu hình** | Lộ trình (N4), kỹ năng (N5), bộ lọc nhóm (N1), giới hạn nội dung (N3) đều sẽ thêm sau |
 | **C3** | Lưu **từng lần cộng điểm kèm thời điểm**, không chỉ lưu tổng | Nền của lịch sử điểm (S9), xếp hạng theo kỳ (C7), tiêu chí phụ khi đồng hạng (S22), và luật chống cày |
 | **C4** | Đổi cấu hình điểm → **áp dụng từ thời điểm đổi** | PO chốt |
-| **C5** | Khử trùng "đã học" tính theo **người học**, không theo lượt ghi danh lớp | Học viên có thể học cùng nội dung qua nhiều lớp |
+| **C5** | Chống cộng trùng "đã học" tính theo **người học**, không theo lượt ghi danh lớp | Học viên có thể học cùng nội dung qua nhiều lớp |
 | **C6** | **Biên kỳ cắt theo múi giờ của tổ chức**, không theo giờ máy chủ | Module Tenant (`TNT.CFG.02`) chưa có → đợt này khai một tham số múi giờ cấp tổ chức, thiết kế để module Tenant sau tiếp quản |
 | **C7** | **Một lần cộng điểm thuộc về nhiều kỳ cùng lúc** → điểm theo kỳ **tính từ sổ giao dịch theo khoảng ngày**. **Nhưng kết quả cuối kỳ phải được lưu cứng** | Kỳ lịch lồng nhau (tuần ⊂ tháng ⊂ quý ⊂ năm) và chiến dịch chạy song song |
 | **C8** 🆕 | **Mọi mốc dùng để xếp hạng phải lưu được thời điểm đạt** — không chỉ điểm, mà cả **thời điểm đạt huy hiệu** và **thời điểm hoàn thành khoá** | S16 cho phép xếp theo huy hiệu và theo số khoá; S22 cần thời điểm đạt để phá đồng hạng. `OQ-B12` |
@@ -200,10 +200,10 @@ Hai cơ chế chung vẫn áp cho mọi loại hoạt động:
 
 | Cơ chế | Tác dụng |
 |---|---|
-| **Khử trùng nội dung đã hoàn thành** (`C5`) | Mỗi nội dung chỉ trả điểm **một lần duy nhất trong đời**, kể cả khi học lại qua lớp khác |
+| **Chống cộng trùng nội dung đã hoàn thành** (`C5`) | Mỗi nội dung chỉ trả điểm **một lần duy nhất trong đời**, kể cả khi học lại qua lớp khác |
 | **Trần điểm tối đa mỗi ngày** (`S8`) | Chặn việc dồn toàn bộ trong một buổi để vượt lên trong chiến dịch |
 
-> **Rủi ro chấp nhận có chủ đích:** `KB-LX-03b` — hoạt động chỉ có Text/Ảnh vẫn được tính hoàn thành ngay khi mở hiển thị. Học viên bấm lướt vẫn nhận điểm. Khử trùng giới hạn thiệt hại ở đúng một lần cho mỗi nội dung.
+> **Rủi ro chấp nhận có chủ đích:** `KB-LX-03b` — hoạt động chỉ có Text/Ảnh vẫn được tính hoàn thành ngay khi mở hiển thị. Học viên bấm lướt vẫn nhận điểm. Chống cộng trùng giới hạn thiệt hại ở đúng một lần cho mỗi nội dung.
 
 ## 6.6 ✅ Quyết định 3 — Chỉ số xếp hạng của chiến dịch *(đã chốt, có hệ quả)*
 

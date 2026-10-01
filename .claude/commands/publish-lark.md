@@ -83,10 +83,26 @@ Quy tắc **fidelity 1:1** — không tóm tắt, không gộp section, không l
 
 Sơ đồ sống trong file `.md` dưới dạng khối ` ```mermaid `, **đặt sẵn đúng vị trí từ lúc soạn ở Bước 9**, không phải vẽ thêm sau khi publish. File nguồn là bản duy nhất; người dùng duyệt đúng thứ sẽ lên Lark.
 
-**Lark không tự dựng ` ```mermaid `** — import xong nó ra code block `Plaintext`. Phải chạy bước đổi:
+**Cách đẩy quyết định sơ đồ có dựng được hay không.** Đã đo cả hai:
+
+| Cách đẩy | Mermaid thành gì |
+|---|---|
+| `lark-cli docs +create --doc-format markdown` | ✅ **Bảng trắng, tự động.** Không cần làm gì thêm |
+| `drive/v1/files/upload_all` → `drive/v1/import_tasks` | ❌ Code block `Plaintext`. Phải chạy bước vá bên dưới |
+
+Dùng cách thứ nhất:
 
 ```bash
 export PATH="$HOME/.local/node/bin:$PATH"
+cat <file.md> | lark-cli docs +create --doc-format markdown \
+  --title "<tên tài liệu>" --parent-token <wiki_node_token> --content - --as user
+```
+
+`--parent-token` nhận thẳng **wiki node token**, nên tài liệu vào đúng chỗ trong Wiki mà không cần bước `move_docs_to_wiki` riêng.
+
+Lỡ đẩy bằng cách thứ hai thì vá:
+
+```bash
 python3 .claude/scripts/lark-mermaid-to-whiteboard.py <doc_token>
 ```
 

@@ -1,8 +1,8 @@
 # Project Context
 
 **Project:** Gamification
-**Ngày tạo:** 23/09/2026 · **Cập nhật:** 23/09/2026, sau khi publish lên Lark
-**Trạng thái:** ✅ **Xong 9 bước.** PRD v0.2 đủ `US1`–`US15`, Gate 4 `Approved with Notes` 23/09/2026, đã publish lên Lark
+**Ngày tạo:** 23/09/2026 · **Cập nhật:** 01/10/2026, sau `CR-009`
+**Trạng thái:** 🔄 **Đang áp `CR-009`** vào PRD v0.3 (điểm check-in tăng dần theo chuỗi). Bản v0.2 đã duyệt và đã publish lên Lark
 **Cỡ yêu cầu:** **L** — đủ 9 bước, đủ 4 Gate
 
 > ⚠️ **File này đã được viết lại toàn bộ sau `CR-007`.** Bản trước viết ở Bước 2 và lệch khá xa sau bảy change request. Nếu thấy mâu thuẫn với tài liệu khác, tin file này và `change-requests.md`.
@@ -39,11 +39,11 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 |---|---|
 | **Cơ chế điểm** | Khai hành động nào được bao nhiêu điểm, bật/tắt từng hành động |
 | **Ba hành động học** | Hoàn thành hoạt động · hoàn thành khoá · hoàn thành bài Test theo `BR-TEST` |
-| **Vào hệ thống hằng ngày** | Mỗi ngày vào hệ thống được điểm một lần, kiểu check-in. Không có chuỗi ngày liên tiếp |
+| **Vào hệ thống hằng ngày** | Mỗi ngày vào hệ thống được điểm một lần. **Điểm tăng dần theo chuỗi ngày liên tiếp** (`CR-009`): điểm nền, bước tăng, trần. Bỏ trọn một ngày thì chuỗi về `0`, đếm mọi ngày dương lịch nên nghỉ cuối tuần cũng đứt |
 | **Huy hiệu** | Bốn loại đo bằng chỉ số đếm: Tích cực (số ngày có mặt) · Học tập (số hoạt động) · Test (số bài Test) · Course (số khoá).<br>**Mốc khoá sau khi tạo. Không có thao tác xoá huy hiệu.** Huy hiệu đã nhận không bị lấy lại bởi việc đổi cấu hình |
 | **Bật/tắt huy hiệu** | Tắt được **cả chức năng huy hiệu**, và tắt được **từng huy hiệu riêng**. Tắt thì không hiện nữa nhưng **dữ liệu giữ nguyên**, bật lại là hiện lại đầy đủ |
 | **Hạng** | Ngưỡng theo ba chỉ số: điểm · huy hiệu · số khoá. **Logic HOẶC** — đạt mốc nào trước thì lên hạng. Hạng **không tụt** |
-| **Chống cày điểm** | Trần điểm mỗi ngày · khử trùng nội dung đã hoàn thành trong một lượt ghi danh |
+| **Chống cày điểm** | Trần điểm mỗi ngày · chống cộng trùng nội dung đã hoàn thành trong một lượt ghi danh |
 | **Lịch sử ghi nhận** | Điểm, huy hiệu, lên hạng. **Giữ toàn bộ, không dọn** |
 | **Thông báo thành tích** | Chỉ đẩy trong hệ thống khi học viên đang online. Không gửi mail, không gộp |
 | **Trang Thành tích của tôi** | Điểm · hạng · toàn bộ huy hiệu kèm mốc và tiến độ |
@@ -93,7 +93,7 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 | `C2` | Mọi danh mục mở rộng được bằng cấu hình |
 | `C3` | Lưu **từng lần cộng điểm kèm thời điểm**, không chỉ lưu tổng |
 | `C4` | Đổi cấu hình → **áp dụng từ thời điểm đổi**, không tính lại quá khứ. Áp cho cả điểm, huy hiệu và hạng |
-| `C5` | Khử trùng trong phạm vi **một lượt ghi danh**. Chỉ cộng điểm khi bản ghi tiến độ **chuyển trạng thái** sang hoàn thành |
+| `C5` | Chống cộng trùng trong phạm vi **một lượt ghi danh**. Chỉ cộng điểm khi bản ghi tiến độ **chuyển trạng thái** sang hoàn thành |
 | `C6` `C9` | Biên ngày và biên khoảng cắt theo **múi giờ tổ chức** |
 | `C7` | Một lần cộng điểm thuộc **mọi khoảng ngày bao trùm nó** |
 | `C8` | Mọi mốc dùng để xếp hạng phải lưu **thời điểm đạt** |
@@ -117,11 +117,11 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 | Loại | Nguồn |
 |---|---|
 | Yêu cầu gốc | `working/raw-inputs/yeu-cau-goc-20260923.md` |
-| **Change requests** | `working/raw-inputs/change-requests.md` — **CR-001 đến CR-007** |
+| **Change requests** | `working/raw-inputs/change-requests.md` — **CR-001 đến CR-009** |
 | BRD | `docs/brd/brd-v0.6-20260923.md` — ⚠️ có dấu CR-007 ở đầu, một số mục hết hiệu lực |
 | Impact Matrix | `working/impact-analysis/impact-matrix-v0.2-20260923.md` — ⚠️ tương tự |
 | Solution | `working/solution-options/solution-comparison-v0.1-20260923.md` — ⚠️ tương tự |
-| **PRD** | `docs/prd/prd-gamification-v0.2-20260923.md` — **trạng thái đúng nhất** |
+| **PRD** | `docs/prd/prd-gamification-v0.3-20261001.md` — **trạng thái đúng nhất**, đang mang `CR-009` |
 | Quyết định | `project-decisions.md` |
 | KB chính | `03-assessment.md` (`BR-TEST`) · `06-user-account.md` §8b (`Test Account`) · `07-learning-experience.md` · `12-data-model.md` · `14-api-surface.md` · `15-product-direction.md` |
 | Schema DB | [Lark → Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd) |
@@ -138,11 +138,14 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 
 | Artifact | Node token | URL | Lần publish gần nhất |
 |---|---|---|---|
-| `[PRD] Gamification v0.2` | `J4NGwHIlmijgZBkqxpWlNS4qgxe` | https://upbasevn.sg.larksuite.com/wiki/J4NGwHIlmijgZBkqxpWlNS4qgxe | 24/09/2026 |
+| `[PRD] Gamification v0.3` | `XKOMwSFSliYoSkkAKE4lWR0Gg3b` | https://upbasevn.sg.larksuite.com/wiki/XKOMwSFSliYoSkkAKE4lWR0Gg3b | 01/10/2026 |
+| `[PRD] Gamification v0.2` | `J4NGwHIlmijgZBkqxpWlNS4qgxe` | https://upbasevn.sg.larksuite.com/wiki/J4NGwHIlmijgZBkqxpWlNS4qgxe | 24/09/2026 · bản đã duyệt Gate 4, giữ để đối chiếu |
 
 > Publish lại thì **ghi đè vào đúng node trên**, đừng import file mới — import mới sinh node khác và người đọc sẽ giữ link cũ.
 >
-> **5 sơ đồ nằm trong chính file `.md`** dưới dạng khối ` ```mermaid `. Sau khi import phải chạy `.claude/scripts/lark-mermaid-to-whiteboard.py <doc_token>` để đổi chúng thành bảng trắng — Lark không tự dựng.
+> **5 sơ đồ nằm trong chính file `.md`** dưới dạng khối ` ```mermaid `.
+>
+> Đẩy bằng `lark-cli docs +create --doc-format markdown` thì **Lark tự dựng mermaid thành bảng trắng**, không cần bước chuyển đổi. Cách import qua `drive/v1/import_tasks` thì không — nó ra code block `Plaintext` và phải chạy `.claude/scripts/lark-mermaid-to-whiteboard.py` để vá.
 >
 > Cách import: `drive/v1/files/upload_all` → `drive/v1/import_tasks` → chờ `job_status = 0` → `wiki/v2/spaces/{space}/nodes/move_docs_to_wiki`. Token user nằm ở scratchpad, hết hạn thì chạy `lark_refresh.py`.
 

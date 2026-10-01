@@ -126,7 +126,7 @@ Chỉ thành vấn đề thật khi có chiến dịch kết thúc đúng lúc c
 | `quiz_attempts` · `quiz_attempt_gradings` | Nguồn sự kiện bài Test |
 | `quizzes` | `Graded Assignment`, `Pass Point` → `BR-TEST` |
 | `courses_users_certificates` | **Nguồn sự kiện "hoàn thành khoá"**. Bảng duy nhất nối thẳng `users` |
-| `courses` · `course_sections` | Đơn vị nội dung để khử trùng (`C5`) |
+| `courses` · `course_sections` | Đơn vị nội dung để chống cộng trùng (`C5`) |
 | `tenant` | Nơi gắn cấu hình. **Không có trường múi giờ** → `S21` |
 | `casbin_rule` | Phân quyền |
 | `resources` · `attachment-files` | Ảnh huy hiệu, ảnh hạng |
@@ -141,7 +141,7 @@ Chỉ thành vấn đề thật khi có chiến dịch kết thúc đúng lúc c
 | **Cấu hình gamification** — hai công tắc · múi giờ · trần điểm/ngày | `C1`, `C6`, `C9`, `S12`, `S21` |
 | **Quy tắc cộng điểm** — hành động → số điểm, bật/tắt | `C2`, `C4` |
 | **Sổ giao dịch điểm** — từng lần cộng, kèm nguồn và thời điểm | `C3`, `C8` — **nền của gần như mọi thứ** |
-| **Dấu nội dung đã tính điểm** — khử trùng theo người học | `C5` |
+| **Dấu nội dung đã tính điểm** — chống cộng trùng theo người học | `C5` |
 | **Ngày có mặt của học viên** | `C9`, `BA-03` |
 | **Danh mục chỉ số đo lường** — dùng chung ba chỗ | `S23`, `C2` |
 | **Huy hiệu** + **huy hiệu đã đạt** | `S5`, `C8` |

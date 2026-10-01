@@ -19,7 +19,7 @@ Gamification là module mới, **chỉ đọc dữ liệu học tập**, nên ph
 Chỗ nguy hiểm nhất **không nằm ở nơi ai cũng nhìn**. Ba thứ đáng lo nhất:
 
 1. **Tài khoản `Test Account` của nhóm Comment Replier sẽ xuất hiện trên bảng xếp hạng công khai** — đây là tài khoản học viên thật theo định nghĩa hệ thống, nhưng là người của công ty.
-2. **Ngày bật tính năng, mọi học viên cũ mở lại nội dung đã học sẽ được cộng điểm** nếu không nạp sẵn dấu khử trùng.
+2. **Ngày bật tính năng, mọi học viên cũ mở lại nội dung đã học sẽ được cộng điểm** nếu không nạp sẵn dấu chống cộng trùng.
 3. **Học lại cùng nội dung ở lớp khác: hệ thống bảo "chưa học", gamification không cộng điểm** — hai hệ thống nói hai điều khác nhau với cùng một học viên.
 
 | | Số lượng |
@@ -75,7 +75,7 @@ Từ BRD v0.6 — module mới gồm 5 lớp:
 
 ```
 Lớp 1  Bắt sự kiện học tập      3 hành động học + "vào hệ thống hằng ngày"
-Lớp 2  Quy đổi ra điểm          bảng cấu hình + khử trùng + trần điểm/ngày
+Lớp 2  Quy đổi ra điểm          bảng cấu hình + chống cộng trùng + trần điểm/ngày
 Lớp 3  Tích luỹ và xét ngưỡng   điểm · 4 loại huy hiệu · hạng
 Lớp 4  Xếp hạng theo kỳ         kỳ lịch (tự động) + chiến dịch (vận hành khai)
 Lớp 5  Phản hồi cho học viên    đẩy khi online · trang thành tích · bảng xếp hạng
@@ -117,7 +117,7 @@ FR/NFR đã có trong BRD: `C1`–`C9` · `BR-TEST` · `BR-REGRADE` · `BR-SKIP`
 | # | Chiều | Conflict | Hiện tại | Mới | Ai quyết |
 | --- | --- | --- | --- | --- | --- |
 | **CF-1** | **Process + Permission** | 🔴 **Tài khoản của người công ty sẽ lên bảng xếp hạng công khai.** `KB-CR-01`: thành viên nhóm Comment Replier **phải là tài khoản học viên có `Test Account = Yes`**. `KB-CR-03`: họ được **tự động thêm vào các lớp**. Về mặt dữ liệu họ là học viên thật, có tiến độ học thật | Test Account là học viên bình thường trong mọi truy vấn | `A15` — bảng xếp hạng công khai danh tính học viên | **PO** |
-| **CF-2** | **Business rule** | 🔴 **Học lại nội dung ở lớp khác: hệ thống bảo "chưa học", gamification không cộng điểm.** Tiến độ gắn theo lượt ghi danh (`class_user_id`), nên vào lớp mới là tiến độ về 0 và học viên **phải học lại**. Nhưng `C5` khử trùng theo người nên **không cộng điểm** | Học viên học lại, thanh tiến độ chạy bình thường | `C5` — mỗi nội dung trả điểm một lần trong đời | **PO** |
+| **CF-2** | **Business rule** | 🔴 **Học lại nội dung ở lớp khác: hệ thống bảo "chưa học", gamification không cộng điểm.** Tiến độ gắn theo lượt ghi danh (`class_user_id`), nên vào lớp mới là tiến độ về 0 và học viên **phải học lại**. Nhưng `C5` chống cộng trùng theo người nên **không cộng điểm** | Học viên học lại, thanh tiến độ chạy bình thường | `C5` — mỗi nội dung trả điểm một lần trong đời | **PO** |
 | **CF-3** | **Business rule** | 🟠 **Đổi ngưỡng hạng thì người cũ giữ hạng, người mới phải đạt cao hơn.** `A3` nói hạng chỉ lên không tụt; `C4` nói đổi cấu hình áp dụng từ lúc đổi. Ghép lại: hai học viên **cùng số điểm nhưng khác hạng** | — | `A3` + `C4` | **PO** |
 | **CF-4** | **Business rule** | 🟠 **Tương tự với huy hiệu.** `A5` nói huy hiệu đạt rồi giữ vĩnh viễn. Nâng ngưỡng huy hiệu → người đạt trước giữ, người sau phải làm nhiều hơn cho cùng một huy hiệu | — | `A5` + `C4` | **PO** |
 | **CF-5** | **Data** | 🟠 **Xoá tài nguyên đang dùng làm ảnh huy hiệu.** `resources` là FK của 4 bảng và có cơ chế quản lý riêng. Vận hành xoá một ảnh đang gắn với huy hiệu thì huy hiệu mất hình — kể cả huy hiệu học viên đã đạt | Quản lý tài nguyên không biết gamification đang dùng | `S4` — huy hiệu có hình | **PO + Dev** |
@@ -142,7 +142,7 @@ FR/NFR đã có trong BRD: `C1`–`C9` · `BR-TEST` · `BR-REGRADE` · `BR-SKIP`
 | **BI-4** | 🟢 `BR-EDIT-07` khoá `Graded Assignment` sau khi có người làm bài | Quy tắc đếm bài Test **ổn định**, không có kịch bản tính lại ngược | — *(thuận lợi)* |
 | **BI-5** | 🟢 `KB-LX-08` chặn huỷ ghi danh sau khi đã học | Đường cày điểm ghi danh–huỷ–ghi danh lại **đã bị chặn sẵn** | — *(thuận lợi)* |
 | **BI-6** | 🔴 **Học viên đã học xong hết khoá của mình thì gần như không còn cách kiếm điểm** — chỉ còn "vào hệ thống hằng ngày" | Nhóm học viên chăm nhất lại là nhóm bị kẹt ở đáy bảng xếp hạng | **`FR-3`**: cân nhắc cách ghi nhận cho nhóm này, hoặc chấp nhận có chủ đích |
-| **BI-7** | 🔴 **Ngày bật tính năng, học viên cũ mở lại nội dung đã học sẽ được cộng điểm** nếu không nạp sẵn dấu khử trùng | Ngày đầu tiên thành ngày cày điểm tập thể | **`FR-4`**: nạp dấu khử trùng từ tiến độ hiện có tại thời điểm bật → xem `TR-2` |
+| **BI-7** | 🔴 **Ngày bật tính năng, học viên cũ mở lại nội dung đã học sẽ được cộng điểm** nếu không nạp sẵn dấu chống cộng trùng | Ngày đầu tiên thành ngày cày điểm tập thể | **`FR-4`**: nạp dấu chống cộng trùng từ tiến độ hiện có tại thời điểm bật → xem `TR-2` |
 | **BI-8** | 🟠 Khoá **Flexible** chỉ bắt đầu khi học viên bấm **Activate** | Học viên giữ khoá chưa Activate thì không sinh sự kiện nào — bình thường, nhưng cần rõ là không tính | `FR-5`: nêu rõ trong `Out of scope` của US |
 | **BI-9** | 🟠 **Khoá Trial** tồn tại (`POST /courses/{id}/trial/upgrade-now`) | Hoạt động trong khoá dùng thử có tính điểm không? | **`FR-6`** — `OQ-C3` |
 | **BI-10** | 🟠 Mô hình **Foundation → Normal Course** là đặc thù UpBase (KB `15` §6) | `BR-SKIP` nhúng khái niệm Foundation vào gamification → **chỗ đóng cứng mới** | **`FR-7`**: viết tổng quát *"khoá được đánh dấu bỏ qua thì không tính hoàn thành"* thay vì gọi tên Foundation |
@@ -168,7 +168,7 @@ FR/NFR đã có trong BRD: `C1`–`C9` · `BR-TEST` · `BR-REGRADE` · `BR-SKIP`
 
 | # | Case chưa định nghĩa | FR bổ sung |
 | --- | --- | --- |
-| CG-7 | **Hai thiết bị cùng hoàn thành một hoạt động gần như đồng thời** — cộng điểm hai lần? | Chống trùng ở tầng ghi nhận, không chỉ dựa khử trùng nội dung |
+| CG-7 | **Hai thiết bị cùng hoàn thành một hoạt động gần như đồng thời** — cộng điểm hai lần? | Chống trùng ở tầng ghi nhận, không chỉ dựa chống cộng trùng nội dung |
 | CG-8 | **Job chốt kỳ chạy lỗi hoặc chạy muộn** | Cơ chế chạy lại, bảo đảm chốt đúng biên kỳ dù job trễ |
 | CG-9 | **Học viên bị `Block` giữa kỳ** — `A14` nói biến khỏi bảng đang chạy. Bị Block rồi mở lại thì sao? | Quy tắc vào/ra bảng xếp hạng |
 | CG-10 | **Mentor chấm bài sau khi kỳ đã chốt** — snapshot đã đóng băng (`O5`) | Điểm vào kỳ hiện tại, không sửa snapshot cũ |
@@ -198,7 +198,7 @@ FR/NFR đã có trong BRD: `C1`–`C9` · `BR-TEST` · `BR-REGRADE` · `BR-SKIP`
 | # | Yêu cầu | Mức |
 | --- | --- | --- |
 | **TR-1** | **Không backfill điểm.** Kỳ lịch bắt đầu từ thời điểm bật (`A16`), không dựng lại bảng cho kỳ trước | Đã chốt |
-| **TR-2** | 🔴 **Nạp sẵn dấu khử trùng từ tiến độ hiện có tại thời điểm bật.** Không làm thì ngày đầu tiên mọi học viên cũ mở lại nội dung đã học đều được cộng điểm | **Bắt buộc** — `BI-7` |
+| **TR-2** | 🔴 **Nạp sẵn dấu chống cộng trùng từ tiến độ hiện có tại thời điểm bật.** Không làm thì ngày đầu tiên mọi học viên cũ mở lại nội dung đã học đều được cộng điểm | **Bắt buộc** — `BI-7` |
 | **TR-3** | Thêm cột múi giờ vào `tenant`, đặt giá trị mặc định cho tổ chức hiện tại | Bắt buộc |
 | **TR-4** | Quyết định trạng thái khởi tạo: mọi học viên bắt đầu ở **0 điểm và hạng thấp nhất** | Cần PO xác nhận |
 
@@ -239,7 +239,7 @@ FR/NFR đã có trong BRD: `C1`–`C9` · `BR-TEST` · `BR-REGRADE` · `BR-SKIP`
 | # | Risk | Mức | Giảm nhẹ |
 | --- | --- | --- | --- |
 | R1 | **Hiệu năng bảng xếp hạng** — chưa ước lượng được tải | 🔴 Cao | `OQ-B9`. Giai đoạn chạy ngầm (`TR-7`) là cơ hội đo tải thật trước khi học viên vào |
-| R2 | **Ngày đầu bật tính năng thành ngày cày điểm tập thể** | 🔴 Cao | `TR-2` — nạp sẵn dấu khử trùng |
+| R2 | **Ngày đầu bật tính năng thành ngày cày điểm tập thể** | 🔴 Cao | `TR-2` — nạp sẵn dấu chống cộng trùng |
 | R3 | **Tài khoản công ty trên bảng xếp hạng công khai** | 🔴 Cao | `CF-1` — PO quyết |
 | R4 | **Nhóm học viên chăm nhất bị kẹt ở đáy bảng** vì đã học hết nội dung | 🟠 Vừa | `BI-6` — PO quyết chấp nhận hay xử lý |
 | R5 | **Hai hệ thống nói hai điều khác nhau** khi học viên học lại ở lớp khác | 🟠 Vừa | `CF-2` — PO quyết |
