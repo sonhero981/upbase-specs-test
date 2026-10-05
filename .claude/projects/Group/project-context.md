@@ -11,7 +11,11 @@
 
 <!-- Bối cảnh: vì sao có yêu cầu này, đang xảy ra chuyện gì -->
 
-Chức năng nhóm là **cây sơ đồ tổ chức đồng bộ từ HRM**, nên trong trao đổi hay gọi là "phòng ban".
+**Đây là chức năng NHÓM, không phải chức năng cây tổ chức.** Cây tổ chức chỉ là **một tập con**: hệ thống đồng bộ với HRM rồi tạo ra các nhóm học viên dựa trên cây đó. Ngoài nguồn này còn có nhóm do người dùng tự tạo, và có thể còn nguồn khác.
+
+Đóng khung sai chỗ này dẫn tới thiết kế sai: nếu coi cây tổ chức là bản chất thì mọi thứ phải nằm trong cây, trong khi nhu cầu thật có cả những nhóm **cắt ngang cơ cấu** — ví dụ gom người theo chức danh ở nhiều phòng ban khác nhau.
+
+Ba nền tảng lớn đều tách hai khái niệm này: TalentLMS và Docebo có `Branch` cho cơ cấu và `Group` cho nhóm tuỳ ý, Moodle có `Cohort` toàn site và `Group` trong khoá. Xem `working/ai-drafts/nghien-cuu-lms-khac-20261005.md`.
 
 **Nền đã có, chưa đủ.** `Group Management` đang chạy để tạo nhóm gửi thông báo từ Ops, nhưng là nhóm phẳng. Dự án này mở rộng nó thành cây nhiều cấp, phân loại theo nguồn, có quan hệ quản lý. `Department Management` từng làm cây cho `staffs` nhưng hiện không chạy.
 
@@ -50,6 +54,7 @@ Bảng so sánh đầy đủ chín tiêu chí: `working/ai-drafts/clarified-requ
 | Câu hỏi mở | `working/open-questions/open-questions-20261005.md` — đã đóng hết |
 | **Dữ liệu HRM** | `working/raw-inputs/lark-users-by-department.csv` — 384 nhân sự, 53 phòng ban, cây sâu 4 cấp. **Đã cắt 16 cột cá nhân** |
 | Nguyên tắc mô hình hoá | `.claude/_shared-knowledge-base/16-domain-principles.md` — nguyên tắc 6, ranh giới Nhóm với Lớp |
+| Nghiên cứu LMS khác | `working/ai-drafts/nghien-cuu-lms-khac-20261005.md` — TalentLMS · Docebo · Moodle · mô hình tích hợp HRIS |
 | **Dự án liên quan** | `.claude/projects/Gamification/` — `US16` bộ lọc bảng xếp hạng theo nhóm đang chờ chức năng này |
 | Phân biệt Nhóm và Lớp | `Gamification/working/raw-inputs/change-requests.md` mục `CR-001`, phần đối chiếu hệ thống |
 | Schema DB | [Lark → Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd) |

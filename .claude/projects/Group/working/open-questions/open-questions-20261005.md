@@ -156,6 +156,21 @@ Riêng `OQ-17` *(cây Lark sâu mấy cấp)* không cần hỏi Dev nữa — �
 
 ---
 
+## Nhóm D — phát sinh từ nghiên cứu LMS khác (05/10)
+
+Bốn câu này không chặn viết BRD, nhưng nên có đáp án trước Bước 7 vì chúng ảnh hưởng phạm vi.
+
+| # | Câu hỏi | Vì sao |
+|---|---|---|
+| `OQ-21` | **Khi đồng bộ, người ở nhánh sâu được ghi là thành viên của một nhóm sâu nhất, hay của cả bốn nhóm trên đường đi?** | Tài liệu tích hợp HRIS ghi rằng phần lớn lần đồng bộ hỏng vì nhóm lồng nhau, do không làm phẳng cơ cấu trước khi đẩy. Hai cách cho hai kết quả khác hẳn ở báo cáo và phạm vi quản lý |
+| `OQ-22` | **Một người rời nhóm thì nghĩa vụ học đã nhận qua nhóm đó xử lý thế nào?** | Yêu cầu mới bàn trường hợp xoá cả nhóm (`OQ-07`), chưa bàn trường hợp một người rời. Moodle gỡ ghi danh trong tình huống tương tự |
+| `OQ-23` | **Học viên bị điều chuyển phòng ban thì nghĩa vụ học theo nhóm cũ xử lý thế nào?** | Tầng 3 của mô hình tích hợp HRIS là sự kiện vòng đời nhân sự. Yêu cầu hiện chỉ nhắc trường hợp quản lý rời vị trí |
+| `OQ-24` | **Có cần nhóm động theo điều kiện không?** Ví dụ *"mọi người có chức danh chứa chữ Trưởng nhóm, ở bất kỳ phòng ban nào"* | Hiện chỉ có hai cách vào nhóm: đồng bộ và gán tay. Nhóm cắt ngang cơ cấu không làm được bằng cả hai cách đó. Moodle có `Dynamic Cohorts` |
+
+---
+
 ## Trạng thái
 
 Không còn câu nào chặn. **Viết BRD được.**
+
+Bốn câu nhóm D để Bước 7 quyết, không cần trả lời ngay.

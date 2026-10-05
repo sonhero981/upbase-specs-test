@@ -27,6 +27,28 @@ Ghi lại để không mất: `14-api-surface.md` cần cập nhật `Department
 
 ---
 
+## 1b. Đóng khung lại — nhóm là chính, cây tổ chức là một nguồn
+
+PO đính chính ngày 05/10: **đây là chức năng Nhóm, không phải chức năng cây tổ chức.**
+
+Cây tổ chức là **một tập con**. Hệ thống đồng bộ với HRM rồi tạo ra các nhóm học viên dựa trên cây đó, và có thể đánh dấu những nhóm này là loại được đồng bộ để phân biệt với nhóm tạo tay. Nhưng nhóm không chỉ có vậy.
+
+Vì sao chỗ này quan trọng:
+
+| Nếu đóng khung là "cây tổ chức" | Nếu đóng khung là "nhóm" |
+|---|---|
+| Mọi nhóm phải nằm trong cây | Cây chỉ là một cách tạo nhóm |
+| Nhóm cắt ngang cơ cấu không biểu diễn được | Nhóm cắt ngang là trường hợp bình thường |
+| Nguồn duy nhất là HRM | HRM là một nguồn, còn nguồn khác |
+
+Ba nền tảng lớn đều tách hai khái niệm này thay vì gộp: TalentLMS và Docebo có `Branch` cho cơ cấu và `Group` cho nhóm tuỳ ý, Moodle có `Cohort` phạm vi site và `Group` phạm vi khoá. Docebo mô tả group là thứ *"có thể là tập con bên trong cơ cấu, hoặc cắt ngang nhiều phần của cơ cấu"*.
+
+Chi tiết: `working/ai-drafts/nghien-cuu-lms-khac-20261005.md`
+
+> Cách đồng bộ và cách đánh dấu nhóm là **ví dụ PO đưa ra để làm rõ khái niệm**, không phải giải pháp đã chốt. Bước 7 và 8 mới so sánh phương án.
+
+---
+
 ## 2. Chuẩn hoá input
 
 | Nhóm | Nội dung |
