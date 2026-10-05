@@ -41,6 +41,7 @@ Dựng phần đầu PRD theo template:
 | Problem | BRD §1 | Viết lại nguyên, không tóm tắt |
 | Analytics | BRD §2 | Chưa có số liệu → ghi rõ, không bỏ trống |
 | Objective | BRD §3 | |
+| **Out of scope** | BRD + `project-context.md` + mọi `CR` đã áp | Cấp **tính năng**, không phải cấp US. Xem quy tắc bên dưới |
 | Stakeholder | BRD §4 | Bảng `Stakeholder │ Action` |
 | **Preferences** | Hỏi người dùng | Link Figma · BRD liên quan · tài liệu đối tác · API tham chiếu · tài khoản staging |
 | Metrics success | **Hỏi người dùng** | Xem quy tắc bên dưới |
@@ -54,6 +55,22 @@ Dựng phần đầu PRD theo template:
 >
 > 🚫 **Tuyệt đối không giữ lại bảng ví dụ của template.** Hai PRD đang lưu hành mang nguyên chỉ số của app ghi chép thu chi (`NPS > 50`, `Transaction Input Time < 30s`) vào tài liệu về routing kho và quảng cáo Shopee. Để lại ví dụ còn tệ hơn bỏ trống.
 
+**Quy tắc `Out of scope` cấp tính năng:**
+
+Mục này trả lời câu hỏi *"tính năng này có bao gồm X không"* mà không bắt người đọc lục hết các US. Khác hẳn `Out of scope` của từng US — cái đó nói về một màn, cái này nói về cả phạm vi.
+
+Gom từ ba nguồn:
+
+| Nguồn | Lấy gì |
+|---|---|
+| `project-context.md` mục `Out of scope` | Thứ đã chốt ngoài phạm vi từ đầu |
+| Mọi `CR` đã áp | Thứ **từng nằm trong phạm vi rồi bị loại** — đây là nhóm hay bị quên nhất |
+| `Out of scope` của từng US | Thứ lặp lại ở nhiều US thì nâng lên cấp tính năng |
+
+Mỗi dòng một thứ, kèm lý do **một câu**. Lý do phải thuộc một trong bốn loại: chưa yêu cầu · chờ tính năng khác · đã cân nhắc và loại ở `CR` nào · thuộc phạm vi tính năng khác.
+
+> Không có mục này thì người đọc PRD trên Lark phải đọc hết 15 US mới ghép lại được bức tranh, mà thứ bị loại giữa chừng theo `CR` thì không US nào nhắc tới.
+
 **Danh sách US:** lấy từ BRD §7, mỗi US gắn nguồn (yêu cầu nào · impact nào · coverage gap nào).
 
 Đánh số `US1`, `US2`, `US3`… liên tục. US chưa làm trong phạm vi này → ghi rõ trong tiêu đề: `US3: Sao chép quy tắc — chưa làm`.
@@ -61,6 +78,27 @@ Dựng phần đầu PRD theo template:
 **→ Dừng, confirm danh sách US với người dùng trước khi viết chi tiết.**
 
 ---
+
+### 9A+ — Chia Unit
+
+Làm **sau khi chốt danh sách US**, trước khi viết chi tiết.
+
+Chia các US thành nhóm **làm độc lập được**. Một Unit là nhóm US cùng phục vụ một cơ chế, release được mà không cần chờ Unit khác xong.
+
+Cách chia:
+
+1. **Nhóm theo cơ chế, không nhóm theo màn hình.** US cấu hình và US hiển thị của cùng một cơ chế thuộc cùng Unit
+2. **Tìm Unit nền** — cái mọi Unit khác phụ thuộc vào. Thường là cơ chế ghi nhận dữ liệu gốc
+3. **Tách Unit nền tảng** — những US chạm mọi Unit (phân quyền, bật tắt, lịch sử) không release độc lập được, gom riêng
+4. **Ghi phụ thuộc theo chiều một hướng.** Phụ thuộc vòng là dấu hiệu chia sai
+
+| Unit | Gồm US | Phụ thuộc | Release độc lập? |
+|---|---|---|---|
+| *Tên nhóm* | `US1` · `US2` | *Unit nào xong trước* | ✅ / ❌ kèm lý do |
+
+Kèm **thứ tự đề xuất** và một câu nói rõ đây chỉ là đề xuất, Dev chốt thứ tự thật.
+
+> **Cỡ `S` bỏ mục này.** Một US thì không có gì để nhóm.
 
 ### 9B — Field Intake
 

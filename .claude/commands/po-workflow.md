@@ -36,6 +36,7 @@ Chỉ **PRD** và **User Guide** là tài liệu bàn giao. Ba artifact còn l�
                 ↓
 [Bước 9]    PRD
               9A  Khung + danh sách US   (điểm dừng: confirm US list)
+              9A+ Chia Unit — nhóm bàn giao, phụ thuộc, thứ tự
               9B  Field Intake           (điểm dừng: hỏi field + rule)
               9C  Viết chi tiết từng US
                 ─────────────────────► GATE 4  Approved?  ──► Need Revision → sửa theo mã cụ thể
@@ -48,6 +49,8 @@ Chỉ **PRD** và **User Guide** là tài liệu bàn giao. Ba artifact còn l�
 | Artifact được duyệt | Vào mục nào của PRD |
 |---|---|
 | BRD | `Problem` · `Analytics` · `Objective` · `Stakeholder` · `Out of scope` từng US |
+| BRD + `project-context` + mọi `CR` | **`Out of scope` cấp tính năng** — gom thứ cả tính năng không làm, kèm thứ từng có rồi bị loại |
+| Danh sách US đã chốt | **`Unit`** — nhóm US làm độc lập được, phụ thuộc giữa các nhóm, thứ tự đề xuất |
 | Impact Matrix | `Solution` · `Database` · `API` · `Acceptance criteria → Data Field` · `Out of scope` |
 | Solution Comparison | `Solution` · `TDD` |
 | Chi tiết US | `Specific Requirement` |
@@ -62,7 +65,7 @@ Sau khi làm rõ yêu cầu (Bước 2), **quét nhanh** KB + DB + Swagger để
 
 | Cỡ | Dấu hiệu — phải đúng **tất cả** | Đường đi | Gate |
 |---|---|---|---|
-| **S** | Chạm **1 màn** · không đổi data model · không đổi business rule hiện có · không chạm module khác · không chạm tính năng `hidden` | Bước 1–3 → **Bước 9 (PRD rút gọn, 1 US)** | **Gate 4** |
+| **S** | Chạm **1 màn** · không đổi data model · không đổi business rule hiện có · không chạm module khác · không chạm tính năng `hidden` | Bước 1–3 → **Bước 9 (PRD rút gọn, 1 US, bỏ `Unit`)** | **Gate 4** |
 | **M** | Chạm **≤2 module** · có thể thêm field nhưng không đổi quan hệ bảng · không phát hiện conflict · đã rõ hướng giải quyết | Bước 1–6 → Bước 9 | **Gate 1 + Gate 2 + Gate 4** |
 | **L** | Chạm **≥3 module**, HOẶC đổi data model/quan hệ, HOẶC có conflict, HOẶC chạm tính năng `hidden`, HOẶC có nhiều hướng giải quyết | **Đủ 9 bước** | **Đủ 4 Gate** |
 
@@ -81,7 +84,9 @@ Sau khi làm rõ yêu cầu (Bước 2), **quét nhanh** KB + DB + Swagger để
 
 Giữ nguyên template nhưng chỉ điền: metadata · Document version · `Problem` · `Objective` · `Preferences` · `Specific Requirement` (1 US đầy đủ).
 
-Xoá hẳn: `Analytics` · `Stakeholder` · `Metrics success` · `Solution` (TDD/Database/API).
+Xoá hẳn: `Analytics` · `Stakeholder` · `Metrics success` · `Solution` (TDD/Database/API) · `Unit`.
+
+> `Out of scope` cấp tính năng thì **giữ** kể cả ở cỡ `S` — một màn vẫn có thứ người đọc tưởng là có mà không làm.
 
 > Cỡ S vẫn phải qua **Field Intake** (Bước 9B). Đây là chỗ hay sai nhất kể cả với yêu cầu nhỏ — sửa một màn vẫn phải biết field nào đã tồn tại.
 

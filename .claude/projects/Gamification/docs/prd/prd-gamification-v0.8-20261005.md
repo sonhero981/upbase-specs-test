@@ -6,7 +6,7 @@
 | **Epic** | ❓ *link Jira* |
 | **Story** | ❓ *link Jira* |
 | **Related** | `brd-v0.6-20260923.md` · `impact-matrix-v0.2-20260923.md` · `solution-comparison-v0.1-20260923.md` |
-| **Document status** | 🔄 **v0.7 chờ PO review lại** — mang `CR-009`, `CR-010` và design đã chốt. Bản v0.2 đã được PO duyệt 23/09/2026 |
+| **Document status** | 🔄 **v0.8 chờ PO review lại** — mang `CR-009`, `CR-010` và design đã chốt. Bản v0.2 đã được PO duyệt 23/09/2026 |
 | **Document owner** | Bùi Đức Huy (PO) |
 | **Designer** | ❓ *cần điền* |
 | **Tech lead** | ❓ *cần điền* |
@@ -26,6 +26,7 @@
 | v0.5 | Bùi Đức Huy | Áp design đã chốt: bước tăng chuỗi cố định `5`, trần `40` chạm đúng ngày thứ 7, bỏ chuỗi dài nhất. Danh sách huy hiệu chuyển sang `My Profile` → tab `Badges`. Thêm hành vi trỏ và bấm trên dải tóm tắt. Viết lại cột `Nguồn` thành nội dung đọc được | Design chốt 01/10 | 01/10/2026 |
 | v0.6 | Bùi Đức Huy | Gộp bốn màn cấu hình Ops thành một trang bốn khối. Thêm mục **Design** kèm sáu ảnh màn đã chốt. Tooltip cho ô chuỗi | Design chốt 01/10 | 01/10/2026 |
 | v0.7 | Bùi Đức Huy | Bỏ viết tắt: `Giải O2` thành `Giải quyết mục tiêu O2`, mã ràng buộc trần thành mã kèm nội dung. Thêm dấu phân cách giữa các mã đứng liền nhau | — | 01/10/2026 |
+| v0.8 | Bùi Đức Huy | Thêm mục **Out of scope** cấp tính năng và mục **Unit** chia 15 US thành 5 nhóm bàn giao kèm phụ thuộc. Học từ phase Inception của AI-DLC | — | 05/10/2026 |
 
 > ✅ **`Approved with Notes` — PO duyệt ngày 23/09/2026.** Còn **8 câu hỏi mở** ở mục `Vấn đề tồn đọng`, không câu nào chặn bàn giao.
 
@@ -89,6 +90,25 @@ Vấn đề tách thành **ba tầng riêng biệt**, mỗi tầng một nguyên
 | O3 | **Học viên có mốc ngắn hạn để nhắm tới** |
 | O4 | **Đội truyền thông nội bộ chọn được khoảng ngày bất kỳ để lấy số liệu công bố** — việc đánh giá hiệu quả và trao thưởng do họ tự làm bên ngoài |
 | O5 | **Điểm số đáng tin** — mỗi con số truy được nguồn, không bị thổi lên bằng thao tác đối phó |
+
+---
+
+# Out of scope
+
+Những thứ **cả tính năng này không làm**. Gồm cả thứ người đọc dễ tưởng là có, và thứ từng nằm trong phạm vi rồi bị loại giữa chừng.
+
+| Không làm | Vì sao |
+|---|---|
+| **Chiến dịch có tên, có phạm vi người tham gia, có vòng đời** | Đã cân nhắc và loại ở change request `CR-007`. Bộ chọn khoảng ngày trên bảng xếp hạng bao trùm nhu cầu này |
+| **Kỳ lịch như thực thể riêng · thao tác chốt kỳ · bảng kết quả đóng băng** | Cùng `CR-007`. Chấp nhận số liệu sống: cùng một khoảng ngày hỏi lúc khác có thể ra kết quả khác |
+| **Trần điểm mỗi ngày** | Đã cân nhắc và loại ở change request `CR-010`. Chống cộng trùng (`BR-13.1`) đã chặn việc lặp lại cùng một nội dung, còn trần ngày thì phạt nhầm người học dồn |
+| **Chuỗi dài nhất từng đạt** | PO chốt ngày 01/10 không hiện. Chỉ số quá khứ không giúp học viên quyết định gì hôm nay |
+| **Bộ lọc bảng xếp hạng theo nhóm, lớp, phòng ban** | Chờ chức năng nhóm đồng bộ từ HRM. Xem `US16 — chưa làm` |
+| **Tính điểm từ Quiz, Case Study, Storyline** | PO chốt không tính ở đợt này. Chỉ bài Test theo `BR-TEST` mới sinh điểm |
+| **Huy hiệu cho điểm số cao** *(ví dụ bài Test đạt từ 90%)* | PO chốt tạm thời không có rule này |
+| **Điểm cho lộ trình học · huy hiệu theo kỹ năng** | Thuộc tính năng Lộ trình và Khung năng lực, cả hai chưa làm |
+| **Sửa logic hoàn thành Activity** | Giữ nguyên cơ chế hiện có. Gamification chỉ đọc dữ liệu học, không sửa |
+| **Phần thưởng vật chất · gamification cho nhân sự Ops · thi đua theo đội** | Chưa yêu cầu |
 
 ---
 
@@ -333,6 +353,27 @@ flowchart LR
 | GET, PUT | `/api/v1/gamification/leaderboard-settings` | Mới | Công tắc `Leaderboard` · bật tắt bốn bảng — `US11` |
 | GET | `/api/v1/gamification/learners` | Mới | Danh sách học viên kèm hạng, theo khoảng ngày — `US12` |
 | GET | `/api/v1/gamification/learners/export` | Mới | Xuất danh sách ra **Excel** theo khoảng ngày đang chọn — `US12` |
+
+---
+
+# Unit — nhóm bàn giao
+
+Mười lăm US chia thành năm nhóm. Mỗi nhóm phục vụ một cơ chế và release được độc lập, trừ phần phụ thuộc ghi ở cột bên.
+
+| Unit | Gồm US | Phụ thuộc | Release độc lập? |
+|---|---|---|---|
+| **Nền tảng** | `US14` phân quyền và hai công tắc · `US15` phân quyền cấu hình | — | ❌ Chạm mọi Unit khác. Phải xong trước tiên |
+| **Điểm** | `US5` điểm check-in theo chuỗi · `US8` cấu hình điểm · `US13` điểm phản ánh việc học thật | Nền tảng | ✅ Là nguồn dữ liệu cho mọi thứ còn lại |
+| **Huy hiệu** | `US4` huy hiệu sắp đạt · `US9` cấu hình huy hiệu | Điểm | ✅ Cần chỉ số đếm từ Unit Điểm |
+| **Hạng** | `US10` cấu hình hạng | Điểm · Huy hiệu | ✅ Ba tiêu chí lên hạng lấy từ hai Unit kia |
+| **Hiển thị cho học viên** | `US1` màn Gamification · `US2` thông báo · `US3` lịch sử ghi nhận | Điểm | ✅ Hiện được ngay khi có điểm, huy hiệu và hạng bổ sung sau |
+| **Bảng xếp hạng** | `US6` bảng xếp hạng · `US7` vị trí của tôi · `US11` cấu hình cột · `US12` danh sách học viên bên Ops | Điểm | ✅ Bảng theo hạng chỉ chạy được sau Unit Hạng, ba bảng kia không cần |
+
+**Thứ tự đề xuất:** Nền tảng → Điểm → Hiển thị cho học viên → Huy hiệu → Hạng → Bảng xếp hạng
+
+Lý do xếp `Hiển thị cho học viên` lên trước `Huy hiệu`: ngay khi Unit Điểm chạy, học viên đã thấy được điểm và lịch sử. Đó là phần thưởng sớm nhất cho người học, và cũng là cách kiểm chứng cơ chế điểm chạy đúng trước khi xây tiếp.
+
+> Đây chỉ là đề xuất. Thứ tự thật do Dev chốt theo năng lực đội và ràng buộc kỹ thuật.
 
 ---
 

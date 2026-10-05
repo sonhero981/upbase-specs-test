@@ -1,7 +1,7 @@
 # Project Context
 
 **Project:** Gamification
-**Ngày tạo:** 23/09/2026 · **Cập nhật:** 01/10/2026, sau khi chốt design
+**Ngày tạo:** 23/09/2026 · **Cập nhật:** 05/10/2026, sau khi học từ AI-DLC
 **Trạng thái:** 🔄 **PRD v0.5** mang `CR-009`, `CR-010` và design đã chốt. Chờ PO review lại từ đầu
 **Cỡ yêu cầu:** **L** — đủ 9 bước, đủ 4 Gate
 
@@ -121,7 +121,7 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 | BRD | `docs/brd/brd-v0.6-20260923.md` — ⚠️ có dấu CR-007 ở đầu, một số mục hết hiệu lực |
 | Impact Matrix | `working/impact-analysis/impact-matrix-v0.2-20260923.md` — ⚠️ tương tự |
 | Solution | `working/solution-options/solution-comparison-v0.1-20260923.md` — ⚠️ tương tự |
-| **PRD** | `docs/prd/prd-gamification-v0.7-20261001.md` — **trạng thái đúng nhất**, đang mang `CR-009` |
+| **PRD** | `docs/prd/prd-gamification-v0.8-20261005.md` — **trạng thái đúng nhất**, đang mang `CR-009` |
 | Quyết định | `project-decisions.md` |
 | KB chính | `03-assessment.md` (`BR-TEST`) · `06-user-account.md` §8b (`Test Account`) · `07-learning-experience.md` · `12-data-model.md` · `14-api-surface.md` · `15-product-direction.md` |
 | Schema DB | [Lark → Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd) |
@@ -138,7 +138,7 @@ Hệ thống UpLnD đã có khoá học và học viên đang vận hành. Số 
 
 | Artifact | Node token | URL | Ghi chú |
 |---|---|---|---|
-| `[PRD] Gamification v0.7` | *(xem wiki)* | https://upbasevn.sg.larksuite.com/docx/Hjuxd3my6oG0UuxBGNOllABAgye | **Bản mới nhất** — 01/10/2026, có 7 ảnh design |
+| `[PRD] Gamification v0.8` | *(xem wiki)* | https://upbasevn.sg.larksuite.com/docx/KeT8dkIStofZ0axlTW5l4S94gre | **Bản mới nhất** — 05/10/2026 |
 | `[PRD] Gamification v0.2` | `J4NGwHIlmijgZBkqxpWlNS4qgxe` | https://upbasevn.sg.larksuite.com/wiki/J4NGwHIlmijgZBkqxpWlNS4qgxe | Bản duyệt Gate 4, giữ để đối chiếu |
 
 > **Publish lại thì nhớ chèn lại ảnh** bằng `.claude/scripts/lark-insert-design-images.py` — ảnh không nằm trong `.md` nên import mới là mất.

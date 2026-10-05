@@ -58,6 +58,18 @@
 
 ---
 
+# Out of scope
+
+*Những thứ **cả tính năng** không làm, kèm lý do một câu. Khác với `Out of scope` của từng US — mục này trả lời câu hỏi "tính năng này có bao gồm X không" mà không bắt người đọc lục hết các US.*
+
+*Viết cả thứ người đọc dễ tưởng là có, và thứ đã từng nằm trong phạm vi rồi bị loại.*
+
+| Không làm | Vì sao |
+| --- | --- |
+| *Tên thứ không làm* | *Lý do một câu: chưa yêu cầu · chờ tính năng khác · đã cân nhắc và loại ở CR nào* |
+
+---
+
 # Stakeholder
 
 | Stakeholder | Action |
@@ -125,6 +137,24 @@
 
 | Method | Endpoint | Mới / Sửa | Mục đích |
 | --- | --- | --- | --- |
+
+---
+
+# Unit — nhóm bàn giao
+
+*Chia các US thành nhóm **làm độc lập được**, để Dev biết bắt đầu từ đâu và cái nào chờ cái nào. Không có mục này thì người nhận PRD phải tự đoán thứ tự.*
+
+*Một Unit là nhóm US cùng phục vụ một cơ chế, release được mà không cần chờ Unit khác xong — trừ phần phụ thuộc ghi rõ ở cột bên.*
+
+| Unit | Gồm US | Phụ thuộc | Release độc lập được? |
+| --- | --- | --- | --- |
+| *Tên nhóm* | `US1` · `US2` | *Unit nào phải xong trước, hoặc `—` nếu không phụ thuộc* | *✅ hoặc ❌ kèm lý do* |
+
+**Thứ tự đề xuất:** *Unit A → Unit B → Unit C*
+
+> Chỉ đề xuất. Thứ tự thật do Dev chốt theo năng lực đội và ràng buộc kỹ thuật.
+
+> **Cỡ `S` bỏ mục này.** Một US thì không có gì để nhóm.
 
 ---
 
