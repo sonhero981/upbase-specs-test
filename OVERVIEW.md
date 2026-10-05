@@ -114,17 +114,56 @@ Ba quy tắc bắt buộc:
 
 ---
 
-## Knowledge base
+## Phương pháp luận đứng sau
 
-15 file, chia ba nhóm:
+Quy trình này không phải phát minh mới. Nó ghép bảy cơ chế đã có sẵn trong lý thuyết phân tích nghiệp vụ và kỹ thuật phần mềm, rồi chỉnh lại cho phù hợp với việc một người làm cùng AI.
 
-| Nhóm | File | Nội dung |
+| Cơ chế trong luồng | Lấy từ | Ý gốc |
 |---|---|---|
-| Nghiệp vụ | `01`–`11` | Course · Question Bank · Assessment · Class · Grading · User · Learning Experience · Certificate · Notification · Storyline · Dashboard |
-| Kỹ thuật | `12`–`14` | Data Model 85 bảng · Mail Events 30 mail · API Surface 708 operation |
-| Định hướng | `15` | UpLnD Platform, bốn portal, chỗ đóng cứng |
+| Năm giai đoạn | BABOK (IIBA) | Khơi gợi yêu cầu, phân tích, đặc tả, kiểm chứng. Bốn hoạt động tách bạch, không trộn |
+| Gate giữa các giai đoạn | Stage-Gate, Robert G. Cooper, 1986 | Mỗi giai đoạn kết thúc bằng một cổng quyết định: đi tiếp, dừng, hay làm lại |
+| Phân cỡ `S` `M` `L` | Rolling wave planning, PMBOK | Mức chi tiết của kế hoạch tỉ lệ với mức bất định. Chỗ đã rõ thì không cần lập kế hoạch dày |
+| Chặng 9A, 9B, 9C | Progressive elaboration, PMBOK | Làm rõ dần. Không cố định mọi chi tiết khi chưa đủ thông tin |
+| Impact Matrix | Software Change Impact Analysis, Bohner và Arnold, 1996 | Trước khi sửa, xác định cái gì bị ảnh hưởng và ảnh hưởng tới đâu |
+| Unit | Modular decomposition, David Parnas, 1972 | Chia hệ thống thành mô-đun ghép lỏng, mỗi cái thay đổi được mà không kéo theo cái khác |
+| `project-decisions.md` | Architecture Decision Record, Michael Nygard, 2011 | Ghi quyết định kèm bối cảnh, để người đọc sau sáu tháng hiểu được vì sao |
 
-Knowledge base phủ khoảng một nửa hệ thống. Ops có 25 nhóm API và LMS có 8 nhóm không nằm trong User Guide. Yêu cầu chạm vùng chưa phủ thì ghi `❓BA`, không kết luận.
+### Vì sao đặt Gate chứ không chạy một mạch
+
+Chi phí sửa một lỗi yêu cầu tăng theo giai đoạn phát hiện. Barry Boehm chỉ ra điều này trong *Software Engineering Economics* (1981): một hiểu nhầm về nghiệp vụ nếu bắt được lúc viết tài liệu thì sửa bằng cách gõ lại vài dòng, còn nếu bắt được sau khi code xong thì phải sửa code, sửa test, sửa cả dữ liệu đã sinh ra.
+
+Gate là chỗ ép dừng để kiểm. Bốn Gate không phải để tạo thủ tục, mà vì bốn artifact đó đều là nền cho artifact sau: BRD sai thì Impact Matrix phân tích nhầm phạm vi, Impact Matrix sót thì PRD thiếu rule.
+
+Ba trạng thái Gate cũng từ Stage-Gate. Cooper mô tả bốn kết quả có thể của một cổng: `Go`, `Kill`, `Hold`, `Recycle`. Luồng này giữ ba cái dùng được: `Approved` ứng với Go, `Need Revision` ứng với Recycle, và `Approved with Notes` là Go kèm điều kiện, cho phép đi tiếp mà không mất dấu việc còn treo.
+
+### Vì sao phân cỡ yêu cầu
+
+Rolling wave planning nói mức chi tiết nên tỉ lệ với mức bất định. Một yêu cầu chạm một màn, không đổi dữ liệu, không đụng rule cũ thì bất định thấp, nên không cần phân tích ảnh hưởng và so sánh phương án.
+
+Quy trình nào cũng bị bỏ khi chi phí tuân thủ vượt giá trị nó mang lại. Phân cỡ giữ cho chi phí đó tương xứng với rủi ro.
+
+### Vì sao AI đề xuất mà người quyết
+
+Việc phân công giữa người và máy có một nguyên tắc cũ, Paul Fitts đặt ra năm 1951: giao cho mỗi bên phần nó làm tốt hơn.
+
+Máy đọc nhanh và nhớ đủ. Nó quét được toàn bộ data model, API surface và knowledge base trong vài giây, rồi chỉ ra chỗ mâu thuẫn mà người đọc tay sẽ bỏ sót.
+
+Người biết bối cảnh mà tài liệu không ghi. Vì sao đợt này ưu tiên tính năng A, tổ chức chịu được rủi ro nào, cái gì đã chốt miệng trong cuộc họp tuần trước. Những thứ đó không nằm trong bất kỳ nguồn nào AI đọc được.
+
+Nên AI dựng bản nháp và chỉ ra vấn đề, người chốt phạm vi và nghiệp vụ. Phân vai này cũng là nguyên tắc nền của AI-DLC, phương pháp do AWS định nghĩa, phát biểu dưới dạng *AI proposes, human validates*.
+
+### Phần không lấy từ đâu cả
+
+Bốn quy tắc dưới đây không có trong tài liệu học thuật nào. Chúng sinh ra từ lỗi gặp phải khi chạy quy trình trên dự án thật, rồi được viết thành quy tắc để không lặp lại:
+
+| Quy tắc | Lỗi nó chặn |
+|---|---|
+| Đánh dấu `❓BA` thay vì suy đoán | AI điền một giá trị nghe hợp lý vào ô trống, Dev code theo, tới lúc test mới phát hiện giá trị đó không có thật |
+| Knowledge base là bản chụp, chạm vùng nào đọc lại nguồn vùng đó | Rule trong knowledge base cũ hơn hệ thống. Bốn rule được phát hiện sai trong một dự án |
+| Có endpoint không có nghĩa là có tính năng | Ba lần kết luận nhầm vì thấy endpoint trong Swagger, trong khi tính năng đã bị gỡ khỏi giao diện |
+| Dọn dấu vết quy trình trước khi bàn giao | Ký hiệu nội bộ như `9A` hay `Gate 3` lọt vào tài liệu gửi Dev, người đọc không tra được chúng là gì |
+
+Một quy trình chỉ dựng từ lý thuyết sẽ thiếu bốn chỗ này. Chúng chỉ lộ ra khi chạy thật.
 
 ---
 
@@ -161,21 +200,3 @@ Chưa hợp khi:
 
 Đổi lại, nó không nói gì về việc viết code, chạy test hay triển khai. Phần đó thuộc về Dev.
 
----
-
-## Đầu ra thực tế
-
-Dự án Gamification cho UpLMS, cỡ `L`, chạy đủ chín bước và bốn Gate:
-
-| | |
-|---|---|
-| Thời gian | 23/09/2026 đến 05/10/2026 |
-| Change request | 10 |
-| Phiên bản BRD | 6 |
-| Phiên bản PRD | 8 |
-| US trong PRD | 15, chia 5 Unit |
-| Business rule | 137 |
-| Sơ đồ | 5, viết bằng Mermaid trong chính file nguồn |
-| Ảnh design | 7 |
-
-PRD cuối cùng: 139 heading, 90 bảng, publish lên Lark với đầy đủ sơ đồ và ảnh.
