@@ -2,8 +2,8 @@
 
 **Project:** Group
 **Ngày tạo:** 05/10/2026
-**Trạng thái:** 🆕 Mới khởi tạo, chưa có yêu cầu gốc
-**Cỡ yêu cầu:** *(xác định sau Bước 2)*
+**Trạng thái:** 🔄 Xong Bước 2. Chờ PO trả lời 6 câu hỏi chặn trước khi viết BRD
+**Cỡ yêu cầu:** **L** *(đề xuất)* — đủ bốn dấu hiệu, chờ PO xác nhận
 
 > Phần dưới đây ghi những gì **đã biết từ dự án Gamification**, nơi chức năng nhóm bị nhắc tới nhiều lần như một thứ chưa có. Mọi dòng đều đánh dấu nguồn. PO xác nhận lại trước khi dùng làm căn cứ.
 
@@ -51,6 +51,9 @@ Hệ quả đang thấy ở tính năng khác: bảng xếp hạng Gamification 
 
 | Loại | Nguồn |
 |---|---|
+| Yêu cầu gốc | `working/raw-inputs/yeu-cau-goc-20261005.md` — 19 hạng mục |
+| Bản làm rõ | `working/ai-drafts/clarified-requirements-20261005.md` |
+| Câu hỏi mở | `working/open-questions/open-questions-20261005.md` — 6 câu chặn |
 | **Dự án liên quan** | `.claude/projects/Gamification/` — `US16` bộ lọc bảng xếp hạng theo nhóm đang chờ chức năng này |
 | Phân biệt Nhóm và Lớp | `Gamification/working/raw-inputs/change-requests.md` mục `CR-001`, phần đối chiếu hệ thống |
 | Schema DB | [Lark → Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd) |
