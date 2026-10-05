@@ -2,7 +2,7 @@
 
 **Mục đích:** nhận yêu cầu → phân tích → sinh tài liệu **PRD theo template công ty**, làm đầu vào cho Tester · UI/UX · Dev, và viết **User Guide** sau khi phát triển xong.
 
-Hướng dẫn cho người dùng: [HUONG-DAN-SU-DUNG.md](HUONG-DAN-SU-DUNG.md) · Quy tắc chi tiết nằm trong từng command, không lặp lại ở đây.
+Tổng quan phương pháp: [OVERVIEW.md](OVERVIEW.md) · Hướng dẫn thao tác: [HUONG-DAN-SU-DUNG.md](HUONG-DAN-SU-DUNG.md) · Quy tắc chi tiết nằm trong từng command, không lặp lại ở đây.
 
 ## Phạm vi
 
