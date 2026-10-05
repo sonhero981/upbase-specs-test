@@ -73,6 +73,7 @@ Ngoài ra, DB cho thấy hệ thống là **multi-tenant** và có hạ tầng *
 | File | Nội dung |
 |---|---|
 | [15-product-direction.md](15-product-direction.md) | **Đọc trước khi viết BRD/FS.** UpLnD: đơn tenant → SaaS đa tenant, LMS → hệ phát triển năng lực. Kèm danh sách **chỗ đóng cứng UpBase** phải gỡ |
+| [16-domain-principles.md](16-domain-principles.md) | **Nguyên tắc mô hình hoá** — cái gì được chứa cái gì. Nhóm · Lớp · Lộ trình. 📌 bản chốt, chưa đầy đủ |
 
 > File 01–14 mô tả hệ thống **đang có**. File 15 mô tả nơi sản phẩm **đang đi tới**. Mọi BRD phải nói rõ yêu cầu thuộc tầng nào, và phục vụ UpBase-only hay mọi tenant.
 

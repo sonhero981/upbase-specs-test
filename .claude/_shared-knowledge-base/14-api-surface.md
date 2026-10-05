@@ -77,6 +77,7 @@ Cập nhật dần. Mỗi dòng là một lần suýt kết luận sai.
 | `Examination` (Ops, 8 op) | ❌ Không có tính năng | PO 23/09/2026 |
 | `Entrance Test` (LMS, 3 op) | ❌ Không có tính năng | PO 23/09/2026 |
 | `POST /api/v1/courses/{id}/trial/upgrade-now` (LMS) | ❌ **Không có khoá Trial** | PO 23/09/2026 |
+| `Department Management` (Ops, 9 op) | ❌ **Không chạy.** Trước đây chỉ dành cho `staffs` | PO 05/10/2026 |
 | `Event Test Management` (Ops, 10 op) · `Event Management` (Ops, 1 op) | `❓BA` — chưa xác nhận | — |
 
 > **Ba lần trong một buổi phân tích.** Tỷ lệ endpoint "chết" trong hệ này đủ cao để **không bao giờ suy ra tính năng từ sự tồn tại của endpoint**.
@@ -87,7 +88,7 @@ Cập nhật dần. Mỗi dòng là một lần suýt kết luận sai.
 |---|---|---|
 | `Roles Management` | 8 | CRUD role, gán/gỡ staff khỏi role |
 | `Permissions management` | 2 | `permissions`, `state-permission-initial` |
-| `Group Management` | 9 | CRUD group, gán user |
+| `Group Management` | 9 | CRUD group, gán user. ✅ **Đang chạy** — phục vụ tạo nhóm để gửi thông báo từ Ops (PO 05/10/2026) |
 | `Department Management` | 9 | `list-unit`, `parent-list` → **cây phòng ban** |
 | `Staff Position` / `Staff Level` / `Staff Facility` | 6/2/5 | Chức danh, cấp bậc, cơ sở của nhân sự |
 

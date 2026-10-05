@@ -20,6 +20,7 @@ Ngoài phạm vi: UpAcademy · Admin · Super Admin — xem `.claude/_shared-kno
 | Nghiệp vụ | `01`–`11` | Course · Question Bank · Assessment · Class · Grading · User · Learning Experience · Certificate · Notification · Storyline · Dashboard |
 | Kỹ thuật | `12`–`14` | Data Model (85 bảng) · Mail Events (30 mail) · API Surface (708 operation) |
 | Định hướng | `15` | UpLnD Platform, 4 portal, chỗ đóng cứng UpBase |
+| **Nguyên tắc** | `16` | **Cái gì được chứa cái gì.** Đọc trước khi thiết kế một thực thể mới |
 
 ### Quy ước ký hiệu
 
@@ -63,6 +64,8 @@ Ngoài phạm vi: UpAcademy · Admin · Super Admin — xem `.claude/_shared-kno
 - **Không bịa.** Thiếu nhẹ → `Assumption`; thiếu ảnh hưởng scope/rule/data/flow → `Open Question`
 - Không ghi đè file đã có — dùng version mới
 - Không tự chốt quyết định thay người dùng; chỉ gợi ý dưới nhãn `Recommendation`
+- **Không thiết kế kỹ thuật chi tiết.** Mục `TDD` trong PRD chỉ nêu **hướng và ràng buộc nghiệp vụ**, không vẽ sequence, không thiết kế bảng chi tiết, không chọn thuật toán. Dev sẽ phân tích lại bằng công cụ của họ; một thiết kế sai từ PO **neo suy nghĩ người đọc** và tốn công gỡ hơn là không có gì. Ghi *cái gì phải đúng*, để Dev quyết *làm thế nào*.
+- **Không dựng danh sách câu hỏi kỹ thuật cho Dev.** Câu hỏi về hiệu năng, cấu hình Casbin, cách lưu trữ cây là việc Dev tự xác định khi làm. PO chỉ hỏi những câu mà **câu trả lời làm đổi phạm vi hoặc đổi business rule**.
 - **Dừng ở mức phân tích, đừng lấn sang việc của Dev.** Cần biết một cơ chế kỹ thuật có tồn tại không → **hỏi PO xác nhận**, không tự đào Swagger/DB để kết luận. Bề mặt API **không** đồng nghĩa với tính năng đang chạy — có endpoint không có nghĩa là có tính năng (xem KB `14` §2.2)
 - **Dọn dấu vết quy trình trước khi bàn giao.** Ký hiệu nội bộ (`9A`, `9C`, `Gate 3`, `Bước 5`), nhãn chờ (`🟡 chờ PO chốt`), ghi chú thay đổi (`🔄 Cấu trúc lại 23/09`, `Ban đầu tôi gộp…`) là **giàn giáo để làm việc, không phải nội dung**. Tài liệu bàn giao đọc bởi Dev, QA, Design — họ không tra được ký hiệu của workflow và không cần biết tôi đã sửa gì giữa chừng. Trạng thái duyệt thì ghi **ai duyệt**, không ghi *Gate mấy*.<br>Giữ lại: `❓BA` (ô trống thật, có người chịu trách nhiệm điền) và bảng lịch sử phiên bản viết bằng tiếng người.
 - **Không viết tắt trong tài liệu bàn giao.** `Giải O2` phải là `Giải quyết mục tiêu O2`. Ô bảng chỉ chứa mã trần (`C10`, `S12`) phải kèm nội dung ngắn, vì người đọc trên Lark không cuộn ngược đi tra được. Viết tắt tiết kiệm được vài chữ nhưng bắt người đọc trả giá.

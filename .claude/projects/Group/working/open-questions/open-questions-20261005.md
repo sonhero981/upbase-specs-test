@@ -19,74 +19,143 @@
 
 ---
 
-## `OQ-06` — Số cấp tối đa của cây. PO giao phân tích
+## `OQ-06` — Số cấp tối đa của cây. Đã đo từ dữ liệu thật
+
+### Cây tổ chức hiện tại trên Lark
+
+Đo từ `working/raw-inputs/lark-users-by-department.csv`, file xuất từ HRM:
+
+| | Số |
+|---|---|
+| Nhân sự trong cây | 384 |
+| Phòng ban riêng biệt | 53 |
+| Khối ở cấp 1 | 5 — `ECOM` · `VẬN HÀNH` · `Tech` · `CHUYỂN ĐỔI SỐ` · `BOD` |
+| **Độ sâu lớn nhất** | **4 cấp** dưới gốc |
+
+Phân bố phòng ban theo độ sâu:
+
+| Cấp | Số phòng ban | Số người |
+|---|---|---|
+| 1 | 2 | 6 |
+| 2 | 22 | 203 |
+| 3 | 27 | 166 |
+| 4 | 2 | 9 |
+
+Hai nhánh duy nhất chạm cấp 4:
+
+```
+ECOM / Trung tâm vận hành 1 / Growth 1 / Sub-Growth 1
+ECOM / Marketing B2C HN / Booking / Sub-Booking
+```
+
+Cây thật nông hơn dự đoán. Hơn một nửa nhân sự nằm ở cấp 2, và chỉ 9 người trong 384 ở cấp sâu nhất.
+
+### Đề xuất: mặc định 6 cấp, cấu hình được
+
+| | |
+|---|---|
+| Giá trị mặc định | **`6`** — thực tế dùng 4, dư 2 cấp để tổ chức mở rộng mà không phải đổi cấu hình |
+| Cách đếm | Từ **nhóm gốc là cấp 1**. Gốc ảo `(root)` của Lark không tính |
+| Phạm vi áp dụng | **Từng cây gốc**, không phải tổng. `RC-02` cho phép nhiều cây song song |
+| Cấu hình | Gắn tổ chức, không đóng cứng trong mã |
 
 ### Giới hạn số cấp giải vấn đề gì
 
-Ba vấn đề hay bị gộp làm một, nhưng mỗi cái cần một cơ chế khác nhau:
+Ba vấn đề hay bị gộp làm một, nhưng chỉ một trong ba thật sự cần tới nó:
 
-| Vấn đề | Giới hạn số cấp có giải được không |
+| Vấn đề | Giới hạn số cấp giải được không |
 |---|---|
-| Cây lỗi tạo vòng lặp: A là cha B, B lại là cha A | ❌ Giải bằng **kiểm chu trình khi di chuyển nhánh**, không phải bằng giới hạn độ sâu |
-| Truy vấn *cha bao trùm con* (`RC-07`) chậm khi cây sâu | ❌ Giải bằng **cách lưu trữ**. Bảng `departments` cũ đã có cột `tree_id`, cho thấy hệ từng đi hướng này |
-| Giao diện cây sâu quá thì không dùng được | ⚠️ Giải bằng **giới hạn hiển thị**, không phải giới hạn dữ liệu |
+| Cây lỗi tạo vòng lặp: A là cha B, B lại là cha A | ❌ Phải kiểm chu trình khi di chuyển nhánh |
+| Truy vấn *cha bao trùm con* (`RC-07`) chậm khi cây sâu | ❌ Thuộc về cách lưu trữ, là việc của Dev |
+| Người dùng vô tình tạo cây quá sâu bằng kéo thả | ✅ **Đây là việc của nó** |
 
-Nên giới hạn số cấp **không giải tốt vấn đề nào trong ba cái trên**. Giá trị thật của nó là **van an toàn chống nhập sai**: chặn người dùng vô tình tạo cây 30 cấp bằng thao tác kéo thả.
+Nên giá trị thật của giới hạn là **van an toàn chống nhập sai**, không phải để bảo vệ hiệu năng.
+---
 
-### Con số đề xuất
+## `OQ-07` · `OQ-08` · `OQ-09` — PO giao phân tích
 
-**Mặc định `5` cấp, cấu hình được theo từng tổ chức, trần cứng `10`.**
+### `OQ-07` — Xoá nhóm thì thành viên và nội dung đã gán xử lý thế nào
 
-| Giá trị | Lý do |
+**Câu hỏi này có thể không cần trả lời, vì nên bỏ luôn chức năng xoá.**
+
+Lý do nằm ở hai chỗ đã chốt:
+
+| Đã chốt | Hệ quả |
 |---|---|
-| Mặc định `5` | Cây tổ chức doanh nghiệp phổ biến có dạng Công ty → Khối → Phòng → Nhóm → Tổ. UpBase hiện ở quy mô 132 người được gán khoá, cây thực tế nhiều khả năng chỉ 3 tới 4 cấp |
-| Cấu hình được | Nhất quán với mọi cấu hình khác: gắn `tenant_id`, không đóng cứng trong mã |
-| Trần cứng `10` | Quá mức này thì giao diện cây không còn đọc được, và gần như chắc chắn là nhập sai chứ không phải cơ cấu thật |
+| Nhóm **không sinh nghĩa vụ học**, nghĩa vụ nằm ở Lớp *(nguyên tắc 6)* | Lượt ghi danh đã sinh ra **sống độc lập trong Lớp**. Xoá nhóm không đụng tới chúng |
+| `RC-11` đòi dựng lại *"tại một thời điểm quá khứ ai thuộc nhóm nào"* | Xoá nhóm là **phá chính yêu cầu này**. Báo cáo của quý trước sẽ trỏ vào một nhóm không còn tồn tại |
+| `RC-12` đã có cơ chế **lưu trữ**: ngừng nhận nội dung mới, giữ nguyên lịch sử | Đây đúng là thứ người dùng cần khi họ nghĩ mình cần "xoá" |
 
-Giới hạn áp cho **từng cây gốc**, không phải tổng. `RC-02` cho phép nhiều cây song song để thể hiện cơ cấu ma trận, mỗi cây đếm độ sâu riêng.
+**Đề xuất:**
 
-### Cách lấy con số đúng thay vì đoán
+| Nhóm thế nào | Cho làm gì |
+|---|---|
+| Chưa từng có thành viên và chưa từng gán nội dung | **Xoá được.** Đây là nhóm tạo nhầm, không có lịch sử để mất |
+| Đã từng có thành viên hoặc đã từng gán nội dung | **Chỉ lưu trữ được, không xoá.** Nút xoá ẩn đi kèm giải thích |
 
-Con số `5` ở trên là đề xuất dựa trên dạng cây phổ biến, không phải dựa trên dữ liệu thật của UpBase. Cách kiểm chứng rẻ:
+Nếu vẫn muốn giữ chức năng xoá cho mọi nhóm, thì quy tắc là: **lượt ghi danh giữ nguyên**, vì chúng sống ở Lớp. Người đang học dở vẫn học tiếp. Chỉ luật đứng *"ai vào nhóm này thì vào lớp kia"* mất đi, nên từ đó không có ai mới được thêm vào lớp qua đường này nữa.
 
-**Xuất cây tổ chức hiện có trên Lark, đếm độ sâu lớn nhất, lấy số đó cộng `2`.** Cộng dư hai cấp để tổ chức còn chỗ mở rộng mà không phải đổi cấu hình ngay.
+### `OQ-08` — Báo cáo hồi tố lùi về quá khứ bao xa
 
-Việc này hỏi Dev được vì cây Lark đã có sẵn và đã có cơ chế đồng bộ user.
+**Đề xuất: giữ toàn bộ, không dọn.**
 
-→ Thành `OQ-17`.
+Lý do là khối lượng dữ liệu quá nhỏ để phải lo. Đo từ file HRM thật:
+
+| | Số |
+|---|---|
+| Nhân sự trong cây | 384 |
+| Phòng ban | 53 |
+
+Mỗi lần một người vào hoặc ra một nhóm là một dòng. Với tỉ lệ biến động nhân sự thông thường, con số này ở mức vài trăm dòng mỗi năm. Mười năm vẫn chưa tới mức cần nghĩ tới chuyện dọn.
+
+Đổi lại, đặt một hạn lưu trữ sẽ tạo ra một loại lỗi khó chịu: báo cáo của năm ngoái chạy được, năm kia thì không, và không ai nhớ vì sao.
+
+Quyết định này cũng nhất quán với Gamification, nơi `BR-3.9` chốt *"sổ giao dịch điểm giữ toàn bộ, không giới hạn thời gian, không dọn"* với lý do tương tự.
+
+### `OQ-09` — Người có nhiều quản lý thì phạm vi dữ liệu tính thế nào
+
+`OQ-18` đã chốt hướng: **quản lý chỉ xem được nhóm mình quản lý**. Phần còn lại cần làm rõ là khi một người thuộc hai nhánh có hai quản lý khác nhau.
+
+Hai cách:
+
+| | Cách | Hệ quả |
+|---|---|---|
+| **a** ⭐ | Xem được người thì **xem toàn bộ dữ liệu học** của người đó | Quản lý nhánh A thấy cả tiến độ khoá mà X học qua nhánh B |
+| b | Chỉ xem dữ liệu phát sinh từ nội dung gán qua nhánh mình | Mỗi quản lý thấy một phần |
+
+**Đề xuất a**, vì cách b không khớp với cách dữ liệu đang lưu: tiến độ học treo vào **lượt ghi danh của Lớp**, không treo vào nhóm. Một khoá có một tiến độ, không chia được theo nhánh mà người đó thuộc về.
+
+Cách b cũng tạo ra một tình huống khó giải thích: hai quản lý cùng mở hồ sơ một người, thấy hai con số khác nhau, và không ai biết con số nào đúng.
+
+**Hệ quả phải chấp nhận:** người thuộc hai nhánh thì hai quản lý cùng thấy toàn bộ dữ liệu học của họ. Đây là hệ quả của cơ cấu ma trận mà `RC-02` cố ý cho phép, không phải lỗi phân quyền. Nếu tổ chức không muốn vậy thì phải không xếp người đó vào hai nhánh.
 
 ---
 
-## Nhóm B — cần trả lời trước Impact Analysis
+## Nhóm B — còn lại
 
-| # | Câu hỏi | Vì sao quan trọng | Hỏi ai | Blocks |
-|---|---|---|---|---|
-| `OQ-07` | **Xoá một nhóm thì thành viên và nội dung đã gán qua nhóm đó xử lý thế nào?** Gỡ ghi danh, giữ nguyên, hay chuyển sang nhóm cha | Yêu cầu chỉ nói *"xử lý"*. Ba cách cho ba kết quả khác hẳn nhau với học viên đang học dở | PO | No |
-| `OQ-08` | **Báo cáo hồi tố cần lùi về quá khứ bao xa?** | Quyết định giữa lưu toàn bộ lịch sử thành viên hay chỉ một cửa sổ | PO | No |
-| `OQ-09` | **Người có hai quản lý trở lên do thuộc nhiều nhánh thì phạm vi dữ liệu tính thế nào?** | `RC-02` cho thuộc nhiều nhánh, `RC-16` cho quản lý đọc dữ liệu nhánh mình. Hai cái gặp nhau sinh ra trường hợp này | PO | No |
-| `OQ-10` | **Gán nội dung chảy xuống nhánh con: người ở nhánh con gia nhập sau khi đã gán thì có nhận không?** | `RC-08` và `RC-09` chồng lên nhau ở đúng chỗ này | PO | No |
-| `OQ-11` | **Trang người học hiện quản lý trực tiếp: lấy quản lý nào khi học viên thuộc nhiều nhánh?** | `RC-17` nói *"quản lý trực tiếp"* số ít, nhưng `RC-02` cho phép nhiều | PO | No |
-| `OQ-12` | **Loại quan hệ ngoài quản lý, ví dụ mentor, làm ngay đợt này hay chỉ cần thiết kế mở rộng được?** | `RC-19` quyết định làm thật hay chỉ chừa chỗ | PO | No |
-| `OQ-16` | 🆕 **`Group Management` hiện làm được gì?** Nhóm phẳng hay đã có cây · một người ở được nhiều nhóm không · đang có bao nhiêu nhóm và bao nhiêu bản ghi thật · ai đang dùng | **Phần chênh giữa cái đang có và yêu cầu chính là phạm vi thật của dự án.** Không biết cái đang có thì ước lượng công sức sẽ sai | Dev | No |
-| `OQ-18` | 🆕 **`ORG.ROL.04` và `ORG.GRP.09` thuộc dự án này hay dự án khác?** | Hai mã chức năng xuất hiện trong yêu cầu. `ORG.ROL.04` là phạm vi dữ liệu theo vai trò, `ORG.GRP.09` là quy tắc người gia nhập sau tự nhận nội dung. Nếu chúng thuộc dự án khác thì `RC-09` và `RC-16` phải hoãn | PO | No |
-| `OQ-19` | 🆕 **Bộ nguyên tắc chứa "nguyên tắc 6" nằm ở đâu?** | PO dẫn nguyên tắc 6 để giải thích vì sao nhóm không được chứa nội dung. Bộ nguyên tắc đó nhiều khả năng còn chi phối chỗ khác trong dự án này | PO | No |
+| # | Câu hỏi | Vì sao quan trọng | Blocks |
+|---|---|---|---|
+| ~~`OQ-10`~~ | Người gia nhập sau có tự nhận nội dung đã gán không | ✅ **Có công tắc chọn lúc tạo nhóm.** Chuỗi: `New group members will be automatically enrolled to this group's existing course` |
+| ~~`OQ-11`~~ | Trang người học hiện quản lý nào | ✅ **Hiện nhiều quản lý** |
+| ~~`OQ-12`~~ | Quan hệ `mentor` làm ngay hay hoãn | ✅ **Làm luôn đợt này** |
+| ~~`OQ-16`~~ | `Group Management` hiện làm được gì | ✅ **Bỏ qua, coi như chưa có gì** |
+| ~~`OQ-18`~~ | `ORG.ROL.04` và `ORG.GRP.09` thuộc dự án nào | ✅ **Đơn giản hoá:** quản lý chỉ xem được nhóm mình quản lý. Không dùng cơ chế phạm vi nhiều mức ở đợt này |
+| ~~`OQ-19`~~ | Bộ nguyên tắc chứa nguyên tắc 6 ở đâu | ✅ **Chưa có trong KB, đã bổ sung** `16-domain-principles.md` |
 
 ---
 
-## Nhóm C — hỏi Dev, trước Gate 2
+## Nhóm C — đã bỏ
 
-| # | Câu hỏi | Vì sao quan trọng | Hỏi ai | Blocks |
-|---|---|---|---|---|
-| `OQ-13` | **Casbin hiện cấu hình thế nào?** Đã hỗ trợ phân quyền theo phạm vi dữ liệu động chưa | `RC-16` cần quyền đọc đổi theo cây chứ không đổi theo vai trò | Dev | No |
-| `OQ-14` | **Bảng `departments` hiện có bao nhiêu bản ghi?** | `Department Management` không chạy, nhưng dữ liệu cũ có thể vẫn còn và gây nhầm khi làm migration | Dev | No |
-| `OQ-15` | **Truy vấn phạm vi cha bao trùm con chịu được cây sâu mấy cấp và bao nhiêu người?** | `RC-07` là rule nền của mọi báo cáo | Dev | No |
-| `OQ-17` | 🆕 **Cây tổ chức trên Lark hiện sâu mấy cấp?** Xuất ra đếm độ sâu lớn nhất | Cho con số thật thay cho đề xuất `5` ở `OQ-06` | Dev | No |
-| `OQ-20` | 🆕 **Cơ chế đồng bộ học viên từ Lark hiện chạy thế nào?** Theo lịch hay theo sự kiện, khoá đối chiếu là gì, xử lý xung đột ra sao | `RC-03` mở rộng chính cơ chế này sang đồng bộ cây. Biết cái đang chạy thì mở rộng rẻ hơn dựng mới | Dev | No |
+Toàn bộ câu hỏi kỹ thuật cho Dev (`OQ-13`, `OQ-14`, `OQ-15`, `OQ-17`, `OQ-20`) **bỏ khỏi dự án này**.
+
+PO chốt ngày 05/10: Dev sẽ phân tích lại bằng công cụ của họ. Một thiết kế hoặc một giả định kỹ thuật sai từ phía PO **neo suy nghĩ người đọc**, tốn công gỡ hơn là không có gì.
+
+Quy tắc này đã ghi vào `CLAUDE.md` và `clarify-requirements.md` để áp cho mọi dự án sau.
+
+Riêng `OQ-17` *(cây Lark sâu mấy cấp)* không cần hỏi Dev nữa — đã đo được từ file HRM, xem `OQ-06`.
 
 ---
 
 ## Trạng thái
 
-Năm câu chặn đã đóng. `OQ-06` có đề xuất kèm cách kiểm chứng, không còn chặn.
-
-**Viết BRD được.** Chín câu còn lại thuộc nhóm B và C, trả lời trước Gate 2 là kịp.
+Không còn câu nào chặn. **Viết BRD được.**

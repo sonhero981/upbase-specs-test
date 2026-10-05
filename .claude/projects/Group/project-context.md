@@ -2,7 +2,7 @@
 
 **Project:** Group
 **Ngày tạo:** 05/10/2026
-**Trạng thái:** ✅ Xong Bước 2 và 3. Năm câu chặn đã đóng, `OQ-06` có đề xuất. **Sẵn sàng viết BRD**
+**Trạng thái:** ✅ Xong Bước 3. Mọi câu hỏi đã đóng hoặc có đề xuất. **Sẵn sàng viết BRD**
 **Cỡ yêu cầu:** **L** — đủ bốn dấu hiệu
 
 ---
@@ -47,7 +47,9 @@ Bảng so sánh đầy đủ chín tiêu chí: `working/ai-drafts/clarified-requ
 |---|---|
 | Yêu cầu gốc | `working/raw-inputs/yeu-cau-goc-20261005.md` — 19 hạng mục |
 | Bản làm rõ | `working/ai-drafts/clarified-requirements-20261005.md` |
-| Câu hỏi mở | `working/open-questions/open-questions-20261005.md` — 5 câu chặn đã đóng, còn 9 câu nhóm B và C |
+| Câu hỏi mở | `working/open-questions/open-questions-20261005.md` — đã đóng hết |
+| **Dữ liệu HRM** | `working/raw-inputs/lark-users-by-department.csv` — 384 nhân sự, 53 phòng ban, cây sâu 4 cấp. **Đã cắt 16 cột cá nhân** |
+| Nguyên tắc mô hình hoá | `.claude/_shared-knowledge-base/16-domain-principles.md` — nguyên tắc 6, ranh giới Nhóm với Lớp |
 | **Dự án liên quan** | `.claude/projects/Gamification/` — `US16` bộ lọc bảng xếp hạng theo nhóm đang chờ chức năng này |
 | Phân biệt Nhóm và Lớp | `Gamification/working/raw-inputs/change-requests.md` mục `CR-001`, phần đối chiếu hệ thống |
 | Schema DB | [Lark → Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd) |

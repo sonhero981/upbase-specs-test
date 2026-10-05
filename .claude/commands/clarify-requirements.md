@@ -91,6 +91,8 @@ Với mỗi requirement candidate, tra KB xem:
 
 Đặt `Blocks Next Step? = Yes` khi thiếu câu trả lời ảnh hưởng tới: **scope · business rule cốt lõi · user/role · dữ liệu bắt buộc · tích hợp quan trọng · phân quyền**.
 
+**Không đặt câu hỏi kỹ thuật cho Dev.** Hiệu năng truy vấn, cấu hình phân quyền, cách lưu trữ, chịu tải bao nhiêu — đó là việc Dev tự xác định khi làm, và hỏi sớm chỉ tạo danh sách chờ không ai trả lời. Chỉ hỏi khi **câu trả lời làm đổi phạm vi hoặc đổi business rule**, ví dụ *"cơ chế đồng bộ HRM đã có chưa"* đổi phạm vi, còn *"truy vấn chịu được cây sâu mấy cấp"* thì không.
+
 Câu hỏi phải **cụ thể và trả lời được**. Tránh câu hỏi mở kiểu *"anh muốn tính năng này thế nào?"* — thay bằng *"khi học viên bị Block giữa lúc đang làm bài, bài đang làm xử lý ra sao: huỷ, giữ nguyên, hay vẫn cho nộp?"*
 
 ---

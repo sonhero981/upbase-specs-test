@@ -120,7 +120,11 @@
 
 ## TDD
 
-*Thiết kế kỹ thuật: luồng xử lý, sequence, cơ chế. Kèm sơ đồ nếu có.*
+*Hướng kỹ thuật và ràng buộc nghiệp vụ mà cách làm nào cũng phải thoả. **Không thiết kế chi tiết.***
+
+*Viết: cơ chế nào chạy khi nào · dữ liệu nào phải lưu · cái gì không được phá. Không viết: sequence diagram, cấu trúc bảng, thuật toán, lựa chọn thư viện.*
+
+> Dev phân tích lại bằng công cụ của họ. Thiết kế sai từ PO neo suy nghĩ người đọc và tốn công gỡ hơn là không có gì. Ghi **cái gì phải đúng**, để Dev quyết **làm thế nào**.
 
 ## Database
 
