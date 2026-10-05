@@ -2,10 +2,8 @@
 
 **Project:** Group
 **Ngày tạo:** 05/10/2026
-**Trạng thái:** 🔄 Xong Bước 2. Chờ PO trả lời 6 câu hỏi chặn trước khi viết BRD
-**Cỡ yêu cầu:** **L** *(đề xuất)* — đủ bốn dấu hiệu, chờ PO xác nhận
-
-> Phần dưới đây ghi những gì **đã biết từ dự án Gamification**, nơi chức năng nhóm bị nhắc tới nhiều lần như một thứ chưa có. Mọi dòng đều đánh dấu nguồn. PO xác nhận lại trước khi dùng làm căn cứ.
+**Trạng thái:** ✅ Xong Bước 2 và 3. Năm câu chặn đã đóng, `OQ-06` có đề xuất. **Sẵn sàng viết BRD**
+**Cỡ yêu cầu:** **L** — đủ bốn dấu hiệu
 
 ---
 
@@ -13,9 +11,11 @@
 
 <!-- Bối cảnh: vì sao có yêu cầu này, đang xảy ra chuyện gì -->
 
-**Đã biết từ Gamification** *(cần PO xác nhận)*:
+Chức năng nhóm là **cây sơ đồ tổ chức đồng bộ từ HRM**, nên trong trao đổi hay gọi là "phòng ban".
 
-Chức năng nhóm là **cây sơ đồ tổ chức đồng bộ từ HRM**, nên trong trao đổi hay gọi là "phòng ban". Hiện chưa có trong UpLnD.
+**Nền đã có, chưa đủ.** `Group Management` đang chạy để tạo nhóm gửi thông báo từ Ops, nhưng là nhóm phẳng. Dự án này mở rộng nó thành cây nhiều cấp, phân loại theo nguồn, có quan hệ quản lý. `Department Management` từng làm cây cho `staffs` nhưng hiện không chạy.
+
+**HRM là Lark.** Đã đồng bộ được học viên, và Lark cũng đã có sẵn cây tổ chức. Phần cần làm là mở rộng cơ chế đồng bộ sang cả cây.
 
 Hệ quả đang thấy ở tính năng khác: bảng xếp hạng Gamification không lọc được theo nhóm, lớp hay phòng ban, nên `US16` của dự án đó phải hoãn. Quản lý trực tiếp cũng chưa có công cụ riêng vì cần đúng bộ lọc này.
 
@@ -27,15 +27,9 @@ Hệ quả đang thấy ở tính năng khác: bảng xếp hạng Gamification 
 
 <!-- Phạm vi sơ bộ, có thể chưa chắc -->
 
-**Câu hỏi phạm vi cần trả lời sớm** *(suy ra từ Gamification, chưa phải phạm vi đã chốt)*:
+**Ranh giới đã chốt:** Nhóm gắn **người**, Lớp gắn **nội dung**. Nhóm không sinh nghĩa vụ học và không được chứa gì ngoài người. Gán nội dung cho nhóm là một **luật đứng** dẫn người vào Lớp, không phải sao chép thành viên một lần.
 
-| # | Câu hỏi |
-|---|---|
-| 1 | Nhóm đồng bộ một chiều từ HRM, hay vận hành sửa được trong UpLMS Ops? |
-| 2 | Một học viên thuộc được nhiều nhóm cùng lúc không? |
-| 3 | Nhóm có cấp bậc (cây) hay phẳng? Trao đổi ở Gamification nói là **cây sơ đồ tổ chức** |
-| 4 | Nhóm khác gì với **Lớp** đang có? Hai khái niệm này từng bị lẫn ở `CR-001` của Gamification |
-| 5 | Người rời tổ chức thì nhóm xử lý thế nào? |
+Bảng so sánh đầy đủ chín tiêu chí: `working/ai-drafts/clarified-requirements-20261005.md` §4.1
 
 ## Stakeholders
 
@@ -53,7 +47,7 @@ Hệ quả đang thấy ở tính năng khác: bảng xếp hạng Gamification 
 |---|---|
 | Yêu cầu gốc | `working/raw-inputs/yeu-cau-goc-20261005.md` — 19 hạng mục |
 | Bản làm rõ | `working/ai-drafts/clarified-requirements-20261005.md` |
-| Câu hỏi mở | `working/open-questions/open-questions-20261005.md` — 6 câu chặn |
+| Câu hỏi mở | `working/open-questions/open-questions-20261005.md` — 5 câu chặn đã đóng, còn 9 câu nhóm B và C |
 | **Dự án liên quan** | `.claude/projects/Gamification/` — `US16` bộ lọc bảng xếp hạng theo nhóm đang chờ chức năng này |
 | Phân biệt Nhóm và Lớp | `Gamification/working/raw-inputs/change-requests.md` mục `CR-001`, phần đối chiếu hệ thống |
 | Schema DB | [Lark → Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd) |

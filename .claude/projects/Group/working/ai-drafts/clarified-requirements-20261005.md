@@ -1,33 +1,29 @@
 # Làm rõ yêu cầu — Group
 
-**Ngày:** 05/10/2026 · **Phiên bản:** v0.1
+**Ngày:** 05/10/2026 · **Phiên bản:** v0.2 — cập nhật 05/10 sau khi PO trả lời 5 câu hỏi chặn
 **Input:** `working/raw-inputs/yeu-cau-goc-20261005.md` — 19 hạng mục, hai nhóm `Group` và `User Group Relationship`
 **Mục đích PO nêu:** tổ chức các nhóm học tập, để gán, theo dõi và đánh giá theo từng nhóm
 
 ---
 
-## 1. Phát hiện lớn nhất — hệ thống đã có hai thứ tên gần giống
+## 1. Nền để mở rộng — đã xác nhận
 
-Tra `14-api-surface.md` mục 2.3 *Tổ chức và phân quyền*:
+PO trả lời `OQ-01` ngày 05/10:
 
-| Nhóm API | Số operation | Nội dung KB ghi |
+| Nhóm API | Trạng thái thật | Dùng được không |
 |---|---|---|
-| **`Group Management`** | 9 | CRUD group, gán user |
-| **`Department Management`** | 9 | `list-unit`, `parent-list` → **cây phòng ban** |
+| **`Group Management`** (9 operation) | ✅ **Đang chạy.** Phục vụ việc tạo nhóm để **gửi thông báo từ Ops** | ✅ **Đây là nền để mở rộng** |
+| **`Department Management`** (9 operation) | ❌ **Không chạy.** Trước đây chỉ dành cho `staffs` | ❌ Không phải nền |
 
-Và trong data model, bảng **`departments`** có cột `unit` và `tree_id`, KB ghi thẳng là *"cây phòng ban"*. Nó gắn với `staffs`, không gắn với `users`.
+Nên dự án này là **mở rộng một chức năng đang chạy**, không phải dựng mới từ đầu. Khác biệt lớn về rủi ro: có dữ liệu thật và có người đang dùng.
 
-Hai nhóm API này cộng lại bao gần hết phần khung của yêu cầu: cây nhiều cấp, CRUD nhóm, gán người vào nhóm.
+Hai hệ quả:
 
-**Nhưng không được kết luận là đã có tính năng.** KB `14` ghi ngay phía trên bảng đó:
+**Nhóm trở thành một nguồn duy nhất cho nhiều mục đích.** PO chốt: khi mở lại chức năng gửi thông báo từ Ops, màn đó chọn người nhận từ chính chức năng nhóm này. Nhóm không còn là thứ riêng của một tính năng.
 
-> *"Ba lần trong một buổi phân tích. Tỷ lệ endpoint 'chết' trong hệ này đủ cao để không bao giờ suy ra tính năng từ sự tồn tại của endpoint."*
+**Phải biết `Group Management` hiện có gì trước khi thiết kế phần thêm.** Nó đang là nhóm phẳng (CRUD group, gán user), còn yêu cầu cần cây nhiều cấp, phân loại theo nguồn, quan hệ quản lý. Phần chênh lệch đó là phạm vi thật của dự án — xem `OQ-16`.
 
-Ba trường hợp đã xác nhận chết: `Examination` (8 op), `Entrance Test` (3 op), `trial/upgrade-now`.
-
-Thêm một dữ kiện ngược chiều: ở dự án Gamification, PO đã chốt **xếp hạng theo phòng ban không làm được vì "`departments` chỉ gắn `staffs`, học viên không có phòng ban"**. Tức là dù cây phòng ban có tồn tại, nó **không phủ học viên**.
-
-→ Câu trả lời cho `OQ-01` quyết định toàn bộ phạm vi dự án này. Xem mục 5.
+Ghi lại để không mất: `14-api-surface.md` cần cập nhật `Department Management` vào bảng *"endpoint có nhưng tính năng không có"*, cùng chỗ với `Examination` và `Entrance Test`.
 
 ---
 
@@ -51,14 +47,14 @@ Thêm một dữ kiện ngược chiều: ở dự án Gamification, PO đã ch�
 
 | ID | Requirement | Type | Source | Confidence | Ghi chú |
 |---|---|---|---|---|---|
-| `RC-01` | Cây nhóm nhiều cấp, số cấp tối đa cấu hình được. Mỗi nhóm có mã, tên, mô tả, nhóm cha | Data · Functional | Mục 1 | High | Trùng khung với `Department Management` nếu nhóm đó còn sống |
-| `RC-02` | Quan hệ người và nhóm là nhiều-nhiều. Nhiều cây gốc song song để thể hiện cơ cấu ma trận | Data | Mục 2 | High | **Đây là chỗ khác `departments` rõ nhất** — `staffs.department_id` là một-nhiều |
-| `RC-03` | Phân loại nhóm theo nguồn: đồng bộ HRM và tự tạo. Nguồn quyết định quyền sửa | Business Rule | Mục 3 | Medium | Cơ chế đồng bộ HRM chưa có mô tả nào |
+| `RC-01` | Cây nhóm nhiều cấp, số cấp tối đa cấu hình được. Mỗi nhóm có mã, tên, mô tả, nhóm cha | Data · Functional | Mục 1 | High | `Department Management` đã chết nên không dùng lại được. Mở rộng từ `Group Management` đang phẳng |
+| `RC-02` | Quan hệ người và nhóm là nhiều-nhiều. Nhiều cây gốc song song để thể hiện cơ cấu ma trận | Data | Mục 2 | High | `Group Management` hiện gán được user, nhưng chưa rõ có cho một người ở nhiều nhóm không — xem `OQ-16` |
+| `RC-03` | Phân loại nhóm theo nguồn: đồng bộ HRM và tự tạo. Nguồn quyết định quyền sửa | Business Rule | Mục 3 | Medium | HRM là **Lark**. Đã đồng bộ được học viên, Lark cũng đã có sẵn cây tổ chức. Cần mở rộng sang đồng bộ cây |
 | `RC-04` | Tạo, sửa, di chuyển nhóm. Di chuyển nhánh thì nhánh con đi theo và quan hệ quản lý tính lại | Functional | Mục 4 | High | |
 | `RC-05` | Thêm gỡ thành viên thủ công, một hoặc nhiều người, có tìm kiếm | Functional | Mục 5 | High | |
 | `RC-06` | Thêm gỡ thành viên theo lô: tệp mẫu, tải lên, đối soát từng dòng, báo lỗi theo dòng | Functional | Mục 6 | High | |
 | `RC-07` | Phạm vi nhóm cha bao trùm toàn bộ nhánh con ở mọi màn đọc dữ liệu | Business Rule | Mục 7 | High | **Rule nền**, chi phối mọi báo cáo. Ảnh hưởng hiệu năng truy vấn |
-| `RC-08` | Gán nội dung cho nhóm, có tuỳ chọn chảy xuống nhánh con, mặc định tắt | Functional | Mục 8 | High | **Đường gán thứ hai song song với Lớp** — xem `OQ-04` |
+| `RC-08` | Gán nội dung cho nhóm, có tuỳ chọn chảy xuống nhánh con, mặc định tắt | Functional | Mục 8 | High | Gán cho nhóm là **luật đứng**, không phải sao chép một lần. Vẫn đi qua Lớp để sinh lượt ghi danh |
 | `RC-09` | Cấu hình từng nhóm: người vào sau có tự nhận nội dung đã gán không, toàn bộ hay chỉ còn hiệu lực | Business Rule | Mục 9 | Medium | Chạm logic ghi danh hiện có |
 | `RC-10` | Danh sách nhóm dạng cây hoặc bảng, lọc theo nguồn, cấp, trạng thái, người quản lý | Screen | Mục 10 | High | |
 | `RC-11` | Nhật ký thay đổi thành viên, đủ để dựng lại ai thuộc nhóm nào tại một thời điểm quá khứ | Data · NFR | Mục 11 | High | Yêu cầu lưu lịch sử có dấu thời gian, giống ràng buộc `C3` ở Gamification |
@@ -66,7 +62,7 @@ Thêm một dữ kiện ngược chiều: ở dự án Gamification, PO đã ch�
 | `RC-13` | Một nhóm có một hoặc nhiều người quản lý, là người dùng chứ không phải vai trò | Data | Mục 13 | High | |
 | `RC-14` | Quản lý suy ra theo cây: không chỉ định đích danh thì lấy quản lý của nhóm cha gần nhất. Tính động | Business Rule | Mục 14 | High | Quan hệ tính lúc đọc, không lưu cứng |
 | `RC-15` | Chỉ định quản lý đích danh trên hồ sơ, ghi đè kết quả suy ra từ cây | Functional | Mục 15 | Medium | Tình huống dùng chưa rõ — xem mục 2 |
-| `RC-16` | Người quản lý đọc được dữ liệu của nhánh mình, không đọc nhánh khác cùng cấp. Chọn được ở `ORG.ROL.04` | Role-Permission | Mục 16 | Low | **Vùng KB chưa phủ.** Hệ thống dùng Casbin |
+| `RC-16` | Người quản lý đọc được dữ liệu của nhánh mình, không đọc nhánh khác cùng cấp. Chọn được ở `ORG.ROL.04` | Role-Permission | Mục 16 | Low | `ORG.ROL.04` là mã chức năng chưa làm: mỗi vai trò gắn một phạm vi. Vùng KB chưa phủ, hệ dùng Casbin |
 | `RC-17` | Trang người học hiện quản lý trực tiếp và đường liên hệ | Screen | Mục 17 | High | Phần duy nhất chạm UpLMS phía học viên |
 | `RC-18` | Quản lý bị khoá hoặc rời nhóm thì cảnh báo nhóm trống quản lý, cho chuyển quan hệ sang người khác | Functional | Mục 18 | Medium | |
 | `RC-19` | Khai thêm loại quan hệ ngoài quản lý, ví dụ mentor, dùng chung cơ chế gán và phạm vi dữ liệu | Data · Functional | Mục 19 | Medium | Yêu cầu thiết kế mở rộng được từ đầu |
@@ -75,20 +71,39 @@ Thêm một dữ kiện ngược chiều: ở dự án Gamification, PO đã ch�
 
 ## 4. Ba chỗ nhóm mới đụng thứ đang chạy
 
-### 4.1 Nhóm và Lớp
+### 4.1 Nhóm và Lớp — PO đã chốt
 
-`classes` đã có và cũng gom người học lại. Ở dự án Gamification, hai khái niệm này từng bị lẫn, `CR-001` phải làm rõ: *"phòng ban chính là chức năng nhóm, đồng bộ từ HRM, khác với Lớp"*.
+Khác nhau ở **đối tượng gắn vào**: Nhóm gắn **người**, Lớp gắn **nội dung**.
 
-Khác biệt nhìn thấy được:
-
-| | Lớp | Nhóm theo yêu cầu này |
+| | Nhóm | Lớp |
 |---|---|---|
-| Gắn với | Một khoá học cụ thể | Không gắn khoá |
-| Vòng đời | Theo đợt học | Lâu dài, theo cơ cấu tổ chức |
-| Người thuộc | Ghi danh vào lớp | Thành viên theo cây |
-| Cấu trúc | Phẳng | Cây nhiều cấp |
+| Trả lời câu hỏi | **Ai** thuộc về đâu | Ai học **cái gì**, trong **khoảng nào** |
+| Gắn với | Người. Không có nội dung | Đúng một đối tượng nội dung: một khoá hoặc một lộ trình |
+| Thời gian | Không có. Phòng Marketing không có hạn | Có. Thời hạn, ngày kích hoạt riêng từng người |
+| Sinh ra gì | **Không sinh nghĩa vụ học.** Chỉ là địa chỉ để gán | **Sinh nghĩa vụ học.** Vào lớp là có việc phải làm |
+| Tiến độ học nằm ở đâu | Không có | Treo vào lượt ghi danh của lớp, không treo vào người |
+| Quan hệ với người | Nhiều-nhiều, lồng nhau. Một người ở nhiều nhánh | Một người vào một lớp là một lượt ghi danh |
+| Nguồn gốc | Có thể đến từ HRM, chỉ đọc | Luôn do L&D tạo |
+| Vòng đời | Lâu dài, theo cơ cấu tổ chức | Theo khoá, mở rồi đóng |
+| Dùng cho | Giao hàng loạt, cộng dồn báo cáo, suy ra quản lý, phạm vi dữ liệu | Theo dõi tiến độ, chốt kết quả, cấp chứng chỉ |
 
-Nhưng cả hai đều là đường để **gán nội dung học**. Có hai đường gán song song thì phải trả lời: một người vừa trong lớp vừa trong nhóm được gán cùng khoá thì tính một hay hai lượt ghi danh.
+**Quan hệ giữa hai cái:**
+
+```
+Nhóm  ──gán nội dung──►  Lớp  ──ghi danh──►  Người học có nghĩa vụ
+ (ai)                     (ai + học gì + khi nào)
+```
+
+**Gán nội dung cho nhóm không phải là sao chép thành viên nhóm vào lớp một lần.** Nó là một **luật đứng**: ai thuộc nhóm này thì vào lớp này. Người gia nhập nhóm sau khi đã gán vẫn tự nhận được, đó là `ORG.GRP.09`. Nếu chỉ sao chép một lần thì không khác gì nhập file.
+
+**Hai cách dùng sai hay gặp**, PO nêu để tránh:
+
+| Cách dùng sai | Vỡ ở đâu |
+|---|---|
+| **Dùng Lớp làm Nhóm** — tạo *"lớp phòng Marketing"* rồi nhét mọi khoá vào | Lớp gắn đúng một nội dung và có thời hạn, phòng ban thì không. Đổi cơ cấu là phải sửa hàng chục lớp |
+| **Nhét nội dung vào Nhóm** — để nhóm *"chứa"* khoá học | Vỡ nguyên tắc 6: quan hệ nội dung với nội dung chỉ sống trong Lộ trình, quan hệ người với nội dung chỉ sống trong Lớp và Automation. **Nhóm không được chứa gì ngoài người** |
+
+`OQ-03` đã chốt: người vừa ở Lớp vừa ở Nhóm, cùng được gán một khoá, vẫn chỉ sinh **một lượt ghi danh**. Điều này nhất quán với bảng trên — nhóm không sinh nghĩa vụ học, nó chỉ dẫn người vào lớp.
 
 ### 4.2 Nhóm và phạm vi dữ liệu
 
