@@ -20,32 +20,39 @@ Ba nguyên tắc đi kèm:
 
 ---
 
-## Năm giai đoạn
+## Chín bước, năm giai đoạn
 
 ```mermaid
 flowchart TD
-    A["Yêu cầu thô"] --> B["Bước 1-3<br/>Làm rõ yêu cầu"]
-    B --> D["Bước 4<br/>BRD"]
-    D ==>|"Gate 1"| E["Bước 5-6<br/>Impact Matrix"]
-    E ==>|"Gate 2"| F["Bước 7-8<br/>So sánh phương án"]
-    F ==>|"Gate 3"| H["Bước 9<br/>PRD"]
-    H ==>|"Gate 4"| I["Publish Lark"]
-    I --> J["User Guide<br/>sau khi Dev xong"]
+    A["Yêu cầu thô"] --> B1["Bước 1 · Nhận input"]
+    B1 --> B2["Bước 2 · Phân tích và làm rõ"]
+    B2 --> B3["Bước 3 · Bổ sung thông tin"]
+    B3 -.->|"còn câu hỏi chặn"| B2
+    B3 --> B4["Bước 4 · Viết BRD"]
+    B4 ==>|"Gate 1"| B5["Bước 5 · Chốt phạm vi liên quan"]
+    B5 --> B6["Bước 6 · Dựng Impact Matrix"]
+    B6 ==>|"Gate 2"| B7["Bước 7 · Chuẩn bị phương án"]
+    B7 --> B8["Bước 8 · So sánh và đề xuất"]
+    B8 ==>|"Gate 3"| B9["Bước 9 · Sinh PRD"]
+    B9 ==>|"Gate 4"| PUB["Publish Lark"]
+    PUB --> UG["User Guide<br/>sau khi Dev xong"]
 ```
 
-*Mũi tên đậm là Gate. Trượt Gate nào thì quay về bước sinh ra artifact đó: Gate 1 về Bước 3, Gate 2 về Bước 5, Gate 3 về Bước 7, Gate 4 sửa theo mã lỗi cụ thể.*
+*Mũi tên đậm là Gate. Nét đứt giữa Bước 3 và Bước 2 là vòng lặp: còn câu hỏi chặn thì quay lại phân tích, chưa viết BRD.*
 
-| Giai đoạn | Bước | Kết quả | Gate |
-|---|---|---|---|
-| Làm rõ yêu cầu | 1–3 | Bản yêu cầu đã làm rõ, danh sách câu hỏi mở | — |
-| BRD | 4 | Business Requirement Document | Gate 1 |
-| Phân tích ảnh hưởng | 5–6 | Related Map, Impact Matrix | Gate 2 |
-| Solution | 7–8 | So sánh phương án, quyết định kỹ thuật | Gate 3 |
-| PRD | 9 | PRD theo template công ty | Gate 4 |
+| Bước | Làm gì | Kết quả |
+|---|---|---|
+| **1** | PO đưa yêu cầu thô vào: mô tả vấn đề, yêu cầu từ stakeholder, biên bản họp, tài liệu tham khảo | File trong `working/raw-inputs/` |
+| **2** | AI đọc yêu cầu, tra knowledge base, tách ra ba thứ: danh sách requirement ứng viên kèm mức tin cậy, phạm vi sơ bộ chia In/Out/Potential, và danh sách câu hỏi mở có đánh dấu câu nào chặn bước sau | Bản làm rõ + bảng câu hỏi mở |
+| **3** | PO trả lời câu hỏi. AI cập nhật bản làm rõ. **Còn câu hỏi chặn thì quay lại Bước 2**, không đi tiếp | Bản làm rõ đã đủ để viết BRD |
+| **4** | Viết BRD: vấn đề, số liệu chứng minh, mục tiêu, stakeholder, phạm vi, danh sách US ở mức tên | `docs/brd/brd-v0.1.md` → **Gate 1** |
+| **5** | Quét knowledge base, schema và Swagger, trình bảng **Related Features & Docs Map**: module nào, màn nào, bảng nào, endpoint nào, rule nào có liên quan. PO xác nhận đủ hay sót | Bản đồ phạm vi liên quan đã được PO chốt |
+| **6** | Dựng Impact Matrix từ bản đồ đó: cái gì bị chạm, chạm tới mức nào, rule nào xung đột với rule hiện có | `working/impact-analysis/impact-matrix-v0.1.md` → **Gate 2** |
+| **7** | Hỏi PO đã có định hướng giải pháp chưa. Có thì nhận xét điểm mạnh và lỗ hổng, gợi ý thêm một hai phương án thay thế. Chưa có thì AI dựng các phương án từ đầu | Danh sách phương án để so sánh |
+| **8** | So sánh các phương án theo: phù hợp nghiệp vụ, tác động tới người dùng, tác động hệ thống và dữ liệu, công sức, rủi ro, phụ thuộc. Kèm khuyến nghị có điều kiện, không phải quyết định cuối | `working/solution-options/solution-comparison-v0.1.md` → **Gate 3** |
+| **9** | Sinh PRD qua bốn chặng, xem bên dưới | `docs/prd/prd-<tính năng>-v0.1.md` → **Gate 4** |
 
-Sau Gate 4: publish lên Lark, và viết User Guide khi Dev làm xong.
-
-Bước 9 chia bốn chặng nhỏ, mỗi chặng có việc riêng:
+Bước 9 chia bốn chặng vì nó là bước nặng nhất:
 
 ```
 9A   Khung PRD + danh sách US        → dừng, PO confirm danh sách
@@ -53,6 +60,21 @@ Bước 9 chia bốn chặng nhỏ, mỗi chặng có việc riêng:
 9B   Field Intake                     → dừng, PO trả lời bảng field
 9C   Viết chi tiết từng US
 ```
+
+Năm giai đoạn gộp chín bước lại: làm rõ yêu cầu (1-3), BRD (4), phân tích ảnh hưởng (5-6), solution (7-8), PRD (9).
+
+### Vì sao tách nhỏ thay vì gộp
+
+Mỗi ranh giới bước là **một chỗ người phải trả lời**. Gộp hai bước lại nghĩa là bỏ một chỗ dừng.
+
+Bước 2 và 3 tách ra vì chúng là **vòng lặp**, không phải hai việc nối tiếp. AI phân tích rồi hỏi, người trả lời, AI phân tích lại. Vòng này chạy tới khi hết câu hỏi chặn. Gộp thành một bước thì không diễn đạt được chỗ lặp.
+
+Bước 5 và 6 tách ra vì **Impact Matrix chỉ đúng khi phạm vi đúng**. Bước 5 trình bản đồ phạm vi để PO xác nhận trước; nếu phạm vi sót một module thì ma trận ở Bước 6 phân tích nhầm chỗ, và sai này không lộ ra cho tới lúc Dev làm.
+
+Bước 7 và 8 tách ra vì Bước 7 **rẽ nhánh theo câu trả lời của PO**. PO đã có định hướng thì AI nhận xét và bổ sung phương án thay thế. PO chưa có thì AI dựng từ đầu. Hai đường khác nhau, dẫn tới cùng một việc ở Bước 8.
+
+Bước 1 tách riêng vì nó không có việc của AI. Nó là chỗ để đặt input đúng chỗ, và cũng là chỗ phát hiện sớm rằng yêu cầu chưa đủ để bắt đầu.
+
 
 ---
 
