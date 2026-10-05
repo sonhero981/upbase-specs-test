@@ -22,6 +22,19 @@ Ba nguyên tắc đi kèm:
 
 ## Năm giai đoạn
 
+```mermaid
+flowchart TD
+    A["Yêu cầu thô"] --> B["Bước 1-3<br/>Làm rõ yêu cầu"]
+    B --> D["Bước 4<br/>BRD"]
+    D ==>|"Gate 1"| E["Bước 5-6<br/>Impact Matrix"]
+    E ==>|"Gate 2"| F["Bước 7-8<br/>So sánh phương án"]
+    F ==>|"Gate 3"| H["Bước 9<br/>PRD"]
+    H ==>|"Gate 4"| I["Publish Lark"]
+    I --> J["User Guide<br/>sau khi Dev xong"]
+```
+
+*Mũi tên đậm là Gate. Trượt Gate nào thì quay về bước sinh ra artifact đó: Gate 1 về Bước 3, Gate 2 về Bước 5, Gate 3 về Bước 7, Gate 4 sửa theo mã lỗi cụ thể.*
+
 | Giai đoạn | Bước | Kết quả | Gate |
 |---|---|---|---|
 | Làm rõ yêu cầu | 1–3 | Bản yêu cầu đã làm rõ, danh sách câu hỏi mở | — |
@@ -69,6 +82,19 @@ Sau Bước 2, AI quét nhanh knowledge base, DB và Swagger rồi phân cỡ:
 | **M** | Chạm tối đa 2 module · thêm field nhưng không đổi quan hệ bảng · không có conflict · đã rõ hướng giải | Bước 1–6 → Bước 9 | Gate 1, 2, 4 |
 | **L** | Chạm từ 3 module trở lên, hoặc đổi data model, hoặc có conflict, hoặc có nhiều hướng giải | Đủ 9 bước | Đủ 4 Gate |
 
+```mermaid
+flowchart LR
+    R["Yêu cầu đã<br/>làm rõ"] --> C{"Phân cỡ"}
+    C -->|"S"| S1["Bước 1-3<br/>PRD rút gọn 1 US"]
+    C -->|"M"| M1["Bước 1-6<br/>rồi Bước 9"]
+    C -->|"L"| L1["Đủ 9 bước"]
+    S1 --> S2["Gate 4"]
+    M1 --> M2["Gate 1 · 2 · 4"]
+    L1 --> L2["Gate 1 · 2 · 3 · 4"]
+```
+
+*Cỡ quyết định bỏ giai đoạn nào. Cỡ `S` bỏ cả phân tích ảnh hưởng lẫn so sánh phương án, cỡ `M` chỉ bỏ so sánh phương án.*
+
 Ba quy tắc bắt buộc:
 
 1. Nghi ngờ thì lên cỡ. Không chắc `S` hay `M` thì chọn `M`
@@ -97,6 +123,22 @@ Ba quy tắc bắt buộc:
 ```
 
 `project-decisions.md` là bộ nhớ của dự án. AI tra file này để không hỏi lại câu đã có đáp án.
+
+Artifact của giai đoạn trước là đầu vào của giai đoạn sau, và cuối cùng dồn hết vào PRD:
+
+```mermaid
+flowchart LR
+    BRD["BRD"] --> P1["Problem · Analytics<br/>Objective · Out of scope<br/>Stakeholder"]
+    IM["Impact Matrix"] --> P2["Database · API<br/>Data Field của từng US"]
+    SC["So sánh<br/>phương án"] --> P3["Solution · TDD"]
+    USL["Danh sách US<br/>đã chốt"] --> P4["Unit<br/>Specific Requirement"]
+    P1 --> PRD["PRD"]
+    P2 --> PRD
+    P3 --> PRD
+    P4 --> PRD
+```
+
+*Không mục nào của PRD viết từ con số không. Mỗi mục truy được về một artifact đã qua Gate.*
 
 ---
 
