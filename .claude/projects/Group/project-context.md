@@ -90,8 +90,11 @@ Bảng so sánh đầy đủ chín tiêu chí: `working/ai-drafts/clarified-requ
 
 ### Đã publish
 
-| Artifact | Node token | URL | Lần publish gần nhất |
+| Artifact | Document token | URL | Lần publish gần nhất |
 | --- | --- | --- | --- |
+| **PRD v0.1** | `Jg7ld8UCzoeMiAxW5ielxlC4gGg` | https://upbasevn.sg.larksuite.com/docx/Jg7ld8UCzoeMiAxW5ielxlC4gGg | 06/10/2026 |
+
+Đối chiếu sau khi publish: **2.326 block** · heading 14/32/124/51 khớp file · **45 bảng** khớp · **4 bảng trắng** từ 4 sơ đồ · không còn khối mã sơ đồ nào sót · 205 gạch đầu dòng khớp.
 
 ## Jira
 
