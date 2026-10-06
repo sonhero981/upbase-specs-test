@@ -15,7 +15,8 @@ Input: artifact cần publish + project — `$ARGUMENTS`
 | Kiểm | Xử lý nếu thiếu |
 |---|---|
 | Artifact ở trạng thái **confirmed** (đã qua Gate) | Chưa → **dừng, không publish** |
-| **Lark target** — wiki space + parent node | Đọc từ `project-context.md` mục `Lark`. Thiếu → hỏi người dùng rồi ghi lại vào đó |
+| **Lark target** — wiki space + **node dự án** | Đọc từ `project-context.md` mục `Lark`. Thiếu → hỏi người dùng rồi ghi lại vào đó |
+| **Node dự án đã tồn tại chưa** | Chưa → **tạo node dự án trước**, xem `B3a`. Không publish tài liệu thẳng vào node cha chung |
 | **Kết nối Lark** | Xem §Kết nối bên dưới |
 
 ---
@@ -142,14 +143,59 @@ Script đọc `order.txt` trong thư mục ảnh (`<tên file>|<chú thích>` m�
 
 ## B3 — Tạo / cập nhật (idempotent)
 
+### B3a — Node dự án phải có trước, tài liệu nằm trong đó
+
+Cấu trúc wiki là **hai tầng**. Tài liệu **không bao giờ** nằm thẳng dưới node cha chung:
+
+```
+02. Execution — Epics & Features     ← node cha chung, nhiều dự án
+├── Gamification                     ← node dự án
+│   └── [PRD] Gamification           ← tài liệu
+└── Group                            ← node dự án
+    └── [PRD] Study Group            ← tài liệu
+```
+
+Trước khi publish tài liệu đầu tiên của một dự án:
+
+| Bước | Làm gì |
+|---|---|
+| 1 | **Liệt kê node con** của node cha chung, tìm node mang tên dự án |
+| 2 | **Chưa có → tạo node dự án trước.** Tên node là tên dự án, không kèm loại tài liệu |
+| 3 | Publish tài liệu với `--parent-token` là **node dự án**, không phải node cha chung |
+| 4 | Lưu **cả hai token** vào `project-context.md`: node dự án và node tài liệu |
+
+```bash
+# 1 — tìm node dự án
+lark-cli api GET /open-apis/wiki/v2/spaces/<space_id>/nodes \
+  --params '{"parent_node_token":"<node cha chung>","page_size":50}' \
+  --jq '.data.items[] | {title,node_token}'
+
+# 2 — chưa có thì tạo
+lark-cli api POST /open-apis/wiki/v2/spaces/<space_id>/nodes \
+  --data '{"obj_type":"docx","node_type":"origin","parent_node_token":"<node cha chung>","title":"<Tên dự án>"}'
+
+# 3 — publish tài liệu vào node dự án
+lark-cli docs +create --doc-format markdown --content @<file>.md \
+  --title "<Tên tài liệu>" --parent-token <node DỰ ÁN>
+```
+
+> ⚠️ **Đã sai một lần (06/10/2026, dự án Group).** Publish thẳng PRD vào `02. Execution` cùng cấp với các node dự án khác. Người dùng phải tự tạo node `Group` rồi kéo tài liệu vào.
+>
+> Một dự án sinh ra **nhiều tài liệu** — BRD, PRD, user guide, bản sau này. Tất cả phải gom dưới một node dự án, nếu không node cha chung sẽ thành một đống phẳng.
+
+### B3b — Tạo hay cập nhật
+
 Tra node đã lưu ở `project-context.md` mục `Lark → Đã publish`:
 
 | Trạng thái | Làm gì |
 |---|---|
-| Chưa có | Tạo node mới dưới parent → **lưu lại node token + URL** |
-| Đã có | Cập nhật nội dung node đó |
+| Chưa có node dự án | Tạo node dự án → rồi tạo tài liệu bên trong → **lưu cả hai token** |
+| Có node dự án, chưa có tài liệu | Tạo tài liệu dưới node dự án → **lưu token tài liệu** |
+| Đã có cả hai | Cập nhật nội dung tài liệu đó |
 
 **Không tạo trùng.** Publish lại cùng một artifact phải cập nhật đúng node cũ.
+
+> **Tên tài liệu trên Lark có thể khác tên file.** Người dùng đổi tên trên Lark là chuyện thường — ví dụ `[PRD] Nhóm học viên` thành `[PRD] Study Group`. Lần publish sau **giữ nguyên tên họ đã đặt**, chỉ cập nhật nội dung. Định danh là **token**, không phải tên.
 
 ---
 
@@ -175,12 +221,16 @@ API trả `200` **không có nghĩa nội dung vào đúng chỗ**. Sau khi publ
 Cập nhật `project-context.md`:
 
 ```markdown
+- **Node dự án:** `<tên>` — `<node_token>`
+
 ### Đã publish
 
-| Artifact | Node token | URL | Lần publish gần nhất |
-| --- | --- | --- | --- |
-| PRD v0.1 | | | |
+| Artifact | Tên trên Lark | Node token | Document token | URL | Lần publish gần nhất |
+| --- | --- | --- | --- | --- | --- |
+| PRD v0.1 | | | | | |
 ```
+
+Ghi **cả node token lẫn document token**: node token để di chuyển hay đổi tên, document token để cập nhật nội dung. Ghi thêm **tên trên Lark** nếu nó khác tên file.
 
 ---
 

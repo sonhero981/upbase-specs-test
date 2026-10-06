@@ -27,3 +27,10 @@
 - [ ] **[BLOCK]** Đã **đọc lại** node và đối chiếu: số heading · số dòng từng bảng · không mục nào bị gộp/mất
 - [ ] Lệch → đã **báo cụ thể mục nào thiếu**
 - [ ] Đã cập nhật `project-context.md` mục `Lark → Đã publish` (node token · URL · ngày)
+
+## Cấu trúc wiki
+- [ ] **[BLOCK]** **Node dự án đã tồn tại?** Chưa → **tạo node dự án trước**, rồi mới publish tài liệu vào trong nó
+- [ ] Tài liệu **không** nằm thẳng dưới node cha chung — một dự án sinh nhiều tài liệu, phải gom lại
+- [ ] Người dùng đã đổi tên tài liệu trên Lark → **giữ nguyên tên họ đặt**, chỉ cập nhật nội dung
+- [ ] Lưu **cả node token lẫn document token** vào `project-context.md`
+

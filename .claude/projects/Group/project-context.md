@@ -86,13 +86,26 @@ Bảng so sánh đầy đủ chín tiêu chí: `working/ai-drafts/clarified-requ
 ## Lark
 
 - **Wiki space:** `7660816820865093342`
-- **Parent node:** [`02. Execution — Epics & Features`](https://upbasevn.sg.larksuite.com/wiki/X3hhwv2MxizpFgkVudVl7e52gUc) — `X3hhwv2MxizpFgkVudVl7e52gUc`
+- **Node cha chung:** [`02. Execution — Epics & Features`](https://upbasevn.sg.larksuite.com/wiki/X3hhwv2MxizpFgkVudVl7e52gUc) — `X3hhwv2MxizpFgkVudVl7e52gUc`
+- **Node dự án:** `Group` — `FwwEwV4V7ilx77k6LColwj3OgDf`
+
+Cấu trúc: tài liệu nằm **trong node dự án**, không nằm thẳng dưới node cha chung.
+
+```
+02. Execution — Epics & Features
+├── Gamification
+│   └── [PRD] Gamification
+└── Group                      ← node dự án
+    └── [PRD] Study Group      ← tài liệu
+```
 
 ### Đã publish
 
-| Artifact | Document token | URL | Lần publish gần nhất |
-| --- | --- | --- | --- |
-| **PRD v0.1** | `Jg7ld8UCzoeMiAxW5ielxlC4gGg` | https://upbasevn.sg.larksuite.com/docx/Jg7ld8UCzoeMiAxW5ielxlC4gGg | 06/10/2026 |
+| Artifact | Tên trên Lark | Node token | Document token | URL | Lần publish gần nhất |
+| --- | --- | --- | --- | --- | --- |
+| **PRD v0.1** | `[PRD] Study Group` | `UAIEw1tKfirmt3kUicZle3NTgfd` | `Jg7ld8UCzoeMiAxW5ielxlC4gGg` | https://upbasevn.sg.larksuite.com/docx/Jg7ld8UCzoeMiAxW5ielxlC4gGg | 06/10/2026 |
+
+> ⚠️ **Tên trên Lark khác tên file.** File là `[PRD] Nhóm học viên`, trên Lark người dùng đặt là `[PRD] Study Group`. Lần publish sau **giữ nguyên tên trên Lark**, chỉ cập nhật nội dung.
 
 Đối chiếu sau khi publish: **2.326 block** · heading 14/32/124/51 khớp file · **45 bảng** khớp · **4 bảng trắng** từ 4 sơ đồ · không còn khối mã sơ đồ nào sót · 205 gạch đầu dòng khớp.
 
