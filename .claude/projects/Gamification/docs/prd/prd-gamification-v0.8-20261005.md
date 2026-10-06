@@ -354,6 +354,365 @@ flowchart LR
 | GET | `/api/v1/gamification/learners` | Mới | Danh sách học viên kèm hạng, theo khoảng ngày — `US12` |
 | GET | `/api/v1/gamification/learners/export` | Mới | Xuất danh sách ra **Excel** theo khoảng ngày đang chọn — `US12` |
 
+## Frontend
+
+*Technical design phía FE: lms-fe (`apps/lms-pro`, `apps/lms-test`) và ops-fe. Shape request/response, enum, mã lỗi xem `[TD-short] Gamification` của BE.*
+
+### 1. Overview
+
+| App | Screen / feature | US |
+|---|---|---|
+| lms-pro | Page `/gamification` (summary strip + leaderboard), panel How-to, Achievement history, tab Badges trong My Profile, points/level widget ở My Learning, achievement toast | US1–US7 |
+| lms-test | Achievement toast | US2 |
+| ops-fe | Settings page (5 block + leaderboard preview), Learners list + export, permission | US8–US12, US14, US15 |
+
+Dependency mới: `socket.io-client` v4 (lms-pro, lms-test). Env mới: `NEXT_PUBLIC_GAMIFICATION_SOCKET_URL`.
+
+---
+
+### 2. Module structure
+
+#### 2.1. lms-fe
+
+```
+features/gamification/src/
+  api/          GamificationAPI, mappers
+  hooks/        useGamificationMe, useLeaderboard, useLeaderboardMe, useAchievementHistory, useMyBadges
+  components/
+    summary/    SummaryStrip
+    panels/     HowToDrawer, AchievementHistory
+    leaderboard/ LeaderboardCard, RangeFilter, TopThreeRow, LeaderboardRow, MyPosition
+    badges/     BadgeGallery, BadgeImage
+    my-learning/ GamificationStat
+  realtime/     useGamificationSocket, toastDeduper, AchievementToast, achievementMessages
+  pages/        GamificationPage
+  mocks/
+libs/hooks/useGamificationVisibility.ts
+libs/utils/   formatThousands, pluralize, formatInOrgTz, toDateParam
+apps/lms-pro/src/app/gamification/page.tsx
+```
+
+- `realtime/` export qua entry point riêng `@lms/feature-gamification/realtime` để lms-test chỉ kéo socket + toast.
+- `useGamificationVisibility` đặt ở `libs/hooks` để Sidebar (`libs/ui`) dùng được mà không import `features/*`.
+
+#### 2.2. ops-fe
+
+```
+features/gamification/src/
+  index.ts · routes.tsx · constants/
+  pages/settings/   SettingsPage
+  pages/learners/   LearnersPage
+  components/settings/  GeneralBlock, PointsBlock, BadgesBlock, BadgeMilestoneCard,
+                        LevelsBlock, LeaderboardBlock, LeaderboardPreview, SettingsFooter
+  components/learners/  LearnersFilter, exportLearners
+  schema/settingsSchema.ts
+  utils/mapSettings.ts · utils/dependency.ts · utils/saveOrder.ts
+```
+
+Đăng ký `AppModule` vào `module-registry.ts` và `scripts/generate-customer.js`.
+
+---
+
+### 3. Routing & navigation
+
+#### 3.1. lms-pro
+
+| Route | Component | Guard |
+|---|---|---|
+| `/gamification` | `GamificationPage` | `withAuthorization([STUDENT])` + `visible` (không thì `notFound()`) |
+| `/overview?tab=badges` | Tab Badges trong My Profile | `visible && badges` |
+
+- `/gamification` phải là route folder riêng, nếu không sẽ bị dynamic route `app/[page]` match.
+- Menu: thêm item `GAMIFICATION` (icon trophy) vào `MENU_OPTIONS`; filter runtime trong `libs/ui/layout/Sidebar` theo `useGamificationVisibility()` vì `showMenu` chỉ tính 1 lần lúc load.
+- My Profile (`apps/lms-pro/src/app/[page]/page.tsx`): thêm tab `badges` ở `items`, `getTabContent`, `mobileOverviewItems`; sync `?tab=` với URL bằng `router.replace`.
+
+#### 3.2. ops-fe
+
+| Route | Page | Permission |
+|---|---|---|
+| `/gamification/settings` | `SettingsPage` | `gr_view_gamification_config` hoặc `gr_update_gamification_config` |
+| `/gamification/learners` | `LearnersPage` | `gr_view_gamification_learners` |
+
+- Thêm `PermissionRoute` (check permission bằng `useHasPermission`, không có quyền → `AccessDenied`) và page `AccessDenied`.
+- Menu: `ID_SIDE_BAR.GAMIFICATION` + item trong `useMenuData` (2 sub-item) + case trong `filterMenuEngagement`.
+
+---
+
+### 4. State & data fetching
+
+#### 4.1. lms-fe
+
+| Query key | API | Option |
+|---|---|---|
+| `['gamification','me']` | `GET /gamification/me` | `staleTime` 60s, `refetchOnWindowFocus: true`, `retry: false`, `silent` |
+| `['gamification','rules']` | `GET /gamification/rules` | `staleTime` 10 phút |
+| `['gamification','history']` | `GET /gamification/me/point-history` | `useInfiniteQuery`, `page_size` 10 |
+| `['gamification','badges']` | `GET /gamification/me/badges` | `staleTime` 0 |
+| `['gamification','leaderboard', params]` | `GET /gamification/leaderboard` | `keepPreviousData`, cancel bằng `signal` |
+| `['gamification','leaderboard-me', params]` | `GET /gamification/leaderboard/me` | như trên |
+| `['myLearnings']` (existing) | `GET /courses/my-learnings` | đọc thêm field `gamification` |
+
+- Mọi response đi qua mapper ở `api/mappers.ts`; component chỉ dùng model đã map.
+- Mock bật bằng `NEXT_PUBLIC_GAMIFICATION_MOCK=true`.
+- Logout → `removeQueries(['gamification'])`.
+
+#### 4.2. ops-fe
+
+| Query key (`gamificationKeys`) | API | Option |
+|---|---|---|
+| `settings()` | `GET /gamification/settings` | `refetchOnWindowFocus: false` |
+| `pointRules()` | `GET /gamification/point-rules` | như trên |
+| `badges()` | `GET /gamification/badges` | như trên |
+| `levels()` | `GET /gamification/levels` | như trên |
+| `leaderboardSettings()` | `GET /gamification/leaderboard-settings` | như trên |
+| `preview(params)` | leaderboard endpoint phía Ops | `keepPreviousData`, cancel bằng `signal` |
+| `learners(query)` | `GET /gamification/learners` | `keepPreviousData` |
+
+- Key factory `gamificationKeys` đặt ở `libs/core/src/constants/queryKeyFactory/` theo convention của ops-fe. Query dùng `select: res => res.data`.
+- **Settings page:** react-hook-form là source of truth khi đang edit. Query cache chỉ dùng để load lần đầu và nhận lại data sau save — không auto-sync cache vào form (tránh ghi đè value đang edit), nên tắt `refetchOnWindowFocus`.
+- Load: 5 query song song → `mapSettings` → `reset` form khi cả 5 đã có data.
+- **Mutation:** mỗi block 1 `useAppMutation` (PUT). `saveOrder.ts` chạy tuần tự bằng `await mutateAsync`. `onSuccess`: `setQueryData` key của block bằng response, `reset` field của block đó, không invalidate cả trang.
+- Save thành công `point-rules` / `badges` / `levels` / `leaderboard-settings` → invalidate `preview` (tab preview theo config đã save).
+- **Learners:** query state (search, sort, range, page) lấy từ URL qua `useTableFilters`. Export gọi API trực tiếp với filter + sort hiện tại, không đi qua cache.
+- Permission lấy từ `useHasPermission`, không fetch thêm.
+
+---
+
+### 5. Realtime — achievement toast (US2, US5)
+
+#### 5.1. Flow
+
+1. Có token → `useGamificationSocket` connect ngay, song song với `GET /gamification/me`. `/me` 404 → `disconnect()`.
+2. BE emit `gamification:achievements { items }` sau mỗi learning action / check-in đầu ngày.
+3. `toastDeduper` quyết định tab nào show toast.
+4. Render mỗi `items[i]` thành 1 toast, delay 150ms giữa các toast.
+5. Invalidate `me`; có event badge thì thêm `badges`; panel history đang mở thì thêm `history`.
+
+#### 5.2. Socket client
+
+| Item | Implementation |
+|---|---|
+| Init | `io(URL, { transports: ['websocket'], auth: cb => cb({ token: currentToken() }) })` |
+| Token expired | `connect_error` `UNAUTHORIZED` → `getAuthManager().refreshToken()` → `connect()`, retry tối đa 3 lần |
+| Lifecycle | 1 socket/tab, mount ở root layout lms-pro (`client-layout.tsx`) và lms-test (`providers.tsx`); logout → `disconnect()` |
+| Disconnect | socket.io tự reconnect, không replay |
+| Error | Wrap `try/catch`, chỉ log |
+
+#### 5.3. Dedupe nhiều tab (`toastDeduper`)
+
+1. Tab hidden (`document.visibilityState !== 'visible'`) → không show.
+2. Tab visible → claim `event.id` qua `BroadcastChannel('gamification-toast')`; tab claim trước thì show.
+3. Lưu `id` đã show vào `sessionStorage` (200 id gần nhất).
+
+#### 5.4. `AchievementToast`
+
+- `toast.custom(<AchievementToast/>, { id, duration: 5000, position: 'bottom-right' })`, không đổi config `<Toaster>` global.
+- Progress bar countdown màu cam ở đáy toast; `zIndex` > 1000 để nằm trên popup course completed.
+
+| Event | Message | Icon |
+|---|---|---|
+| Activity | `+{points} pts for completing the unit` | star |
+| Course | `+{points} pts for completing the course` | star |
+| Test | `+{points} pts for passing {test}` | star |
+| Check-in | `+{points} pts · {streak_day}-day streak` | star |
+| Badge | `You unlocked the {badge} badge by {condition}` | badge image |
+| Level up | `Level up! You've just reached Level {level}` | crown |
+
+- `achievementMessages` build message dạng `ReactNode` (dùng chung với Achievement history); points, badge name, `Level {n}` highlight màu cam.
+- Số đếm dùng `pluralize()`. Tên source `null` → `this unit` / `this test` / `this course`.
+
+---
+
+### 6. Learner screens
+
+#### 6.1. `GamificationPage`
+
+```
+GamificationPage
+├─ Header (title + SummaryStrip)
+├─ LeaderboardCard
+└─ HowToDrawer (mở từ SummaryStrip)
+```
+
+#### 6.2. `SummaryStrip` (US1)
+
+| Cell | Display | Hover | Click |
+|---|---|---|---|
+| Streaks | `{n} Streaks` | `Days you've signed in without a break.` | — |
+| Points | `{n} Points` | `How to collect points?` | Open `HowToDrawer` (collect) |
+| Badges | `{n} Badges` | `Go to badge gallery` | `/overview?tab=badges` |
+| Level | `Level {n}` | `How to level up?` | Open `HowToDrawer` (level) |
+
+#### 6.3. `HowToDrawer` (US1, US3, US10)
+
+`UpBaseDrawerV3` slide từ phải, state `view: 'collect' | 'level' | 'history'`. Button `Achievement History` ở footer đổi `view`, không mở drawer thứ hai.
+
+| View | Content |
+|---|---|
+| collect | Check-in: `{base}-{cap} pts` · `for daily login, +{step} per day in a row up to {cap}`; 3 row `{n} pts` · `for each activity / course / successful test completion` |
+| level | Progress bar tới level kế tiếp (ẩn khi đạt max level) + 3 row `Every {n} points` / `Every {n} completed courses` / `Every {n} badges` |
+| history | `AchievementHistory` |
+
+Chỉ render item BE trả về. Label điểm dạng pill, background cam nhạt.
+
+#### 6.4. `AchievementHistory` (US3)
+
+- `useInfiniteQuery`, load more khi item cuối vào viewport (IntersectionObserver).
+- Mỗi item: timestamp `DD/MM/YYYY HH:mm` (`formatInOrgTz`), message từ `achievementMessages`, divider.
+- Tên dài truncate 60 ký tự + tooltip.
+- Empty state: `Nothing here yet. Start learning to earn your first points.`
+
+| Event | Message (**bold**) |
+|---|---|
+| Check-in ngày đầu | You earned **{n} points** for checking in today. |
+| Check-in đang giữ streak | You earned **{n} points** for checking in today. Day {d} of your streak. |
+| Activity | You earned **{n} points** for completing **{activity}** in **{course}**. |
+| Course | You earned **{n} points** for completing the course **{course}**. |
+| Test | You earned **{n} points** for passing **{test}** in **{course}**. |
+| Badge | You unlocked the **{badge}** badge for reaching {milestone} {unit}. |
+| Level up | You reached **Level {n}**. |
+
+#### 6.5. `LeaderboardCard` (US6, US7)
+
+```
+LeaderboardCard
+├─ Tabs (Points · Badges · Levels · Courses — theo metric BE trả)
+├─ RangeFilter (RangePicker + 5 preset trong dropdown)
+├─ TopThreeRow ×3 + LeaderboardRow ×n
+├─ "Show All" divider
+├─ MyPosition
+└─ LastUpdated / Empty / Error
+```
+
+**State** — sync với URL: `?board=points&range=this_month` hoặc `&range=custom&from=YYYY-MM-DD&to=YYYY-MM-DD`. Mặc định `board=points`, `range=all_time`.
+
+| Behavior | Implementation |
+|---|---|
+| Chọn preset | Gửi range code, không tự tính from/to |
+| Chọn custom range | Gọi API khi chọn đủ 2 ngày; `disabledDate`: sau hôm nay hoặc trước ngày enable feature |
+| Đổi range khi đang ở tab `Levels` / tab bị disable | Fallback về tab enable đầu tiên |
+| Default | Top 5 (`page_size` 5) → `Show All` → `MyPosition` |
+| Click `Show All` | `useInfiniteQuery` 20 row/page; `MyPosition` sticky bottom |
+| User trong top 5 | Không render `MyPosition` |
+| Custom range đang loading | Skeleton |
+
+**Row display:** top 3 dùng medal icon + gradient background gold/silver/bronze; rank ≥ 4 `String(rank).padStart(2,'0')`; `rank = null` để trống; row của user hiện tên `You`; value dùng `formatThousands`.
+
+**Label:** `Last updated {HH:mm}` cho preset; empty state `No one has earned points in this period yet.`
+
+**`MyPosition`:** row của user + `neighbors`, dòng gap `{value} {unit} behind {name}`; chưa có metric → rank trống + hint text.
+
+#### 6.6. `BadgeGallery` (US4)
+
+- Group theo badge type: header `{Type} Badges ({achieved}/{total})`, grid 5 cột (mobile: collapse).
+- Badge chưa đạt: `grayscale` + `opacity`; hover border cam + `{milestone} {unit}`.
+- `BadgeImage`: `onError` → default image.
+
+#### 6.7. `GamificationStat` — My Learning (US1)
+
+`{points} Points · Level {n}` trong `MyLearningHeader`, click navigate tới `/gamification`. Field `gamification` `null` → không render; `points` / `level` `null` → ẩn value đó.
+
+---
+
+### 7. Ops — settings page (US8–US11, US14)
+
+#### 7.1. Form
+
+Một form react-hook-form + zod cho cả page, mỗi block 1 component.
+
+| Block | Field |
+|---|---|
+| `GeneralBlock` | `gamification` · `visibility` · status label `OFF/SHADOW/LIVE` · `timezone` |
+| `PointsBlock` | switch block · 4 action `{ enabled, points }` · step/cap check-in (read-only) |
+| `BadgesBlock` | switch block · 4 badge type `{ enabled, badges[{ id, name, description, image_resource_id }] }` |
+| `LevelsBlock` | switch block · `cap_enabled`, `cap` · 3 criteria `{ enabled, multiple }` |
+| `LeaderboardBlock` | switch block · 4 board `{ enabled }` · `LeaderboardPreview` |
+
+- Disable `gamification` → chỉ render `GeneralBlock` (ẩn `visibility`).
+- `HookFormSwitch` (`@ops/ui`) thêm prop `disabled`.
+- `timezone`: `HookFormSelectAntd`, options từ `Intl.supportedValuesOf('timeZone')`, label kèm offset.
+- Badge name edit inline; click image → `ModalUploadFile` (`fileType='IMAGE'`, `maxCount=1`, location `GAMIFICATION`), lưu `image_resource_id`.
+
+#### 7.2. Validation (`settingsSchema`)
+
+| Field | Rule |
+|---|---|
+| Points mỗi action | Integer 1–100, required khi enable |
+| Multiple mỗi criteria | Integer ≥ 1, required khi enable |
+| `cap` | Integer ≥ 2, required khi `cap_enabled` |
+| Badge name | Cho phép empty (BE lưu default name) |
+| Levels enable | Ít nhất 1 criteria enable |
+| Leaderboard enable | Ít nhất 1 board enable |
+
+Field của item đang disable thì skip validate, giữ value.
+
+#### 7.3. Cross-field dependency (`dependency.ts`)
+
+| Khi disable | Disable / lock |
+|---|---|
+| Points | 4 action · `Show points` |
+| Badges | 4 badge type · criteria `Badges` · `Show badges` |
+| Levels | criteria + `cap` · `Show levels` |
+| Leaderboard | 4 switch board |
+
+- Khi load: lock theo `locked_reason` BE trả. Khi edit: tính bằng `dependency.ts` từ `useWatch`.
+- Lock = disabled + helper text; không đổi value.
+
+**Confirm modal** khi toggle switch (vẫn chờ Save):
+
+| Trigger | Content |
+|---|---|
+| Disable `Gamification` | Ngừng ghi nhận, dữ liệu giữ nguyên, bật lại không tính bù |
+| Enable `Visibility` lần đầu | Học viên thấy ngay số đã tích, không có thông báo hồi tố |
+| Disable `Badges` khi criteria `Badges` đang enable | Tiêu chí đó ngừng, hạng đã đạt giữ nguyên |
+
+#### 7.4. Load & Save
+
+- Load: 5 GET song song → `mapSettings` → `reset` → baseline `useFormDirtyGuard`.
+- Save: validate → PUT các block dirty, mỗi PUT gửi full block, `reset` block đó từ response.
+- Save order (`saveOrder.ts`):
+
+| Case | PUT order |
+|---|---|
+| Enable Gamification | `settings` → block con |
+| Disable Gamification | Chỉ `settings` |
+| Không đổi Gamification | `point-rules → badges → levels → leaderboard-settings → settings` |
+
+- PUT fail → stop, giữ form state các block chưa save.
+- Save disabled khi `!isDirty || isSubmitting || !canEdit`; rời page khi dirty → confirm leave.
+
+#### 7.5. `LeaderboardPreview`
+
+- Tab + RangePicker + top + `Show All`, read-only, không có `MyPosition`.
+- Gọi leaderboard endpoint phía Ops; tab theo config **đã save**. Có thay đổi chưa save ở `Show …` → hiện `Save to update preview`.
+- Gamification hoặc Leaderboard disable → không render.
+
+---
+
+### 8. Feature visibility (lms-pro)
+
+`useGamificationBootstrap()` gọi `useGamificationMe` khi mount app (chỉ `STUDENT`). `useGamificationVisibility()` trả về:
+
+```ts
+{ ready: boolean; visible: boolean; points: boolean; badges: boolean; levels: boolean; leaderboard: boolean }
+```
+
+| `/me` | Kết quả |
+|---|---|
+| 200 | `visible = true`, từng flag theo `features` |
+| 404 | `visible = false` (disabled / hidden / Test Account) — thêm error code vào `toastExceptions` |
+| Error khác / loading | `visible = false` |
+
+| Component | Render khi |
+|---|---|
+| Menu, route `/gamification`, widget My Learning, socket | `visible` |
+| Cell Streaks, cell Points, panel collect | `visible && points` |
+| Cell Badges, tab Badges | `visible && badges` |
+| Cell Level, panel level | `visible && levels` |
+| Leaderboard card | `visible && leaderboard` |
+
+Các API learner khác trả 404 → invalidate `me`.
+
 ---
 
 # Unit — nhóm bàn giao
