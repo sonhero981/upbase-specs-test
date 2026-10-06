@@ -98,7 +98,7 @@
 
 # Metrics success
 
-*Chỉ làm khi tính năng cần đo ngay từ đầu. **Không áp dụng → xoá hẳn mục này.***
+*Luôn đề xuất sẵn, người viết chỉnh hoặc bỏ. Mỗi mục tiêu trong `Objective` nên có ít nhất một cách đo.*
 
 > ⚠️ **Tuyệt đối không giữ lại bảng ví dụ của template.** Hai PRD đang lưu hành mang nguyên chỉ số của app ghi chép thu chi (`NPS > 50`, `Transaction Input Time < 30s`) vào tài liệu về routing kho và quảng cáo Shopee. Hoặc điền chỉ số thật của chính tính năng này, hoặc xoá.
 
@@ -126,21 +126,17 @@
 
 > Dev phân tích lại bằng công cụ của họ. Thiết kế sai từ PO neo suy nghĩ người đọc và tốn công gỡ hơn là không có gì. Ghi **cái gì phải đúng**, để Dev quyết **làm thế nào**.
 
-## Database
+## Dữ liệu phải lưu
 
-*Bảng mới / bảng bị sửa. Mỗi bảng ghi: tên · mục đích · field chính · quan hệ.*
+*Thông tin nghiệp vụ nào bắt buộc phải được ghi lại, và vì sao. **Không khai bảng, không khai cột, không khai kiểu dữ liệu.***
 
-*Đối chiếu `.claude/_shared-knowledge-base/12-data-model.md` — hệ thống có 85 bảng, `tenant_id` gần như ở mọi bảng nghiệp vụ.*
+| Thông tin | Vì sao phải lưu | Ràng buộc |
+| --- | --- | --- |
+| *Ví dụ: thời điểm một người vào và ra khỏi nhóm* | *Báo cáo quá khứ đọc từ đây* | *Không được xoá, kể cả khi người đó nghỉ việc* |
 
-| Bảng | Mới / Sửa | Mục đích | Ghi chú |
-| --- | --- | --- | --- |
-
-## API
-
-*Endpoint mới / endpoint bị đổi. Đối chiếu Swagger trước khi khai báo mới — hệ thống đã có 708 operation.*
-
-| Method | Endpoint | Mới / Sửa | Mục đích |
-| --- | --- | --- | --- |
+> 🚫 **Không có mục `Database` và `API` trong PRD.** Thiết kế bảng, khoá ngoại, endpoint, contract là **việc của Dev** — họ phân tích lại bằng công cụ của họ. Một thiết kế sai từ PO **neo suy nghĩ người đọc** và tốn công gỡ hơn là không có gì.
+>
+> PO ghi **cái gì phải đúng**, Dev quyết **làm thế nào**.
 
 ---
 

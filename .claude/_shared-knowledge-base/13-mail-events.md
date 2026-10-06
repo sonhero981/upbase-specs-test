@@ -17,6 +17,20 @@
 
 ---
 
+## 0. Mail sẽ bổ sung — chưa có trong 30 mail hiện tại
+
+| Mã | Dự án | Khi nào bắn | Ai nhận | Trạng thái |
+|---|---|---|---|---|
+| `MAIL-GRP-01` | **Group** | Một người **rời nhóm** mà còn ít nhất một khoá **đang học dở hoặc đã học xong** | **Quản lý** của người đó *(tạm chưa gửi L&D)* | 🔵 **Chưa làm** — PO chốt 06/10/2026 |
+
+Nội dung: ai rời nhóm nào, sang nhóm nào, còn những khoá nào ở tình trạng gì, cần người nhận vào quyết. Hệ thống **không tự quyết** trong trường hợp này.
+
+Không bắn khi người đó **chưa học khoá nào** *(xử lý tự động)*, và không bắn khi **nghỉ việc** *(lượt ghi danh chỉ đánh dấu kết thúc)*.
+
+> ⚠️ **Mục này tồn tại để chống một lỗi cụ thể:** đọc KB thấy "30 mail" rồi kết luận *"không có mail nào cho việc X, nên hệ thống không làm được việc X"*. Mail chưa có thì bổ sung được — nhưng phải biết là đang bổ sung, không phải đang dùng cái sẵn có.
+
+---
+
 ## 1. Ba nguồn trigger
 
 | Nguồn | Số mail | Nghĩa |

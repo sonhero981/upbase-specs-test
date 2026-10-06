@@ -4,9 +4,9 @@
 |---|---|
 | Nguồn | **Lark wiki → `Data Architecture`** — https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd |
 | File | `UpLnd DB Full.html` (node con của trang trên) |
-| Đối chiếu lần cuối | **23/09/2026** — 85 bảng · 173 quan hệ, khớp với bản KB này |
+| Đối chiếu lần cuối | **05/10/2026** — tải lại file gốc, đọc được 85 bảng · 173 quan hệ, khớp bản KB này. `obj_edit_time` của file = 23/09/2026 11:41, **nguồn chưa đổi** |
 | Quy mô | **85 bảng · 173 quan hệ khoá ngoại · 320 cột được khai** |
-| Giới hạn | ⚠️ Diagram **chỉ chứa PK và FK**, không có danh sách cột đầy đủ, không có kiểu dữ liệu, không có index |
+| Giới hạn | ⚠️ Không có kiểu dữ liệu, không có index, không có ràng buộc.<br>✅ **Đính chính 05/10/2026:** bản KB cũ ghi diagram *"chỉ chứa PK và FK"* — **sai**. Diagram có cả **cột thường**: `groups.name`, `departments.left/right/code/short_name`, `class_user_instances.source_type/status/learning_progress`, `users.type/status/is_operator`. Vẫn **không bảo đảm đủ cột**, nhưng nhiều hơn chỉ khoá |
 
 > ## 🔄 Nguồn sống — phải đọc lại, không tin bản chép
 >
@@ -135,7 +135,9 @@ tenant ─┬─► courses ──► classes ──► class_user_instances ─
 | **`otps`** | Bảng OTP riêng — khớp mail #9. |
 | **`mail_logs`, `notifications`, `notification_user_instances`, `notification_group_instances`** | Hạ tầng thông báo đầy đủ, khớp [09-notification-email.md](09-notification-email.md). |
 | **`import_logs`, `import_log_detail_instances`** | Log import theo dòng — khớp View Log trong UG. |
-| **`field_change_logs`** | **Audit trail** cấp field. UG không nhắc. |
+| **`field_change_logs`** | **Audit trail** cấp field. UG không nhắc.<br>⚠️ **Đọc 05/10/2026: chỉ có 5 cột** — `tenant_id · id · object_type · object_id · created_by_staff_id`. **Không có tên trường, giá trị cũ, giá trị mới, thời điểm.** Đừng giả định nó ghi được nội dung thay đổi |
+| **`class_user_instances.source_type`** | 🟢 **Lượt ghi danh đã có cột ghi nguồn gốc.** Cột đầy đủ: `id · user_id · class_id · status · started_at · finished_at · type · source_type · learning_progress`. Quan trọng cho mọi tính năng thêm một đường ghi danh mới *(đọc 05/10/2026)* |
+| **`groups` chỉ có 3 cột** | `tenant_id · id · name`. Khớp `CreateGroupDto` trong Swagger — nhóm hiện tại **chỉ là tên cộng danh sách người**, không cấu trúc *(đọc 05/10/2026)* |
 | **`batch_job_progress_logs`** | Theo dõi tiến độ job nền. |
 | **`provinces`, `districts`, `wards`** | Địa giới hành chính VN → API `Address Management`. |
 | **`users.university_program_id`, `english_level_id`** | Thuộc tính học viên UG không có. `english_level_id` **nhiều khả năng là "level đầu vào"** của SIS dashboard. |
@@ -155,7 +157,7 @@ tenant ─┬─► courses ──► classes ──► class_user_instances ─
 | `class_lecture_instances` | **Lecture** — khái niệm UG không có, liên quan `Schedules` |
 | `class_user_scores` | Điểm tổng hợp theo học viên |
 | `class_user_storyline_progress` | Tiến độ Storyline riêng |
-| `departments` (`unit`, `tree_id`) | Cây phòng ban |
+| `departments` | **Cây phòng ban dựng bằng Nested Set** — `tree_id` · `left` · `right` · `code` · `short_name` · `type` · `description`. Chỉ `staffs.department_id` trỏ vào, **không phục vụ `users`** *(đọc 05/10/2026)* |
 | `support-groups` | Comment Replier — **không có `tenant_id`** (khác mọi bảng khác) |
 | `report_logs`, `quiz_reports` | Báo cáo |
 | `attachment-files` | File đính kèm chung |

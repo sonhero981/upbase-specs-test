@@ -42,5 +42,9 @@
 - [ ] Phần chờ xác nhận → đánh dấu `Draft - Pending Confirmation`
 
 ## Delivery
-- [ ] Đúng thư mục `docs/prd/`, đúng version, không ghi đè
+- [ ] **[BLOCK]** Người dùng **đã xem bản trước chưa?** Rồi → **tạo file version mới**, giữ nguyên bản cũ, thêm mục **Lịch sử thay đổi**. Chưa → sửa tại chỗ được.
+      > Mốc tăng version là **mỗi lần qua Gate** hoặc mỗi đợt người dùng trả lời một loạt câu hỏi. Làm liên tục trong một phiên thì rất dễ quên — xem `CLAUDE.md` mục *Cách làm việc*.
+- [ ] **[BLOCK]** **Không có mục `Database` và `API`** — không khai bảng, không khai endpoint. Chỉ ghi *thông tin nào phải lưu* và *hệ thống phải cho phép làm gì*
+- [ ] **[BLOCK]** Không có sequence diagram · cấu trúc bảng · thuật toán · lựa chọn thư viện · ước lượng hiệu năng
+- [ ] Đúng thư mục `docs/prd/`, đúng version
 - [ ] Đã chuẩn bị nội dung trình Gate 4, **nêu rõ mục nào đã xoá và vì sao**

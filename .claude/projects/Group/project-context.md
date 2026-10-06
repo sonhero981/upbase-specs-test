@@ -2,7 +2,7 @@
 
 **Project:** Group
 **Ngày tạo:** 05/10/2026
-**Trạng thái:** ✅ Xong Bước 3. Mọi câu hỏi đã đóng hoặc có đề xuất. **Sẵn sàng viết BRD**
+**Trạng thái:** ✅ **PRD đã duyệt** (06/10/2026) — 20 US · 122 business rule · 4 sơ đồ · 14.015 từ. Chín bước xong. **Chưa publish lên Lark**
 **Cỡ yêu cầu:** **L** — đủ bốn dấu hiệu
 
 ---
@@ -17,7 +17,9 @@
 
 Ba nền tảng lớn đều tách hai khái niệm này: TalentLMS và Docebo có `Branch` cho cơ cấu và `Group` cho nhóm tuỳ ý, Moodle có `Cohort` toàn site và `Group` trong khoá. Xem `working/ai-drafts/nghien-cuu-lms-khac-20261005.md`.
 
-**Nền đã có, chưa đủ.** `Group Management` đang chạy để tạo nhóm gửi thông báo từ Ops, nhưng là nhóm phẳng. Dự án này mở rộng nó thành cây nhiều cấp, phân loại theo nguồn, có quan hệ quản lý. `Department Management` từng làm cây cho `staffs` nhưng hiện không chạy.
+**Không có nền để kế thừa.** PO chốt 05/10 *(`BA-01`)*: **bỏ hẳn `Group Management` và Recipients List đang có, coi như chưa có gì.** Nhóm hiện tại là nhóm **phẳng** — chỉ tạo sửa xoá và gán người, không cha con, không nguồn, không quản lý. `Department Management` từng làm cây cho `staffs` nhưng hiện không chạy.
+
+Khi mở lại chức năng gửi thông báo từ Ops, người nhận sẽ chọn thẳng từ chức năng Nhóm mới này.
 
 **HRM là Lark.** Đã đồng bộ được học viên, và Lark cũng đã có sẵn cây tổ chức. Phần cần làm là mở rộng cơ chế đồng bộ sang cả cây.
 
@@ -25,7 +27,13 @@ Hệ quả đang thấy ở tính năng khác: bảng xếp hạng Gamification 
 
 ## Objectives
 
-<!-- Mục tiêu cần đạt -->
+| # | Kết quả muốn đạt |
+|---|---|
+| `O1` | Giao nội dung cho một tập người ổn định, không phải lập danh sách lại mỗi lần |
+| `O2` | Người mới vào tập đó **tự nhận** nội dung đã giao |
+| `O3` | Quản lý xem được tiến độ học của riêng người mình phụ trách |
+| `O4` | Số liệu cộng dồn được theo cơ cấu, từ một phòng ban lên tới cả khối |
+| `O5` | Dựng lại được ai thuộc nhóm nào tại một thời điểm quá khứ |
 
 ## Scope
 
@@ -43,22 +51,34 @@ Bảng so sánh đầy đủ chín tiêu chí: `working/ai-drafts/clarified-requ
 
 ## Phạm vi sản phẩm
 
-<!-- Portal nào bị chạm: UpLMS (người học) / UpLMS Ops (vận hành) / cả hai -->
+**Cả hai portal.** Phần lớn việc nằm ở Ops.
+
+| Portal | Việc | Số US |
+|---|---|---|
+| **UpLMS Ops** | Dựng nhóm, quản lý thành viên, đồng bộ HRM, gán nội dung, gán quản lý, nhật ký, lưu trữ | `US1`–`US15` |
+| **UpLMS** | Quản lý xem tiến độ nhánh mình phụ trách; học viên xem quản lý của mình | `US16`–`US17` |
+| **UpLMS Ops** | Báo cáo cộng dồn theo nhóm, xem được theo mốc quá khứ | `US18` |
+| **Cả hai** | Vòng đời nhân sự — rời nhóm chưa học thì tự xử lý, còn nghĩa vụ học thì báo quản lý | `US19`–`US20` |
 
 ## Key References
 
 | Loại | Nguồn |
 |---|---|
+| **PRD** | `docs/prd/prd-group-v0.1-20261006.md` — **20 US · 122 business rule · 4 sơ đồ.** ✅ Đã duyệt 06/10 |
+| **BRD** | `docs/brd/brd-v0.2-20261006.md` — 20 US. ✅ Đã duyệt |
+| **Impact Matrix** | `working/impact-analysis/impact-matrix-v0.2-20261006.md` — 12 vùng, 6 conflict đã quyết. ✅ Đã duyệt |
+| **Bản đồ phạm vi** | `working/impact-analysis/related-features-map-20261005.md` |
+| **Field Intake** | `working/field-intake-20261006.md` — 13 câu field, đã đóng hết |
 | Yêu cầu gốc | `working/raw-inputs/yeu-cau-goc-20261005.md` — 19 hạng mục |
 | Bản làm rõ | `working/ai-drafts/clarified-requirements-20261005.md` |
-| Câu hỏi mở | `working/open-questions/open-questions-20261005.md` — đã đóng hết |
+| Câu hỏi mở | `working/open-questions/open-questions-20261005.md` — **đóng hết**, kể cả nhóm D |
 | **Dữ liệu HRM** | `working/raw-inputs/lark-users-by-department.csv` — 384 nhân sự, 53 phòng ban, cây sâu 4 cấp. **Đã cắt 16 cột cá nhân** |
 | Nguyên tắc mô hình hoá | `.claude/_shared-knowledge-base/16-domain-principles.md` — nguyên tắc 6, ranh giới Nhóm với Lớp |
 | Nghiên cứu LMS khác | `working/ai-drafts/nghien-cuu-lms-khac-20261005.md` — TalentLMS · Docebo · Moodle · mô hình tích hợp HRIS |
 | **Dự án liên quan** | `.claude/projects/Gamification/` — `US16` bộ lọc bảng xếp hạng theo nhóm đang chờ chức năng này |
 | Phân biệt Nhóm và Lớp | `Gamification/working/raw-inputs/change-requests.md` mục `CR-001`, phần đối chiếu hệ thống |
 | Schema DB | [Lark → Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd) |
-| Swagger | `lms-be.staging.upbase.asia/api/v1/docs` · `ops-be.staging.upbase.asia/api/v1/docs` |
+| Swagger | `uplms-api.staging.upbase.asia/lms/api/v1/docs` · `/ops/api/v1/docs` — **tên miền mới, đọc lại 05/10**. Hai host cũ `lms-be` và `ops-be` đã bỏ |
 | KB cần đọc | `04-class.md` (phân biệt với Lớp) · `06-user-account.md` · `12-data-model.md` · `14-api-surface.md` |
 
 > ⚠️ Knowledge base **chưa phủ** vùng phòng ban và phân quyền. Xem `14-api-surface.md` §1–2. Nhiều câu về nhóm sẽ phải hỏi PO hoặc Dev thay vì tra KB.

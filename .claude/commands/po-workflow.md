@@ -364,7 +364,9 @@ Khi người dùng đổi hoặc thêm yêu cầu sau khi đã có tài liệu �
 
 - Luôn tách `Fact` / `Assumption` / `Open Question` / `Recommendation` trong mọi output
 - **Không bịa.** Thiếu nhẹ → `Assumption`. Thiếu ảnh hưởng scope/rule/data/flow → `Open Question` và đánh dấu `Draft - Pending Confirmation`
-- Không ghi đè file đã có; dùng version mới (`v0.2`, `v0.3`)
+- **Không sửa đè tài liệu người dùng đã xem; tạo version mới** (`v0.2`, `v0.3`). Trước khi sửa file trong `docs/` hay `working/`, tự hỏi **"người dùng đã đọc bản này chưa"** — rồi thì tạo file mới, chưa thì sửa tại chỗ.
+  Mốc tăng version: **mỗi lần qua một Gate**, hoặc mỗi đợt người dùng trả lời một loạt câu hỏi. Không phải mỗi lần sửa một dòng.
+  Version mới phải có mục **Lịch sử thay đổi** ghi đổi gì so với bản trước. Xem `CLAUDE.md` mục *Cách làm việc* để biết lần đã sai.
 - Mỗi artifact ghi rõ nguồn input
 - Không tự chốt quyết định thay người dùng; chỉ gợi ý dưới nhãn `Recommendation`
 - **Gate decision phải rõ ràng.** Trả lời không rõ → hỏi lại, không suy đoán là duyệt

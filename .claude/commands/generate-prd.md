@@ -36,22 +36,22 @@ Dựng phần đầu PRD theo template:
 
 | Mục | Lấy từ đâu | Lưu ý |
 |---|---|---|
-| Bảng metadata | Hỏi người dùng | Target release · Epic/Story link Jira · Document owner · Designer · Tech lead · QA · Reviewer · Document status |
+| Bảng metadata | **Để trống** | Target release · Epic/Story link Jira · Designer · Tech lead · QA · Reviewer. **Không hỏi** — người viết điền sau. Chỉ điền sẵn `Document owner` và `Document status` |
 | Document version | Tự tạo | `v0.1` + ngày + nội dung |
 | Problem | BRD §1 | Viết lại nguyên, không tóm tắt |
 | Analytics | BRD §2 | Chưa có số liệu → ghi rõ, không bỏ trống |
 | Objective | BRD §3 | |
 | **Out of scope** | BRD + `project-context.md` + mọi `CR` đã áp | Cấp **tính năng**, không phải cấp US. Xem quy tắc bên dưới |
 | Stakeholder | BRD §4 | Bảng `Stakeholder │ Action` |
-| **Preferences** | Hỏi người dùng | Link Figma · BRD liên quan · tài liệu đối tác · API tham chiếu · tài khoản staging |
-| Metrics success | **Hỏi người dùng** | Xem quy tắc bên dưới |
-| Solution | Solution Comparison + Impact Matrix | Tách `TDD` · `Database` · `API` |
+| **Preferences** | **Để trống phần link** | Link Figma, tài khoản staging: **không hỏi**, người viết điền sau. Điền sẵn thứ mình biết: BRD liên quan, dữ liệu tham chiếu |
+| Metrics success | **Tự đề xuất, không hỏi** | Xem quy tắc bên dưới |
+| Solution | Solution Comparison + Impact Matrix | Tách `TDD` · `Dữ liệu phải lưu`. **Không có mục `Database` và `API`** — xem *Ranh giới với Dev* ở cuối |
 
 **Quy tắc Metrics success:**
 
-> **Hỏi trước khi viết:** *"Tính năng này có cần định nghĩa chỉ số đo ngay từ đầu không?"*
-> - Có → điền chỉ số **thật của chính tính năng này**, chỉ giữ factor HEART thực sự đo được
-> - Không → **xoá hẳn mục này khỏi PRD**
+> **Luôn tự đề xuất chỉ số, không hỏi người viết có cần đo hay không.** Mỗi mục tiêu trong `Objective` nên có ít nhất một cách đo. Người viết xem rồi chỉnh hoặc bỏ — nhanh hơn là bắt họ nghĩ từ đầu.
+>
+> Chỉ số phải **thật của chính tính năng này**, đo được từ dữ liệu hệ thống sẽ có. Chỉ giữ factor HEART thực sự đo được, không ép đủ 5.
 >
 > 🚫 **Tuyệt đối không giữ lại bảng ví dụ của template.** Hai PRD đang lưu hành mang nguyên chỉ số của app ghi chép thu chi (`NPS > 50`, `Transaction Input Time < 30s`) vào tài liệu về routing kho và quảng cáo Shopee. Để lại ví dụ còn tệ hơn bỏ trống.
 
@@ -224,5 +224,23 @@ Duyệt xong → gợi ý `/publish-lark` (**hỏi trước, có thể skip**).
 - **Không bịa field.** Không tra được trong KB/Swagger và người dùng chưa trả lời → `Open Question`
 - Field **hiện có** phải được nhận diện là hiện có — viết lại thành "mới" là lỗi nặng, vì Dev sẽ tạo trùng
 - Mọi **hằng số cứng** (số ngày, ngưỡng, giới hạn) phải ghi rõ: hardcode hay cấu hình được
-- Bảng mới trong `Database` phải khai báo có `tenant_id` hay không
-- Endpoint mới phải **đối chiếu Swagger trước** — hệ thống đã có 708 operation, tránh khai trùng
+
+---
+
+## Ranh giới với Dev — chỉ viết scope của PO/BA
+
+PRD **không chứa thiết kế kỹ thuật**. Dev đọc PRD rồi tự phân tích bằng công cụ của họ; một thiết kế sai từ PO **neo suy nghĩ người đọc** và tốn công gỡ hơn là không có gì.
+
+| PO viết | Dev quyết |
+|---|---|
+| **Thông tin nào phải được lưu lại** và vì sao | Bảng nào, cột nào, kiểu dữ liệu, khoá ngoại, chỉ mục |
+| **Hệ thống phải cho phép làm gì** | Endpoint nào, method gì, contract ra sao |
+| **Cái gì không được phá** — ràng buộc, bất biến | Cách bảo đảm ràng buộc đó |
+| **Cơ chế nào chạy khi nào** ở mức nghiệp vụ | Chạy đồng bộ hay nền, hàng đợi, lịch |
+| **Hằng số cứng hay cấu hình được** | Cấu hình ở đâu, định dạng gì |
+
+🚫 **Không viết:** sequence diagram · cấu trúc bảng · danh sách endpoint · thuật toán · lựa chọn thư viện · ước lượng hiệu năng · cách lưu cây.
+
+🚫 **Không dựng danh sách câu hỏi kỹ thuật cho Dev.** Chỉ hỏi những câu mà **câu trả lời làm đổi phạm vi hoặc đổi business rule**.
+
+> Quy tắc này do PO chốt ngày 05/10/2026 và nhắc lại 06/10/2026. Cùng nội dung với `CLAUDE.md` mục *Cách làm việc*.

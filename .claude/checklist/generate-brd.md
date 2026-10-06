@@ -31,7 +31,9 @@
 - [ ] `References` ghi rõ **file KB nào** đã đọc
 
 ## Delivery
-- [ ] Đúng thư mục `docs/brd/`, đúng version, không ghi đè
+- [ ] **[BLOCK]** Người dùng **đã xem bản trước chưa?** Rồi → **tạo file version mới**, giữ nguyên bản cũ, thêm mục **Lịch sử thay đổi**. Chưa → sửa tại chỗ được.
+      > Mốc tăng version là **mỗi lần qua Gate** hoặc mỗi đợt người dùng trả lời một loạt câu hỏi. Làm liên tục trong một phiên thì rất dễ quên — xem `CLAUDE.md` mục *Cách làm việc*.
+- [ ] Đúng thư mục `docs/brd/`, đúng version
 - [ ] Còn assumption lớn → đánh dấu `Draft - Pending Confirmation`
 - [ ] Đã chuẩn bị nội dung trình Gate 1
 

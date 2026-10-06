@@ -62,7 +62,12 @@ Ngoài phạm vi: UpAcademy · Admin · Super Admin — xem `.claude/_shared-kno
 - **Hỏi lại khi thiếu thông tin**, không đoán bừa
 - Tách rõ `Fact` / `Assumption` / `Open Question` / `Recommendation`
 - **Không bịa.** Thiếu nhẹ → `Assumption`; thiếu ảnh hưởng scope/rule/data/flow → `Open Question`
-- Không ghi đè file đã có — dùng version mới
+- **Không sửa đè tài liệu người dùng đã xem — tạo version mới.** Trước khi sửa bất kỳ file nào trong `docs/` hoặc `working/`, tự hỏi: **"người dùng đã đọc bản này chưa?"**
+  - **Chưa** → sửa tại chỗ, bình thường.
+  - **Rồi** → `v0.1` thành `v0.2`, file mới, giữ nguyên file cũ. Thêm mục **Lịch sử thay đổi** ghi đổi gì so với bản trước.
+  > ⚠️ **Chỗ đã sai một lần (06/10/2026, project Group).** Câu rule cũ là *"không ghi đè file đã có"* — tôi hiểu "file đã có" là file tồn tại từ trước phiên làm việc, nên cứ sửa đè lên BRD mình vừa tạo, 15 lần liên tiếp qua Gate 1, Bước 5, Gate 2, Bước 7. **Bản PO duyệt ở Gate 1 mất hẳn.**
+  >
+  > Cái bẫy: làm liên tục trong một phiên thì cảm giác "vẫn đang làm dở", nhưng người dùng **đã duyệt** bản trước đó rồi. Mốc tăng version là **mỗi lần người dùng duyệt hoặc trả lời một đợt câu hỏi**, không phải mỗi lần sửa một dòng.
 - Không tự chốt quyết định thay người dùng; chỉ gợi ý dưới nhãn `Recommendation`
 - **Không thiết kế kỹ thuật chi tiết.** Mục `TDD` trong PRD chỉ nêu **hướng và ràng buộc nghiệp vụ**, không vẽ sequence, không thiết kế bảng chi tiết, không chọn thuật toán. Dev sẽ phân tích lại bằng công cụ của họ; một thiết kế sai từ PO **neo suy nghĩ người đọc** và tốn công gỡ hơn là không có gì. Ghi *cái gì phải đúng*, để Dev quyết *làm thế nào*.
 - **Không dựng danh sách câu hỏi kỹ thuật cho Dev.** Câu hỏi về hiệu năng, cấu hình Casbin, cách lưu trữ cây là việc Dev tự xác định khi làm. PO chỉ hỏi những câu mà **câu trả lời làm đổi phạm vi hoặc đổi business rule**.

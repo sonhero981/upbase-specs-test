@@ -2,17 +2,42 @@
 
 | | |
 |---|---|
-| UpLMS (học viên) | https://lms-be.staging.upbase.asia/api/v1/docs · JSON: `/docs-json` |
-| UpLMS Ops | https://ops-be.staging.upbase.asia/api/v1/docs · JSON: `/docs-json` |
+| UpLMS (học viên) | https://uplms-api.staging.upbase.asia/lms/api/v1/docs · JSON: `/docs-json` |
+| UpLMS Ops | https://uplms-api.staging.upbase.asia/ops/api/v1/docs · JSON: `/docs-json` |
 | Truy cập | **Công khai, không cần auth** để đọc spec (staging) |
-| Ngày trích | 23/09/2026 |
+| Ngày trích | **05/10/2026** |
 
-| | LMS | Ops |
-|---|---|---|
-| Endpoint path | 142 | **413** |
-| Operation | 153 | **555** |
-| DTO schema | 51 | **216** |
-| Nhóm tag | 26 | **58** |
+> 🔄 **Tên miền đã đổi (PO cung cấp 05/10/2026).** Hai host cũ `lms-be.staging.upbase.asia` và `ops-be.staging.upbase.asia` **không dùng được nữa** — chứng chỉ TLS không khớp tên miền. Host mới gộp làm một, tách bằng tiền tố đường dẫn `/lms` và `/ops`.
+
+| | LMS | Ops | | LMS cũ | Ops cũ |
+|---|---|---|---|---|---|
+| Endpoint path | 126 | **381** | | 142 | 413 |
+| Operation | 136 | **514** | | 153 | 555 |
+| DTO schema | 46 | **200** | | 51 | 216 |
+| Nhóm tag | 23 | **52** | | 26 | 58 |
+
+> **Bề mặt API co lại, không phình ra.** Giảm 41 operation ở Ops và 17 ở LMS so với bản 23/09/2026. Nguyên nhân chính là ba nhóm chức năng chết đã bị gỡ — xem §2.2.
+
+### Đổi so với bản 23/09/2026
+
+| Nhóm | Cũ | Mới | |
+|---|---|---|---|
+| `Examination` (Ops) | 8 | **0** | ✅ Đã gỡ — khớp PO xác nhận *"không có tính năng"* |
+| `Event Test Management` (Ops) | 10 | **0** | ✅ Đã gỡ — **trả lời được `❓BA` treo từ 23/09** |
+| `Event Management` (Ops) | 1 | **0** | ✅ Đã gỡ — cùng lý do |
+| `Entrance Test` (LMS) | 3 | **0** | ✅ Đã gỡ — khớp PO xác nhận |
+| `Auth` (LMS) | 3 | **0** | Chuyển đi đâu chưa rõ. `❓BA` |
+| `majors` · `universities` (Ops) | 1 · 1 | **0** | Đã gỡ |
+| `Staff Facility` → `Staff Facility Management` | 5 | 5 | Chỉ đổi tên nhóm |
+| `Course Learning Outcome` / `Outcome Management` | gộp | 5 + 4 | Giờ tách rõ hai nhóm |
+| **`Report LMS`** (LMS) | — | **6** | 🆕 **Nhóm mới, KB chưa có.** Xem §2.7 |
+| `Class Management` (Ops) | 51 | 45 | −6 |
+| `Staff Management` (Ops) | 15 | 10 | −5 |
+| `Quiz` (Ops) | 25 | 22 | −3 |
+| `Class Management` (LMS) | 13 | 10 | −3 |
+| `User Management` (LMS) | 14 | 11 | −3 |
+| `User Management` (Ops) | 24 | 22 | −2 |
+| `Sis Dashboard` (Ops) | 12 | 10 | −2 |
 
 ---
 
@@ -55,18 +80,18 @@ Hàm ý: hệ thống quản lý **buổi học thực tế** (lecture/session),
 
 | Nhóm API | Ops | LMS | Endpoint đáng chú ý |
 |---|---|---|---|
-| `Examination` | 8 | — | `{id}/students` |
-| `Event Test Management` | 10 | — | `participants`, `attempts/answers/{id}` |
-| `Entrance Test` | — | 3 | `chart-data/{quizAttemptId}`, `quiz-attempts/{attemptId}/answers` |
-| `Event Management` | 1 | — | — |
+| ~~`Examination`~~ | **0** | — | ✅ Đã gỡ khỏi API (05/10/2026) |
+| ~~`Event Test Management`~~ | **0** | — | ✅ Đã gỡ khỏi API (05/10/2026) |
+| ~~`Entrance Test`~~ | — | **0** | ✅ Đã gỡ khỏi API (05/10/2026) |
+| ~~`Event Management`~~ | **0** | — | ✅ Đã gỡ khỏi API (05/10/2026) |
 
-Ba loại bài kiểm tra **nằm ngoài khoá học**: kỳ thi (Examination), bài test theo sự kiện (Event Test), bài kiểm tra đầu vào (Entrance Test). KB [03-assessment.md](03-assessment.md) chỉ mô tả Test/Quiz **bên trong** khoá.
+Ba loại bài kiểm tra **nằm ngoài khoá học** từng lộ ra qua API: kỳ thi (Examination), bài test theo sự kiện (Event Test), bài kiểm tra đầu vào (Entrance Test). KB [03-assessment.md](03-assessment.md) chỉ mô tả Test/Quiz **bên trong** khoá.
 
-> ❌ **PO xác nhận 23/09/2026: `Examination` và `Entrance Test` — hệ thống tạm thời KHÔNG CÓ hai chức năng này.**
+> ❌ **PO xác nhận 23/09/2026: `Examination` và `Entrance Test` — hệ thống KHÔNG CÓ hai chức năng này.**
 >
-> Endpoint vẫn tồn tại trong Swagger nhưng **chức năng không được dùng**. Đây là bằng chứng cho thấy **bề mặt API không đồng nghĩa với tính năng đang chạy** — có endpoint không có nghĩa là có tính năng.
+> ✅ **Đối chiếu lại 05/10/2026: cả bốn nhóm đã bị gỡ khỏi Swagger.** Thực tế khớp lời PO, và `Event Test Management` + `Event Management` — hai nhóm treo `❓BA` từ 23/09 — **cũng đã biến mất**, nên không cần hỏi nữa.
 >
-> ⚠️ **Áp dụng khi phân tích:** thấy một nhóm API lạ thì **hỏi PO trước khi kết luận tính năng đó tồn tại**. `Event Test Management` và `Event Management` chưa được xác nhận — vẫn `❓BA`.
+> ⚠️ **Bài học vẫn giữ nguyên:** lần trước endpoint tồn tại mà tính năng không có. **Bề mặt API không đồng nghĩa với tính năng đang chạy** theo cả hai chiều. Thấy một nhóm API lạ thì **hỏi PO trước khi kết luận**.
 
 ### 🔁 Danh sách endpoint có nhưng tính năng KHÔNG có
 
@@ -74,13 +99,19 @@ Cập nhật dần. Mỗi dòng là một lần suýt kết luận sai.
 
 | Endpoint / nhóm API | Trạng thái thật | Xác nhận |
 |---|---|---|
-| `Examination` (Ops, 8 op) | ❌ Không có tính năng | PO 23/09/2026 |
-| `Entrance Test` (LMS, 3 op) | ❌ Không có tính năng | PO 23/09/2026 |
+| ~~`Examination`~~ (Ops) | ❌ Không có tính năng → **đã gỡ khỏi API 05/10** | PO 23/09/2026 |
+| ~~`Entrance Test`~~ (LMS) | ❌ Không có tính năng → **đã gỡ khỏi API 05/10** | PO 23/09/2026 |
+| ~~`Event Test Management`~~ · ~~`Event Management`~~ (Ops) | ❌ **Đã gỡ khỏi API 05/10** — không cần hỏi nữa | Đối chiếu 05/10/2026 |
 | `POST /api/v1/courses/{id}/trial/upgrade-now` (LMS) | ❌ **Không có khoá Trial** | PO 23/09/2026 |
 | `Department Management` (Ops, 9 op) | ❌ **Không chạy.** Trước đây chỉ dành cho `staffs` | PO 05/10/2026 |
-| `Event Test Management` (Ops, 10 op) · `Event Management` (Ops, 1 op) | `❓BA` — chưa xác nhận | — |
+| **`Group Management`** (Ops, 9 op) | ❌ **Coi như không có.** Nhóm phẳng, chỉ CRUD + gán user. PO chốt bỏ hẳn, làm lại từ đầu ở dự án Group | PO 05/10/2026 |
+| **Recipients List** *(màn nhóm người nhận Email)* | ❌ **Coi như không có.** Khi mở lại chức năng gửi thông báo từ Ops sẽ chọn người nhận từ chức năng Nhóm mới | PO 05/10/2026 |
+| **`PUT /api/v1/classes/{id}/students/transfer`**<br>**`PUT /api/v1/classes/{id}/students/{student_id}/revert-transfer`** | ❌ **Không có chức năng chuyển lớp.** Muốn chuyển thì xoá khỏi lớp cũ, thêm vào lớp mới, **học lại từ đầu** | PO 06/10/2026 |
+| `Auth` (LMS, 3 op) | `❓BA` — biến mất khỏi Swagger 05/10, chưa rõ chuyển đi đâu | — |
 
-> **Ba lần trong một buổi phân tích.** Tỷ lệ endpoint "chết" trong hệ này đủ cao để **không bao giờ suy ra tính năng từ sự tồn tại của endpoint**.
+> **Sáu lần trong hai buổi phân tích.** Tỷ lệ endpoint "chết" trong hệ này đủ cao để **không bao giờ suy ra tính năng từ sự tồn tại của endpoint** — và chiều ngược lại cũng đúng: nhóm chức năng chết **có thể bị gỡ bất cứ lúc nào**, nên số liệu trong file này phải đối chiếu lại trước mỗi đợt phân tích.
+>
+> Lần thứ sáu đáng chú ý vì khác bốn lần trước: `transfer` **không phải cả một nhóm API** mà là **hai endpoint lẻ nằm giữa một nhóm đang chạy** *(`Class Management`)*. Nhóm API sống không bảo đảm mọi endpoint trong đó đều sống.
 
 ### 2.3 Tổ chức & phân quyền
 
@@ -88,9 +119,27 @@ Cập nhật dần. Mỗi dòng là một lần suýt kết luận sai.
 |---|---|---|
 | `Roles Management` | 8 | CRUD role, gán/gỡ staff khỏi role |
 | `Permissions management` | 2 | `permissions`, `state-permission-initial` |
-| `Group Management` | 9 | CRUD group, gán user. ✅ **Đang chạy** — phục vụ tạo nhóm để gửi thông báo từ Ops (PO 05/10/2026) |
-| `Department Management` | 9 | `list-unit`, `parent-list` → **cây phòng ban** |
-| `Staff Position` / `Staff Level` / `Staff Facility` | 6/2/5 | Chức danh, cấp bậc, cơ sở của nhân sự |
+| `Group Management` | 9 | ❌ **Coi như không có** — PO chốt 05/10/2026, xem bảng endpoint chết.<br>Hiện là **nhóm phẳng**: `GET POST /groups` · `GET PUT DELETE /groups/{id}` · `POST DELETE /groups/users` · `GET /groups/{id}/users` · `GET /groups/{id}/select-users`. **Không có cha con, không có nguồn, không có quản lý** |
+| `Department Management` | 9 | ❌ Không chạy. `list-unit`, `parent-list` → **cây phòng ban**, `{id}/assign-position` → gắn chức danh. Dành cho `staffs`, không dành cho `users` |
+| `Support Group Management` | 9 | Comment Replier. `{id}/supporters` thêm gỡ thành viên, `{id}/avatar` |
+| `Staff Position` / `Staff Level` / `Staff Facility Management` | 6/2/5 | Chức danh, cấp bậc, cơ sở của nhân sự |
+
+### 2.3b 🆕 `Report LMS` — nhóm mới phát hiện 05/10/2026
+
+Sáu endpoint ở phía **học viên**, KB chưa có file nào mô tả:
+
+| Endpoint | Nội dung |
+|---|---|
+| `GET /report/{class_id}/overall` | Hoạt động tổng quan |
+| `GET /report/{class_id}/weekly` | Hoạt động theo tuần |
+| `GET /report/{class_id}/topic` | Hoạt động theo chủ đề |
+| `GET /report/{class_id}/learning-result` | Kết quả học |
+| `GET /report/{class_id}/mock-test-result` | Kết quả thi thử |
+| `GET /report/{class_id}/exam-prediction` | **Dự đoán kết quả thi** |
+
+> ⚠️ **Mọi báo cáo đều lấy `class_id` làm khoá.** Không có chiều nào theo người, theo nhóm hay theo phòng ban. Bất kỳ yêu cầu nào về *"cộng dồn số liệu theo cơ cấu tổ chức"* đều phải thêm một chiều mới vào đây, không tận dụng được.
+>
+> `❓BA` — `exam-prediction` là tính năng đang chạy hay endpoint chết như `Examination` trước đây?
 
 > **Đây là nguồn cho permission matrix** mà KB còn thiếu. Kết hợp với `casbin_rule` trong DB ([12-data-model.md](12-data-model.md)).
 
@@ -138,7 +187,7 @@ Khớp với `tenant.billing_model`, `tenant.can_publish_marketplace`, `course_l
 | [03-assessment.md](03-assessment.md) | `Quiz`(25/3) · `Quiz Attempt`(7/8) · `Class Quiz Management`(9) |
 | [04-class.md](04-class.md) | `Class Management`(51/13) · `Class Resource Management`(30/4) |
 | [05-grading.md](05-grading.md) | `Quiz Attempt Grading`(14) |
-| [06-user-account.md](06-user-account.md) | `User Management`(24/14) · `Staff Management`(15) · `Auth`(3/3) |
+| [06-user-account.md](06-user-account.md) | `User Management`(22/11) · `Staff Management`(10). ⚠️ `Auth` **đã biến mất** khỏi cả hai Swagger (05/10) |
 | [07-learning-experience.md](07-learning-experience.md) | `Course Discussion Manage`(7) · `Course Section Note Manage`(5) · `Resource LMS`(5) |
 | [08-certificate.md](08-certificate.md) | `Certificate`(6) · `User Certificate`(2) |
 | [09-notification-email.md](09-notification-email.md) | `Notifications Management`(5/7) · `Mail Log Management`(4) · `Support Group Management`(9) |
@@ -153,8 +202,8 @@ Khớp với `tenant.billing_model`, `tenant.can_publish_marketplace`, `course_l
 
 | Việc | Cách làm |
 |---|---|
-| Lấy danh sách endpoint của một module | `curl -s <host>/api/v1/docs-json \| jq '.paths \| keys'` |
-| Lấy **field + kiểu dữ liệu** của một entity | Đọc `components.schemas` — **216 DTO ở Ops**, đây là nguồn tốt nhất hiện có cho field-level spec |
+| Lấy danh sách endpoint của một module | `curl -s https://uplms-api.staging.upbase.asia/{ops\|lms}/api/v1/docs-json \| jq '.paths \| keys'` |
+| Lấy **field + kiểu dữ liệu** của một entity | Đọc `components.schemas` — **200 DTO ở Ops**, đây là nguồn tốt nhất hiện có cho field-level spec |
 | Kiểm chứng một business rule | So endpoint + DTO với rule `KB-*` trong KB |
 | Viết FS cần API contract | Trích thẳng từ `docs-json`, không suy đoán |
 
