@@ -8,6 +8,7 @@
 | **CR-007** | 2026-09-23 | **Bỏ hẳn chiến dịch, kỳ lịch và cơ chế chốt kỳ.** Thay bằng **bộ chọn khoảng ngày tự do** trên bảng xếp hạng. Chấp nhận kết quả sống.<br>**Khoá mốc huy hiệu sau khi tạo**, nên huy hiệu đã nhận không bao giờ mất | PO nêu tại 9C, khi viết `US8` | 🔄 **Đang áp dụng** |
 | **CR-009** | 2026-10-01 | **Điểm check-in đổi từ mức cố định sang tăng dần theo chuỗi ngày đăng nhập liên tiếp.** Thêm khối chuỗi trên trang Thành tích. Chuỗi tính theo ngày đăng nhập, đếm mọi ngày dương lịch | PO yêu cầu, sau khi nghe phân tích rủi ro | 🔄 **Đang áp dụng** |
 | **CR-010** | 2026-10-01 | **Bỏ trần điểm mỗi ngày.** Kéo theo bỏ sự kiện `No points` trong lịch sử. Làm rõ logic lên hạng: mỗi mốc chạm được đều cho một hạng, không phải lấy tiêu chí cao nhất | PO review design và đính chính | 🔄 **Đang áp dụng** |
+| **CR-011** | 2026-10-06 | **Trang cấu hình Ops tự lưu, bỏ nút lưu.** Chỉ giữ hai xác nhận dạng popover. Tắt `Points` hoặc `Badges` thì tiêu chí lên hạng tương ứng khoá theo. Bỏ giới hạn trên của số điểm. Bỏ ô chọn múi giờ và nhãn trạng thái | PO làm design màn `Enable - Setting`, thấy lệch với PRD và TD-FE | ✅ **Đã áp dụng** — PRD v0.9, re-entry từ PRD do PO confirm |
 
 ---
 
@@ -537,4 +538,72 @@ PO xác nhận phương án **A** sau khi so hai cách tính trên cùng một v
 Lý do loại B: học viên chạm mốc ở tiêu chí không dẫn đầu thì hạng đứng im, nên hai trong ba tiêu chí gần như không có tác dụng, và các công tắc bật tắt từng tiêu chí ở `US10` mất ý nghĩa.
 
 `BR-10.2` nay có **ví dụ theo dòng thời gian** sáu tháng thay cho phép tính gộp, để người đọc thấy hạng lên dần theo từng mốc chạm được.
+
+---
+
+# CR-011 — Trang cấu hình Ops tự lưu
+
+## Nguyên văn PO
+
+> *"Design thì tôi đang làm như này `Gamification - Enable - Setting.png`, muốn nhập xong là tự lưu chứ không có popup hay modal gì nên không có nút save, đổi lại giải pháp theo hướng này được không"*
+>
+> *"không giới hạn điểm nhập, ko giới hạn 100"*
+>
+> *"nếu tắt cấu hình badge hay point thì các phần cấu hình lên hạng do 2 phần này cũng tắt theo"*
+>
+> *"trong design ko cần chọn múi giờ, cái này cấu hình theo tenant rồi"*
+>
+> *"múi giờ theo tenant, BE sẽ thiết kế vào technical design sau, còn lại ok"*
+
+## Trạng thái trước CR
+
+PRD viết từ lúc bốn khối còn là bốn màn riêng: mỗi khối một nút lưu, sau khi lưu thì nhắc *"chỉ áp dụng từ bây giờ"*. TD-FE §7.4 thì đã chuyển sang **một nút Save chung** cho cả trang, kèm ba confirm modal khi gạt công tắc và cảnh báo khi rời trang chưa lưu. Hai tài liệu lệch nhau, và cả hai đều lệch với design.
+
+## Hai điều chỉnh so với nguyên văn — PO đã đồng ý
+
+| PO muốn | Điều chỉnh | Lý do |
+|---|---|---|
+| *"Nhập xong là tự lưu"* | **Lưu khi rời ô hoặc bấm Enter**, không lưu trong lúc gõ | Cấu hình có hiệu lực ngay và không tính lại quá khứ (`C4`). Đổi bội số lên hạng `3000` → `5000`, lưu lúc ô đang là `5` thì học viên được cộng điểm đúng lúc đó nhảy lên trần hạng, mà hạng không tụt (`BR-10.3`). Debounce cũng không cứu được vì người dùng hay dừng tay giữa chừng |
+| *"Không có popup hay modal gì"* | **Giữ hai xác nhận**, dạng popover nhỏ cạnh công tắc: tắt `Gamification` · bật `Visibility in UpLMS` lần đầu | Tự lưu thì bấm nhầm có hiệu lực ngay. Tắt `Gamification` để lại khoảng trống dữ liệu không tính bù (`BR-14.5`). Bật `Visibility` lần đầu là thời điểm ra mắt cho toàn bộ học viên (`BR-14.4`). Cả hai gần như chỉ xảy ra một lần nên hỏi lại không gây phiền |
+
+## Rule mới
+
+| # | Rule | Mã |
+|---|---|---|
+| 1 | Trang tự lưu, không có nút lưu. Ô nhập lưu khi rời ô hoặc Enter, công tắc lưu khi bấm, hình lưu khi tải lên xong | `BR-14.10` |
+| 2 | Giá trị không hợp lệ thì không lưu, báo lỗi tại ô. Rời trang khi ô đang lỗi thì ô về giá trị đã lưu | `BR-14.11` |
+| 3 | Lưu xong báo nhỏ `Saved`. Lưu lỗi thì ô về giá trị cũ. Không có cảnh báo rời trang | `BR-14.12` |
+| 4 | Chỉ hai xác nhận, dạng popover | `BR-14.13` |
+| 5 | Nhắc *"chỉ áp dụng từ bây giờ"* thành **dòng cố định đầu khối**, không bật lên sau mỗi lần lưu | `US8` · `US10` |
+| 6 | **Tắt `Points` hoặc `Badges` thì tiêu chí lên hạng tương ứng khoá theo.** Khoá giữ nguyên giá trị, bật lại thì chạy lại như cũ. Không hỏi lại, nêu hệ quả bằng dòng giải thích dưới công tắc | `BR-10.7` |
+| 7 | "Chặn lưu" đổi thành **không tắt được tiêu chí hoặc bảng đang chạy cuối cùng**. Tắt chức năng nguồn mà không còn gì chạy thì vẫn cho tắt, khối hiện cảnh báo cố định | `BR-10.8` · `BR-11.5` |
+| 8 | Số điểm **không giới hạn trên** | `BR-8.5` |
+| 9 | **Múi giờ lấy theo tenant**, không có ô chọn trên màn Gamification. Cách lưu do BE quyết trong technical design | `BR-14.9` |
+| 10 | Bỏ nhãn trạng thái tổng. Hai công tắc cùng dòng giải thích của `Visibility in UpLMS` đã đủ | `US14` |
+
+## Lỗ hổng phát hiện khi phân tích — đã vá trong CR này
+
+Trước CR, tắt `Badges` thì tiêu chí lên hạng theo huy hiệu bị khoá, nhưng khoá **không đổi giá trị** (TD-FE §7.3). Nếu đó là tiêu chí duy nhất đang bật thì `BR-10.8` vẫn coi là hợp lệ, trong khi thực tế không ai lên hạng được. `Leaderboard` có lỗ tương tự. Rule 7 vá bằng khái niệm **"đang chạy"** = bật và không bị khoá.
+
+## Tác động
+
+| Hạng mục | Thay đổi |
+|---|---|
+| `US1` | Panel `How to level up?` chỉ hiện tiêu chí **đang chạy**, không hiện tiêu chí bị khoá |
+| `US5` · `US6` | Sửa tham chiếu tiền điều kiện: múi giờ lấy theo tenant, không còn *"khai ở `US14`"* |
+| `US8` | Bỏ nút lưu và nhắc sau lưu. Bỏ giới hạn trên. Thêm dòng giải thích dưới công tắc `Points` |
+| `US9` | Bỏ nút lưu. Thêm dòng giải thích dưới công tắc `Badges` |
+| `US10` | Viết lại `BR-10.7` và `BR-10.8`. Tiêu chí `Points` khoá khi chức năng điểm tắt |
+| `US11` | Viết lại `BR-11.5` |
+| `US14` | Thêm `BR-14.10` đến `BR-14.13`. Bỏ ô chọn múi giờ, bỏ nhãn trạng thái. Hai cảnh báo thành popover |
+| Database · API | Bảng `tenant` từ **Sửa** thành **Đọc**. Endpoint `settings` bỏ múi giờ |
+| TD-FE | Sửa §7.1 · §7.2 · §7.3. **Cơ chế lưu ở §2.2 · §4.2 · §7.4 · §7.5 để Dev tự cập nhật**, PRD chỉ ghi hai điều phải đúng — theo ranh giới PO với Dev |
+| `OQ-08` · `OQ-36` | Cập nhật theo quyết định mới |
+
+## Rủi ro PO chấp nhận
+
+| # | Rủi ro | Vì sao |
+|---|---|---|
+| 1 | Không giới hạn trên mà lại tự lưu: gõ nhầm `1500` thay vì `150` cũng có hiệu lực ngay | Điểm đã cộng theo số nhầm không tính lại, theo `C4` |
+| 2 | Không có nút lưu nên không có bước *"xem lại trước khi lưu"* | Mỗi ô có hiệu lực ngay khi rời ô |
 

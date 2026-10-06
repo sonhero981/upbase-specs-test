@@ -209,3 +209,18 @@ Trước đó `BR-13.10` viết chung là *"lượt học mới được tính �
 | 01/10/2026 | **Tiến độ huy hiệu chưa đạt hiện khi trỏ chuột vào**, dạng `8 check-in` | Design chốt | PO | Design |
 | 01/10/2026 | **Cột `Nguồn` trong bảng US viết rõ nội dung**, không ghi `Yêu cầu gốc dòng N` | Tài liệu trên Lark không đếm dòng nên mã đó vô nghĩa với người đọc | PO | Design |
 
+## CR-011 — Trang cấu hình Ops tự lưu (06/10/2026)
+
+| Ngày | Quyết định | Lý do | Người quyết | Gate |
+| --- | --- | --- | --- | --- |
+| 06/10/2026 | **Trang cấu hình tự lưu, bỏ nút lưu.** Ô nhập lưu khi **rời ô hoặc bấm Enter**, không lưu trong lúc gõ. Công tắc bấm là lưu | PO muốn design không có nút Save. Lưu trong lúc gõ thì giá trị dở dang có hiệu lực ngay và không sửa lại được, ví dụ bội số lên hạng `5` thay vì `5000` | PO, sau khi nghe phân tích | CR-011 |
+| 06/10/2026 | **Giữ đúng hai xác nhận, dạng popover cạnh công tắc:** tắt `Gamification` · bật `Visibility in UpLMS` lần đầu. Các công tắc khác không hỏi lại | PO muốn không popup. Hai thao tác này không đảo ngược được và gần như chỉ xảy ra một lần | PO, sau khi nghe phân tích | CR-011 |
+| 06/10/2026 | **Tắt `Points` hoặc `Badges` thì tiêu chí lên hạng tương ứng khoá theo.** Khoá giữ nguyên giá trị, bật lại thì chạy lại như cũ | PO chỉ định. Cách khoá giữ giá trị theo nguyên tắc chung của `BR-14.7` | PO | CR-011 |
+| 06/10/2026 | **"Chặn lưu" đổi thành không tắt được tiêu chí hoặc bảng đang chạy cuối cùng.** Tắt chức năng nguồn mà không còn gì chạy thì vẫn cho tắt, hiện cảnh báo cố định | Vá lỗ: tiêu chí bị khoá vẫn được tính là "bật" nên `BR-10.8` không bắt được trường hợp không ai lên hạng | Phân tích, PO đồng ý | CR-011 |
+| 06/10/2026 | **Số điểm không giới hạn trên** | PO chỉ định | PO | CR-011 |
+| 06/10/2026 | **Múi giờ lấy theo tenant, không có ô chọn trên màn Gamification.** Cách lưu do BE quyết trong technical design. Thay quyết định ở `OQ-08` | PO chỉ định | PO | CR-011 |
+| 06/10/2026 | **Bỏ nhãn trạng thái tổng** *(tắt hẳn · chạy ngầm · bật đầy đủ)* | Hai công tắc cùng dòng giải thích của `Visibility in UpLMS` đã đủ để đọc ra trạng thái | Phân tích, PO đồng ý | CR-011 |
+| 06/10/2026 | **Không viết lại cơ chế lưu trong TD-FE.** Chỉ sửa dòng nêu business rule, phần còn lại đánh dấu để Dev cập nhật | Ranh giới PO với Dev: PO ghi *cái gì phải đúng*, Dev quyết *làm thế nào* | Phân tích | CR-011 |
+
+**Rủi ro PO chấp nhận:** không giới hạn trên mà lại tự lưu, nên gõ nhầm số điểm cũng có hiệu lực ngay và không tính lại.
+

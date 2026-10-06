@@ -6,7 +6,7 @@
 | **Epic** | ❓ *link Jira* |
 | **Story** | ❓ *link Jira* |
 | **Related** | `brd-v0.6-20260923.md` · `impact-matrix-v0.2-20260923.md` · `solution-comparison-v0.1-20260923.md` |
-| **Document status** | 🔄 **v0.8 chờ PO review lại** — mang `CR-009`, `CR-010` và design đã chốt. Bản v0.2 đã được PO duyệt 23/09/2026 |
+| **Document status** | 🔄 **v0.9 chờ PO review lại** — mang `CR-009`, `CR-010`, `CR-011` và design đã chốt. Bản v0.2 đã được PO duyệt 23/09/2026 |
 | **Document owner** | Bùi Đức Huy (PO) |
 | **Designer** | ❓ *cần điền* |
 | **Tech lead** | ❓ *cần điền* |
@@ -27,8 +27,9 @@
 | v0.6 | Bùi Đức Huy | Gộp bốn màn cấu hình Ops thành một trang bốn khối. Thêm mục **Design** kèm sáu ảnh màn đã chốt. Tooltip cho ô chuỗi | Design chốt 01/10 | 01/10/2026 |
 | v0.7 | Bùi Đức Huy | Bỏ viết tắt: `Giải O2` thành `Giải quyết mục tiêu O2`, mã ràng buộc trần thành mã kèm nội dung. Thêm dấu phân cách giữa các mã đứng liền nhau | — | 01/10/2026 |
 | v0.8 | Bùi Đức Huy | Thêm mục **Out of scope** cấp tính năng và mục **Unit** chia 15 US thành 5 nhóm bàn giao kèm phụ thuộc. Học từ phase Inception của AI-DLC | — | 05/10/2026 |
+| v0.9 | Bùi Đức Huy | Trang cấu hình Ops **tự lưu, bỏ nút lưu**. Chỉ giữ hai xác nhận dạng popover cạnh công tắc. Tắt `Points` hoặc `Badges` thì tiêu chí lên hạng tương ứng khoá theo. Thay "chặn lưu" bằng "không tắt được tiêu chí và bảng cuối cùng". Bỏ giới hạn trên của số điểm. Bỏ ô chọn múi giờ và nhãn trạng thái — múi giờ lấy theo tenant | `CR-011` | 06/10/2026 |
 
-> ✅ **`Approved with Notes` — PO duyệt ngày 23/09/2026.** Còn **8 câu hỏi mở** ở mục `Vấn đề tồn đọng`, không câu nào chặn bàn giao.
+> ✅ **`Approved with Notes` — PO duyệt bản v0.2 ngày 23/09/2026.** Các bản từ v0.3 trở đi mang thay đổi mới, **chờ PO duyệt lại**. Còn **8 câu hỏi mở** ở mục `Vấn đề tồn đọng`, không câu nào chặn bàn giao.
 
 ---
 
@@ -168,7 +169,7 @@ Sáu màn đã chốt ngày 01/10/2026. Ảnh gốc nằm trong repo ở `.claud
 | **How to level up** | `US1` · `US10` | Panel trượt từ phải, ba tiêu chí lên hạng |
 | **Achievement history** | `US3` | Panel trượt từ phải, nội dung dạng câu văn |
 | **User Profile — Badges** | `US4` | Tab trong `My Profile`, bộ đếm `({đã đạt}/{tổng mốc})`, huy hiệu chưa đạt hiện xám |
-| **Ops — Enable Setting** | `US8` · `US9` · `US10` · `US11` · `US14` | Một trang bốn khối, mốc huy hiệu chỉ đọc |
+| **Ops — Enable Setting** | `US8` · `US9` · `US10` · `US11` · `US14` | Một trang bốn khối, mốc huy hiệu chỉ đọc. **Tự lưu, không có nút lưu.** Không có ô chọn múi giờ |
 | **Ops — Disable** | `US14` | `Gamification` tắt thì mọi khối khác biến mất |
 
 # Solution
@@ -291,7 +292,7 @@ flowchart LR
         R1["Thành tích của học viên<br/>điểm - hạng hiện tại<br/>chuỗi hiện tại"]
         R2["Bảng xếp hạng tính sẵn<br/>ghi đè mỗi 8 tiếng"]
     end
-    TN["tenant — SỬA<br/>thêm cột múi giờ<br/>dùng để cắt biên ngày"]
+    TN["tenant<br/>múi giờ tổ chức<br/>dùng để cắt biên ngày"]
     A --> B
     B --> C
     TN --> B
@@ -305,11 +306,11 @@ flowchart LR
 
 *Mười thực thể mới chia ba tầng. Sổ giao dịch điểm là gốc — mọi con số hiển thị đều truy được về đây.*
 
-**10 thực thể mới. Bảng hiện hữu duy nhất bị sửa là `tenant`, thêm một cột.**
+**10 thực thể mới.** Múi giờ tổ chức lấy theo `tenant`. Cách lưu múi giờ, kể cả có sửa bảng `tenant` hay không, do BE quyết trong technical design.
 
 | Bảng | Mới / Sửa | Mục đích | `tenant_id` |
 | --- | --- | --- | --- |
-| `tenant` | **Sửa** | ➕ Thêm **tham số múi giờ** (`C6`, `C9`). Bảng hiện có 7 cột, không có trường này. Thuộc `TNT.CFG.02`, module Tenant chưa làm — đợt này khai tạm ở đây | *(là bảng gốc)* |
+| `tenant` | **Đọc** | Lấy **múi giờ tổ chức** để cắt biên ngày và biên khoảng (`C6`, `C9`). Không có ô chọn múi giờ trên màn Gamification. Cách lưu do BE quyết | *(là bảng gốc)* |
 | Cấu hình gamification | Mới | Hai công tắc chung (`Gamification` · `Visibility in UpLMS`) · **bốn công tắc chức năng** (`Points` · `Badges` · `Levels` · `Leaderboard`) · bốn công tắc cột bảng xếp hạng | ✅ Bắt buộc |
 | Quy tắc cộng điểm | Mới | Bốn hành động, mỗi hành động một công tắc và một số điểm. Riêng check-in khai bằng **ba tham số** điểm chuỗi thay vì một số (`BR-8.5a`) | ✅ Bắt buộc |
 | **Sổ giao dịch điểm** | Mới | **Từng lần cộng điểm kèm nguồn và thời điểm** (`C3`). Nền của lịch sử ghi nhận, bảng xếp hạng theo khoảng ngày, tiêu chí phụ khi đồng hạng, và chỉ số *số khoá hoàn thành* | ✅ **Bắt buộc — rò rỉ ở đây hậu quả nặng nhất** |
@@ -346,7 +347,7 @@ flowchart LR
 
 | Method | Endpoint | Mới / Sửa | Mục đích |
 | --- | --- | --- | --- |
-| GET, PUT | `/api/v1/gamification/settings` | Mới | Hai công tắc chung · múi giờ tổ chức — `US14` |
+| GET, PUT | `/api/v1/gamification/settings` | Mới | Hai công tắc chung — `US14` |
 | GET, PUT | `/api/v1/gamification/point-rules` | Mới | Công tắc `Points` · bốn hành động · ba tham số điểm chuỗi — `US8` |
 | GET, PUT | `/api/v1/gamification/badges` | Mới | Công tắc `Badges` · bật tắt bốn loại · sửa tên, hình, mô tả từng mốc — `US9`.<br>**Không có `POST` và `DELETE`**: không tạo, không xoá huy hiệu (`BR-9.7`). **Giá trị mốc không nhận sửa** (`BR-9.2`) |
 | GET, PUT | `/api/v1/gamification/levels` | Mới | Công tắc `Levels` · ba bội số lên hạng · trần hạng — `US10`.<br>**Không có `POST` và `DELETE`**: hạng là số tịnh tiến, không phải danh sách bậc để tạo |
@@ -408,6 +409,8 @@ features/gamification/src/
   schema/settingsSchema.ts
   utils/mapSettings.ts · utils/dependency.ts · utils/saveOrder.ts
 ```
+
+> ⚠️ `SettingsFooter` và `saveOrder.ts` dựng cho nút Save chung, không còn đúng khi trang tự lưu. Xem lưu ý đầu §7.
 
 Đăng ký `AppModule` vào `module-registry.ts` và `scripts/generate-customer.js`.
 
@@ -473,6 +476,7 @@ features/gamification/src/
 - Load: 5 query song song → `mapSettings` → `reset` form khi cả 5 đã có data.
 - **Mutation:** mỗi block 1 `useAppMutation` (PUT). `saveOrder.ts` chạy tuần tự bằng `await mutateAsync`. `onSuccess`: `setQueryData` key của block bằng response, `reset` field của block đó, không invalidate cả trang.
 - Save thành công `point-rules` / `badges` / `levels` / `leaderboard-settings` → invalidate `preview` (tab preview theo config đã save).
+- ⚠️ Hai dòng mutation ở trên viết cho nút Save chung. Trang nay tự lưu — xem lưu ý đầu §7.
 - **Learners:** query state (search, sort, range, page) lấy từ URL qua `useTableFilters`. Export gọi API trực tiếp với filter + sort hiện tại, không đi qua cache.
 - Permission lấy từ `useHasPermission`, không fetch thêm.
 
@@ -616,13 +620,19 @@ LeaderboardCard
 
 ### 7. Ops — settings page (US8–US11, US14)
 
+> ⚠️ **Dev cập nhật lại theo thay đổi ngày 06/10/2026: trang tự lưu, không có nút Save** (`BR-14.10` đến `BR-14.13`). Các phần dựng trên nút Save chung không còn đúng: `SettingsFooter` và `saveOrder.ts` ở §2.2 · mutation tuần tự ở §4.2 · toàn bộ §7.4 · dòng `Save to update preview` ở §7.5.
+>
+> PO chỉ chốt hành vi, cách lưu do Dev quyết. Hai điều phải đúng:
+> 1. Lưu dồn dập trên cùng một khối **không được để lần lưu trước ghi đè lên lần lưu sau**.
+> 2. Lưu một ô **không được kéo theo giá trị đang lỗi của ô khác** trong cùng khối.
+
 #### 7.1. Form
 
 Một form react-hook-form + zod cho cả page, mỗi block 1 component.
 
 | Block | Field |
 |---|---|
-| `GeneralBlock` | `gamification` · `visibility` · status label `OFF/SHADOW/LIVE` · `timezone` |
+| `GeneralBlock` | `gamification` · `visibility` |
 | `PointsBlock` | switch block · 4 action `{ enabled, points }` · step/cap check-in (read-only) |
 | `BadgesBlock` | switch block · 4 badge type `{ enabled, badges[{ id, name, description, image_resource_id }] }` |
 | `LevelsBlock` | switch block · `cap_enabled`, `cap` · 3 criteria `{ enabled, multiple }` |
@@ -630,19 +640,18 @@ Một form react-hook-form + zod cho cả page, mỗi block 1 component.
 
 - Disable `gamification` → chỉ render `GeneralBlock` (ẩn `visibility`).
 - `HookFormSwitch` (`@ops/ui`) thêm prop `disabled`.
-- `timezone`: `HookFormSelectAntd`, options từ `Intl.supportedValuesOf('timeZone')`, label kèm offset.
 - Badge name edit inline; click image → `ModalUploadFile` (`fileType='IMAGE'`, `maxCount=1`, location `GAMIFICATION`), lưu `image_resource_id`.
 
 #### 7.2. Validation (`settingsSchema`)
 
 | Field | Rule |
 |---|---|
-| Points mỗi action | Integer 1–100, required khi enable |
+| Points mỗi action | Integer ≥ 1, **không giới hạn trên**, required khi enable |
 | Multiple mỗi criteria | Integer ≥ 1, required khi enable |
 | `cap` | Integer ≥ 2, required khi `cap_enabled` |
 | Badge name | Cho phép empty (BE lưu default name) |
-| Levels enable | Ít nhất 1 criteria enable |
-| Leaderboard enable | Ít nhất 1 board enable |
+| Levels enable | Không tắt được criteria **đang chạy** cuối cùng (enable và không bị lock), theo `BR-10.8` |
+| Leaderboard enable | Không tắt được board **đang chạy** cuối cùng, theo `BR-11.5` |
 
 Field của item đang disable thì skip validate, giữ value.
 
@@ -650,7 +659,7 @@ Field của item đang disable thì skip validate, giữ value.
 
 | Khi disable | Disable / lock |
 |---|---|
-| Points | 4 action · `Show points` |
+| Points | 4 action · criteria `Points` · `Show points` |
 | Badges | 4 badge type · criteria `Badges` · `Show badges` |
 | Levels | criteria + `cap` · `Show levels` |
 | Leaderboard | 4 switch board |
@@ -658,13 +667,15 @@ Field của item đang disable thì skip validate, giữ value.
 - Khi load: lock theo `locked_reason` BE trả. Khi edit: tính bằng `dependency.ts` từ `useWatch`.
 - Lock = disabled + helper text; không đổi value.
 
-**Confirm modal** khi toggle switch (vẫn chờ Save):
+**Popover xác nhận** gắn cạnh switch, không phải modal. Chỉ có hai trường hợp, theo `BR-14.13`. Huỷ thì switch về như cũ, không lưu:
 
 | Trigger | Content |
 |---|---|
 | Disable `Gamification` | Ngừng ghi nhận, dữ liệu giữ nguyên, bật lại không tính bù |
 | Enable `Visibility` lần đầu | Học viên thấy ngay số đã tích, không có thông báo hồi tố |
-| Disable `Badges` khi criteria `Badges` đang enable | Tiêu chí đó ngừng, hạng đã đạt giữ nguyên |
+
+- Disable `Points` hoặc `Badges` khi criteria tương ứng đang enable: **không hỏi lại**, hệ quả nêu bằng helper text dưới switch (`BR-10.7`).
+- Levels hoặc Leaderboard không còn item nào đang chạy vì bị lock → hiện cảnh báo cố định trong block (`BR-10.8`, `BR-11.5`).
 
 #### 7.4. Load & Save
 
@@ -823,7 +834,7 @@ Học viên chưa có điểm nào vẫn vào được trang. Lúc đó điểm 
 | Gamification | Dải tóm tắt | `{n} Streaks` | **Chuỗi hiện tại** — số ngày vào hệ thống liên tiếp đang giữ. Chưa vào ngày nào thì hiện `0`. Cách tính ở `US5` |
 | Gamification | Dải tóm tắt | Chuỗi dài nhất | **Không hiện.** Chỉ số quá khứ không giúp học viên quyết định gì hôm nay |
 | Gamification | Dải tóm tắt | Khi `Points` tắt | Ẩn ô chuỗi. Không còn điểm thì chuỗi mất ý nghĩa |
-| Thành tích của tôi | Cách lên hạng | Rule chung | Ngoài tiêu chí gần nhất, hiện **đầy đủ ba tiêu chí lên hạng đang bật** kèm bội số của từng cái. Ví dụ: `Every 3,000 points` · `Every 5 completed courses` · `Every 5 badges`. Tiêu chí đang tắt thì không hiện |
+| Thành tích của tôi | Cách lên hạng | Rule chung | Ngoài tiêu chí gần nhất, hiện **đầy đủ các tiêu chí lên hạng đang chạy** kèm bội số của từng cái. Ví dụ: `Every 3,000 points` · `Every 5 completed courses` · `Every 5 badges`. Tiêu chí đang tắt, hoặc đang bị khoá vì chức năng nguồn tắt (`BR-10.7`), thì không hiện |
 | Thành tích của tôi | Cách tính điểm | Rule chung | Hiện **bảng điểm đang áp dụng**: mỗi hành động đang bật được bao nhiêu điểm. Ví dụ: `Activity completion: 25` · `Course completion: 150` · `Successful test: 50`. Hành động đang tắt thì không hiện |
 | Gamification | Panel `How to collect points?` | Dòng check-in | Nhãn `10–40 points`, mô tả `for each daily sign-in, +5 per day in a row up to day 7`. Hiện khoảng thay vì một số vì điểm thay đổi theo chuỗi |
 | Gamification | Dải tóm tắt | `{n} Badges` | **Chỉ hiện số lượng huy hiệu đã đạt.** Danh sách đầy đủ nằm ở màn khác, xem `US4` |
@@ -844,8 +855,8 @@ Học viên chưa có điểm nào vẫn vào được trang. Lúc đó điểm 
 | Gamification | Panel `How to collect points?` | Bố cục | Trượt từ cạnh phải. Mỗi dòng gồm nhãn điểm bên trái và mô tả hành động bên phải |
 | Gamification | Panel `How to collect points?` | Ba dòng còn lại | `for each activity completion` · `for each course completion` · `for each successful test completion`. Số điểm lấy từ cấu hình đang áp dụng |
 | Gamification | Panel `How to collect points?` | Hành động đang tắt | Không hiện dòng tương ứng |
-| Gamification | Panel `How to level up?` | Nội dung | Ba tiêu chí đang bật, **mỗi dòng mở đầu bằng `Every`**: `Every 3,000 points` · `Every 5 completed courses` · `Every 5 badges`. Thiếu chữ `Every` thì học viên hiểu thành đạt mốc đó một lần là lên hạng, trong khi mỗi lần chạm thêm một mốc đều cho một hạng (`BR-10.2`) |
-| Gamification | Panel `How to level up?` | Tiêu chí đang tắt | Không hiện dòng tương ứng |
+| Gamification | Panel `How to level up?` | Nội dung | Các tiêu chí đang chạy, **mỗi dòng mở đầu bằng `Every`**: `Every 3,000 points` · `Every 5 completed courses` · `Every 5 badges`. Thiếu chữ `Every` thì học viên hiểu thành đạt mốc đó một lần là lên hạng, trong khi mỗi lần chạm thêm một mốc đều cho một hạng (`BR-10.2`) |
+| Gamification | Panel `How to level up?` | Tiêu chí đang tắt hoặc bị khoá | Không hiện dòng tương ứng. Bị khoá là khi `Points` hoặc `Badges` tắt, theo `BR-10.7` |
 | Gamification | Cả hai panel | Đóng | Nút `✕` ở góc phải tiêu đề |
 
 **Business requirement — Business rule**
@@ -1194,7 +1205,7 @@ Là học viên, tôi cần việc vào hệ thống mỗi ngày được ghi nh
 | `Gamification` bật ở cấp tổ chức | Hai công tắc `Gamification` và `Visibility in UpLMS`, cấu hình ở `US14` |
 | Vận hành đã bật hành động **vào hệ thống hằng ngày** và khai ba tham số điểm chuỗi | `US8` |
 | Tài khoản không phải `Test Account` | Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification |
-| Tổ chức đã khai tham số **múi giờ** | Ràng buộc `C9` — biên ngày cắt theo múi giờ tổ chức. Tham số múi giờ khai ở `US14` |
+| Tổ chức đã có **múi giờ** | Ràng buộc `C9` — biên ngày cắt theo múi giờ tổ chức. Múi giờ lấy theo tenant, xem `BR-14.9` |
 
 > `Visibility in UpLMS` tắt thì **vẫn ghi nhận và vẫn cộng điểm**, chỉ không hiện gì cho học viên. Đây là giai đoạn chạy ngầm.
 
@@ -1292,7 +1303,7 @@ Là học viên, tôi cần xem bảng xếp hạng của kỳ tôi chọn, đ�
 | Điều kiện | Nguồn |
 |---|---|
 | `Gamification` bật và `Visibility in UpLMS` bật | Hai công tắc `Gamification` và `Visibility in UpLMS`, cấu hình ở `US14` |
-| Tổ chức đã khai tham số **múi giờ** | Ràng buộc `C6` — biên khoảng cắt theo múi giờ tổ chức. Tham số múi giờ khai ở `US14` |
+| Tổ chức đã có **múi giờ** | Ràng buộc `C6` — biên khoảng cắt theo múi giờ tổ chức. Múi giờ lấy theo tenant, xem `BR-14.9` |
 | Tài khoản không phải `Test Account` | Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification |
 
 ### 3/ Scenario
@@ -1489,9 +1500,9 @@ Là nhân sự vận hành, tôi cần bật tắt cơ chế điểm và khai m�
 
 Nhân sự vận hành mở màn cấu hình `Points` trong khu vực Gamification trên Ops.
 
-Đầu khối là công tắc bật tắt cả cơ chế điểm. Bên dưới là bốn hành động, mỗi hành động có công tắc riêng và một ô nhập số điểm. Riêng check-in có ba ô của bảng điểm chuỗi.
+Đầu khối là công tắc bật tắt cả cơ chế điểm. Bên dưới là bốn hành động, mỗi hành động có công tắc riêng và một ô nhập số điểm. Riêng check-in là ô điểm nền của chuỗi.
 
-Sửa xong thì lưu. Cấu hình mới áp dụng cho các lần cộng điểm **từ thời điểm lưu trở đi**, không tính lại quá khứ.
+Mỗi thay đổi **tự lưu** khi rời ô hoặc khi bấm công tắc, không có nút lưu (`BR-14.10`). Cấu hình mới áp dụng cho các lần cộng điểm **từ thời điểm lưu trở đi**, không tính lại quá khứ.
 
 ### 4/ Acceptance criteria
 
@@ -1499,7 +1510,8 @@ Sửa xong thì lưu. Cấu hình mới áp dụng cho các lần cộng điểm
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Cấu hình điểm | Đầu màn | Công tắc `Points` | Bật tắt cả cơ chế điểm. Tắt thì mọi hành động bên dưới **chuyển sang trạng thái không thao tác được**, nhưng giữ nguyên giá trị đã khai |
+| Cấu hình điểm | Đầu màn | Công tắc `Points` | Bật tắt cả cơ chế điểm. Tắt thì mọi hành động bên dưới **chuyển sang trạng thái không thao tác được**, nhưng giữ nguyên giá trị đã khai. Tiêu chí lên hạng theo điểm ở `US10` **khoá theo**, xem `BR-10.7` |
+| Cấu hình điểm | Đầu màn | Dòng giải thích dưới công tắc `Points` | Nêu rõ tắt `Points` thì tiêu chí lên hạng theo điểm cũng ngừng. **Không có hộp xác nhận.** Chuỗi tiếng Anh: `❓BA` |
 | Cấu hình điểm | Đầu màn | Mô tả chức năng | `Award users with points for different learning activities and encourage healthy competition.` |
 | Cấu hình điểm | Danh sách hành động | `On each daily check-in` | Công tắc riêng + **một ô nhập điểm nền**. Mô tả dưới tiêu đề: `Award points for signing in each day. Each day in a row adds 5 more, up to 40 on day 7.` Ứng với `US5` |
 | Cấu hình điểm | Điểm chuỗi check-in | Ô nhập | **Điểm nền** — số điểm của ngày đầu tiên trong một chuỗi. Số nguyên dương, nhỏ nhất `1`. Mặc định `10` |
@@ -1508,20 +1520,21 @@ Sửa xong thì lưu. Cấu hình mới áp dụng cho các lần cộng điểm
 | Cấu hình điểm | Danh sách hành động | `On each activity completion` | Công tắc riêng + ô nhập số điểm |
 | Cấu hình điểm | Danh sách hành động | `On each course completion` | Công tắc riêng + ô nhập số điểm |
 | Cấu hình điểm | Danh sách hành động | `On each successful test completion` | Công tắc riêng + ô nhập số điểm. **Chỉ tính bài Test đạt**, theo `BR-TEST` |
-| Cấu hình điểm | Ô nhập số điểm | Định dạng | Số nguyên dương. Nhỏ nhất `1`, lớn nhất `❓BA`. Không nhận số âm, không nhận số thập phân, không nhận `0` |
+| Cấu hình điểm | Ô nhập số điểm | Định dạng | Số nguyên dương. Nhỏ nhất `1`, **không giới hạn trên**. Không nhận số âm, không nhận số thập phân, không nhận `0` |
 | Cấu hình điểm | Ô nhập số điểm | Khi hành động đang tắt | Không nhập được, giữ nguyên giá trị cũ |
-| Cấu hình điểm | Ô nhập số điểm | Bỏ trống | Không lưu được. Báo lỗi ngay tại ô |
-| Cấu hình điểm | Nút lưu | Trạng thái | Chỉ bật khi có thay đổi so với giá trị đang lưu |
-| Cấu hình điểm | Sau khi lưu | Xác nhận | Hiện nhắc rằng cấu hình mới **chỉ áp dụng từ bây giờ trở đi**, không tính lại điểm đã cộng. Chuỗi tiếng Anh: `❓BA` |
+| Cấu hình điểm | Ô nhập số điểm | Bỏ trống | Không lưu được. Báo lỗi ngay tại ô, theo `BR-14.11` |
+| Cấu hình điểm | Cách lưu | | **Tự lưu, không có nút lưu.** Ô nhập lưu khi rời ô hoặc bấm Enter, công tắc lưu khi bấm. Theo `BR-14.10` |
+| Cấu hình điểm | Đầu khối | Dòng nhắc cố định | Nêu rằng thay đổi **chỉ áp dụng từ bây giờ trở đi**, không tính lại điểm đã cộng. **Luôn hiện**, không bật lên sau mỗi lần lưu. Chuỗi tiếng Anh: `❓BA` |
 
 **Business requirement — Business rule**
 
 - `BR-8.1` Bốn hành động tính điểm là **danh sách cố định** trong phạm vi này: check-in hằng ngày · hoàn thành hoạt động · hoàn thành khoá · hoàn thành bài Test đạt. Vận hành **không tự thêm hành động mới**.
   > Nhưng danh sách này phải **mở rộng được bằng cấu hình** ở tầng dữ liệu, theo ràng buộc `C2`. Sau này thêm hành động cho lộ trình học thì chỉ thêm bản ghi, không sửa cấu trúc.
-- `BR-8.2` Tắt công tắc `Points` thì **ngừng cộng điểm mới**, nhưng điểm đã có **giữ nguyên** và học viên vẫn xem được ở trang thành tích.
+- `BR-8.2` Tắt công tắc `Points` thì **ngừng cộng điểm mới**, nhưng điểm đã có **giữ nguyên** và học viên vẫn xem được ở trang thành tích. Tiêu chí lên hạng theo điểm khoá theo, xem `BR-10.7`.
 - `BR-8.3` Tắt một hành động riêng lẻ thì chỉ hành động đó ngừng sinh điểm. Ba hành động còn lại chạy bình thường.
 - `BR-8.4` Đổi số điểm của một hành động thì **áp dụng từ thời điểm lưu trở đi**. Các lần cộng điểm trước đó **giữ nguyên số điểm đã ghi** trong lịch sử, theo `C4`.
-- `BR-8.5` Số điểm là **số nguyên dương**, nhỏ nhất `1`. Muốn một hành động không sinh điểm thì **tắt công tắc**, không đặt giá trị `0`.
+- `BR-8.5` Số điểm là **số nguyên dương**, nhỏ nhất `1`, **không có giới hạn trên**. Muốn một hành động không sinh điểm thì **tắt công tắc**, không đặt giá trị `0`.
+  > ⚠️ **Rủi ro PO chấp nhận ngày 06/10/2026.** Không có giới hạn trên mà lại tự lưu khi rời ô, nên gõ nhầm `1500` thay vì `150` cũng có hiệu lực ngay. Điểm đã cộng theo số nhầm **không tính lại**, theo `C4`.
 - `BR-8.5a` Check-in khai bằng **một ô điểm nền**. Bước tăng `5` và trần `40` là **hằng số của đợt này**, không hiện ô nhập.
   > Hai hằng số này vẫn phải **lưu ở tầng dữ liệu chứ không đóng cứng trong mã**, theo `C2`. Đợt sau mở ô cho vận hành sửa thì chỉ cần hiện ô, không phải đổi cấu trúc.
 - `BR-8.5b` **Trần `40` chạm đúng ngày thứ 7** của chuỗi. Con số chọn theo chủ đích: người giữ chuỗi trọn một tuần, kể cả thứ bảy và chủ nhật, thì từ đó về sau luôn nhận mức cao nhất.
@@ -1535,7 +1548,7 @@ Sửa xong thì lưu. Cấu hình mới áp dụng cho các lần cộng điểm
 | Cơ chế điểm bật hay tắt | Đúng/sai | Có | Mặc định **tắt** khi khởi tạo tổ chức | Mới |
 | Mã hành động | Danh mục | Có | Bốn giá trị cố định ở phạm vi này | Mới. Chịu `C2` |
 | Hành động bật hay tắt | Đúng/sai | Có | Mặc định **tắt** | Mới |
-| Số điểm | Số nguyên | Có | `>= 1` | Mới |
+| Số điểm | Số nguyên | Có | `>= 1`, không giới hạn trên | Mới. Tổng điểm tích luỹ của học viên phải chứa được mà không tràn |
 | `tenant_id` | Khoá ngoại | Có | | Ràng buộc `C1` — cấu hình gắn `tenant_id`, không đóng cứng trong mã |
 
 **NFR**
@@ -1585,7 +1598,8 @@ Ví dụ loại Course có mốc `1, 2, 4, 8, 16, 32, 64, 128`. Vận hành đ�
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Cấu hình huy hiệu | Đầu màn | Công tắc `Badges` | Bật tắt cả chức năng huy hiệu |
+| Cấu hình huy hiệu | Đầu màn | Công tắc `Badges` | Bật tắt cả chức năng huy hiệu. Tiêu chí lên hạng theo huy hiệu ở `US10` **khoá theo**, xem `BR-10.7` |
+| Cấu hình huy hiệu | Đầu màn | Dòng giải thích dưới công tắc `Badges` | Nêu rõ tắt `Badges` thì tiêu chí lên hạng theo huy hiệu cũng ngừng. **Không có hộp xác nhận.** Chuỗi tiếng Anh: `❓BA` |
 | Cấu hình huy hiệu | Đầu màn | Mô tả chức năng | `Award users with badges to highlight the milestones in their learning journey.` |
 | Cấu hình huy hiệu | Bốn loại | Danh sách | `Check-in badges` (số ngày có mặt) · `Activity badges` (số hoạt động hoàn thành) · `Test badges` (số bài Test đạt) · `Course badges` (số khoá hoàn thành). Tên tiếng Anh chính xác: `❓BA` |
 | Cấu hình huy hiệu | Mỗi loại | Công tắc riêng | Bật tắt riêng từng loại, không phụ thuộc ba loại còn lại |
@@ -1596,7 +1610,7 @@ Ví dụ loại Course có mốc `1, 2, 4, 8, 16, 32, 64, 128`. Vận hành đ�
 | Cấu hình huy hiệu | Từng mốc | Mô tả | Nhập được, không bắt buộc. Hiện trong tooltip ở `US1` |
 | Cấu hình huy hiệu | Khi loại đang tắt | Các mốc bên dưới | Không thao tác được, giữ nguyên nội dung đã đặt |
 | Cấu hình huy hiệu | Thao tác không có | Tạo, xoá, thêm mốc | **Không có nút tạo huy hiệu, không có nút xoá, không thêm bớt được số mốc trong một loại** |
-| Cấu hình huy hiệu | Nút lưu | Trạng thái | Chỉ bật khi có thay đổi |
+| Cấu hình huy hiệu | Cách lưu | | **Tự lưu, không có nút lưu.** Tên và mô tả lưu khi rời ô, hình lưu khi tải lên xong, công tắc lưu khi bấm. Theo `BR-14.10` |
 
 **Business requirement — Business rule**
 
@@ -1606,7 +1620,7 @@ Ví dụ loại Course có mốc `1, 2, 4, 8, 16, 32, 64, 128`. Vận hành đ�
 - `BR-9.3` Vận hành đặt được **tên, hình và mô tả** cho từng mốc. Đây là phần nội dung, không phải phần logic.
 - `BR-9.4` Đổi tên hoặc hình của một mốc thì **áp ngay cho cả huy hiệu học viên đã đạt**. Vẫn là cùng một huy hiệu, chỉ đổi cách hiển thị. Không phải trao lại, không sinh thông báo.
 - `BR-9.5` Tắt một loại huy hiệu thì huy hiệu loại đó **biến khỏi giao diện học viên**, kể cả với người đã đạt. **Dữ liệu giữ nguyên**, bật lại thì hiện lại đầy đủ. Theo `BR-1.4a`.
-- `BR-9.6` Tắt công tắc `Badges` thì **toàn bộ phần huy hiệu biến khỏi giao diện học viên**, và hệ thống **ngừng xét trao huy hiệu mới**.
+- `BR-9.6` Tắt công tắc `Badges` thì **toàn bộ phần huy hiệu biến khỏi giao diện học viên**, và hệ thống **ngừng xét trao huy hiệu mới**. Tiêu chí lên hạng theo huy hiệu khoá theo, xem `BR-10.7`.
 - `BR-9.7` **Không có thao tác tạo mới hoặc xoá huy hiệu.** Bộ huy hiệu là cố định, chỉ bật tắt và đổi nội dung.
 - `BR-9.8` Tên và hình **luôn có giá trị**. Hệ thống đặt sẵn mặc định cho cả bốn loại và mọi mốc, nên tổ chức bật chức năng lên là dùng được ngay, không phải điền trước.
 
@@ -1703,14 +1717,15 @@ Cuối màn là trần hạng, con số cao nhất học viên có thể đạt 
 | Cấu hình hạng | Đầu màn | Công tắc `Levels` | Bật tắt chức năng hạng |
 | Cấu hình hạng | Đầu màn | Mô tả chức năng | `Levels represent the stages in a user's learning journey.` |
 | Cấu hình hạng | Tiêu đề nhóm | | `Increase the user's level every` |
-| Cấu hình hạng | Ba tiêu chí | `Points` | Công tắc riêng + ô nhập bội số. Cứ mỗi bấy nhiêu điểm tích luỹ thì lên một hạng |
+| Cấu hình hạng | Ba tiêu chí | `Points` | Công tắc riêng + ô nhập bội số. Cứ mỗi bấy nhiêu điểm tích luỹ thì lên một hạng. **Không thao tác được khi chức năng điểm đang tắt**, xem `BR-10.7` |
 | Cấu hình hạng | Ba tiêu chí | `Completed courses` | Công tắc riêng + ô nhập bội số |
 | Cấu hình hạng | Ba tiêu chí | `Badges` | Công tắc riêng + ô nhập bội số. **Không thao tác được khi chức năng huy hiệu đang tắt**, xem `BR-10.7` |
 | Cấu hình hạng | Ô nhập bội số | Định dạng | Số nguyên dương, nhỏ nhất `1`. Bỏ trống thì không lưu được |
 | Cấu hình hạng | Trần hạng | Ô nhập | Số nguyên dương, nhỏ nhất `2`. Bỏ trống nghĩa là **không có trần** |
-| Cấu hình hạng | Cảnh báo | Bật `Levels` mà tắt cả ba tiêu chí | Chặn lưu. Không có tiêu chí nào thì không ai lên hạng được |
-| Cấu hình hạng | Nút lưu | Trạng thái | Chỉ bật khi có thay đổi |
-| Cấu hình hạng | Sau khi lưu | Xác nhận | Nhắc rằng cấu hình mới chỉ áp từ bây giờ, hạng đã đạt giữ nguyên |
+| Cấu hình hạng | Tiêu chí cuối cùng | Công tắc | Khi chỉ còn **một tiêu chí đang chạy**, công tắc của nó **không tắt được**. Trỏ chuột vào thì hiện lý do: cần ít nhất một tiêu chí. Xem `BR-10.8`. Chuỗi tiếng Anh: `❓BA` |
+| Cấu hình hạng | Cảnh báo | Không còn tiêu chí nào chạy | Xảy ra khi tiêu chí bị khoá do tắt `Points` hoặc `Badges`. Khối `Levels` hiện **dòng cảnh báo cố định**: học viên sẽ không lên hạng cho tới khi có lại ít nhất một tiêu chí chạy. Xem `BR-10.8`. Chuỗi tiếng Anh: `❓BA` |
+| Cấu hình hạng | Cách lưu | | **Tự lưu, không có nút lưu.** Ô nhập lưu khi rời ô hoặc bấm Enter, công tắc lưu khi bấm. Theo `BR-14.10` |
+| Cấu hình hạng | Đầu khối | Dòng nhắc cố định | Nêu rằng thay đổi chỉ áp từ bây giờ, hạng đã đạt giữ nguyên. **Luôn hiện**, không bật lên sau mỗi lần lưu. Chuỗi tiếng Anh: `❓BA` |
 
 **Business requirement — Business rule**
 
@@ -1735,8 +1750,22 @@ Cuối màn là trần hạng, con số cao nhất học viên có thể đạt 
 - `BR-10.4` Đổi bội số của một tiêu chí thì **áp dụng từ thời điểm lưu trở đi**, theo `C4`. Hạng học viên đang có **giữ nguyên**, kể cả khi theo cấu hình mới họ chưa đủ điều kiện cho hạng đó.
 - `BR-10.5` **Trần hạng** là số cao nhất học viên đạt tới. Chạm trần rồi thì vượt thêm bội số nào cũng không lên nữa. Bỏ trống trần nghĩa là không giới hạn.
 - `BR-10.6` Hạ trần xuống dưới hạng hiện tại của một số học viên thì những người đó **giữ nguyên hạng đang có**, theo `BR-10.3`. Chỉ người chưa chạm trần mới bị chặn ở trần mới.
-- `BR-10.7` 🔗 **Tắt chức năng huy hiệu thì tiêu chí lên hạng theo huy hiệu tắt theo.** Khi vận hành tắt `Badges` ở `US9`, hệ thống **cảnh báo rõ rằng tiêu chí lên hạng theo huy hiệu cũng sẽ ngừng hoạt động**, rồi mới cho tắt. Hạng học viên đã đạt nhờ huy hiệu **giữ nguyên**.
-- `BR-10.8` Bật `Levels` mà tắt cả ba tiêu chí là **cấu hình không hợp lệ**, chặn lưu. Không có tiêu chí nào thì mọi học viên kẹt ở hạng `1` vĩnh viễn.
+- `BR-10.7` 🔗 **Tắt chức năng điểm hoặc huy hiệu thì tiêu chí lên hạng tương ứng khoá theo.**
+
+  | Tắt gì ở đâu | Tiêu chí nào khoá |
+  |---|---|
+  | `Points` ở `US8` | Lên hạng theo điểm |
+  | `Badges` ở `US9` | Lên hạng theo huy hiệu |
+
+  Tiêu chí theo số khoá hoàn thành không phụ thuộc chức năng nào.
+
+  **Khoá nghĩa là ngừng xét và không thao tác được, nhưng giá trị giữ nguyên.** Công tắc và bội số của tiêu chí không bị đổi. Bật lại chức năng nguồn thì tiêu chí chạy lại đúng như trước khi khoá, vận hành không phải bật lại bằng tay. Cùng nguyên tắc với `BR-14.7`.
+
+  Không có hộp xác nhận khi tắt. Hệ quả nêu bằng dòng giải thích dưới công tắc `Points` và `Badges`. Hạng học viên đã đạt nhờ tiêu chí bị khoá **giữ nguyên**.
+- `BR-10.8` **Tiêu chí đang chạy** là tiêu chí đang bật và không bị khoá theo `BR-10.7`. Khi `Levels` đang bật:
+  - Vận hành **không tắt được tiêu chí đang chạy cuối cùng**. Muốn đổi từ tiêu chí này sang tiêu chí khác thì bật tiêu chí mới trước, rồi tắt tiêu chí cũ.
+  - Tắt `Points` hoặc `Badges` mà khiến khối không còn tiêu chí nào chạy thì **vẫn cho tắt**. Khối `Levels` hiện cảnh báo cố định cho tới khi có lại ít nhất một tiêu chí chạy. Trong thời gian đó không ai lên hạng, hạng đã đạt giữ nguyên.
+  > Không chặn việc tắt `Points` hay `Badges`, vì tắt cả một chức năng là quyết định lớn hơn chuyện lên hạng. Chặn ở đây thì vận hành phải vòng sang khối `Levels` gỡ trước rồi mới tắt được.
 - `BR-10.9` Tắt công tắc `Levels` thì **ngừng xét lên hạng** và **hạng biến khỏi giao diện học viên**. Dữ liệu giữ nguyên, bật lại thì hiện lại. Cột `Level` cũng biến khỏi bảng xếp hạng (`US11`).
 
 **Data Field**
@@ -1804,8 +1833,9 @@ Bên dưới là bốn công tắc chọn cột hiện ra: hạng, điểm, huy 
 | Cấu hình bảng xếp hạng | Bốn bảng | `Show badges` | Bật tắt **bảng xếp hạng theo số huy hiệu** |
 | Cấu hình bảng xếp hạng | Bốn bảng | `Show courses` | Bật tắt **bảng xếp hạng theo số khoá hoàn thành** |
 | Cấu hình bảng xếp hạng | Bảng bị khoá | Khi chức năng nguồn đang tắt | Công tắc **không thao tác được** và có dòng giải thích vì sao. Ví dụ: tắt `Levels` ở `US10` thì `Show levels` khoá lại |
-| Cấu hình bảng xếp hạng | Cảnh báo | Tắt hết bốn bảng | Chặn lưu. Không còn bảng nào để học viên xem |
-| Cấu hình bảng xếp hạng | Nút lưu | Trạng thái | Chỉ bật khi có thay đổi |
+| Cấu hình bảng xếp hạng | Bảng cuối cùng | Công tắc | Khi chỉ còn **một bảng đang chạy**, công tắc của nó **không tắt được**. Trỏ chuột vào thì hiện lý do: cần ít nhất một bảng. Xem `BR-11.5`. Chuỗi tiếng Anh: `❓BA` |
+| Cấu hình bảng xếp hạng | Cảnh báo | Không còn bảng nào chạy | Xảy ra khi các bảng đang bật đều bị khoá do chức năng nguồn tắt. Khối `Leaderboard` hiện **dòng cảnh báo cố định**: học viên không còn bảng nào để xem. Xem `BR-11.5`. Chuỗi tiếng Anh: `❓BA` |
+| Cấu hình bảng xếp hạng | Cách lưu | | **Tự lưu, không có nút lưu.** Công tắc lưu khi bấm. Theo `BR-14.10` |
 
 **Business requirement — Business rule**
 
@@ -1822,7 +1852,9 @@ Bên dưới là bốn công tắc chọn cột hiện ra: hạng, điểm, huy 
   | `Levels` ở `US10` | Bảng theo hạng |
 
   Bảng theo số khoá hoàn thành không phụ thuộc chức năng nào, vì dữ liệu khoá học luôn có.
-- `BR-11.5` Tắt hết bốn bảng là **cấu hình không hợp lệ**, chặn lưu.
+- `BR-11.5` **Bảng đang chạy** là bảng đang bật và không bị khoá theo `BR-11.4`. Khi `Leaderboard` đang bật:
+  - Vận hành **không tắt được bảng đang chạy cuối cùng**.
+  - Tắt một chức năng nguồn mà khiến khối không còn bảng nào chạy thì **vẫn cho tắt**. Khối `Leaderboard` hiện cảnh báo cố định cho tới khi có lại ít nhất một bảng chạy. Cùng cách xử lý với `BR-10.8`.
 - `BR-11.6` Tắt công tắc `Leaderboard` thì **toàn bộ trang bảng xếp hạng biến khỏi UpLMS**, gồm cả khối vị trí của tôi ở `US7`. Dữ liệu điểm vẫn ghi bình thường.
 - `BR-11.7` Đổi cấu hình cột **áp dụng ngay ở lần học viên mở trang tiếp theo**. Không phải chờ chu kỳ tính lại 8 tiếng, vì đây là thay đổi hiển thị chứ không phải thay đổi số liệu.
 
@@ -2090,11 +2122,13 @@ Cách dùng thông thường: bật công tắc thứ nhất, chạy ngầm hai 
 |---|---|---|---|
 | Cấu hình chung | Công tắc 1 | `Gamification` | Bật tắt cả cơ chế. Tắt thì ngừng ghi nhận và ngừng hiển thị |
 | Cấu hình chung | Công tắc 2 | `Visibility in UpLMS` | **Chỉ xuất hiện khi công tắc 1 đang bật.** Quyết định học viên có nhìn thấy gamification hay không |
-| Cấu hình chung | Công tắc 2 | Dòng giải thích | Nêu rõ tắt công tắc này thì hệ thống **vẫn ghi nhận bình thường**, chỉ là học viên không thấy. Chuỗi tiếng Anh: `❓BA` |
-| Cấu hình chung | Trạng thái hiện tại | Nhãn | Hiện rõ đang ở trạng thái nào trong ba: tắt hẳn, chạy ngầm, bật đầy đủ. Chuỗi tiếng Anh: `❓BA` |
-| Cấu hình chung | Múi giờ tổ chức | Ô chọn | Múi giờ dùng để cắt biên ngày và biên khoảng. Xem `BR-14.9` |
-| Cấu hình chung | Cảnh báo khi tắt công tắc 1 | Nội dung | Nêu rõ: ngừng ghi nhận mọi thứ, bốn chức năng con khoá lại, dữ liệu đã có giữ nguyên, và **bật lại sẽ tính từ thời điểm bật chứ không tính bù** |
-| Cấu hình chung | Cảnh báo khi bật công tắc 2 lần đầu | Nội dung | Nêu rõ học viên sẽ **thấy ngay toàn bộ điểm, hạng và huy hiệu đã tích trong giai đoạn chạy ngầm**, và hệ thống **không gửi thông báo hồi tố** |
+| Cấu hình chung | Công tắc 2 | Dòng giải thích | Nêu rõ tắt công tắc này thì hệ thống **vẫn ghi nhận bình thường**, chỉ là học viên không thấy. Dòng này cùng hai công tắc là đủ để đọc ra trạng thái hiện tại, **không có nhãn trạng thái riêng**: `Show points, badges and ranks to your users. While this is off, they still accrue but stay hidden.` |
+| Cấu hình chung | Xác nhận khi tắt công tắc 1 | Hình thức | **Popover nhỏ gắn cạnh công tắc**, không phải modal. Huỷ thì công tắc về như cũ, không lưu. Xem `BR-14.13` |
+| Cấu hình chung | Xác nhận khi tắt công tắc 1 | Nội dung | Nêu rõ: ngừng ghi nhận mọi thứ, bốn chức năng con khoá lại, dữ liệu đã có giữ nguyên, và **bật lại sẽ tính từ thời điểm bật chứ không tính bù**. Chuỗi tiếng Anh: `❓BA` |
+| Cấu hình chung | Xác nhận khi bật công tắc 2 lần đầu | Hình thức | Popover như trên |
+| Cấu hình chung | Xác nhận khi bật công tắc 2 lần đầu | Nội dung | Nêu rõ học viên sẽ **thấy ngay toàn bộ điểm, hạng và huy hiệu đã tích trong giai đoạn chạy ngầm**, và hệ thống **không gửi thông báo hồi tố**. Chuỗi tiếng Anh: `❓BA` |
+| Cả trang cấu hình | Cách lưu | | **Tự lưu, không có nút lưu**, áp cho cả `US8` đến `US11`. Xem `BR-14.10` đến `BR-14.12` |
+| Cả trang cấu hình | Sau mỗi lần lưu | Báo đã lưu | Báo nhỏ `Saved`, tự ẩn, **không phải modal** |
 
 **Business requirement — Business rule**
 
@@ -2115,7 +2149,30 @@ Cách dùng thông thường: bật công tắc thứ nhất, chạy ngầm hai 
 - `BR-14.7` Tắt `Gamification` thì **bốn công tắc chức năng ở `US8` đến `US11` khoá lại**, giữ nguyên mọi giá trị đã cấu hình. Bật lại thì trở về đúng cấu hình cũ.
 - `BR-14.8` Hai công tắc này **gắn với tổ chức** (`C1`). Đợt này chỉ có một tổ chức nên không cần màn quản lý nhiều tổ chức, nhưng dữ liệu phải thiết kế theo tổ chức ngay từ đầu.
 - `BR-14.9` **Múi giờ tổ chức** quyết định biên ngày cho điểm check-in và chuỗi (`US5`), và biên khoảng cho bảng xếp hạng (`US6`). Không dùng giờ máy chủ và không dùng múi giờ thiết bị của học viên.
-  > Tham số này thuộc về **hồ sơ tổ chức** trong module Tenant (`TNT.CFG.02`), nhưng module đó chưa làm. Đợt này khai tạm ở đây, thiết kế để module Tenant sau này tiếp quản mà không phải chuyển dữ liệu.
+  > Múi giờ **lấy theo tenant**, không có ô chọn trên màn Gamification. Cách lưu do BE quyết trong technical design. Tham số này thuộc **hồ sơ tổ chức** trong module Tenant (`TNT.CFG.02`).
+
+**Cách lưu trên trang cấu hình — áp cho cả `US8` đến `US11`**
+
+- `BR-14.10` 🔑 **Trang cấu hình tự lưu, không có nút lưu.**
+
+  | Thành phần | Lưu khi nào |
+  |---|---|
+  | Ô nhập số | **Rời ô hoặc bấm Enter.** Không lưu trong lúc đang gõ, kể cả khi người dùng dừng tay giữa chừng |
+  | Tên và mô tả huy hiệu | Rời ô |
+  | Hình huy hiệu | Tải lên xong |
+  | Công tắc | Bấm là lưu, trừ hai trường hợp ở `BR-14.13` |
+
+  > **Vì sao không lưu trong lúc gõ.** Cấu hình có hiệu lực ngay khi lưu và không tính lại quá khứ (`C4`). Ví dụ vận hành đổi bội số lên hạng từ `3000` thành `5000`: xoá hết rồi gõ `5`. Nếu lưu ngay lúc đó thì cấu hình thành *"mỗi 5 điểm lên 1 hạng"*, học viên nào được cộng điểm đúng lúc ấy nhảy thẳng lên trần hạng. Hạng không tụt (`BR-10.3`) nên không sửa lại được.
+- `BR-14.11` Giá trị không hợp lệ thì **không lưu**, báo lỗi ngay tại ô. Rời trang khi ô đang lỗi thì ô quay về giá trị đã lưu gần nhất. Riêng tên huy hiệu bỏ trống thì quay về tên mặc định, theo `US9`.
+- `BR-14.12` Lưu xong thì hiện báo nhỏ `Saved`. Lưu lỗi thì ô quay về giá trị đã lưu gần nhất và báo lỗi. **Không có cảnh báo khi rời trang**, vì không có thay đổi nào nằm chờ lưu.
+- `BR-14.13` Chỉ **hai thao tác** phải xác nhận trước khi lưu, dạng **popover nhỏ gắn cạnh công tắc**, không phải modal:
+
+  | Thao tác | Vì sao phải hỏi lại |
+  |---|---|
+  | Tắt `Gamification` | Thời gian tắt không được ghi nhận và không tính bù (`BR-14.5`). Bấm nhầm là để lại khoảng trống dữ liệu vĩnh viễn cho cả tổ chức |
+  | Bật `Visibility in UpLMS` lần đầu | Là thời điểm ra mắt: toàn bộ học viên thấy ngay mọi thứ đã tích (`BR-14.4`) |
+
+  Hai thao tác này gần như chỉ xảy ra một lần trong vòng đời tính năng, nên hỏi lại không gây phiền. Các công tắc khác **không hỏi lại**, hệ quả nêu bằng dòng giải thích dưới công tắc.
 
 **Data Field**
 
@@ -2123,7 +2180,7 @@ Cách dùng thông thường: bật công tắc thứ nhất, chạy ngầm hai 
 |---|---|---|---|---|
 | `Gamification` bật hay tắt | Đúng/sai | Có | Mặc định **tắt** | Mới |
 | `Visibility in UpLMS` bật hay tắt | Đúng/sai | Có | Mặc định **tắt** | Mới |
-| Múi giờ tổ chức | Múi giờ | Có | Chuẩn múi giờ quốc tế | **Thêm cột vào bảng `tenant`** — bảng hiện hữu duy nhất bị sửa trong cả tính năng |
+| Múi giờ tổ chức | Múi giờ | Có | Chuẩn múi giờ quốc tế | **Lấy theo tenant**, không nhập trên màn này. Cách lưu do BE quyết trong technical design |
 | `tenant_id` | Khoá ngoại | Có | | Ràng buộc `C1` — cấu hình gắn `tenant_id`, không đóng cứng trong mã |
 
 **NFR**
@@ -2138,7 +2195,10 @@ Hai công tắc này đọc ở gần như mọi thao tác của gamification. C
 | Lên lịch bật tắt vào một thời điểm định trước | Chưa yêu cầu |
 | Bật gamification cho một nhóm học viên thử nghiệm trước | Chờ chức năng nhóm. Xem `US16 — chưa làm` |
 | Xoá toàn bộ dữ liệu gamification khi tắt | Tắt là ngừng ghi, không xoá |
-| Khai đầy đủ hồ sơ tổ chức theo `TNT.CFG.02` | Thuộc module Tenant. Đợt này chỉ khai múi giờ |
+| Khai đầy đủ hồ sơ tổ chức theo `TNT.CFG.02` | Thuộc module Tenant |
+| Chọn múi giờ trên màn Gamification | Múi giờ lấy theo tenant, xem `BR-14.9` |
+| Nhãn trạng thái tổng *(tắt hẳn · chạy ngầm · bật đầy đủ)* | Hai công tắc cùng dòng giải thích của `Visibility in UpLMS` đã đủ để đọc ra trạng thái |
+| Nút lưu · cảnh báo rời trang khi chưa lưu | Trang tự lưu, xem `BR-14.10` |
 
 ### 6/ Conner case
 
@@ -2217,7 +2277,7 @@ Không có yêu cầu riêng. Theo chuẩn của hệ phân quyền hiện có.
 | ~~OQ-02~~ | ✅ **Đã chốt 23/09: cộng điểm lỗi thì ghi lại**, không để mất âm thầm. Xem `BR-13.8` | PO | — |
 | ~~OQ-03~~ | ✅ **Tạm chốt 23/09** bộ Activation · Course start · Completion, kèm `Retention` chưa có mốc nền | PO | — |
 | ~~OQ-07~~ | ✅ **Đã chốt 23/09: sổ giao dịch điểm giữ toàn bộ, không dọn.** Xem `BR-3.9` | PO | — |
-| ~~OQ-08~~ | ✅ **Đã chốt: thêm cột vào bảng `tenant`**, thiết kế để module Tenant sau này tiếp quản. Xem `BR-14.9` | — | — |
+| ~~OQ-08~~ | ✅ **Đã chốt 06/10: múi giờ lấy theo tenant**, không có ô chọn trên màn Gamification. Cách lưu do BE quyết trong technical design. Xem `BR-14.9` | PO | — |
 | ~~OQ-09~~ | ✅ **Đã rõ:** mọi học viên bắt đầu ở `0` điểm và **hạng `1`**, theo `BR-10.1` | — | — |
 | **OQ-10** | Metadata đầu tài liệu: `Target release` · `Epic` · `Story` · `Tech lead` · `QA` · `Reviewer` | PO | Bàn giao |
 | **OQ-11** | Link Figma và tài khoản staging để đối chiếu giao diện | PO | `US1`–`US12` |
@@ -2241,7 +2301,7 @@ Không có yêu cầu riêng. Theo chuẩn của hệ phân quyền hiện có.
 | ~~OQ-33~~ | ✅ **Đã chốt 23/09: có, cả bốn chức năng đều có công tắc riêng** — `Points` · `Badges` · `Levels` · `Leaderboard` | PO | — |
 | ~~OQ-34~~ | ✅ **Đã chốt 23/09: không cần lịch sử ai đổi cấu hình gamification** | PO | — |
 | ~~OQ-35~~ | ✅ **Đã chốt 23/09.** Dãy mốc: Check-in `4, 8, 16, 32, 64, 128, 256, 512` · Activity `10, 25, 50, 100, 200, 400, 800, 1600` · Test `2, 4, 8, 16, 32, 64, 128, 256` · Course `1, 2, 4, 8, 16, 32, 64, 128` | PO | — |
-| ~~OQ-36~~ | ✅ **Đã chốt 23/09: tắt huy hiệu thì tắt luôn tiêu chí lên hạng theo huy hiệu, có cảnh báo khi tắt.** Xem `BR-10.7` | PO | — |
+| ~~OQ-36~~ | ✅ **Đã chốt 06/10: tắt huy hiệu hoặc điểm thì tiêu chí lên hạng tương ứng khoá theo**, giữ nguyên giá trị, bật lại thì chạy lại như cũ. Không có hộp xác nhận, hệ quả nêu bằng dòng giải thích dưới công tắc. Xem `BR-10.7` | PO | — |
 | ~~OQ-37~~ | ✅ **Đã chốt 23/09: `Check-in badges` · `Activity badges` · `Test badges` · `Course badges`** | PO | — |
 | ~~OQ-38~~ | ✅ **Đã chốt 23/09: hạng chỉ là số thứ tự tịnh tiến, không có tên và hình** | PO | — |
 | ~~OQ-39~~ | ✅ **Đã chốt 23/09: tách thành các bảng riêng**, mỗi chỉ số một bảng, không phải một bảng nhiều cột | PO | — |
