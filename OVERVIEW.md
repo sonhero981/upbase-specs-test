@@ -1,8 +1,8 @@
-# PO Workflow — tổng quan phương pháp
+# PO Workflow with AI
 
-Quy trình làm việc giữa PO/BA và AI để biến một yêu cầu thô thành PRD đủ chi tiết cho Dev, QA và Design dùng ngay.
+Quy trình làm việc giữa PO và AI để biến một yêu cầu thô thành PRD đủ chi tiết cho Dev, QA và Design. Là đầu vào cho các AI Workflow tiếp theo
 
-Tài liệu này mô tả **phương pháp**. Muốn biết cài đặt và chạy lệnh thì đọc [HUONG-DAN-SU-DUNG.md](HUONG-DAN-SU-DUNG.md).
+Tài liệu này mô tả **tổng quan quy trình và phương pháp**. Hướng dẫn vận hành chi tiết tại [HUONG-DAN-SU-DUNG.md](HUONG-DAN-SU-DUNG.md).
 
 ---
 
