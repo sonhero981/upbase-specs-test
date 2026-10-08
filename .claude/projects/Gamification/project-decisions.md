@@ -224,3 +224,38 @@ Trước đó `BR-13.10` viết chung là *"lượt học mới được tính �
 
 **Rủi ro PO chấp nhận:** không giới hạn trên mà lại tự lưu, nên gõ nhầm số điểm cũng có hiệu lực ngay và không tính lại.
 
+## CR-012 — Bảng xếp hạng năm bảng, câu chữ check-in (08/10/2026)
+
+| Ngày | Quyết định | Lý do | Người quyết | Gate |
+| --- | --- | --- | --- | --- |
+| 08/10/2026 | **`Badges` chỉ còn ở `All time`**, giống `Level` | Mốc huy hiệu tăng gấp đôi, đếm trong một khoảng thì người mới luôn lợi hơn người cũ | PO | CR-012 |
+| 08/10/2026 | **Thêm bảng `Activities`.** Năm bảng: `Points` · `Activities` · `Courses` theo khung, `Level` · `Badges` chỉ ở `All time` | Bảng `Points` nghiêng về check-in. `Activities` là bảng duy nhất đo thuần việc học theo khung | PO | CR-012 |
+| 08/10/2026 | **`US12` khi chọn khoảng ngày thì ẩn `Level` và `Badges`, thêm cột `Activities`** | Cùng lý do | Phân tích, PO đồng ý | CR-012 |
+| 08/10/2026 | **Xoá `BR-6.14`** | Rule cũ còn sót, mâu thuẫn với `BR-6.2b` và `OQ-29` | Phân tích, PO đồng ý | CR-012 |
+| 08/10/2026 | **Chỉ số đếm không phụ thuộc công tắc `Points`.** Đếm mọi lần xảy ra trong lúc `Gamification` bật, cách lấy dữ liệu do Dev quyết | PO đồng ý "đếm từ dữ liệu học". Khi viết PRD, Claude chỉnh lại: đếm thẳng từ dữ liệu học thì tính cả thời gian `Gamification` tắt, trái `BR-14.5`. Mở rộng cho cả số hoạt động và số bài Test vì cùng một lỗi | Phân tích — **PO cần xác nhận lại phần chỉnh này** | CR-012 |
+| 08/10/2026 | **Câu chữ check-in không dùng `login` hay `sign-in`.** Học viên: `for visiting UpLMS each day…` · Ops: `…when users first visit, even if they're still signed in from before…` · mốc huy hiệu: `Awarded at … check-in days` | Học viên còn phiên đăng nhập từ hôm trước thì mở UpLMS là được tính | PO | CR-012 |
+| 08/10/2026 | **Request nền không tính là vào hệ thống** (`BR-5.1`) | Treo tab qua đêm sẽ tự giữ chuỗi | Phân tích, PO đồng ý | CR-012 |
+
+**Rủi ro PO chấp nhận:** bảng `Activities` biến việc bấm lướt hoạt động chỉ có chữ hoặc ảnh thành cách nhanh nhất để lên top · hoạt động to nhỏ khác nhau đều tính là 1.
+
+## CR-013 — Campaign quay lại, học viên bỏ khoảng ngày tự do (08/10/2026)
+
+| Ngày | Quyết định | Lý do | Người quyết | Gate |
+| --- | --- | --- | --- | --- |
+| 08/10/2026 | **Học viên chỉ có năm khung cố định**, không có bộ chọn khoảng ngày tự do. Đảo một phần `CR-007` | Khoảng tự chọn phải tính lúc chọn — học viên spam được phép tính nặng | PO | CR-013 |
+| 08/10/2026 | **Campaign quay lại:** chọn khoảng thời gian và loại hành động, **số điểm theo cấu hình chung** | PO ban đầu muốn sửa số điểm riêng cho campaign, rồi đổi lại chỉ chọn loại hành động | PO | CR-013 |
+| 08/10/2026 | **Re-entry từ BRD, gộp với `CR-012`.** Cả bốn Gate duyệt lại | Campaign đổi phạm vi và cách đạt `O4` | PO | CR-013 |
+| 08/10/2026 | **Hai bảng mỗi campaign:** điểm và số hoạt động | PO chọn theo đề xuất | PO | CR-013 |
+| 08/10/2026 | **Toàn tổ chức** tham gia | Theo nhóm chờ HRM | PO | CR-013 |
+| 08/10/2026 | **Kết thúc thì đóng băng.** Bài chấm đạt sau khi kết thúc không tính | Campaign làm ra để trao thưởng | PO | CR-013 |
+| 08/10/2026 | **Đang chạy chỉ sửa tên và mô tả. Chỉ xoá khi chưa bắt đầu, không dừng sớm** | Không đổi luật giữa chừng | PO | CR-013 |
+| 08/10/2026 | **Được chồng thời gian** | Điểm campaign chỉ là phép lọc trên sổ giao dịch | PO | CR-013 |
+| 08/10/2026 | **Đổi số điểm chung giữa chừng thì campaign mang hai mức điểm** | Không thêm rule khoá cấu hình | PO | CR-013 |
+| 08/10/2026 | **Học viên xem lại được campaign đã kết thúc** | Kết quả đã đóng băng sẵn | PO | CR-013 |
+| 08/10/2026 | **Ops có màn xem và xuất Excel kết quả campaign** | `US12` là số liệu sống, không lọc loại hành động | PO | CR-013 |
+| 08/10/2026 | **Campaign nằm trong trang bảng xếp hạng, tắt `Leaderboard` thì ẩn theo** | Một công tắc cho mọi thứ thi đua | PO | CR-013 |
+| 08/10/2026 | **`US12` giữ bộ chọn khoảng ngày tự do** | `O4` cần, người dùng Ops ít và có quyền | PO | CR-013 |
+| 08/10/2026 | **`CF-7`: tắt `Gamification` khi campaign đang chạy vẫn cho tắt** | `CF-6` cũ bắt dừng campaign trước, nay không dừng được | Phân tích — **chờ PO, `OQ-42`** | CR-013 |
+
+**Rủi ro PO chấp nhận:** đổi cấu hình chung là đổi luật mọi campaign đang chạy · bài chấm sau khi campaign kết thúc không tính, học viên thiệt nếu mentor chấm chậm.
+

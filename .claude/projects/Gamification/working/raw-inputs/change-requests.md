@@ -9,6 +9,8 @@
 | **CR-009** | 2026-10-01 | **Điểm check-in đổi từ mức cố định sang tăng dần theo chuỗi ngày đăng nhập liên tiếp.** Thêm khối chuỗi trên trang Thành tích. Chuỗi tính theo ngày đăng nhập, đếm mọi ngày dương lịch | PO yêu cầu, sau khi nghe phân tích rủi ro | 🔄 **Đang áp dụng** |
 | **CR-010** | 2026-10-01 | **Bỏ trần điểm mỗi ngày.** Kéo theo bỏ sự kiện `No points` trong lịch sử. Làm rõ logic lên hạng: mỗi mốc chạm được đều cho một hạng, không phải lấy tiêu chí cao nhất | PO review design và đính chính | 🔄 **Đang áp dụng** |
 | **CR-011** | 2026-10-06 | **Trang cấu hình Ops tự lưu, bỏ nút lưu.** Chỉ giữ hai xác nhận dạng popover. Tắt `Points` hoặc `Badges` thì tiêu chí lên hạng tương ứng khoá theo. Bỏ giới hạn trên của số điểm. Bỏ ô chọn múi giờ và nhãn trạng thái | PO làm design màn `Enable - Setting`, thấy lệch với PRD và TD-FE | ✅ **Đã áp dụng** — PRD v0.9, re-entry từ PRD do PO confirm |
+| **CR-012** | 2026-10-08 | **Bảng xếp hạng: `Badges` chỉ còn ở `All time` như `Level`, thêm bảng `Activities`.** Kèm câu chữ check-in thay cho "login", và mấy chỗ vá đi cùng | PO review design màn cấu hình huy hiệu và chuỗi check-in | ✅ **Đã áp dụng** — gộp với `CR-013`, re-entry từ BRD do PO confirm |
+| **CR-013** | 2026-10-08 | **Đưa chiến dịch (campaign) trở lại phạm vi**, đảo một phần `CR-007`. Học viên bỏ bộ chọn khoảng ngày tự do, chỉ còn khung cố định. Campaign chọn khoảng thời gian và loại hành động tính điểm, **số điểm theo cấu hình chung** | PO chỉ định: khoảng ngày tự do phía học viên là lỗ hổng để spam tính toán | ✅ **Đã áp dụng** — BRD v0.7 · Impact v0.3 · Solution v0.2 · PRD v0.10, re-entry từ BRD do PO confirm |
 
 ---
 
@@ -606,4 +608,142 @@ Trước CR, tắt `Badges` thì tiêu chí lên hạng theo huy hiệu bị kho
 |---|---|---|
 | 1 | Không giới hạn trên mà lại tự lưu: gõ nhầm `1500` thay vì `150` cũng có hiệu lực ngay | Điểm đã cộng theo số nhầm không tính lại, theo `C4` |
 | 2 | Không có nút lưu nên không có bước *"xem lại trước khi lưu"* | Mỗi ô có hiệu lực ngay khi rời ô |
+
+---
+
+# CR-012 — Bảng xếp hạng theo huy hiệu chỉ còn ở All time, thêm bảng Activities
+
+## Nguyên văn PO
+
+> *"viết lại câu này, để vận hành và học viên hiểu là checkin mỗi ngày chứ không phải login, vì ngày thứ 2 nếu chưa bị logout mà vào lại hệ thống thì vẫn được tính là checkin chứ không phải logout ra login lại mới tính"*
+>
+> *"huy hiệu cũng là tích lũy nên chắc không đưa vào leaderboard được, vì nếu trong cùng 1 khoảng thời gian thì huy hiệu newbie dễ đạt hơn lên granmaster, tôi nghĩ nên bỏ huy hiệu trong leaderboard mà thay bằng activity"*
+>
+> *"giữ badges cho all time, khi filter khoảng ngày thì level và huy hiệu ko có"*
+>
+> *"bổ sung activties trong leaderboard"*
+
+## Phân tích
+
+**Đếm huy hiệu trong một khoảng ngày đo độ mới, không đo độ chăm.** Mốc tăng gấp đôi nên người mới qua mốc liên tục, người cũ cả tháng không qua mốc nào. Ví dụ với `Activity badges` trong một tháng: người mới làm 30 hoạt động nhận 2 huy hiệu (mốc 10, 25), người cũ đang ở 420 làm 300 hoạt động nhận 0 (mốc kế là 800).
+
+**Bảng `Activities` có giá trị riêng, không trùng `Points`.** Với cấu hình mặc định, bảng `Points` nghiêng về check-in: vào đủ 30 ngày không học gì được `1.095` điểm, cao hơn người chỉ vào ngày thường mà hoàn thành 60 hoạt động (khoảng `1.025`). `Activities` là bảng duy nhất đo thuần việc học theo khoảng ngày với độ phân giải đủ dùng.
+
+## Đề xuất — chờ PO confirm
+
+| # | Nội dung |
+|---|---|
+| 1 | Năm bảng. Theo khoảng ngày: `Points` · `Activities` · `Courses`. Chỉ ở `All time`: `Level` · `Badges`. Thêm công tắc `Show activities` ở `US11` |
+| 2 | `US12`: chọn khoảng ngày thì ẩn cột `Level` và `Badges`, thêm cột `Activities` |
+| 3 | Xoá `BR-6.14` — rule cũ còn sót, mâu thuẫn với `BR-6.2b` và `OQ-29` |
+| 4 | Đếm số khoá hoàn thành từ dữ liệu học, không từ sổ giao dịch điểm. Hiện `BR-11.4` nói bảng `Courses` không phụ thuộc chức năng nào, nhưng định nghĩa chỉ số lại đếm từ sổ điểm — tắt `Points` thì bảng đứng im |
+| 5 | Câu chữ check-in: học viên `for visiting UpLMS each day, +5 for each day in a row, up to 40` · Ops `Award points once a day when users first visit, even if they're still signed in from before. Each day in a row adds 5 more, up to 40 on day 7.` · mốc huy hiệu `Awarded at ... check-in days`. Ba dòng mốc còn lại đổi `every` thành `at` |
+| 6 | `BR-5.1`: chỉ tính khi học viên **chủ động mở hoặc quay lại** UpLMS. Request nền tự chạy không tính, để người treo tab qua đêm không tự giữ chuỗi |
+
+## Rủi ro cần PO chấp nhận
+
+| # | Rủi ro | Vì sao |
+|---|---|---|
+| 1 | Bảng `Activities` biến việc bấm lướt hoạt động chỉ có chữ hoặc ảnh thành cách nhanh nhất để lên top | Rủi ro đã chấp nhận ở `CR-010`, nay có thêm động cơ trực tiếp. Hoạt động chứa video không bị vì phải xem đủ 80% |
+| 2 | Hoạt động to nhỏ khác nhau đều tính là 1 | Học viên được giao khoá chia nhiều hoạt động nhỏ có lợi |
+
+## Điểm re-entry đề xuất
+
+**PRD.** Đổi chi tiết chức năng, không đổi phạm vi. PO chọn gộp với `CR-013` và chạy từ BRD.
+
+## ⚠️ Chỉnh điểm 4 khi áp vào PRD — PO cần xác nhận lại
+
+Đề xuất gốc *"đếm số khoá từ dữ liệu học"* có lỗ: dữ liệu học ghi cả những lần hoàn thành **trong lúc `Gamification` tắt**, đếm từ đó là trái `BR-14.5` (tắt hẳn thì không ghi gì, bật lại không tính bù).
+
+PRD v0.10 viết thành **yêu cầu**, không chỉ nguồn dữ liệu: mọi chỉ số đếm (số ngày có mặt · số hoạt động · số bài Test · số khoá) **đếm mọi lần xảy ra trong lúc `Gamification` bật, không phụ thuộc công tắc `Points` hay từng hành động**. Cách lấy dữ liệu do Dev quyết.
+
+Mở rộng sang số hoạt động và số bài Test vì cùng một lỗi: trước đây `US4` đếm cả hai từ sổ giao dịch điểm, nên tắt `Points` thì tiến độ huy hiệu và bảng `Activities` cũng đứng im.
+
+---
+
+# CR-013 — Campaign trở lại, học viên bỏ khoảng ngày tự do
+
+## Nguyên văn PO
+
+> *"leaderboard ngoài LMS chỉ có filter các khung cố định như this week, this month, this quater, this year, không cho chọn khoảng, để tránh user spam hệ thống tính toán nhiều, đây là lỗ hổng bảo mật"*
+>
+> *"để giải quyết bài toán này thì sẽ bổ sung thêm chức năng campaign, khi tạo campaign sẽ chọn được diễn ra trong khoảng nào, cấu phần tạo nên camp đó bào gồm point và activities, với point thì setting tương tự như gamification, nhưng chỉnh số được số point cho mỗi loại hành động tùy thuộc vào camp đó"*
+>
+> *"theo quy trình change request đi, chỉ có thay đổi một chút là phần point trong camp sẽ chỉ được chọn loại hành động nào thôi chứ không được sửa số point, số point theo cấu hình chung cả gamification"*
+
+## Trạng thái trước CR
+
+`CR-007` bỏ chiến dịch, kỳ lịch và cơ chế chốt kỳ, thay bằng **bộ chọn khoảng ngày tự do** trên bảng xếp hạng. Lý do lúc đó: khoảng ngày tự do bao trùm cả kỳ lịch lẫn chiến dịch.
+
+CR này bỏ bộ chọn tự do phía học viên, nên tiền đề của `CR-007` không còn. Campaign quay lại để lấp đúng chỗ đó: **những khoảng thời gian có chủ đích** mà khung cố định không diễn tả được.
+
+## Rule mới đã rõ
+
+| # | Rule |
+|---|---|
+| 1 | Bảng xếp hạng phía học viên chỉ có `All time` · `This week` · `This month` · `This quarter` · `This year`. Không có bộ chọn khoảng tự do. Mọi khung đều tính sẵn, nên học viên gọi bao nhiêu lần cũng chỉ là đọc |
+| 2 | Tạo campaign: chọn **khoảng thời gian** diễn ra |
+| 3 | Campaign gồm hai cấu phần: **điểm** và **số hoạt động** |
+| 4 | Phần điểm: vận hành **chỉ chọn loại hành động nào được tính**. **Số điểm theo cấu hình chung**, không sửa riêng cho campaign |
+
+## Hệ quả của rule 4 — campaign đơn giản đi nhiều
+
+Điểm campaign **không phải một loại điểm mới**. Nó là điểm chung, lọc theo hai điều kiện: thời điểm nằm trong khoảng campaign, và loại hành động được chọn. Sổ giao dịch điểm đã lưu từng lần cộng kèm nguồn và thời điểm (`C3`), nên **không cần ghi thêm gì** khi học viên hành động.
+
+Kéo theo:
+- **Hai campaign chồng thời gian không xung đột**, vì chỉ là hai cách lọc khác nhau trên cùng một sổ
+- **Campaign phụ thuộc cấu hình chung.** Tắt `Points`, hoặc tắt một hành động, thì phần đó ngừng đóng góp cho mọi campaign đang chạy
+- **Đổi số điểm chung giữa chừng thì campaign mang hai mức điểm**, theo `C4`. Học viên hành động trước và sau thời điểm đổi nhận số điểm khác nhau trong cùng một campaign
+
+## Câu hỏi còn mở — chặn BRD
+
+| # | Câu hỏi | Đề xuất |
+|---|---|---|
+| 1 | Campaign xếp hạng thế nào: **hai bảng** (điểm và hoạt động) hay vận hành **chọn một** chỉ số? | Hai bảng, giống cấu trúc bảng xếp hạng chung |
+| 2 | Ai tham gia? | Toàn tổ chức ở đợt này. Chọn theo nhóm chờ chức năng nhóm từ HRM |
+| 3 | Kết thúc thì **đóng băng** kết quả không? Bài nộp trong campaign mà chấm sau khi kết thúc có tính không? | Đóng băng. Campaign làm ra để trao thưởng, số liệu sống (`BR-6.10`) sẽ làm thứ hạng đổi sau khi đã công bố |
+| 4 | Campaign đang chạy sửa được gì? | Theo `CR-002`: không sửa khoảng thời gian và loại hành động, chỉ sửa tên và mô tả |
+| 5 | Màn danh sách học viên bên Ops (`US12`) có giữ bộ chọn khoảng ngày tự do không? | Giữ. Mục tiêu `O4` đang dựa vào nó, người dùng Ops ít và có phân quyền |
+
+## Điểm re-entry đề xuất
+
+**BRD.** Campaign đưa một thực thể bị loại ở `CR-007` trở lại phạm vi, đổi mục `Out of scope` và cách đạt mục tiêu `O4`.
+
+## PO trả lời — 08/10/2026
+
+> *"5 câu chặn đều theo đề xuất"*
+
+Kèm bốn lựa chọn qua câu hỏi chốt:
+
+| Câu hỏi | PO chọn |
+|---|---|
+| Re-entry | **Gộp `CR-012` với `CR-013`, chạy từ BRD.** Cả bốn Gate duyệt lại |
+| Bài nộp trong campaign mà chấm sau khi kết thúc | **Tính theo lúc chấm đạt.** Chỉ tính nếu được chấm đạt trong thời gian campaign. Kết quả đóng băng ngay khi kết thúc |
+| Đổi số điểm chung khi campaign đang chạy | **Chấp nhận hai mức điểm** trong cùng một campaign, theo `C4` |
+| `CR-012` | **Đồng ý cả sáu điểm**, chấp nhận hai rủi ro của bảng `Activities` |
+
+### Chốt cuối
+
+| # | Rule |
+|---|---|
+| 1 | Campaign có **hai bảng**: điểm (chỉ các loại hành động được chọn) và số hoạt động |
+| 2 | Người tham gia: **toàn tổ chức** |
+| 3 | Kết thúc thì **đóng băng**. Một lần cộng điểm thuộc campaign khi **thời điểm cộng** nằm trong khoảng campaign. Bài chấm sau khi kết thúc không tính |
+| 4 | Đang chạy: **chỉ sửa tên và mô tả**. Không sửa khoảng thời gian và loại hành động |
+| 5 | `US12` bên Ops **giữ bộ chọn khoảng ngày tự do** |
+| 6 | Hai campaign được chồng thời gian |
+| 7 | Học viên **xem lại được campaign đã kết thúc**, thấy kết quả đã đóng băng |
+| 8 | Ops có **màn xem và xuất Excel kết quả từng campaign**. Không dùng `US12` thay được vì `US12` không lọc theo loại hành động và là số liệu sống |
+| 9 | **Chỉ xoá được khi chưa bắt đầu.** Đang chạy thì không dừng, không xoá |
+| 10 | Campaign nằm **trong trang bảng xếp hạng**. Tắt công tắc `Leaderboard` thì campaign ẩn theo, dữ liệu giữ nguyên |
+
+### Mặc định Claude đặt, chưa hỏi PO — duyệt ở Gate
+
+| # | Mặc định | Lý do |
+|---|---|---|
+| a | Khoảng campaign tính **theo ngày trọn**, biên ngày cắt theo múi giờ tổ chức | Cùng quy tắc với khung cố định (`C6`) |
+| b | **Ngày bắt đầu không được ở quá khứ** | Campaign tính hồi tố thì học viên không biết mình đang thi đua |
+| c | Phải chọn **ít nhất một loại hành động** | Không chọn gì thì bảng điểm rỗng |
+| d | **Không thông báo** khi campaign bắt đầu hay kết thúc | Thông báo hiện chỉ dành cho thành tích (`S10`) |
+| e | Học viên bị `Block` hoặc rời tổ chức **vẫn nằm trong kết quả đã đóng băng** | Theo `A14` đã chốt cho snapshot |
 
