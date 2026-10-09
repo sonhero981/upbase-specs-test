@@ -24,7 +24,7 @@ argument-hint: <intent-slug>
 Chạy theo `.claude/protocol/stage-protocol.md`.
 
 ## Mục đích
-Gói mọi thứ của Ideation thành một trang để quyết đi tiếp hay dừng. AWS: stage 1.7, có lựa chọn Reject Initiative. Thay BRD và Gate 1 của luồng cũ.
+Gói mọi thứ của Ideation thành một trang để quyết đi tiếp hay dừng. AWS: stage 1.7, có lựa chọn Reject Initiative.
 
 ## Ask
 Ba câu, không cần tóm tắt xác nhận:

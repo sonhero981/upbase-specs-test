@@ -77,7 +77,7 @@ Ba chỗ từng đánh giá nguy hiểm nhất:
 | Data | `groups` · `group_user_instances` | **Schema Lark** | `groups`: **đúng 3 cột** — `tenant_id · id · name`.<br>`group_user_instances`: `id · group_id · user_id`.<br>Khớp `CreateGroupDto`. Xác nhận bằng dữ liệu: **không có gì để kế thừa** |
 | Data | `casbin_rule` | **Schema Lark** | `tenant_id · id · ptype · v0…v6`. Ma trận quyền nằm trong **dữ liệu**, không đọc được từ cấu trúc |
 | Data | `field_change_logs` | **Schema Lark** | `tenant_id · id · object_type · object_id · created_by_staff_id`.<br>🔴 **Không có tên trường, giá trị cũ, giá trị mới, thời điểm.** Xác nhận `BA-05`: **không dùng được** cho nhật ký thành viên |
-| Data | `roles.is_group` | **Schema Lark** | Có khái niệm role dạng nhóm. `❓BA` — liên quan gì tới chức năng Nhóm không |
+| Data | `roles.is_group` | **Schema Lark** | Có khái niệm role dạng nhóm. `❓PO` — liên quan gì tới chức năng Nhóm không |
 | Data | `support_groups_user_instances` | **Schema Lark** | Comment Replier có bảng nối riêng, không dùng chung `group_user_instances` |
 | Business Rule | `KB-CLASS-01` | KB `04` §9 | Thêm học viên vào Lesson → **cũng thêm vào Foundation** |
 | Business Rule | `KB-CLASS-05` | KB `04` §9 | Lớp `Ended` không chỉnh sửa được |
@@ -143,7 +143,7 @@ Ba ràng buộc bất biến: `C1` nhóm chỉ chứa người · `C2` một lư
 | Grading | Mentor của lớp lấy từ Staff, không lấy từ nhóm. Quan hệ mentor của nhóm là **khái niệm khác** |
 | Certificate | Cấp theo lượt ghi danh, không theo nhóm |
 | Storyline | `hidden`, không liên quan |
-| `Schedules` · `Room` · `Class Schedule` | ⚠️ `❓BA` — nằm trong **vùng KB chưa phủ** *(KB `14` §2.1, 45+ operation)*. Không kết luận "không ảnh hưởng", chỉ ghi là **chưa tra được** |
+| `Schedules` · `Room` · `Class Schedule` | ⚠️ `❓PO` — nằm trong **vùng KB chưa phủ** *(KB `14` §2.1, 45+ operation)*. Không kết luận "không ảnh hưởng", chỉ ghi là **chưa tra được** |
 
 ---
 
@@ -353,7 +353,7 @@ Không tự chọn. Để Bước 7 so sánh.
 | `R-5` | **Lịch sử thành viên chỉ có từ ngày bật.** Báo cáo lùi xa hơn không có dữ liệu | 🟠 | Nói rõ với người dùng, không để họ tưởng có dữ liệu cũ |
 | `R-6` | **Hai luật đứng đụng nhau** — Comment Replier và Nhóm | 🟠 | `CF-2` phải quyết |
 | `R-7` | **Từ "Mentor" trùng tên, khác nghĩa** — Ops chọn nhầm người, Dev dựng nhầm quan hệ | 🟠 | `CF-6` — đổi tên khái niệm mới trước khi viết PRD |
-| `R-8` | Vùng `Schedules` · `Room` chưa tra được, KB không phủ | 🟡 | Ghi `❓BA`, không kết luận không ảnh hưởng |
+| `R-8` | Vùng `Schedules` · `Room` chưa tra được, KB không phủ | 🟡 | Ghi `❓PO`, không kết luận không ảnh hưởng |
 
 ---
 

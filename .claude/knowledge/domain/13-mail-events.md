@@ -53,9 +53,9 @@ Không bắn khi người đó **chưa học khoá nào** *(xử lý tự độn
 | 2 | OPS | Tài khoản UpLMS Ops **đã bị khoá** | 🟢 |
 | 4 | OPS | **Tạo tài khoản staff thành công** — gửi kèm Username + Password | 🟢 |
 | 6 | LMS | Reset password LMS thành công, **kèm mật khẩu mới** | 🔴 **Ngưng** — LMS dùng SSO Lark, không còn tính năng reset password |
-| 7 | OPS | Reset password staff thành công, kèm mật khẩu mới | `❓BA` |
+| 7 | OPS | Reset password staff thành công, kèm mật khẩu mới | `❓PO` |
 | 8 | OPS | Đổi mật khẩu thành công (không kèm mật khẩu) | 🔴 **Ngưng** — *"giờ cũng ẩn nút đổi pass đi rồi"* |
-| 9 | LMS + OPS | **Mã OTP** kèm thời gian hiệu lực `{{EFFECT_TIME}}` phút | `❓BA` — vẫn dùng cho Edit Email của Staff? |
+| 9 | LMS + OPS | **Mã OTP** kèm thời gian hiệu lực `{{EFFECT_TIME}}` phút | `❓PO` — vẫn dùng cho Edit Email của Staff? |
 
 ### Khoá học & chứng chỉ
 
@@ -85,7 +85,7 @@ Không bắn khi người đó **chưa học khoá nào** *(xử lý tự độn
 | 15 | Cronjob | **Nhắc trước N ngày** về bài kiểm tra sắp mở | 🟢 |
 | 16 | Cronjob | Nhắc bài kiểm tra **sắp hết hạn trong 1 ngày** | 🟢 |
 
-> ⚠️ **Bốn mail này lộ ra một cơ chế UG hoàn toàn không mô tả: bài kiểm tra có `Thời gian mở` và `Thời gian đóng`.** KB [03-assessment.md](03-assessment.md) dựng từ UG chỉ có `Test Mode` (Tutor/Timed) và `Attempt` — không có khái niệm cửa sổ thời gian truy cập. DB có bảng `class_quiz_settings` và `class_user_quiz_settings`, API có `Class Quiz Management` (9 endpoint). `❓BA`
+> ⚠️ **Bốn mail này lộ ra một cơ chế UG hoàn toàn không mô tả: bài kiểm tra có `Thời gian mở` và `Thời gian đóng`.** KB [03-assessment.md](03-assessment.md) dựng từ UG chỉ có `Test Mode` (Tutor/Timed) và `Attempt` — không có khái niệm cửa sổ thời gian truy cập. DB có bảng `class_quiz_settings` và `class_user_quiz_settings`, API có `Class Quiz Management` (9 endpoint). `❓PO`
 
 ### Chấm điểm — **nhóm BA nêu là đang tạm ngưng**
 
@@ -102,7 +102,7 @@ Không bắn khi người đó **chưa học khoá nào** *(xử lý tự độn
 
 > 🚨 **Đây là điểm cần chú ý nhất.** BA xác nhận *"các mail liên quan đến chức năng chấm điểm"* đang tạm ngưng kích hoạt. Nghĩa là **cảnh báo ở [05-grading.md](05-grading.md) §9 vẫn đúng, chỉ khác nguyên nhân**: không phải vì module Email ẩn, mà vì 8 mail này bị tắt có chủ đích.
 >
-> Hệ quả: luồng chấm điểm hiện **không có thông báo tự động** ở cả 4 mắt xích (assign · submit to review · regrading · trả kết quả cho học viên). Mentor và học viên phải tự vào hệ thống kiểm tra. `❓BA` — có cơ chế thay thế không?
+> Hệ quả: luồng chấm điểm hiện **không có thông báo tự động** ở cả 4 mắt xích (assign · submit to review · regrading · trả kết quả cho học viên). Mentor và học viên phải tự vào hệ thống kiểm tra. `❓PO` — có cơ chế thay thế không?
 
 ### Thảo luận
 
@@ -127,7 +127,7 @@ Template dùng cú pháp **Handlebars**: `{{VAR}}`, `{{#if}}`, `{{else}}`, `{{/i
 | `{{QUIZ_NAME}}`, `{{START_TIME}}`, `{{END_TIME}}`, `{{NUMBER_DURATION_QUIZ}}`, `{{{TABLE_ROWS}}}` | Bài kiểm tra |
 | `{{#if IS_PUBLIC_ENROLL}}`, `{{#if IS_FLEXIBLE_CLASS}}`, `{{#unless IS_NO_EXPIRED_CLASS}}` | Điều kiện |
 
-> ⚠️ **`IS_PUBLIC_ENROLL`** hàm ý có luồng **học viên tự đăng ký khoá công khai** — UG không mô tả. Liên quan tới bảng `course_listing` (visibility, pricing_model) trong DB. Xem [12-data-model.md](12-data-model.md). `❓BA`
+> ⚠️ **`IS_PUBLIC_ENROLL`** hàm ý có luồng **học viên tự đăng ký khoá công khai** — UG không mô tả. Liên quan tới bảng `course_listing` (visibility, pricing_model) trong DB. Xem [12-data-model.md](12-data-model.md). `❓PO`
 
 ---
 

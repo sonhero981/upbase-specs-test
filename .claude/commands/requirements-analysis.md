@@ -25,11 +25,11 @@ argument-hint: <intent-slug>
 Chạy theo `.claude/protocol/stage-protocol.md`.
 
 ## Mục đích
-Biến phạm vi thành yêu cầu có mã ổn định: FR, NFR, ràng buộc, giả định, câu hỏi mở. AWS: stage 2.3. Thay clarified-requirements và mã `RC` của luồng cũ.
+Biến phạm vi thành yêu cầu có mã ổn định: FR, NFR, ràng buộc, giả định, câu hỏi mở. AWS: stage 2.3.
 
 ## Load
 - S: đọc `inputs/` trực tiếp, viết intent summary gọn trong requirements.
-- Tra KB cho từng hạng mục của scope: **đã có chưa** (KB 01 đến 11); **rule hiện có chi phối** (`BR-*`, `KB-*`); **Hidden** (KB 00 mục Trạng thái); **mail event liên quan**, đang bật hay tắt (KB 13); **vùng KB chưa phủ** (KB 14 §1 và §2) thì ghi `❓BA`, không kết luận.
+- Tra KB cho từng hạng mục của scope: **đã có chưa** (KB 01 đến 11); **rule hiện có chi phối** (`BR-*`, `KB-*`); **Hidden** (KB 00 mục Trạng thái); **mail event liên quan**, đang bật hay tắt (KB 13); **vùng KB chưa phủ** (KB 14 §1 và §2) thì ghi `❓PO`, không kết luận.
 - Phát hiện yêu cầu trùng tính năng đã có: nêu ngay, kèm mã KB, không để tới Impact Analysis. Ví dụ "thêm thông báo khi chấm xong" trong khi mail số 19 đã tồn tại nhưng đang tắt.
 - Chạm dữ liệu: đọc lại nguồn sống nếu quá một tháng kể từ Last verified của KB 12.
 
@@ -54,4 +54,4 @@ FR viết **cái gì phải đúng**, không viết làm thế nào. Không có 
 Checklist của stage. Quét góc nội bộ: mỗi góc áp dụng phải thành FR, assumption có lý do, hoặc out of scope. Reviewer product-lead ở M, L.
 
 ## Gate
-Trình: số FR theo nhóm, NFR, OQ còn chặn, FR trùng thứ đã có, vùng `❓BA`, finding review. Stage kế: 2.31 ở M, L; 2.42 ở S.
+Trình: số FR theo nhóm, NFR, OQ còn chặn, FR trùng thứ đã có, vùng `❓PO`, finding review. Stage kế: 2.31 ở M, L; 2.42 ở S.

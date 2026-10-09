@@ -409,6 +409,8 @@ Thí điểm: ban đầu dự kiến Report Phase 1. PO đổi ngày 09/10/2026:
 
 Câu tuyên bố đề xuất cho README: *"Aligned with AWS AI-DLC Workflows v2.10: Ideation and product-owned Inception stages, AI-DLC terminology and approval protocol, plus the `upbase-po` plugin: four stages for impact analysis, solution options, HLD brief and PRD generation. Construction and Operation are out of scope."*
 
+PO điều chỉnh ngày 09/10/2026: không dùng câu tuyên bố trên. README chỉ ghi một dòng nguồn tham khảo kèm link AWS, đủ để người đọc biết lấy từ đâu; không nhấn mạnh "aligned with".
+
 ---
 
 ## Phụ lục A. Nháp `protocol/stage-protocol.md`
@@ -529,7 +531,7 @@ Chọn theo profile, không hỏi câu đã có trong scope-document hoặc deci
 ## Checklist riêng
 - Mỗi FR truy được về scope-document hoặc câu trả lời.
 - Không có FR mô tả giải pháp kỹ thuật.
-- Vùng KB chưa phủ được đánh `❓BA`, không kết luận.
+- Vùng KB chưa phủ được đánh `❓PO`, không kết luận.
 - Mail event và tính năng Hidden đã tra.
 
 ## Gate

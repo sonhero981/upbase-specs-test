@@ -120,7 +120,7 @@ PRD viết cho Dev và QA. User Guide viết cho người dùng cuối.
 | --- | --- |
 | Viewport | **1920×1080**, headless |
 | Tên file | `NN-<role>-<mô-tả-ngắn>.png` — ví dụ `01-ops-exam-list.png` |
-| Thư mục | `docs/user-guide/screenshots/` |
+| Thư mục | `user-guide/screenshots/` |
 | Kiểm trước khi dùng | Ảnh đạt ~1920px, layout giống desktop thật. Thu gọn hoặc sidebar phình → viewport sai, chụp lại |
 
-Không chụp được → để `<!-- ẢNH: … -->` và liệt kê vào `docs/user-guide/pending-screenshots.md`.
+Không chụp được → để `<!-- ẢNH: … -->` và liệt kê vào `user-guide/pending-screenshots.md`.

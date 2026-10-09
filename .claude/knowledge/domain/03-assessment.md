@@ -15,8 +15,8 @@
 | Vị trí | Section Test, Midterm Test, Final Test | Trong Activity, hoặc trong Video | Trong Section |
 | Tính điểm khoá học | **Có** (nếu Graded Assignment = Yes) | Có thể tính điểm hoàn thành Quiz, **nhưng không tính vào hoàn thành khoá học** | **Không** |
 | Loại câu hỏi | Trắc nghiệm, tự luận, hoặc cả hai | **Chỉ trắc nghiệm** | Theo Question Bank |
-| Số lượt làm | Theo Attempt (Unlimited / Limited) | `❓BA` | **1 lượt duy nhất** |
-| Resume khi gián đoạn | **Có** | `❓BA` | `❓BA` |
+| Số lượt làm | Theo Attempt (Unlimited / Limited) | `❓PO` | **1 lượt duy nhất** |
+| Resume khi gián đoạn | **Có** | `❓PO` | `❓PO` |
 
 ---
 
@@ -72,7 +72,7 @@ Thứ tự ở **Setup Score** và **Reorder** kế thừa thứ tự chọn ở
 
 Điểm mặc định chia đều: `100 / tổng số câu`. Operator chỉnh lại từng câu được.
 
-> UG mục IV ghi lỗi *"Không chuyển được sang Reorder — Total Score sau khi điều chỉnh có tổng chưa bằng 100"*, nhưng phần cấu hình lại nói Total Score "có thể điền khác thang điểm 100". `❓BA` — hai chỗ này mâu thuẫn.
+> UG mục IV ghi lỗi *"Không chuyển được sang Reorder — Total Score sau khi điều chỉnh có tổng chưa bằng 100"*, nhưng phần cấu hình lại nói Total Score "có thể điền khác thang điểm 100". `❓PO` — hai chỗ này mâu thuẫn.
 
 ### Reorder — 3 cách
 
@@ -165,7 +165,7 @@ Hiển thị: tổng điểm · kết quả theo từng chủ đề · chi tiế
 
 > Liên quan trực tiếp tới BR-TEST-01 (export điểm rỗng khi chưa chấm xong) — rule này thuộc màn đang ẩn. Khi phân tích impact về điểm/export, phải hỏi BA xem màn này có được bật lại không.
 
-`❓BA` — Claude chưa đọc chi tiết page này. Cần xác nhận có đưa vào KB không.
+`❓PO` — Claude chưa đọc chi tiết page này. Cần xác nhận có đưa vào KB không.
 
 ---
 

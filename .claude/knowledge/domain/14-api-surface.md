@@ -23,10 +23,10 @@
 | Nhóm | Cũ | Mới | |
 |---|---|---|---|
 | `Examination` (Ops) | 8 | **0** | ✅ Đã gỡ — khớp PO xác nhận *"không có tính năng"* |
-| `Event Test Management` (Ops) | 10 | **0** | ✅ Đã gỡ — **trả lời được `❓BA` treo từ 23/09** |
+| `Event Test Management` (Ops) | 10 | **0** | ✅ Đã gỡ — **trả lời được `❓PO` treo từ 23/09** |
 | `Event Management` (Ops) | 1 | **0** | ✅ Đã gỡ — cùng lý do |
 | `Entrance Test` (LMS) | 3 | **0** | ✅ Đã gỡ — khớp PO xác nhận |
-| `Auth` (LMS) | 3 | **0** | Chuyển đi đâu chưa rõ. `❓BA` |
+| `Auth` (LMS) | 3 | **0** | Chuyển đi đâu chưa rõ. `❓PO` |
 | `majors` · `universities` (Ops) | 1 · 1 | **0** | Đã gỡ |
 | `Staff Facility` → `Staff Facility Management` | 5 | 5 | Chỉ đổi tên nhóm |
 | `Course Learning Outcome` / `Outcome Management` | gộp | 5 + 4 | Giờ tách rõ hai nhóm |
@@ -89,7 +89,7 @@ Ba loại bài kiểm tra **nằm ngoài khoá học** từng lộ ra qua API: k
 
 > ❌ **PO xác nhận 23/09/2026: `Examination` và `Entrance Test` — hệ thống KHÔNG CÓ hai chức năng này.**
 >
-> ✅ **Đối chiếu lại 05/10/2026: cả bốn nhóm đã bị gỡ khỏi Swagger.** Thực tế khớp lời PO, và `Event Test Management` + `Event Management` — hai nhóm treo `❓BA` từ 23/09 — **cũng đã biến mất**, nên không cần hỏi nữa.
+> ✅ **Đối chiếu lại 05/10/2026: cả bốn nhóm đã bị gỡ khỏi Swagger.** Thực tế khớp lời PO, và `Event Test Management` + `Event Management` — hai nhóm treo `❓PO` từ 23/09 — **cũng đã biến mất**, nên không cần hỏi nữa.
 >
 > ⚠️ **Bài học vẫn giữ nguyên:** lần trước endpoint tồn tại mà tính năng không có. **Bề mặt API không đồng nghĩa với tính năng đang chạy** theo cả hai chiều. Thấy một nhóm API lạ thì **hỏi PO trước khi kết luận**.
 
@@ -107,7 +107,7 @@ Cập nhật dần. Mỗi dòng là một lần suýt kết luận sai.
 | **`Group Management`** (Ops, 9 op) | ❌ **Coi như không có.** Nhóm phẳng, chỉ CRUD + gán user. PO chốt bỏ hẳn, làm lại từ đầu ở dự án Group | PO 05/10/2026 |
 | **Recipients List** *(màn nhóm người nhận Email)* | ❌ **Coi như không có.** Khi mở lại chức năng gửi thông báo từ Ops sẽ chọn người nhận từ chức năng Nhóm mới | PO 05/10/2026 |
 | **`PUT /api/v1/classes/{id}/students/transfer`**<br>**`PUT /api/v1/classes/{id}/students/{student_id}/revert-transfer`** | ❌ **Không có chức năng chuyển lớp.** Muốn chuyển thì xoá khỏi lớp cũ, thêm vào lớp mới, **học lại từ đầu** | PO 06/10/2026 |
-| `Auth` (LMS, 3 op) | `❓BA` — biến mất khỏi Swagger 05/10, chưa rõ chuyển đi đâu | — |
+| `Auth` (LMS, 3 op) | `❓PO` — biến mất khỏi Swagger 05/10, chưa rõ chuyển đi đâu | — |
 
 > **Sáu lần trong hai buổi phân tích.** Tỷ lệ endpoint "chết" trong hệ này đủ cao để **không bao giờ suy ra tính năng từ sự tồn tại của endpoint** — và chiều ngược lại cũng đúng: nhóm chức năng chết **có thể bị gỡ bất cứ lúc nào**, nên số liệu trong file này phải đối chiếu lại trước mỗi đợt phân tích.
 >
@@ -139,7 +139,7 @@ Sáu endpoint ở phía **học viên**, KB chưa có file nào mô tả:
 
 > ⚠️ **Mọi báo cáo đều lấy `class_id` làm khoá.** Không có chiều nào theo người, theo nhóm hay theo phòng ban. Bất kỳ yêu cầu nào về *"cộng dồn số liệu theo cơ cấu tổ chức"* đều phải thêm một chiều mới vào đây, không tận dụng được.
 >
-> `❓BA` — `exam-prediction` là tính năng đang chạy hay endpoint chết như `Examination` trước đây?
+> `❓PO` — `exam-prediction` là tính năng đang chạy hay endpoint chết như `Examination` trước đây?
 
 > **Đây là nguồn cho permission matrix** mà KB còn thiếu. Kết hợp với `casbin_rule` trong DB ([12-data-model.md](12-data-model.md)).
 
@@ -162,7 +162,7 @@ Sáu endpoint ở phía **học viên**, KB chưa có file nào mô tả:
 | `Lessee Contacts Management` | 5 | *Lessee* = bên thuê |
 | `Lessee Tag Management` | 5 | |
 
-Khớp với `tenant.billing_model`, `tenant.can_publish_marketplace`, `course_listing` trong DB. `❓BA`
+Khớp với `tenant.billing_model`, `tenant.can_publish_marketplace`, `course_listing` trong DB. `❓PO`
 
 ### 2.6 Khác
 
@@ -174,7 +174,7 @@ Khớp với `tenant.billing_model`, `tenant.can_publish_marketplace`, `course_l
 | `Story` | 6 | Khác `Storyline Management` (17) — **hai khái niệm riêng** |
 | `Mail Log Management` | 4 | Khớp [13-mail-events.md](13-mail-events.md) |
 | `Import logs` | 2 | Khớp `import_logs` |
-| `Feature Section Management` | 2 | `❓BA` — feature flag? |
+| `Feature Section Management` | 2 | `❓PO` — feature flag? |
 
 ---
 

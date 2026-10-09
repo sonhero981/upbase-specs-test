@@ -37,7 +37,7 @@ Course
 Course-level: Midterm Test, Final Test
 ```
 
-> UG ghi "cấu trúc gồm 2 cấp: Section → Activity" (BR-COURSE-02), nhưng phần hướng dẫn mô tả thêm tầng Tab → Document bên trong Activity. `❓BA` — chốt lại số tầng chính thức.
+> UG ghi "cấu trúc gồm 2 cấp: Section → Activity" (BR-COURSE-02), nhưng phần hướng dẫn mô tả thêm tầng Tab → Document bên trong Activity. `❓PO` — chốt lại số tầng chính thức.
 
 ---
 
@@ -78,9 +78,9 @@ Course-level: Midterm Test, Final Test
 
 | Field | Bắt buộc | Kiểu | Giá trị / Ràng buộc |
 |---|---|---|---|
-| Activity Name | `❓BA` | Text | UG không đánh dấu (*) |
+| Activity Name | `❓PO` | Text | UG không đánh dấu (*) |
 | Duration | Không | Number | Thời lượng ước lượng |
-| Type of Activity | `❓BA` | Enum | `Text` \| `Video` \| `Quiz` — **chỉ dùng để hiển thị icon** phía học viên (BR-CONTENT-06) |
+| Type of Activity | `❓PO` | Enum | `Text` \| `Video` \| `Quiz` — **chỉ dùng để hiển thị icon** phía học viên (BR-CONTENT-06) |
 | Choose Learning Outcome | Không | Multi-select | Chỉ chọn được LO thuộc Section chứa Activity |
 | Upload File | Không | File | Từ kho hệ thống hoặc thiết bị, **≤500MB**, nhiều file |
 | Activity Code | — | — | **Hệ thống tự sinh** (BR-CONTENT-05) |

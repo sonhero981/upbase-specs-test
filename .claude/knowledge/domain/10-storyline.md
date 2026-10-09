@@ -59,7 +59,7 @@ Storyline
 | Loại | Field |
 |---|---|
 | **Text** | Text Name, Description (nội dung) |
-| **Question** | Text Name, Description *(UG ghi giống hệt Text — `❓BA` có phải lỗi tài liệu?)* |
+| **Question** | Text Name, Description *(UG ghi giống hệt Text — `❓PO` có phải lỗi tài liệu?)* |
 | **Video** | Video Name, Upload (từ thiết bị hoặc kho hệ thống) |
 | **Interaction** | Xem §3.4 |
 

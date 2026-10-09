@@ -25,7 +25,7 @@ argument-hint: <intent-slug>
 Chạy theo `.claude/protocol/stage-protocol.md`.
 
 ## Mục đích
-Vạch biên: làm gì, không làm gì, để sau. Chia nhu cầu thành Proto-Unit, là hạng mục của intent backlog, ứng viên để Dev chia Unit thật ở stage 2.7. AWS: stage 1.4. Thay BRD mục 5 đến 7.
+Vạch biên: làm gì, không làm gì, để sau. Chia nhu cầu thành Proto-Unit, là hạng mục của intent backlog, ứng viên để Dev chia Unit thật ở stage 2.7. AWS: stage 1.4.
 
 ## Load
 intent-statement; KB 14 §1 và §2 để biết vùng chưa phủ; `decisions.md`.
@@ -37,11 +37,11 @@ intent-statement; KB 14 §1 và §2 để biết vùng chưa phủ; `decisions.m
 4. Ưu tiên theo rủi ro trước, giá trị trước, hay phụ thuộc trước.
 5. Mốc cứng nào gắn với hạng mục nào.
 6. Thứ người đọc dễ tưởng là có mà không làm. Thứ từng nằm trong yêu cầu rồi bị loại.
-7. Hạng mục nào trùng tính năng đã có: tra KB, nêu mã, hỏi mở rộng hay làm mới. Vùng KB chưa phủ thì ghi `❓BA`.
+7. Hạng mục nào trùng tính năng đã có: tra KB, nêu mã, hỏi mở rộng hay làm mới. Vùng KB chưa phủ thì ghi `❓PO`.
 
 ## Generate
 `scope-document.md` theo template: In, Out, Potential mỗi dòng một câu kèm lý do và nguồn; constraints; intent backlog là bảng Proto-Unit `PU1`... với tên, mục đích, portal, MoSCoW, phụ thuộc, trùng tính năng có sẵn hay không; thứ tự gợi ý kèm lý do; mốc cứng; Assumptions & Open Questions.
-Chia Proto-Unit theo bốn quy tắc giữ từ luồng cũ: theo cơ chế, không theo màn hình; tìm hạng mục nền; tách hạng mục chạm mọi thứ như phân quyền, bật tắt, lịch sử; phụ thuộc một chiều. Định nghĩa hết, kể cả Won't, để Impact Analysis quét đúng.
+Chia Proto-Unit theo bốn quy tắc: theo cơ chế, không theo màn hình; tìm hạng mục nền; tách hạng mục chạm mọi thứ như phân quyền, bật tắt, lịch sử; phụ thuộc một chiều. Định nghĩa hết, kể cả Won't, để Impact Analysis quét đúng.
 
 ## Gate
 - Profile M: gate chung với 1.1. Thông điệp hoàn thành gộp intent-statement và scope-document. Request Changes nêu rõ sửa artifact nào.

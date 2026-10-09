@@ -28,7 +28,7 @@ Review độc lập do agent `product-lead` làm. Bám theo AWS AI-DLC `stage-pr
 6. Góc đã chốt chưa: rỗng, trùng, đồng thời, dữ liệu cũ, người bị Block, lớp đã kết thúc. Mỗi góc phải là rule, giả định có lý do, hoặc ngoài phạm vi.
 7. Mọi FR truy được về nhu cầu, mọi US truy được về FR. Mồ côi là finding.
 8. Thẻ nguồn còn đủ, assumption chưa bị nâng thành fact.
-9. Vùng KB chưa phủ có `❓BA`, không kết luận bừa.
+9. Vùng KB chưa phủ có `❓PO`, không kết luận bừa.
 
 ## File review
 ```markdown

@@ -27,15 +27,15 @@ Chạy theo `.claude/protocol/stage-protocol.md`.
 Biết tính năng mới chạm gì trên hệ đang chạy trước khi chọn cách làm. Năm việc: phát hiện conflict với rule hiện có; bổ sung FR, NFR do tác động qua lại; phủ đủ case; transition để golive an toàn; kiểm chiều tenant. Plugin stage của repo, AWS không có stage tương đương ở tầng nghiệp vụ.
 
 ## Bước A, Related Features Map, thay cho bước Ask
-Chủ động quét requirements, KB, schema, Swagger, dựng bảng: Hệ · Tính năng, Module, Entity, Endpoint · New hay Existing · Nguồn · Ghi chú. Bao quát module, màn, entity, API và job, role, rule hiện tại, NFR, mail event, tính năng Hidden. Chưa chắc thì `❓BA`.
-Bảng này là Consolidated Summary của stage. Trình bảng, hỏi PO: đủ chưa, sót gì, dòng nào không liên quan, `❓BA` nào chốt được. Chỉ sang bước B khi PO xác nhận. Nhận ra dễ hơn nhớ ra: PO soát một bản nháp, không phải kể từ đầu.
+Chủ động quét requirements, KB, schema, Swagger, dựng bảng: Hệ · Tính năng, Module, Entity, Endpoint · New hay Existing · Nguồn · Ghi chú. Bao quát module, màn, entity, API và job, role, rule hiện tại, NFR, mail event, tính năng Hidden. Chưa chắc thì `❓PO`.
+Bảng này là Consolidated Summary của stage. Trình bảng, hỏi PO: đủ chưa, sót gì, dòng nào không liên quan, `❓PO` nào chốt được. Chỉ sang bước B khi PO xác nhận. Nhận ra dễ hơn nhớ ra: PO soát một bản nháp, không phải kể từ đầu.
 KB mỏng ở vùng này thì hỏi PO seed danh sách hệ liên quan trước, AI mở rộng sau. Câu hỏi khác chỉ khi cần giả định về hệ cũ hay dữ liệu cũ.
 
 ## Bước B, Impact Matrix
 Theo đúng thứ tự:
 1. **Current Situation**: đọc để tìm dependency, không phải để hiểu feature. Module, entity và field, rule, process, permission, integration, mail event, Hidden.
 2. **Desired Situation**: từ requirements.
-3. **Impact Matrix 12 vùng**: business process, module, screen và report, data, API, role, business rule, NFR, notification và email, reporting, test, release. Mỗi dòng có severity và nguồn. Vùng không ảnh hưởng vẫn ghi lý do. Vùng KB chưa phủ ghi `❓BA`.
+3. **Impact Matrix 12 vùng**: business process, module, screen và report, data, API, role, business rule, NFR, notification và email, reporting, test, release. Mỗi dòng có severity và nguồn. Vùng không ảnh hưởng vẫn ghi lý do. Vùng KB chưa phủ ghi `❓PO`.
    - 3a Conflict bốn chiều: rule, process, data, permission. Phát hiện thì escalate cho PO quyết, không tự resolve.
    - 3b Bidirectional: New sang Old và Old sang New, chiều sau hay bị bỏ.
    - 3c Coverage: boundary, exception, shared entity, side effect. Shared entity dễ vỡ nhất của hệ: `course_categories` là khoá ngoại của sáu bảng; Question Bank được bốn nơi tiêu thụ.

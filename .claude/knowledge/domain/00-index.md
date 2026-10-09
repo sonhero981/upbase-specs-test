@@ -103,7 +103,7 @@ Ngoài ra, DB cho thấy hệ thống là **multi-tenant** và có hạ tầng *
 
 | Ký hiệu | Nghĩa |
 |---|---|
-| `❓BA` | Chưa rõ, cần BA xác nhận — **không dùng làm fact** |
+| `❓PO` | Chưa rõ, cần BA xác nhận — **không dùng làm fact** |
 | `[suy ra]` | Claude suy từ nội dung nguồn, không phải câu chữ trực tiếp |
 | ✅ Đã đính chính | Kết luận cũ sai, đã sửa — ghi rõ ngày |
 

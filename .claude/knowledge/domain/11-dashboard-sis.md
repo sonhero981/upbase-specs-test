@@ -24,7 +24,7 @@ BA xác nhận **hiện tại chỉ có 3 dashboard đang dùng**:
 | — | Tỉ lệ chuyên cần | ⚪ UG có mô tả, **BA không liệt kê trong 3 loại hiện tại** |
 | — | Tỉ lệ đầu vào | ⚪ UG có mô tả, **BA không liệt kê trong 3 loại hiện tại** |
 
-> `❓BA` — Hai dashboard *Tỉ lệ chuyên cần* và *Tỉ lệ đầu vào* được mô tả rất chi tiết trong UG (có filter, tooltip, popup danh sách học viên) nhưng không nằm trong 3 loại BA nêu. Chúng đã gỡ, đang ẩn, hay chỉ là UG viết trước? Nội dung của chúng vẫn giữ ở §4 để không mất thông tin.
+> `❓PO` — Hai dashboard *Tỉ lệ chuyên cần* và *Tỉ lệ đầu vào* được mô tả rất chi tiết trong UG (có filter, tooltip, popup danh sách học viên) nhưng không nằm trong 3 loại BA nêu. Chúng đã gỡ, đang ẩn, hay chỉ là UG viết trước? Nội dung của chúng vẫn giữ ở §4 để không mất thông tin.
 
 ---
 
@@ -75,7 +75,7 @@ Click cột → popup: `ID`, `Student Name`, `Email/Phone`, `Checkin`, `Status` 
 Biểu đồ tròn *Student background distribution*, level `IA` / `IIA` / `IB` / `IIB` / `Other`.
 Click → popup: `ID`, `Student Name`, `Email/Phone`, `Duration`, `Progress` (%).
 
-> "Level đầu vào" nhiều khả năng ứng với cột **`users.english_level_id`** trong DB — xem [12-data-model.md](12-data-model.md). `❓BA`
+> "Level đầu vào" nhiều khả năng ứng với cột **`users.english_level_id`** trong DB — xem [12-data-model.md](12-data-model.md). `❓PO`
 
 ---
 

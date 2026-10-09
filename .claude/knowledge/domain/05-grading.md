@@ -170,7 +170,7 @@ Bản KB đầu tiên suy đoán nguyên nhân là "module Email đang ẩn" —
 
 **Hệ quả thực tế:** toàn bộ luồng chấm điểm hiện **không có thông báo đẩy**. Mentor không biết có bài mới cho đến khi tự vào màn Mark/Grading List; học viên không biết bài đã chấm xong cho đến khi tự mở kết quả. Cách 1 trong 4 đường vào màn chấm (*"từ email — click link chấm bài"*, §6.1) **hiện không dùng được**.
 
-`❓BA` — có cơ chế thông báo thay thế không, hay chấp nhận vận hành thủ công? Chi tiết 30 mail: [13-mail-events.md](13-mail-events.md).
+`❓PO` — có cơ chế thông báo thay thế không, hay chấp nhận vận hành thủ công? Chi tiết 30 mail: [13-mail-events.md](13-mail-events.md).
 
 ---
 

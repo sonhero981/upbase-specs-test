@@ -2,7 +2,7 @@
 
 ## Tiền điều kiện
 - [ ] **[BLOCK]** M, L: HLD Brief approved. S: requirements approved
-- [ ] **[BLOCK]** Field Intake đã PO xác nhận. `❓BA` chưa quyết thành OQ
+- [ ] **[BLOCK]** Field Intake đã PO xác nhận. `❓PO` chưa quyết thành OQ
 
 ## Phần đầu
 - [ ] Problem, Analytics, Objective, Out of scope, Stakeholder, Metrics success, Solution, Proto-Units chép từ HLD Brief, không viết lại

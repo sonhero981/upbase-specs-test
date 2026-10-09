@@ -1391,7 +1391,7 @@ Hệ thống phát hiện tình huống, gửi email. Quản lý đọc, vào h�
 
 | # | Nội dung | Người trả lời | Chặn gì |
 |---|---|---|---|
-| 1 | **Số liệu vận hành thật** — một tháng giao bài bao nhiêu lần, mỗi lần mất bao lâu, đã từng sót người chưa | Người viết | Mục `Analytics` còn `❓BA` |
+| 1 | **Số liệu vận hành thật** — một tháng giao bài bao nhiêu lần, mỗi lần mất bao lâu, đã từng sót người chưa | Người viết | Mục `Analytics` còn `❓PO` |
 | 2 | **Ma trận phân quyền hiện có** — chưa ai đọc được, nó nằm trong dữ liệu chứ không nằm trong cấu trúc | Dev | `US16` — phạm vi dữ liệu dựng trên nền chưa nhìn thấy |
 | 3 | **Loại quan hệ** *(quản lý, mentor)* do hệ thống định nghĩa cố định hay tổ chức tự thêm được | Người viết | `US12` — ảnh hưởng chiều đa tổ chức |
 | 4 | **Tài khoản kiểm thử và tài khoản trả lời bình luận tạo bằng cách nào**, khi chúng không phải nhân sự nên không có trong cây tổ chức | Người viết · Dev | Không chặn |

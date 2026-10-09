@@ -24,7 +24,7 @@ Theo thứ tự:
 1. Có stage `[?]`: trình lại gate của stage đó theo `gate-protocol.md`. Không làm lại việc.
 2. Có stage `[-]` hoặc `[R]`: tiếp tục stage đó từ chỗ dở. Đọc command của stage, nhảy tới đúng bước còn thiếu: câu chưa trả lời, tóm tắt chưa xác nhận, artifact chưa sinh, review chưa chạy. Nói một dòng: "Tiếp tục ở 2.3 Requirements Analysis, còn 2 câu chưa trả lời."
 3. Không có stage dở: lấy stage `[ ]` đầu tiên theo thứ tự trong `state.md`. Nói: "Stage kế: <mã> <tên>. Bắt đầu?" PO đồng ý thì đọc `.claude/commands/<slug>.md` và chạy theo nó.
-4. Mọi stage đều `[x]` hoặc `[S]`: intent xong. Gợi ý `/publish-lark`, `/user-guide`, hoặc đóng intent.
+4. Mọi stage đều `[x]` hoặc `[S]`: intent xong. Gợi ý `/publish-lark`, `/generate-user-guide`, hoặc đóng intent.
 
 Parked: nói "intent đang dừng từ <ngày>", hỏi có tiếp tục không, bỏ dấu Parked khi PO đồng ý.
 

@@ -4,7 +4,7 @@
 - [ ] **[BLOCK]** Mỗi hạng mục đã tra: đã có chưa, rule hiện có, Hidden, mail event, vùng KB chưa phủ
 - [ ] Yêu cầu trùng thứ đã có được nêu ngay, kèm mã KB
 - [ ] Chạm dữ liệu: nguồn sống đã đọc lại nếu quá một tháng kể từ Last verified
-- [ ] Vùng KB chưa phủ ghi `❓BA`, không kết luận "chưa có" hay "không ảnh hưởng"
+- [ ] Vùng KB chưa phủ ghi `❓PO`, không kết luận "chưa có" hay "không ảnh hưởng"
 
 ## FR, NFR
 - [ ] **[BLOCK]** Mỗi FR kiểm chứng được, có mã ổn định, ưu tiên, cờ Existing, New, Changed, nguồn

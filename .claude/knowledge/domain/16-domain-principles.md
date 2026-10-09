@@ -6,7 +6,7 @@
 
 Bộ nguyên tắc quyết định **cái gì được chứa cái gì** trong UpLnD. Chúng chi phối mọi tính năng mới, nên trước khi thiết kế một thực thể mới phải đối chiếu ở đây.
 
-> ⚠️ **File này chưa đầy đủ.** PO dẫn *"nguyên tắc 6"* nhưng chưa có tài liệu gốc liệt kê đủ bộ. Các nguyên tắc khác ghi `❓BA` cho tới khi tra được.
+> ⚠️ **File này chưa đầy đủ.** PO dẫn *"nguyên tắc 6"* nhưng chưa có tài liệu gốc liệt kê đủ bộ. Các nguyên tắc khác ghi `❓PO` cho tới khi tra được.
 
 ---
 
@@ -14,9 +14,9 @@ Bộ nguyên tắc quyết định **cái gì được chứa cái gì** trong U
 
 | # | Nội dung | Nguồn |
 |---|---|---|
-| 1–5 | `❓BA` — chưa tra được | — |
+| 1–5 | `❓PO` — chưa tra được | — |
 | **6** | **Quan hệ nội dung với nội dung chỉ sống trong Lộ trình.**<br>**Quan hệ người với nội dung chỉ sống trong Lớp và Automation.** | PO, 05/10/2026, dự án Group |
-| 7+ | `❓BA` — chưa biết bộ này có bao nhiêu nguyên tắc | — |
+| 7+ | `❓PO` — chưa biết bộ này có bao nhiêu nguyên tắc | — |
 
 ---
 
