@@ -1,104 +1,52 @@
-# Change Request – Đổi yêu cầu giữa chừng
-
-Dùng khi yêu cầu **thay đổi hoặc bổ sung sau khi đã có tài liệu** (BRD / Impact Matrix / Solution / PRD), cần cập nhật tài liệu cũ thay vì làm lại từ đầu.
-
-**Tự kích hoạt** khi người dùng nói: *"tôi có thay đổi yêu cầu…"*, *"bổ sung yêu cầu…"*, *"đổi scope…"*, *"thêm một rule…"*, *"khách yêu cầu thêm…"*. Gõ `/change-request` cũng được.
-
-Input: mô tả thay đổi — `$ARGUMENTS`
-
-> **Xác định project:** ưu tiên `$ARGUMENTS`; không có → suy từ file đang mở; >1 khả dĩ → liệt kê cho chọn, **không đoán**. **Echo + confirm trước khi chạy** — đặc biệt quan trọng khi làm nhiều project song song.
-
 ---
-
-## CR-1. Ghi nhận thay đổi
-
-Ghi vào `working/raw-inputs/change-requests.md` (tạo nếu chưa có):
-
-| CR ID | Ngày | Nội dung thay đổi | Lý do / Nguồn | Trạng thái |
-| --- | --- | --- | --- | --- |
-| CR-001 | YYYY-MM-DD | | | `Đang xử lý` / `Đã áp dụng` |
-
-Mỗi thay đổi một dòng, đánh số CR-001, CR-002…
-
+description: Đổi hoặc bổ sung yêu cầu sau khi một stage đã duyệt. Ghi CR vào decisions.md, chụp archive, mở lại đúng stage, duyệt lại gate
+argument-hint: <intent-slug> <mô tả thay đổi>
 ---
+# /change-request
 
-## CR-2. Đề xuất điểm re-entry
+Dùng khi yêu cầu thay đổi hoặc bổ sung sau khi artifact đã qua gate. Tự kích hoạt khi PO nói *"tôi có thay đổi yêu cầu"*, *"bổ sung"*, *"đổi scope"*, *"thêm một rule"*, *"khách yêu cầu thêm"*.
 
-Map thay đổi vào bảng, lấy **tầng thấp nhất** nếu chạm nhiều tầng:
+Xác định intent: ưu tiên `$ARGUMENTS`; không có thì suy từ file đang mở; hơn một khả năng thì liệt kê cho chọn, không đoán. Echo và confirm trước khi chạy.
 
-| Loại thay đổi | Re-entry từ | Cascade ảnh hưởng |
-| --- | --- | --- |
-| Vấn đề / mục tiêu / phạm vi / business rule mức nghiệp vụ | **BRD** (Bước 4) | Impact → Solution → PRD |
-| Phát hiện ảnh hưởng mới, bổ sung context hệ thống | **Impact Matrix** (Bước 6) | Solution → PRD |
-| Đổi hướng giải pháp, thêm option | **Solution** (Bước 8) | PRD |
-| Đổi chi tiết chức năng (US / field / rule / màn) | **PRD** (Bước 9) | Chỉ phần bị chạm |
-| Chỉ đổi User Guide | **User Guide** | — |
+## 1. Phân loại
+Thay đổi nhỏ trong stage đang mở (`[-]`, `[?]`, `[R]`): sửa và trình lại gate, không cần CR. Thay đổi chạm stage đã `[x]` mới đi đường CR.
 
-**Nguyên tắc chọn tầng:** hỏi *"thay đổi này làm sai lệch kết luận của tầng nào?"* — tầng đó là điểm re-entry.
+## 2. Điểm re-entry
+Hỏi: *thay đổi này làm sai lệch kết luận của stage nào?* Lấy stage thấp nhất bị sai, không lấy stage dễ sửa nhất.
 
-*Ví dụ: "thêm rule học viên bị Block thì không nộp được bài" → chạm business rule → nhưng rule này có làm sai Impact Matrix không? Có, vì nó thêm một nhánh xử lý chưa được quét. → re-entry từ Impact Matrix, không phải chỉ sửa PRD.*
+| Loại thay đổi | Re-entry từ stage | Cascade |
+|---|---|---|
+| Vấn đề, mục tiêu, stakeholder | 1.1 | mọi stage sau |
+| Phạm vi, Proto-Unit | 1.4 | 2.3 trở đi |
+| FR, NFR, rule nghiệp vụ mới | 2.3 | 2.31 trở đi |
+| Phát hiện ảnh hưởng mới | 2.31 | 2.32 trở đi |
+| Đổi hướng giải | 2.32 | 2.4 trở đi |
+| Danh sách US, Proto-Unit | 2.4 | 2.41, 2.42 |
+| Định hướng Design, Tech, Test, quyết định ở họp liên team | 2.41 | 2.42. Phải lấy lại sign-off |
+| Chi tiết US, field, rule, màn | 2.42 | chỉ US bị chạm |
+| Chỉ đổi User Guide | user-guide | — |
 
----
+Ví dụ: *"thêm rule học viên bị Block thì không nộp được bài"* là business rule mới, nhưng nó thêm một nhánh mà Impact Matrix chưa quét, nên re-entry từ 2.3 và chảy qua 2.31, không phải chỉ sửa PRD.
 
-## CR-3. Confirm trước khi chạy — BẮT BUỘC
+## 3. Ghi CR và chụp archive
+- Thêm `CR<n>` vào bảng Change requests của `decisions.md` kèm một DEC ghi nguyên văn PO. Không có file change-requests riêng; phân tích dài thì viết vào `inputs/change-requests.md` và trỏ từ bảng.
+- Trước khi sửa bất kỳ artifact nào: `python3 .claude/scripts/po-tools.py archive .claude/intents/<intent> <stage-slug> <artifact> --label pre-CR<n>`.
 
-Trình bày:
+## 4. Impact preview, PO xác nhận
+Trình bằng hộp chọn: stage re-entry kèm lý do, artifact sẽ đổi, gate phải duyệt lại. PO xác nhận rồi mới chạy. Nếu bảng này đã nằm trong thông điệp gate ngay trước và PO đã trả lời "theo đề xuất", không hỏi lại.
 
-- **Điểm re-entry đề xuất** + lý do
-- **Danh sách tài liệu sẽ bị cập nhật** (impact preview)
-- **Gate nào phải duyệt lại** — mọi Gate sau điểm re-entry
+## 5. Chạy lại xuôi, chế độ sửa
+- Mỗi stage mở lại: hỏi Giữ, Sửa, hay Làm lại từ đầu. `state.md` đặt stage đó `[R]`, stage sau bị chạm về `[ ]`.
+- Chỉ sửa phần bị chạm, không viết lại cả artifact. Tăng version ở frontmatter, thêm dòng Document version với Impact `CR<n>`. PRD chỉ chạm US bị ảnh hưởng, Document status về `IN REVIEW`.
+- Reviewer theo profile ở stage bị chạm; finding đi vào gate, không tự sửa theo finding.
+- Trình lại gate theo `gate-protocol.md`. Nhiều stage nhỏ có thể gộp trong một thông điệp nhưng ghi rõ duyệt từng artifact.
+- 2.41 bị chạm thì lead ký lại; 2.42 bị chạm thì publish lại PRD sau Approve.
 
-> **Không chạy lại khi người dùng chưa confirm điểm re-entry.** Muốn điểm khác → theo người dùng.
+## 6. Tác động ngược
+Trước gate 2.42: chạy `po-tools.py trace`; kiểm business rule mồ côi (rule cũ còn US nào dùng không), mã tham chiếu gãy (`BR-2.3` bị xoá mà chỗ khác còn trỏ), Out of scope lỗi thời (thứ từng ghi "không làm" nay đã làm, hoặc ngược lại).
 
----
-
-## CR-4. Chạy lại xuôi — Update mode
-
-Với mỗi tài liệu từ điểm re-entry trở đi:
-
-- **Chỉ sửa phần bị ảnh hưởng.** Phần không liên quan giữ nguyên — không regenerate toàn bộ
-- **Bump MINOR:** `v0.X` → `v0.(X+1)` trên cùng file
-- Thêm dòng vào **Document version** ở đầu tài liệu:
-
-  | Version | Người cập nhật | Nội dung | Impact | Ngày cập nhật |
-  | --- | --- | --- | --- | --- |
-  | v0.2 | | *tóm tắt thay đổi* | `CR-001` | |
-
-- **PRD:** chỉ chạm US bị ảnh hưởng. US khác không động vào. Cập nhật `Document version` và mục `Vấn đề tồn đọng` nếu có
-- **Mọi Gate sau điểm re-entry** chuyển về trạng thái chờ duyệt lại
-
-Lệnh tương ứng theo điểm re-entry:
-
-| Re-entry | Lệnh |
-|---|---|
-| BRD | `/generate-brd` |
-| Impact Matrix | `/impact-analysis` |
-| Solution | `/compare-solutions` |
-| PRD | `/generate-prd` |
-| User Guide | `/generate-user-guide` |
-
----
-
-## CR-5. Kiểm tra tác động ngược
-
-Sau khi cập nhật, kiểm ba thứ hay bị bỏ sót:
-
-| Kiểm | Vì sao |
-|---|---|
-| **Business rule bị mồ côi** | Rule cũ còn được US nào dùng không, hay đã thành rule chết |
-| **Mã tham chiếu gãy** | `BR-2.3` bị xoá mà chỗ khác còn trỏ tới |
-| **Out of scope lỗi thời** | Thứ từng ghi "không làm" nay đã làm, hoặc ngược lại |
-
----
+## 7. Sau khi duyệt
+Chụp archive bản mới, đóng CR trong bảng, cập nhật Versions trong `state.md`, publish lại artifact bàn giao đã lên Lark.
 
 ## Output
-
-Tóm tắt cho người dùng:
-
-- **CR đã ghi nhận** — ID + nội dung
-- **Điểm re-entry** đã chạy lại từ đâu
-- **Tài liệu đã cập nhật** — file nào, bump lên version nào, đổi gì
-- **Gate cần duyệt lại** trước khi chốt
-- **Tác động ngược** phát hiện được (nếu có)
-
-Tự kiểm theo `.claude/checklist/change-request.md` trước khi trình bày.
+CR đã ghi; stage mở lại; artifact đã sửa và version; gate chờ duyệt lại; tác động ngược phát hiện được. Tự kiểm theo `.claude/verification/change-request.md`.

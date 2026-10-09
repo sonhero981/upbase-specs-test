@@ -1,87 +1,76 @@
 # UpLnD PO/BA AI Workflow
 
-**Mục đích:** nhận yêu cầu → phân tích → sinh tài liệu **PRD theo template công ty**, làm đầu vào cho Tester · UI/UX · Dev, và viết **User Guide** sau khi phát triển xong.
+**Mục đích:** nhận yêu cầu, phân tích, sinh **PRD theo template công ty** làm đầu vào cho Design, Dev, QA, và viết **User Guide** sau khi phát triển xong. Repo này chỉ phân tích yêu cầu và viết tài liệu.
 
-Tổng quan phương pháp: [OVERVIEW.md](OVERVIEW.md) · Hướng dẫn thao tác: [HUONG-DAN-SU-DUNG.md](HUONG-DAN-SU-DUNG.md) · Quy tắc chi tiết nằm trong từng command, không lặp lại ở đây.
+Phương pháp và mapping sang AWS AI-DLC: [README.md](README.md) · Thao tác: [USER-GUIDE.md](USER-GUIDE.md) · Thuật ngữ và họ mã: [GLOSSARY.md](GLOSSARY.md). Quy tắc chi tiết nằm trong `.claude/protocol/` và từng command, không lặp lại ở đây.
+
+## Luồng làm việc
+
+Một luồng duy nhất theo AWS AI-DLC v2.10, mỗi yêu cầu là một intent trong `.claude/intents/`: `/new-intent` tạo, `/po` chạy stage kế tiếp, `/po-status` xem trạng thái, `/po-review` review độc lập. Nghi thức ở `.claude/protocol/*.md`, thuật ngữ ở `GLOSSARY.md`, bài học ở `.claude/memory/team.md`. Tên file artifact ổn định, version ở frontmatter, bản duyệt chụp vào `archive/` của intent theo `gate-protocol.md`; không tạo file `v0.x`. Ba intent chuyển từ luồng cũ ngày 09/10/2026 (Group, Gamification, Report-Phase-1) giữ họ mã cũ trong tài liệu của chúng, ghi ở `intent.md` mỗi intent. Luồng cũ nằm ở tag `pre-aidlc`.
 
 ## Phạm vi
 
-Chỉ **UpLnD** = **UpLMS** (người học) + **UpLMS Ops** (vận hành).
-Ngoài phạm vi: UpAcademy · Admin · Super Admin — xem `.claude/_shared-knowledge-base/15-product-direction.md`.
+Chỉ **UpLnD** = **UpLMS** (người học) + **UpLMS Ops** (vận hành). Ngoài phạm vi: UpAcademy, Admin, Super Admin, xem `.claude/knowledge/domain/15-product-direction.md`.
 
 **Ràng buộc xuyên suốt:** tính năng làm cho UpBase, nhưng **dữ liệu và hạ tầng thiết kế cho đa tenant ngay từ đầu**. Mọi hằng số cứng phải khai báo rõ là hardcode hay cấu hình được.
 
-## Knowledge Base
+## Knowledge
 
-Đọc `.claude/_shared-knowledge-base/00-index.md` trước.
-
-| Nhóm | File | Nội dung |
-|---|---|---|
-| Nghiệp vụ | `01`–`11` | Course · Question Bank · Assessment · Class · Grading · User · Learning Experience · Certificate · Notification · Storyline · Dashboard |
-| Kỹ thuật | `12`–`14` | Data Model (85 bảng) · Mail Events (30 mail) · API Surface (708 operation) |
-| Định hướng | `15` | UpLnD Platform, 4 portal, chỗ đóng cứng UpBase |
-| **Nguyên tắc** | `16` | **Cái gì được chứa cái gì.** Đọc trước khi thiết kế một thực thể mới |
+| Thư mục | Nội dung |
+|---|---|
+| `.claude/knowledge/domain/` | KB sản phẩm, 16 file. Đọc `00-index.md` trước. `01` đến `11` nghiệp vụ · `12` đến `14` data model 85 bảng, 30 mail event, 708 API operation · `15` định hướng, 4 portal, chỗ đóng cứng UpBase · `16` nguyên tắc mô hình hoá, đọc trước khi thiết kế thực thể mới |
+| `.claude/knowledge/product/` | Kiến thức vai PO chép từ AWS AI-DLC; `corner-checklist.md` viết lại cho LMS. Command của stage ghi file nào cần đọc |
+| `.claude/memory/team.md` | Bài học đã giữ lại tại gate, có ngày học. Đọc ở bước Load của mọi stage |
 
 ### Quy ước ký hiệu
 
 | Ký hiệu | Nghĩa |
 |---|---|
-| `BR-COURSE-01` | Business rule **có sẵn trong User Guide** — giữ nguyên nguyên văn |
-| `KB-COURSE-01` | Claude trích từ văn xuôi — **chưa được duyệt** |
-| `❓BA` | Chưa rõ — **không dùng làm fact** |
+| `BR-COURSE-01` | Business rule **có sẵn trong User Guide**, giữ nguyên nguyên văn |
+| `KB-COURSE-01` | Claude trích từ văn xuôi, **chưa được duyệt** |
+| `❓BA` | Chưa rõ, **không dùng làm fact** |
 | `[suy ra]` | Claude suy luận, không phải câu chữ trực tiếp |
-| **Hidden** | Tính năng **đã có code nhưng tạm ẩn** — vẫn phải xét khi phân tích impact |
+| **Hidden** | Tính năng **đã có code nhưng tạm ẩn**, vẫn phải xét khi phân tích ảnh hưởng |
 
 ## Nguồn tra cứu
 
 | Cần gì | Lấy ở đâu |
 |---|---|
-| Business rule, luồng nghiệp vụ | KB `01`–`11` |
-| Bảng, khoá ngoại, quan hệ | KB `12` → nguồn gốc: [Lark `Data Architecture`](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd) |
-| **Field, kiểu dữ liệu, required, enum** | Swagger `components.schemas` — nguồn tốt nhất cho field-level |
+| Business rule, luồng nghiệp vụ | KB `01` đến `11` |
+| Bảng, khoá ngoại, quan hệ | KB `12`, nguồn gốc: [Lark `Data Architecture`](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd) |
+| **Field, kiểu dữ liệu, required, enum** | Swagger `components.schemas`, nguồn tốt nhất cho field |
 | Endpoint | `lms-be.staging.upbase.asia/api/v1/docs-json` · `ops-be.staging.upbase.asia/api/v1/docs-json` |
-| Mail tự động theo event | KB `13` — 📌 bản chốt, không còn file gốc |
-| **Vùng KB chưa phủ** | KB `14` §1–2 — **đọc trước khi kết luận "không ảnh hưởng"** |
+| Mail tự động theo event | KB `13`, 📌 bản chốt, không còn file gốc |
+| **Vùng KB chưa phủ** | KB `14` §1 và §2, **đọc trước khi kết luận "không ảnh hưởng"** |
 
-> ⚠️ **KB chỉ phủ khoảng một nửa hệ thống.** Ops có 25 nhóm API và LMS có 8 nhóm không có trong User Guide (lịch dạy · phòng học · thi cử · phòng ban · phân quyền). Vùng thuộc phần chưa phủ → ghi `❓BA`, không kết luận.
+> ⚠️ **KB chỉ phủ khoảng một nửa hệ thống.** Ops có 25 nhóm API và LMS có 8 nhóm không có trong User Guide (lịch dạy, phòng học, thi cử, phòng ban, phân quyền). Vùng thuộc phần chưa phủ ghi `❓BA`, không kết luận.
 
-### KB là bản chụp — biết khi nào phải đọc lại nguồn
+### KB là bản chụp, biết khi nào phải đọc lại nguồn
 
 | Loại | Gồm | Quy tắc |
 |---|---|---|
-| 🔄 **Nguồn sống** | Schema DB (Lark) · Swagger staging · GitBook UG | Yêu cầu **chạm tới vùng đó** → đọc lại nguồn, không tin bản chép. Quá **1 tháng** kể từ "Đối chiếu lần cuối" → đọc lại trước khi dùng |
-| 📌 **Bản chốt** | 30 mail event (KB `13`) · SIS | Không còn file gốc. Nghi ngờ → **hỏi người dùng**, không tự suy |
+| 🔄 **Nguồn sống** | Schema DB (Lark) · Swagger staging · GitBook UG | Yêu cầu **chạm tới vùng đó** thì đọc lại nguồn, không tin bản chép. Quá **1 tháng** kể từ "Đối chiếu lần cuối" thì đọc lại trước khi dùng |
+| 📌 **Bản chốt** | 30 mail event (KB `13`) · SIS | Không còn file gốc. Nghi ngờ thì **hỏi PO**, không tự suy |
 
-Đọc lại thấy **khác KB** → cập nhật KB và sửa ngày "Đối chiếu lần cuối" ngay, đừng dùng tạm rồi bỏ qua.
+Đọc lại thấy **khác KB** thì cập nhật KB và sửa ngày "Đối chiếu lần cuối" ngay, đừng dùng tạm rồi bỏ qua.
 
 ## Cách làm việc
 
-- Trả lời **tiếng Việt**, giữ thuật ngữ tiếng Anh khi dịch ra gây khó hiểu
-- **Thẳng vào trọng tâm trước**, giải thích sau
-- **Phản biện khi có lỗ hổng thật**, ngắn và đúng lúc
-- **Hỏi lại khi thiếu thông tin**, không đoán bừa
-- Tách rõ `Fact` / `Assumption` / `Open Question` / `Recommendation`
-- **Không bịa.** Thiếu nhẹ → `Assumption`; thiếu ảnh hưởng scope/rule/data/flow → `Open Question`
-- **Không sửa đè tài liệu người dùng đã xem — tạo version mới.** Trước khi sửa bất kỳ file nào trong `docs/` hoặc `working/`, tự hỏi: **"người dùng đã đọc bản này chưa?"**
-  - **Chưa** → sửa tại chỗ, bình thường.
-  - **Rồi** → `v0.1` thành `v0.2`, file mới, giữ nguyên file cũ. Thêm mục **Lịch sử thay đổi** ghi đổi gì so với bản trước.
-  > ⚠️ **Chỗ đã sai một lần (06/10/2026, project Group).** Câu rule cũ là *"không ghi đè file đã có"* — tôi hiểu "file đã có" là file tồn tại từ trước phiên làm việc, nên cứ sửa đè lên BRD mình vừa tạo, 15 lần liên tiếp qua Gate 1, Bước 5, Gate 2, Bước 7. **Bản PO duyệt ở Gate 1 mất hẳn.**
-  >
-  > Cái bẫy: làm liên tục trong một phiên thì cảm giác "vẫn đang làm dở", nhưng người dùng **đã duyệt** bản trước đó rồi. Mốc tăng version là **mỗi lần người dùng duyệt hoặc trả lời một đợt câu hỏi**, không phải mỗi lần sửa một dòng.
-- Không tự chốt quyết định thay người dùng; chỉ gợi ý dưới nhãn `Recommendation`
-- **Không thiết kế kỹ thuật chi tiết.** Mục `TDD` trong PRD chỉ nêu **hướng và ràng buộc nghiệp vụ**, không vẽ sequence, không thiết kế bảng chi tiết, không chọn thuật toán. Dev sẽ phân tích lại bằng công cụ của họ; một thiết kế sai từ PO **neo suy nghĩ người đọc** và tốn công gỡ hơn là không có gì. Ghi *cái gì phải đúng*, để Dev quyết *làm thế nào*.
-- **Không dựng danh sách câu hỏi kỹ thuật cho Dev.** Câu hỏi về hiệu năng, cấu hình Casbin, cách lưu trữ cây là việc Dev tự xác định khi làm. PO chỉ hỏi những câu mà **câu trả lời làm đổi phạm vi hoặc đổi business rule**.
-- **Dừng ở mức phân tích, đừng lấn sang việc của Dev.** Cần biết một cơ chế kỹ thuật có tồn tại không → **hỏi PO xác nhận**, không tự đào Swagger/DB để kết luận. Bề mặt API **không** đồng nghĩa với tính năng đang chạy — có endpoint không có nghĩa là có tính năng (xem KB `14` §2.2)
-- **Dọn dấu vết quy trình trước khi bàn giao.** Ký hiệu nội bộ (`9A`, `9C`, `Gate 3`, `Bước 5`), nhãn chờ (`🟡 chờ PO chốt`), ghi chú thay đổi (`🔄 Cấu trúc lại 23/09`, `Ban đầu tôi gộp…`) là **giàn giáo để làm việc, không phải nội dung**. Tài liệu bàn giao đọc bởi Dev, QA, Design — họ không tra được ký hiệu của workflow và không cần biết tôi đã sửa gì giữa chừng. Trạng thái duyệt thì ghi **ai duyệt**, không ghi *Gate mấy*.<br>Giữ lại: `❓BA` (ô trống thật, có người chịu trách nhiệm điền) và bảng lịch sử phiên bản viết bằng tiếng người.
-- **Không viết tắt trong tài liệu bàn giao.** `Giải O2` phải là `Giải quyết mục tiêu O2`. Ô bảng chỉ chứa mã trần (`C10`, `S12`) phải kèm nội dung ngắn, vì người đọc trên Lark không cuộn ngược đi tra được. Viết tắt tiết kiệm được vài chữ nhưng bắt người đọc trả giá.
-- **Mã đứng liền nhau phải có dấu phân cách.** `` `US1` `US6` `` render trên Lark thành `US1US6` dính liền. Dùng `` `US1` · `US6` ``.
-- **Trích mã thì phải kèm nội dung.** Khi nhắc tới một mã trong trao đổi với người dùng — `OQ-29`, `BR-4.7`, `C5`, `US12`, `A17` — **luôn viết kèm nội dung của nó**, dù chỉ một dòng. Một dự án cỡ L sinh ra hàng trăm mã; không ai nhớ hết, và người dùng phải mở file tra là lỗi của người viết, không phải của người đọc.<br>Trong tài liệu cũng vậy — xem hai quy tắc ngay trên.
+- Trả lời **tiếng Việt**; tên stage, mã, thuật ngữ theo `GLOSSARY.md`.
+- **Thẳng vào trọng tâm trước**, giải thích sau. **Phản biện khi có lỗ hổng thật.** **Hỏi lại khi thiếu thông tin**, không đoán bừa.
+- Tách rõ `Fact` / `Assumption` / `Open Question` / `Recommendation`. **Không bịa.** Thiếu nhẹ thì `Assumption`; thiếu ảnh hưởng phạm vi, rule, dữ liệu, luồng thì `Open Question`; ô không suy được thì `❓BA`.
+- Không tự chốt quyết định thay PO; chỉ gợi ý dưới nhãn `Recommendation`. Lời duyệt và câu trả lời của PO ghi **nguyên văn**.
+- **Không thiết kế kỹ thuật chi tiết.** Ghi *cái gì phải đúng*, để Dev quyết *làm thế nào*. Không hỏi câu kỹ thuật cho Dev; chỉ hỏi câu mà đáp án làm đổi phạm vi hoặc business rule. Cần biết một cơ chế kỹ thuật có tồn tại không thì hỏi PO; có endpoint không có nghĩa là có tính năng.
+- **Tài liệu bàn giao** (Initiative Brief, HLD Brief, PRD, User Guide): không dấu vết quy trình, không viết tắt, mã nào cũng kèm nội dung, mã đứng cạnh nhau có dấu `·`. Trạng thái duyệt ghi ai duyệt, không ghi gate mấy. Giữ lại `❓BA` và bảng lịch sử phiên bản viết bằng tiếng người.
+- **Trích mã trong trao đổi thì kèm nội dung** một dòng. Một intent cỡ L sinh hàng trăm mã, bắt người đọc mở file tra là lỗi của người viết.
+
+Các quy tắc "đã sai một lần" và lý do của chúng nằm ở `.claude/memory/team.md`. Thêm bài học qua vòng học tại gate, không sửa tay giữa chừng một intent.
 
 ## Ranh giới
 
 Repo này **chỉ làm phân tích yêu cầu và viết tài liệu**. Không bàn quy trình vận hành team, không đọc thư mục ngoài repo (trừ `LMS/User Guide/` khi cập nhật KB), không tự mở rộng phạm vi KB.
 
-Gặp điều đáng chú ý nhưng ngoài phạm vi → ghi một dòng vào KB mục "câu hỏi để sau", rồi quay lại việc chính.
+Gặp điều đáng chú ý nhưng ngoài phạm vi thì ghi một dòng vào KB mục "câu hỏi để sau", rồi quay lại việc chính.
 
 ## Bàn giao
 
