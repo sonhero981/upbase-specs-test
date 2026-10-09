@@ -115,7 +115,7 @@ Nhưng không có dòng nào mô tả bảng xếp hạng, và dòng 10 (Trang t
 | **Hoàn thành lộ trình** | ❌ Không có bảng, không có API, không có trong KB | 🚨 **Không có** — `OQ-02` |
 | Đạt bài kiểm tra | ✅ `quiz_attempts` · `quiz_attempt_gradings` · `class_user_scores` | **Có** — "đạt" cần định nghĩa, `OQ-05` |
 | Đạt điểm cao | ⚠️ Có điểm, nhưng "cao" là ngưỡng nào? | `OQ-05` |
-| **Đăng nhập nhiều ngày liên tiếp** | ⚠️ Không có bảng lịch sử đăng nhập của **học viên**. `staff_sessions` chỉ cho nhân sự Ops. Có `GET /api/v1/users/activities` (tham số `ip`, `type`) — **chưa rõ có lưu lịch sử đăng nhập không** | 🚨 `❓BA` — `OQ-03` |
+| **Đăng nhập nhiều ngày liên tiếp** | ⚠️ Không có bảng lịch sử đăng nhập của **học viên**. `staff_sessions` chỉ cho nhân sự Ops. Có `GET /api/v1/users/activities` (tham số `ip`, `type`) — **chưa rõ có lưu lịch sử đăng nhập không** | 🚨 `❓PO` — `OQ-03` |
 
 ### 3.3 Nền dữ liệu cho điều kiện huy hiệu (RC-04)
 

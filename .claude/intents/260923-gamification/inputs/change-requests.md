@@ -164,7 +164,7 @@ Xếp hạng theo "số khoá hoàn thành" trong một chiến dịch một th�
 
 → Tiêu chí phụ **"ai đạt mức đó sớm hơn xếp trên"** (§6.6) từ chỗ *nên có* thành **bắt buộc**. Không có nó thì hai trong ba chỉ số không dùng được.
 
-`C3` đã bắt lưu từng lần cộng điểm kèm thời điểm nên dữ liệu có sẵn — nhưng với chỉ số "số huy hiệu" và "số khoá" thì cần thời điểm đạt **huy hiệu** và thời điểm **hoàn thành khoá**, không phải thời điểm cộng điểm. `❓BA` — cần xác nhận cả ba loại mốc đều lưu được thời điểm.
+`C3` đã bắt lưu từng lần cộng điểm kèm thời điểm nên dữ liệu có sẵn — nhưng với chỉ số "số huy hiệu" và "số khoá" thì cần thời điểm đạt **huy hiệu** và thời điểm **hoàn thành khoá**, không phải thời điểm cộng điểm. `❓PO` — cần xác nhận cả ba loại mốc đều lưu được thời điểm.
 
 ## Hệ quả thứ hai: snapshot phải lưu cả chỉ số
 
@@ -246,7 +246,7 @@ Nên "xếp hạng trong phòng ban của tôi" hiện **không khả thi về m
 | **Nhóm người dùng** (`groups` + `group_user_instances`) | **Có** trong DB, **có** 9 endpoint `Group Management`. Nhưng giao diện quản lý trên Ops (`Recipients List`) **đang ẩn** — KB `09` §1 | ⚠️ Dữ liệu có, giao diện chưa dùng được |
 | **Lớp** (`classes` + `class_user_instances`) | **Có đầy đủ và đang chạy.** Mọi học viên đều thuộc ít nhất một lớp | ✅ **Có** |
 
-PO nói *"cứ xếp hạng theo cả tổ chức"*. Cần làm rõ câu này có bao gồm bỏ luôn **phạm vi lớp** không — vì lớp khác hẳn hai cái kia, dữ liệu đã sẵn sàng. `❓BA`
+PO nói *"cứ xếp hạng theo cả tổ chức"*. Cần làm rõ câu này có bao gồm bỏ luôn **phạm vi lớp** không — vì lớp khác hẳn hai cái kia, dữ liệu đã sẵn sàng. `❓PO`
 
 ### 3. 🚨 `TNT.CFG.02` — tham chiếu ngoài, không tra được
 
@@ -256,7 +256,7 @@ Yêu cầu ghi: *"Biên kỳ cắt theo múi giờ của tổ chức khai ở TN
 - Bảng `tenant` hiện có `id`, `type`, `billing_model`, `can_publish_marketplace`, `contract_type`, `name`, `subdomain` — **không có trường múi giờ**
 - Không có khái niệm múi giờ ở bất kỳ chỗ nào trong KB
 
-→ Đây là phụ thuộc vào một hạng mục cấu hình **chưa tồn tại**. `❓BA`
+→ Đây là phụ thuộc vào một hạng mục cấu hình **chưa tồn tại**. `❓PO`
 
 ---
 
@@ -278,7 +278,7 @@ Riêng phần *"chốt kỳ, đóng băng bảng, lưu kết quả cuối"* thì
 
 BRD v0.1 ghi `N6 — Phần thưởng vật chất: không làm`. CR-001 xuất hiện cụm *"lưu kết quả cuối để công bố và **trao thưởng**"*.
 
-Cách hiểu của tôi: hệ thống chỉ cần **giữ lại bảng xếp hạng cuối kỳ** để con người dựa vào đó trao thưởng ngoài hệ thống — không cần quản lý phần thưởng trong sản phẩm. Cần PO xác nhận. `❓BA`
+Cách hiểu của tôi: hệ thống chỉ cần **giữ lại bảng xếp hạng cuối kỳ** để con người dựa vào đó trao thưởng ngoài hệ thống — không cần quản lý phần thưởng trong sản phẩm. Cần PO xác nhận. `❓PO`
 
 ### US9 phình ra
 
@@ -286,7 +286,7 @@ BRD v0.1, US9 chỉ là *"tạo và quản lý chiến dịch"*. CR-001 thêm ha
 
 | Thêm | Vấn đề |
 |---|---|
-| **"phạm vi người tham gia"** | Chiến dịch giới hạn được ai tham gia. Nhưng cơ chế nhóm học viên chưa dùng được (phát hiện 2) — vậy khoanh phạm vi bằng gì? Theo lớp? Theo khoá? `❓BA` |
+| **"phạm vi người tham gia"** | Chiến dịch giới hạn được ai tham gia. Nhưng cơ chế nhóm học viên chưa dùng được (phát hiện 2) — vậy khoanh phạm vi bằng gì? Theo lớp? Theo khoá? `❓PO` |
 | **"nội dung được tính"** | Chiến dịch giới hạn được nội dung nào tính điểm (ví dụ chỉ tính khoá An toàn thông tin). Đây là chức năng lọc điểm theo phạm vi nội dung — chưa có trong BRD v0.1 |
 
 ### N1 bị đảo

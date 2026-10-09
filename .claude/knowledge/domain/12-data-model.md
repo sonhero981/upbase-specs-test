@@ -52,7 +52,7 @@ tenant
 └── subdomain
 ```
 
-**UG không nhắc một chữ nào về tenant.** Toàn bộ UG viết như thể hệ thống phục vụ một tổ chức duy nhất (UpBase). `❓BA`
+**UG không nhắc một chữ nào về tenant.** Toàn bộ UG viết như thể hệ thống phục vụ một tổ chức duy nhất (UpBase). `❓PO`
 
 ### 1.2 Có hạ tầng **marketplace / thương mại**
 
@@ -69,7 +69,7 @@ Cộng với `tenant.billing_model`, `tenant.can_publish_marketplace`, `tenant.c
 
 Mail template có biến `IS_PUBLIC_ENROLL` — khớp với khả năng học viên tự đăng ký khoá công khai.
 
-`❓BA` — đây là tính năng đã có, đang tắt, hay chuẩn bị cho roadmap?
+`❓PO` — đây là tính năng đã có, đang tắt, hay chuẩn bị cho roadmap?
 
 ### 1.3 Xác thực & phân quyền dùng hạ tầng chuyên biệt
 

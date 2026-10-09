@@ -27,7 +27,7 @@ Phần máy kiểm: chạy `python3 .claude/scripts/po-tools.py trace <intent-di
 | 4 | Mọi BR thuộc một US có trong PRD | | |
 | 5 | HLD Brief đủ chữ ký, hoặc Accept as-is có DEC (M, L) | | |
 | 6 | Conflict trong Impact Matrix đều có DEC | | |
-| 7 | Field Intake không còn `❓BA` chưa chuyển thành OQ | | |
+| 7 | Field Intake không còn `❓PO` chưa chuyển thành OQ | | |
 | 8 | Câu hỏi mở có cờ Chặn đã đóng | | |
 
 ## Kết luận

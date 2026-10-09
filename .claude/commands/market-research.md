@@ -25,7 +25,7 @@ argument-hint: <intent-slug>
 Chạy theo `.claude/protocol/stage-protocol.md`.
 
 ## Mục đích
-Xem sản phẩm khác giải bài toán này thế nào, để đặt tên khái niệm đúng, không phát minh lại, và biết đâu là chuẩn người dùng đã quen. AWS: stage 1.2. Thay cho "nghiên cứu LMS khác" từng làm tự phát ở dự án Group.
+Xem sản phẩm khác giải bài toán này thế nào, để đặt tên khái niệm đúng, không phát minh lại, và biết đâu là chuẩn người dùng đã quen. AWS: stage 1.2.
 
 ## Ask
 1. So với sản phẩm nào, tối đa ba. Mặc định với LMS: TalentLMS, Docebo, Moodle.

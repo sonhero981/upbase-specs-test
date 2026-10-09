@@ -48,7 +48,7 @@ Thuật ngữ và họ mã của po-workflow-upbase, chuẩn theo AWS AI-DLC Wor
 | 2.41 | HLD Brief & Alignment | hld-brief.md | mới |
 | 2.42 | PRD Generation | prd.md, traceability.md | 9B, 9C, Gate 4 |
 
-Tiện ích: `/new-intent`, `/po`, `/po-status`, `/po-review`, `/change-request`, `/publish-lark`, `/user-guide`, `/kb-sync`. Script: `.claude/scripts/po-tools.py` với `trace` (truy vết FR, US, BR), `archive` (chụp bản duyệt), `status` (kiểm lệch state và đĩa).
+Tiện ích: `/new-intent`, `/po`, `/po-status`, `/po-review`, `/change-request`, `/publish-lark`, `/generate-user-guide`. Script: `.claude/scripts/po-tools.py` với `trace` (truy vết FR, US, BR), `archive` (chụp bản duyệt), `status` (kiểm lệch state và đĩa).
 
 ## Họ mã
 | Họ | Dạng | Phạm vi | Ví dụ | Thay cho |
@@ -72,7 +72,7 @@ Quy tắc: mã đã cấp không đánh lại. Trích mã thì kèm nội dung. 
 | Ký hiệu | Nghĩa |
 |---|---|
 | `[ ]` `[-]` `[?]` `[R]` `[x]` `[S]` | Stage chưa làm, đang làm, chờ duyệt, đang sửa, đã duyệt, bỏ qua |
-| `❓BA` | Ô không suy được, cần người điền. Không dùng làm dữ kiện |
+| `❓PO` | Ô không suy được, cần người điền. Không dùng làm dữ kiện |
 | `[suy ra]` | AI suy luận, không phải câu chữ trực tiếp |
 | `[đề xuất]` | Đáp án AI đề xuất trong câu hỏi |
 | `[uỷ quyền]` | PO để AI chọn |

@@ -19,7 +19,7 @@ Dòng đầu tiên chuyển từ các sự cố và quyết định đã ghi tro
 - Define hết user story kể cả cái chưa làm, ghi "chưa làm" trong tiêu đề. Bức tranh đầy đủ giúp phân tích ảnh hưởng đúng (learned 2026-09-23)
 
 ## KB
-- KB chỉ phủ khoảng một nửa hệ thống. Vùng chưa phủ ghi ❓BA, không kết luận "không ảnh hưởng" (learned 2026-09-23)
+- KB chỉ phủ khoảng một nửa hệ thống. Vùng chưa phủ ghi ❓PO, không kết luận "không ảnh hưởng" (learned 2026-09-23)
 - Có endpoint không có nghĩa là có tính năng. Sáu lần endpoint chết trong hệ này (learned 2026-10-06)
 - Tính năng Hidden vẫn phải xét khi phân tích ảnh hưởng (learned 2026-09-23)
 - Bốn rule trong KB từng sai so với hệ thống thật. Chạm vùng nào thì đọc lại nguồn vùng đó (learned 2026-09-23)

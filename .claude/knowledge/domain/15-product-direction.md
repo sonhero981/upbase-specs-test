@@ -81,7 +81,7 @@ Vị trí yêu cầu năng lực gì
 | Học xong sinh bằng chứng | ⚠️ `quiz_attempts`, `courses_users_certificates` | **Chỉ có điểm bài test và chứng chỉ hoàn thành** |
 | Cập nhật lại năng lực | ❌ Không có | Thiếu hoàn toàn |
 
-> **Ba bảng outcome là tài sản đáng chú ý nhất.** KB [12-data-model.md](12-data-model.md) từng đánh dấu chúng là "chưa ánh xạ được sang KB" vì UG chỉ mô tả Learning Outcome ở cấp Section. Xét theo định hướng, đây có thể là nền của lớp năng lực. `❓BA`
+> **Ba bảng outcome là tài sản đáng chú ý nhất.** KB [12-data-model.md](12-data-model.md) từng đánh dấu chúng là "chưa ánh xạ được sang KB" vì UG chỉ mô tả Learning Outcome ở cấp Section. Xét theo định hướng, đây có thể là nền của lớp năng lực. `❓PO`
 
 ---
 

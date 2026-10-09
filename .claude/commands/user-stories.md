@@ -25,7 +25,7 @@ argument-hint: <intent-slug>
 Chạy theo `.claude/protocol/stage-protocol.md`.
 
 ## Mục đích
-Danh sách user story đầy đủ, mỗi US gắn vào một Proto-Unit, mỗi FR có US phủ. AWS: stage 2.4, ở họ là mob với Design, Developer, Quality agent; ở ta lead các team góp ý ở 2.41. Thay 9A và 9A+ của luồng cũ.
+Danh sách user story đầy đủ, mỗi US gắn vào một Proto-Unit, mỗi FR có US phủ. AWS: stage 2.4, ở họ là mob với Design, Developer, Quality agent; ở ta lead các team góp ý ở 2.41.
 
 ## Load
 requirements (FR, OQ); scope-document (Proto-Unit); impact-matrix (coverage gap sinh US); solution-options (option đã chọn); decisions.

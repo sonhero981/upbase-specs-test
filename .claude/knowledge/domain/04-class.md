@@ -57,11 +57,11 @@ Thời hạn riêng của từng học viên **có thể dài hoặc ngắn hơn
 | Field | Bắt buộc | Kiểu | Mặc định | Ghi chú |
 |---|---|---|---|---|
 | Name | **Có** | Text | — | |
-| Code | Không | Text | — | `❓BA` có unique không? |
+| Code | Không | Text | — | `❓PO` có unique không? |
 | Construction Mode | **Có** | Enum | `Online` | Hình thức lớp |
 | Type | **Có** | Enum | `Lesson` | **Chỉ tạo được Lesson** |
-| Số học viên tối đa | `❓BA` | Number | — | |
-| Duration | `❓BA` | Enum | — | `Fixed` \| `Flexible` |
+| Số học viên tối đa | `❓PO` | Number | — | |
+| Duration | `❓PO` | Enum | — | `Fixed` \| `Flexible` |
 | Course | — | Chọn | — | Add Course → **chỉ hiện Normal Course** (BR-TYPE-001) |
 
 ### Import lớp hàng loạt
@@ -94,7 +94,7 @@ Trạng thái xuất hiện trong UG: `DRAFT`, `PUBLIC`, `ENDED` (theo filter c�
 | Đã có học viên nhưng lớp chưa bắt đầu / học viên chưa học | Không sửa: Status, Construction Mode, Type, Course |
 | Đã có học viên đang học hoặc lớp đã bắt đầu | Không sửa: Status, Construction Mode, Type, Course |
 
-> Hai dòng cuối của bảng Lesson có ràng buộc **giống hệt nhau**. `❓BA` — có phải thiếu một mức ràng buộc chặt hơn cho trường hợp lớp đã bắt đầu không?
+> Hai dòng cuối của bảng Lesson có ràng buộc **giống hệt nhau**. `❓PO` — có phải thiếu một mức ràng buộc chặt hơn cho trường hợp lớp đã bắt đầu không?
 
 ---
 

@@ -10,7 +10,7 @@
 | Ký hiệu | Nghĩa |
 |---|---|
 | `[đề xuất]` | Tôi tự điền từ KB hoặc Swagger — **cần người viết xem lại** |
-| `❓BA` | Không suy được, cần người viết cung cấp |
+| `❓PO` | Không suy được, cần người viết cung cấp |
 | **A** | Màn mới hoàn toàn |
 | **B** | Sửa màn có sẵn |
 | **C** | Chỉ đọc, hiển thị |

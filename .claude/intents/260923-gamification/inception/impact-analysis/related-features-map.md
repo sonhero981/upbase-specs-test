@@ -29,18 +29,18 @@ migrated-from: .claude/projects/Gamification/working/impact-analysis/related-map
 | Version | **v0.2** — 23/09/2026 |
 | Input | `docs/brd/brd-v0.6-20260923.md` (Gate 1 `Approved with Notes`) |
 | Nguồn quét | KB `01`–`15` · schema DB 85 bảng · Swagger LMS + Ops |
-| Trạng thái | 🟢 **12/12 `❓BA` đã được PO chốt** — chờ soát lần cuối |
+| Trạng thái | 🟢 **12/12 `❓PO` đã được PO chốt** — chờ soát lần cuối |
 
 ## Change log
 
 | Version | Nội dung |
 |---|---|
-| v0.1 | Bản quét đầu — 12 `❓BA` |
+| v0.1 | Bản quét đầu — 12 `❓PO` |
 | **v0.2** | **PO trả lời toàn bộ 12 câu.** Gỡ `F1`. Đóng `F2` bằng quy trình ngoài. **Loại Storyline khỏi nguồn sự kiện.** Bỏ `Graded Activity`. Thêm màn My Learning vào phạm vi. Ba đính chính KB |
 
 ---
 
-# 1. ✅ PO chốt — 12 câu `❓BA`
+# 1. ✅ PO chốt — 12 câu `❓PO`
 
 | # | Câu hỏi | Chốt của PO | Hệ quả |
 |---|---|---|---|

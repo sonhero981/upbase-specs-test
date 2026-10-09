@@ -172,7 +172,7 @@ Nên chỉ số *"bài chưa chấm"*, và *"hàng chờ duyệt"* nếu hiểu 
 |---|---|---|---|---|---|
 | `RC-01` | Danh sách việc cần làm hôm nay | Screen-Report · Business Rule | Chiều người học, mục 1 | **Low** — *"việc"* chưa định nghĩa | Hệ thống **không có hạn theo từng Activity**. Hạn chỉ có ở: thời hạn lượt ghi danh *(cố định hoặc linh động — KB `04` §3)* · cửa sổ mở và đóng bài kiểm tra *(`KB-MAIL-07`)* · buổi học theo lịch *(KB chưa phủ)*. Chỉ lấy thứ đến hạn hôm nay thì phần lớn ngày danh sách sẽ trống. → `OQ-05` |
 | `RC-02` | Danh sách nội dung sắp hết hạn | Screen-Report | Chiều người học, mục 2 | Medium — thiếu ngưỡng *"sắp"* | **Đã có từng phần:** My Learning hiện *thời hạn còn lại* từng khoá *(KB `07` §1)* · mail #16 nhắc bài kiểm tra **đóng trong 1 ngày** · mail #12 báo khoá **đã** hết hạn. Mới: gom về một chỗ. Khoá linh động chưa Activate thì chưa có hạn *(`KB-CLASS-03`)*. → `OQ-14` |
-| `RC-03` | Danh sách khoá đang học dở, kèm tiến độ | Screen-Report | Chiều người học, mục 3 | **High** | Dữ liệu có sẵn: tiến độ = số Activity hoàn thành / tổng Activity *(`KB-LX-01`)*. Trạng thái `Resume` phía học viên có thể tương ứng, nhưng cách ánh xạ trạng thái hai phía còn `❓BA` *(KB `07` §12 Q1)* |
+| `RC-03` | Danh sách khoá đang học dở, kèm tiến độ | Screen-Report | Chiều người học, mục 3 | **High** | Dữ liệu có sẵn: tiến độ = số Activity hoàn thành / tổng Activity *(`KB-LX-01`)*. Trạng thái `Resume` phía học viên có thể tương ứng, nhưng cách ánh xạ trạng thái hai phía còn `❓PO` *(KB `07` §12 Q1)* |
 | `RC-04` | Kỹ năng vừa đạt và kỹ năng còn thiếu | Data · Business Rule | Chiều người học, mục 4 | **Low** | ❌ Chưa có khung năng lực — §4.2. → `OQ-03` |
 | `RC-05` | Điểm và hạng | Screen-Report | Chiều người học, mục 5 | Medium | Nhiều khả năng dùng lại khối của Gamification `US1` — §4.3. → `OQ-04` |
 
@@ -191,7 +191,7 @@ Nên chỉ số *"bài chưa chấm"*, và *"hàng chờ duyệt"* nếu hiểu 
 
 | ID | Requirement | Type | Source | Confidence | Ghi chú — đối chiếu KB |
 |---|---|---|---|---|---|
-| `RC-12` | Nội dung đang chạy | Screen-Report | Chiều khoá học, mục 1 | Medium | `[suy ra]` Khoá có ít nhất một lớp đang diễn ra. Danh sách trạng thái lớp chính thức còn `❓BA` *(KB `04` §11 Q1)*. → `OQ-15` |
+| `RC-12` | Nội dung đang chạy | Screen-Report | Chiều khoá học, mục 1 | Medium | `[suy ra]` Khoá có ít nhất một lớp đang diễn ra. Danh sách trạng thái lớp chính thức còn `❓PO` *(KB `04` §11 Q1)*. → `OQ-15` |
 | `RC-13` | Tỷ lệ hoàn thành theo nội dung | Screen-Report | Chiều khoá học, mục 2 | Medium — thiếu độ chi tiết | Dashboard SIS thứ nhất đang tính theo **lớp**, tối đa 4 lớp. Mới: theo **khoá**, gộp mọi lớp. → `OQ-16` |
 | `RC-14` | Hàng chờ duyệt | Process | Chiều khoá học, mục 3 | **Low** | Chưa rõ luồng duyệt nào — §4.5. → `OQ-09` |
 | `RC-15` | Câu hỏi chưa trả lời | Screen-Report | Chiều khoá học, mục 4 | Medium | `[suy ra]` Bình luận của học viên trong Thảo luận chưa ai phản hồi *(KB `07` §7)*. Bình luận **gắn theo khoá**, hiện ở mọi lớp dùng khoá đó *(`KB-LX-12`)* — khớp với chiều khoá học. Nhóm Comment Replier trả lời theo Course Category *(KB `09` §7)*. Mail #21 · #22 báo **học viên** khi có người trả lời. Chiều ngược lại — báo **người trả lời** khi có câu hỏi mới — **không có mail nào**. → `OQ-13` |

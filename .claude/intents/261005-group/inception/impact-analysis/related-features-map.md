@@ -11,7 +11,7 @@ migrated-from: .claude/projects/Group/working/impact-analysis/related-features-m
 **Ngày:** 05/10/2026 · **Bước 5** — chốt phạm vi liên quan trước khi dựng Impact Matrix
 **Input:** `docs/brd/brd-v0.1-20261005.md` · `project-context.md` · KB `04` `06` `09` `11` `12` `14` `15` `16`
 
-> Bảng này để PO soát: **đủ chưa · có sót · dòng nào không liên quan.** Mọi `❓BA` phải chốt trước khi sang Bước 6, không để giả định trôi vào Impact Matrix.
+> Bảng này để PO soát: **đủ chưa · có sót · dòng nào không liên quan.** Mọi `❓PO` phải chốt trước khi sang Bước 6, không để giả định trôi vào Impact Matrix.
 
 ---
 
@@ -33,7 +33,7 @@ So với bản trích 23/09/2026, Ops giảm 41 operation và LMS giảm 17. Ngu
 | `Examination` · `Event Test Management` · `Event Management` (Ops) | 19 | **0** |
 | `Entrance Test` · `Auth` (LMS) | 6 | **0** |
 
-PO đã xác nhận `Examination` và `Entrance Test` không có tính năng từ 23/09. Nay cả `Event Test Management` — nhóm treo `❓BA` suốt từ đó — **cũng biến mất**, nên câu hỏi tự đóng.
+PO đã xác nhận `Examination` và `Entrance Test` không có tính năng từ 23/09. Nay cả `Event Test Management` — nhóm treo `❓PO` suốt từ đó — **cũng biến mất**, nên câu hỏi tự đóng.
 
 ### 🆕 Một nhóm mới ảnh hưởng thẳng tới `O4`
 
@@ -219,6 +219,6 @@ Hai quyết định này **cắt bỏ phần lớn độ phức tạp** mà §4 
 |---|---|
 | `Schedules` · `Class Schedule` · `Room Management` *(45+ operation)* | Mảng lịch dạy. Nhóm không chạm buổi học hay phòng học |
 | `Examination` · `Entrance Test` | KB `14` §2.2 — PO xác nhận **không có tính năng** |
-| `Course Listing` · `Lessee` *(marketplace)* | KB `12` §1.2 — `❓BA` từ 23/09, chưa ai xác nhận đang dùng |
+| `Course Listing` · `Lessee` *(marketplace)* | KB `12` §1.2 — `❓PO` từ 23/09, chưa ai xác nhận đang dùng |
 | `Storyline` · `Question Bank` · `Grading` | Không chạm. Nhóm dừng ở mức *ai vào lớp nào* |
 | Cấu trúc bảng, chỉ mục, cách lưu cây | PO chốt 05/10: **không làm technical design**. Dev tự phân tích |

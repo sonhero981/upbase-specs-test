@@ -12,7 +12,7 @@ created: <YYYY-MM-DD>
 <UpLMS, UpLMS Ops, hay cả hai. Ràng buộc đa tenant: làm cho UpBase nhưng dữ liệu và hạ tầng thiết kế cho mọi tenant.>
 
 ## Related intents
-| Intent hoặc dự án cũ | Liên quan ở đâu |
+| Intent liên quan | Liên quan ở đâu |
 |---|---|
 
 ## References

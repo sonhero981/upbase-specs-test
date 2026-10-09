@@ -16,7 +16,7 @@ Trạng thái lấy từ ký hiệu stage: chờ duyệt, đang làm, đang sử
 Có `$ARGUMENTS` thì chỉ in intent đó, kèm bảng Stages đầy đủ và bảng Versions.
 
 ## Kiểm tra lệch
-Chạy trước: `python3 .claude/scripts/po-tools.py status`. Script in bảng tổng, dự án cũ, và tám kiểm tra dưới đây bằng máy. AI đọc kết quả, bổ sung phần máy không thấy (Next action còn hợp lý không, Related intents đúng nội dung không), rồi trình. Không chạy được python thì kiểm tay.
+Chạy trước: `python3 .claude/scripts/po-tools.py status`. Script in bảng tổng và tám kiểm tra dưới đây bằng máy. AI đọc kết quả, bổ sung phần máy không thấy (Next action còn hợp lý không, Related intents đúng nội dung không), rồi trình. Không chạy được python thì kiểm tay.
 Với mỗi intent, kiểm và liệt kê mọi phát hiện, không dừng ở phát hiện đầu:
 1. Stage `[x]` không có artifact, hoặc không có bản chụp trong `archive/`.
 2. Artifact có trên đĩa nhưng stage vẫn `[ ]`.

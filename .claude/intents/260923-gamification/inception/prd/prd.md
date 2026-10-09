@@ -990,13 +990,13 @@ Học viên không ở trong hệ thống thì không nhận thông báo nào. T
 |---|---|---|---|
 | Mọi màn UpLMS | Thông báo nhận điểm | Nội dung | Một dòng, tiếng Anh, theo mẫu `+ {điểm} for {mô tả hành động}`.<br>Ví dụ: `+ 25 for completing the unit` · `+ 150 for completing the course` |
 | Mọi màn UpLMS | Thông báo đạt huy hiệu | Nội dung | Hai dòng, tiếng Anh. Dòng đầu `Congratulations!` in đậm. Dòng sau theo mẫu `You unlocked the {tên huy hiệu} badge by {mô tả điều kiện}`.<br>Ví dụ: `You unlocked the Learning Newbie badge by completing 1 course` |
-| Mọi màn UpLMS | Thông báo lên hạng | Nội dung | Cùng dạng hai dòng như huy hiệu, thay tên huy hiệu bằng tên hạng. Câu chữ chính xác: `❓BA` |
+| Mọi màn UpLMS | Thông báo lên hạng | Nội dung | Cùng dạng hai dòng như huy hiệu, thay tên huy hiệu bằng tên hạng. Câu chữ chính xác: `❓PO` |
 | Mọi màn UpLMS | Biểu tượng | Thông báo điểm | Một biểu tượng chung cho mọi thông báo điểm |
 | Mọi màn UpLMS | Biểu tượng | Thông báo huy hiệu | Hình của chính huy hiệu vừa đạt |
 | Mọi màn UpLMS | Nhiều thông báo cùng lúc | Cách hiển thị | **Không gộp.** Mỗi thành tích là một thẻ riêng, xếp chồng theo đúng thứ tự phát sinh. Một thao tác sinh ra bốn thành tích thì hiện bốn thẻ |
 | Mọi màn UpLMS | Danh từ trong câu | Số ít và số nhiều | Câu phải đúng ngữ pháp theo số lượng: `1 course` chứ không phải `1 courses`. Áp cho mọi mẫu câu có số đếm |
-| Mọi màn UpLMS | Vị trí và hướng xếp chồng | | `❓BA` — chờ Figma |
-| Mọi màn UpLMS | Thời gian tự tắt | | `❓BA` — chờ Figma. Cần tính tới trường hợp bốn năm thẻ xuất hiện cùng lúc |
+| Mọi màn UpLMS | Vị trí và hướng xếp chồng | | `❓PO` — chờ Figma |
+| Mọi màn UpLMS | Thời gian tự tắt | | `❓PO` — chờ Figma. Cần tính tới trường hợp bốn năm thẻ xuất hiện cùng lúc |
 | Mọi màn UpLMS | Khi `Visibility in UpLMS` tắt | | Không đẩy thông báo nào, kể cả khi điểm vẫn đang được ghi ngầm |
 
 **Business requirement — Business rule**
@@ -1068,7 +1068,7 @@ Học viên cuộn xuống để xem các lần trước đó. Chưa có lần n
 | Achievement history | Mục | Dòng nội dung | Một câu hoàn chỉnh. Số điểm, tên huy hiệu và số hạng **in đậm**, phần còn lại chữ thường. Bộ chuỗi đầy đủ ở bảng dưới |
 | Achievement history | Mục | Thứ tự | **Mới nhất lên trước** |
 | Achievement history | Mục | Tên dài | Tên hoạt động và tên khoá cắt ở `60` ký tự rồi thêm `…`. Trỏ chuột vào hiện đầy đủ |
-| Achievement history | Panel | Số mục một lần tải | Tải thêm khi cuộn tới cuối. Số mục mỗi lần: `❓BA` |
+| Achievement history | Panel | Số mục một lần tải | Tải thêm khi cuộn tới cuối. Số mục mỗi lần: `❓PO` |
 | Achievement history | Panel | Trạng thái rỗng | `Nothing here yet. Start learning to earn your first points.` |
 | Lịch sử ghi nhận | Bảng | Thao tác | Chỉ đọc. Không sửa, không xoá, không có nút thao tác nào trên dòng |
 
@@ -1185,10 +1185,10 @@ Trỏ chuột vào một huy hiệu bất kỳ thì hiện **mốc của nó**, 
 | Thành tích của tôi | Danh sách huy hiệu | Phạm vi hiển thị | **Hiện toàn bộ huy hiệu vận hành đã tạo**, cả đã đạt lẫn chưa đạt, kèm mốc của từng cái. Học viên thấy hết bản đồ để biết phấn đấu tới đâu |
 | Thành tích của tôi | Danh sách huy hiệu | Nhóm và thứ tự | Nhóm theo loại. Trong mỗi loại sắp theo mốc tăng dần, mốc thấp trước |
 | Thành tích của tôi | Danh sách huy hiệu | Huy hiệu đã đạt | Hình đầy đủ màu, kèm ngày đạt |
-| Thành tích của tôi | Danh sách huy hiệu | Huy hiệu chưa đạt | Hình hiển thị khác để phân biệt với đã đạt. Cách phân biệt: `❓BA`, chờ Figma |
+| Thành tích của tôi | Danh sách huy hiệu | Huy hiệu chưa đạt | Hình hiển thị khác để phân biệt với đã đạt. Cách phân biệt: `❓PO`, chờ Figma |
 | Thành tích của tôi | Danh sách huy hiệu | Tên huy hiệu | Hiện đầy đủ với cả huy hiệu chưa đạt. Không giấu tên |
 | Thành tích của tôi | Danh sách huy hiệu | Tiến độ | Chỉ hiện với huy hiệu **chưa đạt**. Thanh tiến độ kèm số dạng `{hiện tại}/{ngưỡng}`, ví dụ `12/20` |
-| Thành tích của tôi | Danh sách huy hiệu | Phần còn thiếu | Chỉ hiện với huy hiệu chưa đạt. Một dòng tiếng Anh theo mẫu `{N} more {đơn vị} to unlock`.<br>Ví dụ: `8 more activities to unlock`. Chuỗi cho từng loại: `❓BA` |
+| Thành tích của tôi | Danh sách huy hiệu | Phần còn thiếu | Chỉ hiện với huy hiệu chưa đạt. Một dòng tiếng Anh theo mẫu `{N} more {đơn vị} to unlock`.<br>Ví dụ: `8 more activities to unlock`. Chuỗi cho từng loại: `❓PO` |
 | Thành tích của tôi | Danh sách huy hiệu | Trạng thái rỗng | Vận hành chưa tạo huy hiệu nào thì ẩn cả phần này |
 
 **Business requirement — Business rule**
@@ -1276,7 +1276,7 @@ Học viên bỏ trọn một ngày không vào thì chuỗi về `0`. Lần và
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Mọi màn UpLMS | Thông báo nhận điểm | Nội dung | Theo mẫu của `US2`, kèm độ dài chuỗi sau khi tăng. Chuỗi tiếng Anh: `❓BA`. Gợi ý: `+ {điểm} · {n}-day streak` |
+| Mọi màn UpLMS | Thông báo nhận điểm | Nội dung | Theo mẫu của `US2`, kèm độ dài chuỗi sau khi tăng. Chuỗi tiếng Anh: `❓PO`. Gợi ý: `+ {điểm} · {n}-day streak` |
 | Gamification | Dải tóm tắt | `{n} Streaks` | Chuỗi hiện tại. Đứt thì về `0` |
 | Gamification | Dải tóm tắt | Số ngày có mặt | **Không hiện riêng.** Nó là chỉ số nền cho huy hiệu loại Check-in, học viên thấy qua tiến độ huy hiệu ở `US4`. Khác với chuỗi: con số này **không về `0`** khi nghỉ |
 | Toàn hệ thống | Thao tác của học viên | | **Không có thao tác nào.** Học viên không bấm nút check-in. Hệ thống tự ghi khi thấy học viên vào |
@@ -1388,7 +1388,7 @@ Bảng hiện thứ hạng, tên và chỉ số của từng học viên, kèm n
 | Bảng xếp hạng | Bảng | Cột giá trị | Một cột duy nhất, đúng chỉ số của bảng đang xem |
 | Bảng xếp hạng | Bảng | Dòng của chính người đang xem | Làm nổi bật trong danh sách. Chi tiết ở `US7` |
 | Bảng xếp hạng | Nhãn cập nhật | Nội dung | `Last updated {HH:mm}` theo múi giờ tổ chức. Luôn hiện, kể cả khi bảng vừa mới tính xong |
-| Bảng xếp hạng | Trạng thái rỗng | Khung chưa có ai được ghi nhận | `No one has earned points in this period yet.` Chuỗi cho bảng `Activities` và `Courses`: `❓BA` |
+| Bảng xếp hạng | Trạng thái rỗng | Khung chưa có ai được ghi nhận | `No one has earned points in this period yet.` Chuỗi cho bảng `Activities` và `Courses`: `❓PO` |
 
 **Business requirement — Business rule**
 
@@ -1483,12 +1483,12 @@ Học viên chưa có chỉ số nào trong kỳ thì khối vẫn hiện, nhưn
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Bảng xếp hạng | Khối Vị trí của tôi | Vị trí trên màn | Luôn nhìn thấy được, không phụ thuộc vị trí cuộn của danh sách. Cách thể hiện: `❓BA`, chờ Figma |
+| Bảng xếp hạng | Khối Vị trí của tôi | Vị trí trên màn | Luôn nhìn thấy được, không phụ thuộc vị trí cuộn của danh sách. Cách thể hiện: `❓PO`, chờ Figma |
 | Bảng xếp hạng | Khối Vị trí của tôi | Dòng của chính học viên | Thứ hạng, ảnh, tên, giá trị chỉ số. Làm nổi bật khác với các dòng liền kề |
-| Bảng xếp hạng | Khối Vị trí của tôi | Người liền kề | Vài người ngay trên và ngay dưới. Số lượng mỗi bên: `❓BA` |
+| Bảng xếp hạng | Khối Vị trí của tôi | Người liền kề | Vài người ngay trên và ngay dưới. Số lượng mỗi bên: `❓PO` |
 | Bảng xếp hạng | Khối Vị trí của tôi | Khoảng cách tới người trên | Một dòng nêu còn thiếu bao nhiêu để vượt người ngay trên, theo mẫu `{N} {đơn vị} behind {tên}`. `[đề xuất]` |
 | Bảng xếp hạng | Khối Vị trí của tôi | Học viên đang trong top 3 | Khối vẫn hiện, không ẩn đi. `[đề xuất]` |
-| Bảng xếp hạng | Khối Vị trí của tôi | Học viên chưa có chỉ số | Khối vẫn hiện, ô thứ hạng để trống, kèm một dòng gợi ý bắt đầu học. Chuỗi tiếng Anh: `❓BA` |
+| Bảng xếp hạng | Khối Vị trí của tôi | Học viên chưa có chỉ số | Khối vẫn hiện, ô thứ hạng để trống, kèm một dòng gợi ý bắt đầu học. Chuỗi tiếng Anh: `❓PO` |
 | Bảng xếp hạng | Khối Vị trí của tôi | Khi đổi khung, campaign hoặc chỉ số | Tính lại theo khung hoặc campaign và chỉ số đang chọn ở `US6`, `US19` |
 
 **Business requirement — Business rule**
@@ -1554,7 +1554,7 @@ Mỗi thay đổi **tự lưu** khi rời ô hoặc khi bấm công tắc, khôn
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
 | Cấu hình điểm | Đầu màn | Công tắc `Points` | Bật tắt cả cơ chế điểm. Tắt thì mọi hành động bên dưới **chuyển sang trạng thái không thao tác được**, nhưng giữ nguyên giá trị đã khai. Tiêu chí lên hạng theo điểm ở `US10` **khoá theo**, xem `BR-10.7` |
-| Cấu hình điểm | Đầu màn | Dòng giải thích dưới công tắc `Points` | Nêu rõ tắt `Points` thì tiêu chí lên hạng theo điểm cũng ngừng. **Không có hộp xác nhận.** Chuỗi tiếng Anh: `❓BA` |
+| Cấu hình điểm | Đầu màn | Dòng giải thích dưới công tắc `Points` | Nêu rõ tắt `Points` thì tiêu chí lên hạng theo điểm cũng ngừng. **Không có hộp xác nhận.** Chuỗi tiếng Anh: `❓PO` |
 | Cấu hình điểm | Đầu màn | Mô tả chức năng | `Award users with points for different learning activities and encourage healthy competition.` |
 | Cấu hình điểm | Danh sách hành động | `On each daily check-in` | Công tắc riêng + **một ô nhập điểm nền**. Mô tả dưới tiêu đề: `Award points once a day when users first visit, even if they're still signed in from before. Each day in a row adds 5 more, up to 40 on day 7.` Ứng với `US5` |
 | Cấu hình điểm | Điểm chuỗi check-in | Ô nhập | **Điểm nền** — số điểm của ngày đầu tiên trong một chuỗi. Số nguyên dương, nhỏ nhất `1`. Mặc định `10` |
@@ -1567,7 +1567,7 @@ Mỗi thay đổi **tự lưu** khi rời ô hoặc khi bấm công tắc, khôn
 | Cấu hình điểm | Ô nhập số điểm | Khi hành động đang tắt | Không nhập được, giữ nguyên giá trị cũ |
 | Cấu hình điểm | Ô nhập số điểm | Bỏ trống | Không lưu được. Báo lỗi ngay tại ô, theo `BR-14.11` |
 | Cấu hình điểm | Cách lưu | | **Tự lưu, không có nút lưu.** Ô nhập lưu khi rời ô hoặc bấm Enter, công tắc lưu khi bấm. Theo `BR-14.10` |
-| Cấu hình điểm | Đầu khối | Dòng nhắc cố định | Nêu rằng thay đổi **chỉ áp dụng từ bây giờ trở đi**, không tính lại điểm đã cộng. **Luôn hiện**, không bật lên sau mỗi lần lưu. Chuỗi tiếng Anh: `❓BA` |
+| Cấu hình điểm | Đầu khối | Dòng nhắc cố định | Nêu rằng thay đổi **chỉ áp dụng từ bây giờ trở đi**, không tính lại điểm đã cộng. **Luôn hiện**, không bật lên sau mỗi lần lưu. Chuỗi tiếng Anh: `❓PO` |
 
 **Business requirement — Business rule**
 
@@ -1642,14 +1642,14 @@ Ví dụ loại Course có mốc `1, 2, 4, 8, 16, 32, 64, 128`. Vận hành đ�
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
 | Cấu hình huy hiệu | Đầu màn | Công tắc `Badges` | Bật tắt cả chức năng huy hiệu. Tiêu chí lên hạng theo huy hiệu ở `US10` **khoá theo**, xem `BR-10.7` |
-| Cấu hình huy hiệu | Đầu màn | Dòng giải thích dưới công tắc `Badges` | Nêu rõ tắt `Badges` thì tiêu chí lên hạng theo huy hiệu cũng ngừng. **Không có hộp xác nhận.** Chuỗi tiếng Anh: `❓BA` |
+| Cấu hình huy hiệu | Đầu màn | Dòng giải thích dưới công tắc `Badges` | Nêu rõ tắt `Badges` thì tiêu chí lên hạng theo huy hiệu cũng ngừng. **Không có hộp xác nhận.** Chuỗi tiếng Anh: `❓PO` |
 | Cấu hình huy hiệu | Đầu màn | Mô tả chức năng | `Award users with badges to highlight the milestones in their learning journey.` |
-| Cấu hình huy hiệu | Bốn loại | Danh sách | `Check-in badges` (số ngày có mặt) · `Activity badges` (số hoạt động hoàn thành) · `Test badges` (số bài Test đạt) · `Course badges` (số khoá hoàn thành). Tên tiếng Anh chính xác: `❓BA` |
+| Cấu hình huy hiệu | Bốn loại | Danh sách | `Check-in badges` (số ngày có mặt) · `Activity badges` (số hoạt động hoàn thành) · `Test badges` (số bài Test đạt) · `Course badges` (số khoá hoàn thành). Tên tiếng Anh chính xác: `❓PO` |
 | Cấu hình huy hiệu | Mỗi loại | Công tắc riêng | Bật tắt riêng từng loại, không phụ thuộc ba loại còn lại |
 | Cấu hình huy hiệu | Mỗi loại | Dòng tóm tắt mốc | Nêu dãy mốc của loại đó, mở đầu bằng `Awarded at`, ví dụ `Awarded at 4, 8, 16, 32, 64, 128, 256, 512 check-in days.` · `Awarded at 1, 2, 4, 8, 16, 32, 64, 128 completed courses.`<br>**Không dùng `every`**: mốc là một danh sách cố định, còn `Every` ở khối `Levels` mang nghĩa lặp lại mỗi bội số (`BR-10.2`). Huy hiệu `Check-in` đếm **số ngày**, không đếm số lần đăng nhập |
 | Cấu hình huy hiệu | Từng mốc | Giá trị mốc | **Chỉ đọc.** Không sửa được, không có ô nhập. Xem `BR-9.2` |
 | Cấu hình huy hiệu | Từng mốc | Tên huy hiệu | Nhập được. Có sẵn giá trị mặc định do hệ thống đặt, vận hành đổi nếu muốn. Bỏ trống thì quay về tên mặc định, không lưu trống |
-| Cấu hình huy hiệu | Từng mốc | Hình huy hiệu | Chọn từ kho tài nguyên hoặc tải lên. Có sẵn hình mặc định. Định dạng, kích thước, dung lượng: `❓BA` |
+| Cấu hình huy hiệu | Từng mốc | Hình huy hiệu | Chọn từ kho tài nguyên hoặc tải lên. Có sẵn hình mặc định. Định dạng, kích thước, dung lượng: `❓PO` |
 | Cấu hình huy hiệu | Từng mốc | Mô tả | Nhập được, không bắt buộc. Hiện trong tooltip ở `US1` |
 | Cấu hình huy hiệu | Khi loại đang tắt | Các mốc bên dưới | Không thao tác được, giữ nguyên nội dung đã đặt |
 | Cấu hình huy hiệu | Thao tác không có | Tạo, xoá, thêm mốc | **Không có nút tạo huy hiệu, không có nút xoá, không thêm bớt được số mốc trong một loại** |
@@ -1765,10 +1765,10 @@ Cuối màn là trần hạng, con số cao nhất học viên có thể đạt 
 | Cấu hình hạng | Ba tiêu chí | `Badges` | Công tắc riêng + ô nhập bội số. **Không thao tác được khi chức năng huy hiệu đang tắt**, xem `BR-10.7` |
 | Cấu hình hạng | Ô nhập bội số | Định dạng | Số nguyên dương, nhỏ nhất `1`. Bỏ trống thì không lưu được |
 | Cấu hình hạng | Trần hạng | Ô nhập | Số nguyên dương, nhỏ nhất `2`. Bỏ trống nghĩa là **không có trần** |
-| Cấu hình hạng | Tiêu chí cuối cùng | Công tắc | Khi chỉ còn **một tiêu chí đang chạy**, công tắc của nó **không tắt được**. Trỏ chuột vào thì hiện lý do: cần ít nhất một tiêu chí. Xem `BR-10.8`. Chuỗi tiếng Anh: `❓BA` |
-| Cấu hình hạng | Cảnh báo | Không còn tiêu chí nào chạy | Xảy ra khi tiêu chí bị khoá do tắt `Points` hoặc `Badges`. Khối `Levels` hiện **dòng cảnh báo cố định**: học viên sẽ không lên hạng cho tới khi có lại ít nhất một tiêu chí chạy. Xem `BR-10.8`. Chuỗi tiếng Anh: `❓BA` |
+| Cấu hình hạng | Tiêu chí cuối cùng | Công tắc | Khi chỉ còn **một tiêu chí đang chạy**, công tắc của nó **không tắt được**. Trỏ chuột vào thì hiện lý do: cần ít nhất một tiêu chí. Xem `BR-10.8`. Chuỗi tiếng Anh: `❓PO` |
+| Cấu hình hạng | Cảnh báo | Không còn tiêu chí nào chạy | Xảy ra khi tiêu chí bị khoá do tắt `Points` hoặc `Badges`. Khối `Levels` hiện **dòng cảnh báo cố định**: học viên sẽ không lên hạng cho tới khi có lại ít nhất một tiêu chí chạy. Xem `BR-10.8`. Chuỗi tiếng Anh: `❓PO` |
 | Cấu hình hạng | Cách lưu | | **Tự lưu, không có nút lưu.** Ô nhập lưu khi rời ô hoặc bấm Enter, công tắc lưu khi bấm. Theo `BR-14.10` |
-| Cấu hình hạng | Đầu khối | Dòng nhắc cố định | Nêu rằng thay đổi chỉ áp từ bây giờ, hạng đã đạt giữ nguyên. **Luôn hiện**, không bật lên sau mỗi lần lưu. Chuỗi tiếng Anh: `❓BA` |
+| Cấu hình hạng | Đầu khối | Dòng nhắc cố định | Nêu rằng thay đổi chỉ áp từ bây giờ, hạng đã đạt giữ nguyên. **Luôn hiện**, không bật lên sau mỗi lần lưu. Chuỗi tiếng Anh: `❓PO` |
 
 **Business requirement — Business rule**
 
@@ -1878,8 +1878,8 @@ Bên dưới là năm công tắc chọn bảng hiện ra: hạng, điểm, số
 | Cấu hình bảng xếp hạng | Năm bảng | `Show courses` | Bật tắt **bảng xếp hạng theo số khoá hoàn thành** |
 | Cấu hình bảng xếp hạng | Năm bảng | Phạm vi | Năm công tắc này chỉ áp cho bảng xếp hạng chung. **Campaign luôn có đủ hai bảng** `Points` và `Activities` (`US19`) |
 | Cấu hình bảng xếp hạng | Bảng bị khoá | Khi chức năng nguồn đang tắt | Công tắc **không thao tác được** và có dòng giải thích vì sao. Ví dụ: tắt `Levels` ở `US10` thì `Show levels` khoá lại |
-| Cấu hình bảng xếp hạng | Bảng cuối cùng | Công tắc | Khi chỉ còn **một bảng đang chạy**, công tắc của nó **không tắt được**. Trỏ chuột vào thì hiện lý do: cần ít nhất một bảng. Xem `BR-11.5`. Chuỗi tiếng Anh: `❓BA` |
-| Cấu hình bảng xếp hạng | Cảnh báo | Không còn bảng nào chạy | Xảy ra khi các bảng đang bật đều bị khoá do chức năng nguồn tắt. Khối `Leaderboard` hiện **dòng cảnh báo cố định**: học viên không còn bảng nào để xem. Xem `BR-11.5`. Chuỗi tiếng Anh: `❓BA` |
+| Cấu hình bảng xếp hạng | Bảng cuối cùng | Công tắc | Khi chỉ còn **một bảng đang chạy**, công tắc của nó **không tắt được**. Trỏ chuột vào thì hiện lý do: cần ít nhất một bảng. Xem `BR-11.5`. Chuỗi tiếng Anh: `❓PO` |
+| Cấu hình bảng xếp hạng | Cảnh báo | Không còn bảng nào chạy | Xảy ra khi các bảng đang bật đều bị khoá do chức năng nguồn tắt. Khối `Leaderboard` hiện **dòng cảnh báo cố định**: học viên không còn bảng nào để xem. Xem `BR-11.5`. Chuỗi tiếng Anh: `❓PO` |
 | Cấu hình bảng xếp hạng | Cách lưu | | **Tự lưu, không có nút lưu.** Công tắc lưu khi bấm. Theo `BR-14.10` |
 
 **Business requirement — Business rule**
@@ -2172,9 +2172,9 @@ Cách dùng thông thường: bật công tắc thứ nhất, chạy ngầm hai 
 | Cấu hình chung | Công tắc 2 | `Visibility in UpLMS` | **Chỉ xuất hiện khi công tắc 1 đang bật.** Quyết định học viên có nhìn thấy gamification hay không |
 | Cấu hình chung | Công tắc 2 | Dòng giải thích | Nêu rõ tắt công tắc này thì hệ thống **vẫn ghi nhận bình thường**, chỉ là học viên không thấy. Dòng này cùng hai công tắc là đủ để đọc ra trạng thái hiện tại, **không có nhãn trạng thái riêng**: `Show points, badges and ranks to your users. While this is off, they still accrue but stay hidden.` |
 | Cấu hình chung | Xác nhận khi tắt công tắc 1 | Hình thức | **Popover nhỏ gắn cạnh công tắc**, không phải modal. Huỷ thì công tắc về như cũ, không lưu. Xem `BR-14.13` |
-| Cấu hình chung | Xác nhận khi tắt công tắc 1 | Nội dung | Nêu rõ: ngừng ghi nhận mọi thứ, bốn chức năng con khoá lại, dữ liệu đã có giữ nguyên, và **bật lại sẽ tính từ thời điểm bật chứ không tính bù**. Có campaign đang chạy thì nêu thêm số campaign, và campaign không nhận thêm gì trong thời gian tắt (`BR-20.8`). Chuỗi tiếng Anh: `❓BA` |
+| Cấu hình chung | Xác nhận khi tắt công tắc 1 | Nội dung | Nêu rõ: ngừng ghi nhận mọi thứ, bốn chức năng con khoá lại, dữ liệu đã có giữ nguyên, và **bật lại sẽ tính từ thời điểm bật chứ không tính bù**. Có campaign đang chạy thì nêu thêm số campaign, và campaign không nhận thêm gì trong thời gian tắt (`BR-20.8`). Chuỗi tiếng Anh: `❓PO` |
 | Cấu hình chung | Xác nhận khi bật công tắc 2 lần đầu | Hình thức | Popover như trên |
-| Cấu hình chung | Xác nhận khi bật công tắc 2 lần đầu | Nội dung | Nêu rõ học viên sẽ **thấy ngay toàn bộ điểm, hạng và huy hiệu đã tích trong giai đoạn chạy ngầm**, và hệ thống **không gửi thông báo hồi tố**. Chuỗi tiếng Anh: `❓BA` |
+| Cấu hình chung | Xác nhận khi bật công tắc 2 lần đầu | Nội dung | Nêu rõ học viên sẽ **thấy ngay toàn bộ điểm, hạng và huy hiệu đã tích trong giai đoạn chạy ngầm**, và hệ thống **không gửi thông báo hồi tố**. Chuỗi tiếng Anh: `❓PO` |
 | Cả trang cấu hình | Cách lưu | | **Tự lưu, không có nút lưu**, áp cho cả `US8` đến `US11`. Xem `BR-14.10` đến `BR-14.12` |
 | Cả trang cấu hình | Sau mỗi lần lưu | Báo đã lưu | Báo nhỏ `Saved`, tự ẩn, **không phải modal** |
 
@@ -2364,17 +2364,17 @@ Campaign kết thúc thì học viên vẫn xem lại được. Bảng lúc đó
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Bảng xếp hạng | Lối vào campaign | Vị trí | Cạnh năm khung cố định. Cách thể hiện: `❓BA`, chờ design |
+| Bảng xếp hạng | Lối vào campaign | Vị trí | Cạnh năm khung cố định. Cách thể hiện: `❓PO`, chờ design |
 | Bảng xếp hạng | Danh sách campaign | Gồm những gì | Campaign **đang chạy** và **đã kết thúc**. Campaign chưa bắt đầu không hiện. `[đề xuất]` |
 | Bảng xếp hạng | Danh sách campaign | Thứ tự | Đang chạy trước, đã kết thúc sau. Trong mỗi nhóm, campaign kết thúc gần nhất lên trước. `[đề xuất]` |
 | Campaign | Thông tin | Nội dung | Tên · mô tả · khoảng thời gian · các loại hành động được tính điểm |
-| Campaign | Trạng thái | Nhãn | Đang chạy hoặc đã kết thúc. Chuỗi tiếng Anh: `❓BA` |
+| Campaign | Trạng thái | Nhãn | Đang chạy hoặc đã kết thúc. Chuỗi tiếng Anh: `❓PO` |
 | Campaign | Chọn bảng | Các lựa chọn | Hai bảng: `Points` · `Activities`. **Không chịu năm công tắc `Show …` ở `US11`** |
 | Campaign | Bảng | Top 3, danh sách đầy đủ, cột `#`, cột học viên, cột giá trị | Giống `US6` |
 | Campaign | Khối vị trí của tôi | | Giống `US7` |
-| Campaign đang chạy | Nhãn cập nhật | Nội dung | `Last updated {HH:mm}`, kèm dòng nhắc kết quả chính thức chốt lúc kết thúc. Chuỗi tiếng Anh: `❓BA` |
-| Campaign đã kết thúc | Nhãn | Nội dung | Thay `Last updated` bằng thời điểm đóng băng. Chuỗi tiếng Anh: `❓BA` |
-| Campaign | Trạng thái rỗng | Chưa ai có chỉ số | Chuỗi tiếng Anh: `❓BA` |
+| Campaign đang chạy | Nhãn cập nhật | Nội dung | `Last updated {HH:mm}`, kèm dòng nhắc kết quả chính thức chốt lúc kết thúc. Chuỗi tiếng Anh: `❓PO` |
+| Campaign đã kết thúc | Nhãn | Nội dung | Thay `Last updated` bằng thời điểm đóng băng. Chuỗi tiếng Anh: `❓PO` |
+| Campaign | Trạng thái rỗng | Chưa ai có chỉ số | Chuỗi tiếng Anh: `❓PO` |
 
 **Business requirement — Business rule**
 
@@ -2442,8 +2442,8 @@ Campaign chưa bắt đầu thì sửa mọi thứ và xoá được. Đang ch�
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
 | Danh sách campaign | Bảng | Cột | Tên · khoảng thời gian · trạng thái · loại hành động được tính |
-| Danh sách campaign | Bảng | Trạng thái | Ba trạng thái: chưa bắt đầu · đang chạy · đã kết thúc. **Tính từ ngày hiện tại**, theo múi giờ tổ chức. Chuỗi tiếng Anh: `❓BA` |
-| Tạo campaign | Form | Tên | Bắt buộc. Độ dài tối đa: `❓BA` |
+| Danh sách campaign | Bảng | Trạng thái | Ba trạng thái: chưa bắt đầu · đang chạy · đã kết thúc. **Tính từ ngày hiện tại**, theo múi giờ tổ chức. Chuỗi tiếng Anh: `❓PO` |
+| Tạo campaign | Form | Tên | Bắt buộc. Độ dài tối đa: `❓PO` |
 | Tạo campaign | Form | Mô tả | Không bắt buộc |
 | Tạo campaign | Form | Ngày bắt đầu | Bắt buộc. **Không được ở quá khứ.** `[đề xuất]` |
 | Tạo campaign | Form | Ngày kết thúc | Bắt buộc. Không nhỏ hơn ngày bắt đầu. **Bắt đầu và kết thúc cùng một ngày là hợp lệ.** `[đề xuất]` |
@@ -2481,7 +2481,7 @@ Campaign chưa bắt đầu thì sửa mọi thứ và xoá được. Đang ch�
 
 | Field | Kiểu | Bắt buộc | Giá trị hợp lệ | Ghi chú |
 |---|---|---|---|---|
-| Tên | Chuỗi | Có | Độ dài tối đa `❓BA` | Mới |
+| Tên | Chuỗi | Có | Độ dài tối đa `❓PO` | Mới |
 | Mô tả | Chuỗi | Không | | Mới |
 | Ngày bắt đầu | Ngày | Có | Không ở quá khứ khi tạo | Mới |
 | Ngày kết thúc | Ngày | Có | `>=` ngày bắt đầu | Mới |

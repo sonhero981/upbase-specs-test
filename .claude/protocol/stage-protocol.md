@@ -79,8 +79,8 @@ Phát hiện dấu hiệu vượt profile theo `profiles.md`: nói ngay, và t�
 
 ## Luôn đúng
 - Tách `Fact`, `Assumption`, `Open Question`, `Recommendation`. Không bịa. Thiếu nhẹ ghi Assumption. Thiếu làm đổi phạm vi, rule, dữ liệu, luồng thì ghi Open Question và dừng.
-- Ô không suy được: `❓BA`. Suy luận: `[suy ra]`.
+- Ô không suy được: `❓PO`. Suy luận: `[suy ra]`.
 - Không chốt thay PO. Không thiết kế kỹ thuật chi tiết. Không hỏi kỹ thuật cho Dev. Chỉ hỏi câu mà đáp án làm đổi phạm vi hoặc business rule.
-- KB là bản chụp. Chạm vùng nào thì đọc lại nguồn vùng đó. Quá một tháng kể từ *Last verified* thì đọc lại trước. Vùng KB chưa phủ: `❓BA`, không kết luận.
+- KB là bản chụp. Chạm vùng nào thì đọc lại nguồn vùng đó. Quá một tháng kể từ *Last verified* thì đọc lại trước. Vùng KB chưa phủ: `❓PO`, không kết luận.
 - Có endpoint không có nghĩa là có tính năng. Hidden vẫn phải xét.
 - Một stage một lượt. Mỗi stage kết thúc ở gate.

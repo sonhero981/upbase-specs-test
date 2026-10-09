@@ -37,8 +37,8 @@ Tra trước khi hỏi, để phân biệt field đã tồn tại với field th
 3. Swagger `components.schemas`: field hiện có, kiểu, required, enum. Nguồn tốt nhất cho field.
 4. KB 01 đến 11: rule chi phối.
 5. Phân loại mỗi màn: **A** mới hoàn toàn, **B** sửa màn có sẵn, **C** chỉ đọc.
-Một bảng duy nhất trong `field-intake-questions.md`: Màn · Field · Hiện có? · Kiểu · Bắt buộc · Giá trị hợp lệ · Validate · Rule chi phối · Ghi chú. Điền sẵn `[đề xuất]` từ KB và Swagger; `❓BA` chỗ không suy được. Màn danh sách hỏi thêm filter, search, sort, pagination, cột hiển thị. Field hiện có chỉ hỏi delta và migration.
-PO duyệt bảng là xác nhận tóm tắt. `❓BA` chưa quyết thành OQ, không bịa. S cũng phải qua bước này, đây là chỗ hay sai nhất kể cả với yêu cầu nhỏ.
+Một bảng duy nhất trong `field-intake-questions.md`: Màn · Field · Hiện có? · Kiểu · Bắt buộc · Giá trị hợp lệ · Validate · Rule chi phối · Ghi chú. Điền sẵn `[đề xuất]` từ KB và Swagger; `❓PO` chỗ không suy được. Màn danh sách hỏi thêm filter, search, sort, pagination, cột hiển thị. Field hiện có chỉ hỏi delta và migration.
+PO duyệt bảng là xác nhận tóm tắt. `❓PO` chưa quyết thành OQ, không bịa. S cũng phải qua bước này, đây là chỗ hay sai nhất kể cả với yêu cầu nhỏ.
 
 ## Generate
 `prd.md` theo `.claude/templates/prd.md`:
@@ -48,7 +48,7 @@ PO duyệt bảng là xác nhận tóm tắt. `❓BA` chưa quyết thành OQ, k
 - **Sơ đồ**: khối Mermaid đặt đúng chỗ trong file, xem hai lỗi Mermaid trên Lark ở `/publish-lark`.
 - **Traceability**: bảng FR, US, BR trong PRD; `traceability.md` với trạng thái OK, GAP, ORPHAN, Deferred, N/A.
 - **Open Issues**, **Comments**.
-Quy tắc giữ nguyên từ luồng cũ: không có mục Database và API; không sequence diagram, cấu trúc bảng, thuật toán, thư viện; hằng số ghi rõ cứng hay cấu hình; field hiện có không được mô tả như mới; không bịa field; mục không áp dụng xoá hẳn; không giữ bảng ví dụ của template; dọn dấu vết quy trình; không viết tắt; dấu `·` giữa các mã.
+Quy tắc cố định: không có mục Database và API; không sequence diagram, cấu trúc bảng, thuật toán, thư viện; hằng số ghi rõ cứng hay cấu hình; field hiện có không được mô tả như mới; không bịa field; mục không áp dụng xoá hẳn; không giữ bảng ví dụ của template; dọn dấu vết quy trình; không viết tắt; dấu `·` giữa các mã.
 Profile S: PRD rút gọn gồm metadata, Document version, Problem, Objective, Out of scope, References, Specific Requirement một US. Bỏ Analytics, Stakeholder, Metrics success, Solution, Proto-Units.
 
 ## Verify

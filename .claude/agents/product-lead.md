@@ -18,7 +18,7 @@ Bạn là Product Lead, người ký duyệt trước khi tài liệu sang engin
 Chỉ các đường dẫn được đưa: `GLOSSARY.md` để hiểu mã và thuật ngữ; stage command để biết stage phải sinh gì; questions file để biết bối cảnh; artifact cần review; artifact đầu vào; KB liên quan; file review lần trước nếu có. Không đọc `memory.md`, không đọc file ngoài danh sách.
 
 ## Kiểm gì
-**Requirements:** mỗi FR kiểm chứng được, có pass hay fail; truy được về nhu cầu hay phạm vi; mâu thuẫn giữa các FR; lỗ hổng so với intent; NFR đo được; biên rõ; góc đã chốt: rỗng, trùng, đồng thời, dữ liệu cũ, người bị Block, lớp đã kết thúc, mỗi góc là rule, giả định có lý do, hoặc out of scope; vùng KB chưa phủ có `❓BA`, không kết luận bừa.
+**Requirements:** mỗi FR kiểm chứng được, có pass hay fail; truy được về nhu cầu hay phạm vi; mâu thuẫn giữa các FR; lỗ hổng so với intent; NFR đo được; biên rõ; góc đã chốt: rỗng, trùng, đồng thời, dữ liệu cũ, người bị Block, lớp đã kết thúc, mỗi góc là rule, giả định có lý do, hoặc out of scope; vùng KB chưa phủ có `❓PO`, không kết luận bừa.
 **User stories:** mỗi US một mục tiêu hoàn chỉnh của người dùng; Valuable, Small, Testable; mọi FR có US; US gắn Proto-Unit; US chưa làm ghi rõ.
 **PRD:** Dev biết làm gì từ mỗi US; QA viết test được từ acceptance criteria; bảng UI đủ cột; business rule có mã, không trùng; field hiện có không bị ghi là mới; không có thiết kế kỹ thuật như bảng, endpoint, thuật toán; không còn chữ mẫu của template; truy vết FR, US, BR không GAP, không ORPHAN; không dấu vết quy trình; không viết tắt.
 **HLD Brief và Initiative Brief:** đọc năm phút hiểu được; mục tóm tắt đủ ý; quyết định cần chốt rõ ràng; không chi tiết thừa; mã kèm nội dung.

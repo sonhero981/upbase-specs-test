@@ -87,7 +87,7 @@ Hoạt động học được tính **Hoàn thành** khi icon Check chuyển **x
 
 **Điều kiện hiển thị:** khoá có Status = `Resume` hoặc `Review`. Khoá `Ready to learn` **chưa có Dashboard** (click vào sẽ vào thẳng Course Content).
 
-> ⚠️ Xuất hiện thêm bộ trạng thái khoá học phía học viên: `Ready to learn` / `Resume` / `Review` — **khác** với bộ trạng thái phía Ops (`Draft`/`Publish`/`Lock`/`Block`). `❓BA` — hai bộ này ánh xạ với nhau ra sao?
+> ⚠️ Xuất hiện thêm bộ trạng thái khoá học phía học viên: `Ready to learn` / `Resume` / `Review` — **khác** với bộ trạng thái phía Ops (`Draft`/`Publish`/`Lock`/`Block`). `❓PO` — hai bộ này ánh xạ với nhau ra sao?
 
 | Biểu đồ | Công thức / Logic |
 |---|---|

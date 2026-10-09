@@ -28,7 +28,7 @@ Chỉ **UpLnD** = **UpLMS** (người học) + **UpLMS Ops** (vận hành). Ngo�
 |---|---|
 | `BR-COURSE-01` | Business rule **có sẵn trong User Guide**, giữ nguyên nguyên văn |
 | `KB-COURSE-01` | Claude trích từ văn xuôi, **chưa được duyệt** |
-| `❓BA` | Chưa rõ, **không dùng làm fact** |
+| `❓PO` | Chưa rõ, **không dùng làm fact** |
 | `[suy ra]` | Claude suy luận, không phải câu chữ trực tiếp |
 | **Hidden** | Tính năng **đã có code nhưng tạm ẩn**, vẫn phải xét khi phân tích ảnh hưởng |
 
@@ -43,7 +43,7 @@ Chỉ **UpLnD** = **UpLMS** (người học) + **UpLMS Ops** (vận hành). Ngo�
 | Mail tự động theo event | KB `13`, 📌 bản chốt, không còn file gốc |
 | **Vùng KB chưa phủ** | KB `14` §1 và §2, **đọc trước khi kết luận "không ảnh hưởng"** |
 
-> ⚠️ **KB chỉ phủ khoảng một nửa hệ thống.** Ops có 25 nhóm API và LMS có 8 nhóm không có trong User Guide (lịch dạy, phòng học, thi cử, phòng ban, phân quyền). Vùng thuộc phần chưa phủ ghi `❓BA`, không kết luận.
+> ⚠️ **KB chỉ phủ khoảng một nửa hệ thống.** Ops có 25 nhóm API và LMS có 8 nhóm không có trong User Guide (lịch dạy, phòng học, thi cử, phòng ban, phân quyền). Vùng thuộc phần chưa phủ ghi `❓PO`, không kết luận.
 
 ### KB là bản chụp, biết khi nào phải đọc lại nguồn
 
@@ -58,10 +58,10 @@ Chỉ **UpLnD** = **UpLMS** (người học) + **UpLMS Ops** (vận hành). Ngo�
 
 - Trả lời **tiếng Việt**; tên stage, mã, thuật ngữ theo `GLOSSARY.md`.
 - **Thẳng vào trọng tâm trước**, giải thích sau. **Phản biện khi có lỗ hổng thật.** **Hỏi lại khi thiếu thông tin**, không đoán bừa.
-- Tách rõ `Fact` / `Assumption` / `Open Question` / `Recommendation`. **Không bịa.** Thiếu nhẹ thì `Assumption`; thiếu ảnh hưởng phạm vi, rule, dữ liệu, luồng thì `Open Question`; ô không suy được thì `❓BA`.
+- Tách rõ `Fact` / `Assumption` / `Open Question` / `Recommendation`. **Không bịa.** Thiếu nhẹ thì `Assumption`; thiếu ảnh hưởng phạm vi, rule, dữ liệu, luồng thì `Open Question`; ô không suy được thì `❓PO`.
 - Không tự chốt quyết định thay PO; chỉ gợi ý dưới nhãn `Recommendation`. Lời duyệt và câu trả lời của PO ghi **nguyên văn**.
 - **Không thiết kế kỹ thuật chi tiết.** Ghi *cái gì phải đúng*, để Dev quyết *làm thế nào*. Không hỏi câu kỹ thuật cho Dev; chỉ hỏi câu mà đáp án làm đổi phạm vi hoặc business rule. Cần biết một cơ chế kỹ thuật có tồn tại không thì hỏi PO; có endpoint không có nghĩa là có tính năng.
-- **Tài liệu bàn giao** (Initiative Brief, HLD Brief, PRD, User Guide): không dấu vết quy trình, không viết tắt, mã nào cũng kèm nội dung, mã đứng cạnh nhau có dấu `·`. Trạng thái duyệt ghi ai duyệt, không ghi gate mấy. Giữ lại `❓BA` và bảng lịch sử phiên bản viết bằng tiếng người.
+- **Tài liệu bàn giao** (Initiative Brief, HLD Brief, PRD, User Guide): không dấu vết quy trình, không viết tắt, mã nào cũng kèm nội dung, mã đứng cạnh nhau có dấu `·`. Trạng thái duyệt ghi ai duyệt, không ghi gate mấy. Giữ lại `❓PO` và bảng lịch sử phiên bản viết bằng tiếng người.
 - **Trích mã trong trao đổi thì kèm nội dung** một dòng. Một intent cỡ L sinh hàng trăm mã, bắt người đọc mở file tra là lỗi của người viết.
 
 Các quy tắc "đã sai một lần" và lý do của chúng nằm ở `.claude/memory/team.md`. Thêm bài học qua vòng học tại gate, không sửa tay giữa chừng một intent.

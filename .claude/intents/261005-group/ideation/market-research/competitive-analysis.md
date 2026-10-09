@@ -217,7 +217,7 @@ Nguyên văn bốn bài: `working/raw-inputs/talentlms-help-articles-20261007.md
 - *Fact TalentLMS:* gỡ ghi danh **giữ tiến độ**, ghi danh lại học tiếp
 - *Fact UpLnD:* xoá khỏi lớp thủ công **mất tiến độ thật**, học lại từ đầu *(quyết định Gate 2, 06/10; `OQ-29` chuyển lớp tạm chấp nhận)*. Đây là ràng buộc của chức năng **Lớp**, ngoài phạm vi dự án này — **không đề xuất sửa**
 - *Chỗ chạm dự án:* `US20` kịch bản ghi quản lý nhận mail rồi *"giữ nguyên lớp, hoặc gỡ họ khỏi lớp"*. Ở TalentLMS hai lựa chọn này **đảo ngược được**; ở UpLnD thì **gỡ là mất**. Quản lý không biết điều đó sẽ gỡ nhầm
-- *Recommendation:* thêm **một câu cảnh báo** vào nội dung `MAIL-GRP-01` *("Gỡ khỏi lớp sẽ xoá tiến độ đã học, không khôi phục được")*. Chỉ câu chữ, không đổi luật. Hộp xác nhận gỡ khỏi lớp bên chức năng Lớp có cảnh báo chưa thì `❓BA`
+- *Recommendation:* thêm **một câu cảnh báo** vào nội dung `MAIL-GRP-01` *("Gỡ khỏi lớp sẽ xoá tiến độ đã học, không khôi phục được")*. Chỉ câu chữ, không đổi luật. Hộp xác nhận gỡ khỏi lớp bên chức năng Lớp có cảnh báo chưa thì `❓PO`
 
 ### 9.3 Chỗ TalentLMS có mà PRD **cố ý** không làm — giữ nguyên
 

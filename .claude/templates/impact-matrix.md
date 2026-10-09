@@ -60,7 +60,7 @@ Bản phân tích nội bộ. Kết quả chảy vào `stories.md`, HLD Brief m�
 | 10 | Reporting | | | | |
 | 11 | Test | | | | |
 | 12 | Release | | | | |
-Vùng không bị ảnh hưởng vẫn ghi lý do. Vùng KB chưa phủ ghi `❓BA`.
+Vùng không bị ảnh hưởng vẫn ghi lý do. Vùng KB chưa phủ ghi `❓PO`.
 
 ## 5. Conflict, 4 chiều: rule, process, data, permission
 | # | Chiều | Conflict | Hiện tại | Mới | Ai quyết |

@@ -7,7 +7,7 @@ argument-hint: <đường dẫn file> [--shadow] [--stage <slug>]
 Theo `.claude/protocol/review-protocol.md`. Không sửa artifact. Không ghi `state.md` trừ khi được gọi từ một stage.
 
 1. Xác định artifact và stage. Thư mục stage cho biết slug; `--stage` để chỉ rõ. File ngoài `.claude/intents/` hoặc có `--shadow` thì chạy chế độ shadow.
-2. Input Readiness Gate, giữ từ luồng cũ: artifact có đủ nền chưa, stage trước đã approve chưa. Thiếu thì báo và hỏi có review tiếp không. Review PRD trên Impact Matrix chưa duyệt là review trên cát.
+2. Input Readiness Gate: artifact có đủ nền chưa, stage trước đã approve chưa. Thiếu thì báo và hỏi có review tiếp không. Review PRD trên Impact Matrix chưa duyệt là review trên cát.
 3. Gọi agent `product-lead` bằng Task. Truyền đường dẫn, không dán nội dung: stage command, questions file, artifact, artifact đầu vào, `GLOSSARY.md`, KB liên quan, file review lần trước nếu có. Yêu cầu ghi `reviews/review-<slug>-<NN>.md`, NN là số lần trước cộng một. Nói với PO một câu: "Để Product Lead xem qua trước khi anh/chị đọc."
 4. Đọc file review, trình verdict, bảng finding, summary. PO quyết: sửa, hoặc ghi disposition vào `decisions.md` (Accepted risk, Rejected kèm lý do, Reopened).
 
