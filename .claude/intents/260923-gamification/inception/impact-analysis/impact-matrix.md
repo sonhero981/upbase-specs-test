@@ -1,10 +1,10 @@
 ---
 intent: 260923-gamification
 artifact: impact-matrix
-version: 0.3
+version: 0.4
 status: review
 approved: 2026-09-23 (v0.2, Gate 2)
-note: v0.3 mang CR-013 §14, chờ duyệt lại
+note: v0.4 mang CR-013 §14 và nhật ký ghi nhận bên Ops §15, chờ duyệt lại
 migrated-from: .claude/projects/Gamification/working/impact-analysis/impact-matrix-v0.3-20261008.md
 ---
 # Impact Matrix — Gamification
@@ -28,10 +28,10 @@ migrated-from: .claude/projects/Gamification/working/impact-analysis/impact-matr
 | | |
 | --- | --- |
 | **Project** | Gamification |
-| **Version** | **v0.3** |
+| **Version** | **v0.4** |
 | **Ngày** | 23/09/2026 · cập nhật 08/10/2026 |
 | **Nguồn input** | `brd-v0.7-20261008.md` · `related-map-v0.2` · KB `01`–`15` · schema Lark `Data Architecture` (đọc lại 23/09) · Swagger LMS + Ops |
-| **Trạng thái** | 🔄 **v0.3 chờ PO duyệt lại** — mang `CR-013`. Thêm `CF-7` cần PO xác nhận. Bản v0.2 được PO duyệt ngày 23/09/2026 |
+| **Trạng thái** | 🔄 **v0.4 chờ PO duyệt lại** — §15 nhật ký ghi nhận bên Ops · mang `CR-013`. Thêm `CF-7` cần PO xác nhận. Bản v0.2 được PO duyệt ngày 23/09/2026 |
 
 ## Change log
 
@@ -41,6 +41,7 @@ migrated-from: .claude/projects/Gamification/working/impact-analysis/impact-matr
 | **v0.2** | **PO quyết toàn bộ 6 conflict.** `CF-2` biến mất · `C5` phải sửa · thêm `C10` loại trừ `Test Account` · gỡ `R2` · `R4` · gỡ khoá Trial khỏi phạm vi · chốt `A24` · `A25` |
 | **v0.2.1** | **Ba câu Dev đã có đáp án.** `OQ-B2` ✅ có dấu thời gian · `OQ-B9` ✅ chịu được — **`R1` hạ từ 🔴 xuống 🟡**, xem §11.1 · `OQ-B12` ✅ lưu hết. `A27` PO xác nhận. **Không còn câu hỏi chặn Gate 3** |
 | **v0.3** | **`CR-013` — campaign quay lại ở dạng mới.** Thêm §14 phân tích campaign. Thêm `CF-7` thay `CF-6`. Đóng `CG-10`, `CG-11`, `OQ-C7`, `OQ-C8`. Viết lại `TR-5`, `TR-8`. Thêm `R10`, `R11`. §11.1 tính lại số bảng phải tính |
+| **v0.4** | Thêm §15 **nhật ký ghi nhận bên Ops** (BRD `S25`). Không có thực thể mới, không có conflict mới. Một lỗ có sẵn lộ ra: `BR-13.8` chưa có chỗ hiển thị |
 
 ---
 
@@ -122,7 +123,7 @@ Rule mới: `BR-TEST` · `BR-REGRADE-01/02` · `BR-SKIP` · `S22` (tiêu chí ph
 | --- | --- | --- | --- | --- |
 | 1 | **Business process** | ✅ | 🔧 Quy trình chấm bài phải **chấm hết bài tồn trước khi campaign kết thúc**, vì bài chấm sau đó không tính (`TR-5`). Thêm quy trình: cấu hình gamification · tạo campaign · công bố kết quả ngoài hệ thống | **Medium** |
 | 2 | **Module / function** | ✅ | Module mới. Module hiện hữu thành **nguồn sự kiện chỉ đọc**. My Learning **bị sửa** | **High** |
-| 3 | **Screen / report** | ✅ | 9 màn mới · **1 màn existing bị sửa: My Learning** (hiện điểm tích luỹ + hạng). 🔧 `CR-013` thêm: Ops danh sách và tạo campaign · Ops kết quả campaign kèm xuất Excel · học viên xem campaign trong trang bảng xếp hạng | **Medium** |
+| 3 | **Screen / report** | ✅ | 9 màn mới · **1 màn existing bị sửa: My Learning** (hiện điểm tích luỹ + hạng). 🔧 `CR-013` thêm: Ops danh sách và tạo campaign · Ops kết quả campaign kèm xuất Excel · học viên xem campaign trong trang bảng xếp hạng. Ngày 09/10 thêm **Ops nhật ký ghi nhận** | **Medium** |
 | 4 | **Data** | ✅ | 10 thực thể mới. **`tenant` thêm tham số múi giờ** — bảng hiện hữu duy nhất bị sửa. 🔧 `CR-013` thêm **campaign** và **kết quả campaign đã đóng băng**. Điểm campaign **không ghi thêm** — đọc từ sổ giao dịch điểm đã có | **High** |
 | 5 | **API** | ✅ | API gamification mới. `GET /courses/my-learnings` **thêm field**, không phá contract | **Medium** |
 | 6 | **Role / permission** | ✅ | Thêm resource Casbin. L&D/Mentor/Giáo viên xử lý bằng phân quyền thường | **Low** |
@@ -413,3 +414,27 @@ Campaign theo BRD v0.7 §6.9: vận hành chọn khoảng thời gian và loại
 ### 14.5 Kiểm tra chiều tenant
 
 Campaign và kết quả đóng băng **bắt buộc có `tenant_id`** (`C1`). Campaign là dữ liệu do tenant tạo, khớp dòng *"Tenant: … chiến dịch"* ở §10. Loại hành động là danh mục hệ thống, chịu `C2`.
+
+---
+
+## 15. 🆕 Nhật ký ghi nhận bên Ops *(BRD `S25`, v0.4)*
+
+Vận hành tra mọi lần ghi nhận điểm, huy hiệu, lên hạng của cả tổ chức. Dạng bảng, lọc theo học viên, loại sự kiện, khoảng ngày. Chỉ đọc, không xuất file.
+
+| Vùng | Ảnh hưởng | Ghi chú |
+|---|---|---|
+| **Data** | 🟢 Không có thực thể mới | Đọc cùng nguồn với lịch sử phía học viên: sổ giao dịch điểm, huy hiệu đã đạt, các lần lên hạng |
+| **Screen** | 🟠 Thêm một màn Ops | Chưa có design |
+| **NFR** | 🟠 Truy vấn lớn dần | Dữ liệu toàn tổ chức, giữ vĩnh viễn không dọn (`R7`, `OQ-C5`). Lọc theo học viên và khoảng ngày phải nhanh khi nhật ký đã lớn |
+| **Role / permission** | 🟢 Không thêm quyền | Dùng chung quyền xem danh sách học viên và hạng |
+| **Business rule** | 🟠 Đảo một quyết định | Out of scope cũ của lịch sử ghi nhận ghi *"không ai xem được lịch sử của học viên khác, kể cả vận hành"*. Nay vận hành xem được. Học viên vẫn không |
+| **Quy trình ra mắt** | 🟢 Tốt lên | `TR-7` chạy ngầm 2 đến 4 tuần nay có công cụ để vận hành kiểm điểm ghi đúng trước khi bật hiển thị |
+
+### 15.1 Lỗ có sẵn lộ ra
+
+`BR-13.8` của PRD chốt ngày 23/09: cộng điểm lỗi thì *"ghi lại chỗ lỗi để vận hành thấy và xử lý"*. Chưa có màn nào để vận hành thấy các lần lỗi đó. PO chốt ngày 09/10 **không** đưa vào nhật ký này. Ghi thành câu hỏi mở `OQ-46` ở PRD.
+
+### 15.2 Không có conflict mới
+
+Nhật ký chỉ đọc, không chạm luồng cộng điểm, không đổi dữ liệu. Học viên bị `Block` hoặc rời tổ chức vẫn còn dòng trong nhật ký — khác danh sách học viên — vì nhật ký là lịch sử. `[đề xuất]`, PO duyệt ở Gate 2.
+

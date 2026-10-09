@@ -1,10 +1,10 @@
 ---
 intent: 260923-gamification
 artifact: brd
-version: 0.7
+version: 0.8
 status: review
 approved: 2026-09-23 (v0.6, Approved with Notes, Gate 1)
-note: v0.7 mang CR-013, chờ PO duyệt lại. Artifact phase Ideation theo luồng v1, thay cho intent-statement, scope-document, initiative-brief
+note: v0.8 mang CR-013 và nhật ký ghi nhận bên Ops (S25), chờ PO duyệt lại. Artifact phase Ideation theo luồng v1, thay cho intent-statement, scope-document, initiative-brief
 migrated-from: .claude/projects/Gamification/docs/brd/brd-v0.7-20261008.md
 ---
 # [BRD] Gamification — Điểm, huy hiệu, hạng và bảng xếp hạng
@@ -30,7 +30,7 @@ migrated-from: .claude/projects/Gamification/docs/brd/brd-v0.7-20261008.md
 | **Tính năng** | Gamification |
 | **Người viết** | Bùi Đức Huy (PO) |
 | **Ngày** | 23/09/2026 · cập nhật 08/10/2026 |
-| **Trạng thái** | 🔄 **v0.7 chờ PO duyệt lại** — mang `CR-013`. Bản v0.6 được PO duyệt `Approved with Notes` ngày 23/09/2026 |
+| **Trạng thái** | 🔄 **v0.8 chờ PO duyệt lại** — mang `CR-013` và nhật ký ghi nhận bên Ops. Bản v0.6 được PO duyệt `Approved with Notes` ngày 23/09/2026 |
 | **Cỡ yêu cầu** | **L** — đủ 9 bước, đủ 4 Gate |
 
 ## Document version
@@ -45,6 +45,7 @@ migrated-from: .claude/projects/Gamification/docs/brd/brd-v0.7-20261008.md
 | **v0.6** | 🔧 **Đính chính `BR-TEST`.** `Pass Point` chỉ tồn tại khi `Graded Assignment = Yes`. **Quiz và Case Study không tính.** Đóng `OQ-B16`.<br>🗑️ **Bỏ hành động tính điểm "đạt điểm cao"** — PO chốt tạm thời không có rule này. Gỡ `A23` và `OQ-B17` | `CR-006` | 23/09 |
 | **v0.6.1** | 🔁 **Feed ngược từ Impact Analysis (Gate 2).** Sửa `C5` — chống cộng trùng trong phạm vi một lượt ghi danh, không cắt ngang lớp. Thêm `C10` loại trừ `Test Account`. Thêm `BR-REGRADE-02`. Chốt `A24`, `A25`. Bỏ khoá Trial khỏi phạm vi | `impact-matrix-v0.1` | 23/09 |
 | **v0.7** | **Campaign quay lại ở dạng mới** (§6.9): vận hành chọn khoảng thời gian và loại hành động tính điểm, số điểm theo cấu hình chung, hai bảng điểm và số hoạt động, đóng băng khi kết thúc, được chồng thời gian. Học viên chỉ chọn khung cố định. Cập nhật `O4`, Scope, Out of scope, danh sách US | `CR-013` | 08/10 |
+| **v0.8** | Thêm `S25` **nhật ký ghi nhận bên Ops**: vận hành tra mọi lần ghi nhận điểm, huy hiệu, lên hạng của cả tổ chức, chỉ đọc. Thêm `US24` | — | 09/10 |
 
 **Nguồn input:** `working/raw-inputs/yeu-cau-goc-20260923.md` · `change-requests.md` (CR-001…006, CR-013) · `clarified-requirements-20260923.md` · `project-decisions.md`
 
@@ -175,6 +176,7 @@ Ba chỉ số trên **đã có tiêu chí và có mốc nền** — dùng thẳn
 | S19 | 🔧 **Đóng băng kết quả campaign** khi kết thúc. Khung cố định **không đóng băng**, là số liệu sống |
 | S20 | 🔧 **Xem lại campaign đã kết thúc** — học viên thấy kết quả đã đóng băng |
 | S24 | 🆕 **Ops xem và xuất Excel kết quả từng campaign** — đúng số đã đóng băng |
+| S25 | 🆕 **Nhật ký ghi nhận bên Ops** — vận hành tra mọi lần ghi nhận điểm, huy hiệu, lên hạng của cả tổ chức, lọc theo học viên, loại sự kiện, khoảng ngày. **Chỉ đọc, không xuất file.** Hiện cả trong giai đoạn chạy ngầm. Không hiện lần cộng điểm bị lỗi |
 | S21 | **Tham số múi giờ ở cấp tổ chức** — biên kỳ cắt theo múi giờ tổ chức |
 | S22 | **Tiêu chí phụ khi đồng hạng** — cùng chỉ số thì ai đạt sớm hơn xếp trên |
 | ~~S23~~ | ~~Danh mục chỉ số đo lường dùng chung~~ 🗑️ **PO chốt 23/09: mỗi chỗ tự tính, vận hành tự cấu hình tham số.** Xem §6.8 |
@@ -399,6 +401,7 @@ Bảng số hoạt động lọc tương tự trên dữ liệu học: hoạt đ
 | **US14** | Là nhân sự vận hành, tôi cần kết quả campaign được đóng băng khi kết thúc, xem và xuất được, để công bố và trao thưởng | CR-013 · S19 · S24 · O4 | Xuất Excel |
 | **US15** | Là nhân sự vận hành, tôi cần điểm phản ánh việc học thật, không bị đẩy lên bằng thao tác đối phó | Dòng 7 · O6 | Chịu `C5` |
 | **US16** | Là nhân sự vận hành, tôi cần bật/tắt gamification và bật/tắt hiển thị phía học viên riêng biệt, để chạy thử cơ chế trước khi mở | Dòng 11 · S12 | |
+| **US24** | Là nhân sự vận hành, tôi cần tra được mọi lần ghi nhận điểm, huy hiệu, lên hạng của cả tổ chức, để kiểm cơ chế chạy đúng và trả lời học viên khi họ thắc mắc | PO 09/10 · S25 · O6 | Chỉ đọc. Là `US22` trong PRD |
 | **US17** | Là quản trị, tôi cần phân quyền để chỉ vai trò vận hành phù hợp mới sửa được cấu hình gamification | `[suy ra]` · S13 | |
 
 ## Chưa làm trong đợt này

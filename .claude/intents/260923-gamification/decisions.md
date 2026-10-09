@@ -139,6 +139,12 @@ Nhật ký quyết định của intent. Chuyển từ `archive/v1/project-decis
 | DEC133 | 2026-10-08 | CR-013 → 1.4, 2.31, 2.32, 2.42 | **`US12` giữ bộ chọn khoảng ngày tự do** — Lý do: `O4` cần, người dùng Ops ít và có quyền | — | PO | 2.42, CR |
 | DEC134 | 2026-10-08 | CR-013 → 1.4, 2.31, 2.32, 2.42 | **`CF-7`: tắt `Gamification` khi campaign đang chạy vẫn cho tắt** — Lý do: `CF-6` cũ bắt dừng campaign trước, nay không dừng được | — | Phân tích — **chờ PO, `OQ-42`** | 2.42, CR |
 | DEC135 | 2026-10-09 | 0 | Chuyển dự án Gamification từ luồng v1 sang v2 cùng Gamification, Report-Phase-1 và gỡ luồng v1; artifact giữ nguyên nội dung và họ mã v1; bốn gate đang chờ duyệt lại giữ nguyên trạng thái chờ; 1.2 và 2.41 ghi bỏ qua | "migrate lại toàn bộ các project cũ sang chuẩn mới, xóa phần cũ rồi push lên git 1 lần luôn" | PO | mọi stage |
+| DEC136 | 2026-10-09 | 1.4, 2.31, 2.4, 2.42 | **Thêm nhật ký ghi nhận bên Ops** (BRD `S25`, PRD `US22`). Đảo dòng Out of scope cũ của `US3` *"không ai xem được lịch sử của học viên khác, kể cả vận hành"*: vận hành nay xem được, học viên vẫn không — Lý do: giai đoạn chạy ngầm chỉ vận hành kiểm được điểm ghi đúng; không có màn này thì `O5` chỉ đúng phía học viên. Stage đang chờ duyệt nên sửa thẳng, không mở CR | "bổ sung màn achivement history trong ops" | PO | 2.42, US22 |
+| DEC137 | 2026-10-09 | 2.42 | **Phạm vi: nhật ký chung cả tổ chức**, lọc theo học viên, không chỉ lịch sử từng người | "Nhật ký chung cả tổ chức" | PO | 2.42, US22 |
+| DEC138 | 2026-10-09 | 2.42 | **Giao diện bảng có cột**: thời điểm · học viên · loại sự kiện · chi tiết · điểm | "Bảng có cột (Recommended)" | PO | 2.42, US22 |
+| DEC139 | 2026-10-09 | 2.42 | **Lọc theo loại sự kiện và khoảng ngày, không xuất file** | "Lọc, không xuất (Recommended)" | PO | 2.42, US22 |
+| DEC140 | 2026-10-09 | 2.42 | **Dùng chung quyền `Xem danh sách học viên và hạng`**, không thêm quyền mới | "Dùng chung quyền xem danh sách (Recommended)" | PO | 2.42, US15, US22 |
+| DEC141 | 2026-10-09 | 2.42 | **Nhật ký chỉ có ba loại sự kiện như học viên, không hiện lần cộng điểm bị lỗi.** Chỗ để vận hành thấy lần lỗi theo `BR-13.8` vẫn còn trống, ghi `OQ-46` | "Không, chỉ ba loại như học viên" | PO | 2.42, US13, US22 |
 
 ## Change requests
 Phân tích chi tiết từng CR ở `inputs/change-requests.md` (nguyên văn PO, nhận định, điểm re-entry, trả lời của PO).
