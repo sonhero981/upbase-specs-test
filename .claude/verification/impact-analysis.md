@@ -5,9 +5,9 @@
 - [ ] Field, màn Existing được nhận diện ở đây, không bị coi là mới ở stage sau
 
 ## Nguồn
-- [ ] KB 01 đến 11, 12, 13, 14 §1 và §2, 15 §6 đã tra
-- [ ] **[BLOCK]** Chạm dữ liệu: schema gốc trên Lark đã đọc lại, không dựa bản chép
-- [ ] Swagger `components.schemas` đã tra cho field
+- [ ] KB theo bản đồ trong `domain.md` đã tra: module bị chạm, data model, sự kiện, API surface, định hướng
+- [ ] **[BLOCK]** Chạm dữ liệu: schema gốc theo `domain.md` mục 2 đã đọc lại, không dựa bản chép
+- [ ] API spec đã tra cho field
 
 ## Framework
 - [ ] **[BLOCK]** Đủ 5 bước đúng thứ tự
@@ -15,7 +15,7 @@
 - [ ] Hidden được xét
 - [ ] Conflict 4 chiều, **[BLOCK]** được escalate, không tự resolve
 - [ ] Bidirectional có cả chiều Old sang New
-- [ ] Coverage đủ boundary, exception, shared entity, side effect. Shared entity `course_categories` và Question Bank đã kiểm
+- [ ] Coverage đủ boundary, exception, shared entity, side effect. Shared entity dễ vỡ trong `domain.md` mục 4 phần 2.31 đã kiểm
 - [ ] Transition đủ Data, Compatibility, Cutover
 - [ ] Tenant đủ 4 câu
 

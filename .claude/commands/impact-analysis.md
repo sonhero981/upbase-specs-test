@@ -1,5 +1,5 @@
 ---
-description: Stage 2.31 Impact Analysis, plugin upbase-po của luồng v2. Related Features Map rồi Impact Matrix 12 vùng. Gọi qua /po
+description: Stage 2.31 Impact Analysis, plugin po-workflow của luồng v2. Related Features Map rồi Impact Matrix 12 vùng. Gọi qua /po
 argument-hint: <intent-slug>
 ---
 # 2.31 Impact Analysis
@@ -9,11 +9,11 @@ argument-hint: <intent-slug>
 | Stage | 2.31 Impact Analysis |
 | Slug | impact-analysis |
 | Phase | inception |
-| Plugin | `upbase-po` |
+| Plugin | `po-workflow` |
 | Execution | always ở M và L |
 | Lead | product |
 | Produces | `inception/impact-analysis/related-features-map.md` · `impact-matrix.md` · `impact-analysis-questions.md` |
-| Consumes | `requirements.md` (bắt buộc) · `scope-document.md` · `intent-statement.md` · KB 12, 13, 14, 15, 16 · schema Lark Data Architecture · Swagger |
+| Consumes | `requirements.md` (bắt buộc) · `scope-document.md` · `intent-statement.md` · KB và nguồn sống theo `domain.md` mục 2, 3 và mục 4 phần 2.31 |
 | Requires | requirements-analysis |
 | Profiles | M, L |
 | Reviewer | none |
@@ -27,7 +27,7 @@ Chạy theo `.claude/protocol/stage-protocol.md`.
 Biết tính năng mới chạm gì trên hệ đang chạy trước khi chọn cách làm. Năm việc: phát hiện conflict với rule hiện có; bổ sung FR, NFR do tác động qua lại; phủ đủ case; transition để golive an toàn; kiểm chiều tenant. Plugin stage của repo, AWS không có stage tương đương ở tầng nghiệp vụ.
 
 ## Bước A, Related Features Map, thay cho bước Ask
-Chủ động quét requirements, KB, schema, Swagger, dựng bảng: Hệ · Tính năng, Module, Entity, Endpoint · New hay Existing · Nguồn · Ghi chú. Bao quát module, màn, entity, API và job, role, rule hiện tại, NFR, mail event, tính năng Hidden. Chưa chắc thì `❓PO`.
+Chủ động quét requirements, KB, schema và API spec theo `domain.md`, dựng bảng: Hệ · Tính năng, Module, Entity, Endpoint · New hay Existing · Nguồn · Ghi chú. Bao quát module, màn, entity, API và job, role, rule hiện tại, NFR, mail event, tính năng Hidden. Chưa chắc thì `❓PO`.
 Bảng này là Consolidated Summary của stage. Trình bảng, hỏi PO: đủ chưa, sót gì, dòng nào không liên quan, `❓PO` nào chốt được. Chỉ sang bước B khi PO xác nhận. Nhận ra dễ hơn nhớ ra: PO soát một bản nháp, không phải kể từ đầu.
 KB mỏng ở vùng này thì hỏi PO seed danh sách hệ liên quan trước, AI mở rộng sau. Câu hỏi khác chỉ khi cần giả định về hệ cũ hay dữ liệu cũ.
 
@@ -38,9 +38,9 @@ Theo đúng thứ tự:
 3. **Impact Matrix 12 vùng**: business process, module, screen và report, data, API, role, business rule, NFR, notification và email, reporting, test, release. Mỗi dòng có severity và nguồn. Vùng không ảnh hưởng vẫn ghi lý do. Vùng KB chưa phủ ghi `❓PO`.
    - 3a Conflict bốn chiều: rule, process, data, permission. Phát hiện thì escalate cho PO quyết, không tự resolve.
    - 3b Bidirectional: New sang Old và Old sang New, chiều sau hay bị bỏ.
-   - 3c Coverage: boundary, exception, shared entity, side effect. Shared entity dễ vỡ nhất của hệ: `course_categories` là khoá ngoại của sáu bảng; Question Bank được bốn nơi tiêu thụ.
+   - 3c Coverage: boundary, exception, shared entity, side effect. Shared entity dễ vỡ của hệ lấy từ `domain.md` mục 4 phần 2.31.
 4. **Transition**: data, compatibility, cutover.
-5. **Tenant**: bốn câu theo KB 15 §6.
+5. **Tenant**: các câu kiểm chiều tenant ghi trong `domain.md` mục 4 phần 2.31.
 FR, NFR phát sinh: ghi trong impact-matrix, rồi bổ sung vào `requirements.md` dưới dạng FR mới với thẻ `[2.31]`, tăng version requirements, ghi DEC. Không sửa FR đã duyệt.
 Phụ lục nguồn đã đọc, kể cả "chưa tra được", bắt buộc.
 

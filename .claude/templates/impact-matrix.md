@@ -8,7 +8,7 @@ status: draft
 
 | | |
 |---|---|
-| Nguồn input | `requirements.md` v<N> · `related-features-map.md` · KB · schema Lark · Swagger |
+| Nguồn input | `requirements.md` v<N> · `related-features-map.md` · KB · schema · API spec, theo `domain.md` |
 | Ngày | |
 
 Bản phân tích nội bộ. Kết quả chảy vào `stories.md`, HLD Brief mục 6, và PRD mục Data Field, Out of scope.
@@ -28,13 +28,13 @@ Bản phân tích nội bộ. Kết quả chảy vào `stories.md`, HLD Brief m�
 | Loại | Mục | Nguồn | Ghi chú |
 |---|---|---|---|
 | Module, Feature | | KB `0X §Y` | |
-| Data, Entity, Field | | KB `12` · bảng `<tên>` | |
+| Data, Entity, Field | | file data model · bảng `<tên>` | |
 | Business rule | | `BR-XXX-01`, `KB-XXX-01` | |
 | Process | | | |
-| Permission | | KB `06 §9` · `casbin_rule` | |
-| Integration, Consumer | | KB `14` | |
-| Mail event | | KB `13` mail số N | đang bật hay tắt |
-| Tính năng Hidden bị chạm | | KB `00-index` | |
+| Permission | | file phân quyền theo `domain.md` · bảng rule | |
+| Integration, Consumer | | file API surface | |
+| Sự kiện, mail | | file sự kiện · mail số N | đang bật hay tắt |
+| Tính năng Hidden bị chạm | | index KB mục Trạng thái | |
 
 ## 3. Desired Situation
 <Từ requirements: tính năng mới làm gì, process mới ra sao.>
@@ -56,7 +56,7 @@ Bản phân tích nội bộ. Kết quả chảy vào `stories.md`, HLD Brief m�
 | 6 | Role, permission | | | | |
 | 7 | Business rule | | | | |
 | 8 | NFR | | | | |
-| 9 | Notification, email | | | | KB `13` |
+| 9 | Notification, email | | | | file sự kiện |
 | 10 | Reporting | | | | |
 | 11 | Test | | | | |
 | 12 | Release | | | | |
@@ -84,10 +84,10 @@ Vùng không bị ảnh hưởng vẫn ghi lý do. Vùng KB chưa phủ ghi `❓
 | Compatibility | bản cũ và mới chạy song song được không |
 | Cutover | thứ tự bật, rollback, ẩn hiện khi golive |
 
-## 9. Tenant, theo KB 15 §6
+## 9. Tenant, theo câu hỏi trong `domain.md` mục 4 phần 2.31
 | Câu hỏi | Trả lời | Xử lý |
 |---|---|---|
-| Có nhúng thêm logic riêng UpBase vào code không | | |
+| Có nhúng thêm logic riêng một tenant vào code không | | |
 | Có hằng số cứng mới không | | cứng hay cấu hình |
 | Bảng mới có `tenant_id` không | | |
 | Enum mới do hệ thống hay tenant định nghĩa | | |
@@ -105,6 +105,6 @@ Vùng không bị ảnh hưởng vẫn ghi lý do. Vùng KB chưa phủ ghi `❓
 |---|---|
 | KB | |
 | DB | |
-| Swagger | |
+| API spec | |
 | Mail | |
 | Chưa tra được | |

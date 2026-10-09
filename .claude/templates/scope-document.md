@@ -20,7 +20,7 @@ status: draft
 
 ## Constraints
 - Nghiệp vụ: <...> [nguồn]
-- Tenant và hằng số: <cứng hay cấu hình> [KB-15 §6]
+- Tenant và hằng số: <cứng hay cấu hình> [KB]
 - Tích hợp: <...>
 - Dữ liệu cũ: <...>
 

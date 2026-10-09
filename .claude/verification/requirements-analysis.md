@@ -1,7 +1,7 @@
 # Checklist: 2.3 Requirements Analysis
 
 ## Tra KB trước khi hỏi
-- [ ] **[BLOCK]** Mỗi hạng mục đã tra: đã có chưa, rule hiện có, Hidden, mail event, vùng KB chưa phủ
+- [ ] **[BLOCK]** Mỗi hạng mục đã tra theo bản đồ KB trong `domain.md`: đã có chưa, rule hiện có, Hidden, sự kiện và mail, vùng KB chưa phủ
 - [ ] Yêu cầu trùng thứ đã có được nêu ngay, kèm mã KB
 - [ ] Chạm dữ liệu: nguồn sống đã đọc lại nếu quá một tháng kể từ Last verified
 - [ ] Vùng KB chưa phủ ghi `❓PO`, không kết luận "chưa có" hay "không ảnh hưởng"
@@ -13,7 +13,7 @@
 - [ ] Constraints ghi hằng số cứng hay cấu hình
 
 ## Góc
-- [ ] Mỗi góc áp dụng (rỗng, trùng, đồng thời, dữ liệu cũ, Block, lớp kết thúc, nhiều nhóm, mail hàng loạt) đã thành FR, assumption có lý do, hoặc out of scope
+- [ ] Mỗi góc áp dụng trong `corner-checklist.md` của domain đã thành FR, assumption có lý do, hoặc out of scope
 
 ## Câu hỏi và nguồn
 - [ ] Không hỏi kỹ thuật cho Dev. Chỉ hỏi câu đổi phạm vi hoặc rule

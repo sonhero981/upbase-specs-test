@@ -13,14 +13,14 @@ argument-hint: <intent-slug>
 | Execution | always ở M và L |
 | Lead | product |
 | Produces | `ideation/intent-capture/intent-statement.md` · `intent-capture-questions.md` |
-| Consumes | `inputs/*` (bắt buộc) · `intent.md` · KB 15 product direction · KB 16 domain principles |
+| Consumes | `inputs/*` (bắt buộc) · `intent.md` · KB định hướng sản phẩm và nguyên tắc mô hình hoá theo `domain.md` mục 4 phần 1.1 |
 | Requires | không |
 | Profiles | M, L |
 | Reviewer | product-lead ở L. M: none |
 | Summary confirmation | required |
 | Template | `.claude/templates/intent-statement.md` |
 | Checklist | `.claude/verification/intent-capture.md` |
-| Knowledge | `.claude/knowledge/domain/00-index.md`, `15-product-direction.md`, `16-domain-principles.md` · product: `product-guide.md` §Persona Development, `requirements-elicitation.md` §Stakeholder Interviews |
+| Knowledge | `.claude/knowledge/domain/domain.md` mục 1 và mục 4 phần 1.1, cùng các file KB nó trỏ tới · product: `product-guide.md` §Persona Development, `requirements-elicitation.md` §Stakeholder Interviews |
 
 Chạy theo `.claude/protocol/stage-protocol.md`. Dưới đây chỉ là phần riêng của stage.
 
@@ -29,7 +29,7 @@ Khung vấn đề trước khi bàn giải pháp: ai gặp vấn đề gì, vì 
 
 ## Load
 - Đọc nguyên văn `inputs/`. Tách **giải pháp người yêu cầu đã nghĩ sẵn** ra khỏi **vấn đề**. "Thêm nút export" là giải pháp; vấn đề có thể là "không lấy được dữ liệu ra để đối chiếu". Giải pháp đó là Recommendation, chưa phải yêu cầu.
-- KB 15 và 16: yêu cầu thuộc tầng nào của UpLnD, phục vụ UpBase hay mọi tenant, có đụng nguyên tắc mô hình hoá nào.
+- KB định hướng và nguyên tắc mô hình hoá theo `domain.md`: yêu cầu thuộc tầng nào của sản phẩm, phục vụ một tenant hay mọi tenant, có đụng nguyên tắc mô hình hoá nào.
 - `intent.md` mục Related intents: trùng hay phụ thuộc intent khác không.
 
 ## Ask
@@ -40,11 +40,11 @@ Gợi ý, không phải kịch bản. Bỏ câu đã có đáp án trong inputs.
 4. Vì sao làm lúc này: áp lực, cơ hội, hay nợ cũ.
 5. Stakeholder: ai quan tâm điều gì, ai quyết phạm vi và ưu tiên, ai chỉ cần được báo.
 6. Bản đầu tiên không làm gì. Hỏi về sản phẩm, không hỏi lại profile.
-7. Portal nào: UpLMS, Ops, hay cả hai. Hằng số nào phải cấu hình theo tenant.
+7. Portal nào, theo danh sách portal trong `domain.md` mục 1. Hằng số nào phải cấu hình theo tenant.
 Mỗi câu có lựa chọn "Chưa xác định" khi PO có thể chưa biết. Không bịa stakeholder.
 
 ## Generate
-`intent-statement.md` theo template. Thẻ nguồn ở mọi khối: `[desc]`, `[Q3]`, `[KB-15 §6]`, `[assumption]`. Stakeholder map có cột Nguồn. Mục Assumptions & Open Questions bắt buộc.
+`intent-statement.md` theo template. Thẻ nguồn ở mọi khối: `[desc]`, `[Q3]`, `[KB-<file> §<mục>]`, `[assumption]`. Stakeholder map có cột Nguồn. Mục Assumptions & Open Questions bắt buộc.
 Success metrics: tự đề xuất ít nhất một cách đo cho mỗi objective, chỉ giữ cái đo được từ dữ liệu hệ thống sẽ có. Không có số thì mô tả cách làm hiện tại đủ rõ, không bỏ trống.
 
 ## Verify

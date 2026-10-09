@@ -25,7 +25,7 @@ Review độc lập do agent `product-lead` làm. Bám theo AWS AI-DLC `stage-pr
 3. Có gì ngầm hiểu mà chưa viết. Giả định là lỗ hổng.
 4. Mọi mục có giá trị với người dùng hay nghiệp vụ không. Thừa là lấn phạm vi.
 5. Biên có rõ không: In, Out, để sau.
-6. Góc đã chốt chưa: rỗng, trùng, đồng thời, dữ liệu cũ, người bị Block, lớp đã kết thúc. Mỗi góc phải là rule, giả định có lý do, hoặc ngoài phạm vi.
+6. Góc đã chốt chưa, theo `corner-checklist.md` của domain. Mỗi góc phải là rule, giả định có lý do, hoặc ngoài phạm vi.
 7. Mọi FR truy được về nhu cầu, mọi US truy được về FR. Mồ côi là finding.
 8. Thẻ nguồn còn đủ, assumption chưa bị nâng thành fact.
 9. Vùng KB chưa phủ có `❓PO`, không kết luận bừa.
@@ -65,4 +65,4 @@ READY khi không có Critical và tối đa hai Major. Location trỏ đúng m�
 - Không chép lịch sử review vào artifact. Artifact không có mục "trạng thái review".
 
 ## Shadow, tài liệu người khác viết
-Giữ cách làm hiện có: tóm tắt tài liệu trước để PO xác nhận hiểu đúng; quét KB và Swagger xem tài liệu bỏ sót vùng nào; findings chia ba nhóm sai, thiếu, mơ hồ; phụ lục nguồn đã đọc; phụ lục câu AI tự trả lời được kèm nguồn. Mục đích là tìm chỗ sai so với hệ thống thật, không chấm cách viết.
+Giữ cách làm hiện có: tóm tắt tài liệu trước để PO xác nhận hiểu đúng; quét KB và API spec xem tài liệu bỏ sót vùng nào; findings chia ba nhóm sai, thiếu, mơ hồ; phụ lục nguồn đã đọc; phụ lục câu AI tự trả lời được kèm nguồn. Mục đích là tìm chỗ sai so với hệ thống thật, không chấm cách viết.

@@ -30,7 +30,7 @@ status: draft
 | Loại | Ràng buộc | Nguồn |
 |---|---|---|
 | Nghiệp vụ | | |
-| Tenant và hằng số | <cứng hay cấu hình> | [KB-15 §6] |
+| Tenant và hằng số | <cứng hay cấu hình> | [KB] |
 | Tích hợp | | |
 | Dữ liệu cũ | | |
 
@@ -47,6 +47,6 @@ status: draft
 | Nguồn | Cụ thể | Last verified |
 |---|---|---|
 | KB | | |
-| Swagger | | |
+| API spec | | |
 | Schema | | |
 Chưa tra được: <vùng nào không có nguồn để tra>

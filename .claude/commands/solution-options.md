@@ -1,5 +1,5 @@
 ---
-description: Stage 2.32 Solution Options, plugin upbase-po của luồng v2. Có điều kiện. So sánh hướng giải, khuyến nghị có điều kiện. Gọi qua /po
+description: Stage 2.32 Solution Options, plugin po-workflow của luồng v2. Có điều kiện. So sánh hướng giải, khuyến nghị có điều kiện. Gọi qua /po
 argument-hint: <intent-slug>
 ---
 # 2.32 Solution Options
@@ -9,7 +9,7 @@ argument-hint: <intent-slug>
 | Stage | 2.32 Solution Options |
 | Slug | solution-options |
 | Phase | inception |
-| Plugin | `upbase-po` |
+| Plugin | `po-workflow` |
 | Execution | conditional: có từ hai hướng giải, hoặc PO chưa có hướng |
 | Lead | product |
 | Produces | `inception/solution-options/solution-options.md` · `solution-options-questions.md` |

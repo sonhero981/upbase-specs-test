@@ -17,7 +17,7 @@
 - [ ] BR mã `BR<US>.<n>`, không trùng. Rule chạm tính năng có sẵn dẫn mã KB
 - [ ] **[BLOCK]** Field hiện có ghi là hiện có. Không bịa field
 - [ ] Hằng số ghi cứng hay cấu hình
-- [ ] Mail event bị chạm đối chiếu KB 13
+- [ ] Sự kiện, mail bị chạm đối chiếu file sự kiện trong KB
 
 ## Truy vết và review
 - [ ] **[BLOCK]** Traceability: không GAP, không ORPHAN. `verification/phase-check-inception.md` đạt

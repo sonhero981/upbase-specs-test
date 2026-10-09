@@ -11,7 +11,7 @@ Intent: <slug> · Cách trả lời: <Guide me | Edit file | Chat> · Đã trả
 
 ## Q1. <Câu hỏi, một câu, tự giải thích>
 Vì sao hỏi: <một dòng: cái gì phụ thuộc vào câu trả lời>
-A. <lựa chọn>  [đề xuất, theo KB-11 §2]
+A. <lựa chọn>  [đề xuất, theo KB-<file> §<mục>]
 B. <lựa chọn>
 C. <lựa chọn>
 X. Khác, xin nói rõ
@@ -21,7 +21,7 @@ Chặn: có | không
 
 ## Quy tắc đặt câu hỏi
 - Chỉ hỏi câu mà đáp án **làm đổi phạm vi, business rule, dữ liệu, luồng, hoặc quyền**. Không hỏi kỹ thuật cho Dev.
-- Tra KB, Swagger, DB và `decisions.md` trước. Có đáp án rồi thì không hỏi. Còn mơ hồ thì hỏi hẹp, nêu đáp án cũ: "Trước đã chốt A ở DEC5, giờ có áp cho trường hợp B không?"
+- Tra KB, API spec, schema và `decisions.md` trước. Có đáp án rồi thì không hỏi. Còn mơ hồ thì hỏi hẹp, nêu đáp án cũ: "Trước đã chốt A ở DEC5, giờ có áp cho trường hợp B không?"
 - Mỗi câu tự giải thích. Mã nào xuất hiện thì kèm nội dung: "yêu cầu xuất báo cáo theo nhóm (FR3)", không viết "FR3 còn đúng không?".
 - Một dòng *Vì sao hỏi* khi lý do không hiển nhiên.
 - Lựa chọn A đến E, tối đa năm, luôn có X. Khi không chắc có lựa chọn nào hợp, thêm "Chưa xác định" để PO không bị ép chọn bừa.
@@ -40,7 +40,7 @@ Chặn: có | không
 Hỏi cách trả lời một lần cho cả intent, ghi vào `state.md`. Stage sau nói một dòng: "Đang hỏi theo cách anh/chị chọn: Guide me. Muốn đổi thì nói." PO đổi giữa chừng thì ghi lại.
 
 ## Ghi câu trả lời
-- Nguyên văn lời PO sau `[Answer]:`, kể cả khi chọn bằng chữ cái: `A, "tính theo lượt ghi danh như SIS đang làm"`.
+- Nguyên văn lời PO sau `[Answer]:`, kể cả khi chọn bằng chữ cái: `A, "<lời PO nói thêm>"`; ví dụ ở `domain.md` mục 5.
 - Diễn giải của AI, nếu cần, dòng dưới: `Hiểu là: ...`.
 - PO uỷ quyền: `[Answer]: [uỷ quyền] "tuỳ anh", chọn A theo đề xuất`. Nói với PO một dòng: "Anh/chị để tôi chọn Q2, tôi chọn A. Muốn khác thì nói."
 - Không bao giờ tự điền `[Answer]:` khi PO chưa nói.
@@ -63,7 +63,7 @@ Khi mọi câu đã trả lời và stage có summary confirmation:
 |---|---|
 | `[desc]` | Lời yêu cầu gốc trong `inputs/` |
 | `[Q3]` | Câu trả lời số 3 của stage này. Stage khác ghi `[2.3 Q3]` |
-| `[KB-04 §3]` | Nguồn trong KB |
+| `[KB-<file> §<mục>]` | Nguồn trong KB |
 | `[DEC5]` | Quyết định đã ghi |
 | `[assumption]` | Giả định, chưa xác nhận |
 | `[suy ra]` | AI suy luận từ nguồn, không phải câu chữ trực tiếp |

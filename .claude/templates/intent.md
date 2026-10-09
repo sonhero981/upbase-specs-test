@@ -9,7 +9,7 @@ created: <YYYY-MM-DD>
 <Một đoạn: ai yêu cầu, yêu cầu gì, vì sao bây giờ. Nguyên văn nằm ở inputs/.>
 
 ## Product boundary
-<UpLMS, UpLMS Ops, hay cả hai. Ràng buộc đa tenant: làm cho UpBase nhưng dữ liệu và hạ tầng thiết kế cho mọi tenant.>
+<Portal nào theo domain.md mục 1. Ràng buộc tenant theo domain.md.>
 
 ## Related intents
 | Intent liên quan | Liên quan ở đâu |

@@ -22,7 +22,7 @@ status: draft
 |---|---|---|---|---|
 
 ## Điều đáng mượn
-| # | Điều gì | Từ đâu | Vì sao hợp với UpLnD |
+| # | Điều gì | Từ đâu | Vì sao hợp với sản phẩm |
 |---|---|---|---|
 
 ## Điều không mượn

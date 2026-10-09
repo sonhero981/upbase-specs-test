@@ -26,8 +26,8 @@ status: draft
 | | | | | [Q5] |
 
 ## Product boundary and constraints
-- Portal: <UpLMS, UpLMS Ops, hay cả hai> [Q7]
-- Tenant: <hằng số nào cứng, nào cấu hình> [KB-15 §6]
+- Portal: <theo danh sách portal trong domain.md> [Q7]
+- Tenant: <hằng số nào cứng, nào cấu hình> [KB]
 - <ràng buộc khác>
 
 ## Initial scope signal

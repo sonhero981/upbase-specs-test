@@ -6,13 +6,13 @@
 
 ## Phân bài
 - [ ] Chạm cả hai hệ thì hai bài riêng `-student` và `-ops`, không gộp
-- [ ] Đặt đúng repo GitBook: `uplms` cho học viên, `uplms-ops` cho vận hành
+- [ ] Đặt đúng repo và đối tượng theo `domain.md` mục 4 phần User Guide
 
 ## Cấu trúc
 - [ ] Đủ bốn mục: I. Thông tin chung · II. Hướng dẫn chi tiết · III. Lưu ý và quy tắc nghiệp vụ · IV. Lỗi thường gặp
 - [ ] **[BLOCK]** Có khai báo `Phạm vi & Module liên quan`: module chính, chức năng chính, module liên quan
 - [ ] Có `Điều kiện tiên quyết`: quyền, dữ liệu cần có trước
-- [ ] Đúng cú pháp GitBook: `{% hint %}`, `<details>`, `{% stepper %}`
+- [ ] Đúng cú pháp của công cụ tài liệu ghi trong `domain.md` mục 4 phần User Guide, theo template của domain
 
 ## Giọng văn và nội dung
 - [ ] **[BLOCK]** Không còn tên bảng, field kỹ thuật, endpoint, mã rule

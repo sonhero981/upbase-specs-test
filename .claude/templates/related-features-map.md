@@ -11,13 +11,13 @@ status: draft
 ## Nguồn đã đối chiếu lại
 | Nguồn | Kết quả | Ngày |
 |---|---|---|
-| Swagger | | |
-| Schema Lark | | |
+| API spec | | |
+| Schema DB | | |
 
 ## Bản đồ
 | Hệ | Tính năng, Module, Entity, Endpoint | New hay Existing | Nguồn | Ghi chú |
 |---|---|---|---|---|
-| UpLMS hay Ops | | | KB 04 §3 · bảng `classes` · `GET /api/v1/classes` | `❓PO` nếu chưa chắc |
+| <portal theo domain.md> | | | KB `<file> §<mục>` · bảng `<tên>` · `<endpoint>` | `❓PO` nếu chưa chắc |
 
 Bao quát: module, màn hình, entity, API và job, role, rule hiện tại, NFR, mail event, tính năng Hidden.
 

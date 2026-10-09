@@ -16,7 +16,7 @@ Chỉ publish artifact có `status: approved` trong frontmatter. Input: `$ARGUME
 | Kiểm | Thiếu thì |
 |---|---|
 | Frontmatter `status: approved` | Dừng, không publish |
-| Lark target trong `intent.md` mục Lark: wiki space, node cha chung, intent node | Hỏi PO rồi ghi lại |
+| Lark target: wiki space và node cha chung trong `domain.md` phần Publish, intent node trong `intent.md` mục Lark | Hỏi PO rồi ghi lại |
 | Intent node đã tồn tại | Tạo trước, xem B3 |
 | Kết nối Lark | Xem bên dưới |
 
@@ -41,11 +41,11 @@ Sơ đồ sống trong file dưới dạng khối ` ```mermaid `, đặt đúng 
 ## B3. Tạo hay cập nhật
 Wiki hai tầng, tài liệu không bao giờ nằm thẳng dưới node cha chung:
 ```
-02. Execution — Epics & Features     node cha chung, X3hhwv2MxizpFgkVudVl7e52gUc
-├── Group                            intent node
-│   └── [PRD] Group                  tài liệu
-└── Gamification
-    └── [PRD] Gamification
+<node cha chung, token trong domain.md>
+├── <Intent A>                       intent node
+│   └── [PRD] <Intent A>             tài liệu
+└── <Intent B>
+    └── [PRD] <Intent B>
 ```
 
 | Trạng thái trong `intent.md` | Làm gì |

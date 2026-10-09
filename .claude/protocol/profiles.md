@@ -20,16 +20,16 @@ Depth nói mức chi tiết của artifact, không nói số câu hỏi. Số c�
 | 1.4 | Scope Definition | AWS | Luôn chạy ở M, L |
 | 1.7 | Approval & Handoff, Initiative Brief | AWS | Luôn chạy ở L |
 | 2.3 | Requirements Analysis | AWS | Luôn chạy |
-| 2.31 | Impact Analysis | Plugin `upbase-po` | Luôn chạy ở M, L |
-| 2.32 | Solution Options | Plugin `upbase-po` | Khi có từ hai hướng giải, hoặc PO chưa có hướng |
+| 2.31 | Impact Analysis | Plugin `po-workflow` | Luôn chạy ở M, L |
+| 2.32 | Solution Options | Plugin `po-workflow` | Khi có từ hai hướng giải, hoặc PO chưa có hướng |
 | 2.4 | User Stories | AWS | Luôn chạy ở M, L |
-| 2.41 | HLD Brief & Alignment | Plugin `upbase-po` | Luôn chạy ở M, L |
-| 2.42 | PRD Generation | Plugin `upbase-po` | Luôn chạy |
+| 2.41 | HLD Brief & Alignment | Plugin `po-workflow` | Luôn chạy ở M, L |
+| 2.42 | PRD Generation | Plugin `po-workflow` | Luôn chạy |
 
 Stage AWS ngoài phạm vi PO, chỉ để mapping: 1.3, 1.5, 1.6, 2.1, 2.2, 2.5, 2.6, 2.7, 2.8, 2.9 và toàn bộ Construction, Operation.
 
 ## Quy tắc
-1. Chọn profile ở `/new-intent` sau khi quét nhanh KB, Swagger, DB. Echo một dòng trước khi chạy: *"Profile M: 7 stage, 6 gate, Depth Standard, reviewer ở 3 stage, summary confirmation bật. Đồng ý không?"* PO có quyền đổi.
+1. Chọn profile ở `/new-intent` sau khi quét nhanh KB, API spec, schema theo `domain.md`. Echo một dòng trước khi chạy: *"Profile M: 7 stage, 6 gate, Depth Standard, reviewer ở 3 stage, summary confirmation bật. Đồng ý không?"* PO có quyền đổi.
 2. Nghi ngờ giữa hai profile thì chọn profile lớn hơn.
 3. Phát hiện giữa chừng dấu hiệu vượt profile: nói ngay, tại gate gần nhất đưa lựa chọn **Add [stage]**. Thêm stage tức là nâng profile, ghi vào `state.md` kèm lý do và một dòng DEC.
 4. PO muốn tắt một nghi thức cho intent này ("intent này không cần reviewer"): ghi vào `state.md` phần Switches kèm nguyên văn. Áp cho intent này, intent sau về mặc định.

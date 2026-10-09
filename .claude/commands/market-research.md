@@ -28,13 +28,13 @@ Chạy theo `.claude/protocol/stage-protocol.md`.
 Xem sản phẩm khác giải bài toán này thế nào, để đặt tên khái niệm đúng, không phát minh lại, và biết đâu là chuẩn người dùng đã quen. AWS: stage 1.2.
 
 ## Ask
-1. So với sản phẩm nào, tối đa ba. Mặc định với LMS: TalentLMS, Docebo, Moodle.
+1. So với sản phẩm nào, tối đa ba. Mặc định lấy danh sách trong `domain.md` mục 4 phần 1.2.
 2. Xem khía cạnh nào: mô hình khái niệm, thuật ngữ, luồng chính, giới hạn, cách tích hợp.
 3. Quyết định nào phụ thuộc vào kết quả này. Không có thì ghi `[S]` và không chạy.
 
 ## Generate
-`competitive-analysis.md`: mỗi sản phẩm một mục ngắn; bảng so sánh theo khía cạnh đã chọn; thuật ngữ nên dùng; điều đáng mượn và vì sao hợp UpLnD; điều không mượn và vì sao; đối chiếu với yêu cầu hiện tại, chỗ nào làm đổi phạm vi hay rule; nguồn kèm link và ngày đọc. Trích đúng, không suy diễn tính năng từ tên menu.
-Thu thập: `help.talentlms.com` chặn tải tự động, lấy bài qua API Zendesk `/api/v2/help_center/en-us/articles/<id>.json`. Bài đã lấy lưu nguyên văn vào `inputs/` để tra lại.
+`competitive-analysis.md`: mỗi sản phẩm một mục ngắn; bảng so sánh theo khía cạnh đã chọn; thuật ngữ nên dùng; điều đáng mượn và vì sao hợp với sản phẩm; điều không mượn và vì sao; đối chiếu với yêu cầu hiện tại, chỗ nào làm đổi phạm vi hay rule; nguồn kèm link và ngày đọc. Trích đúng, không suy diễn tính năng từ tên menu.
+Thu thập: nguồn nào chặn tải tự động thì dùng cách ghi trong `domain.md` mục 4 phần 1.2. Bài đã lấy lưu nguyên văn vào `inputs/` để tra lại.
 
 ## Gate
 Trình bảng so sánh và danh sách điều đáng mượn. Stage kế: 1.4.

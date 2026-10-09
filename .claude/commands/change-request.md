@@ -26,7 +26,7 @@ Hỏi: *thay đổi này làm sai lệch kết luận của stage nào?* Lấy s
 | Chi tiết US, field, rule, màn | 2.42 | chỉ US bị chạm |
 | Chỉ đổi User Guide | user-guide | — |
 
-Ví dụ: *"thêm rule học viên bị Block thì không nộp được bài"* là business rule mới, nhưng nó thêm một nhánh mà Impact Matrix chưa quét, nên re-entry từ 2.3 và chảy qua 2.31, không phải chỉ sửa PRD.
+Ví dụ: một rule mới kiểu "người dùng bị khoá thì không gửi được" là business rule, nhưng nó thêm một nhánh mà Impact Matrix chưa quét, nên re-entry từ 2.3 và chảy qua 2.31, không phải chỉ sửa PRD. Ví dụ của domain ở `domain.md` mục 5.
 
 ## 3. Ghi CR và chụp archive
 - Thêm `CR<n>` vào bảng Change requests của `decisions.md` kèm một DEC ghi nguyên văn PO. Không có file change-requests riêng; phân tích dài thì viết vào `inputs/change-requests.md` và trỏ từ bảng.

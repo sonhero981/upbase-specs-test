@@ -1,6 +1,6 @@
 # Knowledge Base — Sản phẩm UpBase LMS
 
-KB này là **bản chắt lọc** từ nhiều nguồn, dùng làm đầu vào cho Impact Analysis và FS. Đọc KB để biết *có gì, ràng buộc gì, chạm vào đâu*; mở nguồn gốc khi cần chi tiết.
+KB này là **bản chắt lọc** từ nhiều nguồn, dùng làm đầu vào cho Impact Analysis và FS. Đọc KB để biết *có gì, ràng buộc gì, chạm vào đâu*; mở nguồn gốc khi cần chi tiết. Manifest của domain, đọc trước KB: `domain.md` cùng thư mục.
 
 | | |
 |---|---|

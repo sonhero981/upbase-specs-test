@@ -1,8 +1,11 @@
-# User Guide: UpLnD PO/BA AI Workflow
+# User Guide: PO Workflow
 
 Hệ thống này giúp PO và BA đi từ yêu cầu thô tới PRD bàn giao theo template công ty, rồi tới User Guide sau khi Dev làm xong. Bạn nói chuyện với AI bằng tiếng Việt và không cần biết lập trình. Từ 09/10/2026 mọi yêu cầu chạy theo luồng chuẩn hoá từ AWS AI-DLC; ba dự án Group, Gamification và Report-Phase-1 đã chuyển sang luồng này và giữ họ mã cũ trong tài liệu của chúng.
 
-Tài liệu này nói cách thao tác. Phương pháp và lý do của từng stage ở [README.md](README.md); thuật ngữ ở [GLOSSARY.md](GLOSSARY.md).
+Tài liệu này nói cách thao tác. Tài liệu liên quan:
+
+- [README.md](README.md): phương pháp và lý do của từng stage
+- [GLOSSARY.md](GLOSSARY.md): thuật ngữ và họ mã
 
 ## Mục lục
 
@@ -34,7 +37,7 @@ Một yêu cầu là một intent. Intent đi qua hai phase, Ideation để khun
 | 2.42 PRD Generation | PRD, `traceability.md` | gate | `inception/prd/` |
 | Sau khi Dev xong | User Guide | | `user-guide/` |
 
-Stage 2.31, 2.32, 2.41 và 2.42 là phần repo thêm, gọi là plugin `upbase-po`. Sáu stage còn lại lấy từ AWS AI-DLC.
+Stage 2.31, 2.32, 2.41 và 2.42 là phần repo thêm, gọi là plugin `po-workflow`. Sáu stage còn lại lấy từ AWS AI-DLC.
 
 ### Profile quyết định đi mấy stage
 
@@ -72,7 +75,7 @@ git config --global user.email "email@upbase.vn"
 
 ### 2.3 Mở đúng thư mục
 
-Vào File, chọn Open Folder, chọn thư mục `po-workflow-upbase`. Claude Code chỉ đọc được file trong thư mục đang mở; mở sai thì AI không thấy KB và các lệnh không chạy. Kiểm tra: panel Explorer hiện `po-workflow-upbase`, bên dưới có `.claude/` và `CLAUDE.md`.
+Vào File, chọn Open Folder, chọn thư mục `po-workflow`. Claude Code chỉ đọc được file trong thư mục đang mở; mở sai thì AI không thấy KB và các lệnh không chạy. Kiểm tra: panel Explorer hiện `po-workflow`, bên dưới có `.claude/` và `CLAUDE.md`.
 
 ### 2.4 Python cho script kiểm tra
 
@@ -89,20 +92,21 @@ Script `.claude/scripts/po-tools.py` cần Python 3.9 trở lên, Mac có sẵn.
 ## 3. Cấu trúc thư mục
 
 ```
-po-workflow-upbase/
+po-workflow/
 ├── CLAUDE.md                  AI đọc mỗi phiên: phạm vi, quy ước, nguồn tra cứu
 ├── README.md                  phương pháp, từng stage, mapping sang AWS AI-DLC
 ├── USER-GUIDE.md              file này
+├── DOMAIN-SETUP.md            dựng quy trình cho một sản phẩm khác
 ├── GLOSSARY.md                thuật ngữ, tên stage, họ mã
 └── .claude/
     ├── commands/              mỗi stage một lệnh, cộng tiện ích
     ├── protocol/              nghi thức chung: stage, gate, review, câu hỏi, profile
-    ├── templates/             mẫu artifact, kể cả template PRD gốc của công ty
+    ├── templates/             mẫu artifact chung của engine
     ├── verification/          checklist từng stage và tiện ích
     ├── agents/product-lead.md reviewer độc lập
     ├── knowledge/
-    │   ├── domain/            KB sản phẩm UpLnD, 16 file
-    │   └── product/           kiến thức vai PO từ AWS, corner checklist cho LMS
+    │   ├── domain/            domain pack: domain.md, KB UpLnD 16 file, corner checklist, templates/ PRD và User Guide của công ty
+    │   └── product/           kiến thức vai PO từ AWS, không phụ thuộc sản phẩm
     ├── memory/team.md         bài học đã giữ lại tại gate
     ├── scripts/po-tools.py    truy vết, chụp archive, kiểm trạng thái
     └── intents/
@@ -137,7 +141,15 @@ Sau đó bạn đặt tài liệu đầu vào như mô tả yêu cầu, email, b
 
 Mỗi lần gọi, AI đọc `state.md` rồi chạy stage kế tiếp hoặc tiếp tục stage đang dở. Làm nhiều intent song song thì luôn ghi tên intent trong lệnh.
 
-Mỗi stage đi qua bảy bước: AI đọc nền, hỏi bằng questions file, tóm tắt để bạn xác nhận, viết artifact, tự kiểm bằng checklist và reviewer, ghi bài học, rồi trình gate. Cách trả lời ở mục 5.
+Mỗi stage đi qua bảy bước; cách trả lời ở mục 5:
+
+1. AI đọc nền
+2. Hỏi bằng questions file
+3. Tóm tắt để bạn xác nhận
+4. Viết artifact
+5. Tự kiểm bằng checklist và reviewer
+6. Ghi bài học
+7. Trình gate
 
 ### Ideation, profile M và L
 
@@ -171,7 +183,11 @@ Mỗi stage đi qua bảy bước: AI đọc nền, hỏi bằng questions file,
 
 ### Questions file
 
-Mỗi stage có một file câu hỏi, ví dụ `requirements-analysis-questions.md`. Mỗi câu có lựa chọn A, B, C, lựa chọn `X. Khác`, dòng `Chặn: có` khi thiếu đáp án thì không viết tiếp được, và dòng `[Answer]:` để ghi câu trả lời. Lựa chọn AI đề xuất có ghi nguồn.
+Mỗi stage có một file câu hỏi, ví dụ `requirements-analysis-questions.md`. Mỗi câu gồm:
+
+- Lựa chọn A, B, C, và `X. Khác`; lựa chọn AI đề xuất có ghi nguồn
+- Dòng `Chặn: có` khi thiếu đáp án thì không viết tiếp được
+- Dòng `[Answer]:` để ghi câu trả lời
 
 Lần đầu AI hỏi bạn muốn trả lời theo cách nào, rồi dùng cách đó cho cả intent:
 
@@ -216,18 +232,35 @@ Tại gate AI hỏi "Có gì cần nhớ cho lần sau không?" kèm vài quan s
 | `/change-request <intent>` | Đổi hoặc bổ sung yêu cầu giữa chừng; tự kích hoạt khi bạn nói "tôi đổi yêu cầu", "bổ sung" |
 | `/publish-lark <intent> <artifact>` | Đẩy Initiative Brief, HLD Brief, PRD đã duyệt lên Lark |
 | `/generate-user-guide <intent>` | Viết User Guide sau khi Dev xong |
+| `/new-domain <sản phẩm>` | Dựng khung domain pack cho sản phẩm mới, chạy trong repo mới. Xem DOMAIN-SETUP.md |
 
 Lệnh của từng stage như `/intent-capture` hay `/prd-generation` tồn tại, nhưng gọi qua `/po` để state được cập nhật đúng.
 
 ### Đổi yêu cầu giữa chừng
 
-Đừng sửa lẻ tẻ. AI ghi `CR1` vào `decisions.md` kèm lời bạn, chụp artifact bị ảnh hưởng vào `archive/`, đề xuất stage phải quay lại và gate phải duyệt lại, chờ bạn xác nhận, rồi chạy xuôi từ đó và chỉ sửa phần bị chạm. HLD Brief đổi thì lead ký lại; PRD đổi thì publish lại Lark sau khi duyệt.
+Đừng sửa lẻ tẻ. AI làm theo thứ tự:
+
+1. Ghi `CR1` vào `decisions.md` kèm lời bạn
+2. Chụp artifact bị ảnh hưởng vào `archive/`
+3. Đề xuất stage phải quay lại và gate phải duyệt lại, chờ bạn xác nhận
+4. Chạy xuôi từ đó, chỉ sửa phần bị chạm
+
+HLD Brief đổi thì lead ký lại; PRD đổi thì publish lại Lark sau khi duyệt.
 
 ## 7. Knowledge
 
-KB sản phẩm có 16 file trong `.claude/knowledge/domain/`, bắt đầu từ `00-index.md`: `01` đến `11` nghiệp vụ, `12` data model, `13` mail event, `14` API surface, `15` định hướng và ràng buộc đa tenant, `16` nguyên tắc mô hình hoá.
+Mọi thứ riêng của sản phẩm nằm trong domain pack `.claude/knowledge/domain/`. File AI đọc đầu tiên là `domain.md`, manifest cho biết sản phẩm là gì, nguồn nào còn sống, KB nào trả lời câu gì, và mỗi stage cần dữ kiện gì. KB sản phẩm có 16 file, bắt đầu từ `00-index.md`:
 
-Kiến thức vai PO nằm trong `.claude/knowledge/product/`, chép từ AWS AI-DLC. Trong đó `corner-checklist.md` là danh sách góc hay sót viết riêng cho LMS, như lớp đã kết thúc, học viên bị Block, một người nhiều nhóm, dữ liệu cũ trước ngày bật tính năng, mail hàng loạt. AI quét nó ở 2.3 và 2.42.
+- `01` đến `11`: nghiệp vụ theo module
+- `12`: data model
+- `13`: mail event
+- `14`: API surface, kể cả vùng KB chưa phủ
+- `15`: định hướng sản phẩm và ràng buộc đa tenant
+- `16`: nguyên tắc mô hình hoá
+
+Cùng thư mục có `corner-checklist.md`, danh sách góc hay sót viết riêng cho LMS, như lớp đã kết thúc, học viên bị Block, một người nhiều nhóm, dữ liệu cũ trước ngày bật tính năng, mail hàng loạt; AI quét nó ở 2.3 và 2.42. Thư mục con `templates/` chứa template PRD và User Guide theo chuẩn công ty.
+
+Kiến thức vai PO nằm trong `.claude/knowledge/product/`, chép từ AWS AI-DLC và không phụ thuộc sản phẩm. Muốn dùng quy trình cho một sản phẩm hay công ty khác, đọc [DOMAIN-SETUP.md](DOMAIN-SETUP.md) rồi chạy `/new-domain` trong một repo mới; engine giữ nguyên, chỉ thay domain pack.
 
 ### Quy ước ký hiệu
 

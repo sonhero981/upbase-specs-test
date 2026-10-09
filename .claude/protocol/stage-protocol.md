@@ -17,7 +17,7 @@ Ngay sau frontmatter của Claude Code (`description`, `argument-hint`), command
 | Stage | Mã và tên: `2.3 Requirements Analysis` |
 | Slug | kebab-case, trùng tên file command và tên thư mục artifact |
 | Phase | `ideation` hoặc `inception` |
-| Plugin | `upbase-po` với stage repo thêm (2.31, 2.32, 2.41, 2.42). Bỏ trống với stage gốc AWS |
+| Plugin | `po-workflow` với stage repo thêm (2.31, 2.32, 2.41, 2.42). Bỏ trống với stage gốc AWS |
 | Execution | `always`, hoặc `conditional` kèm điều kiện |
 | Lead | Agent dẫn stage, luôn là `product` trong phạm vi PO. Với 2.41 ghi thêm lead các team góp và ký |
 | Produces | Artifact sinh ra, kèm questions file |
@@ -33,7 +33,7 @@ Ngay sau frontmatter của Claude Code (`description`, `argument-hint`), command
 ### 1. Load
 - Đọc `state.md` của intent. Stage này phải là stage kế tiếp hoặc stage đang dở. Nếu không, dừng và hỏi PO.
 - Đọc `decisions.md`, chỉ những dòng có cột *Read when* khớp stage hoặc chủ đề đang làm.
-- Đọc `intent.md`, artifact trong Consumes, file KB mà command liệt kê, `.claude/memory/team.md`.
+- Đọc `.claude/knowledge/domain/domain.md` (manifest của domain, mục của stage đang chạy), `intent.md`, artifact trong Consumes, file KB mà command và manifest liệt kê, `.claude/memory/team.md`.
 - Tra `decisions.md` và mọi questions file trước đó. Không hỏi lại câu đã có đáp án. Còn mơ hồ thì hỏi hẹp, nêu đáp án cũ.
 - Đánh dấu stage `[-]` trong `state.md`. Stage đang `[-]` hoặc `[R]` từ phiên trước: đọc questions file, tiếp từ câu còn trống hoặc bước đang dở. Stage `[?]`: trình lại gate, không làm lại.
 

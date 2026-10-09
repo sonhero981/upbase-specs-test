@@ -20,7 +20,7 @@ argument-hint: <intent-slug>
 | Summary confirmation | required |
 | Template | `.claude/templates/scope-document.md` |
 | Checklist | `.claude/verification/scope-definition.md` |
-| Knowledge | KB `00-index.md` · `14-api-surface.md` §1 và §2 (vùng KB chưa phủ) · `15-product-direction.md` · product: `prioritization-frameworks.md` §MoSCoW, `product-guide.md` §MVP Definition Criteria |
+| Knowledge | `.claude/knowledge/domain/domain.md` mục 3 (vùng KB chưa phủ) và mục 4 phần 1.4 · product: `prioritization-frameworks.md` §MoSCoW, `product-guide.md` §MVP Definition Criteria |
 
 Chạy theo `.claude/protocol/stage-protocol.md`.
 
@@ -28,7 +28,7 @@ Chạy theo `.claude/protocol/stage-protocol.md`.
 Vạch biên: làm gì, không làm gì, để sau. Chia nhu cầu thành Proto-Unit, là hạng mục của intent backlog, ứng viên để Dev chia Unit thật ở stage 2.7. AWS: stage 1.4.
 
 ## Load
-intent-statement; KB 14 §1 và §2 để biết vùng chưa phủ; `decisions.md`.
+intent-statement; vùng KB chưa phủ theo `domain.md` mục 3; `decisions.md`.
 
 ## Ask
 1. Phạm vi nhỏ nhất vẫn có giá trị là gì.

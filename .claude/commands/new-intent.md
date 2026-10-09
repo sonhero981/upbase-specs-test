@@ -27,7 +27,7 @@ Có mô tả yêu cầu trong `$ARGUMENTS` thì ghi nguyên văn vào `inputs/re
 
 ## 0.2 Detection
 Quét nhanh để chọn profile, không phải Impact Analysis:
-- Đọc `inputs/`, `.claude/knowledge/domain/00-index.md`, `.claude/memory/team.md`.
+- Đọc `inputs/`, `.claude/knowledge/domain/domain.md`, index KB mà nó trỏ tới, `.claude/memory/team.md`.
 - Đoán module, màn, bảng, mail event bị chạm. Kiểm vùng có thuộc phần KB chưa phủ không, có tính năng Hidden không, có tích hợp ngoài không, có dữ liệu cũ cần migration không.
 - Tìm intent liên quan: so module bị chạm với `intent.md` của intent khác. Có thì ghi vào Related intents.
 - Điền `intent.md`: Request, Product boundary, Related intents, KB cần đọc. Figma và Jira để trống cho PO.

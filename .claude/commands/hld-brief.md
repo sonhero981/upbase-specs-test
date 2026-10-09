@@ -1,5 +1,5 @@
 ---
-description: Stage 2.41 HLD Brief & Alignment, plugin upbase-po của luồng v2. Tài liệu ba trang để họp liên team; lead Design, Dev, QA ghi định hướng trực tiếp trong repo; sign-off rồi mới viết PRD; Lark là bản cuối. Gọi qua /po
+description: Stage 2.41 HLD Brief & Alignment, plugin po-workflow của luồng v2. Tài liệu ba trang để họp liên team; lead Design, Dev, QA ghi định hướng trực tiếp trong repo; sign-off rồi mới viết PRD; Lark là bản cuối. Gọi qua /po
 argument-hint: <intent-slug>
 ---
 # 2.41 HLD Brief & Alignment
@@ -9,7 +9,7 @@ argument-hint: <intent-slug>
 | Stage | 2.41 HLD Brief & Alignment |
 | Slug | hld-brief |
 | Phase | inception |
-| Plugin | `upbase-po` |
+| Plugin | `po-workflow` |
 | Execution | always ở M và L |
 | Lead | product. Design lead, Tech lead, QA lead là người góp và ký |
 | Produces | `inception/hld-brief/hld-brief.md` · `hld-brief-questions.md` |

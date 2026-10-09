@@ -1,20 +1,20 @@
 # Glossary
 
-Thuật ngữ và họ mã của po-workflow-upbase, chuẩn theo AWS AI-DLC Workflows v2.10, file `docs/guide/glossary.md` của repo `awslabs/aidlc-workflows`. Phần repo thêm ngoài AWS đóng gói thành plugin `upbase-po`, theo đúng cách AWS cho phép thêm stage. Áp cho intent trong `.claude/intents/`. Dự án cũ trong `.claude/projects/` giữ thuật ngữ cũ tới khi xong.
+Thuật ngữ và họ mã của po-workflow, chuẩn theo AWS AI-DLC Workflows v2.10, file `docs/guide/glossary.md` của repo `awslabs/aidlc-workflows`. Phần repo thêm ngoài AWS đóng gói thành plugin `po-workflow`, theo đúng cách AWS cho phép thêm stage. Áp cho intent trong `.claude/intents/`. Dự án cũ trong `.claude/projects/` giữ thuật ngữ cũ tới khi xong.
 
 ## Khung
 | Thuật ngữ | Nghĩa ở đây | Nguồn |
 |---|---|---|
 | AI-DLC | AI-Driven Development Life Cycle, phương pháp của AWS. Repo này theo phase Ideation và phần Inception do Product Agent dẫn | AWS |
-| Space | Toàn bộ repo, một team | AWS |
+| Space | Toàn bộ repo, một team. Mỗi domain một space, xem DOMAIN-SETUP.md | AWS |
 | Intent | Một yêu cầu đi trọn vòng phân tích, có thư mục riêng | AWS. Thay "project" |
 | Phase | Ideation, Inception. Construction và Operation ngoài phạm vi | AWS |
 | Stage | Một bước có artifact và approval gate riêng, đánh số theo AWS: `1.1`, `2.3`. Stage repo thêm mang số thập phân `2.31`, `2.32`, `2.41`, `2.42`, là số gợi ý thứ tự theo quy ước plugin của AWS, không đánh lại số stage gốc | AWS |
-| Plugin stage | Stage repo thêm, gói trong plugin `upbase-po`: 2.31, 2.32, 2.41, 2.42. Ghi `plugin: upbase-po` trong metadata | AWS gọi gói stage thêm vào là plugin. Ta không có bước compose, nên đây là quy ước ghi nhãn |
+| Plugin stage | Stage repo thêm, gói trong plugin `po-workflow`: 2.31, 2.32, 2.41, 2.42. Ghi `plugin: po-workflow` trong metadata | AWS gọi gói stage thêm vào là plugin. Ta không có bước compose, nên đây là quy ước ghi nhãn |
 | Workflow profile | `S`, `M`, `L`. Tập stage, công tắc nghi thức, depth | AWS gọi là scope trong engine. Không dùng chữ Scope vì đã dùng cho phạm vi tính năng |
 | Depth | Minimal, Standard, Comprehensive. Mức chi tiết artifact | AWS |
 | Approval gate | Điểm duyệt cuối mỗi stage | AWS. Thay "Gate 1 đến 4" và "điểm dừng" |
-| Alignment gate | Gate của 2.41, cần sign-off ba lead | Plugin `upbase-po` |
+| Alignment gate | Gate của 2.41, cần sign-off ba lead | Plugin `po-workflow` |
 | Summary confirmation | Xác nhận tóm tắt câu trả lời trước khi sinh artifact | AWS |
 | Field Intake | Summary confirmation riêng của 2.42 về field, rule, validate | Repo |
 | Questions file | `<stage>-questions.md`, nguồn sự thật của câu trả lời | AWS |
@@ -24,13 +24,16 @@ Thuật ngữ và họ mã của po-workflow-upbase, chuẩn theo AWS AI-DLC Wor
 | Decision Log | `decisions.md` | AWS |
 | Memory | `memory.md` của intent, `.claude/memory/team.md` của repo | AWS |
 | Learnings | Vòng học tại gate | AWS |
-| Knowledge | KB sản phẩm, hiện ở `.claude/knowledge/domain/`, và kiến thức vai PO | AWS |
+| Knowledge | Domain pack ở `.claude/knowledge/domain/` và kiến thức vai PO ở `.claude/knowledge/product/` | AWS |
+| Engine | Phần không phụ thuộc sản phẩm: protocol, command, template chung, checklist, agent, script | Repo |
+| Domain pack | Mọi thứ riêng của sản phẩm: manifest `domain.md`, KB, corner checklist, template công ty. Đổi sản phẩm là thay thư mục này, engine giữ nguyên | Repo |
 | Live source · Pinned record · Last verified | Nguồn sống, bản chốt, ngày đối chiếu của KB | Repo |
 | Product Lead review | Review độc lập, READY hoặc NOT-READY | AWS |
 | Verification checklist | Checklist tự kiểm của stage, mục blocking | AWS gọi là compartment 2. Không gọi là Sensor, Sensor là script |
 | Archive | Bản chụp tại gate và trước CR, không sửa | AWS |
 | Initiative Brief | Tài liệu chốt hướng một trang, stage 1.7 | AWS. Thay BRD |
-| HLD Brief | Tài liệu đồng thuận liên team, stage 2.41 | Plugin `upbase-po` |
+| HLD Brief | Tài liệu đồng thuận liên team, stage 2.41 | Plugin `po-workflow` |
+| Mob, Mob Elaboration | Không dùng làm tên stage hay artifact. Hai nghĩa ở AWS: bài blog AI-DLC (Raja SP, 07/2025) gọi Mob Elaboration là cả team người cùng kiểm câu hỏi và đề xuất của AI trong Inception; bản Workflows v2.10 gọi mob là chế độ nhiều agent ở stage 2.4 User Stories, chỉ bật ở scope `enterprise`. Ở đây 2.41 HLD Brief & Alignment là bản bằng người thật của nghĩa trong bài blog; mob agent của v2.10 không chạy | AWS, hai nguồn |
 | Proto-Unit `PU` | Hạng mục trong intent backlog, sinh ở stage 1.4, ứng viên để Dev chia Unit thật ở stage 2.7. Ở 2.4 mỗi US gắn vào một Proto-Unit | AWS, stage 1.4 Scope Definition. Thay Unit, tránh trùng `U1` Dev sinh ở 2.7 |
 | Impact Analysis · Solution Options · Hidden · KB · CR · PRD · US · BR | Giữ nguyên | |
 
@@ -48,7 +51,16 @@ Thuật ngữ và họ mã của po-workflow-upbase, chuẩn theo AWS AI-DLC Wor
 | 2.41 | HLD Brief & Alignment | hld-brief.md | mới |
 | 2.42 | PRD Generation | prd.md, traceability.md | 9B, 9C, Gate 4 |
 
-Tiện ích: `/new-intent`, `/po`, `/po-status`, `/po-review`, `/change-request`, `/publish-lark`, `/generate-user-guide`. Script: `.claude/scripts/po-tools.py` với `trace` (truy vết FR, US, BR), `archive` (chụp bản duyệt), `status` (kiểm lệch state và đĩa).
+Tiện ích:
+
+- `/new-intent`: tạo intent, chọn profile
+- `/po`: chạy stage kế tiếp hoặc tiếp tục
+- `/po-status`: trạng thái mọi intent, kiểm lệch
+- `/po-review`: review độc lập bằng agent Product Lead
+- `/change-request`: đổi yêu cầu sau khi đã duyệt
+- `/publish-lark`: đẩy artifact đã duyệt lên Lark
+- `/generate-user-guide`: viết User Guide sau khi Dev xong
+- Script `.claude/scripts/po-tools.py`: `trace` truy vết FR, US, BR; `archive` chụp bản duyệt; `status` kiểm lệch state và đĩa
 
 ## Họ mã
 | Họ | Dạng | Phạm vi | Ví dụ | Thay cho |
@@ -85,3 +97,5 @@ Quy tắc: mã đã cấp không đánh lại. Trích mã thì kèm nội dung. 
 - "Sensor" là script kiểm tự động. Checklist tự kiểm gọi là "verification checklist".
 - "Bolt", "swarm", "walking skeleton" không dùng.
 - "Gate 1" đến "Gate 4" là tên cũ. Gọi theo stage: "gate của 2.3".
+- Dữ kiện sản phẩm không ghi vào command hay checklist. Ghi vào `domain.md` hoặc KB rồi để command trỏ tới.
+- "Mob" không phải tên của 2.41. Buổi ký HLD Brief tương đương Mob Elaboration trong bài blog AWS, nhưng tên stage giữ là HLD Brief & Alignment để không trùng chữ mob của v2.10 ở 2.4.

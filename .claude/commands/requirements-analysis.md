@@ -20,7 +20,7 @@ argument-hint: <intent-slug>
 | Summary confirmation | required. S: off |
 | Template | `.claude/templates/requirements.md` |
 | Checklist | `.claude/verification/requirements-analysis.md` |
-| Knowledge | KB `00-index.md` · `01` đến `11` theo module bị chạm · `13-mail-events.md` · `14-api-surface.md` §1 và §2 · `12-data-model.md` khi chạm dữ liệu · product: `requirements-guide.md`, `requirements-elicitation.md` §Validation Checklist, `corner-checklist.md` |
+| Knowledge | `.claude/knowledge/domain/domain.md` mục 3 và mục 4 phần 2.3: KB theo module bị chạm, sự kiện và mail, API surface, data model khi chạm dữ liệu · product: `requirements-guide.md`, `requirements-elicitation.md` §Validation Checklist, `corner-checklist.md` |
 
 Chạy theo `.claude/protocol/stage-protocol.md`.
 
@@ -29,13 +29,13 @@ Biến phạm vi thành yêu cầu có mã ổn định: FR, NFR, ràng buộc, 
 
 ## Load
 - S: đọc `inputs/` trực tiếp, viết intent summary gọn trong requirements.
-- Tra KB cho từng hạng mục của scope: **đã có chưa** (KB 01 đến 11); **rule hiện có chi phối** (`BR-*`, `KB-*`); **Hidden** (KB 00 mục Trạng thái); **mail event liên quan**, đang bật hay tắt (KB 13); **vùng KB chưa phủ** (KB 14 §1 và §2) thì ghi `❓PO`, không kết luận.
-- Phát hiện yêu cầu trùng tính năng đã có: nêu ngay, kèm mã KB, không để tới Impact Analysis. Ví dụ "thêm thông báo khi chấm xong" trong khi mail số 19 đã tồn tại nhưng đang tắt.
-- Chạm dữ liệu: đọc lại nguồn sống nếu quá một tháng kể từ Last verified của KB 12.
+- Tra KB cho từng hạng mục của scope theo bản đồ KB trong `domain.md`: **đã có chưa** (file theo module); **rule hiện có chi phối** (`BR-*`, `KB-*`); **Hidden** (index mục Trạng thái); **sự kiện, mail liên quan**, đang bật hay tắt; **vùng KB chưa phủ** thì ghi `❓PO`, không kết luận.
+- Phát hiện yêu cầu trùng tính năng đã có: nêu ngay, kèm mã KB, không để tới Impact Analysis. Ví dụ của domain đang cài ở `domain.md` mục 4 phần 2.3.
+- Chạm dữ liệu: đọc lại nguồn sống nếu quá một tháng kể từ ngày đối chiếu của file data model.
 
 ## Ask
 Chỉ hỏi lỗ hổng còn lại sau khi đã tra KB. Quét sáu chiều của AWS để tìm lỗ hổng: hành vi chức năng; phi chức năng đo được; kịch bản người dùng và góc; bối cảnh nghiệp vụ; tích hợp và dữ liệu; chất lượng.
-Góc hay sót: quét từng thành phần theo `.claude/knowledge/product/corner-checklist.md`, phần Điều kiện theo bề mặt. Mỗi góc áp dụng thành FR, assumption có lý do, hoặc out of scope; không thành câu hỏi nếu một mặc định hợp lý giải quyết được.
+Góc hay sót: quét từng thành phần theo `.claude/knowledge/domain/corner-checklist.md`, phần Điều kiện theo bề mặt. Mỗi góc áp dụng thành FR, assumption có lý do, hoặc out of scope; không thành câu hỏi nếu một mặc định hợp lý giải quyết được.
 Gợi ý câu hỏi: hành vi nào phải giữ nguyên; dữ liệu bắt buộc và dữ liệu phải lưu lại; vai nào làm gì; hằng số nào cứng, nào cấu hình; ngoại lệ xử lý ra sao; yêu cầu trùng thứ đã có thì mở rộng hay làm mới.
 Không hỏi kỹ thuật cho Dev. Depth Minimal ở S: chỉ câu chặn.
 

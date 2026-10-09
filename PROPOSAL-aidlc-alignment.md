@@ -307,6 +307,8 @@ Chép từ AWS vào `knowledge/product/`, ghi một dòng nguồn: requirements-
 
 ---
 
+**Bổ sung 09/10/2026, tách engine và domain pack:** mọi dữ kiện riêng của sản phẩm chuyển vào `.claude/knowledge/domain/` với manifest `domain.md`; corner checklist và template PRD, User Guide của công ty cũng nằm trong đó, bản gốc AWS giữ ở `knowledge/product/corner-checklist-aws.md`. Command chỉ trỏ tới manifest. Thêm `DOMAIN-SETUP.md` và lệnh `/new-domain`. Plugin đổi tên `upbase-po` thành `po-workflow`, repo đổi tên `po-workflow-upbase` thành `po-workflow`. Các đoạn trên trong đề xuất này giữ tên cũ như lúc duyệt.
+
 ### 2.15 HLD Brief, tài liệu đồng thuận liên team
 
 Bổ sung ngày 09/10/2026 theo yêu cầu PO.
@@ -327,7 +329,7 @@ Bổ sung ngày 09/10/2026 theo yêu cầu PO.
 | Dùng khi họp | Mục 1 đọc trong một phút. Mục 7 là agenda. Mục 12 là biên bản |
 | Văn phong | Cho người đọc, không có từ ngữ quy trình nội bộ, mã nào cũng kèm nội dung, không viết tắt |
 
-**Bổ sung 09/10/2026 từ `mob-review.md`** (báo cáo họp Mob Review của dự án HRM, cùng ý với Mob Elaboration của AWS): mỗi vai có "điểm cần đặc biệt lưu ý" do người tổng hợp gợi trước, nên đầu mục 8, 9, 10 có tối đa năm dòng AI gợi cho lead; rủi ro đã chấp nhận là điều kiện chặn release chứ không phải backlog, nên mục 6 thêm bảng rủi ro, giả định, finding còn treo kèm điều kiện; quyết định họp có ba mức chứ không chỉ đồng ý, nên mục 12 thêm trạng thái "Yêu cầu sửa" và gate coi nó là Request Changes; bản tổng hợp không được sửa thẳng, sửa ở nguồn rồi tổng hợp lại, ghi thành ghi chú đầu template. Không mượn phần kiến trúc, API contract, database của mob-review vì ngoài phạm vi PO.
+**Bổ sung 09/10/2026 từ `mob-review.md`** (báo cáo họp Mob Review của dự án HRM, cùng ý với Mob Elaboration của AWS): mỗi vai có "điểm cần đặc biệt lưu ý" do người tổng hợp gợi trước, nên đầu mục 8, 9, 10 có tối đa năm dòng AI gợi cho lead; rủi ro đã chấp nhận là điều kiện chặn release chứ không phải backlog, nên mục 6 thêm bảng rủi ro, giả định, finding còn treo kèm điều kiện; quyết định họp có ba mức chứ không chỉ đồng ý, nên mục 12 thêm trạng thái "Yêu cầu sửa" và gate coi nó là Request Changes; bản tổng hợp không được sửa thẳng, sửa ở nguồn rồi tổng hợp lại, ghi thành ghi chú đầu template. Không mượn phần kiến trúc, API contract, database của mob-review vì ngoài phạm vi PO. PO quyết cùng ngày: giữ tên stage HLD Brief & Alignment, không đổi thành Mob Elaboration, vì trong v2.10 chữ mob là chế độ nhiều agent ở 2.4; nghĩa hai nguồn ghi ở GLOSSARY mục Mob.
 
 **Mapping sang AWS:** Initiative Brief ở stage 1.7 là bản một trang kết thúc Ideation. HLD Brief là bản một trang kết thúc phần Inception của PO. AWS cho ba agent Design, Developer, Quality góp ý song song vào User Stories theo kiểu mob và dùng Domain Design, Refined Mockups cho tầng thiết kế cao. Ở đây mob là người thật, nên cần sign-off nhiều vai, điều AWS không có. Ghi rõ là plugin stage.
 

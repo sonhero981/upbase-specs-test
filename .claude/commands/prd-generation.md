@@ -1,5 +1,5 @@
 ---
-description: Stage 2.42 PRD Generation, plugin upbase-po của luồng v2. Field Intake rồi PRD theo template công ty, phần đầu chép từ HLD Brief. Gọi qua /po
+description: Stage 2.42 PRD Generation, plugin po-workflow của luồng v2. Field Intake rồi PRD theo template công ty, phần đầu chép từ HLD Brief. Gọi qua /po
 argument-hint: <intent-slug>
 ---
 # 2.42 PRD Generation
@@ -9,16 +9,16 @@ argument-hint: <intent-slug>
 | Stage | 2.42 PRD Generation |
 | Slug | prd-generation |
 | Phase | inception |
-| Plugin | `upbase-po` |
+| Plugin | `po-workflow` |
 | Execution | always |
 | Lead | product |
 | Produces | `inception/prd/prd.md` · `field-intake-questions.md` · `traceability.md` · `verification/phase-check-inception.md` |
-| Consumes | `hld-brief.md` đã approve (M, L bắt buộc) · `stories.md` · `requirements.md` · `impact-matrix.md` · `solution-options.md` · `decisions.md` · `design/` và Figma · KB · Swagger `components.schemas` · schema Lark |
+| Consumes | `hld-brief.md` đã approve (M, L bắt buộc) · `stories.md` · `requirements.md` · `impact-matrix.md` · `solution-options.md` · `decisions.md` · `design/` và Figma · KB, API spec và schema theo `domain.md` mục 4 phần 2.42 |
 | Requires | hld-brief ở M, L. requirements-analysis ở S |
 | Profiles | S, M, L |
 | Reviewer | product-lead |
 | Summary confirmation | Field Intake, bắt buộc ở mọi profile |
-| Template | `.claude/templates/prd.md` · `.claude/templates/traceability.md` |
+| Template | `.claude/knowledge/domain/templates/prd.md` (template công ty, theo `domain.md`) · `.claude/templates/traceability.md` |
 | Checklist | `.claude/verification/prd-generation.md` |
 | Knowledge | KB theo Impact Matrix · product: `corner-checklist.md` khi viết acceptance criteria và business rule, `user-story-patterns.md` §Given/When/Then |
 
@@ -33,15 +33,15 @@ M, L: thiếu HLD Brief approved thì dừng. S: dùng requirements và inputs.
 ## Ask là Field Intake, Consolidated Summary của stage
 Tra trước khi hỏi, để phân biệt field đã tồn tại với field thật sự mới:
 1. Impact Matrix: entity và màn bị chạm.
-2. KB 12: bảng, khoá ngoại.
-3. Swagger `components.schemas`: field hiện có, kiểu, required, enum. Nguồn tốt nhất cho field.
-4. KB 01 đến 11: rule chi phối.
+2. File data model theo `domain.md`: bảng, khoá ngoại.
+3. API spec, nguồn field ghi trong `domain.md` mục 4 phần 2.42: field hiện có, kiểu, required, enum.
+4. KB theo module: rule chi phối.
 5. Phân loại mỗi màn: **A** mới hoàn toàn, **B** sửa màn có sẵn, **C** chỉ đọc.
-Một bảng duy nhất trong `field-intake-questions.md`: Màn · Field · Hiện có? · Kiểu · Bắt buộc · Giá trị hợp lệ · Validate · Rule chi phối · Ghi chú. Điền sẵn `[đề xuất]` từ KB và Swagger; `❓PO` chỗ không suy được. Màn danh sách hỏi thêm filter, search, sort, pagination, cột hiển thị. Field hiện có chỉ hỏi delta và migration.
+Một bảng duy nhất trong `field-intake-questions.md`: Màn · Field · Hiện có? · Kiểu · Bắt buộc · Giá trị hợp lệ · Validate · Rule chi phối · Ghi chú. Điền sẵn `[đề xuất]` từ KB và API spec; `❓PO` chỗ không suy được. Màn danh sách hỏi thêm filter, search, sort, pagination, cột hiển thị. Field hiện có chỉ hỏi delta và migration.
 PO duyệt bảng là xác nhận tóm tắt. `❓PO` chưa quyết thành OQ, không bịa. S cũng phải qua bước này, đây là chỗ hay sai nhất kể cả với yêu cầu nhỏ.
 
 ## Generate
-`prd.md` theo `.claude/templates/prd.md`:
+`prd.md` theo `.claude/knowledge/domain/templates/prd.md`; tên mục chủ template cấm đổi ghi ở `domain.md` mục 4 phần 2.42:
 - **Phần đầu chép từ HLD Brief**: Problem, Analytics, Objective, Out of scope cấp tính năng, Stakeholder, Metrics success, Solution gồm Technical Direction lấy từ mục 9 của brief và Data to Retain, Proto-Units từ mục 5. Không viết lại, chỉ chỉnh câu cho khớp template. S không có brief: viết từ requirements.
 - **References**: link HLD Brief, Figma, tài liệu liên quan. Tài khoản staging để trống, người viết điền sau.
 - **Specific Requirement**: mỗi US sáu mục theo template công ty: User story, Pre-Condition, Scenario, Acceptance criteria gồm bảng UI dạng A hoặc B với cột Yêu cầu đủ định dạng, placeholder, options, mặc định, disable, tooltip, validate, hành vi; Business rule mã `BR<US>.<n>`, rule chạm tính năng có sẵn dẫn mã KB; Data Field; NFR; Out of scope; Conner case để trống cho QA. Viết liên tục, không dừng giữa từng US, trừ US rủi ro cao.

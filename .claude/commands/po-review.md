@@ -12,4 +12,4 @@ Theo `.claude/protocol/review-protocol.md`. Không sửa artifact. Không ghi `s
 4. Đọc file review, trình verdict, bảng finding, summary. PO quyết: sửa, hoặc ghi disposition vào `decisions.md` (Accepted risk, Rejected kèm lý do, Reopened).
 
 ## Chế độ shadow, tài liệu người khác viết
-Trước khi gọi agent: tóm tắt tài liệu để PO xác nhận hiểu đúng. Agent nhận thêm nhiệm vụ: quét KB, Swagger, so với hệ thống thật; findings chia ba nhóm sai, thiếu, mơ hồ; phụ lục A nguồn đã đọc kể cả chưa tra được; phụ lục B câu AI tự trả lời được kèm nguồn và độ chắc. Mục đích là tìm chỗ sai so với hệ thống thật, không chấm cách viết.
+Trước khi gọi agent: tóm tắt tài liệu để PO xác nhận hiểu đúng. Agent nhận thêm nhiệm vụ: quét KB, API spec, so với hệ thống thật; findings chia ba nhóm sai, thiếu, mơ hồ; phụ lục A nguồn đã đọc kể cả chưa tra được; phụ lục B câu AI tự trả lời được kèm nguồn và độ chắc. Mục đích là tìm chỗ sai so với hệ thống thật, không chấm cách viết.

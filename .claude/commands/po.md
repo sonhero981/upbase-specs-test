@@ -38,7 +38,7 @@ Parked: nói "intent đang dừng từ <ngày>", hỏi có tiếp tục không, 
 | "tôi đổi yêu cầu", "bổ sung" | Chuyển sang `/change-request` |
 
 ## 5. Trước khi chạy một stage
-Đọc theo thứ tự: `.claude/protocol/stage-protocol.md`, command của stage, `state.md`, `decisions.md` theo cột Read when, `intent.md`, `.claude/memory/team.md`. Rồi mới bắt đầu bước Load của stage.
+Đọc theo thứ tự: `.claude/protocol/stage-protocol.md`, `.claude/knowledge/domain/domain.md`, command của stage, `state.md`, `decisions.md` theo cột Read when, `intent.md`, `.claude/memory/team.md`. Rồi mới bắt đầu bước Load của stage.
 
 ## Luôn
 - Trước stage đầu tiên của một phiên, nói một dòng: intent nào, profile, stage nào, cách trả lời đang dùng.
