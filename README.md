@@ -61,6 +61,27 @@ Số stage giữ nguyên của AWS: 1.1, 1.2, 1.4, 1.7 thuộc Ideation; 2.3, 2.
 
 Phần còn lại của tài liệu đi qua từng stage. Mỗi stage được tả theo cùng một khung: stage này để làm gì, AI làm gì, PO làm gì, artifact ra sao, gate hỏi gì, và chỗ nào khác AWS.
 
+### Chuỗi đầu ra: từ Proto-Unit tới PRD, rồi tới Unit của Dev
+
+PRD là đầu ra cuối của phạm vi PO và là cái gói bọc mọi thứ phía trước. Thứ tự tạo ra đi từ Proto-Unit ở 1.4, qua FR ở 2.3, tới user story ở 2.4; acceptance criteria chỉ được viết ở 2.42, ngay trong PRD. Unit thật không thuộc phạm vi PO: Dev chốt ở 2.7 từ các Proto-Unit sau khi nhận PRD.
+
+```mermaid
+flowchart LR
+    subgraph PO["PO, trong repo này"]
+        direction LR
+        S14["1.4 Scope Definition<br/>In, Out, Proto-Unit PU1, PU2"] --> S23["2.3 Requirements<br/>FR1, FR2, NFR1"]
+        S23 --> S24["2.4 User Stories<br/>US1 gắn PU1, phủ FR1<br/>chưa có acceptance criteria"]
+        S24 --> S242["2.42 PRD<br/>mỗi US có AC và BR1.1, BR1.2<br/>Traceability FR → US → BR"]
+    end
+    subgraph DEV["Dev, sau bàn giao"]
+        direction LR
+        U["2.7 Unit thật<br/>tách, gộp từ Proto-Unit"] --> C["Construction theo Unit<br/>US và AC là căn cứ nghiệm thu"]
+    end
+    S242 ==>|"bàn giao"| U
+```
+
+Đọc PRD thì thấy chiều ngược lại: PRD chứa Proto-Unit, Proto-Unit chứa US, US chứa acceptance criteria và business rule. Sơ đồ cấu trúc đó ở mục 2.42.
+
 ## Khởi tạo: /new-intent
 
 Tương đương ba stage Initialization của AWS, gộp làm một lệnh chạy một mạch và chỉ hỏi PO ở cuối.
@@ -350,11 +371,11 @@ Stage của plugin. AWS coi PRD là tài liệu đầu vào và không sinh nó;
 Bước Ask là Field Intake. AI tra trước khi hỏi:
 
 - Impact Matrix: entity và màn bị chạm
-- KB 12: bảng và khoá ngoại
-- `components.schemas` trong Swagger: field hiện có kèm kiểu, bắt buộc và enum
-- KB 01 đến 11: rule chi phối
+- File data model trong KB: bảng và khoá ngoại
+- API spec, với UpLnD là `components.schemas` trong Swagger: field hiện có kèm kiểu, bắt buộc và enum
+- KB theo module: rule chi phối
 
-Mỗi màn được phân loại A mới hoàn toàn, B sửa màn có sẵn, C chỉ đọc. Kết quả là một bảng duy nhất trong `field-intake-questions.md` với cột màn, field, hiện có hay chưa, kiểu, bắt buộc, giá trị hợp lệ, validate, rule chi phối; AI điền sẵn đề xuất từ KB và Swagger, để `❓PO` ở chỗ không suy được. Field hiện có chỉ hỏi phần thay đổi và migration. PO duyệt bảng này là bước xác nhận tóm tắt của stage, và profile S cũng phải qua, vì đây là chỗ hay sai nhất kể cả với yêu cầu nhỏ.
+Mỗi màn được phân loại A mới hoàn toàn, B sửa màn có sẵn, C chỉ đọc. Kết quả là một bảng duy nhất trong `field-intake-questions.md` với cột màn, field, hiện có hay chưa, kiểu, bắt buộc, giá trị hợp lệ, validate, rule chi phối; AI điền sẵn đề xuất từ KB và API spec, để `❓PO` ở chỗ không suy được. Field hiện có chỉ hỏi phần thay đổi và migration. PO duyệt bảng này là bước xác nhận tóm tắt của stage, và profile S cũng phải qua, vì đây là chỗ hay sai nhất kể cả với yêu cầu nhỏ.
 
 PRD viết theo template công ty:
 
@@ -370,6 +391,27 @@ Phần Specific Requirement viết liên tục từng US với sáu mục:
 - Acceptance criteria, gồm bảng UI dạng A hoặc B, business rule mã `BR<US>.<n>` dẫn mã KB khi chạm tính năng có sẵn, data field và NFR
 - Out of scope
 - Conner case, để trống cho QA
+
+Cấu trúc chứa nhau của PRD theo mục của template, cũng là thứ tự Dev đọc khi nhận bàn giao:
+
+```mermaid
+flowchart TB
+    subgraph PRD["PRD"]
+        direction TB
+        PUS["Proto-Units<br/>PU1 gồm US1, US2 · PU2 gồm US3<br/>gợi ý chia việc, Dev chốt Unit thật ở 2.7"]
+        subgraph SR["Specific Requirement, mỗi US sáu mục"]
+            direction LR
+            US1["US1<br/>1/ User story<br/>2/ Pre - Condition<br/>3/ Scenario<br/>4/ Acceptance criteria: bảng UI, BR1.1, BR1.2<br/>5/ Out of scope<br/>6/ Conner case"]
+            US2["US2<br/>sáu mục như US1"]
+            US3["US3<br/>sáu mục như US1"]
+        end
+        TR["Traceability<br/>FR → US → BR, trạng thái OK, GAP, ORPHAN"]
+        PUS -.->|"US nào thuộc PU nào"| SR
+        SR -.->|"US phủ FR nào, BR thuộc US nào"| TR
+    end
+```
+
+Acceptance criteria và business rule chỉ xuất hiện ở đây, không có trong `stories.md`; Proto-Unit trong PRD là gợi ý chia việc, Unit thật do Dev chốt.
 
 Quy tắc cố định:
 

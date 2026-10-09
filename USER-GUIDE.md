@@ -39,6 +39,28 @@ Một yêu cầu là một intent. Intent đi qua hai phase, Ideation để khun
 
 Stage 2.31, 2.32, 2.41 và 2.42 là phần repo thêm, gọi là plugin `po-workflow`. Sáu stage còn lại lấy từ AWS AI-DLC.
 
+### Đầu ra cuối cùng trông thế nào
+
+PRD là tài liệu bàn giao cuối. Bên trong, Proto-Unit chứa user story, user story chứa acceptance criteria và business rule; Traceability nối FR, US, BR để không sót.
+
+```mermaid
+flowchart TB
+    subgraph PRD["PRD"]
+        direction TB
+        subgraph PU1["Proto-Unit PU1, gợi ý chia việc cho Dev"]
+            direction LR
+            US1["US1<br/>User story · Pre - Condition · Scenario<br/>Acceptance criteria: bảng UI, BR1.1, BR1.2<br/>Out of scope · Conner case"]
+            US2["US2<br/>sáu mục như US1"]
+        end
+        subgraph PU2["Proto-Unit PU2"]
+            US3["US3"]
+        end
+        TR["Traceability<br/>FR → US → BR"]
+    end
+```
+
+Thứ tự làm ra chúng thì ngược lại: Proto-Unit có từ 1.4, FR từ 2.3, US từ 2.4, còn acceptance criteria chỉ viết ở 2.42. Unit thật là của Dev, chốt ở stage 2.7 sau khi nhận PRD, nên trong PRD chỉ có Proto-Unit.
+
 ### Profile quyết định đi mấy stage
 
 Khi tạo intent, AI đề xuất profile kèm lý do và bạn có quyền đổi. Không chắc S hay M thì chọn M.
