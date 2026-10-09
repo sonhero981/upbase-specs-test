@@ -10,7 +10,6 @@ Tài liệu liên quan:
 - [DOMAIN-SETUP.md](DOMAIN-SETUP.md): dựng quy trình cho một sản phẩm hay công ty khác
 - [GLOSSARY.md](GLOSSARY.md): thuật ngữ và họ mã
 - [CLAUDE.md](CLAUDE.md): luật tổ chức cho AI
-- [PROPOSAL-aidlc-alignment.md](PROPOSAL-aidlc-alignment.md): thiết kế và các quyết định đã duyệt khi chuẩn hoá
 
 ## Nguyên tắc nền
 
@@ -508,7 +507,7 @@ Ba intent chuyển từ luồng cũ ngày 09/10/2026 giữ họ mã cũ trong t�
 | Engine, hook, sensor, binary `aidlc` | Không cài. Command của Claude Code đọc protocol trực tiếp |
 | Construction, Operation | Ngoài phạm vi |
 
-Lý do chọn AWS làm chuẩn thay vì bản specs.md, so sánh ưu nhược điểm và các quyết định D1 đến D12: [PROPOSAL-aidlc-alignment.md](PROPOSAL-aidlc-alignment.md).
+Lý do chọn AWS làm chuẩn thay vì bản specs.md, so sánh ưu nhược điểm và các quyết định D1 đến D12 nằm trong đề xuất đã duyệt ngày 09/10/2026. File đề xuất đã gỡ khỏi repo, còn trong lịch sử git: `git show 04060e8:PROPOSAL-aidlc-alignment.md`.
 
 ## Phương pháp luận đứng sau
 
