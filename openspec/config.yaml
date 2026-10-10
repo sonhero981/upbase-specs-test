@@ -1,0 +1,34 @@
+schema: spec-driven
+
+context: |
+  Store nằm chung repo PO (upbase-specs). Hệ thống Upbase LMS gồm 4 repo code tách rời, chi tiết ở .claude/knowledge/tech/system-map.md:
+  lms-be (NestJS), lms-package (@upbase-tech/*), lms-fe (app học viên), ops-fe (app vận hành).
+  Viết artifact bằng tiếng Việt, giữ nguyên tech term tiếng Anh.
+  Requirement gốc là artifact đã duyệt của intent trong .claude/intents/<slug>/ (đọc theo origin/main); change lệch intent thì intent thắng.
+  Tech không sửa .claude/intents/**, trừ mục 9 và dòng Dev mục 12 của hld-brief.md.
+  Bug nằm trong @upbase-tech/* sửa ở lms-package rồi build, bump, publish; không patch trong app.
+
+rules:
+  proposal:
+    - Chỉ tạo change khi stage 2.42 trong state.md của intent là [x]; đọc intent theo .claude/knowledge/tech/intent-handoff.md.
+    - Có bảng US ↔ repo ↔ trạng thái, đủ N_list dòng.
+    - Ghi intent slug, version prd.md, Jira ticket, Figma (nếu có).
+    - Liệt kê repo bị ảnh hưởng theo .claude/knowledge/tech/system-map.md.
+  specs:
+    - Mỗi Requirement có ít nhất 1 Scenario WHEN/THEN kiểm chứng được.
+    - Chỗ chưa rõ ghi [NEEDS CLARIFICATION - nội dung câu hỏi], không tự đoán.
+  design:
+    - Change đụng BE phải có mục "API contract" gồm endpoint, method, request, response, error code, event socket/Kafka.
+    - Shape lấy từ code lms-be thật, không lấy từ trí nhớ.
+    - Cuối mục API contract ghi "Approved by - <BE owner theo .claude/knowledge/tech/system-map.md>"; AI không tự điền, chờ owner duyệt.
+  tasks:
+    - Nhóm theo repo bằng heading "## lms-package", "## lms-be", "## lms-fe", "## ops-fe"; bỏ repo không đụng.
+    - Thứ tự package → be → fe. Không gộp task của 2 repo vào 1 checkbox.
+
+operations:
+  apply:
+    guidance:
+      - Không apply khi specs còn [NEEDS CLARIFICATION] hoặc API contract chưa có "Approved by".
+  archive:
+    guidance:
+      - Chỉ archive change ở store khi PR của mọi repo liên quan đã merge.

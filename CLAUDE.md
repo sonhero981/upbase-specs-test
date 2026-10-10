@@ -68,10 +68,14 @@ Các quy tắc "đã sai một lần" và lý do của chúng nằm ở `.claude
 
 ## Ranh giới
 
-Repo này **chỉ làm phân tích yêu cầu và viết tài liệu**. Không bàn quy trình vận hành team, không đọc thư mục ngoài repo (trừ `LMS/User Guide/` khi cập nhật KB), không tự mở rộng phạm vi KB.
+Phần PO của repo **chỉ làm phân tích yêu cầu và viết tài liệu**. Không bàn quy trình vận hành team, không đọc thư mục ngoài repo (trừ `LMS/User Guide/` khi cập nhật KB), không tự mở rộng phạm vi KB.
 
 Gặp điều đáng chú ý nhưng ngoài phạm vi thì ghi một dòng vào KB mục "câu hỏi để sau", rồi quay lại việc chính.
 
 ## Bàn giao
 
 Tài liệu đi lên **Lark** (doc + wiki). Không dùng Confluence. User Guide đi lên **GitBook** (`uplms` · `uplms-ops`).
+
+## Phần Tech (OpenSpec store)
+
+Thư mục `openspec/` là store OpenSpec `upbase-specs` của đội Tech: change cross-repo (lms-be, lms-fe, ops-fe, lms-package) lập từ intent đã duyệt. Lệnh `/opsx:*`; config `openspec/config.yaml`; bản đồ repo và owner `.claude/knowledge/tech/system-map.md`; cách đọc intent `.claude/knowledge/tech/intent-handoff.md`. Luật PO ở trên không áp cho `openspec/`; Tech không sửa `.claude/intents/**` trừ mục 9 và dòng Dev mục 12 của `hld-brief.md`.
