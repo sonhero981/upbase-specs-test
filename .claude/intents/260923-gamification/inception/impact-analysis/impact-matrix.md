@@ -2,9 +2,10 @@
 intent: 260923-gamification
 artifact: impact-matrix
 version: 0.4
-status: review
-approved: 2026-09-23 (v0.2, Gate 2)
-note: v0.4 mang CR-013 §14 và nhật ký ghi nhận bên Ops §15, chờ duyệt lại
+status: approved
+approved_at: 2026-10-12
+approved: 2026-10-12 (v0.4); 2026-09-23 (v0.2, Gate 2)
+note: v0.4 mang CR-013 §14 và nhật ký ghi nhận bên Ops §15
 migrated-from: .claude/projects/Gamification/working/impact-analysis/impact-matrix-v0.3-20261008.md
 ---
 # Impact Matrix — Gamification

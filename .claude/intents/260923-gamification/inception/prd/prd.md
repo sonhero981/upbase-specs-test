@@ -1,10 +1,11 @@
 ---
 intent: 260923-gamification
 artifact: prd
-version: 0.13
-status: review
-approved: 2026-09-23 (v0.2, Gate 4, Approved with Notes)
-note: v0.13 mang CR-009 đến CR-013, design đã chốt, US22 nhật ký ghi nhận bên Ops và technical design backend, chờ PO duyệt lại
+version: 0.14
+status: approved
+approved_at: 2026-10-12
+approved: 2026-10-12 (v0.14, Approved with Notes, kèm ba quyết định R-16 R-17 R-18); 2026-09-23 (v0.2, Approved with Notes)
+note: v0.14 mang CR-009 đến CR-013, design 01/10 và 12/10, US22, technical design backend; sửa theo review Product Lead lần 01 và 02
 lark: KeT8dkIStofZ0axlTW5l4S94gre
 lark-title: [PRD] Gamification
 lark-version: 0.8
@@ -14,11 +15,11 @@ migrated-from: .claude/projects/Gamification/docs/prd/prd-gamification-v0.10-202
 
 | | |
 | --- | --- |
-| **Target release** | ❓ *cần điền* |
-| **Epic** | ❓ *link Jira* |
+| **Target release** | 2 Sprints |
+| **Epic** | [Gamification](https://jira.upbase.asia/browse/UPLNDEP-8) · [Leaderboard](https://jira.upbase.asia/browse/UPLNDEP-9) |
 | **Story** | ❓ *link Jira* |
-| **Related** | `brd-v0.7-20261008.md` · `impact-matrix-v0.3-20261008.md` · `solution-comparison-v0.2-20261008.md` |
-| **Document status** | 🔄 **v0.13 chờ PO review lại** — mang `CR-009` đến `CR-013`, design đã chốt, nhật ký ghi nhận bên Ops và technical design backend. Bản v0.2 đã được PO duyệt 23/09/2026 |
+| **Related** | [BRD](https://github.com/buidhui/po_workflow/blob/main/.claude/intents/260923-gamification/ideation/brd.md) · [Impact Matrix](https://github.com/buidhui/po_workflow/blob/main/.claude/intents/260923-gamification/inception/impact-analysis/impact-matrix.md) · [Solution Options](https://github.com/buidhui/po_workflow/blob/main/.claude/intents/260923-gamification/inception/solution-options/solution-options.md) |
+| **Document status** | ✅ **v0.14 PO duyệt ngày 12/10/2026** — mang `CR-009` đến `CR-013`, design đã chốt, nhật ký ghi nhận bên Ops và technical design backend. Bản v0.2 đã được PO duyệt 23/09/2026 |
 | **Document owner** | Bùi Đức Huy (PO) |
 | **Designer** | ❓ *cần điền* |
 | **Tech lead** | ❓ *cần điền* |
@@ -38,14 +39,15 @@ migrated-from: .claude/projects/Gamification/docs/prd/prd-gamification-v0.10-202
 | v0.5 | Bùi Đức Huy | Áp design đã chốt: bước tăng chuỗi cố định `5`, trần `40` chạm đúng ngày thứ 7, bỏ chuỗi dài nhất. Danh sách huy hiệu chuyển sang `My Profile` → tab `Badges`. Thêm hành vi trỏ và bấm trên dải tóm tắt. Viết lại cột `Nguồn` thành nội dung đọc được | Design chốt 01/10 | 01/10/2026 |
 | v0.6 | Bùi Đức Huy | Gộp bốn màn cấu hình Ops thành một trang bốn khối. Thêm mục **Design** kèm sáu ảnh màn đã chốt. Tooltip cho ô chuỗi | Design chốt 01/10 | 01/10/2026 |
 | v0.7 | Bùi Đức Huy | Bỏ viết tắt: `Giải O2` thành `Giải quyết mục tiêu O2`, mã ràng buộc trần thành mã kèm nội dung. Thêm dấu phân cách giữa các mã đứng liền nhau | — | 01/10/2026 |
-| v0.8 | Bùi Đức Huy | Thêm mục **Out of scope** cấp tính năng và mục **Unit** chia 15 US thành 5 nhóm bàn giao kèm phụ thuộc. Học từ phase Inception của AI-DLC | — | 05/10/2026 |
+| v0.8 | Bùi Đức Huy | Thêm mục **Out of scope** cấp tính năng và mục **Unit** chia 15 US thành 5 nhóm bàn giao kèm phụ thuộc | — | 05/10/2026 |
 | v0.9 | Bùi Đức Huy | Trang cấu hình Ops **tự lưu, bỏ nút lưu**. Chỉ giữ hai xác nhận dạng popover cạnh công tắc. Tắt `Points` hoặc `Badges` thì tiêu chí lên hạng tương ứng khoá theo. Thay "chặn lưu" bằng "không tắt được tiêu chí và bảng cuối cùng". Bỏ giới hạn trên của số điểm. Bỏ ô chọn múi giờ và nhãn trạng thái — múi giờ lấy theo tenant | `CR-011` | 06/10/2026 |
 | v0.10 | Bùi Đức Huy | **Campaign quay lại** (`US19` đến `US21`): vận hành chọn khoảng thời gian và loại hành động, số điểm theo cấu hình chung, hai bảng điểm và số hoạt động, đóng băng khi kết thúc. Học viên **bỏ bộ chọn khoảng ngày tự do**, chỉ còn khung cố định (`CR-013`).<br>Bảng xếp hạng thành **năm bảng**: thêm `Activities`, `Badges` chỉ còn ở `All time` như `Level`. Câu chữ check-in thay cho "login". Chỉ số đếm không phụ thuộc công tắc `Points`. Xoá `BR-6.14` (`CR-012`) | `CR-012` · `CR-013` | 08/10/2026 |
 | v0.11 | Bùi Đức Huy | Thêm **nhật ký ghi nhận bên Ops** (`US22`): toàn tổ chức, dạng bảng, lọc theo học viên, loại sự kiện, khoảng ngày, chỉ đọc, không xuất file. Bỏ dòng *"kể cả vận hành"* ở Out of scope của `US3`. Dọn ba chỗ còn sót từ `CR-010` và `CR-012` ở `US3` | — | 09/10/2026 |
 | v0.12 | Cuong (Dev) · Bùi Đức Huy | Thêm **technical design backend**. Dựng lại các mục nghiệp vụ của phần giải pháp bị thay mất khi thêm technical design: nguyên tắc nền, cách bắt sự kiện, năm luồng, mười hai ràng buộc `C1` đến `C12`, ba rule nền, định nghĩa chỉ số. Ghi các chỗ technical design còn lệch so với phạm vi hiện tại | — | 12/10/2026 |
 | v0.13 | Bùi Đức Huy | Dòng 0 điểm, sinh ra khi `Points` hoặc một hành động đang tắt, **ẩn với học viên** ở lịch sử ghi nhận và **hiện cho vận hành** ở nhật ký ghi nhận. Ghi rõ tài khoản kiểm thử nhận diện bằng trường `is_operator` | — | 12/10/2026 |
+| v0.14 | Bùi Đức Huy | Sửa theo review và các quyết định ngày 12/10. Viết lại `US1` thành **màn Gamification**, kèm bảng ẩn hiện theo công tắc và khối điểm, hạng trên My Learning. Viết lại `US4` theo tab Badges. Tắt `Points` thì ẩn điểm với học viên. Điểm nền check-in không giới hạn trên, trần theo điểm nền. Chuỗi tính lại từ `1` khi bật lại `Points` hoặc check-in. Lên hạng chỉ tính mốc mới vượt qua. Hoạt động chỉ gồm Learning Activity. Biên thời gian của bảng xếp hạng. Campaign theo design: ba bảng, `Activities` tuỳ chọn, bỏ mô tả. Câu chữ thông báo theo design. Thêm bảng truy vết phạm vi, dọn tham chiếu cũ. Khi duyệt, chốt thêm: trao bù huy hiệu khi bật `Badges` hoặc bật lại một loại, không thông báo · dòng lịch sử, thông báo và bảng `Points` của campaign ẩn theo chức năng · bảng quyền bên Ops, tắt `Gamification` vẫn xem được dữ liệu đã có | — | 12/10/2026 |
 
-> ✅ **`Approved with Notes` — PO duyệt bản v0.2 ngày 23/09/2026.** Các bản từ v0.3 trở đi mang thay đổi mới, **chờ PO duyệt lại**. Còn **13 câu hỏi mở** ở mục `Vấn đề tồn đọng`. Bốn câu về campaign (`OQ-42` đến `OQ-45`) cần trả lời trước khi bàn giao Unit Campaign, không chặn các Unit khác. `OQ-46` về chỗ để vận hành thấy lần cộng điểm bị lỗi.
+> ✅ **`Approved with Notes` — PO duyệt bản v0.14 ngày 12/10/2026.** Bản v0.2 được duyệt ngày 23/09/2026. Còn **15 câu hỏi mở** ở mục `Vấn đề tồn đọng`. `OQ-42`, `OQ-49`, `OQ-52` cần trả lời trước khi bàn giao Unit Campaign. `OQ-45` là phần design còn thiếu. Các câu còn lại không chặn bàn giao Unit đầu tiên.
 
 ---
 
@@ -124,7 +126,7 @@ Những thứ **cả tính năng này không làm**. Gồm cả thứ người �
 | **Trần điểm mỗi ngày** | Đã cân nhắc và loại ở change request `CR-010`. Chống cộng trùng (`BR-13.1`) đã chặn việc lặp lại cùng một nội dung, còn trần ngày thì phạt nhầm người học dồn |
 | **Chuỗi dài nhất từng đạt** | PO chốt ngày 01/10 không hiện. Chỉ số quá khứ không giúp học viên quyết định gì hôm nay |
 | **Bộ lọc bảng xếp hạng theo nhóm, lớp, phòng ban** | Chờ chức năng nhóm đồng bộ từ HRM. Xem `US16 — chưa làm` |
-| **Tính điểm từ Quiz, Case Study, Storyline** | PO chốt không tính ở đợt này. Chỉ bài Test theo `BR-TEST` mới sinh điểm |
+| **Tính điểm từ Quiz, Case Study, Storyline** | PO chốt không tính ở đợt này. Quiz nằm trong Learning Activity vẫn cho điểm hoạt động nhưng không cho điểm bài Test, xem mục Định nghĩa chỉ số |
 | **Huy hiệu cho điểm số cao** *(ví dụ bài Test đạt từ 90%)* | PO chốt tạm thời không có rule này |
 | **Điểm cho lộ trình học · huy hiệu theo kỹ năng** | Thuộc tính năng Lộ trình và Khung năng lực, cả hai chưa làm |
 | **Sửa logic hoàn thành Activity** | Giữ nguyên cơ chế hiện có. Gamification chỉ đọc dữ liệu học, không sửa |
@@ -136,8 +138,8 @@ Những thứ **cả tính năng này không làm**. Gồm cả thứ người �
 
 | Stakeholder | Action |
 | --- | --- |
-| **Học viên (UpLMS)** | Nhận điểm · nhận huy hiệu · lên hạng · xem trang thành tích · tra lịch sử điểm · xem bảng xếp hạng và vị trí của mình |
-| **Nhân sự vận hành (UpLMS Ops)** | Khai bảng điểm · tạo huy hiệu · đặt hạng và ngưỡng · bật/tắt cơ chế |
+| **Học viên (UpLMS)** | Nhận điểm · nhận huy hiệu · lên hạng · xem màn Gamification · tra lịch sử điểm · xem bảng xếp hạng và vị trí của mình |
+| **Nhân sự vận hành (UpLMS Ops)** | Khai bảng điểm · đặt tên và hình huy hiệu · đặt hạng và ngưỡng · bật/tắt cơ chế · tạo campaign |
 | **Đội truyền thông nội bộ** | Chọn khoảng ngày để lấy số liệu · công bố và **trao thưởng ngoài hệ thống** |
 | **L&D** | Dùng dữ liệu điểm, hạng, huy hiệu để đánh giá mức độ tham gia học tập ở quy mô tổ chức |
 | **Quản lý trực tiếp** | Theo dõi tình hình học của nhân viên mình phụ trách |
@@ -152,10 +154,10 @@ Những thứ **cả tính năng này không làm**. Gồm cả thứ người �
 ❓ **Cần bổ sung trước khi bàn giao** — đây là nơi Dev và QA tìm mọi thứ để bắt đầu.
 
 - **UX:** ❓ *link Figma — chưa có*. Ảnh design chốt ngày 01/10 nằm ở mục **Design** ngay dưới
-- **Luồng giải pháp:** `working/solution-options/solution-comparison-v0.1-20260923.md` §9
-- **Phân tích ảnh hưởng:** `working/impact-analysis/impact-matrix-v0.2-20260923.md`
-- **Tài liệu nền:** `docs/brd/brd-v0.6-20260923.md` · `project-decisions.md`
-- **API tham chiếu:** `lms-be.staging.upbase.asia/api/v1/docs` · `ops-be.staging.upbase.asia/api/v1/docs`
+- **Luồng giải pháp:** `inception/solution-options/solution-options.md` §9, §10
+- **Phân tích ảnh hưởng:** `inception/impact-analysis/impact-matrix.md`
+- **Tài liệu nền:** `ideation/brd.md` · `decisions.md`
+- **API tham chiếu:** `uplms-api.staging.upbase.asia/lms/api/v1/docs` · `uplms-api.staging.upbase.asia/ops/api/v1/docs` (tên miền mới từ 05/10/2026)
 - **Tham chiếu ngoài:** `TNT.CFG.02` — Hồ sơ tổ chức và tham số *(module Tenant, chưa làm)*
 - **KB liên quan:** `03-assessment.md` (`BR-TEST`) · `06-user-account.md` §8b (`Test Account`) · `07-learning-experience.md` (điều kiện hoàn thành) · `12-data-model.md` · `15-product-direction.md` §6
 - **Tài khoản staging:** ❓ *chưa có*
@@ -166,7 +168,7 @@ Những thứ **cả tính năng này không làm**. Gồm cả thứ người �
 
 > Ba chỉ số dưới là **chỉ số thật đang đo của chính sản phẩm**, lấy từ General Launch 8/9–21/9/2026. Mốc nền là số đo trước khi có gamification.
 
-| Factor (HEART) | Goal | Signal | Metrics |
+| Factor (khung HEART: Happiness · Engagement · Adoption · Retention · Task success) | Goal | Signal | Metrics |
 | --- | --- | --- | --- |
 | **Adoption** | Học viên được gán khoá chịu mở ứng dụng | Đăng nhập lần đầu trong 7 ngày | **Activation** — mốc nền **40.2%**, tiêu chí **80%** |
 | **Engagement** | Vào rồi thì bắt đầu học, không bỏ đó | Bắt đầu khoá trong 7 ngày | **Course start** — mốc nền **22%**, tiêu chí **80%** |
@@ -179,18 +181,21 @@ Hai factor còn lại (**Happiness**) **xoá vì chưa có cách đo** — khôn
 
 # Design
 
-Sáu màn đã chốt ngày 01/10/2026. Ảnh gốc nằm trong repo ở `.claude/projects/Gamification/design/`.
+Các màn chốt ngày 01/10/2026, thêm và cập nhật ngày 12/10/2026. Ảnh gốc nằm trong thư mục `design/` của tài liệu này.
 
 | Màn | Thuộc US | Chốt gì ở đây |
 |---|---|---|
 | **Gamification** | `US1` · `US6` · `US7` | Dải tóm tắt bốn ô · bảng xếp hạng bốn tab · khối vị trí của tôi với đường kẻ `Show All`. ⚠️ **Cần cập nhật theo `CR-012`, `CR-013`**: thêm tab `Activities`, bỏ bộ chọn khoảng ngày tự do, thêm lối vào campaign |
-| **How to collect points** | `US1` | Panel trượt từ phải, bốn dòng theo bốn hành động tính điểm |
+| **How to collect points** | `US1` · `US3` | Panel trượt từ phải, bốn dòng theo bốn hành động tính điểm, nút `Achievement History` ở cuối |
 | **How to level up** | `US1` · `US10` | Panel trượt từ phải, ba tiêu chí lên hạng |
 | **Achievement history** | `US3` | Panel trượt từ phải, nội dung dạng câu văn |
 | **User Profile — Badges** | `US4` | Tab trong `My Profile`, bộ đếm `({đã đạt}/{tổng mốc})`, huy hiệu chưa đạt hiện xám |
-| **Ops — Enable Setting** | `US8` · `US9` · `US10` · `US11` · `US14` | Một trang bốn khối, mốc huy hiệu chỉ đọc. **Tự lưu, không có nút lưu.** Không có ô chọn múi giờ |
-| **Ops — Disable** | `US14` | `Gamification` tắt thì mọi khối khác biến mất |
-| **Campaign** | `US19` · `US20` · `US21` | ❓ **Chưa có design** — học viên xem campaign, vận hành tạo campaign, vận hành xem và xuất kết quả |
+| **Ops — Enable Setting** | `US8` · `US9` · `US10` · `US11` · `US14` · `US20` | Một trang bốn khối, mốc huy hiệu chỉ đọc, khối `Campaign` ở cuối. **Tự lưu, không có nút lưu.** Không có ô chọn múi giờ. ⚠️ Cần sửa: thiếu công tắc `Show badges`; phần xem trước còn bộ chọn khoảng ngày; ba dòng mốc huy hiệu còn chữ `every`; câu check-in còn viết cứng `up to 40 on day 7` |
+| **Ops — Disable** | `US14` | `Gamification` tắt thì mọi khối khác biến mất. ⚠️ Khối `Campaign` cần hiện ở chế độ chỉ xem (`BR-15.8`) |
+| **Thông báo thành tích** | `US2` | Thẻ ở góc dưới bên phải, xếp chồng theo chiều dọc, thanh đếm ngược ở đáy |
+| **Ops — Campaign Settings** | `US20` | Panel tạo và sửa campaign: tên, ngày bắt đầu, ngày kết thúc, bốn loại hành động, ô `Activity` |
+| **Ops — Kết quả campaign** | `US21` | Panel ba tab `Points` · `Activities` · `Courses`. ⚠️ Cần sửa: bỏ dòng `You`, thêm nút xuất Excel |
+| **Campaign phía học viên** | `US19` | ❓ **Chưa có design** |
 | **Ops — Achievement history** | `US22` | ❓ **Chưa có design** — nhật ký ghi nhận toàn tổ chức, dạng bảng có bộ lọc |
 
 # Solution
@@ -277,7 +282,7 @@ Dấu sống cùng lượt ghi danh, nên **xoá học viên khỏi lớp rồi 
 | Mã | Nội dung |
 |---|---|
 | `BR-TEST` | Test `Graded Assignment = Yes` → tính khi **đạt Pass Point**. `= No` → tính khi **hoàn thành**. **Quiz · Case Study · Storyline → không tính** |
-| `BR-REGRADE` | Chấm lại chỉ đi một chiều không-đạt → đạt. **Điểm chốt tại lần chấm đầu tiên**, chấm lại không cộng thêm. Không cần cơ chế thu hồi |
+| `BR-REGRADE` | Chấm lại chỉ đi một chiều không-đạt → đạt. **Điểm chốt tại lần chấm đầu tiên**, chấm lại không cộng thêm. Không cần cơ chế thu hồi.<br>Ví dụ: bài chấm tay, lần đầu trượt, chấm lại thành đạt → **không có điểm bài Test, không đếm vào số bài Test, `Test badges`, bảng campaign**. PO đã chốt ngày 23/09 |
 | `BR-SKIP` | **Khoá được đánh dấu bỏ qua thì không tính là hoàn thành** *(viết tổng quát thay vì gọi tên Foundation — tránh đóng cứng logic UpBase)* |
 
 ### Định nghĩa chỉ số — viết một lần, ba chỗ dùng lại
@@ -291,17 +296,32 @@ Mỗi chỗ **tự tính** — huy hiệu và hạng đếm trọn đời, bản
 | **Số hoạt động hoàn thành** | Bản ghi tiến độ chuyển sang hoàn thành, trong phạm vi lượt ghi danh. Đếm theo quy tắc chung bên dưới |
 | **Số bài Test** | Theo `BR-TEST` |
 | **Số khoá hoàn thành** | **Số lượt hoàn thành khoá**, không phải số chứng chỉ. Đếm theo quy tắc chung bên dưới. Học lại một khoá thì tính thêm một lượt (`BR-13.10`), trong khi chứng chỉ không cấp lại — hai con số này khác nhau, xem `BR-13.12`. **Không tính khoá bỏ qua** (`BR-SKIP`) |
-| **Số huy hiệu** | Huy hiệu đã đạt, giữ vĩnh viễn |
+| **Số huy hiệu** | Huy hiệu đã đạt **thuộc các loại đang bật**. Huy hiệu loại đang tắt không đếm nhưng vẫn giữ (`BR-9.10`) |
 | **Điểm campaign** | Điểm tích luỹ, chỉ lấy các lần cộng có **thời điểm cộng** nằm trong khoảng campaign **và** loại hành động nằm trong danh sách campaign chọn (`US19`) |
 | **Số hoạt động campaign** | Số hoạt động hoàn thành, chỉ lấy các lần hoàn thành nằm trong khoảng campaign (`US19`) |
+| **Số khoá campaign** | Số lượt hoàn thành khoá, chỉ lấy các lần hoàn thành nằm trong khoảng campaign (`US19`) |
 
 🔑 **Quy tắc chung cho mọi chỉ số đếm** *(số ngày có mặt · số hoạt động · số bài Test · số khoá)*: đếm **mọi lần xảy ra trong lúc `Gamification` bật**, **không phụ thuộc công tắc `Points` hay công tắc từng hành động** ở `US8`. Không đếm phần xảy ra trước khi bật hoặc trong thời gian tắt hẳn (`BR-14.5`).
 
 > Lý do: nếu đếm từ sổ giao dịch điểm thì tắt `Points` hoặc tắt một hành động sẽ làm bảng `Activities`, bảng `Courses` và tiến độ huy hiệu đứng im, dù học viên vẫn học. Nếu đếm thẳng từ dữ liệu học thì lại tính cả thời gian `Gamification` tắt, trái với `BR-14.5`. Cách lấy dữ liệu do Dev quyết, miễn đúng quy tắc trên.
 
+🔑 **Hoạt động là Learning Activity.** PO chốt ngày 12/10.
+
+| Loại nội dung trong khoá | Điểm hoạt động | Điểm bài Test | Đếm vào số hoạt động và `Activity badges` | Đếm vào số bài Test và `Test badges` |
+|---|---|---|---|---|
+| Learning Activity chứa Text hoặc Ảnh | Có | — | Có | — |
+| Learning Activity chứa Video | Có | — | Có | — |
+| Learning Activity chứa Quiz | Có, khi làm xong Quiz (`KB-LX-03`) | Không. Quiz không phải bài Test (`BR-TEST`) | Có | — |
+| Test | Không | Có, theo `BR-TEST` | Không | Có |
+| Case Study | Không | Không | Không | Không |
+| Storyline (đang ẩn) | Không | Không | Không | Không |
+
+- **Bài Test làm nhiều lượt:** lượt trượt không có điểm; lượt sau đạt thì có điểm **một lần** cho bài đó trong lượt ghi danh (`C5`). Khác với **chấm lại** một lượt đã chấm (`BR-REGRADE`), vốn không cộng thêm.
+- **Bài Test `Graded Assignment = No`** không có ngưỡng đạt, tính khi hoàn thành (`BR-TEST`). Câu chữ `successful`, `passing` trên giao diện áp cho cả loại này.
+
 ## Backend
 
-> ⚠️ **Dev cập nhật lại theo PRD v0.11.** Technical design backend này được viết theo phạm vi trước change request `CR-012`, `CR-013` và trước `US22`. Những chỗ lệch, PO đã chốt, Dev quyết cách làm:
+> ⚠️ **Dev cập nhật lại theo PRD v0.14.** Technical design backend này được viết theo phạm vi trước change request `CR-012`, `CR-013` và trước `US22`. Những chỗ lệch, PO đã chốt, Dev quyết cách làm:
 > - **Học viên không có khoảng ngày tự do** (`BR-6.15`). Nhánh `from/to` tính lúc chọn ở luồng bảng xếp hạng chỉ còn đúng cho màn danh sách học viên bên Ops (`US12`)
 > - **Check-in chỉ tính khi học viên chủ động mở hoặc quay lại UpLMS** (`BR-5.1`). Request nền tự chạy không tính, nên không ghi nhận ở mọi request đã xác thực
 > - **Năm bảng xếp hạng**: thêm `Activities`; `Level` và `Badges` chỉ có ở `All time` (`BR-6.2b`)
@@ -309,6 +329,14 @@ Mỗi chỗ **tự tính** — huy hiệu và hạng đếm trọn đời, bản
 > - **Campaign** (`US19` đến `US21`): thêm thực thể campaign và kết quả đóng băng, tác vụ đóng băng riêng (`C11`, `C12`)
 > - **Nhật ký ghi nhận bên Ops** (`US22`)
 > - **Dòng 0 điểm** khi `Points` hoặc hành động đang tắt: lịch sử phía học viên **không trả** dòng này (`BR-3.1a`), nhật ký bên Ops **có trả** (`BR-22.1a`)
+> - **Lịch sử phía học viên** (`US3`) gồm cả dòng đạt huy hiệu và dòng lên hạng. Chỉ lọc bỏ dòng 0 điểm, không lọc bỏ hai loại kia
+> - **Múi giờ không chỉnh trên màn Gamification** (`BR-14.9`): API cấu hình chung không nhận múi giờ. Tổ chức hiện tại mặc định UTC+7 (`BR-6.16`)
+> - **Điểm nền check-in không giới hạn trên**, trần bằng `40` hoặc bằng điểm nền khi điểm nền lớn hơn (`BR-5.4`, `BR-8.5a`)
+> - **`Points` hoặc hành động check-in tắt thì chuỗi không chạy**; lần vào đầu tiên sau khi bật lại mở chuỗi mới từ `1` (`BR-5.15`)
+> - **Hoạt động chỉ gồm Learning Activity** (mục Định nghĩa chỉ số). Test, Case Study, Storyline không sinh điểm hoạt động
+> - **Lên hạng chỉ tính mốc mới vượt qua** (`BR-10.4a`). Technical design đang làm đúng cách này
+> - **Lần ghi nhận lại sau lỗi** mang thời điểm hoàn thành gốc (`BR-13.8`, `[đề xuất]`)
+> - **Campaign** có bảng `Points`, `Activities` tuỳ chọn, `Courses`; không có mô tả (`BR-20.1`)
 Hiện tại hệ thống chỉ ghi nhận tiến độ học mà không phản hồi lại cho học viên. Tiến độ Activity/Storyline được ghi ở API `GET course/:class_id/section/:section_id/progress` của app `lms`. Tiến độ Test và case study được ghi khi nộp bài ở `mock-test-service`, và khi chấm tay xong một lượt. Khi học xong, `class_user` chuyển sang `COMPLETED` ngay trong các luồng này. Ngoài ra `event-processor-service` tính lại tiến độ khi vận hành hoặc hệ thống đổi nội dung.
 
 BE cần thêm một module gamification dùng chung, gồm các phần:
@@ -651,6 +679,16 @@ Chi tiết cột, index, quan hệ: [design.dbml](design.dbml)
 | `1789998000000-seed-gamification-defaults.ts` | Seed cho mỗi tenant hiện có: settings (tắt), 4 point rules, 4 badge types, 32 badges, 3 level criteria | Xoá dữ liệu đã seed |
 
 ## Frontend
+
+> ⚠️ **Dev cập nhật lại theo PRD v0.14**, cùng lưu ý ở §6.5 và §7.5 bên dưới:
+> - **Một mục menu `Gamification`**; bảng xếp hạng và campaign nằm trong màn này (`US1`, `US6`)
+> - **Ẩn hiện theo công tắc** theo bảng `BR-1.8`. Tắt `Points` thì ẩn ô điểm và panel cách tính điểm — §8 đang làm đúng
+> - **Khối điểm và hạng trên My Learning** (`US1`, `[đề xuất]`, chờ design)
+> - **Nút `Achievement History`** ở cuối panel `How to collect points?` (`US3`)
+> - **Dòng check-in** dùng biến `{nền}–{trần}`; tooltip chuỗi không dùng *signed in* (`US1`)
+> - **Câu chữ thông báo** theo design (`US2`); dòng 0 điểm không có thông báo (`BR-2.10`)
+> - **Campaign** (`US19` đến `US21`): chưa có technical design
+> - **Bỏ thanh tiến độ tới hạng kế tiếp** trong panel `How to level up?` (§6.3) và phần tiến độ hạng trả về từ `/me`. Thanh này đã đưa ra ngoài phạm vi (`US1`)
 
 *Technical design phía FE: lms-fe (`apps/lms-pro`, `apps/lms-test`) và ops-fe. Shape request/response, enum, mã lỗi xem `[TD-short] Gamification` của BE.*
 
@@ -1036,9 +1074,9 @@ Mười chín US chia thành bảy nhóm. Mỗi nhóm phục vụ một cơ ch�
 
 | Unit | Gồm US | Phụ thuộc | Release độc lập? |
 |---|---|---|---|
-| **Nền tảng** | `US14` phân quyền và hai công tắc · `US15` phân quyền cấu hình | — | ❌ Chạm mọi Unit khác. Phải xong trước tiên |
+| **Nền tảng** | `US14` hai công tắc · `US15` phân quyền cấu hình | — | ❌ Chạm mọi Unit khác. Phải xong trước tiên |
 | **Điểm** | `US5` điểm check-in theo chuỗi · `US8` cấu hình điểm · `US13` điểm phản ánh việc học thật · `US22` nhật ký ghi nhận bên Ops | Nền tảng | ✅ Là nguồn dữ liệu cho mọi thứ còn lại. `US22` đi cùng Unit này vì nó là cách duy nhất kiểm điểm ghi đúng trong giai đoạn chạy ngầm. Dòng huy hiệu và lên hạng tự xuất hiện khi hai Unit đó xong |
-| **Huy hiệu** | `US4` huy hiệu sắp đạt · `US9` cấu hình huy hiệu | Điểm | ✅ Cần chỉ số đếm từ Unit Điểm |
+| **Huy hiệu** | `US4` bộ huy hiệu trong My Profile · `US9` cấu hình huy hiệu | Điểm | ✅ Cần chỉ số đếm từ Unit Điểm |
 | **Hạng** | `US10` cấu hình hạng | Điểm · Huy hiệu | ✅ Ba tiêu chí lên hạng lấy từ hai Unit kia |
 | **Hiển thị cho học viên** | `US1` màn Gamification · `US2` thông báo · `US3` lịch sử ghi nhận | Điểm | ✅ Hiện được ngay khi có điểm, huy hiệu và hạng bổ sung sau |
 | **Bảng xếp hạng** | `US6` bảng xếp hạng · `US7` vị trí của tôi · `US11` cấu hình bảng · `US12` danh sách học viên bên Ops | Điểm | ✅ Bảng theo hạng chỉ chạy được sau Unit Hạng, bảng theo huy hiệu sau Unit Huy hiệu. Ba bảng còn lại không cần |
@@ -1068,7 +1106,7 @@ Lý do xếp `Hiển thị cho học viên` lên trước `Huy hiệu`: ngay khi
 | **US1** | Là học viên, tôi cần xem điểm, hạng và huy hiệu đã đạt để biết nỗ lực học của mình được ghi nhận tới đâu | Giải quyết mục tiêu `O2` — nỗ lực học được ghi nhận ngay lúc nó xảy ra |
 | **US2** | Là học viên, tôi cần được báo ngay khi nhận điểm, đạt huy hiệu hoặc lên hạng, trong lúc đang dùng hệ thống | Giải quyết mục tiêu `O2` — nỗ lực học được ghi nhận ngay lúc nó xảy ra |
 | **US3** | Là học viên, tôi cần tra được từng lần cộng điểm đến từ đâu để tin vào con số của mình | Giải quyết mục tiêu `O5` — điểm số đáng tin, mỗi con số truy được nguồn.<br>Dựa trên ràng buộc `C3` — lưu từng lần cộng điểm kèm thời điểm |
-| **US4** | Là học viên, tôi cần biết huy hiệu nào sắp đạt và còn thiếu gì để có mục tiêu ngắn hạn | Giải quyết mục tiêu `O3` — học viên có mốc ngắn hạn để nhắm tới |
+| **US4** | Là học viên, tôi cần xem toàn bộ huy hiệu, cả đã đạt lẫn chưa đạt, cùng mốc của từng cái, để có mục tiêu ngắn hạn | Giải quyết mục tiêu `O3` — học viên có mốc ngắn hạn để nhắm tới |
 | **US5** | Là học viên, tôi cần việc vào hệ thống mỗi ngày được ghi nhận thành điểm để có lý do mở ứng dụng hằng ngày | Giải quyết mục tiêu `O1` — học viên quay lại học đều đặn mà không cần nhắc thủ công.<br>**Nhắm thẳng vào Activation 40.2%**, chỉ số yếu nhất trong mục `Analytics` |
 | **US6** | Là học viên, tôi cần xem bảng xếp hạng theo khung thời gian cố định để biết mình đứng ở đâu so với người khác | Yêu cầu bổ sung ở change request `CR-001` — đưa bảng xếp hạng vào phạm vi đợt này. Khung cố định thay bộ chọn tự do ở `CR-013` |
 | **US7** | Là học viên, tôi cần luôn thấy vị trí của chính mình kèm vài người liền kề, kể cả khi không ở nhóm đầu | Yêu cầu bổ sung ở change request `CR-001`.<br>Là cơ chế giảm nhẹ chính cho bảng xếp hạng toàn tổ chức: người hạng thấp vẫn thấy được mình |
@@ -1106,13 +1144,41 @@ Lý do xếp `Hiển thị cho học viên` lên trước `Huy hiệu`: ngay khi
 >
 > **Hai cách xem thời gian.** Bảng xếp hạng chung dùng **khung cố định**, là số liệu sống. Muốn một đợt thi đua có chủ đích, có kết quả không đổi để trao thưởng, thì dùng **campaign** (`US19` đến `US21`). Học viên không có bộ chọn khoảng ngày tự do.
 
+**Truy vết phạm vi trong BRD sang US**
+
+BRD đánh số US riêng. Bảng dưới nối các hạng mục phạm vi `S` của BRD với US của tài liệu này.
+
+| Hạng mục BRD | Nội dung | US |
+|---|---|---|
+| `S1` · `S2` | Cơ chế điểm, ba hành động học | `US8` · `US13` |
+| `S3` | Vào hệ thống hằng ngày | `US5` |
+| `S4` · `S5` | Huy hiệu, bốn loại | `US9` · `US4` |
+| `S6` | Hạng | `US10` |
+| `S7` | Điểm tích luỹ và điểm theo khung thời gian | `US1` · `US6` |
+| `S8` | Chống cày điểm | `US13` |
+| `S9` | Lịch sử điểm | `US3` |
+| `S10` | Thông báo thành tích | `US2` |
+| `S11` | Màn của học viên | `US1` · `US4` |
+| `S12` | Hai công tắc | `US14` |
+| `S13` | Phân quyền | `US15` |
+| `S14` · `S22` | Bảng xếp hạng theo khung cố định, tiêu chí phụ khi đồng hạng | `US6` · `US11` |
+| `S15` · `S16` · `S17` | Campaign, cấu phần, luật chỉnh sửa. **Lệch BRD theo quyết định PO ngày 12/10:** thêm bảng `Courses`, `Activities` thành tuỳ chọn, bỏ mô tả, đang chạy chỉ sửa tên | `US20` |
+| `S18` | Vị trí của tôi | `US7` |
+| `S19` · `S24` | Đóng băng, xem và xuất kết quả campaign | `US21` |
+| `S20` | Học viên xem lại campaign | `US19` |
+| `S21` | Múi giờ tổ chức | `US14` |
+| `S25` | Nhật ký ghi nhận bên Ops | `US22` |
+
+> Số US của BRD không dùng để tra tài liệu này. Ví dụ `US24` của BRD là `US22` ở đây, `US8` của BRD (xem lại campaign) là `US19` ở đây.
+| Giả định `A25` | My Learning hiện điểm và hạng | `US1` |
+
 ---
 
-## US1: Trang Thành tích của tôi
+## US1: Màn Gamification
 
 ### 1/ User story
 
-Là học viên, tôi cần xem điểm, hạng và huy hiệu đã đạt của mình để biết nỗ lực học được ghi nhận tới đâu.
+Là học viên, tôi cần một màn tập trung điểm, chuỗi, huy hiệu và hạng của mình, để biết nỗ lực học được ghi nhận tới đâu.
 
 ### 2/ Pre - Condition
 
@@ -1121,13 +1187,16 @@ Là học viên, tôi cần xem điểm, hạng và huy hiệu đã đạt của
 | `Gamification` đang bật và `Visibility in UpLMS` đang bật ở cấp tổ chức | Hai công tắc `Gamification` và `Visibility in UpLMS`, cấu hình ở `US14` |
 | Học viên đăng nhập được vào UpLMS | KB `06` |
 | Tài khoản không phải `Test Account` | Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification.<br>Chi tiết ở KB `06-user-account.md` quy tắc `KB-USER-TA-01` |
-| Vận hành đã tạo ít nhất một hạng. Chưa có hạng nào thì khối hạng không hiện | `US11` |
 
 ### 3/ Scenario
 
-Học viên vào UpLMS, mở trang Thành tích của tôi từ menu chính hoặc từ màn My Learning. Trang hiện ba khối theo thứ tự: điểm tích luỹ, hạng hiện tại kèm tiến độ tới hạng kế tiếp, và danh sách huy hiệu đã đạt.
+Học viên bấm mục `Gamification` ở menu trái của UpLMS. Màn gồm ba phần từ trên xuống: tiêu đề kèm **dải tóm tắt bốn ô** (chuỗi · điểm · huy hiệu · hạng), **bảng xếp hạng** (`US6`), và **khối vị trí của tôi** (`US7`).
 
-Học viên chưa có điểm nào vẫn vào được trang. Lúc đó điểm hiện 0, hạng là hạng thấp nhất, phần huy hiệu hiện trạng thái rỗng.
+Bấm ô điểm thì mở panel `How to collect points?`. Ở cuối panel có nút `Achievement History` để mở lịch sử ghi nhận (`US3`). Bấm ô hạng thì mở panel `How to level up?`. Bấm ô huy hiệu thì chuyển sang `My Profile` → tab `Badges` (`US4`).
+
+Ở màn My Learning có một khối nhỏ hiện điểm và hạng. Bấm vào thì sang màn Gamification.
+
+Học viên chưa có điểm nào vẫn vào được màn: các ô hiện `0`, hạng là `Level 1`.
 
 ### 4/ Acceptance criteria
 
@@ -1135,24 +1204,20 @@ Học viên chưa có điểm nào vẫn vào được trang. Lúc đó điểm 
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Thành tích của tôi | Điểm vào trang | Mục menu | Hiện ở menu chính của UpLMS. `Visibility in UpLMS` tắt thì mục menu biến mất, và mở thẳng đường dẫn trả về không tìm thấy |
-| Thành tích của tôi | Điểm vào trang | Lối tắt ở My Learning | Từ khối điểm và hạng trên My Learning, bấm vào mở sang trang này. Xem `US5` cho chi tiết khối đó |
-| Thành tích của tôi | Khối tổng quan | Điểm tích luỹ | Số nguyên, phân cách hàng nghìn bằng dấu chấm. Giá trị nhỏ nhất 0, không có số âm. Không kèm đơn vị sau số. Chưa có điểm thì hiện `0`, không hiện trạng thái rỗng |
-| Thành tích của tôi | Khối tổng quan | Hạng hiện tại | **Một con số thứ tự tịnh tiến**, bắt đầu từ `1`. **Không có tên hạng, không có hình hạng.** Học viên mới vào hệ thống ở hạng `1` |
-| Thành tích của tôi | Khối tổng quan | Tiến độ tới hạng kế tiếp | Thanh tiến độ kèm dòng nêu phần còn thiếu của **tiêu chí sắp chạm mốc nhất**. Chạm **trần hạng** rồi thì ẩn cả khối, không hiện thanh đầy |
-| Gamification | Dải tóm tắt | `{n} Streaks` | **Chuỗi hiện tại** — số ngày vào hệ thống liên tiếp đang giữ. Chưa vào ngày nào thì hiện `0`. Cách tính ở `US5` |
+| Gamification | Điểm vào | Mục menu | **Một mục `Gamification` ở menu trái** của UpLMS. Bảng xếp hạng và campaign nằm trong màn này, không có mục menu riêng. `Visibility in UpLMS` tắt thì mục biến mất, và mở thẳng đường dẫn trả về không tìm thấy |
+| Gamification | Đầu màn | Tiêu đề | `Gamification` |
+| Gamification | Đầu màn | Phụ đề | `Keep learning and climb the leaderboard.` |
+| Gamification | Dải tóm tắt | Ô `{n} Streaks` | **Chuỗi hiện tại** — số ngày liên tiếp có vào hệ thống đang giữ. Chưa có thì hiện `0`. Cách tính ở `US5` |
+| Gamification | Dải tóm tắt | Ô `{n} Points` | **Điểm tích luỹ.** Số nguyên, phân cách hàng nghìn bằng dấu chấm, nhỏ nhất `0`. Chưa có điểm thì hiện `0` |
+| Gamification | Dải tóm tắt | Ô `{n} Badges` | **Số huy hiệu đã đạt** của các loại đang bật. Danh sách đầy đủ ở `US4` |
+| Gamification | Dải tóm tắt | Ô `Level {n}` | **Hạng hiện tại**, một con số thứ tự tịnh tiến bắt đầu từ `1`. **Không có tên hạng, không có hình hạng** |
 | Gamification | Dải tóm tắt | Chuỗi dài nhất | **Không hiện.** Chỉ số quá khứ không giúp học viên quyết định gì hôm nay |
-| Gamification | Dải tóm tắt | Khi `Points` tắt | Ẩn ô chuỗi. Không còn điểm thì chuỗi mất ý nghĩa |
-| Thành tích của tôi | Cách lên hạng | Rule chung | Ngoài tiêu chí gần nhất, hiện **đầy đủ các tiêu chí lên hạng đang chạy** kèm bội số của từng cái. Ví dụ: `Every 3,000 points` · `Every 5 completed courses` · `Every 5 badges`. Tiêu chí đang tắt, hoặc đang bị khoá vì chức năng nguồn tắt (`BR-10.7`), thì không hiện |
-| Thành tích của tôi | Cách tính điểm | Rule chung | Hiện **bảng điểm đang áp dụng**: mỗi hành động đang bật được bao nhiêu điểm. Ví dụ: `Activity completion: 25` · `Course completion: 150` · `Successful test: 50`. Hành động đang tắt thì không hiện |
-| Gamification | Panel `How to collect points?` | Dòng check-in | Nhãn `10–40 pts`, mô tả `for visiting UpLMS each day, +5 for each day in a row, up to 40`. Hiện khoảng thay vì một số vì điểm thay đổi theo chuỗi.<br>**Không dùng chữ `login` hay `sign-in`**: học viên đang còn phiên đăng nhập từ hôm trước, mở UpLMS là được tính, không phải đăng xuất rồi đăng nhập lại. Cũng không dùng `check in` ở câu này, vì dễ hiểu thành phải bấm một nút (`BR-5.2`) |
-| Gamification | Dải tóm tắt | `{n} Badges` | **Chỉ hiện số lượng huy hiệu đã đạt.** Danh sách đầy đủ nằm ở màn khác, xem `US4` |
 
 **Bốn ô tóm tắt — trỏ vào và bấm**
 
 | Ô | Hiện gì | Trỏ chuột vào | Bấm vào |
 |---|---|---|---|
-| **Chuỗi** | `5 Streaks` | Tooltip `Days you've signed in without a break.` | Không có hành động. Ô này chỉ để xem |
+| **Chuỗi** | `5 Streaks` | Tooltip `Days in a row you've visited.` `[đề xuất]` — không dùng chữ *signed in*, cùng lý do ở dòng check-in bên dưới | Không có hành động. Ô này chỉ để xem |
 | **Điểm** | `475 Points` | Gợi ý `How to collect points?` | Mở panel `How to collect points?` trượt từ phải |
 | **Huy hiệu** | `3 Badges` | Gợi ý `Go to badge gallery` | **Chuyển màn** sang `My Profile` → tab `Badges` (`US4`) |
 | **Hạng** | `Level 1` | Gợi ý `How to level up?` | Mở panel `How to level up?` trượt từ phải |
@@ -1162,52 +1227,83 @@ Học viên chưa có điểm nào vẫn vào được trang. Lúc đó điểm 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
 | Gamification | Panel `How to collect points?` | Bố cục | Trượt từ cạnh phải. Mỗi dòng gồm nhãn điểm bên trái và mô tả hành động bên phải |
+| Gamification | Panel `How to collect points?` | Dòng check-in | Nhãn `{nền}–{trần} pts`, mô tả `for visiting each day, +5 in a row, up to {trần}`. `{nền}` và `{trần}` lấy từ cấu hình đang áp dụng (`BR-8.5a`). Hiện khoảng thay vì một số vì điểm thay đổi theo chuỗi.<br>Điểm nền từ `40` trở lên thì chuỗi không còn tác dụng: nhãn `{nền} pts`, mô tả `for visiting each day`. `[đề xuất]`<br>**Không dùng chữ `login` hay `sign-in`**: học viên đang còn phiên đăng nhập từ hôm trước, mở UpLMS là được tính, không phải đăng xuất rồi đăng nhập lại. Cũng không dùng `check in` ở câu này, vì dễ hiểu thành phải bấm một nút (`BR-5.2`) |
 | Gamification | Panel `How to collect points?` | Ba dòng còn lại | `for each activity completion` · `for each course completion` · `for each successful test completion`. Số điểm lấy từ cấu hình đang áp dụng |
 | Gamification | Panel `How to collect points?` | Hành động đang tắt | Không hiện dòng tương ứng |
+| Gamification | Panel `How to collect points?` | Nút `Achievement History` | Ở cuối panel. Bấm thì mở panel lịch sử ghi nhận (`US3`) |
 | Gamification | Panel `How to level up?` | Nội dung | Các tiêu chí đang chạy, **mỗi dòng mở đầu bằng `Every`**: `Every 3,000 points` · `Every 5 completed courses` · `Every 5 badges`. Thiếu chữ `Every` thì học viên hiểu thành đạt mốc đó một lần là lên hạng, trong khi mỗi lần chạm thêm một mốc đều cho một hạng (`BR-10.2`) |
 | Gamification | Panel `How to level up?` | Tiêu chí đang tắt hoặc bị khoá | Không hiện dòng tương ứng. Bị khoá là khi `Points` hoặc `Badges` tắt, theo `BR-10.7` |
 | Gamification | Cả hai panel | Đóng | Nút `✕` ở góc phải tiêu đề |
 
+**Khối điểm và hạng trên My Learning** `[đề xuất]`, chờ design
+
+| Màn hình | Giao diện | Field | Yêu cầu |
+|---|---|---|---|
+| My Learning | Khối điểm và hạng | Vị trí | Đầu màn My Learning, trên danh sách khoá |
+| My Learning | Khối điểm và hạng | Nội dung | `{n} Points · Level {k}`, cùng giá trị với hai ô trên màn Gamification |
+| My Learning | Khối điểm và hạng | Bấm vào | Mở màn Gamification |
+| My Learning | Khối điểm và hạng | Ẩn hiện | Theo bảng ở `BR-1.8` |
+| My Learning | Phần có sẵn | | **Không đổi.** Đây là màn có sẵn duy nhất phía học viên bị sửa, và chỉ thêm khối này |
+
 **Business requirement — Business rule**
 
-- `BR-1.1` Trang chỉ tồn tại khi `Gamification` bật **và** `Visibility in UpLMS` bật. Tắt một trong hai thì trang không truy cập được bằng bất kỳ đường nào.
-- `BR-1.2` Điểm hiển thị là **điểm tích luỹ** của cá nhân tính từ lúc vào hệ thống, không phải điểm theo kỳ.
+- `BR-1.1` Màn chỉ tồn tại khi `Gamification` bật **và** `Visibility in UpLMS` bật. Tắt một trong hai thì màn không truy cập được bằng bất kỳ đường nào.
+- `BR-1.2` Điểm hiển thị là **điểm tích luỹ** của cá nhân tính từ lúc vào hệ thống, không phải điểm theo khung thời gian.
 - `BR-1.3` **Hạng chỉ lên, không tụt.** Vận hành đổi ngưỡng hạng thì cấu hình mới **chỉ áp từ thời điểm đổi trở đi**. Học viên đang ở một hạng **giữ nguyên hạng đó**, kể cả khi không còn đủ ngưỡng mới. Theo `C4`.
-  > Riêng điểm tích luỹ không bao giờ giảm, nên hạng chỉ xét theo điểm thì thực tế không tụt trừ khi vận hành đổi ngưỡng.
-- `BR-1.4` **Huy hiệu đã nhận không bị lấy lại bởi việc đổi cấu hình.** Mốc của một huy hiệu **khoá ngay sau khi tạo**, và **không có thao tác xoá huy hiệu**. Nên không có cách nào để vận hành làm học viên mất một huy hiệu đã đạt.
+- `BR-1.4` **Huy hiệu đã nhận không bị lấy lại.** Mốc do hệ thống định sẵn và không sửa được (`BR-9.2`), và **không có thao tác xoá huy hiệu** (`BR-9.7`). Nên không có cách nào để vận hành làm học viên mất một huy hiệu đã đạt.
 - `BR-1.4a` Huy hiệu **không còn hiện** trong đúng hai trường hợp:
   | Trường hợp | Dữ liệu |
   |---|---|
-  | Vận hành **tắt chức năng huy hiệu**, hoặc **tắt rule của riêng huy hiệu đó** | Giữ nguyên. Bật lại thì hiện lại đầy đủ |
+  | Vận hành **tắt chức năng huy hiệu**, hoặc **tắt loại huy hiệu đó** | Giữ nguyên. Bật lại thì hiện lại đầy đủ |
   | Học viên **rời tổ chức** | Theo vòng đời tài khoản, không phải cơ chế của gamification |
-- `BR-1.5` Tài khoản có `Test Account = Yes` không phát sinh dữ liệu gamification nên không vào được trang này. Theo `KB-USER-TA-01`.
+- `BR-1.5` Tài khoản có `Test Account = Yes` không phát sinh dữ liệu gamification nên không vào được màn này. Theo `KB-USER-TA-01`.
 - `BR-1.6` Điểm là số nguyên.
 - `BR-1.7` Ảnh huy hiệu lấy từ kho tài nguyên dùng chung. Tài nguyên bị xoá thì rơi về ảnh mặc định, huy hiệu của học viên không mất.
+- `BR-1.8` 🔑 **Mỗi thành phần phía học viên ẩn theo công tắc của chức năng sinh ra nó.** Ẩn chỉ là không hiện: dữ liệu giữ nguyên, bật lại thì hiện lại đầy đủ.
+
+  | Thành phần | Ẩn khi |
+  |---|---|
+  | Mục menu `Gamification`, cả màn, khối trên My Learning | `Gamification` hoặc `Visibility in UpLMS` tắt (`BR-1.1`) |
+  | Ô `Points`, panel `How to collect points?`, phần điểm trên My Learning | `Points` tắt. PO chốt ngày 12/10, cùng cách với huy hiệu và hạng |
+  | Ô `Streaks` | `Points` tắt, hoặc hành động check-in tắt |
+  | Ô `Badges`, tab `Badges` ở My Profile (`US4`) | `Badges` tắt (`BR-9.6`) |
+  | Ô `Level`, panel `How to level up?`, phần hạng trên My Learning | `Levels` tắt (`BR-10.9`) |
+  | Bảng xếp hạng, khối vị trí của tôi, campaign | `Leaderboard` tắt (`BR-11.6`) |
+  | Nút `Achievement History` | Nằm trong panel `How to collect points?`. `Points` tắt thì nút chuyển sang panel `How to level up?`. Cả hai tắt thì không có lối vào lịch sử. `[đề xuất]` |
+  | Dòng điểm trong lịch sử ghi nhận (`US3`) | `Points` tắt |
+  | Dòng đạt huy hiệu trong lịch sử | `Badges` tắt, hoặc loại huy hiệu đó tắt |
+  | Dòng lên hạng trong lịch sử | `Levels` tắt |
+  | Thông báo điểm · huy hiệu · lên hạng (`US2`) | Lần lượt: `Points` · `Badges` hoặc loại đó · `Levels` tắt. Mỗi loại thông báo chỉ phụ thuộc chức năng của nó |
+  | Bảng `Points` của campaign (`US19`) | `Points` tắt. Bảng `Activities`, `Courses` vẫn hiện |
+
+  PO chốt các dòng trên ngày 12/10.
 
 **Data Field**
 
 | Field | Kiểu | Bắt buộc | Giá trị hợp lệ | Ghi chú |
 |---|---|---|---|---|
-| Điểm tích luỹ | Số nguyên | Có | `>= 0` | Mới. Đọc từ bảng điểm của học viên |
-| Hạng hiện tại | Khoá ngoại tới bảng Hạng | Không | Rỗng khi chưa có hạng nào được tạo | Mới |
+| Điểm tích luỹ | Số nguyên | Có | `>= 0` | Mới |
+| Chuỗi hiện tại | Số nguyên | Có | `>= 0` | Mới. Cách tính ở `US5` |
+| Hạng hiện tại | Số nguyên | Có | `>= 1` | Mới. Bắt đầu từ `1`, theo `BR-10.1` |
 | Thời điểm lên hạng | Thời gian | Không | | Mới. Cần cho `C8` |
 | Huy hiệu đã đạt | Danh sách | Không | | Mới. Mỗi dòng gồm mã huy hiệu và **thời điểm đạt** (`C8`) |
 
-> Trang này **chỉ đọc**. Không có field nào học viên sửa được.
+> Màn này **chỉ đọc**. Không có field nào học viên sửa được.
 
 **NFR**
 
-Trang đọc giá trị đã lưu sẵn. Không tính lại điểm hay xét lại hạng khi mở trang.
+Màn đọc giá trị đã lưu sẵn. Không tính lại điểm hay xét lại hạng khi mở màn.
 
 ### 5/ Out of scope
 
 | Không làm ở US này | Thuộc về |
 |---|---|
-| Hiển thị điểm theo khoảng ngày | `US6` |
-| Hiển thị huy hiệu **chưa đạt** và phần còn thiếu | `US4` |
-| Hiển thị lịch sử từng lần cộng điểm | `US3` |
+| Hiển thị điểm theo khung thời gian | `US6` |
+| Hiển thị huy hiệu **chưa đạt** | `US4` |
+| Hiển thị lịch sử từng lần ghi nhận | `US3` |
 | So sánh thứ hạng với học viên khác | `US6`, `US7` |
-| Cho học viên đổi ảnh huy hiệu, tên hạng, hay bất kỳ cấu hình nào | `US10`, `US11` |
+| Cho học viên đổi ảnh huy hiệu hay bất kỳ cấu hình nào | `US8`, `US9`, `US10` |
+| **Thanh tiến độ tới hạng kế tiếp** | `[đề xuất]` — design ngày 01/10 không có. Panel `How to level up?` đã nêu cách lên hạng |
 
 ### 6/ Conner case
 
@@ -1226,9 +1322,9 @@ Là học viên, tôi cần được báo ngay khi nhận điểm, đạt huy hi
 | Điều kiện | Nguồn |
 |---|---|
 | `Gamification` bật và `Visibility in UpLMS` bật | Hai công tắc `Gamification` và `Visibility in UpLMS`, cấu hình ở `US14` |
-| Học viên **đang mở UpLMS** tại thời điểm thành tích phát sinh | Bảng xếp hạng tính sẵn theo chu kỳ 8 tiếng, xem `BR-6.12` |
+| Học viên **đang mở UpLMS** tại thời điểm thành tích phát sinh | `BR-2.1` |
 | Tài khoản không phải `Test Account` | Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification |
-| Vận hành đã khai ít nhất một hành động tính điểm | `US9` |
+| Chức năng sinh ra thành tích đó đang bật: `Points` cho thông báo điểm, `Badges` và loại đó cho huy hiệu, `Levels` cho lên hạng | `BR-1.8` |
 
 ### 3/ Scenario
 
@@ -1236,7 +1332,7 @@ Học viên hoàn thành một hoạt động học. Điểm được cộng nga
 
 Nếu lần cộng điểm này đủ ngưỡng một huy hiệu, huy hiệu được trao và báo kèm. Nếu đủ ngưỡng hạng kế tiếp, học viên lên hạng và nhận thông báo nổi bật hơn.
 
-Học viên không ở trong hệ thống thì không nhận thông báo nào. Thành tích vẫn được ghi, tra lại được ở lịch sử điểm (`US3`) và trang thành tích (`US1`).
+Học viên không ở trong hệ thống thì không nhận thông báo nào. Thành tích vẫn được ghi, tra lại được ở lịch sử điểm (`US3`) và màn Gamification (`US1`).
 
 > Trường hợp offline hay gặp nhất là **bài kiểm tra chấm tay**. Mentor chấm xong sau vài ngày, điểm được cộng lúc đó, học viên thường không đang online.
 
@@ -1246,16 +1342,31 @@ Học viên không ở trong hệ thống thì không nhận thông báo nào. T
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Mọi màn UpLMS | Thông báo nhận điểm | Nội dung | Một dòng, tiếng Anh, theo mẫu `+ {điểm} for {mô tả hành động}`.<br>Ví dụ: `+ 25 for completing the unit` · `+ 150 for completing the course` |
-| Mọi màn UpLMS | Thông báo đạt huy hiệu | Nội dung | Hai dòng, tiếng Anh. Dòng đầu `Congratulations!` in đậm. Dòng sau theo mẫu `You unlocked the {tên huy hiệu} badge by {mô tả điều kiện}`.<br>Ví dụ: `You unlocked the Learning Newbie badge by completing 1 course` |
-| Mọi màn UpLMS | Thông báo lên hạng | Nội dung | Cùng dạng hai dòng như huy hiệu, thay tên huy hiệu bằng tên hạng. Câu chữ chính xác: `❓PO` |
+| Mọi màn UpLMS | Thông báo nhận điểm | Nội dung | Một dòng, tiếng Anh, theo mẫu `+{điểm} pts for {mô tả hành động}`, phần `+{điểm} pts` tô màu nhấn.<br>Ví dụ: `+150 pts for completing the course` |
+| Mọi màn UpLMS | Thông báo đạt huy hiệu | Nội dung | Một dòng, tiếng Anh, theo mẫu `You unlocked the {tên huy hiệu} badge by {mô tả điều kiện}`, tên huy hiệu tô màu nhấn.<br>Ví dụ: `You unlocked the Check-in Grower badge by visiting 8 days` |
+| Mọi màn UpLMS | Thông báo lên hạng | Nội dung | `Level up! You've just reached Level {n}`, phần `Level {n}` tô màu nhấn. Hạng không có tên (`OQ-38`) |
 | Mọi màn UpLMS | Biểu tượng | Thông báo điểm | Một biểu tượng chung cho mọi thông báo điểm |
 | Mọi màn UpLMS | Biểu tượng | Thông báo huy hiệu | Hình của chính huy hiệu vừa đạt |
 | Mọi màn UpLMS | Nhiều thông báo cùng lúc | Cách hiển thị | **Không gộp.** Mỗi thành tích là một thẻ riêng, xếp chồng theo đúng thứ tự phát sinh. Một thao tác sinh ra bốn thành tích thì hiện bốn thẻ |
+| Mọi màn UpLMS | Bộ chuỗi đầy đủ | | Theo bảng ngay dưới. `[đề xuất]` cho các dòng chưa có trong design |
 | Mọi màn UpLMS | Danh từ trong câu | Số ít và số nhiều | Câu phải đúng ngữ pháp theo số lượng: `1 course` chứ không phải `1 courses`. Áp cho mọi mẫu câu có số đếm |
-| Mọi màn UpLMS | Vị trí và hướng xếp chồng | | `❓PO` — chờ Figma |
-| Mọi màn UpLMS | Thời gian tự tắt | | `❓PO` — chờ Figma. Cần tính tới trường hợp bốn năm thẻ xuất hiện cùng lúc |
+| Mọi màn UpLMS | Vị trí và hướng xếp chồng | | **Góc dưới bên phải**, các thẻ xếp chồng theo chiều dọc. Mỗi thẻ có thanh đếm ngược ở đáy. Theo design `Thông báo thành tích` |
+| Mọi màn UpLMS | Thời gian tự tắt | | `❓PO`, xem `OQ-53`. Cần tính tới trường hợp bốn năm thẻ xuất hiện cùng lúc |
 | Mọi màn UpLMS | Khi `Visibility in UpLMS` tắt | | Không đẩy thông báo nào, kể cả khi điểm vẫn đang được ghi ngầm |
+
+**Bộ chuỗi thông báo**
+
+| Thành tích | Chuỗi |
+|---|---|
+| Check-in | `+{n} pts for visiting today · {d}-day streak` |
+| Hoàn thành hoạt động | `+{n} pts for completing {tên hoạt động}` |
+| Hoàn thành khoá | `+{n} pts for completing the course` — có trong design |
+| Qua bài Test | `+{n} pts for passing {tên bài Test}` |
+| Huy hiệu `Check-in badges` | `You unlocked the {tên huy hiệu} badge by visiting {mốc} days` |
+| Huy hiệu `Activity badges` | `You unlocked the {tên huy hiệu} badge by completing {mốc} activities` |
+| Huy hiệu `Test badges` | `You unlocked the {tên huy hiệu} badge by passing {mốc} tests` |
+| Huy hiệu `Course badges` | `You unlocked the {tên huy hiệu} badge by completing {mốc} courses` — có trong design |
+| Lên hạng | `Level up! You've just reached Level {n}` — có trong design |
 
 **Business requirement — Business rule**
 
@@ -1263,10 +1374,11 @@ Học viên không ở trong hệ thống thì không nhận thông báo nào. T
 - `BR-2.2` Không gửi email cho bất kỳ thông báo thành tích nào. Gamification không chạm vào 30 mail event hiện có.
 - `BR-2.3` Không dùng cơ chế Notification hiện có của Ops. Cơ chế đó là soạn tay gửi theo nhóm, gửi theo job nửa tiếng (`KB-NOTI-05`), không phù hợp với thông báo theo từng người.
 - `BR-2.4` `Visibility in UpLMS` tắt thì không đẩy thông báo nào, dù `Gamification` vẫn đang bật và điểm vẫn được ghi.
-- `BR-2.5` Khi chuyển từ **chạy ngầm** sang **bật đầy đủ**, **không bắn thông báo hồi tố** cho dữ liệu đã tích trong giai đoạn chạy ngầm. Học viên thấy điểm và hạng đã có sẵn ở trang thành tích, kèm lịch sử để tra nguồn.
+- `BR-2.5` Khi chuyển từ **chạy ngầm** sang **bật đầy đủ**, **không bắn thông báo hồi tố** cho dữ liệu đã tích trong giai đoạn chạy ngầm. Học viên thấy điểm và hạng đã có sẵn ở màn Gamification, kèm lịch sử để tra nguồn.
 - `BR-2.6` Lỗi ở phần hiển thị thông báo **không được làm hỏng thao tác học**. Học viên bấm Hoàn thành thì thao tác đó phải thành công dù thông báo không hiện được. Theo `NFR-GAM-01`.
 - `BR-2.7` Tài khoản có `Test Account = Yes` không nhận thông báo, vì không phát sinh dữ liệu gamification.
 - `BR-2.8` Không có thông báo tụt hạng, vì hạng chỉ lên không tụt (`BR-1.3`).
+- `BR-2.10` **Dòng 0 điểm không sinh thông báo.** Dòng này sinh ra khi `Points` hoặc hành động đó đang tắt, và đã ẩn với học viên ở lịch sử (`BR-3.1a`).
 - `BR-2.9` **Không gộp thông báo.** Mỗi thành tích phát sinh một thẻ riêng, kể cả khi nhiều thành tích đến từ cùng một thao tác.
 
 **NFR**
@@ -1308,7 +1420,7 @@ Là học viên, tôi cần tra được từng lần cộng điểm đến từ
 
 ### 3/ Scenario
 
-Học viên ở màn Gamification, mở `Achievement history`. Một panel trượt ra từ cạnh phải, liệt kê từng lần ghi nhận theo thứ tự **mới nhất lên trước**.
+Học viên mở panel `How to collect points?` trên màn Gamification rồi bấm nút `Achievement History`. Một panel trượt ra từ cạnh phải, liệt kê từng lần ghi nhận theo thứ tự **mới nhất lên trước**.
 
 Mỗi mục gồm hai dòng: dòng trên là thời điểm, dòng dưới là một câu kể rõ học viên nhận được gì và vì sao.
 
@@ -1320,13 +1432,13 @@ Học viên cuộn xuống để xem các lần trước đó. Chưa có lần n
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Achievement history | Điểm vào | Vị trí | **Panel trượt từ cạnh phải**, mở từ màn Gamification. Không phải trang riêng, không phải tab |
+| Achievement history | Điểm vào | Vị trí | **Panel trượt từ cạnh phải**, mở từ nút `Achievement History` ở cuối panel `How to collect points?` (`US1`). Không phải trang riêng, không phải tab |
 | Achievement history | Panel | Tiêu đề | `Achievement history`, kèm nút `✕` đóng ở góc phải |
 | Achievement history | Mục | Dòng thời gian | `HH:mm • dd/mm/yyyy`, chữ nhỏ màu nhạt, cắt theo múi giờ tổ chức |
 | Achievement history | Mục | Dòng nội dung | Một câu hoàn chỉnh. Số điểm, tên huy hiệu và số hạng **in đậm**, phần còn lại chữ thường. Bộ chuỗi đầy đủ ở bảng dưới |
 | Achievement history | Mục | Thứ tự | **Mới nhất lên trước** |
 | Achievement history | Mục | Tên dài | Tên hoạt động và tên khoá cắt ở `60` ký tự rồi thêm `…`. Trỏ chuột vào hiện đầy đủ |
-| Achievement history | Panel | Số mục một lần tải | Tải thêm khi cuộn tới cuối. Số mục mỗi lần: `❓PO` |
+| Achievement history | Panel | Số mục một lần tải | Tải thêm khi cuộn tới cuối. Số mục mỗi lần: `❓PO`, xem `OQ-19` |
 | Achievement history | Panel | Trạng thái rỗng | `Nothing here yet. Start learning to earn your first points.` |
 | Lịch sử ghi nhận | Bảng | Thao tác | Chỉ đọc. Không sửa, không xoá, không có nút thao tác nào trên dòng |
 
@@ -1370,6 +1482,8 @@ Mẫu chung: `You earned **{điểm}** for {hành động}.` Phần trong `{…}
 - `BR-3.7` Điểm ghi trong giai đoạn **chạy ngầm** hiện đầy đủ trong lịch sử ngay khi bật `Visibility in UpLMS`.
 - `BR-3.8` Tài khoản có `Test Account = Yes` không có lịch sử, vì không phát sinh dữ liệu gamification.
 - `BR-3.9` **Lịch sử giữ toàn bộ, không giới hạn thời gian, không dọn.** Học viên tra được mọi lần ghi nhận từ ngày đầu tiên. Đây là điều kiện để `O5` đứng vững: một con số chỉ đáng tin khi truy được tới tận nguồn.
+- `BR-3.10` **Dòng lịch sử ẩn theo chức năng sinh ra nó**, theo bảng `BR-1.8`: dòng điểm ẩn khi `Points` tắt, dòng huy hiệu ẩn khi `Badges` hoặc loại đó tắt, dòng lên hạng ẩn khi `Levels` tắt. Dữ liệu giữ nguyên, bật lại thì hiện lại. PO chốt ngày 12/10.
+- `BR-3.11` Dòng lịch sử hiện **tên nội dung tại thời điểm ghi nhận**. Hoạt động, khoá hay bài Test bị đổi tên hoặc bị xoá sau đó thì dòng vẫn giữ tên cũ. Áp chung cho nhật ký bên Ops (`US22`). `[đề xuất]`
 
 **Data Field**
 
@@ -1377,7 +1491,7 @@ Mẫu chung: `You earned **{điểm}** for {hành động}.` Phần trong `{…}
 |---|---|---|---|---|
 | Thời điểm ghi nhận | Thời gian | Có | | Mới. Nền của `C3`, `C7`, `C8` |
 | Học viên | Khoá ngoại tới `users` | Có | | Mới |
-| Loại hành động | Danh mục | Có | Một trong các hành động khai ở `US9` | Mới |
+| Loại hành động | Danh mục | Có | Một trong các hành động khai ở `US8` | Mới |
 | Nội dung nguồn | Khoá ngoại | Không | Hoạt động, khoá, hoặc bài Test. Rỗng với hành động check-in | Mới |
 | Số điểm | Số nguyên | Có | `>= 0` | Mới. `0` khi `Points` hoặc hành động đó đang tắt — không hiện với học viên (`BR-3.1a`) |
 | `tenant_id` | Khoá ngoại | Có | | `C1`. Bảng này là nơi rò rỉ gây hậu quả nặng nhất |
@@ -1395,7 +1509,7 @@ Danh sách tải theo trang, không tải toàn bộ lịch sử của học vi�
 | Lọc hoặc tìm kiếm trong lịch sử | Chưa yêu cầu. Xem `OQ-18` |
 | Xuất lịch sử ra file | Chưa yêu cầu |
 | Xem lịch sử của học viên khác | Học viên không có quyền này. Vận hành xem ở nhật ký ghi nhận bên Ops (`US22`) |
-| Vận hành sửa hoặc cộng bù điểm thủ công | `A12`. Nếu sau này cần thì là một US riêng |
+| Vận hành sửa hoặc cộng bù điểm thủ công | Giả định `A12`: vận hành không sửa hay cộng trừ điểm thủ công. Nếu sau này cần thì là một US riêng |
 
 ### 6/ Conner case
 
@@ -1403,18 +1517,18 @@ Danh sách tải theo trang, không tải toàn bộ lịch sử của học vi�
 
 ---
 
-## US4: Huy hiệu sắp đạt
+## US4: Bộ huy hiệu trong My Profile
 
 ### 1/ User story
 
-Là học viên, tôi cần biết huy hiệu nào mình sắp đạt và còn thiếu bao nhiêu, để có mục tiêu ngắn hạn để nhắm tới.
+Là học viên, tôi cần xem toàn bộ huy hiệu, cả đã đạt lẫn chưa đạt, cùng mốc của từng cái, để có mục tiêu ngắn hạn để nhắm tới.
 
 ### 2/ Pre - Condition
 
 | Điều kiện | Nguồn |
 |---|---|
 | `Gamification` bật và `Visibility in UpLMS` bật | Hai công tắc `Gamification` và `Visibility in UpLMS`, cấu hình ở `US14` |
-| Vận hành đã tạo ít nhất một huy hiệu | `US10` |
+| Chức năng `Badges` bật và có ít nhất một loại huy hiệu đang bật | `US9` |
 | Tài khoản không phải `Test Account` | Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification |
 
 ### 3/ Scenario
@@ -1423,7 +1537,7 @@ Học viên bấm ô `{n} Badges` trên màn Gamification, hệ thống chuyển
 
 Tab này hiện **toàn bộ huy hiệu của từng loại đang bật**, cả đã đạt lẫn chưa đạt. Huy hiệu đã đạt hiện màu, chưa đạt hiện xám. Tiêu đề mỗi loại kèm bộ đếm dạng `Check-in Badges (2/8)`.
 
-Trỏ chuột vào một huy hiệu bất kỳ thì hiện **mốc của nó**, ví dụ `8 check-in`. Đó là cách học viên biết còn thiếu bao nhiêu.
+Trỏ chuột vào một huy hiệu thì hiện **mốc của nó**, ví dụ `8 check-in days`. Học viên so mốc đó với chỉ số của mình để biết còn bao xa.
 
 ### 4/ Acceptance criteria
 
@@ -1432,64 +1546,47 @@ Trỏ chuột vào một huy hiệu bất kỳ thì hiện **mốc của nó**, 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
 | My Profile → Badges | Điểm vào | Vị trí | **Một tab trong màn `My Profile`**, cạnh `My profile` và `Security`. Vào từ ô `{n} Badges` trên màn Gamification |
-| My Profile → Badges | Tiêu đề loại | Bộ đếm | `{Tên loại} Badges ({đã đạt}/{tổng mốc})`, ví dụ `Check-in Badges (2/8)` |
-| My Profile → Badges | Huy hiệu | Hình | Đã đạt hiện màu, **chưa đạt hiện xám**. Ảnh vận hành tải lên ở `US9`. Ảnh gốc bị xoá thì rơi về ảnh mặc định |
-| My Profile → Badges | Huy hiệu | Tên | Hiện dưới hình |
-| My Profile → Badges | Huy hiệu | Mốc | Hiện khi **trỏ chuột vào huy hiệu**, dạng `{mốc} {đơn vị}` — ví dụ `8 check-in`. Đây là cách học viên biết còn thiếu bao nhiêu |
-| My Profile → Badges | Huy hiệu | Ngày đạt | **Không hiện ở đây.** Học viên tra trong `Achievement history` (`US3`), nơi có đủ thời điểm của mọi mốc |
+| My Profile → Badges | Tiêu đề loại | Tên và bộ đếm | `{Tên loại} ({đã đạt}/{tổng mốc})`, ví dụ `Check-in Badges (2/8)`. Tên bốn loại theo `US9` |
+| My Profile → Badges | Huy hiệu | Hình | Đã đạt hiện màu, **chưa đạt hiện xám**. Ảnh lấy theo cấu hình ở `US9`. Ảnh gốc bị xoá thì rơi về ảnh mặc định |
+| My Profile → Badges | Huy hiệu | Tên | Hiện dưới hình, với cả huy hiệu chưa đạt. Không giấu tên |
+| My Profile → Badges | Huy hiệu | Trỏ chuột vào | Khung huy hiệu nổi lên, hiện **mốc** dưới tên, dạng `{mốc} {đơn vị}`, ví dụ `8 check-in days`. `{đơn vị}`: `check-in days` · `activities` · `passed tests` · `completed courses`. Huy hiệu có mô tả ở `US9` thì hiện thêm mô tả. `[đề xuất]` cho phần mô tả |
+| My Profile → Badges | Huy hiệu | Ngày đạt | **Không hiện ở đây.** Học viên tra trong lịch sử ghi nhận (`US3`) |
 | My Profile → Badges | Huy hiệu | Thứ tự | Nhóm theo loại, trong mỗi loại sắp theo **mốc tăng dần**. Mọi học viên thấy cùng một thứ tự |
-| My Profile → Badges | Loại đang tắt | Hiển thị | Không hiện cả nhóm. Vận hành tắt loại nào ở `US9` thì loại đó biến mất khỏi tab |
-| Thành tích của tôi | Danh sách huy hiệu | Phạm vi hiển thị | **Hiện toàn bộ huy hiệu vận hành đã tạo**, cả đã đạt lẫn chưa đạt, kèm mốc của từng cái. Học viên thấy hết bản đồ để biết phấn đấu tới đâu |
-| Thành tích của tôi | Danh sách huy hiệu | Nhóm và thứ tự | Nhóm theo loại. Trong mỗi loại sắp theo mốc tăng dần, mốc thấp trước |
-| Thành tích của tôi | Danh sách huy hiệu | Huy hiệu đã đạt | Hình đầy đủ màu, kèm ngày đạt |
-| Thành tích của tôi | Danh sách huy hiệu | Huy hiệu chưa đạt | Hình hiển thị khác để phân biệt với đã đạt. Cách phân biệt: `❓PO`, chờ Figma |
-| Thành tích của tôi | Danh sách huy hiệu | Tên huy hiệu | Hiện đầy đủ với cả huy hiệu chưa đạt. Không giấu tên |
-| Thành tích của tôi | Danh sách huy hiệu | Tiến độ | Chỉ hiện với huy hiệu **chưa đạt**. Thanh tiến độ kèm số dạng `{hiện tại}/{ngưỡng}`, ví dụ `12/20` |
-| Thành tích của tôi | Danh sách huy hiệu | Phần còn thiếu | Chỉ hiện với huy hiệu chưa đạt. Một dòng tiếng Anh theo mẫu `{N} more {đơn vị} to unlock`.<br>Ví dụ: `8 more activities to unlock`. Chuỗi cho từng loại: `❓PO` |
-| Thành tích của tôi | Danh sách huy hiệu | Trạng thái rỗng | Vận hành chưa tạo huy hiệu nào thì ẩn cả phần này |
+| My Profile → Badges | Loại đang tắt | Hiển thị | Không hiện cả nhóm |
+| My Profile → Badges | Chức năng `Badges` tắt | Hiển thị | Tab `Badges` biến mất khỏi `My Profile` |
+| My Profile → Badges | Loại chưa đạt huy hiệu nào | Hiển thị | Vẫn hiện đủ tám mốc, tất cả màu xám, bộ đếm `(0/8)` |
 
 **Business requirement — Business rule**
 
-- `BR-4.1` Hiện **toàn bộ huy hiệu vận hành đã tạo**, cả đã đạt lẫn chưa đạt, kèm mốc của từng cái.
-- `BR-4.2` Huy hiệu chưa đạt hiện thêm tiến độ và phần còn thiếu. Huy hiệu đã đạt hiện ngày đạt.
-- `BR-4.3` 🔑 **Số đếm hiển thị ở đây phải dùng đúng định nghĩa chỉ số đã khai trong `Solution`, giống hệt lúc hệ thống xét trao huy hiệu.** Sai lệch giữa hai chỗ tạo ra tình huống học viên thấy *"còn 1 nữa"*, làm xong, rồi không được huy hiệu.
-- `BR-4.4` Vận hành chưa tạo huy hiệu nào cho một loại thì loại đó **không hiện**.
-- `BR-4.5` Tài khoản có `Test Account = Yes` không có phần này.
-
-**Đổi ngưỡng huy hiệu — quét lại toàn bộ**
-
-- `BR-4.6` **Mốc của một huy hiệu khoá ngay sau khi tạo**, vận hành không sửa được. **Cũng không có thao tác xoá huy hiệu.** Nên không có tình huống nào khiến học viên mất huy hiệu đã có, và không có tình huống phải quét lại cấp bù.
-- `BR-4.7` Vận hành tạo thêm huy hiệu mới với mốc khác thì huy hiệu đó được xét **từ thời điểm tạo trở đi**, theo `C4`. Học viên đã vượt mốc từ trước được trao ở lần xét tiếp theo.
-- `BR-4.8` Huy hiệu bị **tắt** thì biến khỏi danh sách với mọi học viên, kể cả người đã đạt. Dữ liệu giữ nguyên, bật lại thì hiện lại đầy đủ. Xem `BR-1.4a`.
-- `BR-4.9` **Tắt cả chức năng huy hiệu** thì toàn bộ phần huy hiệu biến khỏi trang Thành tích của tôi, và chỉ số `Badges` biến khỏi bộ chọn chỉ số của bảng xếp hạng (`US6`).
+- `BR-4.1` Hiện **toàn bộ huy hiệu của mọi loại đang bật**, cả đã đạt lẫn chưa đạt, kèm mốc của từng cái. Mỗi loại có tám mốc do hệ thống định sẵn (`BR-9.2`).
+- `BR-4.2` Đã đạt và chưa đạt **phân biệt bằng màu**. **Không có thanh tiến độ, không hiện phần còn thiếu, không hiện ngày đạt.** Design chốt ngày 01/10.
+- `BR-4.4` Loại huy hiệu đang tắt thì **không hiện** (`BR-9.5`). Tắt cả chức năng huy hiệu thì cả tab biến mất (`BR-9.6`).
+- `BR-4.5` Tài khoản có `Test Account = Yes` không có tab này.
+- `BR-4.6` Mốc do hệ thống định sẵn, **không sửa được**, và **không có thao tác tạo hay xoá huy hiệu** (`BR-9.2`, `BR-9.7`). Nên huy hiệu đã đạt không bao giờ mất, và không có trường hợp phải quét lại để cấp bù.
+- `BR-4.7` Vận hành đổi tên, hình hoặc mô tả của một mốc ở `US9` thì **áp ngay cho mọi học viên**, kể cả người đã đạt (`BR-9.4`).
 
 > **Ba cơ chế cùng một luật.** Điểm, huy hiệu và hạng đều chỉ áp thay đổi **từ thời điểm đổi trở đi**, và **không có gì bị lấy lại** khỏi học viên. Hạng không tụt, huy hiệu không mất, điểm đã ghi không đổi.
 
 **Data Field**
 
-Không có field mới. Phần này tính từ dữ liệu đã có:
+Không có field mới. Phần này đọc từ dữ liệu đã có:
 
 | Cần gì | Lấy ở đâu |
 |---|---|
-| Ngưỡng và loại của từng huy hiệu | Bảng Huy hiệu (`US10`) |
-| Huy hiệu học viên đã đạt | Bảng Huy hiệu đã đạt (`US1`) |
-| Số ngày có mặt | Bảng Ngày có mặt (`US5`) |
-| Số hoạt động hoàn thành | Theo mục Định nghĩa chỉ số — **không phụ thuộc công tắc `Points`** |
-| Số bài Test | Theo mục Định nghĩa chỉ số, lọc theo `BR-TEST` |
-| Số khoá hoàn thành | **Số lượt hoàn thành khoá**, theo mục Định nghĩa chỉ số. ⚠️ **Không dùng** `GET /api/v1/users/course-certificate/count`, vì endpoint đó đếm chứng chỉ mà chứng chỉ không cấp lại khi học lại — xem `BR-13.12` |
+| Loại, mốc, tên, hình, mô tả của từng huy hiệu | Cấu hình huy hiệu (`US9`) |
+| Huy hiệu học viên đã đạt | Huy hiệu đã đạt (`US1`) |
 
 **NFR**
 
-Số đếm của mỗi loại chỉ tính **một lần** cho mỗi lần mở trang, rồi so với mọi mốc của loại đó. Không tính lại cho từng huy hiệu.
-
-Việc quét lại khi đổi ngưỡng (`BR-4.6`, `BR-4.7`) chạy nền, không chặn thao tác lưu cấu hình của vận hành.
+Tab đọc danh sách huy hiệu đã đạt đã lưu sẵn. Không đếm lại chỉ số khi mở tab, vì tab không hiện tiến độ.
 
 ### 5/ Out of scope
 
 | Không làm ở US này | Lý do |
 |---|---|
+| Thanh tiến độ và phần còn thiếu của huy hiệu chưa đạt | Design chốt ngày 01/10 chỉ hiện mốc khi trỏ chuột vào |
+| Ngày đạt cạnh huy hiệu | Tra ở lịch sử ghi nhận (`US3`) |
 | Gợi ý nội dung cụ thể để đạt huy hiệu, ví dụ *"học khoá X"* | Chưa yêu cầu. Cần logic đề xuất nội dung, là bài toán khác |
-| Hiện tiến độ tới **hạng** kế tiếp | Đã có ở `US1` |
 | Thông báo khi sắp đạt một huy hiệu, ví dụ *"còn 1 nữa"* | Chưa yêu cầu. `US2` chỉ báo khi đã đạt |
 
 ### 6/ Conner case
@@ -1511,7 +1608,7 @@ Là học viên, tôi cần việc vào hệ thống mỗi ngày được ghi nh
 | Điều kiện | Nguồn |
 |---|---|
 | `Gamification` bật ở cấp tổ chức | Hai công tắc `Gamification` và `Visibility in UpLMS`, cấu hình ở `US14` |
-| Vận hành đã bật hành động **vào hệ thống hằng ngày** và khai ba tham số điểm chuỗi | `US8` |
+| Vận hành đã bật hành động **vào hệ thống hằng ngày** và khai điểm nền của chuỗi | `US8` |
 | Tài khoản không phải `Test Account` | Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification |
 | Tổ chức đã có **múi giờ** | Ràng buộc `C9` — biên ngày cắt theo múi giờ tổ chức. Múi giờ lấy theo tenant, xem `BR-14.9` |
 
@@ -1533,9 +1630,9 @@ Học viên bỏ trọn một ngày không vào thì chuỗi về `0`. Lần và
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Mọi màn UpLMS | Thông báo nhận điểm | Nội dung | Theo mẫu của `US2`, kèm độ dài chuỗi sau khi tăng. Chuỗi tiếng Anh: `❓PO`. Gợi ý: `+ {điểm} · {n}-day streak` |
+| Mọi màn UpLMS | Thông báo nhận điểm | Nội dung | Theo mẫu của `US2`, kèm độ dài chuỗi sau khi tăng: `+{điểm} pts for visiting today · {n}-day streak`. `[đề xuất]` |
 | Gamification | Dải tóm tắt | `{n} Streaks` | Chuỗi hiện tại. Đứt thì về `0` |
-| Gamification | Dải tóm tắt | Số ngày có mặt | **Không hiện riêng.** Nó là chỉ số nền cho huy hiệu loại Check-in, học viên thấy qua tiến độ huy hiệu ở `US4`. Khác với chuỗi: con số này **không về `0`** khi nghỉ |
+| Gamification | Dải tóm tắt | Số ngày có mặt | **Không hiện riêng.** Nó là chỉ số nền cho `Check-in badges`, học viên thấy qua huy hiệu đã đạt ở `US4`. Khác với chuỗi: con số này **không về `0`** khi nghỉ |
 | Toàn hệ thống | Thao tác của học viên | | **Không có thao tác nào.** Học viên không bấm nút check-in. Hệ thống tự ghi khi thấy học viên vào |
 
 **Business requirement — Business rule**
@@ -1543,18 +1640,29 @@ Học viên bỏ trọn một ngày không vào thì chuỗi về `0`. Lần và
 - `BR-5.1` Mỗi ngày ghi nhận **một lần duy nhất**, ở lần đầu tiên học viên vào hệ thống trong ngày đó. Vào nhiều lần trong ngày không cộng thêm điểm và không tăng chuỗi.
   - **Vào hệ thống là học viên chủ động mở hoặc quay lại UpLMS.** Còn phiên đăng nhập từ hôm trước thì mở UpLMS là được tính, không cần đăng nhập lại.
   - **Request nền tự chạy không tính**, ví dụ kết nối thông báo hoặc tự làm mới dữ liệu khi tab để mở. Nếu không, học viên treo tab qua đêm sẽ tự giữ chuỗi kể cả thứ bảy, chủ nhật.
+
+  | Hành vi | Tính là vào hệ thống? |
+  |---|---|
+  | Mở UpLMS, tải lại trang, đi tới một trang khác trong UpLMS | Có |
+  | Tab để mở từ hôm qua, sáng nay học viên bấm vào một mục bất kỳ | Có |
+  | Tab để mở từ hôm qua, không ai thao tác | Không |
+  | Ứng dụng tự gọi dữ liệu nền: kết nối thông báo, tự làm mới khi chuyển tab | Không |
 - `BR-5.2` **Không có thao tác check-in thủ công.** Học viên không bấm gì. Hệ thống ghi nhận khi thấy học viên có mặt.
 - `BR-5.3` **"Ngày" cắt theo múi giờ tổ chức** (`C9`). Không dùng giờ máy chủ và không dùng múi giờ của thiết bị học viên.
-- `BR-5.4` **Điểm tăng dần theo độ dài chuỗi.** Gọi `n` là ngày thứ mấy của chuỗi đang giữ:<br>`điểm = min( điểm nền + (n − 1) × 5 , trần điểm chuỗi )`<br>**Bước tăng cố định `5`, không cấu hình được.** Vận hành chỉ khai hai tham số ở `US8`: điểm nền và trần.<br>Với `10 / 40`: `10 · 15 · 20 · 25 · 30 · 35 · 40`, chạm trần đúng **ngày thứ 7**. Trọn một tuần được `175` điểm.
+- `BR-5.4` **Điểm tăng dần theo độ dài chuỗi.** Gọi `n` là ngày thứ mấy của chuỗi đang giữ:<br>`điểm = min( điểm nền + (n − 1) × 5 , trần )`, với `trần = max( 40 , điểm nền )`<br>**Bước tăng cố định `5`. Vận hành chỉ khai một tham số ở `US8`: điểm nền.** Trần là `40`, hoặc bằng điểm nền khi điểm nền lớn hơn `40`. PO chốt ngày 12/10.<br>Với nền `10`: `10 · 15 · 20 · 25 · 30 · 35 · 40`, chạm trần đúng **ngày thứ 7**, trọn một tuần được `175` điểm. Với nền `20`: chạm trần ngày thứ 5. Với nền `50`: mọi ngày được `50`, chuỗi không còn làm điểm tăng.
 - `BR-5.5` **Chuỗi tăng thêm một mỗi ngày có mặt.** Ngày mở đầu một chuỗi có `n = 1` và nhận đúng mức điểm nền.
 - `BR-5.6` **Bỏ trọn một ngày thì chuỗi về `0`.** Lần vào kế tiếp mở chuỗi mới từ `n = 1`. Hệ thống đếm **mọi ngày dương lịch**, nên thứ bảy, chủ nhật, ngày lễ và ngày nghỉ phép đều làm đứt chuỗi nếu học viên không vào.
 - `BR-5.7` **Đứt chuỗi không thu hồi điểm đã nhận.** Điểm nằm lại trong sổ giao dịch, chuỗi về `0` chỉ ảnh hưởng mức điểm của những ngày sau.
-- `BR-5.9` Đổi ba tham số ở `US8` **chỉ áp dụng từ thời điểm đổi** (`C4`). Chuỗi đang giữ không bị cắt và không bị tính lại; ngày kế tiếp dùng tham số mới với đúng `n` hiện có.
+- `BR-5.9` Đổi điểm nền ở `US8` **chỉ áp dụng từ thời điểm đổi** (`C4`). Chuỗi đang giữ không bị cắt và không bị tính lại; ngày kế tiếp dùng điểm nền mới với đúng `n` hiện có.
 - `BR-5.10` **Trần điểm chuỗi** ở `BR-5.4` chỉ chặn mức điểm của riêng một ngày check-in. Nó không phải trần cho tổng điểm trong ngày — hệ thống không có trần đó.
 - `BR-5.11` Ghi nhận ngày có mặt nằm trong cùng thao tác với việc học viên vào hệ thống. Lỗi ở đây **không được chặn học viên vào hệ thống**, theo `NFR-GAM-01`.
 - `BR-5.12` `Gamification` tắt thì **không ghi nhận gì**. Bật lại chỉ tính từ thời điểm bật: chuỗi mở lại từ `n = 1`, không dựng lại những ngày đã qua.
 - `BR-5.13` `Visibility in UpLMS` tắt thì **vẫn ghi nhận, vẫn cộng điểm, vẫn tăng chuỗi**, chỉ không hiện và không thông báo.
 - `BR-5.14` Tài khoản có `Test Account = Yes` không được ghi nhận ngày có mặt và không có chuỗi.
+- `BR-5.15` 🔑 **`Points` hoặc hành động check-in đang tắt: ngày có mặt vẫn ghi, chuỗi thì không.** Ngày có mặt vẫn được đếm cho `Check-in badges` (mục Định nghĩa chỉ số). Lần vào hệ thống đầu tiên sau khi bật lại **mở chuỗi mới từ `n = 1`**, nhận mức điểm nền. PO chốt ngày 12/10.
+  > Ví dụ: Lan đang ở ngày thứ 5 của chuỗi. Vận hành tắt `Points` hai ngày rồi bật lại. Lan vào đều cả hai ngày đó. Hôm bật lại, Lan nhận điểm nền và chuỗi tính lại từ `1`.
+  >
+  > **Bật lại giữa ngày** `[đề xuất]`: Lan vào lúc 08:00 khi `Points` đang tắt, ngày đó đã được ghi. 10:00 vận hành bật lại. 14:00 Lan vào lại: không cộng điểm, vì mỗi ngày chỉ ghi nhận một lần (`BR-5.1`). Chuỗi mới bắt đầu từ lần vào ngày hôm sau, với `n = 1`.
 
 **Data Field**
 
@@ -1564,11 +1672,11 @@ Học viên bỏ trọn một ngày không vào thì chuỗi về `0`. Lần và
 | Ngày có mặt | Ngày | Có | Cắt theo múi giờ tổ chức | Mới. Không lưu giờ phút, chỉ lưu ngày |
 | `tenant_id` | Khoá ngoại | Có | | Ràng buộc `C1` — cấu hình gắn `tenant_id`, không đóng cứng trong mã |
 
-Một học viên một ngày chỉ có **một bản ghi**. Đây cũng là cách chặn cộng điểm hai lần khi học viên mở hai thiết bị cùng lúc, xử lý luôn `CG-7`.
+Một học viên một ngày chỉ có **một bản ghi**. Đây cũng là cách chặn cộng điểm hai lần khi học viên mở hai thiết bị cùng lúc.
 
-Số ngày có mặt dùng ở hai nơi: hành động tính điểm này, và **huy hiệu loại Tích cực** (`US4`, `US9`).
+Số ngày có mặt dùng ở hai nơi: hành động tính điểm này, và **`Check-in badges`** (`US4`, `US9`).
 
-Trạng thái chuỗi **không lưu ở bảng này** mà lưu ở `Thành tích của học viên`, vì nó là trạng thái của một người chứ không phải của một ngày:
+Chuỗi là trạng thái của một người, không phải của một ngày. Cần giữ các thông tin sau:
 
 | Field | Kiểu | Bắt buộc | Giá trị hợp lệ | Ghi chú |
 |---|---|---|---|---|
@@ -1581,7 +1689,7 @@ Bảng `Ngày có mặt của học viên` giữ nguyên cấu trúc. Nó vẫn 
 
 Việc ghi nhận chạy ở lần vào đầu tiên trong ngày. Những lần vào sau trong cùng ngày không được tạo thêm thao tác ghi.
 
-Việc xác định chuỗi đã đứt hay chưa đọc từ `Ngày có mặt gần nhất`, không quét lại bảng `Ngày có mặt của học viên`.
+Việc xác định chuỗi đã đứt hay chưa phải nhanh, không phụ thuộc số ngày có mặt đã tích.
 
 ### 5/ Out of scope
 
@@ -1589,8 +1697,8 @@ Việc xác định chuỗi đã đứt hay chưa đọc từ `Ngày có mặt g
 |---|---|
 | Miễn trừ thứ bảy, chủ nhật, ngày lễ và nghỉ phép khỏi việc đứt chuỗi | `BR-5.6` đếm mọi ngày dương lịch. PO chốt ở `CR-009` sau khi cân nhắc phương án theo lịch làm việc |
 | Quỹ bảo vệ chuỗi, cho phép vắng vài ngày mỗi tháng mà không đứt | Đã nêu ở `CR-009`, PO không chọn |
-| Thông báo đẩy cảnh báo sắp đứt chuỗi | `BR-2.1` chỉ đẩy thông báo khi học viên **đang mở UpLMS**. Người sắp đứt chuỗi theo định nghĩa là người không vào, nên sẽ không bao giờ nhận được. Thay bằng dòng nhắc tĩnh trên trang Thành tích |
-| Huy hiệu trao theo độ dài chuỗi | Chưa yêu cầu. Huy hiệu loại Tích cực vẫn đo tổng số ngày có mặt |
+| Thông báo đẩy cảnh báo sắp đứt chuỗi | `BR-2.1` chỉ đẩy thông báo khi học viên **đang mở UpLMS**. Người sắp đứt chuỗi theo định nghĩa là người không vào, nên sẽ không bao giờ nhận được. Thay bằng dòng nhắc tĩnh trên màn Gamification |
+| Huy hiệu trao theo độ dài chuỗi | Chưa yêu cầu. `Check-in badges` vẫn đo tổng số ngày có mặt |
 | Nút check-in cho học viên tự bấm | `BR-5.2`. Vào hệ thống là đủ |
 | Lấy dữ liệu từ sự kiện đăng nhập của Keycloak | Học viên dùng SSO Lark, phiên sống nhiều ngày nên có thể không sinh sự kiện đăng nhập mới. Người chăm nhất lại là người ít sinh sự kiện nhất |
 | Dựng lại số ngày có mặt trước khi bật tính năng | `BR-5.12`. Không tính bù, và chuỗi cũng mở lại từ đầu |
@@ -1630,22 +1738,23 @@ Bảng hiện thứ hạng, tên và chỉ số của từng học viên, kèm n
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Bảng xếp hạng | Điểm vào | Vị trí | Mục riêng ở menu chính UpLMS. `Visibility in UpLMS` tắt thì mục biến mất |
+| Bảng xếp hạng | Điểm vào | Vị trí | **Nằm trong màn Gamification** (`US1`), dưới dải tóm tắt. Không có mục menu riêng |
 | Bảng xếp hạng | Chọn khung thời gian | Các lựa chọn | `All time` · `This week` · `This month` · `This quarter` · `This year`. **Không có bộ chọn khoảng ngày tự do**, xem `BR-6.15` |
 | Bảng xếp hạng | Chọn khung thời gian | Mặc định | `All time` — từ ngày bật tính năng tới hôm nay |
 | Bảng xếp hạng | Chọn khung thời gian | Hiển thị | Luôn hiện khoảng ngày của khung đang chọn, ví dụ `1–30 Sep 2026` |
 | Bảng xếp hạng | Chọn khung thời gian | Campaign | Lối vào campaign nằm cạnh các khung cố định. Chi tiết ở `US19` |
-| Bảng xếp hạng | Chọn bảng | Các lựa chọn | Năm bảng riêng: `Points` · `Activities` · `Courses` · `Level` · `Badges`. Chỉ hiện những bảng vận hành đã bật ở `US11`. **`Level` và `Badges` chỉ có ở `All time`**, biến mất khi chọn khung khác |
+| Bảng xếp hạng | Chọn bảng | Các lựa chọn | Năm bảng riêng, theo thứ tự `Points` · `Activities` · `Courses` · `Badges` · `Level`. Thứ tự này dùng chung cho `US6`, `US11`, `US19`. `[đề xuất]`. Chỉ hiện những bảng vận hành đã bật ở `US11`. **`Level` và `Badges` chỉ có ở `All time`**, biến mất khi chọn khung khác |
 | Bảng xếp hạng | Chọn bảng | Đổi khung làm bảng đang xem biến mất | Chuyển về bảng đầu tiên còn hiện. `[đề xuất]` |
-| Bảng xếp hạng | Chọn bảng | Mặc định | `Points`. `[đề xuất]` |
+| Bảng xếp hạng | Chọn bảng | Mặc định | `Points`. Bảng `Points` không hiện thì mở bảng đầu tiên còn hiện theo thứ tự trên. `[đề xuất]` |
 | Bảng xếp hạng | Bảng | Top 3 | Ba vị trí đầu hiển thị nổi bật, tách khỏi danh sách bên dưới |
-| Bảng xếp hạng | Bảng | Danh sách đầy đủ | Bên dưới top 3, cuộn được, gồm **toàn bộ học viên** kể cả người chưa có chỉ số nào. Người chưa có chỉ số nằm cuối |
+| Bảng xếp hạng | Bảng | Mặc định | Hiện **5 dòng đầu**, rồi đường kẻ `Show All`, rồi khối vị trí của tôi (`US7`). Theo design |
+| Bảng xếp hạng | Bảng | Danh sách đầy đủ | Bấm `Show All` thì mở danh sách cuộn được, gồm **toàn bộ học viên** kể cả người chưa có chỉ số nào. Người chưa có chỉ số nằm cuối |
 | Bảng xếp hạng | Bảng | Cột `#` | Thứ hạng, số nguyên bắt đầu từ 1. Không có hai người cùng thứ hạng, xem `BR-6.4`. **Học viên chưa có chỉ số nào để trống ô này** |
 | Bảng xếp hạng | Bảng | Cột học viên | Ảnh đại diện và tên học viên |
 | Bảng xếp hạng | Bảng | Cột giá trị | Một cột duy nhất, đúng chỉ số của bảng đang xem |
 | Bảng xếp hạng | Bảng | Dòng của chính người đang xem | Làm nổi bật trong danh sách. Chi tiết ở `US7` |
 | Bảng xếp hạng | Nhãn cập nhật | Nội dung | `Last updated {HH:mm}` theo múi giờ tổ chức. Luôn hiện, kể cả khi bảng vừa mới tính xong |
-| Bảng xếp hạng | Trạng thái rỗng | Khung chưa có ai được ghi nhận | `No one has earned points in this period yet.` Chuỗi cho bảng `Activities` và `Courses`: `❓PO` |
+| Bảng xếp hạng | Trạng thái rỗng | Khung chưa có ai được ghi nhận | `No one has earned points in this period yet.` Chuỗi cho bảng `Activities` và `Courses`: `❓PO`, xem `OQ-50` |
 
 **Business requirement — Business rule**
 
@@ -1655,11 +1764,19 @@ Bảng hiện thứ hạng, tên và chỉ số của từng học viên, kèm n
 - `BR-6.2b` 🔑 **Bảng theo hạng và bảng theo số huy hiệu chỉ có ở `All time`**, biến mất khi chọn khung khác. Theo `BR-11.2`.
   > **Vì sao huy hiệu không đếm theo khung được.** Mốc huy hiệu tăng gấp đôi, nên đếm huy hiệu trong một khoảng đo độ mới, không đo độ chăm. Ví dụ với `Activity badges` trong một tháng: người mới làm 30 hoạt động nhận 2 huy hiệu (mốc 10, 25), còn người cũ đang ở 420 làm 300 hoạt động nhận 0 huy hiệu vì mốc kế tiếp là 800.
 - `BR-6.3` Các khung là **khoảng theo lịch**, không phải cửa sổ trượt. `This week` là tuần theo lịch, không phải bảy ngày gần nhất. Biên ngày cắt theo **múi giờ tổ chức**.
-- `BR-6.4` **Cùng chỉ số thì ai đạt mức đó sớm hơn xếp trên.** Không hiển thị hai người cùng thứ hạng. Quy tắc này bắt buộc vì hai trong năm chỉ số có khoảng giá trị rất hẹp: số huy hiệu thường từ 0 đến 10, số khoá hoàn thành từ 0 đến 5.
+- `BR-6.4` **Cùng chỉ số thì ai đạt mức đó sớm hơn xếp trên.** Trùng cả chỉ số lẫn thời điểm thì **xếp theo tên từ A đến Z**. Không hiển thị hai người cùng thứ hạng. Quy tắc này bắt buộc vì hai trong năm chỉ số có khoảng giá trị rất hẹp: số huy hiệu thường từ 0 đến 10, số khoá hoàn thành từ 0 đến 5.
 - `BR-6.5` Bảng **tính sẵn theo chu kỳ**, không tính lại mỗi lần học viên mở trang. Nhãn `Last updated` cho biết số liệu tính tới lúc nào.
-- `BR-6.6` Học viên **chưa có chỉ số nào trong khung vẫn xuất hiện** trong bảng, nhưng **cột thứ hạng để trống**. Nhiều người cùng ở trạng thái này thì vẫn nằm trên dưới nhau trong danh sách, chỉ là không ai có số thứ hạng.
+- `BR-6.6` Học viên **chưa có chỉ số nào trong khung vẫn xuất hiện** trong bảng, nhưng **cột thứ hạng để trống**. Nhiều người cùng ở trạng thái này thì xếp với nhau theo **tên từ A đến Z**, không ai có số thứ hạng.
 - `BR-6.12` 🔑 **Mọi bảng đều tính sẵn, 8 tiếng một lần**, gồm năm khung cố định và các campaign đang chạy. Mở là thấy ngay, kèm nhãn `Last updated {HH:mm}`. **Không có phép tính nào chạy theo yêu cầu của học viên.**
 - `BR-6.13` **Gốc của bảng là toàn thời gian**, tính từ ngày bật tính năng tới hôm nay. Khung thời gian là **bộ lọc** đặt lên trên, không phải một bảng riêng biệt.
+- `BR-6.16` 🔑 **Biên thời gian.** PO chốt ngày 12/10.
+
+  | Câu hỏi | Quy tắc |
+  |---|---|
+  | Tuần bắt đầu ngày nào | **Thứ Hai** |
+  | `All time` tính từ khi nào | Từ **lần đầu tiên** bật `Gamification`. Tắt hẳn rồi bật lại không đặt lại mốc này |
+  | Múi giờ | Múi giờ của tổ chức (`BR-14.9`). Tổ chức hiện tại mặc định **UTC+7** |
+  | Bảng `Level`: học viên vẫn ở hạng `1` | Coi như **chưa có chỉ số**: vẫn nằm trong danh sách, ô thứ hạng để trống, theo `BR-6.6` |
 - `BR-6.15` 🔑 **Học viên không chọn được khoảng ngày tự do.** Khoảng tự chọn phải tính lúc chọn, nên ai cũng gọi được một phép tính nặng tuỳ ý, và gọi liên tục là làm chậm cả hệ thống. Chỉ còn khung cố định thì mọi thứ phía học viên đều tính sẵn, học viên gọi bao nhiêu lần cũng chỉ là đọc.
   > Nhu cầu xem một đợt có chủ đích thì dùng campaign (`US19`). Vận hành vẫn có bộ chọn khoảng ngày tự do ở `US12`.
 - `BR-6.7` Tài khoản có `Test Account = Yes` **không xuất hiện**, vì không phát sinh dữ liệu gamification.
@@ -1674,7 +1791,7 @@ Bảng hiện thứ hạng, tên và chỉ số của từng học viên, kèm n
 | Field | Kiểu | Bắt buộc | Ghi chú |
 |---|---|---|---|
 | Khung thời gian hoặc campaign | Danh mục hoặc khoá ngoại tới campaign | Có | Năm khung cố định, hoặc một campaign đang chạy |
-| Chỉ số | Danh mục | Có | Một trong năm. Campaign chỉ có `Points` và `Activities` |
+| Chỉ số | Danh mục | Có | Một trong năm. Campaign có `Points`, `Activities` nếu bật, và `Courses` |
 | Học viên | Khoá ngoại tới `users` | Có | |
 | Giá trị chỉ số | Số nguyên | Có | |
 | Thời điểm đạt mức hiện tại | Thời gian | Có | Nền của `BR-6.4`. Theo `C8` |
@@ -1689,7 +1806,7 @@ Bảng này bị **ghi đè mỗi chu kỳ tính**. Kết quả đóng băng ch�
 | Loại bảng | Cách tính |
 |---|---|
 | Năm khung cố định, nhân các bảng đang bật | **Tính sẵn** theo chu kỳ 8 tiếng (`BR-6.12`) |
-| Mỗi campaign đang chạy, hai bảng | **Tính sẵn** cùng chu kỳ (`US19`) |
+| Mỗi campaign đang chạy, hai hoặc ba bảng | **Tính sẵn** cùng chu kỳ (`US19`) |
 | Campaign đã kết thúc | Đọc kết quả đã đóng băng, không tính lại (`US21`) |
 
 `All time` là khoảng nặng nhất và **càng ngày càng nặng**, vì nó gom toàn bộ sổ giao dịch từ ngày bật tính năng.
@@ -1728,7 +1845,7 @@ Là học viên, tôi cần luôn thấy vị trí của chính mình kèm vài 
 
 ### 3/ Scenario
 
-Học viên mở trang Bảng xếp hạng. Ngoài top 3 ở trên và danh sách đầy đủ ở giữa, có một khối riêng luôn hiện vị trí của chính học viên kèm vài người ngay trên và ngay dưới.
+Học viên xem bảng xếp hạng trên màn Gamification. Dưới 5 dòng đầu và đường kẻ `Show All` là khối vị trí của chính học viên, kèm một người ngay dưới.
 
 Học viên cuộn danh sách đi đâu thì khối này vẫn ở đó. Đổi khung thời gian, đổi campaign hoặc đổi chỉ số thì khối này tính lại theo.
 
@@ -1740,18 +1857,18 @@ Học viên chưa có chỉ số nào trong kỳ thì khối vẫn hiện, nhưn
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Bảng xếp hạng | Khối Vị trí của tôi | Vị trí trên màn | Luôn nhìn thấy được, không phụ thuộc vị trí cuộn của danh sách. Cách thể hiện: `❓PO`, chờ Figma |
+| Bảng xếp hạng | Khối Vị trí của tôi | Vị trí trên màn | Ngay dưới đường kẻ `Show All`. Khi danh sách đầy đủ đang mở thì khối dính ở cuối vùng cuộn, luôn nhìn thấy |
 | Bảng xếp hạng | Khối Vị trí của tôi | Dòng của chính học viên | Thứ hạng, ảnh, tên, giá trị chỉ số. Làm nổi bật khác với các dòng liền kề |
-| Bảng xếp hạng | Khối Vị trí của tôi | Người liền kề | Vài người ngay trên và ngay dưới. Số lượng mỗi bên: `❓PO` |
+| Bảng xếp hạng | Khối Vị trí của tôi | Người liền kề | Dòng của học viên và **một người ngay dưới**, theo design. Số lượng cố định, không cấu hình |
 | Bảng xếp hạng | Khối Vị trí của tôi | Khoảng cách tới người trên | Một dòng nêu còn thiếu bao nhiêu để vượt người ngay trên, theo mẫu `{N} {đơn vị} behind {tên}`. `[đề xuất]` |
-| Bảng xếp hạng | Khối Vị trí của tôi | Học viên đang trong top 3 | Khối vẫn hiện, không ẩn đi. `[đề xuất]` |
-| Bảng xếp hạng | Khối Vị trí của tôi | Học viên chưa có chỉ số | Khối vẫn hiện, ô thứ hạng để trống, kèm một dòng gợi ý bắt đầu học. Chuỗi tiếng Anh: `❓PO` |
+| Bảng xếp hạng | Khối Vị trí của tôi | Học viên đang trong 5 dòng đầu | **Không có khối riêng.** Dòng của học viên được làm nổi bật ngay trong 5 dòng đầu |
+| Bảng xếp hạng | Khối Vị trí của tôi | Học viên chưa có chỉ số | Khối vẫn hiện, ô thứ hạng để trống, kèm một dòng gợi ý bắt đầu học. Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
 | Bảng xếp hạng | Khối Vị trí của tôi | Khi đổi khung, campaign hoặc chỉ số | Tính lại theo khung hoặc campaign và chỉ số đang chọn ở `US6`, `US19` |
 
 **Business requirement — Business rule**
 
-- `BR-7.1` Khối này **luôn hiện**, kể cả khi học viên nằm ngoài top 3 và ngoài vùng danh sách đang cuộn tới.
-- `BR-7.2` Hiện kèm **vài người ngay trên và ngay dưới**, để học viên thấy khoảng cách gần nhất chứ không chỉ thấy con số thứ hạng.
+- `BR-7.1` Khối này **luôn hiện** khi học viên nằm ngoài 5 dòng đầu, kể cả khi ngoài vùng danh sách đang cuộn tới. Học viên trong 5 dòng đầu thì dòng của họ nổi bật ngay trong danh sách.
+- `BR-7.2` Hiện kèm **một người ngay dưới**, theo design. Dòng khoảng cách tới người ngay trên cho học viên biết cần thêm bao nhiêu để vượt lên.
 - `BR-7.3` Học viên **chưa có chỉ số nào trong kỳ** thì khối vẫn hiện với ô thứ hạng để trống, theo `BR-6.6`. Không ẩn khối, vì ẩn đi thì đúng nhóm học viên cần được kéo vào lại là nhóm không thấy gì.
 - `BR-7.4` Khối cập nhật **cùng nhịp với bảng**, 8 tiếng một lần theo `BR-6.12`. Không tính riêng theo thời gian thực.
 - `BR-7.5` Đổi kỳ hoặc đổi chỉ số ở `US6` thì khối tính lại theo. Kỳ và chỉ số của khối luôn khớp với bảng đang xem.
@@ -1811,33 +1928,33 @@ Mỗi thay đổi **tự lưu** khi rời ô hoặc khi bấm công tắc, khôn
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
 | Cấu hình điểm | Đầu màn | Công tắc `Points` | Bật tắt cả cơ chế điểm. Tắt thì mọi hành động bên dưới **chuyển sang trạng thái không thao tác được**, nhưng giữ nguyên giá trị đã khai. Tiêu chí lên hạng theo điểm ở `US10` **khoá theo**, xem `BR-10.7` |
-| Cấu hình điểm | Đầu màn | Dòng giải thích dưới công tắc `Points` | Nêu rõ tắt `Points` thì tiêu chí lên hạng theo điểm cũng ngừng. **Không có hộp xác nhận.** Chuỗi tiếng Anh: `❓PO` |
+| Cấu hình điểm | Đầu màn | Dòng giải thích dưới công tắc `Points` | Nêu rõ tắt `Points` thì tiêu chí lên hạng theo điểm cũng ngừng. **Không có hộp xác nhận.** Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
 | Cấu hình điểm | Đầu màn | Mô tả chức năng | `Award users with points for different learning activities and encourage healthy competition.` |
-| Cấu hình điểm | Danh sách hành động | `On each daily check-in` | Công tắc riêng + **một ô nhập điểm nền**. Mô tả dưới tiêu đề: `Award points once a day when users first visit, even if they're still signed in from before. Each day in a row adds 5 more, up to 40 on day 7.` Ứng với `US5` |
-| Cấu hình điểm | Điểm chuỗi check-in | Ô nhập | **Điểm nền** — số điểm của ngày đầu tiên trong một chuỗi. Số nguyên dương, nhỏ nhất `1`. Mặc định `10` |
+| Cấu hình điểm | Danh sách hành động | `On each daily check-in` | Công tắc riêng + **một ô nhập điểm nền**. Mô tả dưới tiêu đề: `Award points once a day when users first visit, even if they're still signed in from before. Each day in a row adds 5 more, up to {trần} on day {k}.` Hai số lấy theo điểm nền đang lưu, `{k}` là ngày chạm trần. Điểm nền từ `40` trở lên thì vế sau đổi thành `Every day gives the same points.` `[đề xuất]`. Ứng với `US5` |
+| Cấu hình điểm | Điểm chuỗi check-in | Ô nhập | **Điểm nền** — số điểm của ngày đầu tiên trong một chuỗi. Số nguyên dương, nhỏ nhất `1`, không giới hạn trên. Mặc định `10` |
 | Cấu hình điểm | Điểm chuỗi check-in | Bước tăng | **Cố định `5`, không hiện ô nhập.** Nêu trong câu mô tả |
-| Cấu hình điểm | Điểm chuỗi check-in | Trần điểm chuỗi | **Mặc định `40`**, chạm đúng ngày thứ 7. Chưa cho vận hành sửa ở đợt này, nêu trong câu mô tả |
-| Cấu hình điểm | Danh sách hành động | `On each activity completion` | Công tắc riêng + ô nhập số điểm |
+| Cấu hình điểm | Điểm chuỗi check-in | Trần điểm chuỗi | **`40`, hoặc bằng điểm nền khi điểm nền lớn hơn `40`.** Không có ô nhập, nêu trong câu mô tả |
+| Cấu hình điểm | Danh sách hành động | `On each activity completion` | Công tắc riêng + ô nhập số điểm. Mô tả dưới tiêu đề: `Award users with points for each learning activity completion.` Chỉ tính Learning Activity, theo mục Định nghĩa chỉ số |
 | Cấu hình điểm | Danh sách hành động | `On each course completion` | Công tắc riêng + ô nhập số điểm |
 | Cấu hình điểm | Danh sách hành động | `On each successful test completion` | Công tắc riêng + ô nhập số điểm. **Chỉ tính bài Test đạt**, theo `BR-TEST` |
 | Cấu hình điểm | Ô nhập số điểm | Định dạng | Số nguyên dương. Nhỏ nhất `1`, **không giới hạn trên**. Không nhận số âm, không nhận số thập phân, không nhận `0` |
 | Cấu hình điểm | Ô nhập số điểm | Khi hành động đang tắt | Không nhập được, giữ nguyên giá trị cũ |
 | Cấu hình điểm | Ô nhập số điểm | Bỏ trống | Không lưu được. Báo lỗi ngay tại ô, theo `BR-14.11` |
 | Cấu hình điểm | Cách lưu | | **Tự lưu, không có nút lưu.** Ô nhập lưu khi rời ô hoặc bấm Enter, công tắc lưu khi bấm. Theo `BR-14.10` |
-| Cấu hình điểm | Đầu khối | Dòng nhắc cố định | Nêu rằng thay đổi **chỉ áp dụng từ bây giờ trở đi**, không tính lại điểm đã cộng. **Luôn hiện**, không bật lên sau mỗi lần lưu. Chuỗi tiếng Anh: `❓PO` |
+| Cấu hình điểm | Đầu khối | Dòng nhắc cố định | Nêu rằng thay đổi **chỉ áp dụng từ bây giờ trở đi**, không tính lại điểm đã cộng. **Luôn hiện**, không bật lên sau mỗi lần lưu. Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
 
 **Business requirement — Business rule**
 
 - `BR-8.1` Bốn hành động tính điểm là **danh sách cố định** trong phạm vi này: check-in hằng ngày · hoàn thành hoạt động · hoàn thành khoá · hoàn thành bài Test đạt. Vận hành **không tự thêm hành động mới**.
   > Nhưng danh sách này phải **mở rộng được bằng cấu hình** ở tầng dữ liệu, theo ràng buộc `C2`. Sau này thêm hành động cho lộ trình học thì chỉ thêm bản ghi, không sửa cấu trúc.
-- `BR-8.2` Tắt công tắc `Points` thì **ngừng cộng điểm mới**, nhưng điểm đã có **giữ nguyên** và học viên vẫn xem được ở trang thành tích. Tiêu chí lên hạng theo điểm khoá theo, xem `BR-10.7`.
+- `BR-8.2` Tắt công tắc `Points` thì **ngừng cộng điểm mới**. Điểm đã có **giữ nguyên** nhưng **ẩn với học viên**, cùng cách với huy hiệu và hạng; bật lại thì hiện lại đầy đủ (`BR-1.8`). PO chốt ngày 12/10. Tiêu chí lên hạng theo điểm khoá theo, xem `BR-10.7`.
 - `BR-8.3` Tắt một hành động riêng lẻ thì chỉ hành động đó ngừng sinh điểm. Ba hành động còn lại chạy bình thường.
 - `BR-8.4` Đổi số điểm của một hành động thì **áp dụng từ thời điểm lưu trở đi**. Các lần cộng điểm trước đó **giữ nguyên số điểm đã ghi** trong lịch sử, theo `C4`.
 - `BR-8.5` Số điểm là **số nguyên dương**, nhỏ nhất `1`, **không có giới hạn trên**. Muốn một hành động không sinh điểm thì **tắt công tắc**, không đặt giá trị `0`.
   > ⚠️ **Rủi ro PO chấp nhận ngày 06/10/2026.** Không có giới hạn trên mà lại tự lưu khi rời ô, nên gõ nhầm `1500` thay vì `150` cũng có hiệu lực ngay. Điểm đã cộng theo số nhầm **không tính lại**, theo `C4`.
-- `BR-8.5a` Check-in khai bằng **một ô điểm nền**. Bước tăng `5` và trần `40` là **hằng số của đợt này**, không hiện ô nhập.
+- `BR-8.5a` Check-in khai bằng **một ô điểm nền**, số nguyên dương, **không giới hạn trên**. Bước tăng `5` là hằng số. **Trần bằng `40`, hoặc bằng điểm nền khi điểm nền lớn hơn `40`.** Không có ô nhập cho bước tăng và trần. PO chốt ngày 12/10.
   > Hai hằng số này vẫn phải **lưu ở tầng dữ liệu chứ không đóng cứng trong mã**, theo `C2`. Đợt sau mở ô cho vận hành sửa thì chỉ cần hiện ô, không phải đổi cấu trúc.
-- `BR-8.5b` **Trần `40` chạm đúng ngày thứ 7** của chuỗi. Con số chọn theo chủ đích: người giữ chuỗi trọn một tuần, kể cả thứ bảy và chủ nhật, thì từ đó về sau luôn nhận mức cao nhất.
+- `BR-8.5b` Với điểm nền mặc định `10`, **trần `40` chạm đúng ngày thứ 7** của chuỗi. Con số chọn theo chủ đích: người giữ chuỗi trọn một tuần, kể cả thứ bảy và chủ nhật, thì từ đó về sau luôn nhận mức cao nhất. Điểm nền cao hơn thì chạm trần sớm hơn; từ `40` trở lên thì mọi ngày bằng nhau.
 - `BR-8.5c` Đổi điểm nền **không cắt chuỗi của học viên nào**. Chuỗi đang giữ chạy tiếp, ngày kế tiếp tính theo giá trị mới (`BR-5.9`).
 - `BR-8.8` Mọi giá trị trên màn này **gắn với tổ chức** (`C1`), không đóng cứng trong mã.
 
@@ -1899,15 +2016,15 @@ Ví dụ loại Course có mốc `1, 2, 4, 8, 16, 32, 64, 128`. Vận hành đ�
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
 | Cấu hình huy hiệu | Đầu màn | Công tắc `Badges` | Bật tắt cả chức năng huy hiệu. Tiêu chí lên hạng theo huy hiệu ở `US10` **khoá theo**, xem `BR-10.7` |
-| Cấu hình huy hiệu | Đầu màn | Dòng giải thích dưới công tắc `Badges` | Nêu rõ tắt `Badges` thì tiêu chí lên hạng theo huy hiệu cũng ngừng. **Không có hộp xác nhận.** Chuỗi tiếng Anh: `❓PO` |
+| Cấu hình huy hiệu | Đầu màn | Dòng giải thích dưới công tắc `Badges` | Nêu rõ tắt `Badges` thì tiêu chí lên hạng theo huy hiệu cũng ngừng. **Không có hộp xác nhận.** Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
 | Cấu hình huy hiệu | Đầu màn | Mô tả chức năng | `Award users with badges to highlight the milestones in their learning journey.` |
-| Cấu hình huy hiệu | Bốn loại | Danh sách | `Check-in badges` (số ngày có mặt) · `Activity badges` (số hoạt động hoàn thành) · `Test badges` (số bài Test đạt) · `Course badges` (số khoá hoàn thành). Tên tiếng Anh chính xác: `❓PO` |
+| Cấu hình huy hiệu | Bốn loại | Danh sách | `Check-in badges` (số ngày có mặt) · `Activity badges` (số hoạt động hoàn thành) · `Test badges` (số bài Test đạt) · `Course badges` (số khoá hoàn thành). Tên đã chốt ở `OQ-37` |
 | Cấu hình huy hiệu | Mỗi loại | Công tắc riêng | Bật tắt riêng từng loại, không phụ thuộc ba loại còn lại |
 | Cấu hình huy hiệu | Mỗi loại | Dòng tóm tắt mốc | Nêu dãy mốc của loại đó, mở đầu bằng `Awarded at`, ví dụ `Awarded at 4, 8, 16, 32, 64, 128, 256, 512 check-in days.` · `Awarded at 1, 2, 4, 8, 16, 32, 64, 128 completed courses.`<br>**Không dùng `every`**: mốc là một danh sách cố định, còn `Every` ở khối `Levels` mang nghĩa lặp lại mỗi bội số (`BR-10.2`). Huy hiệu `Check-in` đếm **số ngày**, không đếm số lần đăng nhập |
 | Cấu hình huy hiệu | Từng mốc | Giá trị mốc | **Chỉ đọc.** Không sửa được, không có ô nhập. Xem `BR-9.2` |
 | Cấu hình huy hiệu | Từng mốc | Tên huy hiệu | Nhập được. Có sẵn giá trị mặc định do hệ thống đặt, vận hành đổi nếu muốn. Bỏ trống thì quay về tên mặc định, không lưu trống |
-| Cấu hình huy hiệu | Từng mốc | Hình huy hiệu | Chọn từ kho tài nguyên hoặc tải lên. Có sẵn hình mặc định. Định dạng, kích thước, dung lượng: `❓PO` |
-| Cấu hình huy hiệu | Từng mốc | Mô tả | Nhập được, không bắt buộc. Hiện trong tooltip ở `US1` |
+| Cấu hình huy hiệu | Từng mốc | Hình huy hiệu | Chọn từ kho tài nguyên hoặc tải lên. Có sẵn hình mặc định. Định dạng, kích thước, dung lượng: `❓PO`, xem `OQ-51` |
+| Cấu hình huy hiệu | Từng mốc | Mô tả | Nhập được, không bắt buộc. Hiện khi học viên trỏ chuột vào huy hiệu ở `US4` |
 | Cấu hình huy hiệu | Khi loại đang tắt | Các mốc bên dưới | Không thao tác được, giữ nguyên nội dung đã đặt |
 | Cấu hình huy hiệu | Thao tác không có | Tạo, xoá, thêm mốc | **Không có nút tạo huy hiệu, không có nút xoá, không thêm bớt được số mốc trong một loại** |
 | Cấu hình huy hiệu | Cách lưu | | **Tự lưu, không có nút lưu.** Tên và mô tả lưu khi rời ô, hình lưu khi tải lên xong, công tắc lưu khi bấm. Theo `BR-14.10` |
@@ -1921,6 +2038,19 @@ Ví dụ loại Course có mốc `1, 2, 4, 8, 16, 32, 64, 128`. Vận hành đ�
 - `BR-9.4` Đổi tên hoặc hình của một mốc thì **áp ngay cho cả huy hiệu học viên đã đạt**. Vẫn là cùng một huy hiệu, chỉ đổi cách hiển thị. Không phải trao lại, không sinh thông báo.
 - `BR-9.5` Tắt một loại huy hiệu thì huy hiệu loại đó **biến khỏi giao diện học viên**, kể cả với người đã đạt. **Dữ liệu giữ nguyên**, bật lại thì hiện lại đầy đủ. Theo `BR-1.4a`.
 - `BR-9.6` Tắt công tắc `Badges` thì **toàn bộ phần huy hiệu biến khỏi giao diện học viên**, và hệ thống **ngừng xét trao huy hiệu mới**. Tiêu chí lên hạng theo huy hiệu khoá theo, xem `BR-10.7`.
+- `BR-9.9` 🔑 **Bật `Badges`, hoặc bật lại một loại, thì trao bù ngay.** Học viên nhận mọi mốc đã vượt qua của loại đó, không phải chờ lần ghi nhận kế tiếp. PO chốt ngày 12/10.
+  - Huy hiệu trao bù **không gửi thông báo**, cùng lý do `BR-14.4`: không để học viên nhận hàng loạt thông báo cùng lúc
+  - Thời điểm đạt của huy hiệu trao bù là **lúc trao bù**
+  - Loại đang tắt thì **không xét trao**. Bật lại thì trao bù như trên
+  - Huy hiệu trao bù vẫn tính vào tiêu chí lên hạng theo huy hiệu, theo `BR-10.4a`
+
+  | Tình huống | Kết quả |
+  |---|---|
+  | Chạy ngầm ba tuần với `Badges` tắt. Lan có `30` hoạt động. Vận hành bật `Badges` và loại `Activity badges` | Ngay lúc bật, Lan nhận mốc `10` và `25`. Không có thông báo. Mốc `50` trao khi Lan đạt `50` hoạt động |
+  | Vận hành tắt `Badges` một tuần rồi bật lại. Trong tuần đó Lan vượt mốc `50` | Lúc bật lại, Lan nhận mốc `50`. Không có thông báo |
+  | Vận hành tắt riêng `Check-in badges` rồi bật lại | Như trên, chỉ áp cho loại đó |
+- `BR-9.10` **Số huy hiệu chỉ đếm loại đang bật**, áp chung cho ô `{n} Badges` (`US1`), bảng xếp hạng theo huy hiệu (`US6`), cột `Badges` ở `US12`. Huy hiệu của loại đang tắt không đếm nhưng vẫn giữ. PO chốt ngày 12/10.
+  > **Riêng tiêu chí lên hạng: mỗi huy hiệu chỉ góp một lần.** Nếu không, tắt rồi bật lại một loại làm số huy hiệu giảm rồi tăng, và học viên lên hạng lần nữa từ chính những huy hiệu đã tính. `[đề xuất]`
 - `BR-9.7` **Không có thao tác tạo mới hoặc xoá huy hiệu.** Bộ huy hiệu là cố định, chỉ bật tắt và đổi nội dung.
 - `BR-9.8` Tên và hình **luôn có giá trị**. Hệ thống đặt sẵn mặc định cho cả bốn loại và mọi mốc, nên tổ chức bật chức năng lên là dùng được ngay, không phải điền trước.
 
@@ -1978,8 +2108,7 @@ không cần đủ cả ba"]
 Hạng = 1 + 3 + 2 + 1 = HẠNG 7"]
     EX --> CAP{"Vượt trần hạng
 vận hành đặt?"}
-    CAP -->|"Có"| CAPPED["Dừng ở trần
-ẩn thanh tiến độ"]
+    CAP -->|"Có"| CAPPED["Dừng ở trần"]
     CAP -->|"Không"| OK["Lên hạng mới
 ghi vào lịch sử"]
     OK --> RULE["HẠNG CHỈ LÊN, KHÔNG TỤT
@@ -2022,10 +2151,10 @@ Cuối màn là trần hạng, con số cao nhất học viên có thể đạt 
 | Cấu hình hạng | Ba tiêu chí | `Badges` | Công tắc riêng + ô nhập bội số. **Không thao tác được khi chức năng huy hiệu đang tắt**, xem `BR-10.7` |
 | Cấu hình hạng | Ô nhập bội số | Định dạng | Số nguyên dương, nhỏ nhất `1`. Bỏ trống thì không lưu được |
 | Cấu hình hạng | Trần hạng | Ô nhập | Số nguyên dương, nhỏ nhất `2`. Bỏ trống nghĩa là **không có trần** |
-| Cấu hình hạng | Tiêu chí cuối cùng | Công tắc | Khi chỉ còn **một tiêu chí đang chạy**, công tắc của nó **không tắt được**. Trỏ chuột vào thì hiện lý do: cần ít nhất một tiêu chí. Xem `BR-10.8`. Chuỗi tiếng Anh: `❓PO` |
-| Cấu hình hạng | Cảnh báo | Không còn tiêu chí nào chạy | Xảy ra khi tiêu chí bị khoá do tắt `Points` hoặc `Badges`. Khối `Levels` hiện **dòng cảnh báo cố định**: học viên sẽ không lên hạng cho tới khi có lại ít nhất một tiêu chí chạy. Xem `BR-10.8`. Chuỗi tiếng Anh: `❓PO` |
+| Cấu hình hạng | Tiêu chí cuối cùng | Công tắc | Khi chỉ còn **một tiêu chí đang chạy**, công tắc của nó **không tắt được**. Trỏ chuột vào thì hiện lý do: cần ít nhất một tiêu chí. Xem `BR-10.8`. Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
+| Cấu hình hạng | Cảnh báo | Không còn tiêu chí nào chạy | Xảy ra khi tiêu chí bị khoá do tắt `Points` hoặc `Badges`. Khối `Levels` hiện **dòng cảnh báo cố định**: học viên sẽ không lên hạng cho tới khi có lại ít nhất một tiêu chí chạy. Xem `BR-10.8`. Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
 | Cấu hình hạng | Cách lưu | | **Tự lưu, không có nút lưu.** Ô nhập lưu khi rời ô hoặc bấm Enter, công tắc lưu khi bấm. Theo `BR-14.10` |
-| Cấu hình hạng | Đầu khối | Dòng nhắc cố định | Nêu rằng thay đổi chỉ áp từ bây giờ, hạng đã đạt giữ nguyên. **Luôn hiện**, không bật lên sau mỗi lần lưu. Chuỗi tiếng Anh: `❓PO` |
+| Cấu hình hạng | Đầu khối | Dòng nhắc cố định | Nêu rằng thay đổi chỉ áp từ bây giờ, hạng đã đạt giữ nguyên. **Luôn hiện**, không bật lên sau mỗi lần lưu. Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
 
 **Business requirement — Business rule**
 
@@ -2042,12 +2171,20 @@ Cuối màn là trần hạng, con số cao nhất học viên có thể đạt 
   > | Tháng 4 | `5.000` điểm · **`10` khoá** · `5` huy hiệu | mốc 10 khoá | `5` |
   > | Tháng 6 | **`9.000` điểm** · `10` khoá · `5` huy hiệu | mốc 6.000 rồi 9.000 điểm | `7` |
   >
-  > Tính nhanh ở một thời điểm bất kỳ: **hạng = `1` + tổng số mốc đã chạm của cả ba tiêu chí.** Ở tháng 6 là `1 + 3 + 2 + 1 = 7`.
+  > Khi cấu hình không đổi, hạng ở một thời điểm bằng `1` cộng tổng số mốc đã chạm của cả ba tiêu chí. Ở tháng 6 là `1 + 3 + 2 + 1 = 7`. **Khi cấu hình đổi thì không tính lại theo công thức này**, xem `BR-10.4a`.
   >
   > **Không phải lấy tiêu chí cao nhất.** Nếu chỉ lấy cái cao nhất thì tháng 2 và tháng 3 Lan chạm mốc mà hạng vẫn đứng im ở `2`, vì tiêu chí khoá đang dẫn với 1 mốc. PO chốt phương án A ngày 01/10 để mọi mốc chạm được đều có tác dụng.
 
 - `BR-10.3` **Hạng chỉ lên, không tụt.** Theo `BR-1.3`.
 - `BR-10.4` Đổi bội số của một tiêu chí thì **áp dụng từ thời điểm lưu trở đi**, theo `C4`. Hạng học viên đang có **giữ nguyên**, kể cả khi theo cấu hình mới họ chưa đủ điều kiện cho hạng đó.
+- `BR-10.4a` 🔑 **Chỉ tính mốc mới vượt qua, không lên bù.** Mỗi khi một chỉ số tăng, chỉ đếm số mốc **vừa vượt qua** theo bội số đang áp dụng tại lúc đó. PO chốt ngày 12/10.
+
+  | Tình huống | Kết quả |
+  |---|---|
+  | Lan có `9.000` điểm, hạng `7`. Vận hành hạ bội số điểm từ `3.000` xuống `1.000`, rồi Lan nhận thêm `25` điểm | Lan **giữ hạng `7`**. Tới `10.000` điểm thì lên `8`, tới `11.000` lên `9` |
+  | Bật thêm tiêu chí `Badges` (mỗi `5` huy hiệu) khi Lan đã có `10` huy hiệu | Không lên bù. Lan đạt huy hiệu thứ `15` thì lên một hạng |
+  | Tắt `Levels` một thời gian rồi bật lại | Không xét bù cho giai đoạn tắt. Chỉ mốc vượt qua sau lúc bật lại mới tính |
+  | Học viên đang bị chặn ở trần, vận hành nâng hoặc bỏ trần | Không lên bù. Chỉ mốc vượt qua sau lúc đổi trần mới tính |
 - `BR-10.5` **Trần hạng** là số cao nhất học viên đạt tới. Chạm trần rồi thì vượt thêm bội số nào cũng không lên nữa. Bỏ trống trần nghĩa là không giới hạn.
 - `BR-10.6` Hạ trần xuống dưới hạng hiện tại của một số học viên thì những người đó **giữ nguyên hạng đang có**, theo `BR-10.3`. Chỉ người chưa chạm trần mới bị chặn ở trần mới.
 - `BR-10.7` 🔗 **Tắt chức năng điểm hoặc huy hiệu thì tiêu chí lên hạng tương ứng khoá theo.**
@@ -2078,12 +2215,12 @@ Cuối màn là trần hạng, con số cao nhất học viên có thể đạt 
 | Bội số | Số nguyên | Có | `>= 1` | Mới |
 | Trần hạng | Số nguyên | Không | `>= 2`. Rỗng nghĩa là không giới hạn | Mới |
 | Hạng hiện tại của học viên | Số nguyên | Có | `>= 1` | Mới. Nằm ở bảng thành tích của học viên |
-| Thời điểm lên hạng gần nhất | Thời gian | Có | | Mới. Cần cho `C8` và cho sự kiện `Rank up` ở `US3` |
+| Thời điểm lên hạng gần nhất | Thời gian | Không | Rỗng khi học viên vẫn ở hạng `1` | Mới. Cần cho `C8` và cho sự kiện `Level up` ở `US3` |
 | `tenant_id` | Khoá ngoại | Có | | Ràng buộc `C1` — cấu hình gắn `tenant_id`, không đóng cứng trong mã |
 
 **NFR**
 
-Xét hạng chạy sau mỗi lần cộng điểm và sau mỗi lần trao huy hiệu. Phép tính là ba phép chia lấy phần nguyên rồi cộng lại, không cần duyệt dữ liệu.
+Xét hạng chạy sau mỗi lần cộng điểm và sau mỗi lần trao huy hiệu, theo `BR-10.4a`: chỉ đếm số mốc vừa vượt qua, không cần duyệt lại dữ liệu cũ.
 
 ### 5/ Out of scope
 
@@ -2133,10 +2270,10 @@ Bên dưới là năm công tắc chọn bảng hiện ra: hạng, điểm, số
 | Cấu hình bảng xếp hạng | Năm bảng | `Show activities` | Bật tắt **bảng xếp hạng theo số hoạt động hoàn thành** |
 | Cấu hình bảng xếp hạng | Năm bảng | `Show badges` | Bật tắt **bảng xếp hạng theo số huy hiệu**. Chỉ có ở `All time` |
 | Cấu hình bảng xếp hạng | Năm bảng | `Show courses` | Bật tắt **bảng xếp hạng theo số khoá hoàn thành** |
-| Cấu hình bảng xếp hạng | Năm bảng | Phạm vi | Năm công tắc này chỉ áp cho bảng xếp hạng chung. **Campaign luôn có đủ hai bảng** `Points` và `Activities` (`US19`) |
+| Cấu hình bảng xếp hạng | Năm bảng | Phạm vi | Năm công tắc này chỉ áp cho bảng xếp hạng chung. Bảng của campaign do cấu hình từng campaign quyết (`US20`) |
 | Cấu hình bảng xếp hạng | Bảng bị khoá | Khi chức năng nguồn đang tắt | Công tắc **không thao tác được** và có dòng giải thích vì sao. Ví dụ: tắt `Levels` ở `US10` thì `Show levels` khoá lại |
-| Cấu hình bảng xếp hạng | Bảng cuối cùng | Công tắc | Khi chỉ còn **một bảng đang chạy**, công tắc của nó **không tắt được**. Trỏ chuột vào thì hiện lý do: cần ít nhất một bảng. Xem `BR-11.5`. Chuỗi tiếng Anh: `❓PO` |
-| Cấu hình bảng xếp hạng | Cảnh báo | Không còn bảng nào chạy | Xảy ra khi các bảng đang bật đều bị khoá do chức năng nguồn tắt. Khối `Leaderboard` hiện **dòng cảnh báo cố định**: học viên không còn bảng nào để xem. Xem `BR-11.5`. Chuỗi tiếng Anh: `❓PO` |
+| Cấu hình bảng xếp hạng | Bảng cuối cùng | Công tắc | Khi chỉ còn **một bảng đang chạy**, công tắc của nó **không tắt được**. Trỏ chuột vào thì hiện lý do: cần ít nhất một bảng. Xem `BR-11.5`. Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
+| Cấu hình bảng xếp hạng | Cảnh báo | Không còn bảng nào chạy | Xảy ra khi các bảng đang bật đều bị khoá do chức năng nguồn tắt. Khối `Leaderboard` hiện **dòng cảnh báo cố định**: học viên không còn bảng nào để xem. Xem `BR-11.5`. Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
 | Cấu hình bảng xếp hạng | Cách lưu | | **Tự lưu, không có nút lưu.** Công tắc lưu khi bấm. Theo `BR-14.10` |
 
 **Business requirement — Business rule**
@@ -2204,8 +2341,8 @@ Là nhân sự vận hành, tôi cần xem danh sách học viên kèm hạng c�
 
 | Điều kiện | Nguồn |
 |---|---|
-| `Gamification` đang bật ở cấp tổ chức | `US14` |
-| Người dùng có quyền xem dữ liệu gamification | `US15` |
+| `Gamification` bật hay tắt đều xem được | `BR-15.8` |
+| Người dùng có quyền `Xem danh sách học viên và hạng` | `US15` |
 
 ### 3/ Scenario
 
@@ -2222,16 +2359,16 @@ Vận hành tìm theo tên, sắp xếp theo cột bất kỳ, và xem theo tran
 | Danh sách học viên | Bảng | Cột `Learner` | Ảnh đại diện và tên học viên |
 | Danh sách học viên | Bảng | Cột `Level` | Số hạng hiện tại. Ẩn cột nếu chức năng hạng đang tắt |
 | Danh sách học viên | Bảng | Cột `Points` | Điểm tích luỹ toàn thời gian. Ẩn cột nếu chức năng điểm đang tắt |
-| Danh sách học viên | Bảng | Cột `Badges` | Số huy hiệu đã đạt. Ẩn cột nếu chức năng huy hiệu đang tắt |
+| Danh sách học viên | Bảng | Cột `Badges` | Số huy hiệu đã đạt của các loại đang bật (`BR-9.10`). Ẩn cột nếu chức năng huy hiệu đang tắt |
 | Danh sách học viên | Bảng | Cột `Activities` | Số hoạt động hoàn thành. Luôn hiện |
 | Danh sách học viên | Bảng | Cột `Courses` | Số khoá hoàn thành. Luôn hiện |
 | Danh sách học viên | Bảng | Cột `Last activity` | Ngày gần nhất học viên có mặt trong hệ thống. Chưa vào lần nào thì để trống |
 | Danh sách học viên | Chọn khoảng ngày | Cách chọn | Bộ chọn khoảng ngày tự do, kèm nút nhanh `All time` · `This week` · `This month` · `This quarter` · `This year`. Mặc định `All time` |
 | Danh sách học viên | Chọn khoảng ngày | Ảnh hưởng tới cột | Chọn một khoảng cụ thể thì `Points`, `Activities`, `Courses` tính **trong khoảng đó**, còn cột `Level` và `Badges` **ẩn đi**, cùng lý do với `BR-11.2` |
 | Danh sách học viên | Xuất file | Nút `Export` | Xuất đúng danh sách đang hiện, theo khoảng ngày và thứ tự sắp xếp hiện tại. **Định dạng Excel** |
-| Danh sách học viên | Xuất file | Nội dung | Gồm mọi dòng của kết quả lọc hiện tại, không chỉ trang đang xem |
+| Danh sách học viên | Xuất file | Nội dung | Gồm mọi dòng của kết quả lọc hiện tại, không chỉ trang đang xem. Cột trong file giống cột đang hiện trên màn. `[đề xuất]` |
 | Danh sách học viên | Tìm kiếm | Theo tên | Một ô tìm theo tên học viên |
-| Danh sách học viên | Sắp xếp | Theo cột | Bấm tiêu đề cột để sắp xếp. Mặc định sắp theo hạng giảm dần |
+| Danh sách học viên | Sắp xếp | Theo cột | Bấm tiêu đề cột để sắp xếp. Mặc định sắp theo hạng giảm dần. Cột `Level` đang ẩn thì mặc định sắp theo điểm giảm dần. `[đề xuất]` |
 | Danh sách học viên | Phân trang | Số dòng mỗi trang | Theo chuẩn các màn danh sách khác của Ops |
 | Danh sách học viên | Thao tác | | **Chỉ đọc.** Không có nút sửa, không có nút xoá, không mở được chi tiết để chỉnh |
 | Danh sách học viên | Tên học viên | Bấm vào | Mở nhật ký ghi nhận (`US22`) đã lọc sẵn theo người đó. `[đề xuất]` |
@@ -2239,7 +2376,7 @@ Vận hành tìm theo tên, sắp xếp theo cột bất kỳ, và xem theo tran
 
 **Business requirement — Business rule**
 
-- `BR-12.1` Màn này **chỉ đọc**. Vận hành không sửa hạng, không cộng trừ điểm, không trao hay gỡ huy hiệu thủ công. Theo `A12`.
+- `BR-12.1` Màn này **chỉ đọc**. Vận hành không sửa hạng, không cộng trừ điểm, không trao hay gỡ huy hiệu thủ công. Theo giả định `A12`: vận hành không sửa hay cộng trừ điểm thủ công.
 - `BR-12.2` Hiện **mọi học viên của tổ chức**, kể cả người chưa có điểm nào. Người chưa có gì thì các cột số hiện `0`.
 - `BR-12.3` Tài khoản có `Test Account = Yes` **không xuất hiện**, theo `C10`.
 - `BR-12.4` **Có bộ lọc khoảng ngày tự do**, mặc định toàn thời gian. Chọn một khoảng cụ thể thì điểm, số hoạt động và số khoá tính trong khoảng đó, còn **cột hạng và cột huy hiệu ẩn đi**, cùng lý do với `BR-11.2`.
@@ -2264,7 +2401,6 @@ Danh sách đọc theo trang. Không tính lại hạng hay đếm lại huy hi�
 | Không làm ở US này | Lý do |
 |---|---|
 | Sửa hạng, cộng trừ điểm, trao huy hiệu thủ công | `BR-12.1`. Nếu sau này cần thì là một US riêng, và phải xử lý cả việc ghi vào lịch sử |
-| Xem lịch sử ghi nhận của một học viên cụ thể | Chưa yêu cầu. Học viên tự xem ở `US3` |
 | Lọc theo lớp, khoá, phòng ban | Chờ chức năng nhóm. Xem `US16 — chưa làm` |
 
 ### 6/ Conner case
@@ -2281,16 +2417,18 @@ flowchart TD
     T1 -->|"Có"| X1["Bỏ qua hoàn toàn<br/>không ghi gì"]
     T1 -->|"Không"| T2{"Gamification bật?"}
     T2 -->|"Tắt"| X2["Không ghi nhận"]
-    T2 -->|"Bật"| T3{"Hành động này<br/>bật tính điểm?"}
-    T3 -->|"Tắt"| X3["Không cộng điểm"]
-    T3 -->|"Bật"| T4{"Đã cộng điểm<br/>nội dung này<br/>trong lượt học này?"}
-    T4 -->|"Rồi"| X4["Không cộng lại<br/>chống cộng trùng theo C5"]
-    T4 -->|"Chưa"| W["Cộng điểm<br/>ghi sổ giao dịch"]
-    W --> B1["Xét huy hiệu"]
+    T2 -->|"Bật"| T4{"Đã ghi nhận nội dung này<br/>trong lượt học này?"}
+    T4 -->|"Rồi"| X4["Không ghi lại<br/>chống cộng trùng theo C5"]
+    T4 -->|"Chưa"| T3{"Points và hành động<br/>này đang bật?"}
+    T3 -->|"Bật"| W["Cộng điểm<br/>ghi sổ giao dịch"]
+    T3 -->|"Tắt"| Z["Ghi nhận với 0 điểm<br/>không thông báo"]
+    W --> C["Đếm chỉ số"]
+    Z --> C
+    C --> B1["Xét huy hiệu"]
     B1 --> B2["Xét hạng"]
 ```
 
-*Năm cửa kiểm trước khi cộng một điểm. Trượt ở cửa nào thì dừng ở đó.*
+*Ba cửa chặn hẳn: tài khoản kiểm thử, `Gamification` tắt, nội dung đã ghi nhận rồi. Hành động hoặc `Points` tắt thì vẫn ghi nhận với 0 điểm để chỉ số đếm chạy tiếp.*
 
 ### 1/ User story
 
@@ -2304,13 +2442,13 @@ Là nhân sự vận hành, tôi cần điểm phản ánh việc học thật, 
 
 | Điều kiện | Nguồn |
 |---|---|
-| `Gamification` đang bật và cơ chế điểm đang bật | `US8` · `US14` |
+| `Gamification` đang bật | `US14`. `Points` hoặc hành động tắt thì vẫn ghi nhận với 0 điểm, xem `BR-13.13` |
 
 ### 3/ Scenario
 
-Học viên hoàn thành một hoạt động. Trước khi cộng điểm, hệ thống kiểm ba điều: nội dung này đã trả điểm cho học viên trong lượt ghi danh hiện tại chưa, bản ghi tiến độ có thật sự vừa chuyển sang hoàn thành không, và tài khoản có phải tài khoản kiểm thử không.
+Học viên hoàn thành một hoạt động. Trước khi ghi nhận, hệ thống kiểm ba điều: nội dung này đã trả điểm cho học viên trong lượt ghi danh hiện tại chưa, bản ghi tiến độ có thật sự vừa chuyển sang hoàn thành không, và tài khoản có phải tài khoản kiểm thử không.
 
-Qua hết ba cửa thì cộng điểm. Vướng cửa nào thì không cộng và không ghi gì vào lịch sử.
+Qua hết ba cửa thì ghi nhận: cộng điểm nếu `Points` và hành động đó đang bật, ghi 0 điểm nếu đang tắt. Vướng cửa nào thì không ghi gì.
 
 ### 4/ Acceptance criteria
 
@@ -2330,18 +2468,22 @@ Qua hết ba cửa thì cộng điểm. Vướng cửa nào thì không cộng v
 **Chống cộng trùng khi thao tác song song**
 
 - `BR-13.5` Học viên mở hai thiết bị hoặc hai tab và hoàn thành cùng một hoạt động gần như đồng thời thì **chỉ cộng điểm một lần**. Việc kiểm và ghi phải là một thao tác không tách rời.
-  > Điểm cộng ngay trong luồng (`Option C`) nên hai thao tác song song đều có thể chạy tới bước cộng điểm cùng lúc. Nếu chỉ dựa vào chống cộng trùng ở `BR-13.1` thì cả hai đều thấy "chưa trả điểm" và cùng cộng.
+  > Điểm cộng ngay trong luồng (phương án đã chọn ở phần giải pháp, mục Cách bắt sự kiện) nên hai thao tác song song đều có thể chạy tới bước cộng điểm cùng lúc. Nếu chỉ dựa vào chống cộng trùng ở `BR-13.1` thì cả hai đều thấy "chưa trả điểm" và cùng cộng.
 - `BR-13.6` Với **điểm khi vào hệ thống hằng ngày**, ràng buộc một học viên một ngày một bản ghi ở `US5` đã tự chặn trùng. Không cần cơ chế thêm.
 
 **Khi cộng điểm gặp lỗi**
 
 - `BR-13.7` Lỗi ở phần cộng điểm **không được làm hỏng thao tác học**, theo `NFR-GAM-01`. Học viên bấm Hoàn thành thì thao tác đó phải thành công.
-- `BR-13.8` ✅ Lỗi bị chặn lại thì **ghi lại chỗ lỗi để vận hành thấy và xử lý**, không để mất âm thầm. Học viên học thật mà không có điểm và không ai giải thích được là đúng thứ `O5` muốn tránh. PO chốt 23/09.
+- `BR-13.8` ✅ Lỗi bị chặn lại thì **ghi lại lần lỗi**, không để mất âm thầm. Học viên học thật mà không có điểm và không ai giải thích được là đúng thứ `O5` muốn tránh. PO chốt 23/09.
+  - Hệ thống **tự ghi nhận lại** lần lỗi. Vận hành không cộng bù bằng tay (`A12`: vận hành không sửa hay cộng trừ điểm thủ công).
+  - Lần ghi nhận lại mang **thời điểm hoàn thành gốc**, không mang thời điểm ghi lại. Nhờ vậy điểm rơi đúng ngày, đúng khung thời gian và đúng campaign (`C11`). `[đề xuất]`
+  - Lần ghi nhận lại không gửi thông báo.
+  - Vận hành thấy các lần lỗi ở đâu: xem `OQ-46`.
 
 **Những gì KHÔNG chặn, có chủ đích**
 
 - `BR-13.9` Hoạt động chỉ có **Text hoặc Ảnh** được tính hoàn thành ngay khi mở hiển thị, theo `KB-LX-03b`. Học viên bấm lướt vẫn nhận điểm. **Không làm cơ chế chống cày riêng cho loại này.**
-  > Rủi ro chấp nhận có chủ đích. Thiệt hại bị chặn bởi hai lớp: chống cộng trùng khiến mỗi nội dung chỉ trả điểm một lần, và trần ngày chặn việc dồn toàn bộ trong một buổi. Hoạt động chứa Video đã chặt sẵn vì phải xem đủ 80% thời lượng (`KB-LX-03a`).
+  > Rủi ro chấp nhận có chủ đích. Thiệt hại chỉ còn một lớp chặn: chống cộng trùng khiến mỗi nội dung chỉ trả điểm một lần. Trần điểm ngày, lớp chặn thứ hai, đã bỏ ở `CR-010`. Hoạt động chứa Video đã chặt sẵn vì phải xem đủ 80% thời lượng (`KB-LX-03a`).
 - `BR-13.10` **Học viên bị xoá khỏi lớp rồi thêm lại thì lượt học mới được tính điểm mới**, cho cả hoàn thành hoạt động lẫn hoàn thành khoá. Coi như một khoá mới.
 
   Vận hành thêm lại học viên vào lớp thì chọn **ghi nhận đã xong khoá** hoặc **học lại từ đầu**. Chọn ghi nhận đã xong thì không có tiến độ nào chuyển trạng thái, nên **không phát sinh điểm nào**.
@@ -2353,21 +2495,21 @@ Qua hết ba cửa thì cộng điểm. Vướng cửa nào thì không cộng v
   >
   > Học viên hoàn thành khoá A hai lần thì được điểm hai lần (`BR-13.10`) nhưng chỉ có một chứng chỉ. Nếu đếm bằng chứng chỉ thì con số sẽ thấp hơn thực tế và lệch với điểm đã cộng.
   >
-  > Chỉ số này đếm **số lượt hoàn thành khoá** trong sổ giao dịch điểm, không đếm chứng chỉ.
+  > Chỉ số này đếm **số lượt hoàn thành khoá** theo mục Định nghĩa chỉ số, không đếm chứng chỉ.
 - `BR-13.11` Học viên **không tự huỷ ghi danh được** sau khi đã học ít nhất một hoạt động, theo `KB-LX-08`. Đường cày điểm ghi danh rồi huỷ rồi ghi danh lại **đã bị hệ thống chặn sẵn**, không cần làm gì thêm.
+- `BR-13.13` 🔑 **`Points` hoặc hành động đang tắt: vẫn ghi nhận lần hoàn thành với 0 điểm.** Nhờ vậy số hoạt động, số khoá, số bài Test và tiến độ huy hiệu vẫn chạy tiếp (mục Định nghĩa chỉ số). Dòng 0 điểm không sinh thông báo (`BR-2.10`), ẩn với học viên (`BR-3.1a`), hiện cho vận hành (`BR-22.1a`).
 
 **Data Field**
 
-Không có field mới. US này dùng ba thứ đã khai ở nơi khác:
+Không có field mới. US này dùng thứ đã khai ở nơi khác:
 
 | Cần gì | Ở đâu |
 |---|---|
-| Dấu nội dung đã tính điểm | Bảng chống cộng trùng, `US3` |
-| Tổng điểm đã nhận trong ngày | Tính từ sổ giao dịch điểm theo ngày, `US3` |
+| Dấu nội dung đã ghi nhận | Theo `C5`: mỗi nội dung một lần trong một lượt ghi danh |
 
 **NFR**
 
-Bốn cửa kiểm chạy trong cùng thao tác với việc hoàn thành hoạt động, nên phải nhẹ. Việc tính tổng điểm đã nhận trong ngày cần tránh quét lại toàn bộ sổ giao dịch mỗi lần.
+Các cửa kiểm chạy trong cùng thao tác với việc hoàn thành hoạt động, nên phải nhẹ.
 
 ### 5/ Out of scope
 
@@ -2430,9 +2572,9 @@ Cách dùng thông thường: bật công tắc thứ nhất, chạy ngầm hai 
 | Cấu hình chung | Công tắc 2 | `Visibility in UpLMS` | **Chỉ xuất hiện khi công tắc 1 đang bật.** Quyết định học viên có nhìn thấy gamification hay không |
 | Cấu hình chung | Công tắc 2 | Dòng giải thích | Nêu rõ tắt công tắc này thì hệ thống **vẫn ghi nhận bình thường**, chỉ là học viên không thấy. Dòng này cùng hai công tắc là đủ để đọc ra trạng thái hiện tại, **không có nhãn trạng thái riêng**: `Show points, badges and ranks to your users. While this is off, they still accrue but stay hidden.` |
 | Cấu hình chung | Xác nhận khi tắt công tắc 1 | Hình thức | **Popover nhỏ gắn cạnh công tắc**, không phải modal. Huỷ thì công tắc về như cũ, không lưu. Xem `BR-14.13` |
-| Cấu hình chung | Xác nhận khi tắt công tắc 1 | Nội dung | Nêu rõ: ngừng ghi nhận mọi thứ, bốn chức năng con khoá lại, dữ liệu đã có giữ nguyên, và **bật lại sẽ tính từ thời điểm bật chứ không tính bù**. Có campaign đang chạy thì nêu thêm số campaign, và campaign không nhận thêm gì trong thời gian tắt (`BR-20.8`). Chuỗi tiếng Anh: `❓PO` |
+| Cấu hình chung | Xác nhận khi tắt công tắc 1 | Nội dung | Nêu rõ: ngừng ghi nhận mọi thứ, bốn chức năng con khoá lại, dữ liệu đã có giữ nguyên, và **bật lại sẽ tính từ thời điểm bật chứ không tính bù**. Có campaign đang chạy thì nêu thêm số campaign, và campaign không nhận thêm gì trong thời gian tắt (`BR-20.8`). Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
 | Cấu hình chung | Xác nhận khi bật công tắc 2 lần đầu | Hình thức | Popover như trên |
-| Cấu hình chung | Xác nhận khi bật công tắc 2 lần đầu | Nội dung | Nêu rõ học viên sẽ **thấy ngay toàn bộ điểm, hạng và huy hiệu đã tích trong giai đoạn chạy ngầm**, và hệ thống **không gửi thông báo hồi tố**. Chuỗi tiếng Anh: `❓PO` |
+| Cấu hình chung | Xác nhận khi bật công tắc 2 lần đầu | Nội dung | Nêu rõ học viên sẽ **thấy ngay toàn bộ điểm, hạng và huy hiệu đã tích trong giai đoạn chạy ngầm**, và hệ thống **không gửi thông báo hồi tố**. Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
 | Cả trang cấu hình | Cách lưu | | **Tự lưu, không có nút lưu**, áp cho cả `US8` đến `US11`. Xem `BR-14.10` đến `BR-14.12` |
 | Cả trang cấu hình | Sau mỗi lần lưu | Báo đã lưu | Báo nhỏ `Saved`, tự ẩn, **không phải modal** |
 
@@ -2447,7 +2589,7 @@ Cách dùng thông thường: bật công tắc thứ nhất, chạy ngầm hai 
   | **Bật đầy đủ** | Bật | Bật | Ghi nhận và hiển thị |
 
 - `BR-14.2` Công tắc `Visibility in UpLMS` **chỉ tồn tại khi `Gamification` đang bật**. Tắt công tắc 1 thì công tắc 2 biến mất khỏi giao diện, giá trị của nó giữ nguyên để lần sau bật lại vẫn như cũ.
-- `BR-14.3` Ở trạng thái **chạy ngầm**, hệ thống ghi nhận đầy đủ: cộng điểm, trao huy hiệu, xét hạng, tính bảng xếp hạng. Chỉ có ba thứ không xảy ra: học viên không thấy trang thành tích, không thấy bảng xếp hạng, và **không nhận thông báo** (`A19`).
+- `BR-14.3` Ở trạng thái **chạy ngầm**, hệ thống ghi nhận đầy đủ: cộng điểm, trao huy hiệu, xét hạng, tính bảng xếp hạng. Chỉ có ba thứ không xảy ra: học viên không thấy màn Gamification, không thấy bảng xếp hạng, và **không nhận thông báo** (giả định `A19`: tắt `Visibility in UpLMS` thì không đẩy thông báo).
 - `BR-14.4` 🔑 Chuyển từ **chạy ngầm** sang **bật đầy đủ** thì **không bắn thông báo hồi tố**. Học viên thấy ngay điểm, hạng và huy hiệu đã tích, kèm lịch sử để tra nguồn. Không có thông báo nào cho những gì đã xảy ra trong giai đoạn chạy ngầm.
   > Không có rule này thì mỗi học viên nhận hàng trăm thông báo cùng lúc vào đúng ngày ra mắt.
 - `BR-14.5` Bật lại sau khi **tắt hẳn** thì **tính từ thời điểm bật trở đi**. Giai đoạn tắt không ghi gì nên không có gì để bù. Dữ liệu trước khi tắt giữ nguyên và hiện lại đầy đủ.
@@ -2455,7 +2597,7 @@ Cách dùng thông thường: bật công tắc thứ nhất, chạy ngầm hai 
 - `BR-14.7` Tắt `Gamification` thì **bốn công tắc chức năng ở `US8` đến `US11` khoá lại**, giữ nguyên mọi giá trị đã cấu hình. Bật lại thì trở về đúng cấu hình cũ.
 - `BR-14.8` Hai công tắc này **gắn với tổ chức** (`C1`). Đợt này chỉ có một tổ chức nên không cần màn quản lý nhiều tổ chức, nhưng dữ liệu phải thiết kế theo tổ chức ngay từ đầu.
 - `BR-14.9` **Múi giờ tổ chức** quyết định biên ngày cho điểm check-in và chuỗi (`US5`), và biên khoảng cho bảng xếp hạng (`US6`). Không dùng giờ máy chủ và không dùng múi giờ thiết bị của học viên.
-  > Múi giờ **lấy theo tenant**, không có ô chọn trên màn Gamification. Cách lưu do BE quyết trong technical design. Tham số này thuộc **hồ sơ tổ chức** trong module Tenant (`TNT.CFG.02`).
+  > Múi giờ **lấy theo tenant**, không có ô chọn trên màn Gamification. Cách lưu do Dev quyết trong technical design. Tổ chức hiện tại mặc định **UTC+7**, đợt này chưa có màn sửa (`BR-6.16`). Tham số này thuộc **hồ sơ tổ chức** trong module Tenant (`TNT.CFG.02`).
 
 **Cách lưu trên trang cấu hình — áp cho cả `US8` đến `US11`**
 
@@ -2486,7 +2628,7 @@ Cách dùng thông thường: bật công tắc thứ nhất, chạy ngầm hai 
 |---|---|---|---|---|
 | `Gamification` bật hay tắt | Đúng/sai | Có | Mặc định **tắt** | Mới |
 | `Visibility in UpLMS` bật hay tắt | Đúng/sai | Có | Mặc định **tắt** | Mới |
-| Múi giờ tổ chức | Múi giờ | Có | Chuẩn múi giờ quốc tế | **Lấy theo tenant**, không nhập trên màn này. Cách lưu do BE quyết trong technical design |
+| Múi giờ tổ chức | Múi giờ | Có | Chuẩn múi giờ quốc tế | **Lấy theo tenant**, không nhập trên màn này. Mặc định UTC+7 cho tổ chức hiện tại. Cách lưu do Dev quyết trong technical design |
 | `tenant_id` | Khoá ngoại | Có | | Ràng buộc `C1` — cấu hình gắn `tenant_id`, không đóng cứng trong mã |
 
 **NFR**
@@ -2538,16 +2680,30 @@ Quản trị gán quyền cho vai trò phù hợp. Vai trò không có quyền t
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
 | Phân quyền (màn hiện có) | Danh sách quyền | Nhóm `Gamification` | Xuất hiện như một nhóm quyền mới. **Không làm màn phân quyền riêng** |
-| Phân quyền (màn hiện có) | Quyền | `Xem cấu hình gamification` | Mở được trang cấu hình và danh sách học viên, nhưng không sửa được |
-| Phân quyền (màn hiện có) | Quyền | `Sửa cấu hình gamification` | Sửa được cả bốn khối cấu hình ở `US8` đến `US11`, công tắc chung ở `US14`, và **tạo, sửa, xoá campaign** ở `US20`. `[đề xuất]` dùng chung quyền này cho campaign |
-| Phân quyền (màn hiện có) | Quyền | `Xem danh sách học viên và hạng` | Mở được màn ở `US12` và xuất file. Xem và xuất **kết quả campaign** ở `US21`. `[đề xuất]`. Xem **nhật ký ghi nhận** ở `US22`, PO chốt ngày 09/10 |
+| Phân quyền (màn hiện có) | Quyền | `Xem cấu hình gamification` | Mở được trang cấu hình và thấy danh sách campaign, nhưng không sửa được |
+| Phân quyền (màn hiện có) | Quyền | `Sửa cấu hình gamification` | Sửa được cả bốn khối cấu hình ở `US8` đến `US11`, công tắc chung ở `US14`, và **tạo, sửa, xoá campaign** ở `US20` |
+| Phân quyền (màn hiện có) | Quyền | `Xem danh sách học viên và hạng` | Mở được màn ở `US12` và xuất file. Thấy danh sách campaign để mở **kết quả campaign** ở `US21`, xem và xuất. Xem **nhật ký ghi nhận** ở `US22` |
 | Menu Ops | Khu vực Gamification | Hiển thị | Không có quyền xem thì **không thấy khu vực này trong menu**, và mở thẳng đường dẫn cũng không vào được |
 
 **Business requirement — Business rule**
 
 - `BR-15.1` Thêm nhóm quyền mới vào **hệ phân quyền hiện có**, không dựng cơ chế riêng và không làm màn riêng.
 - `BR-15.2` **Tách quyền xem và quyền sửa.** Cấu hình gamification ảnh hưởng tới điểm của toàn bộ học viên, nên cần có vai trò xem được để đối chiếu mà không sửa được.
-- `BR-15.3` Không có quyền xem thì khu vực Gamification **không xuất hiện trong menu Ops**, và mở thẳng đường dẫn cũng không vào được.
+- `BR-15.3` Không có **quyền nào trong ba quyền** thì khu vực Gamification **không xuất hiện trong menu Ops**, và mở thẳng đường dẫn cũng không vào được.
+- `BR-15.7` 🔑 **Bảng quyền bên Ops.** PO chốt ngày 12/10.
+
+  | Màn hoặc thao tác | `Xem cấu hình gamification` | `Sửa cấu hình gamification` | `Xem danh sách học viên và hạng` |
+  |---|---|---|---|
+  | Trang cấu hình (`US8` đến `US11`, `US14`): xem | Có | Có | Không |
+  | Trang cấu hình: sửa, bật tắt | Không | Có | Không |
+  | Danh sách campaign (`US20`): xem | Có | Có | Có |
+  | Tạo, sửa, xoá campaign | Không | Có | Không |
+  | Kết quả campaign (`US21`): xem, xuất | Không | Không | Có |
+  | Danh sách học viên (`US12`): xem, xuất | Không | Không | Có |
+  | Nhật ký ghi nhận (`US22`) | Không | Không | Có |
+
+  Một vai trò có thể được gán nhiều quyền. Quyền gộp lại theo từng dòng.
+- `BR-15.8` **Tắt `Gamification` vẫn xem được dữ liệu đã có:** danh sách học viên (`US12`), kết quả campaign (`US21`), nhật ký ghi nhận (`US22`). Trên trang cấu hình, khối `Campaign` vẫn hiện ở chế độ chỉ xem để mở kết quả đã đóng băng. `[đề xuất]` cho cách hiện khối `Campaign`. PO chốt ngày 12/10.
 - `BR-15.4` Phân quyền này **chỉ áp cho Ops**. Học viên trên UpLMS không chịu ảnh hưởng: khi `Visibility in UpLMS` bật thì mọi học viên đều thấy phần của mình và thấy bảng xếp hạng.
 - `BR-15.5` **L&D, Mentor, Giáo viên là vai trò trong Ops như mọi vai trò khác.** Họ thấy được gì hoàn toàn do quản trị gán quyền, không có xử lý riêng cho từng vai trò.
 - `BR-15.6` Đổi quyền có hiệu lực theo đúng cơ chế của hệ phân quyền hiện có. Gamification không tự làm khác.
@@ -2584,8 +2740,8 @@ flowchart LR
     F1 -->|"Không"| X["Không tính"]
     F2 -->|"Có"| P["Bảng Points<br/>của campaign"]
     F2 -->|"Không"| X
-    A["Hoàn thành hoạt động<br/>trong lúc Gamification bật"] --> F3{"Trong khoảng<br/>campaign?"}
-    F3 -->|"Có"| AC["Bảng Activities<br/>của campaign"]
+    A["Hoàn thành hoạt động hoặc khoá<br/>trong lúc Gamification bật"] --> F3{"Trong khoảng<br/>campaign?"}
+    F3 -->|"Có"| AC["Bảng Activities và Courses<br/>của campaign"]
     F3 -->|"Không"| X
     P --> R{"Campaign<br/>đã kết thúc?"}
     AC --> R
@@ -2610,7 +2766,7 @@ Là học viên, tôi cần xem các campaign đang chạy và đã kết thúc 
 
 ### 3/ Scenario
 
-Trong trang Bảng xếp hạng, cạnh năm khung cố định có lối vào campaign. Học viên chọn một campaign đang chạy và thấy tên, mô tả, khoảng thời gian, các loại hành động được tính điểm, hai bảng `Points` và `Activities`, cùng khối vị trí của mình.
+Trong trang Bảng xếp hạng, cạnh năm khung cố định có lối vào campaign. Học viên chọn một campaign đang chạy và thấy tên, khoảng thời gian, các loại hành động được tính điểm, các bảng của campaign (`Points`, `Activities` nếu campaign có, `Courses`), cùng khối vị trí của mình.
 
 Bảng của campaign đang chạy cập nhật 8 tiếng một lần, như khung cố định. Kèm một dòng nhắc rằng kết quả chính thức chốt lúc campaign kết thúc.
 
@@ -2622,30 +2778,32 @@ Campaign kết thúc thì học viên vẫn xem lại được. Bảng lúc đó
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Bảng xếp hạng | Lối vào campaign | Vị trí | Cạnh năm khung cố định. Cách thể hiện: `❓PO`, chờ design |
+| Bảng xếp hạng | Lối vào campaign | Vị trí | Cạnh năm khung cố định. Cách thể hiện: `❓PO`, chờ design, xem `OQ-45` |
 | Bảng xếp hạng | Danh sách campaign | Gồm những gì | Campaign **đang chạy** và **đã kết thúc**. Campaign chưa bắt đầu không hiện. `[đề xuất]` |
 | Bảng xếp hạng | Danh sách campaign | Thứ tự | Đang chạy trước, đã kết thúc sau. Trong mỗi nhóm, campaign kết thúc gần nhất lên trước. `[đề xuất]` |
-| Campaign | Thông tin | Nội dung | Tên · mô tả · khoảng thời gian · các loại hành động được tính điểm |
-| Campaign | Trạng thái | Nhãn | Đang chạy hoặc đã kết thúc. Chuỗi tiếng Anh: `❓PO` |
-| Campaign | Chọn bảng | Các lựa chọn | Hai bảng: `Points` · `Activities`. **Không chịu năm công tắc `Show …` ở `US11`** |
+| Campaign | Thông tin | Nội dung | Tên · khoảng thời gian · các loại hành động được tính điểm |
+| Campaign | Trạng thái | Nhãn | `In Progress` hoặc `Expired`, cùng nhãn với bên Ops (`US20`). `[đề xuất]` |
+| Campaign | Chọn bảng | Các lựa chọn | `Points` · `Activities` khi campaign có bảng này · `Courses`. **Không chịu năm công tắc `Show …` ở `US11`** |
 | Campaign | Bảng | Top 3, danh sách đầy đủ, cột `#`, cột học viên, cột giá trị | Giống `US6` |
 | Campaign | Khối vị trí của tôi | | Giống `US7` |
-| Campaign đang chạy | Nhãn cập nhật | Nội dung | `Last updated {HH:mm}`, kèm dòng nhắc kết quả chính thức chốt lúc kết thúc. Chuỗi tiếng Anh: `❓PO` |
-| Campaign đã kết thúc | Nhãn | Nội dung | Thay `Last updated` bằng thời điểm đóng băng. Chuỗi tiếng Anh: `❓PO` |
-| Campaign | Trạng thái rỗng | Chưa ai có chỉ số | Chuỗi tiếng Anh: `❓PO` |
+| Campaign đang chạy | Nhãn cập nhật | Nội dung | `Last updated {HH:mm}`, kèm dòng nhắc kết quả chính thức chốt lúc kết thúc. Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
+| Campaign đã kết thúc | Nhãn | Nội dung | Thay `Last updated` bằng thời điểm đóng băng. Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
+| Campaign | Trạng thái rỗng | Chưa ai có chỉ số | Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
 
 **Business requirement — Business rule**
 
 - `BR-19.1` Campaign nằm **trong trang bảng xếp hạng**. Tắt công tắc `Leaderboard` (`BR-11.6`) thì campaign ẩn theo, dữ liệu giữ nguyên.
 - `BR-19.2` 🔑 **Bảng `Points` của campaign** là tổng điểm từ các lần cộng có **thời điểm cộng nằm trong khoảng campaign** và **loại hành động nằm trong danh sách campaign chọn**. Số điểm là số đã ghi trong sổ giao dịch, theo cấu hình chung tại lúc cộng.
 - `BR-19.3` **Bảng `Activities` của campaign** là số hoạt động hoàn thành trong khoảng campaign, theo mục Định nghĩa chỉ số. **Không phụ thuộc danh sách loại hành động** campaign chọn cho phần điểm.
+- `BR-19.3a` **Bảng `Courses` của campaign** là số lượt hoàn thành khoá trong khoảng campaign, theo mục Định nghĩa chỉ số. Campaign nào cũng có bảng này. Xem `OQ-49`.
 - `BR-19.4` Bài Test nộp trong campaign mà **chấm đạt sau khi campaign kết thúc thì không tính**, vì thời điểm cộng điểm là lúc chấm đạt.
 - `BR-19.5` Campaign đang chạy **tính sẵn 8 tiếng một lần**, cùng nhịp với khung cố định (`BR-6.12`). Không tính lúc học viên mở.
 - `BR-19.6` Campaign kết thúc thì **đọc kết quả đã đóng băng**, không tính lại (`US21`).
-- `BR-19.7` Tiêu chí phụ `BR-6.4` áp cho cả hai bảng: cùng chỉ số thì ai đạt sớm hơn xếp trên.
+- `BR-19.7` Tiêu chí phụ `BR-6.4` áp cho mọi bảng của campaign: cùng chỉ số thì ai đạt sớm hơn xếp trên.
 - `BR-19.8` Campaign **phụ thuộc cấu hình chung**:
   - Tắt `Points` hoặc tắt một hành động ở `US8` thì phần đó ngừng đóng góp cho mọi campaign đang chạy
   - Đổi số điểm ở `US8` thì campaign mang hai mức điểm, theo `C4`. PO chấp nhận ngày 08/10
+  - `Points` tắt thì **bảng `Points` của campaign ẩn** với học viên; bảng `Activities` và `Courses` vẫn hiện (`BR-1.8`). PO chốt ngày 12/10
 - `BR-19.9` Học viên bị `Block` hoặc rời tổ chức: trước lúc kết thúc thì không có mặt, sau lúc kết thúc thì vẫn trong kết quả (`C12`).
 - `BR-19.10` **Không thông báo** khi campaign bắt đầu hoặc kết thúc. `[đề xuất]` — thông báo chỉ dành cho thành tích (`US2`).
 
@@ -2655,7 +2813,7 @@ Không có field mới phía học viên. Đọc campaign ở `US20`, bảng tí
 
 **NFR**
 
-Mỗi campaign đang chạy thêm hai bảng vào lượt tính sẵn 8 tiếng. Campaign đã kết thúc chỉ đọc kết quả đã lưu, chi phí gần bằng 0.
+Mỗi campaign đang chạy thêm hai hoặc ba bảng vào lượt tính sẵn 8 tiếng. Campaign đã kết thúc chỉ đọc kết quả đã lưu, chi phí gần bằng 0.
 
 ### 5/ Out of scope
 
@@ -2687,11 +2845,11 @@ Là nhân sự vận hành, tôi cần tạo campaign có thời hạn riêng v�
 
 ### 3/ Scenario
 
-Vận hành mở khu vực Campaign trong Gamification trên Ops, thấy danh sách campaign kèm trạng thái.
+Ở cuối trang cấu hình Gamification trên Ops có khối `Campaign`, liệt kê các campaign kèm trạng thái. Bấm `+ Campaign` thì mở panel `Campaign Settings` trượt từ phải.
 
-Tạo mới: nhập tên, mô tả, ngày bắt đầu, ngày kết thúc, rồi chọn loại hành động được tính điểm. Mỗi loại hiện kèm số điểm theo cấu hình chung, chỉ để xem, không sửa được.
+Tạo mới: nhập tên, ngày bắt đầu, ngày kết thúc, chọn loại hành động được tính điểm, và chọn campaign có bảng `Activities` hay không.
 
-Campaign chưa bắt đầu thì sửa mọi thứ và xoá được. Đang chạy thì chỉ sửa tên và mô tả. Đã kết thúc thì chỉ xem.
+Campaign chưa bắt đầu thì sửa mọi thứ và xoá được. Đang chạy thì chỉ sửa tên. Đã kết thúc thì chỉ xem kết quả.
 
 ### 4/ Acceptance criteria
 
@@ -2699,25 +2857,30 @@ Campaign chưa bắt đầu thì sửa mọi thứ và xoá được. Đang ch�
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Danh sách campaign | Bảng | Cột | Tên · khoảng thời gian · trạng thái · loại hành động được tính |
-| Danh sách campaign | Bảng | Trạng thái | Ba trạng thái: chưa bắt đầu · đang chạy · đã kết thúc. **Tính từ ngày hiện tại**, theo múi giờ tổ chức. Chuỗi tiếng Anh: `❓PO` |
-| Tạo campaign | Form | Tên | Bắt buộc. Độ dài tối đa: `❓PO` |
-| Tạo campaign | Form | Mô tả | Không bắt buộc |
-| Tạo campaign | Form | Ngày bắt đầu | Bắt buộc. **Không được ở quá khứ.** `[đề xuất]` |
+| Danh sách campaign | Đầu khối | Tiêu đề và phụ đề | `Campaign` · `Run time-bound learning challenges with results that are locked once they end.` |
+| Danh sách campaign | Đầu khối | Nút `+ Campaign` | Mở panel `Campaign Settings` để tạo mới |
+| Danh sách campaign | Bảng | Cột | `Name` · `Duration` · `Status` · `Contribution` · `Action`. `Contribution` liệt kê cấu phần, ví dụ `Point (Checkin; Activity); Activity; Course` |
+| Danh sách campaign | Bảng | Cột `Action` | Chưa bắt đầu: sửa, xoá. Đang chạy: xem kết quả, sửa tên. Đã kết thúc: xem kết quả. Design chưa có nút xoá, xem `OQ-45` |
+| Danh sách campaign | Bảng | Trạng thái | Ba trạng thái: `Not started` · `In Progress` · `Expired`. **Tính từ ngày hiện tại**, theo múi giờ tổ chức |
+| Tạo campaign | Panel | Tiêu đề | `Campaign Settings`, trượt từ cạnh phải |
+| Tạo campaign | Form | Tên | Bắt buộc. Độ dài tối đa: `❓PO`, xem `OQ-52` |
+| Tạo campaign | Form | Ngày bắt đầu | Bắt buộc. **Sớm nhất là ngày mai**, để campaign vừa tạo còn sửa và xoá được trước khi chạy. `[đề xuất]` |
 | Tạo campaign | Form | Ngày kết thúc | Bắt buộc. Không nhỏ hơn ngày bắt đầu. **Bắt đầu và kết thúc cùng một ngày là hợp lệ.** `[đề xuất]` |
 | Tạo campaign | Form | Loại hành động | Chọn nhiều trong bốn hành động: check-in hằng ngày · hoàn thành hoạt động · hoàn thành khoá · hoàn thành bài Test đạt. **Phải chọn ít nhất một.** `[đề xuất]` |
 | Tạo campaign | Form | Số điểm | **Không có ô sửa số điểm.** Mỗi loại hành động hiện số điểm theo cấu hình chung ở `US8`, chỉ đọc |
+| Tạo campaign | Form | Ô `Activity` | Ô tick riêng, dưới nhóm `Points`. Bật thì campaign có bảng `Activities`. Mặc định bật. `[đề xuất]` |
+| Tạo campaign | Form | Bảng `Courses` | Luôn có, không có ô chọn. Xem `OQ-49` |
 | Tạo campaign | Form | Hành động đang tắt ở `US8` | Vẫn chọn được, kèm dòng nhắc: hành động này đang tắt nên chưa sinh điểm cho tới khi bật lại. `[đề xuất]` |
-| Tạo campaign | Form | Cách lưu | **Có nút tạo, không tự lưu.** Campaign tạo xong là có hiệu lực từ ngày bắt đầu, nên cần một thao tác chủ động. Khác với trang cấu hình ở `BR-14.10`. `[đề xuất]` |
+| Tạo campaign | Form | Cách lưu | Nút `Save` và `Cancel`, **không tự lưu.** Campaign tạo xong là có hiệu lực từ ngày bắt đầu, nên cần một thao tác chủ động. Khác với trang cấu hình ở `BR-14.10` |
 | Sửa campaign | Chưa bắt đầu | Mọi field | Sửa được |
-| Sửa campaign | Đang chạy | Tên, mô tả | Sửa được. Ngày bắt đầu, ngày kết thúc, loại hành động **chỉ đọc** |
+| Sửa campaign | Đang chạy | Tên | Sửa được. Ngày bắt đầu, ngày kết thúc, loại hành động, ô `Activity` **chỉ đọc** |
 | Sửa campaign | Đã kết thúc | Mọi field | Chỉ xem |
 | Xoá campaign | Chưa bắt đầu | Nút xoá | Có. Xác nhận bằng popover cạnh nút, giống `BR-14.13` |
 | Xoá campaign | Đang chạy hoặc đã kết thúc | Nút xoá, nút dừng | **Không có** |
 
 **Business requirement — Business rule**
 
-- `BR-20.1` Campaign gồm: tên · mô tả · ngày bắt đầu · ngày kết thúc · danh sách loại hành động được tính điểm.
+- `BR-20.1` Campaign gồm: tên · ngày bắt đầu · ngày kết thúc · danh sách loại hành động được tính điểm · có bảng `Activities` hay không. Bảng `Courses` luôn có. **Không có mô tả.** PO chốt ngày 12/10 theo design.
 - `BR-20.2` 🔑 **Không có số điểm riêng cho campaign.** Số điểm theo cấu hình chung ở `US8`. Campaign chỉ chọn loại hành động nào được tính. PO chốt ngày 08/10.
 - `BR-20.3` Khoảng campaign tính **theo ngày trọn**, biên ngày cắt theo múi giờ tổ chức (`C6`). `[đề xuất]`
 - `BR-20.4` Người tham gia là **toàn tổ chức**. Không chọn theo lớp, khoá hay nhóm.
@@ -2727,20 +2890,21 @@ Campaign chưa bắt đầu thì sửa mọi thứ và xoá được. Đang ch�
   | Trạng thái | Sửa | Xoá | Dừng |
   |---|---|---|---|
   | Chưa bắt đầu | Mọi thứ | ✅ | — |
-  | Đang chạy | **Chỉ tên và mô tả** | ❌ | ❌ |
+  | Đang chạy | **Chỉ tên** | ❌ | ❌ |
   | Đã kết thúc | ❌ | ❌ | — |
 
   > Đang chạy thì luật không đổi, kể cả thời điểm kết thúc, để học viên đang thi đua không bị đổi luật giữa chừng.
 - `BR-20.7` ⚠️ **Đổi cấu hình chung là đổi luật của mọi campaign đang chạy.** Tắt một hành động hay đổi số điểm ở `US8` thì campaign đổi theo (`BR-19.8`). Vận hành cần biết điều này trước khi sửa cấu hình chung.
 - `BR-20.8` **Tắt `Gamification` khi có campaign đang chạy: vẫn cho tắt.** Campaign không nhận thêm gì trong thời gian tắt. Popover xác nhận ở `BR-14.13` nêu thêm số campaign đang chạy. `[đề xuất]` — chờ PO xác nhận, xem `OQ-42`.
 - `BR-20.9` Campaign gắn với tổ chức (`C1`). Loại hành động là danh mục hệ thống, mở rộng được (`C2`).
+- `BR-20.10` **Trạng thái campaign xét tại lúc bấm `Save` hoặc lúc xoá**, không xét lúc mở form. Ví dụ: mở form lúc 23:50 khi campaign còn `Not started`, bấm `Save` lúc 00:05 khi đã `In Progress` thì thay đổi ngày, loại hành động, ô `Activity` bị từ chối, chỉ đổi tên được lưu, kèm thông báo lý do. Xoá lúc đó cũng bị từ chối. `[đề xuất]`
 
 **Data Field**
 
 | Field | Kiểu | Bắt buộc | Giá trị hợp lệ | Ghi chú |
 |---|---|---|---|---|
-| Tên | Chuỗi | Có | Độ dài tối đa `❓PO` | Mới |
-| Mô tả | Chuỗi | Không | | Mới |
+| Tên | Chuỗi | Có | Độ dài tối đa `❓PO`, xem `OQ-52` | Mới |
+| Có bảng Activities | Đúng/sai | Có | | Mới. Ô `Activity` trong form |
 | Ngày bắt đầu | Ngày | Có | Không ở quá khứ khi tạo | Mới |
 | Ngày kết thúc | Ngày | Có | `>=` ngày bắt đầu | Mới |
 | Loại hành động | Danh sách danh mục | Có | Ít nhất một trong bốn hành động của `US8` | Mới. Chịu `C2` |
@@ -2778,12 +2942,12 @@ Là nhân sự vận hành, tôi cần xem và xuất kết quả của từng c
 
 | Điều kiện | Nguồn |
 |---|---|
-| Có campaign đang chạy hoặc đã kết thúc | `US20` |
+| Có campaign đang chạy hoặc đã kết thúc. `Gamification` bật hay tắt đều xem được | `US20` · `BR-15.8` |
 | Người dùng có quyền xem danh sách học viên và hạng | `US15` |
 
 ### 3/ Scenario
 
-Từ danh sách campaign, vận hành mở một campaign và thấy hai bảng `Points` và `Activities` với toàn bộ học viên.
+Từ danh sách campaign, vận hành mở một campaign. Panel trượt từ phải, tiêu đề là tên kèm khoảng thời gian, gồm các bảng của campaign với toàn bộ học viên.
 
 Campaign đang chạy thì đây là số tạm tính, có nhãn cập nhật. Campaign đã kết thúc thì đây là kết quả chính thức, đã đóng băng.
 
@@ -2795,11 +2959,14 @@ Vận hành xuất Excel để gửi đội truyền thông.
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Kết quả campaign | Bảng | Tab | `Points` · `Activities` |
+| Kết quả campaign | Panel | Tiêu đề | `{tên} ({ngày bắt đầu} - {ngày kết thúc})`, trượt từ cạnh phải |
+| Kết quả campaign | Bảng | Tab | `Points` · `Activities` khi campaign có bảng này · `Courses` |
+| Kết quả campaign | Bảng | Bố cục | Top 3 nổi bật, 5 dòng đầu rồi đường kẻ `Show All`, giống `US6` |
+| Kết quả campaign | Bảng | Dòng `You` | **Không có.** Vận hành không phải người thi. Design đang có, cần bỏ (`OQ-45`) |
 | Kết quả campaign | Bảng | Cột | Thứ hạng · học viên · giá trị chỉ số |
 | Kết quả campaign | Đang chạy | Nhãn | Số tạm tính, kèm `Last updated {HH:mm}` |
 | Kết quả campaign | Đã kết thúc | Nhãn | Kết quả chính thức, kèm thời điểm đóng băng |
-| Kết quả campaign | Xuất | Nút xuất | Xuất **Excel**, gồm cả hai bảng. Campaign đang chạy vẫn xuất được, nhưng file ghi rõ là số tạm tính. `[đề xuất]` |
+| Kết quả campaign | Xuất | Nút xuất | Xuất **Excel**, gồm mọi bảng của campaign. Campaign đang chạy vẫn xuất được, nhưng file ghi rõ là số tạm tính. `[đề xuất]`. Design chưa có nút xuất, xem `OQ-45` |
 
 **Business requirement — Business rule**
 
@@ -2814,7 +2981,7 @@ Vận hành xuất Excel để gửi đội truyền thông.
 | Field | Kiểu | Bắt buộc | Ghi chú |
 |---|---|---|---|
 | Campaign | Khoá ngoại | Có | |
-| Bảng | Danh mục | Có | `Points` · `Activities` |
+| Bảng | Danh mục | Có | `Points` · `Activities` · `Courses` |
 | Học viên | Khoá ngoại tới `users` | Có | |
 | Giá trị chỉ số | Số nguyên | Có | |
 | Thời điểm đạt mức | Thời gian | Có | Nền của `BR-6.4` |
@@ -2852,7 +3019,7 @@ Là nhân sự vận hành, tôi cần tra được mọi lần hệ thống ghi
 
 | Điều kiện | Nguồn |
 |---|---|
-| `Gamification` đang bật ở cấp tổ chức | `US14` |
+| `Gamification` bật hay tắt đều xem được | `BR-15.8` |
 | Người dùng có quyền xem danh sách học viên và hạng | `US15` |
 
 ### 3/ Scenario
@@ -2869,7 +3036,7 @@ Từ danh sách học viên ở `US12`, bấm tên một người thì mở nh�
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Nhật ký ghi nhận | Điểm vào | Vị trí | Mục `Achievement history` trong khu vực Gamification trên Ops, cạnh danh sách học viên. Cách thể hiện: `❓PO`, chờ design |
+| Nhật ký ghi nhận | Điểm vào | Vị trí | Mục `Achievement history` trong khu vực Gamification trên Ops, cạnh danh sách học viên. Cách thể hiện: `❓PO`, chờ design, xem `OQ-45` |
 | Nhật ký ghi nhận | Bảng | Cột `Time` | `HH:mm dd/mm/yyyy`, theo múi giờ tổ chức |
 | Nhật ký ghi nhận | Bảng | Cột `Learner` | Ảnh đại diện và tên học viên |
 | Nhật ký ghi nhận | Bảng | Cột `Event` | Một trong ba: `Points` · `Badge` · `Level up` |
@@ -2904,7 +3071,7 @@ Từ danh sách học viên ở `US12`, bấm tên một người thì mở nh�
 - `BR-22.1` Nhật ký có **đúng ba loại sự kiện như phía học viên** (`US3`): nhận điểm · đạt huy hiệu · lên hạng. Cùng nguồn dữ liệu, cùng số điểm đã ghi. Vận hành và học viên nhìn cùng một sự thật.
 - `BR-22.1a` 🔑 **Khác học viên ở một chỗ: dòng 0 điểm vẫn hiện.** Khi học viên hỏi *"sao tuần đó tôi không có điểm"*, vận hành nhìn là thấy lý do: hành động đang tắt. Cột `Points` ghi `0`. PO chốt ngày 12/10.
 - `BR-22.2` 🔑 **Hiện đầy đủ cả khi `Visibility in UpLMS` đang tắt.** Giai đoạn chạy ngầm là lúc vận hành cần nhật ký nhất.
-- `BR-22.3` **Chỉ đọc.** Vận hành không sửa, không xoá, không cộng bù điểm thủ công, theo `A12` và `BR-3.5`.
+- `BR-22.3` **Chỉ đọc.** Vận hành không sửa, không xoá, không cộng bù điểm thủ công, theo giả định `A12` (vận hành không sửa điểm thủ công) và `BR-3.5` (lịch sử không sửa, không xoá được).
 - `BR-22.4` Phạm vi **toàn tổ chức**. Tài khoản `Test Account` không có dòng nào, theo `C10`.
 - `BR-22.5` Học viên bị `Block` hoặc đã rời tổ chức: **các dòng đã ghi vẫn hiện**. Nhật ký là lịch sử, không ẩn theo trạng thái hiện tại của người học. `[đề xuất]` — khác `US12`, nơi người bị `Block` không xuất hiện (`BR-12.7`).
 - `BR-22.6` Đọc **thẳng từ dữ liệu ghi nhận**, cập nhật tức thì, không chờ chu kỳ 8 tiếng của bảng xếp hạng. Cùng cách với `BR-12.5`.
@@ -2925,7 +3092,7 @@ Danh sách tải theo trang. Dữ liệu là của **cả tổ chức** và **gi
 |---|---|
 | Xuất nhật ký ra file | PO chốt ngày 09/10. Số liệu để công bố dùng `US12` và `US21` |
 | Hiện lần cộng điểm bị lỗi | `BR-22.8`. Xem `OQ-46` |
-| Sửa, xoá, cộng bù điểm thủ công | `A12`. Nếu sau này cần thì là một US riêng |
+| Sửa, xoá, cộng bù điểm thủ công | Giả định `A12`: vận hành không sửa hay cộng trừ điểm thủ công. Nếu sau này cần thì là một US riêng |
 | Nhật ký ai đổi cấu hình gamification | Đã chốt không cần, xem `OQ-34` |
 
 ### 6/ Conner case
@@ -2942,33 +3109,38 @@ Danh sách tải theo trang. Dữ liệu là của **cả tổ chức** và **gi
 | ~~OQ-02~~ | ✅ **Đã chốt 23/09: cộng điểm lỗi thì ghi lại**, không để mất âm thầm. Xem `BR-13.8` | PO | — |
 | ~~OQ-03~~ | ✅ **Tạm chốt 23/09** bộ Activation · Course start · Completion, kèm `Retention` chưa có mốc nền | PO | — |
 | ~~OQ-07~~ | ✅ **Đã chốt 23/09: sổ giao dịch điểm giữ toàn bộ, không dọn.** Xem `BR-3.9` | PO | — |
-| ~~OQ-08~~ | ✅ **Đã chốt 06/10: múi giờ lấy theo tenant**, không có ô chọn trên màn Gamification. Cách lưu do BE quyết trong technical design. Xem `BR-14.9` | PO | — |
+| ~~OQ-08~~ | ✅ **Đã chốt 06/10: múi giờ lấy theo tenant**, không có ô chọn trên màn Gamification. Cách lưu do Dev quyết trong technical design. Xem `BR-14.9` | PO | — |
 | ~~OQ-09~~ | ✅ **Đã rõ:** mọi học viên bắt đầu ở `0` điểm và **hạng `1`**, theo `BR-10.1` | — | — |
-| **OQ-10** | Metadata đầu tài liệu: `Target release` · `Epic` · `Story` · `Tech lead` · `QA` · `Reviewer` | PO | Bàn giao |
+| **OQ-10** | Metadata đầu tài liệu còn trống: `Story` · `Designer` · `Tech lead` · `QA` · `Reviewer`. `Target release` và `Epic` đã có | PO | Bàn giao |
 | **OQ-11** | Link Figma và tài khoản staging để đối chiếu giao diện | PO | `US1`–`US12` |
 | **OQ-12** | Học viên có tắt hoặc chỉnh được thông báo thành tích không? | PO | `US2` |
-| **OQ-16** | Câu chữ tiếng Anh cho thông báo **lên hạng** | PO | `US2` |
-| **OQ-17** | Câu chữ tiếng Anh mô tả từng loại hành động trong cột `Source` của lịch sử điểm | PO | `US3` |
+| ~~OQ-16~~ | ✅ **Đã chốt 12/10 theo design:** `Level up! You've just reached Level {n}`. Xem `US2` | PO | — |
+| ~~OQ-17~~ | ✅ **Đã có:** bộ chuỗi ở `US3` | PO | — |
 | **OQ-18** | Lịch sử điểm có cần **lọc theo khoảng ngày hoặc theo loại hành động** không? Hiện tôi để ngoài phạm vi | PO | `US3` |
 | **OQ-19** | Số dòng mỗi trang của lịch sử điểm | PO | `US3` |
 | **OQ-42** | **Tắt `Gamification` khi có campaign đang chạy thì vẫn cho tắt, đúng không?** Quy định cũ bắt phải dừng chiến dịch trước, nhưng nay campaign đang chạy không dừng được và nhiều campaign được chồng thời gian — giữ quy định cũ thì gần như không bao giờ tắt được. Xem `BR-20.8` | PO | `US14` · `US20` |
-| **OQ-43** | **Các mục ghi `[đề xuất]` ở `US19`, `US20`, `US21`** — biên ngày trọn, ngày bắt đầu không ở quá khứ, chọn ít nhất một loại hành động, không thông báo, không hiện campaign chưa bắt đầu, có nút tạo thay vì tự lưu, dùng chung quyền ở `US15` | PO | `US19` · `US20` · `US21` |
-| **OQ-44** | **Cách tính bảng campaign:** tính sẵn 8 tiếng một lần và đóng băng bằng tác vụ riêng. Đề xuất ở `solution-comparison-v0.2` §10, chờ PO duyệt | PO + Dev | `US19` · `US21` |
-| **OQ-45** | **Design cho campaign** và nhật ký ghi nhận bên Ops, cùng cập nhật design bảng xếp hạng: thêm tab `Activities`, bỏ bộ chọn khoảng ngày tự do, thêm lối vào campaign, thêm `Show activities` bên Ops | PO | `US6` · `US11` · `US19` đến `US22` |
+| **OQ-43** | **Các mục ghi `[đề xuất]` trong PRD.** Chính: tooltip ô chuỗi và nút `Achievement History` khi `Points` tắt (`US1`) · khối điểm và hạng trên My Learning (`US1`) · bỏ thanh tiến độ tới hạng kế tiếp (`US1`) · hiện mô tả khi trỏ vào huy hiệu (`US4`) · câu chữ khi điểm nền từ `40` trở lên (`US1`, `US8`) · sắp xếp và cột file Excel (`US12`) · thời điểm của lần ghi nhận lại sau lỗi (`BR-13.8`) · các mục của campaign và nhật ký Ops (`US19` đến `US22`) · bật lại giữa ngày (`BR-5.15`) · thứ tự tab và bảng mặc định (`US6`) · tên trong lịch sử khi nội dung đổi tên hoặc bị xoá (`BR-3.11`) · một huy hiệu chỉ góp một lần vào tiêu chí lên hạng (`BR-9.10`) · ngày bắt đầu sớm nhất và thời điểm xét trạng thái campaign (`US20`) · khối `Campaign` chỉ xem khi tắt `Gamification` (`BR-15.8`) | PO | `US1` · `US4` · `US8` · `US12` · `US13` · `US19` đến `US22` |
+| ~~OQ-44~~ | ✅ **Đã chốt 12/10:** bảng campaign tính sẵn 8 tiếng một lần, kết thúc thì đóng băng bằng tác vụ riêng | PO | — |
+| **OQ-45** | **Design còn thiếu hoặc lệch PRD.** Màn Gamification: thêm tab `Activities`, bỏ bộ chọn khoảng ngày, thêm lối vào campaign · Trang cấu hình Ops: thêm `Show badges`, bỏ bộ chọn khoảng ngày ở phần xem trước, đổi `every` thành `at` ở ba dòng mốc, câu check-in dùng số theo điểm nền · Kết quả campaign: bỏ dòng `You`, thêm nút xuất Excel · Danh sách campaign: thêm nút xoá; khối `Campaign` vẫn hiện ở chế độ chỉ xem khi tắt `Gamification` · Chưa có design: campaign phía học viên, nhật ký Ops (`US22`), khối trên My Learning | PO | `US1` · `US6` · `US11` · `US19` đến `US22` |
 | **OQ-46** | **Vận hành thấy lần cộng điểm bị lỗi ở đâu?** `BR-13.8` chốt *"ghi lại chỗ lỗi để vận hành thấy và xử lý"*, nhưng chưa có màn nào hiện chúng. PO chốt ngày 09/10 không hiện ở nhật ký ghi nhận (`US22`) | PO | `US13` |
 | ~~OQ-47~~ | ✅ **Đã chốt 12/10: dòng 0 điểm ẩn với học viên, hiện cho vận hành.** Xem `BR-3.1a`, `BR-22.1a` | PO | — |
 | ~~OQ-48~~ | ✅ **Đã chốt 12/10: trường `Test Account` chính là `users.is_operator`.** Technical design lọc đúng. Xem `C10` | PO | — |
-| ~~OQ-20~~ | ✅ **Đã chốt 23/09: hạ ngưỡng thì quét lại cấp bù, nâng ngưỡng thì gỡ huy hiệu.** Xem `BR-4.6`, `BR-4.7` | PO | — |
+| **OQ-49** | **Bảng `Courses` của campaign luôn có, hay tuỳ chọn như `Activities`?** PO chọn ngày 12/10 *"Courses luôn có"*, nhưng cột `Contribution` trong design danh sách campaign có dòng không có `Course`, tức là tuỳ chọn | PO | `US19` · `US20` · `US21` |
+| **OQ-50** | **Câu chữ tiếng Anh còn trống:** trạng thái rỗng của bảng `Activities`, `Courses` (`US6`) · gợi ý bắt đầu học trong khối vị trí của tôi (`US7`) · dòng giải thích dưới công tắc `Points`, `Badges` và dòng nhắc cố định (`US8`, `US9`, `US10`) · tooltip và cảnh báo tiêu chí, bảng cuối cùng (`US10`, `US11`) · hai popover xác nhận (`US14`) · nhãn cập nhật, nhãn đóng băng, trạng thái rỗng của campaign (`US19`) | PO | `US6` · `US7` · `US8` đến `US11` · `US14` · `US19` |
+| **OQ-51** | **Ảnh huy hiệu vận hành tải lên:** định dạng, kích thước, dung lượng tối đa | PO | `US9` |
+| **OQ-52** | **Độ dài tối đa tên campaign** | PO | `US20` |
+| **OQ-53** | **Thời gian tự tắt của thông báo thành tích**, kể cả khi bốn năm thẻ xuất hiện cùng lúc | PO | `US2` |
+| ~~OQ-20~~ | ✅ **Không còn áp dụng sau `CR-007`:** mốc huy hiệu do hệ thống định sẵn, không sửa được, nên không có tình huống đổi ngưỡng. Xem `BR-4.6` | PO | — |
 | ~~OQ-22~~ | ✅ **Đã chốt 23/09: không báo khi gỡ huy hiệu.** Sau `CR-008` thì tình huống này không còn phát sinh — mốc huy hiệu khoá sau khi tạo nên không có thao tác gỡ, và lịch sử cũng không có sự kiện `Badge removed`. Xem `BR-1.4` | PO | — |
 | ~~OQ-23~~ | ✅ **Đã chốt 23/09: hạng KHÔNG tụt.** Đổi ngưỡng hạng chỉ áp từ thời điểm đổi trở đi. Khác với huy hiệu, cố ý. Xem `BR-1.3` | PO | — |
-| ~~OQ-21~~ | ✅ **Đã làm rõ 23/09: chứng chỉ cấp theo KHOÁ, không theo lượt ghi danh.** Một học viên một chứng chỉ cho một khoá, học lại không cấp thêm. Xem `BR-13.12`. *(Còn lại một chi tiết cho Dev: endpoint đếm chứng chỉ đã loại khoá bỏ qua theo `BR-SKIP` chưa — kiểm lúc làm.)* | PO | — |
+| ~~OQ-21~~ | ✅ **Đã làm rõ 23/09: chứng chỉ cấp theo KHOÁ, không theo lượt ghi danh.** Một học viên một chứng chỉ cho một khoá, học lại không cấp thêm. Xem `BR-13.12`. Số khoá hoàn thành không đếm bằng chứng chỉ, xem mục Định nghĩa chỉ số. | PO | — |
 | ~~OQ-25~~ | ✅ **Đã chốt 23/09: vẫn hiện, nhưng cột thứ hạng để trống.** Xem `BR-6.6` | PO | — |
 | ~~OQ-26~~ | ✅ **Đã chốt 23/09: nổi bật top 3.** Danh sách đầy đủ bên dưới — xem `OQ-28` | PO | — |
 | ~~OQ-27~~ | ✅ **Đã chốt 23/09: tính lại 8 tiếng một lần, ba lần một ngày.** Xem `BR-6.12` | PO | — |
 | ~~OQ-28~~ | ✅ **Đã chốt 23/09: nổi bật top 3, danh sách đầy đủ cuộn được bên dưới**, người chưa có chỉ số nằm cuối với ô thứ hạng để trống | PO | — |
 | ~~OQ-29~~ | ✅ **Đã chốt 23/09: chọn khoảng ngày thì không có bảng theo hạng.** Bảng `Level` chỉ tồn tại ở `All time`. **Ngày 08/10 thêm bảng `Badges` cùng quy tắc.** Xem `BR-11.2` | PO | — |
 | ~~OQ-30~~ | ✅ **Đảo ngày 08/10: học viên không còn khoảng ngày tự chọn**, mọi bảng tính sẵn 8 tiếng một lần. Xem `BR-6.12`, `BR-6.15` | PO | — |
-| ~~OQ-31~~ | ✅ **Đã chốt 23/09: không có thao tác xoá huy hiệu.** Huy hiệu chỉ không còn hiện khi tắt chức năng huy hiệu, tắt rule của huy hiệu đó, hoặc học viên rời tổ chức. Xem `BR-1.4a` | PO | — |
+| ~~OQ-31~~ | ✅ **Đã chốt 23/09: không có thao tác xoá huy hiệu.** Huy hiệu chỉ không còn hiện khi tắt chức năng huy hiệu, tắt loại huy hiệu đó, hoặc học viên rời tổ chức. Xem `BR-1.4a` | PO | — |
 | ~~OQ-32~~ | ✅ **Đã chốt 23/09: hai cấp** — một công tắc `Badges` cho cả chức năng, và một công tắc cho từng loại huy hiệu | PO | — |
 | ~~OQ-33~~ | ✅ **Đã chốt 23/09: có, cả bốn chức năng đều có công tắc riêng** — `Points` · `Badges` · `Levels` · `Leaderboard` | PO | — |
 | ~~OQ-34~~ | ✅ **Đã chốt 23/09: không cần lịch sử ai đổi cấu hình gamification** | PO | — |

@@ -18,38 +18,38 @@ status: Running
 Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]` đang sửa · `[x]` đã duyệt · `[S]` bỏ qua kèm lý do. Ghi chú `v1:` trỏ tới artifact kế thừa từ luồng v1.
 
 ### IDEATION
-- [?] 1.1 intent-capture · v1: ideation/brd.md v0.7 §1 đến §4, chờ duyệt lại theo CR-013. v0.6 Gate 1 Approved with Notes 2026-09-23
+- [x] 1.1 intent-capture · v1: ideation/brd.md v0.8 §1 đến §4. Duyệt 2026-10-12 (DEC145), 11 finding là rủi ro chấp nhận. v0.6 Gate 1 Approved with Notes 2026-09-23
 - [S] 1.2 market-research · v1 không làm
-- [?] 1.4 scope-definition · v1: ideation/brd.md v0.8 §5 đến §7, chờ duyệt lại theo CR-013 và S25 nhật ký ghi nhận bên Ops
-- [?] 1.7 approval-handoff · v1: ideation/brd.md v0.7, không có bản một trang, chờ duyệt lại
+- [x] 1.4 scope-definition · v1: ideation/brd.md v0.8 §5 đến §7. Duyệt 2026-10-12 (DEC145)
+- [x] 1.7 approval-handoff · v1: ideation/brd.md v0.8, không có bản một trang. Duyệt 2026-10-12 (DEC145), archive/approval-handoff/brd-v0.8-20261012.md
 ### INCEPTION
 - [x] 2.3 requirements-analysis · v1: inception/requirements-analysis/requirements.md v0.1 ngày 2026-09-23, không cập nhật sau CR; nội dung CR ở brd.md, prd.md và inputs/change-requests.md
-- [?] 2.31 impact-analysis · v1: inception/impact-analysis/impact-matrix.md v0.4, chờ duyệt lại (CR-013 §14, nhật ký Ops §15). v0.2 Gate 2 duyệt 2026-09-23
-- [?] 2.32 solution-options · v1: inception/solution-options/solution-options.md v0.2, chờ Gate 3 duyệt lại (§10 cách tính campaign, OQ-44). v0.1 duyệt 2026-09-23
-- [?] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story, thêm US19 đến US21 campaign và US22 nhật ký Ops, chờ duyệt lại
+- [x] 2.31 impact-analysis · v1: inception/impact-analysis/impact-matrix.md v0.4. Duyệt 2026-10-12 (DEC146). v0.2 Gate 2 duyệt 2026-09-23
+- [x] 2.32 solution-options · v1: inception/solution-options/solution-options.md v0.2. Duyệt 2026-10-12, chốt option K (DEC147). v0.1 duyệt 2026-09-23
+- [x] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story. Duyệt 2026-10-12 cùng 2.42 (DEC157)
 - [S] 2.41 hld-brief · stage chưa tồn tại khi chạy v1; chạy bổ sung sau khi bốn gate duyệt lại, trước khi bàn giao Dev
-- [?] 2.42 prd-generation · v1: inception/prd/prd.md v0.13, chờ duyệt lại (CR-009 đến CR-013, design, US22, technical design backend). v0.2 Gate 4 duyệt 2026-09-23. Lark đang v0.8
+- [x] 2.42 prd-generation · v1: inception/prd/prd.md v0.14. Duyệt 2026-10-12 kèm ba quyết định (DEC157), sau một lần Request Changes. Archive prd-generation/prd-v0.14-20261012.md; (CR-009 đến CR-013, design, US22, technical design backend). v0.2 Gate 4 duyệt 2026-09-23. Lark đang v0.8
 
 ## Current
 | | |
 |---|---|
-| Stage | CR-013 (gộp CR-012): chạy lại từ BRD, bốn gate chờ PO duyệt lại |
-| Next action | PO duyệt lại theo thứ tự: brd v0.8 → impact-matrix v0.4 → solution-options v0.2 → prd v0.13; trả lời OQ-42 đến OQ-46 ở mục Vấn đề tồn đọng của PRD. Sau Approve: chụp archive, publish lại PRD lên Lark bằng overwrite, chèn lại ảnh design theo order.txt |
-| Blocking questions open | 5, OQ-42 đến OQ-46 trong PRD |
-| Open CR | CR-013 (gộp CR-012) |
+| Stage | Mọi stage của profile đã duyệt. CR-012, CR-013 đã đóng |
+| Next action | Chạy 2.41 HLD Brief với Design, Dev, QA trước khi bàn giao. PO trả lời OQ-42, OQ-49, OQ-52 trước Unit Campaign. Dev cập nhật technical design theo PRD v0.14 |
+| Blocking questions open | 0 chặn gate; 15 câu hỏi mở trong PRD |
+| Open CR | none, CR-012 và CR-013 đóng 2026-10-12 |
 | Parked | no |
 
 ## Versions
 | Artifact | Version | Status | Approved | Lark |
 |---|---|---|---|---|
-| brd | v0.8 | review | v0.6: 2026-09-23 | — |
+| brd | v0.8 | approved | v0.6: 2026-09-23 | — |
 | requirements | v0.1 | approved | 2026-09-23 | — |
 | related-features-map | v0.2 | approved | 2026-09-23 | — |
-| impact-matrix | v0.4 | review | v0.2: 2026-09-23 | — |
-| solution-options | v0.2 | review | v0.1: 2026-09-23 | — |
+| impact-matrix | v0.4 | approved | v0.2: 2026-09-23 | — |
+| solution-options | v0.2 | approved | v0.1: 2026-09-23 | — |
 | initiative-brief | — | không có, v1 dùng BRD | — | — |
 | hld-brief | — | chưa chạy | — | — |
-| prd | v0.13 | review | v0.2: 2026-09-23 | v0.8 · KeT8dkIStofZ0axlTW5l4S94gre, publish 2026-10-05 |
+| prd | v0.14 | approved | v0.14: 2026-10-12 · v0.2: 2026-09-23 | v0.14 · Hjuxd3my6oG0UuxBGNOllABAgye, publish 2026-10-12 |
 
 ## Log
 - 2026-09-23 created ở luồng v1, cỡ L. Gate 1, 2, 3, 4 trong ngày; CR-001 đến CR-008
@@ -61,3 +61,6 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-09 PO thêm nhật ký ghi nhận bên Ops (S25 · US22), stage đang chờ duyệt nên sửa thẳng: BRD v0.8, Impact v0.4, PRD v0.11. Thêm OQ-46
 - 2026-10-12 Dev thêm technical design backend (PR #3) và thay mất phần nghiệp vụ của giải pháp; PO yêu cầu dựng lại. PRD v0.12, thêm OQ-47, OQ-48. Technical design viết theo phạm vi trước CR-012, CR-013, US22, đã ghi lưu ý cho Dev
 - 2026-10-12 PO đóng OQ-47 (dòng 0 điểm ẩn với học viên, hiện cho vận hành) và OQ-48 (Test Account = users.is_operator, ghi vào KB 06). PRD v0.13
+- 2026-10-12 Review Product Lead lần 01: BRD NOT-READY 11 finding, PRD NOT-READY 15 finding. PO Approve BRD v0.8 (1.1 · 1.4 · 1.7), Impact v0.4 (2.31), Solution v0.2 (2.32, option K); Request Changes PRD v0.13 (2.4 · 2.42). Progress: 6/8 | INCEPTION 3/5 · Next: sửa PRD rồi trình lại 2.4 · 2.42
+- 2026-10-12 Sửa PRD theo review lần 01 và tám quyết định của PO (DEC149 đến DEC156), PRD v0.14. Review lần 02: NOT-READY, 0 Critical, 3 Major mới. PO Approve kèm ba quyết định (DEC157 đến DEC160). Đóng CR-012, CR-013. Progress: 8/8 | INCEPTION 5/5 · Next: publish Lark, rồi 2.41 HLD Brief
+- 2026-10-12 Publish PRD v0.14 lên Lark: doc v0.8 cũ đã bị xoá, ghi đè doc `[PRD] Gamification` hiện có trong node (Hjuxd3my6oG0UuxBGNOllABAgye, đang v0.7); chép Target release, Epic điền tay vào PRD trước khi ghi đè. Đối chiếu: heading 15/32/141/23 khớp, 11 bảng trắng, 0 sơ đồ dạng code, 10 ảnh trong mục Design

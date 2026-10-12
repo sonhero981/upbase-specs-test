@@ -17,6 +17,7 @@ Dòng đầu tiên chuyển từ các sự cố và quyết định đã ghi tro
 - Không giữ bảng ví dụ của template. Hai PRD cũ mang nguyên chỉ số NPS của một app khác (learned 2026-09-23)
 - Technical Direction chỉ nêu cái gì phải đúng, không vẽ sequence, không thiết kế bảng, không chọn thuật toán (learned 2026-10-05)
 - Define hết user story kể cả cái chưa làm, ghi "chưa làm" trong tiêu đề. Bức tranh đầy đủ giúp phân tích ảnh hưởng đúng (learned 2026-09-23)
+- Technical design của Dev viết vào PRD thì thêm mục mới, không thay mục nghiệp vụ PO đã viết. Một lần technical design backend thay mất ràng buộc C1 đến C12, ba rule nền và định nghĩa chỉ số, làm gãy tham chiếu từ các US (learned 2026-10-12)
 
 ## KB
 - KB chỉ phủ khoảng một nửa hệ thống. Vùng chưa phủ ghi ❓PO, không kết luận "không ảnh hưởng" (learned 2026-09-23)

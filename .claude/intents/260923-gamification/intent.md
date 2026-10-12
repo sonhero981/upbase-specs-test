@@ -32,7 +32,7 @@ Quyết định giải pháp đã chốt: tính trong luồng, độ trễ bằn
 | Loại | Nguồn |
 |---|---|
 | Figma | chưa có |
-| Jira Epic / Story | chưa có |
+| Jira Epic / Story | Epic [UPLNDEP-8 Gamification](https://jira.upbase.asia/browse/UPLNDEP-8) · [UPLNDEP-9 Leaderboard](https://jira.upbase.asia/browse/UPLNDEP-9), PO điền trên Lark. Story chưa có |
 | Design đã chốt | `design/` tám ảnh màn, `order.txt` liệt kê bảy ảnh chèn vào mục Design của PRD theo thứ tự; ảnh "Thông báo thành tích" chưa có trong order.txt |
 | KB cần đọc | `03-assessment.md` (`BR-TEST`) · `06-user-account.md` §8b (Test Account) · `07-learning-experience.md` · `12-data-model.md` · `14-api-surface.md` · `15-product-direction.md` |
 | Schema DB | [Lark Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd), đối chiếu 23/09/2026 |
@@ -44,15 +44,15 @@ Quyết định giải pháp đã chốt: tính trong luồng, độ trễ bằn
 | Wiki space | `7660816820865093342` |
 | Node cha chung | `02. Execution — Epics & Features`, token `X3hhwv2MxizpFgkVudVl7e52gUc` |
 | Intent node | `Gamification`, token `LRVgwz5L9imG6WkQvJdllro5gNd` |
-| Published | initiative-brief: — · hld-brief: — · prd: **v0.8** trên Lark ngày 05/10/2026, doc `KeT8dkIStofZ0axlTW5l4S94gre`, https://upbasevn.sg.larksuite.com/docx/KeT8dkIStofZ0axlTW5l4S94gre; bản v0.2 duyệt Gate 4 giữ ở node `J4NGwHIlmijgZBkqxpWlNS4qgxe` để đối chiếu |
+| Published | initiative-brief: — · hld-brief: — · prd: **v0.14** ngày 12/10/2026, node `JGfawDSDviHEcAkWwdnlXrthgne`, doc `Hjuxd3my6oG0UuxBGNOllABAgye`, tên trên Lark `[PRD] Gamification`. Doc cũ `KeT8dkIStofZ0axlTW5l4S94gre` (v0.8) đã bị xoá trên Lark; trước lần publish này doc mới đang là v0.7, có Target release và Epic điền tay, đã chép vào PRD |
 
-Publish lại: dùng `lark-cli docs +update --command overwrite` vào doc v0.8, giữ tên trên Lark; sáu sơ đồ Mermaid tự thành bảng trắng; **ảnh design phải chèn lại** bằng `.claude/scripts/lark-insert-design-images.py` theo `design/order.txt` vì ảnh không nằm trong file `.md`.
+Publish lại: dùng `lark-cli docs +update --command overwrite` vào doc `Hjuxd3my6oG0UuxBGNOllABAgye`, **đọc bảng thông tin đầu doc trên Lark trước** vì PO có thể điền tay, giữ tên trên Lark; sáu sơ đồ Mermaid tự thành bảng trắng; **ảnh design phải chèn lại** bằng `.claude/scripts/lark-insert-design-images.py` theo `design/order.txt` vì ảnh không nằm trong file `.md`.
 
 ## Việc còn treo
-1. Bốn gate chờ PO duyệt lại sau CR-013: `brd.md` v0.7, `impact-matrix.md` v0.3, `solution-options.md` v0.2, `prd.md` v0.10.
-2. `OQ-42` đến `OQ-45` về campaign ở mục Vấn đề tồn đọng của PRD: tắt Gamification khi campaign đang chạy; các mục `[đề xuất]` ở `US19` đến `US21`; cách tính bảng campaign; design cho campaign.
-3. Lark đang v0.8, publish lại sau khi duyệt, kèm chèn ảnh.
-4. Designer, Tech lead, QA, Jira trống. Stage 2.41 HLD Brief chưa chạy; nên chạy trước khi bàn giao Dev vì dự án từng sinh bốn CR sau PRD do lệch design và tech.
+1. Stage 2.41 HLD Brief chưa chạy. Nên chạy trước khi bàn giao Dev: dự án đã sinh nhiều CR do lệch design và technical design.
+2. 15 câu hỏi mở trong PRD. Unit Campaign chờ `OQ-42` (tắt Gamification khi campaign chạy), `OQ-49` (bảng Courses tuỳ chọn hay luôn có), `OQ-52` (độ dài tên campaign). `OQ-43` gom các mục `[đề xuất]`. `OQ-45` là design còn thiếu.
+3. Technical design backend và frontend cần Dev cập nhật theo PRD v0.14, theo khối lưu ý đầu mục `## Backend` và `## Frontend`.
+4. Metadata còn trống: Story, Designer, Tech lead, QA, Reviewer (`OQ-10`).
 
 ## Mapping từ luồng v1
 | File v1 | Vị trí v2 | Stage | Ghi chú |

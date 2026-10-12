@@ -148,6 +148,22 @@ Nhật ký quyết định của intent. Chuyển từ `archive/v1/project-decis
 | DEC142 | 2026-10-12 | 2.42 | **Dựng lại các mục nghiệp vụ của phần giải pháp trong PRD** bị thay khi Dev thêm technical design backend (PR #3): nguyên tắc nền, cách bắt sự kiện, năm luồng, ràng buộc `C1` đến `C12`, ba rule nền, định nghĩa chỉ số. **Không dựng lại** mục Database và API cũ, vì PRD không giữ hai mục này và chúng nay thuộc technical design. Giữ nguyên technical design, thêm lưu ý các chỗ lệch so với PRD v0.11; thêm `OQ-47` dòng 0 điểm, `OQ-48` cờ tài khoản kiểm thử | "dựng lại phần bổ sung" | PO | 2.42, technical design |
 | DEC143 | 2026-10-12 | 2.42 | **Dòng 0 điểm ẩn với học viên, hiện cho vận hành.** Dòng này sinh ra khi `Points` hoặc hành động đang tắt (technical design backend vẫn ghi để giữ số đếm). Lịch sử học viên không hiện (`BR-3.1a`), nhật ký Ops hiện kèm nhãn `points off` (`BR-22.1a`). Đóng `OQ-47` | "47 đồng ý theo đề xuất" | PO | 2.42, US3, US22 |
 | DEC144 | 2026-10-12 | 2.42 | **Trường `Test Account` chính là `users.is_operator`.** Technical design lọc đúng theo `C10`. Ghi vào KB `06` §8b. Đóng `OQ-48` | "test account đúng là is_operator" | PO | mọi stage, C10, KB 06 |
+| DEC145 | 2026-10-12 | 1.1 · 1.4 · 1.7 | **Approve BRD v0.8.** Review Product Lead lần 01: NOT-READY, 1 Critical, 8 Major, 2 Minor (`reviews/review-intent-capture-01.md`). Cả 11 finding ghi rủi ro chấp nhận | "Approve (Recommended)" | PO | mọi stage |
+| DEC146 | 2026-10-12 | 2.31 | **Approve Impact Matrix v0.4** gồm §14 campaign và §15 nhật ký Ops. `CF-7` vẫn chờ trả lời ở `OQ-42` của PRD | "Approve (Recommended)" | PO | 2.32, 2.42 |
+| DEC147 | 2026-10-12 | 2.32 | **Approve Solution Options v0.2, chốt option K cho campaign:** tính sẵn 8 tiếng một lần, kết thúc thì đóng băng bằng tác vụ riêng. Đóng `OQ-44` | "Approve (Recommended)" | PO | 2.42, campaign |
+| DEC148 | 2026-10-12 | 2.4 · 2.42 | **Request Changes PRD v0.13.** Review Product Lead lần 01: NOT-READY, 1 Critical, 9 Major, 5 Minor (`reviews/review-prd-generation-01.md`). Sửa R-01, R-02, R-06, R-08, R-09 và các Minor theo quyết định đã có; gom R-03, R-04, R-05, R-07, R-10 thành một đợt câu hỏi; review lại rồi trình lại gate. Lần Request Changes thứ 1 | "Request Changes (Recommended)" | PO | 2.42 |
+| DEC149 | 2026-10-12 | 2.42 | **Lên hạng chỉ tính mốc mới vượt qua, không lên bù** khi đổi bội số, bật thêm tiêu chí, bật lại `Levels`, nâng trần (`BR-10.4a`). Review R-05 | "Chỉ tính mốc mới (Recommended)" | PO | 2.42, US10 |
+| DEC150 | 2026-10-12 | 2.42 | **Điểm nền check-in không giới hạn trên; trần bằng `40` hoặc bằng điểm nền khi lớn hơn** (`BR-5.4`, `BR-8.5a`). Review R-04 | "Không giới hạn, trần theo nền" | PO | 2.42, US5, US8 |
+| DEC151 | 2026-10-12 | 2.42 | **Tắt `Points` thì ẩn điểm với học viên**, như huy hiệu và hạng; sửa `BR-8.2` (`BR-1.8`). Review R-02 | "Ẩn, giống Badges và Levels (Recommended)" | PO | 2.42, US1, US8 |
+| DEC152 | 2026-10-12 | 2.42 | **`Points` hoặc check-in tắt thì chuỗi không chạy; bật lại mở chuỗi mới từ 1** (`BR-5.15`). Review R-06 | "Bật lại thì tính từ 1" | PO | 2.42, US5 |
+| DEC153 | 2026-10-12 | 2.42 | **Hoạt động chỉ gồm Learning Activity** (Text/Ảnh, Video, Quiz trong Activity); Test, Case Study, Storyline không sinh điểm hoạt động. Test nhiều lượt: lượt sau đạt thì có điểm một lần. Review R-07 | "Chỉ Learning Activity (Recommended)" | PO | 2.42, Định nghĩa chỉ số |
+| DEC154 | 2026-10-12 | 2.42 | **Biên thời gian:** tuần bắt đầu thứ Hai · `All time` từ lần bật đầu tiên · UTC+7 mặc định · hạng 1 coi như chưa có chỉ số · trùng thì xếp tên A–Z (`BR-6.16`, `BR-6.4`). Review R-10 | "Theo đề xuất (Recommended)" | PO | 2.42, US6 |
+| DEC155 | 2026-10-12 | 2.42 | **Khối điểm và hạng trên My Learning viết theo đề xuất, design sau** (`US1`). Review R-03 | "Viết đề xuất, design sau (Recommended)" | PO | 2.42, US1 |
+| DEC156 | 2026-10-12 | 2.42 | **Campaign theo design ngày 12/10:** ba bảng `Points` · `Activities` (tuỳ chọn) · `Courses` (luôn có, xem `OQ-49`), bỏ mô tả, giữ nút xuất Excel, bỏ dòng `You` bên Ops. Thay một phần DEC124 | "Theo design, giữ xuất Excel (Recommended)" | PO | 2.42, US19, US20, US21 |
+| DEC157 | 2026-10-12 | 2.4 · 2.42 | **Approve PRD v0.14 kèm ba quyết định.** Review Product Lead lần 02: NOT-READY, 0 Critical, 3 Major mới (R-16, R-17, R-18), 12 Minor; 10 finding lần 01 đã sửa. Ba Major giải bằng DEC158 đến DEC160, Minor sửa trong bản, phần còn lại ghi rủi ro chấp nhận. Đóng `CR-012`, `CR-013` | "Approve kèm 3 quyết định (Recommended)" | PO | mọi stage |
+| DEC158 | 2026-10-12 | 2.42 | **Trao bù huy hiệu khi bật `Badges` hoặc bật lại một loại, không thông báo; số huy hiệu chỉ đếm loại đang bật** (`BR-9.9`, `BR-9.10`). Review R-16 | "Trao bù, không thông báo (Recommended)" | PO | 2.42, US9 |
+| DEC159 | 2026-10-12 | 2.42 | **Dòng lịch sử, thông báo, bảng `Points` của campaign ẩn theo chức năng sinh ra nó** (`BR-1.8`, `BR-3.10`, `BR-19.8`). Review R-17 | "Ẩn theo chức năng (Recommended)" | PO | 2.42, US1, US2, US3, US19 |
+| DEC160 | 2026-10-12 | 2.42 | **Bảng quyền bên Ops; tắt `Gamification` vẫn xem được US12, kết quả campaign, nhật ký** (`BR-15.7`, `BR-15.8`). Review R-18 | "Theo đề xuất (Recommended)" | PO | 2.42, US15 |
 
 ## Change requests
 Phân tích chi tiết từng CR ở `inputs/change-requests.md` (nguyên văn PO, nhận định, điểm re-entry, trả lời của PO).
@@ -165,9 +181,23 @@ Phân tích chi tiết từng CR ở `inputs/change-requests.md` (nguyên văn P
 | CR-009 | Điểm check-in tăng dần theo chuỗi | `inputs/change-requests.md` | Đóng ở v1 |
 | CR-010 | Bỏ trần điểm ngày, làm rõ logic lên hạng | `inputs/change-requests.md` | Đóng ở v1 |
 | CR-011 | Trang cấu hình Ops tự lưu | `inputs/change-requests.md` | Đóng ở v1 |
-| CR-012 | Bảng xếp hạng theo huy hiệu chỉ còn ở All time, thêm bảng Activities | `inputs/change-requests.md` | Mở. Gộp CR-012 vào CR-013 (PO 08/10/2026), chạy lại từ BRD; chờ duyệt lại BRD v0.7, Impact v0.3, Solution v0.2, PRD v0.10 |
-| CR-013 | Campaign trở lại, học viên bỏ khoảng ngày tự do | `inputs/change-requests.md` | Mở. Gộp CR-012 vào CR-013 (PO 08/10/2026), chạy lại từ BRD; chờ duyệt lại BRD v0.7, Impact v0.3, Solution v0.2, PRD v0.10 |
+| CR-012 | Bảng xếp hạng theo huy hiệu chỉ còn ở All time, thêm bảng Activities | `inputs/change-requests.md` | Đóng 12/10/2026, PRD v0.14 duyệt (DEC157). Trước đó: Mở. Gộp CR-012 vào CR-013 (PO 08/10/2026), chạy lại từ BRD; chờ duyệt lại BRD v0.7, Impact v0.3, Solution v0.2, PRD v0.10 |
+| CR-013 | Campaign trở lại, học viên bỏ khoảng ngày tự do | `inputs/change-requests.md` | Đóng 12/10/2026, bốn gate duyệt lại (DEC145 đến DEC147, DEC157). Trước đó: Mở. Gộp CR-012 vào CR-013 (PO 08/10/2026), chạy lại từ BRD; chờ duyệt lại BRD v0.7, Impact v0.3, Solution v0.2, PRD v0.10 |
 
 ## Accepted risks
 | DEC | Finding | Vì sao chấp nhận |
 |---|---|---|
+| DEC157 | prd-generation R-14 (Minor): tiêu đề `## TDD` chưa viết đầy đủ | Giữ theo tên mục của template công ty |
+| DEC157 | prd-generation R-15 (Minor): bảng truy vết chưa có cột BR | Bảng nối phạm vi BRD sang US đã đủ cho bàn giao; truy vết tới BR làm khi chạy `po-tools.py trace` ở intent mới |
+| DEC157 | prd-generation: các mục `[đề xuất]` còn chờ PO (`OQ-43`) và 15 câu hỏi mở | Không chặn bàn giao Unit đầu tiên; Unit Campaign chờ `OQ-42`, `OQ-49`, `OQ-52` |
+| DEC145 | intent-capture R-01 (Critical): BRD không chứa phạm vi CR-008 đến CR-012 | BRD là hồ sơ nội bộ của intent chuyển từ luồng cũ; phạm vi đúng nằm ở PRD. Dọn khi có dịp, không chặn bàn giao |
+| DEC145 | intent-capture R-02 (Major): Chữ cũ kỳ lịch, snapshot, C7 lưu cứng còn trong thân bài | BRD là hồ sơ nội bộ của intent chuyển từ luồng cũ; phạm vi đúng nằm ở PRD. Dọn khi có dịp, không chặn bàn giao |
+| DEC145 | intent-capture R-03 (Major): Problem và Analytics lệch nhau, tầng 1 không có cơ chế chạm tới | BRD là hồ sơ nội bộ của intent chuyển từ luồng cũ; phạm vi đúng nằm ở PRD. Dọn khi có dịp, không chặn bàn giao |
+| DEC145 | intent-capture R-04 (Major): Mục tiêu chưa có cách đo | BRD là hồ sơ nội bộ của intent chuyển từ luồng cũ; phạm vi đúng nằm ở PRD. Dọn khi có dịp, không chặn bàn giao |
+| DEC145 | intent-capture R-05 (Major): Vế số liệu khoảng ngày của O4 và nhu cầu L&D không có mục S | BRD là hồ sơ nội bộ của intent chuyển từ luồng cũ; phạm vi đúng nằm ở PRD. Dọn khi có dịp, không chặn bàn giao |
+| DEC145 | intent-capture R-06 (Major): Công tắc Points, Leaderboard chưa định nghĩa trong BRD | BRD là hồ sơ nội bộ của intent chuyển từ luồng cũ; phạm vi đúng nằm ở PRD. Dọn khi có dịp, không chặn bàn giao |
+| DEC145 | intent-capture R-07 (Major): S25 vào phạm vi không qua CR, §8 chưa đánh giá | BRD là hồ sơ nội bộ của intent chuyển từ luồng cũ; phạm vi đúng nằm ở PRD. Dọn khi có dịp, không chặn bàn giao |
+| DEC145 | intent-capture R-08 (Major): Mã O và US lệch giữa BRD, PRD, intent.md | BRD là hồ sơ nội bộ của intent chuyển từ luồng cũ; phạm vi đúng nằm ở PRD. Dọn khi có dịp, không chặn bàn giao |
+| DEC145 | intent-capture R-09 (Major): Trạng thái câu hỏi mở dừng ở 23/09 | BRD là hồ sơ nội bộ của intent chuyển từ luồng cũ; phạm vi đúng nằm ở PRD. Dọn khi có dịp, không chặn bàn giao |
+| DEC145 | intent-capture R-10 (Minor): Bảng stakeholder thiếu vai quyết định | BRD là hồ sơ nội bộ của intent chuyển từ luồng cũ; phạm vi đúng nằm ở PRD. Dọn khi có dịp, không chặn bàn giao |
+| DEC145 | intent-capture R-11 (Minor): Chưa trả lời câu tenant và tầng theo KB 15 §7 | BRD là hồ sơ nội bộ của intent chuyển từ luồng cũ; phạm vi đúng nằm ở PRD. Dọn khi có dịp, không chặn bàn giao |
