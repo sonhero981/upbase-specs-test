@@ -1,10 +1,10 @@
 ---
 intent: 260923-gamification
 artifact: prd
-version: 0.11
+version: 0.13
 status: review
 approved: 2026-09-23 (v0.2, Gate 4, Approved with Notes)
-note: v0.11 mang CR-009 đến CR-013, design đã chốt và US22 nhật ký ghi nhận bên Ops, chờ PO duyệt lại
+note: v0.13 mang CR-009 đến CR-013, design đã chốt, US22 nhật ký ghi nhận bên Ops và technical design backend, chờ PO duyệt lại
 lark: KeT8dkIStofZ0axlTW5l4S94gre
 lark-title: [PRD] Gamification
 lark-version: 0.8
@@ -18,7 +18,7 @@ migrated-from: .claude/projects/Gamification/docs/prd/prd-gamification-v0.10-202
 | **Epic** | ❓ *link Jira* |
 | **Story** | ❓ *link Jira* |
 | **Related** | `brd-v0.7-20261008.md` · `impact-matrix-v0.3-20261008.md` · `solution-comparison-v0.2-20261008.md` |
-| **Document status** | 🔄 **v0.11 chờ PO review lại** — mang `CR-009` đến `CR-013`, design đã chốt và nhật ký ghi nhận bên Ops. Bản v0.2 đã được PO duyệt 23/09/2026 |
+| **Document status** | 🔄 **v0.13 chờ PO review lại** — mang `CR-009` đến `CR-013`, design đã chốt, nhật ký ghi nhận bên Ops và technical design backend. Bản v0.2 đã được PO duyệt 23/09/2026 |
 | **Document owner** | Bùi Đức Huy (PO) |
 | **Designer** | ❓ *cần điền* |
 | **Tech lead** | ❓ *cần điền* |
@@ -42,6 +42,8 @@ migrated-from: .claude/projects/Gamification/docs/prd/prd-gamification-v0.10-202
 | v0.9 | Bùi Đức Huy | Trang cấu hình Ops **tự lưu, bỏ nút lưu**. Chỉ giữ hai xác nhận dạng popover cạnh công tắc. Tắt `Points` hoặc `Badges` thì tiêu chí lên hạng tương ứng khoá theo. Thay "chặn lưu" bằng "không tắt được tiêu chí và bảng cuối cùng". Bỏ giới hạn trên của số điểm. Bỏ ô chọn múi giờ và nhãn trạng thái — múi giờ lấy theo tenant | `CR-011` | 06/10/2026 |
 | v0.10 | Bùi Đức Huy | **Campaign quay lại** (`US19` đến `US21`): vận hành chọn khoảng thời gian và loại hành động, số điểm theo cấu hình chung, hai bảng điểm và số hoạt động, đóng băng khi kết thúc. Học viên **bỏ bộ chọn khoảng ngày tự do**, chỉ còn khung cố định (`CR-013`).<br>Bảng xếp hạng thành **năm bảng**: thêm `Activities`, `Badges` chỉ còn ở `All time` như `Level`. Câu chữ check-in thay cho "login". Chỉ số đếm không phụ thuộc công tắc `Points`. Xoá `BR-6.14` (`CR-012`) | `CR-012` · `CR-013` | 08/10/2026 |
 | v0.11 | Bùi Đức Huy | Thêm **nhật ký ghi nhận bên Ops** (`US22`): toàn tổ chức, dạng bảng, lọc theo học viên, loại sự kiện, khoảng ngày, chỉ đọc, không xuất file. Bỏ dòng *"kể cả vận hành"* ở Out of scope của `US3`. Dọn ba chỗ còn sót từ `CR-010` và `CR-012` ở `US3` | — | 09/10/2026 |
+| v0.12 | Cuong (Dev) · Bùi Đức Huy | Thêm **technical design backend**. Dựng lại các mục nghiệp vụ của phần giải pháp bị thay mất khi thêm technical design: nguyên tắc nền, cách bắt sự kiện, năm luồng, mười hai ràng buộc `C1` đến `C12`, ba rule nền, định nghĩa chỉ số. Ghi các chỗ technical design còn lệch so với phạm vi hiện tại | — | 12/10/2026 |
+| v0.13 | Bùi Đức Huy | Dòng 0 điểm, sinh ra khi `Points` hoặc một hành động đang tắt, **ẩn với học viên** ở lịch sử ghi nhận và **hiện cho vận hành** ở nhật ký ghi nhận. Ghi rõ tài khoản kiểm thử nhận diện bằng trường `is_operator` | — | 12/10/2026 |
 
 > ✅ **`Approved with Notes` — PO duyệt bản v0.2 ngày 23/09/2026.** Các bản từ v0.3 trở đi mang thay đổi mới, **chờ PO duyệt lại**. Còn **13 câu hỏi mở** ở mục `Vấn đề tồn đọng`. Bốn câu về campaign (`OQ-42` đến `OQ-45`) cần trả lời trước khi bàn giao Unit Campaign, không chặn các Unit khác. `OQ-46` về chỗ để vận hành thấy lần cộng điểm bị lỗi.
 
@@ -195,7 +197,118 @@ Sáu màn đã chốt ngày 01/10/2026. Ảnh gốc nằm trong repo ở `.claud
 
 ## TDD
 
+### Nguyên tắc nền
+
+**Gamification chỉ đọc dữ liệu học tập, không sửa.** Nó ghi ra bản ghi của riêng nó. Đây là điều kiện để giữ nguyên logic hoàn thành Activity hiện tại và để bật/tắt gamification không ảnh hưởng gì tới việc học.
+
+### Cách bắt sự kiện: **tính trong luồng**
+
+Điểm được cộng **ngay trong cùng thao tác** với việc hoàn thành hoạt động, không qua tác vụ nền, không qua hàng đợi. Học viên thấy điểm **tức thì**.
+
+> **`NFR-GAM-01` — bắt buộc.** Lỗi ở gamification **không được làm hỏng thao tác học**. Học viên bấm Hoàn thành thì thao tác đó **phải thành công**, kể cả khi phần cộng điểm gặp lỗi. Phần cộng điểm cũng **không được làm chậm cảm nhận** của thao tác.
+>
+> Hệ quả phải xử lý: lỗi bị chặn lại thì **điểm lần đó mất mà không ai biết** → `OQ-02`.
+
+### Năm luồng
+
+```mermaid
+flowchart TD
+    subgraph TT["NHỊP TỨC THÌ"]
+        A["Học viên hoàn thành<br/>hoạt động · khoá · bài Test"] --> B["Cộng điểm<br/>ghi vào sổ giao dịch"]
+        V["Học viên vào hệ thống<br/>lần đầu trong ngày"] --> B
+        B --> C["Xét huy hiệu"]
+        C --> D["Xét hạng"]
+        D --> E["Thông báo đẩy<br/>nếu đang online"]
+        E --> H["Học viên thấy điểm<br/>NGAY LẬP TỨC"]
+    end
+    subgraph CK["NHỊP 8 TIẾNG"]
+        F["Tác vụ nền đọc<br/>sổ giao dịch"] --> G["Tính bảng xếp hạng<br/>ghi đè kết quả cũ"]
+        G --> I["Thứ hạng đổi ở<br/>lần cập nhật sau"]
+    end
+    B -.->|"nguồn dữ liệu"| F
+```
+
+*Hai nhịp chạy song song: mọi thứ học viên tự làm thì ghi nhận tức thì, riêng bảng xếp hạng tính nền 8 tiếng một lần.*
+
+| # | Luồng | Cách chạy | Nhịp |
+|---|---|---|---|
+| 1 | **Cộng điểm khi hoàn thành hoạt động / khoá / bài Test** | Trong luồng | Tức thì |
+| 2 | **Ghi nhận ngày có mặt (check-in)** | Trong luồng, **lần đầu trong ngày** học viên vào hệ thống | Tức thì |
+| 3 | **Xét huy hiệu và xét hạng** | Sau khi cộng điểm, cùng luồng | Tức thì |
+| 4 | **Tính bảng xếp hạng** | Tác vụ nền, **tính sẵn theo chu kỳ**, hiển thị nhãn *"cập nhật lúc HH:mm"*. Gồm cả campaign đang chạy | Theo chu kỳ |
+| 5 | **Đóng băng campaign** | Tác vụ riêng, chạy khi campaign kết thúc, lọc đúng biên thời gian. **Không đi theo chu kỳ hiển thị** | Một lần mỗi campaign |
+
+> ℹ️ **Điểm hiện ngay nhưng thứ hạng đổi ở lần cập nhật tiếp theo.** Hai nhịp khác nhau — cần nói rõ trên giao diện để học viên không thắc mắc.
+
+### Mười hai ràng buộc bắt buộc
+
+| # | Ràng buộc |
+|---|---|
+| Ràng buộc `C1` — cấu hình gắn `tenant_id`, không đóng cứng trong mã | Cấu hình gắn với **tổ chức**, không đóng cứng |
+| Ràng buộc `C2` — mọi danh mục mở rộng được bằng cấu hình | Mọi danh mục **mở rộng được bằng cấu hình** |
+| Ràng buộc `C3` — lưu từng lần cộng điểm kèm thời điểm | Lưu **từng lần cộng điểm kèm thời điểm**, không chỉ lưu tổng |
+| Ràng buộc `C4` — đổi cấu hình chỉ áp dụng từ thời điểm đổi | Đổi cấu hình điểm → **áp dụng từ thời điểm đổi**, không tính lại quá khứ |
+| Ràng buộc `C5` — chống cộng trùng trong phạm vi một lượt ghi danh | Chống cộng trùng trong phạm vi **một lượt ghi danh**. Chỉ cộng điểm khi bản ghi tiến độ **chuyển trạng thái** sang hoàn thành, tính từ lúc bật |
+| Ràng buộc `C6` — biên khoảng cắt theo múi giờ tổ chức | **Biên kỳ cắt theo múi giờ tổ chức**, không theo giờ máy chủ |
+| Ràng buộc `C7` — một lần cộng điểm thuộc mọi khoảng ngày bao trùm nó | Một lần cộng điểm thuộc **mọi khoảng ngày bao trùm nó**, nên bảng xếp hạng luôn tính từ sổ giao dịch theo khoảng ngày |
+| Ràng buộc `C8` — mọi mốc dùng để xếp hạng phải lưu thời điểm đạt | **Mọi mốc dùng để xếp hạng phải lưu thời điểm đạt** |
+| Ràng buộc `C9` — biên ngày cắt theo múi giờ tổ chức | **"Ngày"** trong check-in cắt theo **múi giờ tổ chức** |
+| Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification | **`Test Account` bị loại khỏi TOÀN BỘ logic gamification**. Trường `Test Account` lưu ở `users.is_operator`, PO xác nhận ngày 12/10 — lọc ngay từ tầng ghi nhận, không ghi rồi lọc sau |
+| Ràng buộc `C11` — kết quả campaign tính đúng theo biên thời gian | Kết quả đóng băng **lọc theo thời điểm cộng điểm hoặc thời điểm hoàn thành**, không theo thời điểm tác vụ chạy. Tác vụ đóng băng chạy trễ vẫn phải ra đúng số |
+| Ràng buộc `C12` — kết quả campaign đã đóng băng giữ nguyên mãi | Học viên bị `Block` hoặc rời tổ chức **sau khi campaign kết thúc** vẫn nằm trong kết quả. Người đã bị `Block` hoặc rời tổ chức **trước lúc kết thúc** thì không có mặt |
+
+#### `C5` nói gì
+
+**Lượt ghi danh** là một lần học viên được thêm vào một lớp chứa khoá học. Mỗi lần thêm vào sinh ra một bản ghi mới. Trong UpLnD, **toàn bộ tiến độ học treo vào bản ghi ghi danh chứ không treo vào con người** — hệ thống lưu *"lượt ghi danh số 1 đã xong bài 3"*, không lưu *"anh A đã học bài 3"*.
+
+`C5` gồm hai lớp chặn độc lập:
+
+| Lớp | Nội dung | Chặn được gì |
+|---|---|---|
+| **Chống cộng trùng** | Mỗi nội dung chỉ trả điểm **một lần trong một lượt ghi danh**. Trả rồi thì đóng dấu, lần sau thấy dấu là bỏ qua | Học viên mở lại bài đã xong để lấy thêm điểm |
+| **Chỉ bắt lúc chuyển trạng thái** | Chỉ cộng khi bản ghi tiến độ **vừa chuyển** từ chưa hoàn thành sang hoàn thành. Không nhìn trạng thái hiện tại | Nội dung đã hoàn thành **trước khi bật** tính năng tự nó không sinh điểm, nên không phải nạp sẵn dấu cho toàn bộ lịch sử học của mọi người |
+
+Dấu sống cùng lượt ghi danh, nên **xoá học viên khỏi lớp rồi thêm lại là lượt mới**: tiến độ về `0`, học lại từ đầu, và điểm được tính lại từ đầu. Chứng chỉ thì không, vì chứng chỉ cấp theo khoá chứ không theo lượt (`BR-13.12`).
+
+> Hệ quả cho Dev: **"số khoá hoàn thành"** dùng để xét huy hiệu, lên hạng và xếp hạng phải đếm **theo lượt hoàn thành**, không đếm từ endpoint chứng chỉ. Học hai lượt thì tính hai lượt nhưng chỉ có một chứng chỉ. Đếm trong lúc nào: xem mục Định nghĩa chỉ số ngay dưới.
+
+### Ba rule nền
+
+| Mã | Nội dung |
+|---|---|
+| `BR-TEST` | Test `Graded Assignment = Yes` → tính khi **đạt Pass Point**. `= No` → tính khi **hoàn thành**. **Quiz · Case Study · Storyline → không tính** |
+| `BR-REGRADE` | Chấm lại chỉ đi một chiều không-đạt → đạt. **Điểm chốt tại lần chấm đầu tiên**, chấm lại không cộng thêm. Không cần cơ chế thu hồi |
+| `BR-SKIP` | **Khoá được đánh dấu bỏ qua thì không tính là hoàn thành** *(viết tổng quát thay vì gọi tên Foundation — tránh đóng cứng logic UpBase)* |
+
+### Định nghĩa chỉ số — viết một lần, ba chỗ dùng lại
+
+Mỗi chỗ **tự tính** — huy hiệu và hạng đếm trọn đời, bảng xếp hạng đếm trong khoảng ngày — nhưng **cái gì được đếm thì phải thống nhất**:
+
+| Chỉ số | Đếm cái gì |
+|---|---|
+| **Điểm tích luỹ** | Tổng mọi lần cộng điểm, không hết hạn |
+| **Số ngày có mặt** | Số ngày riêng biệt học viên vào hệ thống, cắt theo múi giờ tổ chức |
+| **Số hoạt động hoàn thành** | Bản ghi tiến độ chuyển sang hoàn thành, trong phạm vi lượt ghi danh. Đếm theo quy tắc chung bên dưới |
+| **Số bài Test** | Theo `BR-TEST` |
+| **Số khoá hoàn thành** | **Số lượt hoàn thành khoá**, không phải số chứng chỉ. Đếm theo quy tắc chung bên dưới. Học lại một khoá thì tính thêm một lượt (`BR-13.10`), trong khi chứng chỉ không cấp lại — hai con số này khác nhau, xem `BR-13.12`. **Không tính khoá bỏ qua** (`BR-SKIP`) |
+| **Số huy hiệu** | Huy hiệu đã đạt, giữ vĩnh viễn |
+| **Điểm campaign** | Điểm tích luỹ, chỉ lấy các lần cộng có **thời điểm cộng** nằm trong khoảng campaign **và** loại hành động nằm trong danh sách campaign chọn (`US19`) |
+| **Số hoạt động campaign** | Số hoạt động hoàn thành, chỉ lấy các lần hoàn thành nằm trong khoảng campaign (`US19`) |
+
+🔑 **Quy tắc chung cho mọi chỉ số đếm** *(số ngày có mặt · số hoạt động · số bài Test · số khoá)*: đếm **mọi lần xảy ra trong lúc `Gamification` bật**, **không phụ thuộc công tắc `Points` hay công tắc từng hành động** ở `US8`. Không đếm phần xảy ra trước khi bật hoặc trong thời gian tắt hẳn (`BR-14.5`).
+
+> Lý do: nếu đếm từ sổ giao dịch điểm thì tắt `Points` hoặc tắt một hành động sẽ làm bảng `Activities`, bảng `Courses` và tiến độ huy hiệu đứng im, dù học viên vẫn học. Nếu đếm thẳng từ dữ liệu học thì lại tính cả thời gian `Gamification` tắt, trái với `BR-14.5`. Cách lấy dữ liệu do Dev quyết, miễn đúng quy tắc trên.
+
 ## Backend
+
+> ⚠️ **Dev cập nhật lại theo PRD v0.11.** Technical design backend này được viết theo phạm vi trước change request `CR-012`, `CR-013` và trước `US22`. Những chỗ lệch, PO đã chốt, Dev quyết cách làm:
+> - **Học viên không có khoảng ngày tự do** (`BR-6.15`). Nhánh `from/to` tính lúc chọn ở luồng bảng xếp hạng chỉ còn đúng cho màn danh sách học viên bên Ops (`US12`)
+> - **Check-in chỉ tính khi học viên chủ động mở hoặc quay lại UpLMS** (`BR-5.1`). Request nền tự chạy không tính, nên không ghi nhận ở mọi request đã xác thực
+> - **Năm bảng xếp hạng**: thêm `Activities`; `Level` và `Badges` chỉ có ở `All time` (`BR-6.2b`)
+> - **Chỉ số đếm không phụ thuộc công tắc `Points`**, đếm mọi lần xảy ra trong lúc `Gamification` bật (mục Định nghĩa chỉ số ở trên)
+> - **Campaign** (`US19` đến `US21`): thêm thực thể campaign và kết quả đóng băng, tác vụ đóng băng riêng (`C11`, `C12`)
+> - **Nhật ký ghi nhận bên Ops** (`US22`)
+> - **Dòng 0 điểm** khi `Points` hoặc hành động đang tắt: lịch sử phía học viên **không trả** dòng này (`BR-3.1a`), nhật ký bên Ops **có trả** (`BR-22.1a`)
 Hiện tại hệ thống chỉ ghi nhận tiến độ học mà không phản hồi lại cho học viên. Tiến độ Activity/Storyline được ghi ở API `GET course/:class_id/section/:section_id/progress` của app `lms`. Tiến độ Test và case study được ghi khi nộp bài ở `mock-test-service`, và khi chấm tay xong một lượt. Khi học xong, `class_user` chuyển sang `COMPLETED` ngay trong các luồng này. Ngoài ra `event-processor-service` tính lại tiến độ khi vận hành hoặc hệ thống đổi nội dung.
 
 BE cần thêm một module gamification dùng chung, gồm các phần:
@@ -1248,7 +1361,8 @@ Mẫu chung: `You earned **{điểm}** for {hành động}.` Phần trong `{…}
 
 **Business requirement — Business rule**
 
-- `BR-3.1` Lịch sử hiện **mọi lần hệ thống cộng điểm**. Không còn trần điểm ngày nên không còn trường hợp xét mà không được điểm.
+- `BR-3.1` Lịch sử hiện **mọi lần hệ thống cộng điểm lớn hơn 0**.
+- `BR-3.1a` 🔑 **Dòng 0 điểm không hiện với học viên.** Dòng này sinh ra khi `Points` hoặc hành động đó đang tắt: hệ thống vẫn ghi nhận để số hoạt động, số khoá, số bài Test tiếp tục được đếm (mục Định nghĩa chỉ số), nhưng không có điểm. Hiện ra chỉ gây nản, cùng lý do `CR-010` đã bỏ sự kiện *không được điểm*. Vận hành vẫn thấy dòng này ở nhật ký ghi nhận (`US22`). PO chốt ngày 12/10.
 - `BR-3.3` Mỗi dòng nêu **nguồn cụ thể**, không chỉ loại hành động. Học viên phải đối chiếu được với việc mình đã làm.
 - `BR-3.4` Sắp xếp theo thời điểm, mới nhất trước.
 - `BR-3.5` Lịch sử **không sửa và không xoá được**, kể cả bởi vận hành.
@@ -1265,7 +1379,7 @@ Mẫu chung: `You earned **{điểm}** for {hành động}.` Phần trong `{…}
 | Học viên | Khoá ngoại tới `users` | Có | | Mới |
 | Loại hành động | Danh mục | Có | Một trong các hành động khai ở `US9` | Mới |
 | Nội dung nguồn | Khoá ngoại | Không | Hoạt động, khoá, hoặc bài Test. Rỗng với hành động check-in | Mới |
-| Số điểm | Số nguyên | Có | `>= 1` | Mới |
+| Số điểm | Số nguyên | Có | `>= 0` | Mới. `0` khi `Points` hoặc hành động đó đang tắt — không hiện với học viên (`BR-3.1a`) |
 | `tenant_id` | Khoá ngoại | Có | | `C1`. Bảng này là nơi rò rỉ gây hậu quả nặng nhất |
 
 > Đây là **sổ giao dịch điểm**, bảng nền của gần như mọi thứ trong tính năng: lịch sử ở US này, xếp hạng theo kỳ (`C7`), tiêu chí phụ khi đồng hạng (`S22`), và kiểm tra luật chống cày.
@@ -2781,12 +2895,14 @@ Từ danh sách học viên ở `US12`, bấm tên một người thì mở nh�
 | Qua bài Test | `Passed test {tên bài Test} in {tên khoá}` |
 | Đạt huy hiệu | `Unlocked {tên huy hiệu} · {mốc} {đơn vị}` |
 | Lên hạng | `Reached Level {n}` |
+| Dòng 0 điểm | Chuỗi như hành động tương ứng, thêm ` · points off` ở cuối, ví dụ `Completed activity {tên hoạt động} in {tên khoá} · points off` |
 
 > Viết ngắn, không thành câu như phía học viên, vì vận hành quét cột chứ không đọc từng dòng. `{đơn vị}` giống `US3`: `check-in days` · `activities` · `passed tests` · `completed courses`.
 
 **Business requirement — Business rule**
 
 - `BR-22.1` Nhật ký có **đúng ba loại sự kiện như phía học viên** (`US3`): nhận điểm · đạt huy hiệu · lên hạng. Cùng nguồn dữ liệu, cùng số điểm đã ghi. Vận hành và học viên nhìn cùng một sự thật.
+- `BR-22.1a` 🔑 **Khác học viên ở một chỗ: dòng 0 điểm vẫn hiện.** Khi học viên hỏi *"sao tuần đó tôi không có điểm"*, vận hành nhìn là thấy lý do: hành động đang tắt. Cột `Points` ghi `0`. PO chốt ngày 12/10.
 - `BR-22.2` 🔑 **Hiện đầy đủ cả khi `Visibility in UpLMS` đang tắt.** Giai đoạn chạy ngầm là lúc vận hành cần nhật ký nhất.
 - `BR-22.3` **Chỉ đọc.** Vận hành không sửa, không xoá, không cộng bù điểm thủ công, theo `A12` và `BR-3.5`.
 - `BR-22.4` Phạm vi **toàn tổ chức**. Tài khoản `Test Account` không có dòng nào, theo `C10`.
@@ -2840,6 +2956,8 @@ Danh sách tải theo trang. Dữ liệu là của **cả tổ chức** và **gi
 | **OQ-44** | **Cách tính bảng campaign:** tính sẵn 8 tiếng một lần và đóng băng bằng tác vụ riêng. Đề xuất ở `solution-comparison-v0.2` §10, chờ PO duyệt | PO + Dev | `US19` · `US21` |
 | **OQ-45** | **Design cho campaign** và nhật ký ghi nhận bên Ops, cùng cập nhật design bảng xếp hạng: thêm tab `Activities`, bỏ bộ chọn khoảng ngày tự do, thêm lối vào campaign, thêm `Show activities` bên Ops | PO | `US6` · `US11` · `US19` đến `US22` |
 | **OQ-46** | **Vận hành thấy lần cộng điểm bị lỗi ở đâu?** `BR-13.8` chốt *"ghi lại chỗ lỗi để vận hành thấy và xử lý"*, nhưng chưa có màn nào hiện chúng. PO chốt ngày 09/10 không hiện ở nhật ký ghi nhận (`US22`) | PO | `US13` |
+| ~~OQ-47~~ | ✅ **Đã chốt 12/10: dòng 0 điểm ẩn với học viên, hiện cho vận hành.** Xem `BR-3.1a`, `BR-22.1a` | PO | — |
+| ~~OQ-48~~ | ✅ **Đã chốt 12/10: trường `Test Account` chính là `users.is_operator`.** Technical design lọc đúng. Xem `C10` | PO | — |
 | ~~OQ-20~~ | ✅ **Đã chốt 23/09: hạ ngưỡng thì quét lại cấp bù, nâng ngưỡng thì gỡ huy hiệu.** Xem `BR-4.6`, `BR-4.7` | PO | — |
 | ~~OQ-22~~ | ✅ **Đã chốt 23/09: không báo khi gỡ huy hiệu.** Sau `CR-008` thì tình huống này không còn phát sinh — mốc huy hiệu khoá sau khi tạo nên không có thao tác gỡ, và lịch sử cũng không có sự kiện `Badge removed`. Xem `BR-1.4` | PO | — |
 | ~~OQ-23~~ | ✅ **Đã chốt 23/09: hạng KHÔNG tụt.** Đổi ngưỡng hạng chỉ áp từ thời điểm đổi trở đi. Khác với huy hiệu, cố ý. Xem `BR-1.3` | PO | — |

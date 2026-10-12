@@ -145,6 +145,9 @@ Nhật ký quyết định của intent. Chuyển từ `archive/v1/project-decis
 | DEC139 | 2026-10-09 | 2.42 | **Lọc theo loại sự kiện và khoảng ngày, không xuất file** | "Lọc, không xuất (Recommended)" | PO | 2.42, US22 |
 | DEC140 | 2026-10-09 | 2.42 | **Dùng chung quyền `Xem danh sách học viên và hạng`**, không thêm quyền mới | "Dùng chung quyền xem danh sách (Recommended)" | PO | 2.42, US15, US22 |
 | DEC141 | 2026-10-09 | 2.42 | **Nhật ký chỉ có ba loại sự kiện như học viên, không hiện lần cộng điểm bị lỗi.** Chỗ để vận hành thấy lần lỗi theo `BR-13.8` vẫn còn trống, ghi `OQ-46` | "Không, chỉ ba loại như học viên" | PO | 2.42, US13, US22 |
+| DEC142 | 2026-10-12 | 2.42 | **Dựng lại các mục nghiệp vụ của phần giải pháp trong PRD** bị thay khi Dev thêm technical design backend (PR #3): nguyên tắc nền, cách bắt sự kiện, năm luồng, ràng buộc `C1` đến `C12`, ba rule nền, định nghĩa chỉ số. **Không dựng lại** mục Database và API cũ, vì PRD không giữ hai mục này và chúng nay thuộc technical design. Giữ nguyên technical design, thêm lưu ý các chỗ lệch so với PRD v0.11; thêm `OQ-47` dòng 0 điểm, `OQ-48` cờ tài khoản kiểm thử | "dựng lại phần bổ sung" | PO | 2.42, technical design |
+| DEC143 | 2026-10-12 | 2.42 | **Dòng 0 điểm ẩn với học viên, hiện cho vận hành.** Dòng này sinh ra khi `Points` hoặc hành động đang tắt (technical design backend vẫn ghi để giữ số đếm). Lịch sử học viên không hiện (`BR-3.1a`), nhật ký Ops hiện kèm nhãn `points off` (`BR-22.1a`). Đóng `OQ-47` | "47 đồng ý theo đề xuất" | PO | 2.42, US3, US22 |
+| DEC144 | 2026-10-12 | 2.42 | **Trường `Test Account` chính là `users.is_operator`.** Technical design lọc đúng theo `C10`. Ghi vào KB `06` §8b. Đóng `OQ-48` | "test account đúng là is_operator" | PO | mọi stage, C10, KB 06 |
 
 ## Change requests
 Phân tích chi tiết từng CR ở `inputs/change-requests.md` (nguyên văn PO, nhận định, điểm re-entry, trả lời của PO).

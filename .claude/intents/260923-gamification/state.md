@@ -28,13 +28,13 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - [?] 2.32 solution-options · v1: inception/solution-options/solution-options.md v0.2, chờ Gate 3 duyệt lại (§10 cách tính campaign, OQ-44). v0.1 duyệt 2026-09-23
 - [?] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story, thêm US19 đến US21 campaign và US22 nhật ký Ops, chờ duyệt lại
 - [S] 2.41 hld-brief · stage chưa tồn tại khi chạy v1; chạy bổ sung sau khi bốn gate duyệt lại, trước khi bàn giao Dev
-- [?] 2.42 prd-generation · v1: inception/prd/prd.md v0.11, chờ duyệt lại (CR-009 đến CR-013, design, US22). v0.2 Gate 4 duyệt 2026-09-23. Lark đang v0.8
+- [?] 2.42 prd-generation · v1: inception/prd/prd.md v0.13, chờ duyệt lại (CR-009 đến CR-013, design, US22, technical design backend). v0.2 Gate 4 duyệt 2026-09-23. Lark đang v0.8
 
 ## Current
 | | |
 |---|---|
 | Stage | CR-013 (gộp CR-012): chạy lại từ BRD, bốn gate chờ PO duyệt lại |
-| Next action | PO duyệt lại theo thứ tự: brd v0.8 → impact-matrix v0.4 → solution-options v0.2 → prd v0.11; trả lời OQ-42 đến OQ-46 ở mục Vấn đề tồn đọng của PRD. Sau Approve: chụp archive, publish lại PRD lên Lark bằng overwrite, chèn lại ảnh design theo order.txt |
+| Next action | PO duyệt lại theo thứ tự: brd v0.8 → impact-matrix v0.4 → solution-options v0.2 → prd v0.13; trả lời OQ-42 đến OQ-46 ở mục Vấn đề tồn đọng của PRD. Sau Approve: chụp archive, publish lại PRD lên Lark bằng overwrite, chèn lại ảnh design theo order.txt |
 | Blocking questions open | 5, OQ-42 đến OQ-46 trong PRD |
 | Open CR | CR-013 (gộp CR-012) |
 | Parked | no |
@@ -49,7 +49,7 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 | solution-options | v0.2 | review | v0.1: 2026-09-23 | — |
 | initiative-brief | — | không có, v1 dùng BRD | — | — |
 | hld-brief | — | chưa chạy | — | — |
-| prd | v0.11 | review | v0.2: 2026-09-23 | v0.8 · KeT8dkIStofZ0axlTW5l4S94gre, publish 2026-10-05 |
+| prd | v0.13 | review | v0.2: 2026-09-23 | v0.8 · KeT8dkIStofZ0axlTW5l4S94gre, publish 2026-10-05 |
 
 ## Log
 - 2026-09-23 created ở luồng v1, cỡ L. Gate 1, 2, 3, 4 trong ngày; CR-001 đến CR-008
@@ -59,3 +59,5 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-08 CR-012 và CR-013 gộp, chạy lại từ BRD: BRD v0.7, Impact v0.3, Solution v0.2, PRD v0.10 chờ duyệt lại
 - 2026-10-09 chuyển sang luồng v2, giữ nội dung và họ mã v1; bản cũ của BRD, Impact, Solution vào archive
 - 2026-10-09 PO thêm nhật ký ghi nhận bên Ops (S25 · US22), stage đang chờ duyệt nên sửa thẳng: BRD v0.8, Impact v0.4, PRD v0.11. Thêm OQ-46
+- 2026-10-12 Dev thêm technical design backend (PR #3) và thay mất phần nghiệp vụ của giải pháp; PO yêu cầu dựng lại. PRD v0.12, thêm OQ-47, OQ-48. Technical design viết theo phạm vi trước CR-012, CR-013, US22, đã ghi lưu ý cho Dev
+- 2026-10-12 PO đóng OQ-47 (dòng 0 điểm ẩn với học viên, hiện cho vận hành) và OQ-48 (Test Account = users.is_operator, ghi vào KB 06). PRD v0.13

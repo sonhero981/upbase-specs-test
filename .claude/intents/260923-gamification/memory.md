@@ -7,6 +7,7 @@ Nhật ký quan sát trong lúc làm. AI ghi, PO đọc tại gate. Mỗi dòng:
 - 2026-10-09T14:00 [migration] BRD, Impact Matrix, Solution đều có khối "mục không còn hiệu lực" ở đầu file từ v1. Giữ nguyên; khi PO duyệt lại nên cân nhắc dọn các mục đó thay vì giữ ghi chú chồng ghi chú.
 
 ## Deviations
+- 2026-10-12T09:00 [2.42] Technical design backend của Dev (PR #3) thay cả khối nghiệp vụ của mục giải pháp thay vì thêm vào cạnh; dựng lại nguyên văn bản v0.11 dưới `## TDD`, trước `## Backend`. Nên thống nhất với Dev: technical design thêm mục mới, không sửa mục PO viết.
 - 2026-10-09T18:00 [2.42] Thêm US22 mà không mở CR; các stage bị chạm (1.4, 2.31, 2.4, 2.42) đều đang `[?]` nên theo change-request §1 là sửa trong stage đang mở. Ghi DEC136 đến DEC141 để giữ dấu vết vì nó đảo một dòng Out of scope cũ của US3.
 - 2026-10-09T14:00 [migration] Giữ họ mã v1 và tên Unit, vì PRD v0.8 đã publish và Report-Phase-1 tham chiếu `US1`, `US7`.
 

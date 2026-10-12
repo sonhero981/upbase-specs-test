@@ -159,6 +159,7 @@ Học viên chỉ **xem**, không có thao tác đăng xuất từ xa. Phát hi�
 |---|---|
 | **Mục đích** | **L&D và QA dùng để vào kiểm tra khoá học sau khi soạn** — giao diện đã ổn chưa, nội dung có sai gì không |
 | **Bản chất** | Là **tài khoản học viên thật**, có tiến độ học thật, xuất hiện trong mọi truy vấn học viên thông thường |
+| **Lưu ở đâu** | Trường **`users.is_operator`**. PO xác nhận ngày 12/10/2026, khi đối chiếu technical design backend của Gamification. Tên trên giao diện là `Test Account`, tên trong dữ liệu là `is_operator` |
 
 ### Quy tắc — rất dễ bỏ sót khi phân tích
 
@@ -181,7 +182,7 @@ Học viên chỉ **xem**, không có thao tác đăng xuất từ xa. Phát hi�
 | Q1 | **Danh sách Role đầy đủ là gì?** UG chỉ nói "quyền truy cập nhóm chức năng X" — chưa có ma trận Role × Chức năng. Đây là khoảng trống lớn nhất của KB. |
 | Q2 | Hệ thống nhân sự UpBase là hệ nào (tên, cơ chế đồng bộ, tần suất)? |
 | Q3 | Đồng bộ HRIS là một chiều hay hai chiều? Username sửa trên UpLMS có bị ghi đè ở lần sync sau không? |
-| ~~Q4~~ | ~~`Test Account` là trường của Student — nằm ở đâu, ai set?~~ ✅ **Đã trả lời phần mục đích và quy tắc — xem §8b.** Còn lại: nằm ở màn nào, ai set? |
+| ~~Q4~~ | ~~`Test Account` là trường của Student — nằm ở đâu, ai set?~~ ✅ **Đã trả lời phần mục đích và quy tắc — xem §8b.** Lưu ở `users.is_operator` (PO 12/10/2026). Còn lại: bật ở màn nào, ai bật? |
 | Q5 | `Type User` trong file export có những giá trị nào? |
 | Q6 | Staff có bị ảnh hưởng bởi HRIS không, hay hoàn toàn quản lý thủ công? |
 | Q7 | Trang Staff có mục "Tạo tài khoản" và "Chỉnh sửa" nhưng **nội dung để trống** trong UG — quy trình thực tế thế nào? |
