@@ -18,14 +18,14 @@ status: draft
 |---|---|---|---|---|
 
 ## Khái niệm và thuật ngữ
-| Khái niệm của ta | <SP1> gọi là | <SP2> | <SP3> | Nên dùng |
+| Khái niệm của sản phẩm | <SP1> gọi là | <SP2> | <SP3> | Nên dùng |
 |---|---|---|---|---|
 
-## Điều đáng mượn
+## Điểm nên áp dụng
 | # | Điều gì | Từ đâu | Vì sao hợp với sản phẩm |
 |---|---|---|---|
 
-## Điều không mượn
+## Điểm không áp dụng
 | # | Điều gì | Vì sao |
 |---|---|---|
 

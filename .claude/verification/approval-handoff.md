@@ -4,5 +4,5 @@
 - [ ] **[BLOCK]** Phase check Ideation đạt: mọi objective có hạng mục, mọi PU truy về objective, Out không mâu thuẫn In, OQ chặn đã đóng. Ghi `verification/phase-check-ideation.md`
 - [ ] Mục quyết định đã chốt lấy từ `decisions.md`, đủ mã DEC
 - [ ] Rủi ro và giả định lớn có mức và cách giảm hoặc người xác nhận
-- [ ] Khuyến nghị go, no-go có điều kiện và nêu cái gì sẽ đổi kết luận
+- [ ] Khuyến nghị go, no-go có điều kiện và nêu yếu tố nào sẽ làm đổi kết luận
 - [ ] Gate có đủ ba lựa chọn: Approve, Request Changes, Reject Initiative

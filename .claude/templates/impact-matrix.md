@@ -14,7 +14,7 @@ status: draft
 Bản phân tích nội bộ. Kết quả chảy vào `stories.md`, HLD Brief mục 6, và PRD mục Data Field, Out of scope.
 
 ## 1. Summary
-<Ba đến năm dòng: chạm vào đâu, chỗ nào nguy hiểm nhất, conflict nào phải quyết.>
+<Ba đến năm dòng: ảnh hưởng tới đâu, vùng nào rủi ro nhất, conflict nào phải quyết.>
 
 | | Số lượng |
 |---|---|

@@ -11,7 +11,7 @@ status: draft
 
 ## 2. Functional requirements
 ### Nhóm A: <tên khả năng>
-| ID | Yêu cầu, cái gì phải đúng | Ưu tiên | Existing, New, Changed | Mã KB liên quan | Nguồn |
+| ID | Yêu cầu, điều phải đúng | Ưu tiên | Existing, New, Changed | Mã KB liên quan | Nguồn |
 |---|---|---|---|---|---|
 | FR1 | | Must | New | | [Q1] |
 | FR1.1 | | | | | |

@@ -41,7 +41,7 @@ Gợi ý, không phải kịch bản. Bỏ câu đã có đáp án trong inputs.
 5. Stakeholder: ai quan tâm điều gì, ai quyết phạm vi và ưu tiên, ai chỉ cần được báo.
 6. Bản đầu tiên không làm gì. Hỏi về sản phẩm, không hỏi lại profile.
 7. Portal nào, theo danh sách portal trong `domain.md` mục 1. Hằng số nào phải cấu hình theo tenant.
-Mỗi câu có lựa chọn "Chưa xác định" khi PO có thể chưa biết. Không bịa stakeholder.
+Mỗi câu có lựa chọn "Chưa xác định" khi PO có thể chưa biết. Không tự thêm stakeholder.
 
 ## Generate
 `intent-statement.md` theo template. Thẻ nguồn ở mọi khối: `[desc]`, `[Q3]`, `[KB-<file> §<mục>]`, `[assumption]`. Stakeholder map có cột Nguồn. Mục Assumptions & Open Questions bắt buộc.
@@ -52,6 +52,6 @@ Checklist của stage. Reviewer product-lead ở L.
 
 ## Gate
 - Profile L: gate riêng. Trình: vấn đề một đoạn, objective kèm cách đo, stakeholder, ràng buộc, assumption đáng chú ý, OQ còn chặn.
-- Profile M: không hỏi gate ở đây. Đánh dấu 1.1 `[?]`, chạy tiếp 1.4 trong cùng lượt, gate chung ở cuối 1.4 theo `gate-protocol.md`.
+- Profile M: không mở gate tại stage này. Đánh dấu 1.1 `[?]`, chạy tiếp 1.4 trong cùng lượt, gate chung ở cuối 1.4 theo `gate-protocol.md`.
 
 Stage kế: 1.2 nếu PO muốn so với sản phẩm khác, không thì 1.4.

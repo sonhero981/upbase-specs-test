@@ -33,8 +33,8 @@ Xem sản phẩm khác giải bài toán này thế nào, để đặt tên khá
 3. Quyết định nào phụ thuộc vào kết quả này. Không có thì ghi `[S]` và không chạy.
 
 ## Generate
-`competitive-analysis.md`: mỗi sản phẩm một mục ngắn; bảng so sánh theo khía cạnh đã chọn; thuật ngữ nên dùng; điều đáng mượn và vì sao hợp với sản phẩm; điều không mượn và vì sao; đối chiếu với yêu cầu hiện tại, chỗ nào làm đổi phạm vi hay rule; nguồn kèm link và ngày đọc. Trích đúng, không suy diễn tính năng từ tên menu.
+`competitive-analysis.md`: mỗi sản phẩm một mục ngắn; bảng so sánh theo khía cạnh đã chọn; thuật ngữ nên dùng; điểm nên áp dụng và lý do phù hợp với sản phẩm; điểm không áp dụng và lý do; đối chiếu với yêu cầu hiện tại, điểm làm thay đổi phạm vi hay rule; nguồn kèm link và ngày đọc. Trích đúng, không suy diễn tính năng từ tên menu.
 Thu thập: nguồn nào chặn tải tự động thì dùng cách ghi trong `domain.md` mục 4 phần 1.2. Bài đã lấy lưu nguyên văn vào `inputs/` để tra lại.
 
 ## Gate
-Trình bảng so sánh và danh sách điều đáng mượn. Stage kế: 1.4.
+Trình bảng so sánh và danh sách điểm nên áp dụng. Stage kế: 1.4.

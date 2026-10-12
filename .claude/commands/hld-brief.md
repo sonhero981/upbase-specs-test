@@ -27,7 +27,7 @@ Chạy theo `.claude/protocol/stage-protocol.md`.
 Một tài liệu tối đa ba trang để họp với lead Design, Dev, QA; để họ ghi định hướng của mình; và để chốt tầng cao trước khi viết PRD chi tiết. Gate của stage là Alignment gate, cần sign-off ba lead. Nguồn sự thật là file trong repo cho tới khi ký; Lark chỉ nhận bản cuối. Plugin stage; AWS có Initiative Brief ở Ideation và mob agent ở 2.4, không có bản đồng thuận nhiều vai.
 
 ## Load
-Mọi artifact trên. `decisions.md`: Accepted risks và conflict đã quyết. OQ còn mở ở mọi stage là ứng viên cho mục 7.
+Mọi artifact trên. `stories.md`: thẻ từng US, nguồn cho cột Ý chính ở mục 5; lead đọc thẻ trước khi ghi mục của mình. `decisions.md`: Accepted risks và conflict đã quyết. OQ còn mở ở mọi stage là ứng viên cho mục 7.
 
 ## Ask
 1. Lead Design, Dev, QA là ai. Điền `intent.md` nếu trống.
@@ -36,7 +36,7 @@ Mọi artifact trên. `decisions.md`: Accepted risks và conflict đã quyết. 
 4. Điều PO muốn nhấn mạnh, hoặc chưa muốn đưa vào.
 
 ## Generate
-`hld-brief.md` theo template, mười hai mục. AI viết mục 1 đến 7 và 11 từ artifact đã duyệt, không viết nội dung mới. Mục 6 có thêm bảng rủi ro đã chấp nhận, giả định lớn chưa kiểm chứng và finding review còn treo, lấy từ Accepted risks trong `decisions.md`, mục Assumptions & Open Questions của các artifact và file review mới nhất; tối đa bảy dòng, mỗi dòng ghi điều kiện kèm theo, vì rủi ro đã chấp nhận là điều kiện đi kèm quyết định chứ không phải việc để sau. Mục 8, 9, 10 để trống cho lead, nhưng đầu mỗi mục AI ghi tối đa năm dòng in nghiêng "Điểm cần lưu ý cho <vai>" lấy từ Impact Matrix, constraints, corner checklist và coverage gap; đó là gợi ý để lead trả lời, không phải nội dung thay lead. Mục 12 điền tên và trạng thái "Chưa xem". Giới hạn 1.500 từ, kiểm bằng đếm từ. Văn phong bàn giao: không thẻ nguồn, không từ quy trình, mã kèm nội dung, không viết tắt. Mục 4 có thể một sơ đồ Mermaid kèm một dòng chú thích.
+`hld-brief.md` theo template, mười hai mục. AI viết mục 1 đến 7 và 11 từ artifact đã duyệt, không viết nội dung mới. Mục 6 có thêm bảng rủi ro đã chấp nhận, giả định lớn chưa kiểm chứng và finding review còn treo, lấy từ Accepted risks trong `decisions.md`, mục Assumptions & Open Questions của các artifact và file review mới nhất; tối đa bảy dòng, mỗi dòng ghi điều kiện kèm theo, vì rủi ro đã chấp nhận là điều kiện đi kèm quyết định chứ không phải việc để sau. Mục 5 có cột Ý chính một dòng mỗi US, rút từ thẻ US trong `stories.md`. Mục 8, 9, 10 giữ nguyên khung của template cho lead điền, AI không điền khung; đầu mỗi mục AI ghi tối đa năm dòng in nghiêng "Điểm cần lưu ý cho <vai>" lấy từ Impact Matrix, constraints, corner checklist và coverage gap; đó là gợi ý để lead trả lời, không phải nội dung thay lead. Mục 12 điền tên và trạng thái "Chưa xem". Giới hạn 1.500 từ, kiểm bằng đếm từ. Văn phong bàn giao: không thẻ nguồn, không từ quy trình, mã kèm nội dung, không viết tắt. Mục 4 có thể một sơ đồ Mermaid kèm một dòng chú thích.
 
 ## Giao cho lead, sau Verify và trước gate
 1. Chụp bản nháp để sau này so diff: `python3 .claude/scripts/po-tools.py archive .claude/intents/<slug> hld-brief inception/hld-brief/hld-brief.md --label draft`.
@@ -49,9 +49,9 @@ Quy ước cho lead làm trên repo:
 - Lead không mở được repo: gửi nội dung cho PO. PO dán nguyên văn, mở đầu bằng "(ghi theo <tên>, <ngày>)". Sign-off của lead đó ghi theo tin nhắn xác nhận, lưu nguyên văn vào `decisions.md`.
 
 ## Khi lead ghi xong, hoặc sau họp
-PO gọi `/po <slug>`. Stage đang `[-]` nên tiếp tục ở đây:
+PO gọi `/po <slug>`. Stage đang `[-]` nên tiếp tục tại bước này:
 1. So file hiện tại với bản chụp ở `archive/`, trình diff theo mục.
-2. Mục 8, 9, 10 giữ nguyên văn của lead. Lead sửa mục 1 đến 7 hoặc 11 thì nêu riêng, PO quyết nhận hay trả lại; nhận thì ghi DEC kèm tên lead.
+2. Mục 8, 9, 10 giữ nguyên văn của lead. Khung còn ý bỏ trống, nhất là mục 9, thì báo PO hỏi lead; AI không tự điền, vì 2.42 viết chi tiết bám theo các ý này. Lead sửa mục 1 đến 7 hoặc 11 thì nêu riêng, PO quyết nhận hay trả lại; nhận thì ghi DEC kèm tên lead.
 3. Định hướng của lead mâu thuẫn với artifact đã duyệt, ví dụ Tech lead cắt một US, QA thêm điều kiện làm đổi rule: đi qua `/change-request`, không sửa tay.
 4. Mỗi quyết định trong họp hoặc trong mục 7 đã có đáp án: một DEC, người quyết là lead tương ứng, nguyên văn nếu có.
 5. Mục 7 còn dòng chưa quyết: giữ, đưa vào thông điệp gate.

@@ -25,7 +25,7 @@ Hộp chọn hoặc chat, ghi nguyên văn:
 
 ## 2. Dựng khung
 - Xoá `.claude/knowledge/domain/` trừ `templates/` nếu PO giữ; tạo lại thư mục
-- Viết `domain.md` theo sáu mục của `DOMAIN-SETUP.md` mục 5, điền từ câu trả lời; chỗ chưa biết ghi `❓PO`, không bịa. Mục 3 bản đồ KB liệt kê các file sẽ viết với tên và câu hỏi mỗi file trả lời, chưa có nội dung
+- Viết `domain.md` theo sáu mục của `DOMAIN-SETUP.md` mục 5, điền từ câu trả lời; điểm chưa biết ghi `❓PO`, không tự điền. Mục 3 bản đồ KB liệt kê các file sẽ viết với tên và câu hỏi mỗi file trả lời, chưa có nội dung
 - Viết `00-index.md` khung: bảng nguồn từ câu 4 với cột đối chiếu lần cuối để trống, danh sách file KB dự kiến, mục Trạng thái tính năng trống, mục câu hỏi để sau trống
 - Tạo từng file KB trong bản đồ với frontmatter `status: chưa viết`, một dòng mô tả câu hỏi file sẽ trả lời
 - Chép `.claude/knowledge/product/corner-checklist-aws.md` thành `corner-checklist.md`, thêm đầu file dòng "Chưa viết lại cho <sản phẩm>, xem DOMAIN-SETUP.md mục 6"

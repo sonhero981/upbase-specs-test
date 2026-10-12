@@ -33,7 +33,7 @@ So sánh các hướng giải trước khi chốt, trên nền Impact Matrix đ�
 Ép option từ góc khác nhau để tránh "hai option là một": đổi quy trình không cần code; cấu hình; mở rộng cái có sẵn; làm mới; cắt phạm vi.
 
 ## Generate
-`solution-options.md` theo template: tình huống; bảng option kèm nguồn gốc (PO, AI, cách hệ đang làm); so sánh cùng bộ bảy tiêu chí: business fit, tác động người dùng và quy trình, tác động hệ thống và dữ liệu lấy từ Impact Matrix, effort tương đối, risk, dependency, nợ đóng cứng tenant; pros và cons; Recommendation gồm option, điều kiện, risk phải chấp nhận, cái gì sẽ đổi kết luận. Effort và risk ghi Cao, Trung bình, Thấp kèm lý do, không bịa số giờ.
+`solution-options.md` theo template: tình huống; bảng option kèm nguồn gốc (PO, AI, cách hệ đang làm); so sánh cùng bộ bảy tiêu chí: business fit, tác động người dùng và quy trình, tác động hệ thống và dữ liệu lấy từ Impact Matrix, effort tương đối, risk, dependency, nợ đóng cứng tenant; pros và cons; Recommendation gồm option, điều kiện, risk phải chấp nhận, yếu tố nào sẽ làm đổi kết luận. Effort và risk ghi Cao, Trung bình, Thấp kèm lý do, không ước lượng số giờ.
 
 ## Gate
 Trình: nhận xét định hướng của PO nếu có; bảng so sánh; recommendation. Approve nghĩa là chọn option: ghi DEC với option, lý do, trade-off chấp nhận. Stage kế: 2.4.

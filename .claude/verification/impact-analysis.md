@@ -2,7 +2,7 @@
 
 ## Related Features Map
 - [ ] **[BLOCK]** PO đã chốt bản đồ: đủ, sót, không liên quan. `❓PO` đã xử lý, không trôi vào matrix
-- [ ] Field, màn Existing được nhận diện ở đây, không bị coi là mới ở stage sau
+- [ ] Field, màn Existing được nhận diện ở stage này, không bị coi là mới ở stage sau
 
 ## Nguồn
 - [ ] KB theo bản đồ trong `domain.md` đã tra: module bị chạm, data model, sự kiện, API surface, định hướng

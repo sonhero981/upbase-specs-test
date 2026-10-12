@@ -15,9 +15,11 @@
 - [ ] Mỗi US đủ sáu mục. Conner case để trống
 - [ ] Bảng UI đúng dạng A hoặc B, cột Yêu cầu đủ định dạng, placeholder, options, mặc định, disable, tooltip, validate, hành vi
 - [ ] BR mã `BR<US>.<n>`, không trùng. Rule chạm tính năng có sẵn dẫn mã KB
-- [ ] **[BLOCK]** Field hiện có ghi là hiện có. Không bịa field
+- [ ] **[BLOCK]** Field hiện có ghi là hiện có. Không tự thêm field
 - [ ] Hằng số ghi cứng hay cấu hình
 - [ ] Sự kiện, mail bị chạm đối chiếu file sự kiện trong KB
+- [ ] **[BLOCK]** M, L: Scenario, AC, Data Field, NFR của từng US dẫn được về mục 4, 8, 9, 10 của HLD Brief. Chỗ brief chưa nói có `[đề xuất]` và OQ gắn tên lead. Không còn chỗ mâu thuẫn brief chưa xử lý
+- [ ] PRD không quy định phần mục 9 ghi "Dev tự quyết ở detailed design"
 
 ## Truy vết và review
 - [ ] **[BLOCK]** Traceability: không GAP, không ORPHAN. `verification/phase-check-inception.md` đạt

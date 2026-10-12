@@ -1,16 +1,16 @@
 # Glossary
 
-Thuật ngữ và họ mã của po-workflow, chuẩn theo AWS AI-DLC Workflows v2.10, file `docs/guide/glossary.md` của repo `awslabs/aidlc-workflows`. Phần repo thêm ngoài AWS đóng gói thành plugin `po-workflow`, theo đúng cách AWS cho phép thêm stage. Áp cho intent trong `.claude/intents/`. Dự án cũ trong `.claude/projects/` giữ thuật ngữ cũ tới khi xong.
+Thuật ngữ và họ mã của PO-Workflow, theo AWS AI-DLC Workflows v2.10, file `docs/guide/glossary.md` của repo `awslabs/aidlc-workflows`. Phần PO-Workflow thêm ngoài AWS đóng gói thành plugin `po-workflow`, theo cách AWS cho phép thêm stage. Ba intent chuyển từ luồng cũ giữ họ mã cũ trong tài liệu của chúng.
 
 ## Khung
-| Thuật ngữ | Nghĩa ở đây | Nguồn |
+| Thuật ngữ | Nghĩa trong PO-Workflow | Nguồn |
 |---|---|---|
-| AI-DLC | AI-Driven Development Life Cycle, phương pháp của AWS. Repo này theo phase Ideation và phần Inception do Product Agent dẫn | AWS |
+| AI-DLC | AI-Driven Development Life Cycle, phương pháp của AWS. PO-Workflow theo phase Ideation và phần Inception do Product Agent dẫn | AWS |
 | Space | Toàn bộ repo, một team. Mỗi domain một space, xem DOMAIN-SETUP.md | AWS |
 | Intent | Một yêu cầu đi trọn vòng phân tích, có thư mục riêng | AWS. Thay "project" |
 | Phase | Ideation, Inception. Construction và Operation ngoài phạm vi | AWS |
-| Stage | Một bước có artifact và approval gate riêng, đánh số theo AWS: `1.1`, `2.3`. Stage repo thêm mang số thập phân `2.31`, `2.32`, `2.41`, `2.42`, là số gợi ý thứ tự theo quy ước plugin của AWS, không đánh lại số stage gốc | AWS |
-| Plugin stage | Stage repo thêm, gói trong plugin `po-workflow`: 2.31, 2.32, 2.41, 2.42. Ghi `plugin: po-workflow` trong metadata | AWS gọi gói stage thêm vào là plugin. Ta không có bước compose, nên đây là quy ước ghi nhãn |
+| Stage | Một bước có artifact và approval gate riêng, đánh số theo AWS: `1.1`, `2.3`. Stage PO-Workflow thêm mang số thập phân `2.31`, `2.32`, `2.41`, `2.42`, là số gợi ý thứ tự theo quy ước plugin của AWS, không đánh lại số stage gốc | AWS |
+| Plugin stage | Stage PO-Workflow thêm, gói trong plugin `po-workflow`: 2.31, 2.32, 2.41, 2.42. Ghi `plugin: po-workflow` trong metadata | AWS gọi gói stage thêm vào là plugin. PO-Workflow không có bước compose, nên đây là quy ước ghi nhãn |
 | Workflow profile | `S`, `M`, `L`. Tập stage, công tắc nghi thức, depth | AWS gọi là scope trong engine. Không dùng chữ Scope vì đã dùng cho phạm vi tính năng |
 | Depth | Minimal, Standard, Comprehensive. Mức chi tiết artifact | AWS |
 | Approval gate | Điểm duyệt cuối mỗi stage | AWS. Thay "Gate 1 đến 4" và "điểm dừng" |
@@ -25,16 +25,17 @@ Thuật ngữ và họ mã của po-workflow, chuẩn theo AWS AI-DLC Workflows 
 | Memory | `memory.md` của intent, `.claude/memory/team.md` của repo | AWS |
 | Learnings | Vòng học tại gate | AWS |
 | Knowledge | Domain pack ở `.claude/knowledge/domain/` và kiến thức vai PO ở `.claude/knowledge/product/` | AWS |
-| Engine | Phần không phụ thuộc sản phẩm: protocol, command, template chung, checklist, agent, script | Repo |
-| Domain pack | Mọi thứ riêng của sản phẩm: manifest `domain.md`, KB, corner checklist, template công ty. Đổi sản phẩm là thay thư mục này, engine giữ nguyên | Repo |
+| Engine | Phần không phụ thuộc sản phẩm: protocol, command, template chung, checklist, agent, script | PO-Workflow |
+| Domain pack | Toàn bộ phần riêng của sản phẩm: manifest `domain.md`, KB, corner checklist, template công ty. Đổi sản phẩm là thay thư mục này, engine giữ nguyên | PO-Workflow |
 | Live source · Pinned record · Last verified | Nguồn sống, bản chốt, ngày đối chiếu của KB | Repo |
 | Product Lead review | Review độc lập, READY hoặc NOT-READY | AWS |
 | Verification checklist | Checklist tự kiểm của stage, mục blocking | AWS gọi là compartment 2. Không gọi là Sensor, Sensor là script |
 | Archive | Bản chụp tại gate và trước CR, không sửa | AWS |
 | Initiative Brief | Tài liệu chốt hướng một trang, stage 1.7 | AWS. Thay BRD |
 | HLD Brief | Tài liệu đồng thuận liên team, stage 2.41 | Plugin `po-workflow` |
-| Mob, Mob Elaboration | Không dùng làm tên stage hay artifact. Hai nghĩa ở AWS: bài blog AI-DLC (Raja SP, 07/2025) gọi Mob Elaboration là cả team người cùng kiểm câu hỏi và đề xuất của AI trong Inception; bản Workflows v2.10 gọi mob là chế độ nhiều agent ở stage 2.4 User Stories, chỉ bật ở scope `enterprise`. Ở đây 2.41 HLD Brief & Alignment là bản bằng người thật của nghĩa trong bài blog; mob agent của v2.10 không chạy | AWS, hai nguồn |
+| Mob, Mob Elaboration | Không dùng làm tên stage hay artifact. Hai nghĩa ở AWS: bài blog AI-DLC (Raja SP, 07/2025) gọi Mob Elaboration là cả team người cùng kiểm câu hỏi và đề xuất của AI trong Inception; bản Workflows v2.10 gọi mob là chế độ nhiều agent ở stage 2.4 User Stories, chỉ bật ở scope `enterprise`. Trong PO-Workflow, 2.41 HLD Brief & Alignment là bản do người thật thực hiện theo nghĩa trong bài blog; mob agent của v2.10 không chạy | AWS, hai nguồn |
 | Proto-Unit `PU` | Hạng mục trong intent backlog, sinh ở stage 1.4, ứng viên để Dev chia Unit thật ở stage 2.7. Ở 2.4 mỗi US gắn vào một Proto-Unit | AWS, stage 1.4 Scope Definition. Thay Unit, tránh trùng `U1` Dev sinh ở 2.7 |
+| Thẻ US | Mô tả chín mục của một user story ở 2.4: vai và mục tiêu, bối cảnh, luồng chính, nhánh đáng kể, rule đã biết, dữ liệu và vùng chạm, ngoài phạm vi, phụ thuộc, chưa rõ. Đủ cho lead viết HLD, chưa có acceptance criteria | Repo, theo Definition of Ready của AWS |
 | Impact Analysis · Solution Options · Hidden · KB · CR · PRD · US · BR | Giữ nguyên | |
 
 ## Stage
@@ -90,10 +91,10 @@ Quy tắc: mã đã cấp không đánh lại. Trích mã thì kèm nội dung. 
 | `[uỷ quyền]` | PO để AI chọn |
 | `[desc]` `[Q3]` `[KB-04 §3]` `[DEC5]` `[assumption]` | Thẻ nguồn trong artifact nội bộ |
 
-## Dùng sai hay gặp
+## Cách dùng sai thường gặp
 - "Scope" chỉ phạm vi tính năng In, Out, Potential. Cỡ yêu cầu là "profile".
 - "Unit" là của Dev ở stage 2.7. PO viết "Proto-Unit", sinh ở 1.4.
-- "Extension" là chữ trong nguyên lý 8 của spec 2.0. Tên cơ chế là "plugin"; stage ta thêm là "plugin stage".
+- "Extension" là chữ trong nguyên lý 8 của spec 2.0. Tên cơ chế là "plugin"; stage PO-Workflow thêm là "plugin stage".
 - "Sensor" là script kiểm tự động. Checklist tự kiểm gọi là "verification checklist".
 - "Bolt", "swarm", "walking skeleton" không dùng.
 - "Gate 1" đến "Gate 4" là tên cũ. Gọi theo stage: "gate của 2.3".

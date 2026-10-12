@@ -94,7 +94,7 @@ status: draft
 
 ## Technical Direction
 
-*Chép từ HLD Brief mục 9 do Tech lead viết, cộng ràng buộc nghiệp vụ mà cách làm nào cũng phải thoả. Ghi cái gì phải đúng, để Dev quyết làm thế nào. Không sequence diagram, không cấu trúc bảng, không thuật toán, không thư viện.*
+*Chép từ HLD Brief mục 9 do Tech lead viết, cộng ràng buộc nghiệp vụ mà cách làm nào cũng phải thoả. Ghi điều phải đúng, để Dev quyết làm thế nào. Không sequence diagram, không cấu trúc bảng, không thuật toán, không thư viện.*
 
 ## Data to Retain
 

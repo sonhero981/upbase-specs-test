@@ -8,7 +8,7 @@
 
 ## FR, NFR
 - [ ] **[BLOCK]** Mỗi FR kiểm chứng được, có mã ổn định, ưu tiên, cờ Existing, New, Changed, nguồn
-- [ ] **[BLOCK]** Không có FR mô tả bảng, endpoint, thuật toán. FR nói cái gì phải đúng
+- [ ] **[BLOCK]** Không có FR mô tả bảng, endpoint, thuật toán. FR mô tả điều phải đúng
 - [ ] NFR chỉ ghi khi đo được
 - [ ] Constraints ghi hằng số cứng hay cấu hình
 

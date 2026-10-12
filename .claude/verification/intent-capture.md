@@ -6,7 +6,7 @@
 - [ ] **[BLOCK]** Giải pháp người yêu cầu nghĩ sẵn nằm ở mục riêng, nhãn Recommendation
 - [ ] Current workaround mô tả đủ để hiểu vì sao cần đổi. Không bỏ trống
 - [ ] Mỗi objective là kết quả, có ít nhất một cách đo từ dữ liệu hệ thống sẽ có
-- [ ] Stakeholder map không có vai bịa. Mỗi dòng có nguồn
+- [ ] Stakeholder map không có vai tự thêm. Mỗi dòng có nguồn
 - [ ] Product boundary ghi portal và ràng buộc tenant
 
 ## Nguồn

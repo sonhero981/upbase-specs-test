@@ -1,4 +1,4 @@
-# PO Workflow
+# PO-Workflow
 
 **Mục đích:** nhận yêu cầu, phân tích, sinh **PRD theo template công ty** làm đầu vào cho Design, Dev, QA, và viết **User Guide** sau khi phát triển xong. Repo này chỉ phân tích yêu cầu và viết tài liệu. Engine không phụ thuộc sản phẩm; sản phẩm nằm trong domain pack.
 
@@ -48,9 +48,9 @@ Nguồn sống là nguồn còn bản gốc ở ngoài, như schema DB, API spec
 
 - Trả lời **tiếng Việt**; tên stage, mã, thuật ngữ theo `GLOSSARY.md`.
 - **Thẳng vào trọng tâm trước**, giải thích sau. **Phản biện khi có lỗ hổng thật.** **Hỏi lại khi thiếu thông tin**, không đoán bừa.
-- Tách rõ `Fact` / `Assumption` / `Open Question` / `Recommendation`. **Không bịa.** Thiếu nhẹ thì `Assumption`; thiếu ảnh hưởng phạm vi, rule, dữ liệu, luồng thì `Open Question`; ô không suy được thì `❓PO`.
+- Tách rõ `Fact` / `Assumption` / `Open Question` / `Recommendation`. **Không tự điền dữ kiện.** Thiếu nhẹ thì `Assumption`; thiếu ảnh hưởng phạm vi, rule, dữ liệu, luồng thì `Open Question`; ô không suy được thì `❓PO`.
 - Không tự chốt quyết định thay PO; chỉ gợi ý dưới nhãn `Recommendation`. Lời duyệt và câu trả lời của PO ghi **nguyên văn**.
-- **Không thiết kế kỹ thuật chi tiết.** Ghi *cái gì phải đúng*, để Dev quyết *làm thế nào*. Không hỏi câu kỹ thuật cho Dev; chỉ hỏi câu mà đáp án làm đổi phạm vi hoặc business rule. Cần biết một cơ chế kỹ thuật có tồn tại không thì hỏi PO; có endpoint không có nghĩa là có tính năng.
+- **Không thiết kế kỹ thuật chi tiết.** Ghi *điều phải đúng*, để Dev quyết *cách làm*. Không hỏi câu kỹ thuật cho Dev; chỉ hỏi câu mà đáp án làm đổi phạm vi hoặc business rule. Cần biết một cơ chế kỹ thuật có tồn tại không thì hỏi PO; có endpoint không có nghĩa là có tính năng.
 - **Tài liệu bàn giao** (Initiative Brief, HLD Brief, PRD, User Guide): không dấu vết quy trình, không viết tắt, mã nào cũng kèm nội dung, mã đứng cạnh nhau có dấu `·`. Trạng thái duyệt ghi ai duyệt, không ghi gate mấy. Giữ lại `❓PO` và bảng lịch sử phiên bản viết bằng tiếng người.
 - **Trích mã trong trao đổi thì kèm nội dung** một dòng. Một intent cỡ L sinh hàng trăm mã, bắt người đọc mở file tra là lỗi của người viết.
 

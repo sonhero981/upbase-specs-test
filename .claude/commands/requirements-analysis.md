@@ -48,7 +48,7 @@ Không hỏi kỹ thuật cho Dev. Depth Minimal ở S: chỉ câu chặn.
 5. Assumptions & Open Questions: `OQ1`... có cờ Chặn và owner.
 6. Out of scope.
 7. Sources read kèm Last verified, và mục "chưa tra được".
-FR viết **cái gì phải đúng**, không viết làm thế nào. Không có FR mô tả bảng, endpoint, hay thuật toán.
+FR viết **điều phải đúng**, không viết cách làm. Không có FR mô tả bảng, endpoint, hay thuật toán.
 
 ## Verify
 Checklist của stage. Quét góc nội bộ: mỗi góc áp dụng phải thành FR, assumption có lý do, hoặc out of scope. Reviewer product-lead ở M, L.

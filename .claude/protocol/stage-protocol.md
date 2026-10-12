@@ -78,7 +78,7 @@ Execution `conditional` và điều kiện không xảy ra: ghi `[S]` kèm lý d
 Phát hiện dấu hiệu vượt profile theo `profiles.md`: nói ngay, và tại gate gần nhất đưa lựa chọn **Add [stage]**. Không tự chạy tiếp đường cũ.
 
 ## Luôn đúng
-- Tách `Fact`, `Assumption`, `Open Question`, `Recommendation`. Không bịa. Thiếu nhẹ ghi Assumption. Thiếu làm đổi phạm vi, rule, dữ liệu, luồng thì ghi Open Question và dừng.
+- Tách `Fact`, `Assumption`, `Open Question`, `Recommendation`. Không tự điền dữ kiện. Thiếu nhẹ ghi Assumption. Thiếu làm đổi phạm vi, rule, dữ liệu, luồng thì ghi Open Question và dừng.
 - Ô không suy được: `❓PO`. Suy luận: `[suy ra]`.
 - Không chốt thay PO. Không thiết kế kỹ thuật chi tiết. Không hỏi kỹ thuật cho Dev. Chỉ hỏi câu mà đáp án làm đổi phạm vi hoặc business rule.
 - KB là bản chụp. Chạm vùng nào thì đọc lại nguồn vùng đó. Quá một tháng kể từ *Last verified* thì đọc lại trước. Vùng KB chưa phủ: `❓PO`, không kết luận.

@@ -10,7 +10,7 @@ Cách hỏi và ghi câu trả lời của PO. Bám theo AWS AI-DLC `stage-proto
 Intent: <slug> · Cách trả lời: <Guide me | Edit file | Chat> · Đã trả lời: 2/6
 
 ## Q1. <Câu hỏi, một câu, tự giải thích>
-Vì sao hỏi: <một dòng: cái gì phụ thuộc vào câu trả lời>
+Vì sao hỏi: <một dòng: điều gì phụ thuộc vào câu trả lời>
 A. <lựa chọn>  [đề xuất, theo KB-<file> §<mục>]
 B. <lựa chọn>
 C. <lựa chọn>

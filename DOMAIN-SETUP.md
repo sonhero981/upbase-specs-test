@@ -19,11 +19,11 @@ Engine là phần không phụ thuộc sản phẩm: protocol, command, template
 
 Hai thứ nằm ngoài thư mục đó nhưng thuộc về domain, phải làm mới khi đổi: `.claude/memory/team.md` chứa bài học của team hiện tại, và `.claude/intents/` chứa việc của sản phẩm hiện tại.
 
-Command và checklist không ghi cứng dữ kiện sản phẩm; chúng trỏ về `domain.md` theo mục. Nên đổi domain không đụng tới engine. Lệnh `/new-domain` làm phần khung của các bước dưới đây; phần cần người vẫn là người.
+Command và checklist không ghi cứng dữ kiện sản phẩm; chúng trỏ về `domain.md` theo mục. Vì vậy đổi domain không ảnh hưởng tới engine. Lệnh `/new-domain` dựng phần khung của các bước dưới đây; phần cần con người quyết vẫn do người làm.
 
 ## 2. Tạo space mới
 
-Mỗi domain một repo, AWS gọi là một space. Không dựng domain mới đè lên repo đang có intent.
+Mỗi domain một repo, AWS gọi là một space. Không dựng domain mới trên repo đang có intent.
 
 1. Clone repo này sang thư mục mới, đặt tên theo sản phẩm, ví dụ `po-workflow-crm`
 2. Xoá mọi thư mục trong `.claude/intents/`, giữ `.gitkeep`
@@ -33,7 +33,7 @@ Mỗi domain một repo, AWS gọi là một space. Không dựng domain mới �
 
 ## 3. Thu nguồn sống
 
-Quy trình đứng được là nhờ KB bám vào nguồn thật. Trước khi viết KB, liệt kê nguồn và phân loại:
+Quy trình chỉ vận hành được khi KB bám vào nguồn thật. Trước khi viết KB, liệt kê nguồn và phân loại:
 
 | Loại nguồn | Ví dụ | Xếp vào |
 |---|---|---|
@@ -65,9 +65,9 @@ Cách làm với AI, từng file một:
 
 1. Đưa AI một nguồn và nói viết file KB nào. AI chắt lọc, mỗi rule một mã
 2. Mã rule: `BR-<MODULE>-NN` khi rule có trong tài liệu chính thức, `KB-<MODULE>-NN` khi AI trích từ văn xuôi và chưa ai duyệt. Hai loại này khác nhau về độ tin cậy, không gộp
-3. Chỗ nguồn không nói thì ghi `❓PO`, không để AI điền cho đủ
+3. Điểm nguồn không đề cập thì ghi `❓PO`, không để AI tự điền
 4. PO duyệt từng file; duyệt xong ghi ngày đối chiếu vào `00-index.md`
-5. Ghi rõ vùng KB chưa phủ ngay trong `api-surface`, để Impact Analysis không kết luận "không ảnh hưởng" ở vùng mù
+5. Ghi rõ vùng KB chưa phủ ngay trong `api-surface`, để Impact Analysis không kết luận "không ảnh hưởng" ở vùng chưa có thông tin
 
 Để hình dung khối lượng: KB của UpLnD có 16 file, khoảng 27.700 từ, chắt từ 57 page user guide, 85 bảng và 708 operation, và vẫn chỉ phủ khoảng một nửa hệ thống.
 
@@ -82,11 +82,11 @@ Cách làm với AI, từng file một:
 5. Ví dụ dùng trong engine, để command giữ chung
 6. Thành phần của pack
 
-Mục 4 là phần quan trọng nhất: mỗi command đọc đúng mục của stage mình, nên thiếu mục nào thì stage đó chạy mù.
+Mục 4 là phần quan trọng nhất: mỗi command đọc đúng mục của stage mình, nên thiếu mục nào thì stage đó chạy thiếu dữ kiện.
 
 ## 6. Viết lại corner checklist
 
-Chép `.claude/knowledge/product/corner-checklist-aws.md` thành `domain/corner-checklist.md`, giữ phần "Cách dùng", thay toàn bộ "Điều kiện theo bề mặt" bằng góc của domain mới. Góc tốt là góc từng gây lỗi thật hoặc chắc chắn sẽ gặp: trạng thái kết thúc, người dùng bị khoá, dữ liệu cũ trước ngày bật tính năng, thao tác hàng loạt, hai người làm cùng lúc. Stage 2.3 và 2.42 quét theo file này.
+Chép `.claude/knowledge/product/corner-checklist-aws.md` thành `domain/corner-checklist.md`, giữ phần "Cách dùng", thay toàn bộ "Điều kiện theo bề mặt" bằng góc của domain mới. Corner case nên đưa vào là loại từng gây lỗi thật hoặc chắc chắn sẽ gặp: trạng thái kết thúc, người dùng bị khoá, dữ liệu cũ trước ngày bật tính năng, thao tác hàng loạt, hai người làm cùng lúc. Stage 2.3 và 2.42 quét theo file này.
 
 ## 7. Template của công ty
 
@@ -96,7 +96,7 @@ Template User Guide: theo cấu trúc tài liệu người dùng mà công ty đ
 
 ## 8. Chạy thử
 
-1. `/new-intent` một yêu cầu nhỏ, profile S, đi tới PRD. Mục tiêu là xem command tra đúng KB và manifest, không phải ra PRD đẹp
+1. `/new-intent` một yêu cầu nhỏ, profile S, đi tới PRD. Mục tiêu là kiểm tra command tra đúng KB và manifest, chưa cần PRD hoàn chỉnh
 2. `python3 .claude/scripts/po-tools.py status` phải báo khớp
 3. Một intent profile M có HLD Brief, để kiểm vòng ký của lead
 4. Bài học đầu tiên ghi vào `team.md` qua câu hỏi tại gate
@@ -109,5 +109,5 @@ Template User Guide: theo cấu trúc tài liệu người dùng mà công ty đ
 - [ ] `corner-checklist.md` viết theo domain, không còn ví dụ của UpLnD
 - [ ] `templates/prd.md` đúng tên mục của chủ template công ty
 - [ ] `team.md` trống, `intents/` trống
-- [ ] Không còn chữ của sản phẩm cũ trong engine: `grep -rn "UpLnD\|UpLMS\|UpBase" .claude/commands .claude/protocol .claude/templates .claude/verification .claude/agents CLAUDE.md` trả về rỗng
+- [ ] Không còn tên sản phẩm cũ trong engine: `grep -rn "UpLnD\|UpLMS\|UpBase" .claude/commands .claude/protocol .claude/templates .claude/verification .claude/agents CLAUDE.md` trả về rỗng
 - [ ] Chạy thử một intent S tới PRD, `po-tools.py status` khớp
