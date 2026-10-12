@@ -195,206 +195,347 @@ Sáu màn đã chốt ngày 01/10/2026. Ảnh gốc nằm trong repo ở `.claud
 
 ## TDD
 
-### Nguyên tắc nền
+## Backend
+Hiện tại hệ thống chỉ ghi nhận tiến độ học mà không phản hồi lại cho học viên. Tiến độ Activity/Storyline được ghi ở API `GET course/:class_id/section/:section_id/progress` của app `lms`. Tiến độ Test và case study được ghi khi nộp bài ở `mock-test-service`, và khi chấm tay xong một lượt. Khi học xong, `class_user` chuyển sang `COMPLETED` ngay trong các luồng này. Ngoài ra `event-processor-service` tính lại tiến độ khi vận hành hoặc hệ thống đổi nội dung.
 
-**Gamification chỉ đọc dữ liệu học tập, không sửa.** Nó ghi ra bản ghi của riêng nó. Đây là điều kiện để giữ nguyên logic hoàn thành Activity hiện tại và để bật/tắt gamification không ảnh hưởng gì tới việc học.
+BE cần thêm một module gamification dùng chung, gồm các phần:
 
-### Cách bắt sự kiện: **tính trong luồng**
+- **Ghi nhận và cộng điểm:** mỗi khi học viên hoàn thành hoạt động, khoá, bài Test hoặc check-in trong ngày thì ghi nhận và cộng điểm.
+- **Huy hiệu và hạng:** xét ngay sau mỗi lần cộng điểm.
+- **Thông báo realtime:** báo cho học viên đang online.
+- **Bảng xếp hạng:** tính sẵn theo lịch.
+- **API:** cho học viên ở app `lms` và cho vận hành ở app `ops`, gồm cấu hình theo tenant và danh sách học viên.
 
-Điểm được cộng **ngay trong cùng thao tác** với việc hoàn thành hoạt động, không qua tác vụ nền, không qua hàng đợi. Học viên thấy điểm **tức thì**.
+Các luồng học hiện có chỉ được gắn thêm hook. Logic tính tiến độ giữ nguyên. App `lms` hiện chưa có WebSocket gateway nên phải dựng mới.
 
-> **`NFR-GAM-01` — bắt buộc.** Lỗi ở gamification **không được làm hỏng thao tác học**. Học viên bấm Hoàn thành thì thao tác đó **phải thành công**, kể cả khi phần cộng điểm gặp lỗi. Phần cộng điểm cũng **không được làm chậm cảm nhận** của thao tác.
->
-> Hệ quả phải xử lý: lỗi bị chặn lại thì **điểm lần đó mất mà không ai biết** → `OQ-02`.
+## Mục tiêu
 
-### Năm luồng
+- Có một engine dùng chung trong `libs/modules/src/lib/gamification`, mọi app gọi cùng một logic để ghi nhận, cộng điểm, xét huy hiệu và xét hạng.
+- Chỉ hook vào các luồng do học viên tạo ra, không sửa logic tính tiến độ hiện có.
+- Gamification lỗi không làm hỏng thao tác học của học viên.
 
-```mermaid
-flowchart TD
-    subgraph TT["NHỊP TỨC THÌ"]
-        A["Học viên hoàn thành<br/>hoạt động · khoá · bài Test"] --> B["Cộng điểm<br/>ghi vào sổ giao dịch"]
-        V["Học viên vào hệ thống<br/>lần đầu trong ngày"] --> B
-        B --> C["Xét huy hiệu"]
-        C --> D["Xét hạng"]
-        D --> E["Thông báo đẩy<br/>nếu đang online"]
-        E --> H["Học viên thấy điểm<br/>NGAY LẬP TỨC"]
-    end
-    subgraph CK["NHỊP 8 TIẾNG"]
-        F["Tác vụ nền đọc<br/>sổ giao dịch"] --> G["Tính bảng xếp hạng<br/>ghi đè kết quả cũ"]
-        G --> I["Thứ hạng đổi ở<br/>lần cập nhật sau"]
-    end
-    B -.->|"nguồn dữ liệu"| F
-```
+## Luồng xử lý
 
-*Hai nhịp chạy song song: mọi thứ học viên tự làm thì ghi nhận tức thì, riêng bảng xếp hạng tính nền 8 tiếng một lần.*
-
-| # | Luồng | Cách chạy | Nhịp |
-|---|---|---|---|
-| 1 | **Cộng điểm khi hoàn thành hoạt động / khoá / bài Test** | Trong luồng | Tức thì |
-| 2 | **Ghi nhận ngày có mặt (check-in)** | Trong luồng, **lần đầu trong ngày** học viên vào hệ thống | Tức thì |
-| 3 | **Xét huy hiệu và xét hạng** | Sau khi cộng điểm, cùng luồng | Tức thì |
-| 4 | **Tính bảng xếp hạng** | Tác vụ nền, **tính sẵn theo chu kỳ**, hiển thị nhãn *"cập nhật lúc HH:mm"*. Gồm cả campaign đang chạy | Theo chu kỳ |
-| 5 | **Đóng băng campaign** | Tác vụ riêng, chạy khi campaign kết thúc, lọc đúng biên thời gian. **Không đi theo chu kỳ hiển thị** | Một lần mỗi campaign |
-
-> ℹ️ **Điểm hiện ngay nhưng thứ hạng đổi ở lần cập nhật tiếp theo.** Hai nhịp khác nhau — cần nói rõ trên giao diện để học viên không thắc mắc.
-
-### Mười hai ràng buộc bắt buộc
-
-| # | Ràng buộc |
-|---|---|
-| Ràng buộc `C1` — cấu hình gắn `tenant_id`, không đóng cứng trong mã | Cấu hình gắn với **tổ chức**, không đóng cứng |
-| Ràng buộc `C2` — mọi danh mục mở rộng được bằng cấu hình | Mọi danh mục **mở rộng được bằng cấu hình** |
-| Ràng buộc `C3` — lưu từng lần cộng điểm kèm thời điểm | Lưu **từng lần cộng điểm kèm thời điểm**, không chỉ lưu tổng |
-| Ràng buộc `C4` — đổi cấu hình chỉ áp dụng từ thời điểm đổi | Đổi cấu hình điểm → **áp dụng từ thời điểm đổi**, không tính lại quá khứ |
-| Ràng buộc `C5` — chống cộng trùng trong phạm vi một lượt ghi danh | Chống cộng trùng trong phạm vi **một lượt ghi danh**. Chỉ cộng điểm khi bản ghi tiến độ **chuyển trạng thái** sang hoàn thành, tính từ lúc bật |
-| Ràng buộc `C6` — biên khoảng cắt theo múi giờ tổ chức | **Biên kỳ cắt theo múi giờ tổ chức**, không theo giờ máy chủ |
-| Ràng buộc `C7` — một lần cộng điểm thuộc mọi khoảng ngày bao trùm nó | Một lần cộng điểm thuộc **mọi khoảng ngày bao trùm nó**, nên bảng xếp hạng luôn tính từ sổ giao dịch theo khoảng ngày |
-| Ràng buộc `C8` — mọi mốc dùng để xếp hạng phải lưu thời điểm đạt | **Mọi mốc dùng để xếp hạng phải lưu thời điểm đạt** |
-| Ràng buộc `C9` — biên ngày cắt theo múi giờ tổ chức | **"Ngày"** trong check-in cắt theo **múi giờ tổ chức** |
-| Ràng buộc `C10` — `Test Account` bị loại khỏi toàn bộ logic gamification | **`Test Account` bị loại khỏi TOÀN BỘ logic gamification** — lọc ngay từ tầng ghi nhận, không ghi rồi lọc sau |
-| Ràng buộc `C11` — kết quả campaign tính đúng theo biên thời gian | Kết quả đóng băng **lọc theo thời điểm cộng điểm hoặc thời điểm hoàn thành**, không theo thời điểm tác vụ chạy. Tác vụ đóng băng chạy trễ vẫn phải ra đúng số |
-| Ràng buộc `C12` — kết quả campaign đã đóng băng giữ nguyên mãi | Học viên bị `Block` hoặc rời tổ chức **sau khi campaign kết thúc** vẫn nằm trong kết quả. Người đã bị `Block` hoặc rời tổ chức **trước lúc kết thúc** thì không có mặt |
-
-#### `C5` nói gì
-
-**Lượt ghi danh** là một lần học viên được thêm vào một lớp chứa khoá học. Mỗi lần thêm vào sinh ra một bản ghi mới. Trong UpLnD, **toàn bộ tiến độ học treo vào bản ghi ghi danh chứ không treo vào con người** — hệ thống lưu *"lượt ghi danh số 1 đã xong bài 3"*, không lưu *"anh A đã học bài 3"*.
-
-`C5` gồm hai lớp chặn độc lập:
-
-| Lớp | Nội dung | Chặn được gì |
-|---|---|---|
-| **Chống cộng trùng** | Mỗi nội dung chỉ trả điểm **một lần trong một lượt ghi danh**. Trả rồi thì đóng dấu, lần sau thấy dấu là bỏ qua | Học viên mở lại bài đã xong để lấy thêm điểm |
-| **Chỉ bắt lúc chuyển trạng thái** | Chỉ cộng khi bản ghi tiến độ **vừa chuyển** từ chưa hoàn thành sang hoàn thành. Không nhìn trạng thái hiện tại | Nội dung đã hoàn thành **trước khi bật** tính năng tự nó không sinh điểm, nên không phải nạp sẵn dấu cho toàn bộ lịch sử học của mọi người |
-
-Dấu sống cùng lượt ghi danh, nên **xoá học viên khỏi lớp rồi thêm lại là lượt mới**: tiến độ về `0`, học lại từ đầu, và điểm được tính lại từ đầu. Chứng chỉ thì không, vì chứng chỉ cấp theo khoá chứ không theo lượt (`BR-13.12`).
-
-> Hệ quả cho Dev: **"số khoá hoàn thành"** dùng để xét huy hiệu, lên hạng và xếp hạng phải đếm **theo lượt hoàn thành**, không đếm từ endpoint chứng chỉ. Học hai lượt thì tính hai lượt nhưng chỉ có một chứng chỉ. Đếm trong lúc nào: xem mục Định nghĩa chỉ số ngay dưới.
-
-### Ba rule nền
-
-| Mã | Nội dung |
-|---|---|
-| `BR-TEST` | Test `Graded Assignment = Yes` → tính khi **đạt Pass Point**. `= No` → tính khi **hoàn thành**. **Quiz · Case Study · Storyline → không tính** |
-| `BR-REGRADE` | Chấm lại chỉ đi một chiều không-đạt → đạt. **Điểm chốt tại lần chấm đầu tiên**, chấm lại không cộng thêm. Không cần cơ chế thu hồi |
-| `BR-SKIP` | **Khoá được đánh dấu bỏ qua thì không tính là hoàn thành** *(viết tổng quát thay vì gọi tên Foundation — tránh đóng cứng logic UpBase)* |
-
-### Định nghĩa chỉ số — viết một lần, ba chỗ dùng lại
-
-Mỗi chỗ **tự tính** — huy hiệu và hạng đếm trọn đời, bảng xếp hạng đếm trong khoảng ngày — nhưng **cái gì được đếm thì phải thống nhất**:
-
-| Chỉ số | Đếm cái gì |
-|---|---|
-| **Điểm tích luỹ** | Tổng mọi lần cộng điểm, không hết hạn |
-| **Số ngày có mặt** | Số ngày riêng biệt học viên vào hệ thống, cắt theo múi giờ tổ chức |
-| **Số hoạt động hoàn thành** | Bản ghi tiến độ chuyển sang hoàn thành, trong phạm vi lượt ghi danh. Đếm theo quy tắc chung bên dưới |
-| **Số bài Test** | Theo `BR-TEST` |
-| **Số khoá hoàn thành** | **Số lượt hoàn thành khoá**, không phải số chứng chỉ. Đếm theo quy tắc chung bên dưới. Học lại một khoá thì tính thêm một lượt (`BR-13.10`), trong khi chứng chỉ không cấp lại — hai con số này khác nhau, xem `BR-13.12`. **Không tính khoá bỏ qua** (`BR-SKIP`) |
-| **Số huy hiệu** | Huy hiệu đã đạt, giữ vĩnh viễn |
-| **Điểm campaign** | Điểm tích luỹ, chỉ lấy các lần cộng có **thời điểm cộng** nằm trong khoảng campaign **và** loại hành động nằm trong danh sách campaign chọn (`US19`) |
-| **Số hoạt động campaign** | Số hoạt động hoàn thành, chỉ lấy các lần hoàn thành nằm trong khoảng campaign (`US19`) |
-
-🔑 **Quy tắc chung cho mọi chỉ số đếm** *(số ngày có mặt · số hoạt động · số bài Test · số khoá)*: đếm **mọi lần xảy ra trong lúc `Gamification` bật**, **không phụ thuộc công tắc `Points` hay công tắc từng hành động** ở `US8`. Không đếm phần xảy ra trước khi bật hoặc trong thời gian tắt hẳn (`BR-14.5`).
-
-> Lý do: nếu đếm từ sổ giao dịch điểm thì tắt `Points` hoặc tắt một hành động sẽ làm bảng `Activities`, bảng `Courses` và tiến độ huy hiệu đứng im, dù học viên vẫn học. Nếu đếm thẳng từ dữ liệu học thì lại tính cả thời gian `Gamification` tắt, trái với `BR-14.5`. Cách lấy dữ liệu do Dev quyết, miễn đúng quy tắc trên.
-
-## Database
+### Tổng quan
 
 ```mermaid
 flowchart LR
-    subgraph A["1 · CẤU HÌNH — vận hành đặt"]
-        direction TB
-        C1["Cấu hình gamification<br/>2 công tắc chung<br/>4 công tắc chức năng"]
-        C2["Quy tắc cộng điểm<br/>4 hành động<br/>check-in: 3 tham số chuỗi"]
-        C3["Huy hiệu<br/>4 loại x 8 mốc"]
-        C4["Cấu hình hạng<br/>3 bội số + trần"]
-        C5["Campaign<br/>khoảng · loại hành động"]
-    end
-    subgraph B["2 · GHI NHẬN — hệ thống ghi"]
-        direction TB
-        L2["Dấu nội dung đã tính điểm<br/>chống cộng trùng theo lượt ghi danh"]
-        L3["Ngày có mặt của học viên<br/>1 người 1 ngày 1 bản ghi<br/>nguồn dựng lại chuỗi"]
-        L1["Sổ giao dịch điểm<br/>từng lần cộng kèm thời điểm"]
-        L4["Huy hiệu đã đạt<br/>kèm thời điểm đạt"]
-    end
-    subgraph C["3 · ĐỌC — màn hình đọc"]
-        direction TB
-        R1["Thành tích của học viên<br/>điểm - hạng hiện tại<br/>chuỗi hiện tại"]
-        R2["Bảng xếp hạng tính sẵn<br/>ghi đè mỗi 8 tiếng"]
-        R3["Kết quả campaign<br/>đóng băng khi kết thúc"]
-    end
-    TN["tenant<br/>múi giờ tổ chức<br/>dùng để cắt biên ngày"]
-    A --> B
-    B --> C
-    TN --> B
-    L2 -.->|"chặn cộng trùng"| L1
-    L3 --> L1
-    L1 --> L4
-    L1 --> R1
-    L4 --> R1
-    L1 --> R2
-    L1 --> R3
+  FE["Trình duyệt"]
+  subgraph LMS["app lms"]
+    P["Progress API"]
+    G["LmsGuard"]
+    API["API học viên"]
+    GW["Socket gateway"]
+  end
+  MT["mock-test-service: nộp bài"]
+  OPS["ops: finishGrading, API cấu hình, learners"]
+  ENG[["Engine gamification (libs/modules)"]]
+  K{{"Kafka: process_gamification_checkin"}}
+  EP["event-processor: consumer check-in"]
+  BJ["background-job: retry 15 phút, leaderboard"]
+  DB[("Postgres")]
+  R[("Redis")]
+
+  P --> ENG
+  MT --> ENG
+  OPS --> ENG
+  G -->|SET NX| R
+  G -.-> K -.-> EP --> ENG
+  ENG --> DB
+  ENG -.->|redis-emitter| R
+  R -.->|redis-adapter| GW -.-> FE
+  BJ --> ENG
+  BJ --> DB
+  API --> DB
+  API --> R
+  OPS --> DB
 ```
 
-*Mười hai thực thể mới chia ba tầng. Sổ giao dịch điểm là gốc — mọi con số hiển thị đều truy được về đây.*
+### 1. Ghi nhận điểm từ luồng học (đầu việc 4, 5, 7, 8)
 
-**12 thực thể mới.** Múi giờ tổ chức lấy theo `tenant`. Cách lưu múi giờ, kể cả có sửa bảng `tenant` hay không, do BE quyết trong technical design.
+Vẽ đại diện bằng progress API. Nộp bài ở `mock-test-service` và `finishGrading` ở `ops` đi cùng luồng, chỉ khác điểm gọi `record`.
 
-| Bảng | Mới / Sửa | Mục đích | `tenant_id` |
+```mermaid
+sequenceDiagram
+  autonumber
+  participant FE as Trình duyệt
+  participant L as lms: progress API
+  participant C as ClassService
+  participant E as GamificationEngine
+  participant CFG as GamificationConfig
+  participant DB as Postgres
+  participant R as Redis
+  participant GW as lms: socket gateway
+
+  FE->>L: GET /api/v1/course/:class_id/section/:section_id/progress
+  L->>C: createCourseSectionProgress
+  C->>DB: đọc class_user.status (trước)
+  C->>DB: lưu tiến độ + class_user.status, commit
+  opt section ACTIVITY vừa hoàn thành, hoặc status chuyển sang COMPLETED
+    C->>E: record(fact) trong try/catch
+    E->>CFG: đọc cấu hình (in-memory, Redis)
+    alt Gamification tắt hoặc is_operator
+      E-->>C: bỏ qua
+    else
+      rect rgb(235, 240, 255)
+        Note over E,DB: transaction gamification
+        E->>DB: upsert + SELECT learner_stats FOR UPDATE
+        E->>DB: INSERT ledger POINT ON CONFLICT DO NOTHING
+        alt trùng uq_ledger_dedup
+          E-->>C: dừng
+        else ghi mới
+          E->>DB: cập nhật total_points, counter, last_*_at
+          E->>DB: INSERT BADGE, LEVEL khi chạm mốc
+        end
+      end
+      opt is_visible và không phải lần chạy lại
+        E-)R: emit gamification:achievements tới room user:{id}
+        R-)GW: redis-adapter
+        GW-)FE: gamification:achievements
+      end
+    end
+  end
+  C-->>L: kết quả tiến độ
+  L-->>FE: 200
+```
+
+### 2. Check-in (đầu việc 9)
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant FE as Trình duyệt
+  participant G as lms: LmsGuard
+  participant R as Redis
+  participant K as Kafka
+  participant EP as event-processor
+  participant E as GamificationEngine
+  participant DB as Postgres
+
+  FE->>G: request đã xác thực bất kỳ
+  G->>G: bind tenant, bỏ qua nếu is_operator
+  G->>R: SET tenant:user:ngày NX
+  opt key mới trong ngày
+    G-)K: process_gamification_checkin
+  end
+  G-->>FE: request đi tiếp, không chờ
+  K-)EP: message (interceptor đặt app.tenant_id)
+  EP->>DB: INSERT gamification_checkins ON CONFLICT DO NOTHING
+  alt trùng uq_checkins_user_date
+    EP-->>K: dừng
+  else ngày mới
+    EP->>DB: đọc current_streak, last_checkin_date, last_enabled_at
+    EP->>E: record(CHECKIN, streak_day)
+    Note over E,DB: transaction và emit như luồng 1
+  end
+```
+
+### 3. Lỗi và chạy lại (đầu việc 6)
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant C as Hook luồng học / consumer
+  participant E as GamificationEngine
+  participant DB as Postgres
+  participant J as background-job: cron 15 phút
+
+  C->>E: record(fact)
+  E->>DB: transaction gamification
+  DB--xE: lỗi
+  E->>DB: ROLLBACK
+  E->>DB: INSERT gamification_failed_events (fact, lỗi, PENDING)
+  E-->>C: không throw, log GAMIFICATION_RECORD_FAILED
+  loop mỗi 15 phút, runForEachTenant
+    J->>DB: lấy failed_events PENDING
+    J->>E: record(fact, chạy lại, không emit)
+    alt thành công hoặc trùng ON CONFLICT
+      J->>DB: status = RESOLVED
+    else vẫn lỗi
+      J->>DB: retry_count + 1, đủ 5 lần thì GAVE_UP
+    end
+  end
+```
+
+### 4. Bảng xếp hạng (đầu việc 11, 12)
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant J as background-job: cron leaderboard
+  participant DB as Postgres
+  participant FE as Trình duyệt
+  participant L as lms: API leaderboard
+  participant R as Redis
+
+  Note over J: 00:00, 08:00, 16:00 giờ tổ chức, runForEachTenant
+  J->>DB: tính 16 bảng, INSERT batch mới vào leaderboard_entries
+  J->>DB: UPDATE leaderboard_batch_id, leaderboard_computed_at
+  J->>DB: DELETE batch cũ
+  FE->>L: GET /api/v1/gamification/leaderboard
+  alt range_code (khoảng nhanh)
+    L->>DB: đọc entries theo leaderboard_batch_id
+  else from/to (khoảng tự chọn)
+    L->>R: đọc cache
+    opt cache miss
+      L->>DB: cùng SQL xếp hạng trên ledger
+      L->>R: ghi cache 5 phút
+    end
+  end
+  L-->>FE: danh sách + last_updated_at
+```
+
+### 5. Kết nối realtime (đầu việc 7)
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant FE as Trình duyệt
+  participant GW as lms: socket gateway
+  participant R as Redis
+
+  FE->>GW: connect kèm token
+  GW->>GW: xác thực token như LmsGuard
+  alt token sai hoặc hết hạn
+    GW-->>FE: connect_error UNAUTHORIZED
+  else hợp lệ
+    GW->>R: join room user:{id} qua redis-adapter
+    GW-->>FE: connected
+  end
+```
+
+## Pattern áp dụng
+
+### Design pattern
+
+| Pattern | Áp dụng cho | Interface / class | Đầu việc |
 | --- | --- | --- | --- |
-| `tenant` | **Đọc** | Lấy **múi giờ tổ chức** để cắt biên ngày và biên khoảng (`C6`, `C9`). Không có ô chọn múi giờ trên màn Gamification. Cách lưu do BE quyết | *(là bảng gốc)* |
-| Cấu hình gamification | Mới | Hai công tắc chung (`Gamification` · `Visibility in UpLMS`) · **bốn công tắc chức năng** (`Points` · `Badges` · `Levels` · `Leaderboard`) · năm công tắc bảng xếp hạng | ✅ Bắt buộc |
-| Quy tắc cộng điểm | Mới | Bốn hành động, mỗi hành động một công tắc và một số điểm. Riêng check-in khai bằng **ba tham số** điểm chuỗi thay vì một số (`BR-8.5a`) | ✅ Bắt buộc |
-| **Sổ giao dịch điểm** | Mới | **Từng lần cộng điểm kèm nguồn và thời điểm** (`C3`). Nền của lịch sử ghi nhận, bảng xếp hạng theo khoảng ngày, tiêu chí phụ khi đồng hạng, và chỉ số *số khoá hoàn thành* | ✅ **Bắt buộc — rò rỉ ở đây hậu quả nặng nhất** |
-| Dấu nội dung đã tính điểm | Mới | Chống cộng trùng trong phạm vi lượt ghi danh (`C5`) | ✅ Bắt buộc |
-| Ngày có mặt của học viên | Mới | Nguồn cho điểm check-in và huy hiệu loại Check-in. Một học viên một ngày một bản ghi | ✅ Bắt buộc |
-| Huy hiệu | Mới | Bốn loại, mỗi loại tám mốc. **Giá trị mốc chỉ đọc sau khi khởi tạo** (`BR-9.2`). Tên, hình, mô tả sửa được. Công tắc bật tắt từng loại | ✅ Bắt buộc |
-| Huy hiệu đã đạt | Mới | Học viên nào đạt mốc nào, **kèm thời điểm đạt** (`C8`) | ✅ Bắt buộc |
-| Cấu hình hạng | Mới | Ba bội số lên hạng (điểm · số khoá · số huy hiệu), mỗi cái một công tắc, cộng trần hạng. **Không có tên hạng và hình hạng** — hạng là số thứ tự tịnh tiến | ✅ Bắt buộc |
-| **Thành tích của học viên** | Mới | Điểm tích luỹ · hạng hiện tại · thời điểm lên hạng gần nhất · **chuỗi hiện tại, ngày có mặt gần nhất**. Đây là bảng `US1` và `US12` đọc | ✅ Bắt buộc |
-| **Bảng xếp hạng tính sẵn** | Mới | Thứ hạng cho năm khung cố định nhân các bảng, cộng hai bảng cho mỗi campaign đang chạy. **Bị ghi đè mỗi chu kỳ 8 tiếng** (`BR-6.12`) | ✅ Bắt buộc |
-| Campaign | Mới | Tên · mô tả · khoảng thời gian · loại hành động được tính điểm (`US20`). **Không có số điểm riêng** | ✅ Bắt buộc |
-| **Kết quả campaign đã đóng băng** | Mới | Ghi **một lần** khi campaign kết thúc, không bao giờ ghi đè (`US21`, `C11`, `C12`) | ✅ Bắt buộc |
+| G8 Facade | Điểm vào duy nhất cho mọi luồng ghi nhận ở lms, mock-test, ops, event-processor và cron retry | `GamificationEngineService.record(fact)` | 4, 6, 8, 9 |
+| G4 Chain of Responsibility | Chuỗi xử lý một lần ghi nhận trong transaction; context chung giữ stats đã khoá và danh sách thành tích | `RecordContext`; `EligibilityHandler` → `PointHandler` → `BadgeHandler` → `LevelHandler`, kế thừa `AbstractCorHandler` | 4, 5 |
+| G1 Strategy + G2 Registry | Nguồn số liệu và SQL xếp hạng theo metric | `LeaderboardMetricStrategy`: `PointsMetric`, `BadgesMetric`, `CoursesMetric`, `LevelMetric`; chọn qua `LeaderboardMetricRegistry` | 11, 12, 13 |
+| G3 Template Method | 5 API `PUT` cấu hình Ops chung khung: đọc cấu hình → validate riêng → validate chéo → lưu → xoá cache | `BaseGamificationSettingService` với `validate()`, `apply()` abstract; 5 service con | 10 |
+| G5 Adapter | Gửi thông báo realtime qua socket.io redis-emitter | `GamificationNotifier` (token): `SocketIoGamificationNotifier` | 7 |
+| G6 Event Handler | Consumer `process_gamification_checkin` | `GamificationCheckinHandler implements KafkaEventHandler<GamificationCheckinPayload>` | 9 |
+| G9 Repository | Insert bỏ qua trùng, khoá dòng stats, gom ledger theo khoảng | `GamificationLedgerRepository`, `GamificationLearnerStatsRepository` | 1, 4, 11 |
 
-> **Ảnh huy hiệu** dùng hạ tầng `resources` sẵn có. Tài nguyên bị xoá thì rơi về **ảnh mặc định** (`BR-1.7`). Hạng không có hình nên không dùng `resources`.
+### Pattern kỹ thuật
+
+| Pattern | Đầu việc | Ghi chú |
+| --- | --- | --- |
+| T2 Xử lý bất đồng bộ qua Kafka | 9 | Topic `process_gamification_checkin` |
+| T3 Job chạy cho từng tenant | 6, 11 | Cron retry, cron leaderboard |
+| T4 Exception nghiệp vụ có mã lỗi | 2, 10, 12 | `GamificationNotAvailableException` → 404 |
+| T5 Cache Redis có xoá khi ghi | 3, 12 | Leaderboard khoảng tự chọn cache 5 phút |
+| T7 Phân trang | 12, 13 | Lịch sử, leaderboard, learners |
+| T8 Xuất file Excel | 13 | Export learners |
+| T9 Idempotent bằng unique index | 4, 5, 9 | `uq_ledger_dedup`, `uq_ledger_badge`, `uq_ledger_level`, `uq_checkins_user_date` |
+| T10 Hook sau commit không chặn luồng chính | 8 | |
+| T11 Ghi sự kiện lỗi và chạy lại | 6 | `gamification_failed_events` |
+| T12 Chặn lặp ngắn hạn bằng Redis | 9 | Check-in trong `LmsGuard` |
+| T13 Khoá dòng tổng hợp để tuần tự hoá | 4 | `gamification_learner_stats` |
+| T14 Sổ chỉ ghi thêm kèm bảng tổng hợp | 4, 5 | Ledger + learner stats |
+| T15 Snapshot tính sẵn kèm con trỏ batch | 11 | `leaderboard_batch_id` |
+| T16 Cache hai tầng cho cấu hình | 3 | |
+| **Mới**: Socket.io gateway, Redis adapter cho nhiều instance, app khác emit qua redis-emitter | 7 | Chưa có WebSocket trong repo |
+
+## Đầu việc
+
+1. **Database**: thêm cột `tenant.timezone`, tạo 10 bảng gamification có RLS, seed cấu hình mặc định cho các tenant hiện có — `libs/database/migrations`, `libs/database/src/lib/entities/gamification`
+   - Entity gamification không kế thừa `AbstractEntity`, không có `deleted_at`.
+   - Viết partial unique index bằng SQL thuần trong migration.
+2. **Interface dùng chung**: enum, DTO, exception (`GamificationNotAvailableException` → 404), kiểu payload cho socket event `gamification:achievements` — `libs/interface/src/lib/gamification`, `libs/exceptions`, `libs/interface/src/lib/socket`
+3. **Đọc cấu hình**: service đọc 5 bảng cấu hình của tenant — `libs/modules/src/lib/gamification`
+   - Cache 2 tầng: Redis (khoá có tiền tố tenant) và in-memory 30 giây. Xoá cache khi Ops lưu.
+   - Tenant chưa có cấu hình thì upsert bản mặc định, mọi công tắc ở trạng thái tắt.
+4. **Engine ghi nhận điểm**: `GamificationEngineService.record(fact)` — `libs/modules/src/lib/gamification`
+   - Bỏ qua khi `Gamification` tắt hoặc user có `is_operator = true`.
+   - Trong một transaction: upsert rồi `SELECT ... FOR UPDATE` dòng `gamification_learner_stats`, sau đó `INSERT` dòng `POINT` vào ledger với `ON CONFLICT DO NOTHING` trên `uq_ledger_dedup`. Bị trùng thì dừng.
+   - Ghi `points = 0` khi `Points` hoặc hành động đó đang tắt. Sau đó cập nhật `total_points`, các counter và `last_*_at`.
+5. **Xét huy hiệu và hạng**: chạy trong cùng transaction với engine — `libs/modules/src/lib/gamification`
+   - Huy hiệu: khi `Badges` và loại huy hiệu đang bật, so counter với các mốc rồi `INSERT` dòng `BADGE` và tăng `badges_count`.
+   - Hạng: với mỗi tiêu chí đang bật, cộng `floor(sau / m) − floor(trước / m)` rồi chặn ở trần. Mỗi hạng tăng thêm `INSERT` 1 dòng `LEVEL`.
+6. **Xử lý lỗi và chạy lại**: engine và cron retry — `libs/modules/src/lib/gamification`, `apps/background-job-service`
+   - Khi lỗi: rollback phần gamification, ghi `gamification_failed_events` với trạng thái `PENDING`, log `GAMIFICATION_RECORD_FAILED`, không throw ra luồng học.
+   - Cron 15 phút chạy lại tối đa 5 lần. Thành công thì chuyển `RESOLVED`, hết lượt thì chuyển `GAVE_UP`. Lần chạy lại không gửi thông báo.
+7. **Realtime**: dựng `GamificationGateway` (socket.io) — `apps/lms`
+   - Xác thực token giống `LmsGuard`. Mỗi user một room `user:{id}`. Dùng `@socket.io/redis-adapter`; các app khác emit qua `@socket.io/redis-emitter`.
+   - Engine emit `gamification:achievements` sau khi commit, khi đang hiển thị với học viên và không phải lần chạy lại.
+8. **Hook vào luồng học**: gọi `engine.record` sau khi transaction của luồng học đã commit, bọc try/catch
+   - `class.service.ts#createCourseSectionProgress`, `quiz.service.ts#saveUserProgressAfterSubmit` (+ `handleUserProgressFor*`), `#createTopicAttempt`, `#createCaseStudyAttempt`, `quiz-attempt-grading.service.ts#finishGrading`.
+   - Phát hiện hoàn thành khoá bằng cách so `class_user.status` trước và sau khi lưu tiến độ.
+   - Không đụng `handleProgress`, `syncLearningProgress`, `setPassFoundation`.
+9. **Check-in**: ghi nhận ngày có mặt qua Kafka — `apps/lms/src/auth/guard/lms.guard.ts`, `apps/event-processor-service`
+   - `LmsGuard`: sau khi bind tenant, bỏ qua `is_operator`, chặn lặp trong ngày bằng Redis `SET NX` theo `tenant:user:ngày`, rồi phát `process_gamification_checkin`.
+   - Consumer chèn `gamification_checkins` (unique theo ngày), rồi gọi engine với điểm tính theo chuỗi.
+10. **API Ops cấu hình**: settings, point-rules, badges, levels, leaderboard-settings — `apps/ops`
+    - Validate chéo giữa các khối cấu hình, xoá cache sau khi lưu.
+    - Khai báo permission theo nhóm `gamification_management`.
+11. **Leaderboard**: cron tính sẵn theo batch — `apps/background-job-service`
+    - Chạy lúc 00:00, 08:00, 16:00 giờ tổ chức qua `runForEachTenant`. Ghi batch mới vào `gamification_leaderboard_entries`, xếp hạng bằng `ROW_NUMBER() OVER (ORDER BY value DESC, reached_at ASC, user_id ASC)`. Sau đó đổi con trỏ `leaderboard_batch_id` và xoá batch cũ.
+    - Khoảng `ALL_TIME` đọc từ `learner_stats`. Các khoảng khác gom từ ledger, đổi mốc thời gian theo `tenant.timezone`.
+12. **API học viên**: `/gamification/me`, `/me/point-history`, `/me/badges`, `/rules`, `/leaderboard`, `/leaderboard/me`; thêm field `gamification` vào `my-learnings` — `apps/lms`
+    - Trả 404 khi tắt, khi đang ẩn, hoặc khi là Test Account. Lịch sử chỉ hiện dòng `POINT` có `points > 0`.
+    - Leaderboard với khoảng ngày tự chọn: tính lúc gọi bằng cùng SQL, cache Redis 5 phút. Loại học viên `BLOCKED`.
+    - Huy hiệu có ảnh đã bị xoá thì trả ảnh mặc định.
+13. **API Ops học viên**: danh sách và export `.xlsx` (exceljs) theo khoảng ngày, loại học viên `BLOCKED` — `apps/ops`
 
 ## API
 
-Đã đối chiếu Swagger — hệ thống có **692 operation** (LMS 144 / Ops 548), **không có nhóm nào liên quan gamification**. Tiền tố `/api/v1/gamification/` không trùng với đường dẫn nào đang tồn tại.
+### API mới
 
-### UpLMS — phía học viên
+| Method | Path | App | Controller#method | Guard / operationId | Request DTO | Response | Mã lỗi |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| GET | `/api/v1/gamification/me` | lms | `GamificationController#getMe` | `LmsGuard` | — | điểm, hạng, chuỗi, số huy hiệu, tiến độ hạng | 401, 404 |
+| GET | `/api/v1/gamification/me/point-history` | lms | `#getHistory` | `LmsGuard` | `page`, `limit` (≤100, mặc định 20) | danh sách sự kiện + `meta` | 400, 401, 404 |
+| GET | `/api/v1/gamification/me/badges` | lms | `#getBadges` | `LmsGuard` | — | huy hiệu + tiến độ | 401, 404 |
+| GET | `/api/v1/gamification/rules` | lms | `#getRules` | `LmsGuard` | — | bảng điểm, tiêu chí hạng | 401, 404 |
+| GET | `/api/v1/gamification/leaderboard` | lms | `#getLeaderboard` | `LmsGuard` | `metric`, `range_code` hoặc `from`/`to`, `page`, `limit` | danh sách + `last_updated_at` | 400, 401, 404 |
+| GET | `/api/v1/gamification/leaderboard/me` | lms | `#getMyPosition` | `LmsGuard` | `metric`, `range_code` hoặc `from`/`to` | dòng của tôi ±2 + phần còn thiếu | 400, 401, 404 |
+| GET, PUT | `/api/v1/gamification/settings` | ops | `GamificationSettingController#get/#update` | `StaffGuard`; `get_gamification_settings` / `update_gamification_settings` | `UpdateGamificationSettingDto` (2 công tắc, `timezone`) | cấu hình | 400, 403 |
+| GET, PUT | `/api/v1/gamification/point-rules` | ops | `#getPointRules/#updatePointRules` | như trên | `UpdatePointRulesDto` | 4 hành động | 400, 403 |
+| GET, PUT | `/api/v1/gamification/badges` | ops | `#getBadges/#updateBadges` | như trên | `UpdateBadgesDto` (bật tắt loại, tên/hình/mô tả) | 4 loại × 8 mốc | 400, 403 |
+| GET, PUT | `/api/v1/gamification/levels` | ops | `#getLevels/#updateLevels` | như trên | `UpdateLevelSettingDto` | 3 tiêu chí + công tắc/giá trị trần | 400, 403 |
+| GET, PUT | `/api/v1/gamification/leaderboard-settings` | ops | `#getLeaderboardSettings/#update...` | như trên | `UpdateLeaderboardSettingDto` | 4 bảng | 400, 403 |
+| GET | `/api/v1/gamification/learners` | ops | `GamificationLearnerController#list` | `StaffGuard`; `get_gamification_learners` | `search`, `sort`, `from`/`to`, `page`, `limit` | danh sách + `meta` | 400, 403 |
+| GET | `/api/v1/gamification/learners/export` | ops | `#export` | `StaffGuard`; `export_gamification_learners` | như list, không phân trang | file `.xlsx` (exceljs) | 400, 403 |
 
-| Method | Endpoint | Mới / Sửa | Mục đích |
+- Permission Ops thuộc group `gamification_management`, `tags: []`:
+  - `gr_view_gamification_settings`: GET cấu hình và learners.
+  - `gr_update_gamification_settings`: mọi PUT.
+  - `gr_view_gamification_learners`: learners và export.
+- DTO đặt ở `libs/interface/src/lib/gamification`; exception mới ở `libs/exceptions` (vd `GamificationNotAvailableException` → 404).
+- Socket: event `gamification:achievements` với `{ items: [{ type: 'POINTS' | 'BADGE' | 'LEVEL', ... }] }`, kiểu định nghĩa trong `libs/interface/src/lib/socket`.
+
+### API thay đổi
+
+| Method | Path | App | Thay đổi request | Thay đổi response | Tương thích ngược |
+| --- | --- | --- | --- | --- | --- |
+| GET | `/api/v1/courses/my-learnings` | lms | Không | Thêm object `gamification` `{ points, level }` (chỉ có khi đang hiển thị với học viên) | Có, chỉ thêm field |
+| GET | `/api/v1/course/:class_id/section/:section_id/progress` | lms | Không | Không | Có, chỉ thêm hook sau khi ghi tiến độ |
+
+## Database
+
+Chi tiết cột, index, quan hệ: [design.dbml](design.dbml)
+
+| Bảng | Mới / sửa | Thay đổi chính | tenant_id + RLS |
 | --- | --- | --- | --- |
-| GET | `/api/v1/gamification/me` | Mới | Điểm tích luỹ · hạng hiện tại · huy hiệu đã đạt — `US1` |
-| GET | `/api/v1/gamification/me/point-history` | Mới | Lịch sử từng lần cộng điểm — `US3` |
-| GET | `/api/v1/gamification/me/badges` | Mới | Huy hiệu đã đạt + **sắp đạt kèm phần còn thiếu** — `US4` |
-| GET | `/api/v1/gamification/leaderboard` | Mới | Bảng xếp hạng theo **khung cố định hoặc campaign** và **chỉ số** được chọn — `US6` · `US19`. **Không nhận khoảng ngày tự do** (`BR-6.15`) |
-| GET | `/api/v1/gamification/campaigns` | Mới | Campaign đang chạy và đã kết thúc — `US19` |
-| GET | `/api/v1/gamification/leaderboard/me` | Mới | Vị trí của tôi kèm vài người liền kề — `US7` |
-| GET | `/api/v1/gamification/rules` | Mới | Bảng điểm và tiêu chí lên hạng đang áp dụng, để hiện phần *cách tính điểm* và *cách lên hạng* ở `US1` |
-| PUT | `/api/v1/courses/**.../progress` | **Sửa** | Endpoint hiện có. Thêm phần cộng điểm **trong luồng**, chịu `NFR-GAM-01` |
-| GET | `/api/v1/courses/my-learnings` | **Sửa** | Endpoint hiện có. **Thêm field** điểm tích luỹ và hạng — chỉ thêm, không phá contract cũ |
+| `tenant` | Sửa | Thêm `timezone varchar(64) NOT NULL DEFAULT 'Asia/Ho_Chi_Minh'` | Là bảng gốc |
+| `gamification_settings` | Mới | 1 dòng/tenant: 2 công tắc chung, 4 công tắc chức năng, 4 `lb_show_*`, trần hạng, `first_enabled_at`, `last_enabled_at`, con trỏ batch leaderboard | Có |
+| `gamification_point_rules` | Mới | 4 dòng/tenant theo `action_code`; check-in có `params {step, cap}` | Có |
+| `gamification_badge_types` | Mới | 4 loại, công tắc theo loại | Có |
+| `gamification_badges` | Mới | 32 mốc; `milestone` chỉ đọc; tên, `default_name`, mô tả, `image_resource_id` | Có |
+| `gamification_level_criteria` | Mới | 3 tiêu chí, công tắc + `multiple` | Có |
+| `gamification_ledger_entries` | Mới | Sổ chỉ INSERT cho `POINT`/`BADGE`/`LEVEL`; 3 partial unique + 2 index đọc | Có |
+| `gamification_checkins` | Mới | Ngày có mặt, unique `(tenant_id, user_id, checkin_date)` | Có |
+| `gamification_learner_stats` | Mới | 1 dòng/học viên: điểm, hạng, chuỗi, counters, `last_*_at` | Có |
+| `gamification_leaderboard_entries` | Mới | Snapshot theo `batch_id` × `range_code` × `metric`, PK ghép | Có |
+| `gamification_failed_events` | Mới | Sự kiện lỗi, `status`, `retry_count` | Có |
 
-> **Điểm check-in (`US5`) không có endpoint riêng.** Hệ thống ghi nhận ngày có mặt ở lần đầu học viên vào hệ thống trong ngày, không có thao tác nào của học viên.
-
-### UpLMS Ops — phía vận hành
-
-| Method | Endpoint | Mới / Sửa | Mục đích |
-| --- | --- | --- | --- |
-| GET, PUT | `/api/v1/gamification/settings` | Mới | Hai công tắc chung — `US14` |
-| GET, PUT | `/api/v1/gamification/point-rules` | Mới | Công tắc `Points` · bốn hành động · ba tham số điểm chuỗi — `US8` |
-| GET, PUT | `/api/v1/gamification/badges` | Mới | Công tắc `Badges` · bật tắt bốn loại · sửa tên, hình, mô tả từng mốc — `US9`.<br>**Không có `POST` và `DELETE`**: không tạo, không xoá huy hiệu (`BR-9.7`). **Giá trị mốc không nhận sửa** (`BR-9.2`) |
-| GET, PUT | `/api/v1/gamification/levels` | Mới | Công tắc `Levels` · ba bội số lên hạng · trần hạng — `US10`.<br>**Không có `POST` và `DELETE`**: hạng là số tịnh tiến, không phải danh sách bậc để tạo |
-| GET, PUT | `/api/v1/gamification/leaderboard-settings` | Mới | Công tắc `Leaderboard` · bật tắt năm bảng — `US11` |
-| GET | `/api/v1/gamification/learners` | Mới | Danh sách học viên kèm hạng, theo khoảng ngày — `US12` |
-| GET | `/api/v1/gamification/learners/export` | Mới | Xuất danh sách ra **Excel** theo khoảng ngày đang chọn — `US12` |
-| GET, POST | `/api/v1/gamification/campaigns` | Mới | Danh sách và tạo campaign — `US20` |
-| GET, PUT, DELETE | `/api/v1/gamification/campaigns/{id}` | Mới | Xem, sửa, xoá campaign — `US20`. **Sửa và xoá bị giới hạn theo trạng thái** (`BR-20.6`) |
-| GET | `/api/v1/gamification/campaigns/{id}/results` | Mới | Kết quả hai bảng của campaign — `US21` |
-| GET | `/api/v1/gamification/campaigns/{id}/results/export` | Mới | Xuất kết quả campaign ra **Excel** — `US21` |
-| GET | `/api/v1/gamification/achievement-log` | Mới | Nhật ký ghi nhận toàn tổ chức, lọc theo học viên, loại sự kiện, khoảng ngày — `US22` |
-
-> Đường dẫn của các endpoint campaign và nhật ký ghi nhận là đề xuất, Dev chốt.
+| Migration | Up | Down |
+| --- | --- | --- |
+| `1789996000000-add-timezone-to-tenant.ts` | Thêm cột `timezone` | Xoá cột |
+| `1789997000000-create-gamification-tables.ts` | Tạo 10 bảng, FK, index (partial unique viết SQL thuần); `ENABLE` + `FORCE ROW LEVEL SECURITY`, policy `tenant_isolation_<table>` có `OR app_rls_bypassed()` | Xoá policy và bảng theo thứ tự ngược |
+| `1789998000000-seed-gamification-defaults.ts` | Seed cho mỗi tenant hiện có: settings (tắt), 4 point rules, 4 badge types, 32 badges, 3 level criteria | Xoá dữ liệu đã seed |
 
 ## Frontend
 
