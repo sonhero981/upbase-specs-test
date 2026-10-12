@@ -1,13 +1,13 @@
 ---
 intent: 261005-group
 artifact: prd
-version: 0.2
+version: 0.3
 status: approved
-approved: 2026-10-09 (v0.2); 2026-10-06 (v0.1)
-cr: CR1 ngày 2026-10-09, chạm US9 US13 US16 US20
+approved: 2026-10-12 (v0.3); 2026-10-09 (v0.2); 2026-10-06 (v0.1)
+cr: CR2 ngày 2026-10-12, chạm US3 US7 US19 US20, danh sách US, Vấn đề tồn đọng; CR1 ngày 2026-10-09, chạm US9 US13 US16 US20
 gate: v1 Gate 4
 lark: Jg7ld8UCzoeMiAxW5ielxlC4gGg
-lark-title: [PRD] Study Group
+lark-title: [PRD] Group
 migrated-from: .claude/projects/Group/docs/prd/prd-group-v0.1-20261006.md
 ---
 # [PRD] Nhóm học viên
@@ -20,7 +20,7 @@ migrated-from: .claude/projects/Group/docs/prd/prd-group-v0.1-20261006.md
 | **Related** | `[BRD] Group — Nhóm học viên` · Dự án Gamification *(`US16` bộ lọc bảng xếp hạng theo nhóm đang chờ chức năng này)* |
 | **Document status** | `PUBLISH` |
 | **Document owner** | Bùi Đức Huy |
-| **Người duyệt** | Bùi Đức Huy — v0.1 ngày 06/10/2026 · v0.2 ngày 09/10/2026 |
+| **Người duyệt** | Bùi Đức Huy — v0.1 ngày 06/10/2026 · v0.2 ngày 09/10/2026 · v0.3 ngày 12/10/2026 |
 | **Designer** | |
 | **Tech lead** | |
 | **QA** | |
@@ -34,6 +34,7 @@ migrated-from: .claude/projects/Group/docs/prd/prd-group-v0.1-20261006.md
 | --- | --- | --- | --- | --- |
 | v0.1 | Bùi Đức Huy | Bản đầu — 20 user story, 122 business rule, 7 nhóm bàn giao | — | 06/10/2026 |
 | v0.2 | Bùi Đức Huy | Sau khi đối chiếu với TalentLMS: `US16` ghi rõ màn theo dõi nhánh ở UpLMS Ops · thêm mail event `MAIL-GRP-02` báo người được gán quản lý hoặc nhận chuyển phụ trách · thêm câu cảnh báo mất tiến độ vào `MAIL-GRP-01`. Sau review: chỉ định quản lý chính (`US11`) cũng gửi `MAIL-GRP-02`, email gộp khi chuyển phụ trách chỉ liệt nhóm mới, phần mentor không báo. 128 business rule | `US9` · `US11` · `US13` · `US16` · `US20` | 09/10/2026 |
+| v0.3 | Bùi Đức Huy | Sau review user story: người thuộc **nhiều nhóm cùng giao một lớp** thì rời một nhóm vẫn giữ lượt ghi danh khi nhóm kia còn giao (`BR-3.7` · `BR-19.7`, mở rộng `BR-7.9`, thêm điều kiện không bắn `MAIL-GRP-01`) · cột Nguồn của danh sách user story dẫn thêm `RC-02` `RC-07` `RC-20` và trỏ bảng truy vết · Vấn đề tồn đọng #2 ghi lý do ma trận quyền không chặn viết PRD, thêm #7 ba góc chưa có luật. 130 business rule | `US3` · `US7` · `US19` · `US20` | 12/10/2026 |
 
 ---
 
@@ -320,19 +321,21 @@ Phụ thuộc đi một chiều, không có vòng.
 
 ## Danh sách user story
 
+Cột Nguồn dẫn hạng mục của yêu cầu gốc và, nơi yêu cầu được phủ bằng business rule ở nhiều US, mã `RC` của bản làm rõ. Bảng truy vết đầy đủ hai chiều `RC` sang `US` và `US` sang `RC`: `traceability.md` cùng thư mục.
+
 ### Phía vận hành
 
 | ID | User story | Unit | Nguồn |
 |---|---|---|---|
 | `US1` | Tạo và sửa nhóm nhiều cấp, để dựng được cơ cấu tổ chức đang dùng | U1 | Yêu cầu 1, 4 |
 | `US2` | Di chuyển một nhánh sang nhóm cha khác, để cơ cấu đổi thì hệ thống theo kịp | U1 | Yêu cầu 4 |
-| `US3` | Thêm và gỡ thành viên thủ công, để xử lý trường hợp lẻ | U1 | Yêu cầu 5 |
+| `US3` | Thêm và gỡ thành viên thủ công, để xử lý trường hợp lẻ | U1 | Yêu cầu 5 · `RC-02` một người thuộc nhiều nhóm |
 | `US4` | Thêm và gỡ thành viên theo lô bằng tệp, để không phải thao tác từng người với nhóm hàng chục người | U1 | Yêu cầu 6 |
 | `US5` | Nhóm đồng bộ từ hệ thống nhân sự được đánh dấu riêng và không cho sửa, để biết nhóm nào là bản sao của nguồn ngoài | U2 | Yêu cầu 3 |
-| `US6` | Xem danh sách nhóm dạng cây hoặc bảng kèm bộ lọc, để tìm được nhóm trong số hàng chục nhóm | U1 | Yêu cầu 10 |
+| `US6` | Xem danh sách nhóm dạng cây hoặc bảng kèm bộ lọc, để tìm được nhóm trong số hàng chục nhóm | U1 | Yêu cầu 10 · `RC-07` nhóm cha bao trùm nhánh con |
 | `US7` | Giao nội dung cho một nhóm, tuỳ chọn chảy xuống nhánh con, để giao bài cho cả phòng bằng một thao tác | U3 | Yêu cầu 8 · giải quyết `O1` |
 | `US8` | Bật tắt việc người mới vào nhóm tự nhận nội dung đã giao, để kiểm soát ai phải học gì | U3 | Yêu cầu 9 · giải quyết `O2` |
-| `US9` | Gán một hoặc nhiều người quản lý cho nhóm, để hệ thống biết ai phụ trách ai | U4 | Yêu cầu 13 |
+| `US9` | Gán một hoặc nhiều người quản lý cho nhóm, để hệ thống biết ai phụ trách ai | U4 | Yêu cầu 13 · `RC-20` báo email người được gán quản lý |
 | `US10` | Hệ thống tự suy ra quản lý theo cây khi nhóm con chưa gán, để không phải gán lại cho từng nhánh | U4 | Yêu cầu 14 |
 | `US11` | Chỉ định quản lý đích danh trên hồ sơ một người, để xử lý trường hợp báo cáo chéo nhánh | U4 | Yêu cầu 15 |
 | `US12` | Gán mentor cho nhóm, để mentor đi theo nhóm vào lớp và phụ trách đúng nhóm đó | U4 | Yêu cầu 19 |
@@ -344,14 +347,14 @@ Phụ thuộc đi một chiều, không có vòng.
 
 | ID | User story | Unit | Nguồn |
 |---|---|---|---|
-| `US16` | Là quản lý, xem toàn bộ dữ liệu học của người trong nhánh mình phụ trách, và chỉ những người đó | U5 | Yêu cầu 16 · giải quyết `O3` |
+| `US16` | Là quản lý, xem toàn bộ dữ liệu học của người trong nhánh mình phụ trách, và chỉ những người đó | U5 | Yêu cầu 16 · `RC-07` nhóm cha bao trùm nhánh con · giải quyết `O3` |
 | `US17` | Là học viên, thấy ai là quản lý của mình và cách liên hệ | U5 | Yêu cầu 17 |
 
 ### Báo cáo
 
 | ID | User story | Unit | Nguồn |
 |---|---|---|---|
-| `US18` | Xem số liệu học cộng dồn theo nhóm và theo cả nhánh, ở hiện tại hoặc tại một mốc quá khứ | U7 | Giải quyết `O4` |
+| `US18` | Xem số liệu học cộng dồn theo nhóm và theo cả nhánh, ở hiện tại hoặc tại một mốc quá khứ | U7 | Giải quyết `O4` · `RC-07` nhóm cha bao trùm nhánh con · `RC-11` dựng lại quá khứ |
 
 ### Vòng đời nhân sự
 
@@ -507,6 +510,7 @@ Người vận hành tìm theo tên, mã nhân viên hoặc email, chọn một 
   - Có khoá đang học dở hoặc đã học xong → vẫn gỡ khỏi nhóm, nhưng **gửi email cho quản lý** để họ quyết. Xem `US20`
 - `BR-3.5` Mọi lần thêm gỡ ghi vào nhật ký kèm **thời điểm** và **lý do** `Thêm tay`
 - `BR-3.6` Người đã nghỉ việc vẫn gỡ được khỏi nhóm, nhưng lượt ghi danh của họ **giữ nguyên trạng thái đã kết thúc**, không xoá
+- `BR-3.7` Người thuộc **nhiều nhóm cùng giao một lớp**: trước khi áp `BR-3.4` cho lớp đó, hệ thống kiểm còn nhóm nào người đó **vẫn là thành viên** đang giao đúng lớp đó không. **Còn thì giữ nguyên lượt ghi danh**, chỉ bỏ nhóm vừa rời khỏi danh sách nguồn của lượt *(`BR-7.9`)*; không tự gỡ, không gửi `MAIL-GRP-01`. Chỉ khi không còn nhóm nào giao thì mới xét `BR-3.4`
 
 #### Data Field
 
@@ -750,7 +754,7 @@ Chỉ có **một cửa chặn thật**: lớp đã kết thúc. Sức chứa kh
 - `BR-7.6` 🔴 **Vượt sức chứa lớp KHÔNG chặn.** Vẫn thêm người bình thường. Hệ thống chỉ hiện **một dòng ở màn danh sách học viên trong lớp** báo số học viên đã vượt giới hạn. Không phải thông báo tức thời, không phải hộp xác nhận
 - `BR-7.7` Lớp có lớp Foundation gắn kèm thì người vào lớp chính **cũng vào Foundation**. Đây là hành vi sẵn có của Lớp, không phải luật mới
 - `BR-7.8` **Tài khoản kiểm thử bị bỏ qua** ở mọi bước của luật đứng
-- `BR-7.9` Lượt ghi danh sinh ra qua nhóm phải **ghi lại nguồn**, để phân biệt với người được thêm tay
+- `BR-7.9` Lượt ghi danh sinh ra qua nhóm phải **ghi lại nguồn**, để phân biệt với người được thêm tay. **Một lượt có thể có nhiều nguồn** khi nhiều nhóm cùng giao một lớp: mỗi nhóm là một nguồn, người rời một nhóm thì chỉ bớt một nguồn, lượt còn nguyên khi còn nguồn khác *(`BR-3.7`)*
 - `BR-7.10` **Không gỡ được một lớp khỏi nhóm khi đã có người trong nhóm học lớp đó.** Cùng logic với việc gỡ học viên khỏi lớp
 - `BR-7.11` Giao nội dung cho nhóm **không hồi tố**: người đã rời nhóm trước thời điểm giao thì không vào lớp
 
@@ -1320,7 +1324,7 @@ Là nhân sự vận hành, tôi cần hệ thống tự gỡ người khỏi c�
 
 ### 3/ Scenario
 
-Không có thao tác. Hệ thống xét từng khoá người đó nhận qua nhóm cũ. Khoá nào chưa học thì gỡ luôn. Rồi thêm họ vào nhóm mới và áp luật đứng của nhóm đó.
+Không có thao tác. Hệ thống xét từng khoá người đó nhận qua nhóm cũ. Khoá nào chưa học, và không còn nhóm nào khác của người đó đang giao, thì gỡ luôn. Rồi thêm họ vào nhóm mới và áp luật đứng của nhóm đó.
 
 ### 4/ Acceptance criteria
 
@@ -1332,6 +1336,7 @@ Không có thao tác. Hệ thống xét từng khoá người đó nhận qua nh
 - `BR-19.4` Sau khi gỡ, nếu người đó vào nhóm mới thì **luật đứng của nhóm mới chạy bình thường**
 - `BR-19.5` Người đó có **ít nhất một khoá đang học dở hoặc đã học xong** thì không áp `US19` cho khoá đó, mà chuyển sang `US20`. Hai luật áp **cho từng khoá**, không áp cho cả người
 - `BR-19.6` Mọi lần gỡ tự động ghi nhật ký với lý do `Điều chuyển`
+- `BR-19.7` Trước khi tự gỡ theo `BR-19.2`, kiểm còn nhóm khác đang giao đúng lớp đó mà người đó vẫn là thành viên không. **Còn thì không gỡ**, lượt ghi danh giữ nguyên với nguồn là nhóm còn lại *(`BR-3.7`, `BR-7.9`)*. Ghi nhật ký một dòng *Giữ lại vì nhóm `<tên nhóm>` vẫn giao* với lý do `Điều chuyển`
 
 ### 5/ Out of scope
 
@@ -1365,7 +1370,7 @@ Hệ thống phát hiện tình huống, gửi email. Quản lý đọc, vào h�
 | **Khi nào bắn** | Một người rời nhóm mà còn ít nhất một khoá đang học dở hoặc đã học xong |
 | **Gửi cho** | **Quản lý chính** ở dòng người nhận. Các quản lý khác ở dòng đồng gửi |
 | **Nội dung** | Ai rời nhóm nào, sang nhóm nào · danh sách khoá còn lại kèm tình trạng từng khoá · đường dẫn tới hồ sơ người đó · một câu cảnh báo cố định: *"Gỡ khỏi lớp sẽ xoá tiến độ đã học và không khôi phục được. Giữ nguyên lớp nếu muốn người này học tiếp."* |
-| **Không bắn khi** | Người đó chưa học khoá nào *(`US19` tự xử lý)* · người đó nghỉ việc *(lượt ghi danh chỉ đánh dấu kết thúc)* |
+| **Không bắn khi** | Người đó chưa học khoá nào *(`US19` tự xử lý)* · người đó nghỉ việc *(lượt ghi danh chỉ đánh dấu kết thúc)* · với từng khoá: người đó **vẫn thuộc một nhóm khác đang giao đúng lớp đó** *(`BR-3.7`, lượt ghi danh giữ nguyên, không có gì phải quyết)* |
 
 #### Business requirement — Business rule
 
@@ -1392,11 +1397,12 @@ Hệ thống phát hiện tình huống, gửi email. Quản lý đọc, vào h�
 | # | Nội dung | Người trả lời | Chặn gì |
 |---|---|---|---|
 | 1 | **Số liệu vận hành thật** — một tháng giao bài bao nhiêu lần, mỗi lần mất bao lâu, đã từng sót người chưa | Người viết | Mục `Analytics` còn `❓PO` |
-| 2 | **Ma trận phân quyền hiện có** — chưa ai đọc được, nó nằm trong dữ liệu chứ không nằm trong cấu trúc | Dev | `US16` — phạm vi dữ liệu dựng trên nền chưa nhìn thấy |
+| 2 | **Ma trận phân quyền hiện có** — chưa ai đọc được, nó nằm trong dữ liệu chứ không nằm trong cấu trúc | Dev | `US16` ở phía Dev: phạm vi dữ liệu dựng trên nền chưa nhìn thấy. **Không chặn viết PRD**, vì màn theo dõi nhánh đọc theo **quan hệ quản lý**, không theo vai trò hệ thống *(`BR-16.4`; phạm vi tách theo màn chốt 06/10, đơn giản hoá phạm vi chốt 05/10)*. Dev xin bản export ma trận quyền trước khi làm `US16` để nối hai phạm vi |
 | 3 | **Loại quan hệ** *(quản lý, mentor)* do hệ thống định nghĩa cố định hay tổ chức tự thêm được | Người viết | `US12` — ảnh hưởng chiều đa tổ chức |
 | 4 | **Tài khoản kiểm thử và tài khoản trả lời bình luận tạo bằng cách nào**, khi chúng không phải nhân sự nên không có trong cây tổ chức | Người viết · Dev | Không chặn |
 | 5 | **Mốc lùi tối đa của báo cáo quá khứ** là ngày bật tính năng *(`BR-18.7`)*. Cần nói rõ với người dùng, đừng để họ tưởng có dữ liệu cũ hơn | Người viết | Không chặn, nhưng phải truyền đạt |
 | 6 | **Hộp xác nhận gỡ học viên khỏi lớp** bên chức năng Lớp đã có cảnh báo mất tiến độ chưa | Dev | Không chặn. Thuộc chức năng Lớp, ngoài phạm vi dự án này; `MAIL-GRP-01` đã có câu cảnh báo riêng |
+| 7 | **Ba góc chưa có luật**, từ bản phân tích ảnh hưởng: đồng bộ lỗi nửa chừng thì áp toàn bộ hay chấp nhận dở dang · quyền quản lý bị thu hồi khi họ đang xem báo cáo · tên *Nhóm* dễ nhầm với *support group* đang có ở Ops | Người viết · Dev | Không chặn. Hai góc đầu Dev đề xuất khi làm `US5` và `US16`; góc tên gọi Design xử lý ở nhãn màn hình |
 
 ---
 

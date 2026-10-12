@@ -1,9 +1,10 @@
 ---
 intent: 261005-group
 artifact: brd
-version: 0.2
+version: 0.3
 status: approved
-approved: 2026-10-06
+approved: 2026-10-12 (v0.3); 2026-10-06 (v0.2)
+review: lần 01 NOT-READY, Request Changes (DEC78); lần 02 READY, Approve (DEC79), ngày 2026-10-12
 gate: v1 Gate 1 ngày 2026-10-05, cập nhật v0.2 sau Gate 2 và Bước 7
 migrated-from: .claude/projects/Group/docs/brd/brd-v0.2-20261006.md
 note: Artifact phase Ideation theo luồng v1. Thay cho intent-statement, scope-document và initiative-brief của v2
@@ -14,8 +15,8 @@ note: Artifact phase Ideation theo luồng v1. Thay cho intent-statement, scope-
 | --- | --- |
 | **Tính năng** | Group |
 | **Người viết** | Bùi Đức Huy (PO) |
-| **Version** | **v0.2** — 06/10/2026 |
-| **Trạng thái** | `Approved` — qua Gate 1 *(05/10)*, Gate 2 *(06/10)*, Bước 7 *(06/10)* |
+| **Version** | **v0.3** — 12/10/2026 |
+| **Trạng thái** | `Approved` — v0.3 duyệt 12/10/2026 sau review Product Lead; v0.2 qua Gate 1 *(05/10)*, Gate 2 *(06/10)*, Bước 7 *(06/10)* |
 
 > Bản nháp nội bộ để chốt hướng trước khi viết PRD.
 
@@ -24,7 +25,8 @@ note: Artifact phase Ideation theo luồng v1. Thay cho intent-statement, scope-
 | Version | Ngày | Nội dung |
 |---|---|---|
 | `v0.1` | 05/10/2026 | Bản đầu, 19 US. ⚠️ **Không được lưu lại** — xem ghi chú dưới |
-| **`v0.2`** | 06/10/2026 | Gộp toàn bộ quyết định từ Gate 1, Bước 5, Gate 2 và Bước 7 |
+| `v0.2` | 06/10/2026 | Gộp toàn bộ quyết định từ Gate 1, Bước 5, Gate 2 và Bước 7 |
+| **`v0.3`** | 12/10/2026 | Cập nhật theo CR1 *(09/10)* và review Product Lead lần 01. Không đổi phạm vi |
 
 **Đổi gì ở `v0.2`:**
 
@@ -37,9 +39,20 @@ note: Artifact phase Ideation theo luồng v1. Thay cho intent-statement, scope-
 | Việc mới | **`MAIL-GRP-01`** — một mail event mới phải làm. 30 mail hiện có không có cái nào cho việc này |
 | Bị thay thế | `BA-06` *(giữ người nghỉ việc trong nhóm)* → `CF-4` *(gỡ khỏi nhóm, đánh dấu lượt ghi danh)* |
 
+**Đổi gì ở `v0.3`:**
+
+| Vùng | Thay đổi |
+|---|---|
+| §1 | Thêm mục **Product boundary**: portal, tenant, tầng, hằng số, chỗ đóng cứng chạm tới |
+| Mentor | §4, §5, `US12` viết lại theo `CF-6` *(06/10)*: mentor của nhóm chính là mentor của lớp. Bản v0.2 còn giữ khung ban đầu *"loại quan hệ thứ hai, dùng chung cơ chế"* |
+| `US16` | Chuyển sang **UpLMS Ops** theo `DEC73` *(09/10)*. Bản v0.2 xếp nhầm vào UpLMS |
+| Mail | Thêm **`MAIL-GRP-02`** theo `DEC74` *(09/10)*; `MAIL-GRP-01` thêm câu cảnh báo mất tiến độ theo `DEC75` |
+| §8, §10, §11 | Đường dẫn chuyển sang cấu trúc intent; §8 trỏ sang Impact Matrix đã có; §10 thêm bảng Gate 2 và CR1 |
+| Ký hiệu | `❓BA` đổi thành `❓PO` theo GLOSSARY |
+
 > ⚠️ **`v0.1` không được lưu lại.** Bản đó bị sửa đè nhiều lần trong ngày 05–06/10 thay vì tạo version mới, và chưa từng được commit, nên không mở lại được nội dung đúng lúc Gate 1 duyệt.
 >
-> Truy vết **vẫn còn** ở `project-decisions.md` — mọi quyết định ghi kèm ngày và gate. Thứ mất là bản chụp toàn văn, không phải lý do.
+> Truy vết **vẫn còn** ở `decisions.md` *(bản v1: `archive/v1/project-decisions.md`)* — mọi quyết định ghi kèm ngày và gate. Thứ mất là bản chụp toàn văn, không phải lý do.
 
 ---
 
@@ -57,13 +70,23 @@ Ba nhóm người gặp vấn đề, theo ba cách khác nhau.
 
 Hệ quả đã thấy ở tính năng khác: dự án Gamification phải hoãn `US16` *(bộ lọc bảng xếp hạng theo nhóm)*, và ghi nhận trong tài liệu rằng **quản lý trực tiếp chưa có công cụ riêng** — cả hai đều chờ đúng chức năng này.
 
+## Product boundary
+
+| | |
+|---|---|
+| **Portal** | Cả hai. Phần lớn việc ở **UpLMS Ops**: dựng nhóm, thành viên, đồng bộ HRM, gán nội dung, quản lý, nhật ký, lưu trữ, báo cáo — `US1` đến `US16`, `US18` đến `US20`. **UpLMS** chỉ có `US17`, học viên xem quản lý của mình. Màn theo dõi nhánh `US16` nằm ở **UpLMS Ops**, quản lý đăng nhập bằng tài khoản nhân sự vận hành, chính tài khoản được gán ở `US9` — chốt 09/10/2026 *(`DEC73`)* |
+| **UpBase hay mọi tenant** | Làm cho UpBase, nhưng dữ liệu và hạ tầng cho **mọi tenant**. Nhóm, quan hệ thành viên, quan hệ quản lý và mentor đều thuộc về một tổ chức; mô hình không mang giả định riêng của UpBase. Đã kiểm chiều tenant ở Impact Matrix §9 |
+| **Tầng** | Tầng **LMS đang có**, mở rộng từ Lớp và User. Không thuộc tầng năng lực định hướng |
+| **Hằng số** | Số cấp tối đa của cây: mặc định **6**, **cấu hình được theo tổ chức**, không đóng cứng *(`BR-1.4`)*. Độ dài tên nhóm 255 và mô tả 1000 ký tự là giới hạn field, cố định *(`F-11`)* |
+| **Chỗ đóng cứng UpBase chạm tới** | Nguồn cơ cấu là **Lark**, qua cơ chế đồng bộ HRIS một chiều đang có — KB `15-product-direction.md` §6 xếp đây là chỗ đóng cứng mức cao, vì mỗi tenant một HRIS. Dự án này **mở rộng** cơ chế đó sang tầng cơ cấu, không gỡ nó. Nhóm tự tạo không phụ thuộc Lark |
+
 ---
 
 # 2. Analytics
 
 ## Dữ liệu cơ cấu hiện có
 
-Xuất từ Lark ngày 05/10/2026, file `working/raw-inputs/lark-users-by-department.csv`:
+Xuất từ Lark ngày 05/10/2026, file `inputs/lark-users-by-department.csv`:
 
 | | Số |
 |---|---|
@@ -87,7 +110,7 @@ Phòng ban đông nhất có **55 người** (`ECOM / Fulfillment HCM`). Hơn m�
 
 ## Cách vận hành đang xoay xở
 
-❓`BA` — chưa khảo sát trực tiếp. Phần dưới là suy luận từ những gì hệ thống hiện có, cần PO xác nhận hoặc bổ sung số liệu thật:
+❓`PO` — chưa khảo sát trực tiếp. Phần dưới là suy luận từ những gì hệ thống hiện có, cần PO xác nhận hoặc bổ sung số liệu thật:
 
 | Hướng | Hiện trạng suy ra |
 |---|---|
@@ -120,7 +143,7 @@ Phòng ban đông nhất có **55 người** (`ECOM / Fulfillment HCM`). Hơn m�
 | **L&D** | Giao bài học theo nhóm thay vì theo danh sách người |
 | **Quản lý trực tiếp** | Xem tiến độ học của người trong nhánh mình phụ trách |
 | **Học viên (UpLMS)** | Nhận nội dung qua nhóm; xem ai là quản lý của mình |
-| **Mentor** | Loại quan hệ thứ hai ngoài quản lý, dùng chung cơ chế |
+| **Mentor** | Gắn vào nhóm. Khi nhóm được giao lớp thì tự thành mentor của lớp đó, phụ trách đúng người từ nhóm đó. Không có phạm vi dữ liệu riêng như quản lý |
 | Hệ HRM (Lark) | Nguồn cơ cấu tổ chức. Hệ gốc, UpLnD chỉ đọc |
 
 ---
@@ -138,13 +161,13 @@ Phòng ban đông nhất có **55 người** (`ECOM / Fulfillment HCM`). Hơn m�
 | **Phạm vi bao trùm** | Nhóm cha gồm người ở toàn bộ nhánh con, ở mọi màn đọc dữ liệu |
 | **Gán nội dung** | Gán cho nhóm, tuỳ chọn chảy xuống nhánh con. Công tắc tự ghi danh người vào sau |
 | **Quan hệ quản lý** | Gán quản lý cho nhóm; suy ra quản lý theo cây; chỉ định đích danh trên hồ sơ |
-| **Quan hệ mentor** | Loại quan hệ thứ hai, dùng chung cơ chế gán |
+| **Quan hệ mentor** | Gán mentor cho nhóm. Mentor của nhóm **chính là** mentor của lớp mà nhóm được giao, phụ trách đúng người từ nhóm đó; mentor đầu tiên vào lớp là người chịu trách nhiệm chính, đổi lại được. Không có cơ chế phạm vi dữ liệu riêng — chốt 06/10/2026 *(`CF-6`)* |
 | **Phạm vi dữ liệu** | Quản lý chỉ xem được nhóm mình quản lý |
 | **Thành viên theo thời gian** | Ghi mọi thay đổi thành viên kèm thời điểm, giữ không giới hạn. **Nền của báo cáo**, không chỉ để tra tay |
 | **Báo cáo theo nhóm** | Cộng dồn số liệu học theo nhóm và theo cả nhánh, xem được ở hiện tại hoặc tại một mốc quá khứ |
 | **Người nghỉ việc** | Gỡ khỏi nhóm theo đồng bộ. Lượt ghi danh **đánh dấu kết thúc**, không xoá dữ liệu |
 | **Vòng đời nhân sự** | Rời nhóm mà chưa học khoá nào → hệ thống tự xử lý. Đang học dở hoặc đã xong → báo quản lý |
-| **Một mail event mới** | `MAIL-GRP-01` — báo quản lý khi người rời nhóm còn nghĩa vụ học. 30 mail hiện có không có cái nào cho việc này |
+| **Hai mail event mới** | `MAIL-GRP-01` — báo quản lý khi người rời nhóm còn nghĩa vụ học · `MAIL-GRP-02` — báo người được gán làm quản lý, nhận chuyển phụ trách, hoặc được chỉ định quản lý chính, để họ biết có nhánh phải theo dõi *(thêm 09/10/2026, CR1)*. 30 mail hiện có không có cái nào cho hai việc này |
 | **Màn danh sách** | Xem dạng cây hoặc bảng, lọc theo nguồn, cấp, trạng thái, người quản lý |
 | **Lưu trữ** | Nhóm lưu trữ ngừng nhận nội dung mới, giữ nguyên lịch sử. Chỉ nhóm chưa có lịch sử gì mới xoá được |
 
@@ -306,7 +329,9 @@ Lý do nằm ở cách dữ liệu đang lưu: tiến độ treo vào **lượt 
 
 # 7. Danh sách User Story dự kiến
 
-## Phía vận hành — UpLMS Ops
+> Nhóm bàn giao, phụ thuộc và thứ tự release của 20 US nằm ở `inception/prd/prd.md` mục *Unit — nhóm bàn giao*, bảng `U1` đến `U7`. BRD không lặp lại bảng đó.
+
+## Phía vận hành và quản lý — UpLMS Ops
 
 | ID | User Story | Nguồn |
 |---|---|---|
@@ -321,16 +346,31 @@ Lý do nằm ở cách dữ liệu đang lưu: tiến độ treo vào **lượt 
 | `US9` | Là vận hành, tôi cần gán một hoặc nhiều người quản lý cho nhóm, để hệ thống biết ai phụ trách ai | Hạng mục 13 |
 | `US10` | Là vận hành, tôi cần hệ thống tự suy ra quản lý theo cây khi nhóm con chưa gán, để không phải gán lại cho từng nhánh | Hạng mục 14 |
 | `US11` | Là vận hành, tôi cần chỉ định quản lý đích danh trên hồ sơ một người, để xử lý trường hợp báo cáo chéo nhánh | Hạng mục 15 |
-| `US12` | Là vận hành, tôi cần khai loại quan hệ `mentor` ngoài quản lý, dùng chung cơ chế gán | Hạng mục 19 |
+| `US12` | Là vận hành, tôi cần gán mentor cho nhóm, để khi nhóm được giao lớp thì mentor tự vào lớp đó và phụ trách đúng người từ nhóm | Hạng mục 19 · `CF-6` |
 | `US13` | Là vận hành, tôi cần được cảnh báo khi một nhóm trống quản lý và chuyển được toàn bộ quan hệ sang người khác | Hạng mục 18 |
 | `US14` | Là vận hành, tôi cần lưu trữ một nhóm để nó ngừng nhận nội dung mới mà vẫn giữ lịch sử, và chỉ xoá được nhóm tạo nhầm chưa có lịch sử gì | Hạng mục 12 · `OQ-07` |
 | `US15` | Là vận hành, tôi cần tra được nhật ký thay đổi thành viên khi có vấn đề cần làm rõ, không giới hạn thời gian | Hạng mục 11 · `OQ-08` · `BA-05` · giải `O5` |
+| `US16` | Là quản lý, tôi cần xem toàn bộ dữ liệu học của người trong nhánh mình phụ trách, và chỉ những người đó. Màn này ở **UpLMS Ops**, đăng nhập bằng tài khoản nhân sự vận hành đã được gán ở `US9` | Hạng mục 16 · `OQ-09` · giải `O3` · `DEC73` |
 
-## Phía quản lý và học viên — UpLMS
+### `MAIL-GRP-02` — mail event thứ hai, thêm 09/10/2026 theo CR1
+
+Không có mail này thì người được gán không biết mình có nhánh phải theo dõi, màn `US16` không có cửa vào và `O3` treo *(`DEC74`, `RC-20`)*.
+
+| | |
+|---|---|
+| **Khi nào bắn** | Một người được gán **trực tiếp** làm quản lý của một nhóm *(`US9`)* · nhận chuyển toàn bộ phụ trách từ người khác *(`US13`)* · được chỉ định làm quản lý chính trên hồ sơ một người *(`US11`)* |
+| **Ai nhận** | Người được gán. Không đồng gửi ai |
+| **Nói gì** | Nhóm nào hoặc người nào, ai gán, lúc nào · với nhóm: số người trong nhánh tính cả nhóm con · đường dẫn tới màn theo dõi nhánh `US16` |
+| **Để làm gì** | Người nhận biết mình đã có nhánh phải theo dõi và vào đúng màn |
+
+> Không bắn khi quan hệ **kế thừa** từ nhóm cha, vì không có thao tác gán nào xảy ra · người đó **đã là** quản lý của chính nhóm đó · gán hoặc chuyển **mentor** *(`US12`)*.
+>
+> Chuyển phụ trách nhiều nhóm thì **một** email gộp, chỉ liệt nhóm người nhận chưa quản lý trước đó; không còn nhóm mới nào thì không gửi. Câu chữ cụ thể ở PRD `US9`.
+
+## Phía học viên — UpLMS
 
 | ID | User Story | Nguồn |
 |---|---|---|
-| `US16` | Là quản lý, tôi cần xem toàn bộ dữ liệu học của người trong nhánh mình phụ trách, và chỉ những người đó | Hạng mục 16 · `OQ-09` · giải `O3` |
 | `US17` | Là học viên, tôi cần thấy ai là quản lý của mình và cách liên hệ | Hạng mục 17 |
 
 ## Báo cáo
@@ -356,7 +396,7 @@ Lý do nằm ở cách dữ liệu đang lưu: tiến độ treo vào **lượt 
 |---|---|
 | **Khi nào bắn** | Một người rời nhóm *(bị gỡ, hoặc đồng bộ gỡ do điều chuyển)* mà **còn ít nhất một khoá đang học dở hoặc đã học xong** |
 | **Ai nhận** | **Quản lý** của người đó. Tạm thời chưa gửi L&D |
-| **Nói gì** | Ai rời nhóm nào, sang nhóm nào, còn những khoá nào ở tình trạng gì, và cần người nhận vào quyết |
+| **Nói gì** | Ai rời nhóm nào, sang nhóm nào, còn những khoá nào ở tình trạng gì, và cần người nhận vào quyết. Kèm một câu cảnh báo cố định: **gỡ khỏi lớp sẽ xoá tiến độ đã học, không khôi phục được** *(thêm 09/10/2026, `DEC75`)* |
 | **Để làm gì** | Người nhận vào xử lý thủ công. Hệ thống **không tự quyết** trong trường hợp này |
 
 > Không bắn khi người đó **chưa học khoá nào** — trường hợp đó `US19` xử lý tự động.
@@ -385,7 +425,7 @@ Câu chữ cụ thể để PRD.
 
 # 8. Tác động tới hệ thống hiện tại
 
-> ⚠️ **Chưa chạy Impact Analysis.** Bảng dưới chỉ liệt kê module bị chạm tới và lý do chạm, lấy từ KB. **Không xếp mức ảnh hưởng** vì chưa có căn cứ. Mức sẽ có ở Gate 2.
+> Bảng dưới là bản quét sơ bộ lúc viết BRD, chỉ liệt kê module bị chạm tới và lý do chạm, lấy từ KB. Mức ảnh hưởng, 12 vùng và 6 conflict đã quyết nằm ở `inception/impact-analysis/impact-matrix.md` v0.3; vùng 9 *(mail `MAIL-GRP-02`)* thêm ở CR1 ngày 09/10/2026.
 
 | Module | Chạm vào vì |
 |---|---|
@@ -412,7 +452,7 @@ Câu chữ cụ thể để PRD.
 
 # 10. Open Questions
 
-Danh sách đầy đủ: `working/open-questions/open-questions-20261005.md`
+Danh sách đầy đủ: `inception/requirements-analysis/requirements-analysis-questions.md`
 
 ✅ **Bốn câu nhóm D đã đóng hết ngày 06/10/2026 ở Bước 7.**
 
@@ -443,17 +483,35 @@ Danh sách đầy đủ: `working/open-questions/open-questions-20261005.md`
 | ~~`BA-06`~~ ⚠️ | ~~Người nghỉ việc giữ nguyên trong nhóm~~ — **đã bị thay thế bởi `CF-4` ngày 06/10**: gỡ khỏi nhóm, lượt ghi danh đánh dấu kết thúc | §6 *Ba trường hợp rời nhóm* |
 | ~~`BA-07`~~ ✅ | Vượt sức chứa lớp **chỉ cảnh báo**, vẫn thêm được | `US7` |
 
+## Đã đóng ở Gate 2 — 06/10/2026
+
+| # | Quyết định | Vào đâu trong tài liệu |
+|---|---|---|
+| ~~`CF-6`~~ ✅ | **Mentor của nhóm chính là mentor của lớp**, không phải hai khái niệm. Thêm nhóm vào lớp thì mentor của nhóm được gán luôn làm mentor trong lớp, phụ trách đúng nhóm đó. Mentor đầu tiên vào lớp là người chịu trách nhiệm chính, đổi lại được | §4 · §5 In scope *Quan hệ mentor* · `US12` |
+| ~~`CF-4`~~ ✅ | Người nghỉ việc gỡ khỏi nhóm, lượt ghi danh **đánh dấu kết thúc**, giữ dữ liệu — thay `BA-06` | §6 *Ba trường hợp rời nhóm* |
+
+## Đã đóng ở CR1 — 09/10/2026
+
+| # | Quyết định | Vào đâu trong tài liệu |
+|---|---|---|
+| ~~`DEC73`~~ ✅ | Màn theo dõi nhánh `US16` ở **UpLMS Ops**, quản lý dùng tài khoản nhân sự vận hành như `US9` | §1 *Product boundary* · §7 |
+| ~~`DEC74`~~ ✅ | Thêm mail event **`MAIL-GRP-02`** báo người được gán quản lý, nhận chuyển phụ trách, hoặc được chỉ định quản lý chính; quan hệ kế thừa không gửi | §5 In scope · §7 *`MAIL-GRP-02`* |
+| ~~`DEC75`~~ ✅ | `MAIL-GRP-01` thêm câu cảnh báo: gỡ khỏi lớp sẽ xoá tiến độ, không khôi phục được | §7 *`MAIL-GRP-01`* |
+
 ---
 
 # 11. References
 
 | Loại | Nguồn |
 |---|---|
-| Yêu cầu gốc | `working/raw-inputs/yeu-cau-goc-20261005.md` — 19 hạng mục |
-| Bản làm rõ | `working/ai-drafts/clarified-requirements-20261005.md` |
-| Nghiên cứu LMS khác | `working/ai-drafts/nghien-cuu-lms-khac-20261005.md` — TalentLMS · Docebo · Moodle |
-| Dữ liệu HRM | `working/raw-inputs/lark-users-by-department.csv` — 384 nhân sự, 53 phòng ban |
-| Quyết định đã chốt | `project-decisions.md` |
-| Nguyên tắc mô hình hoá | KB `16-domain-principles.md` — nguyên tắc 6, ranh giới Nhóm với Lớp |
-| KB liên quan | `04-class.md` · `06-user-account.md` · `12-data-model.md` · `14-api-surface.md` |
-| Dự án liên quan | `.claude/projects/Gamification/` — `US16` đang chờ chức năng này |
+| Yêu cầu gốc | `inputs/yeu-cau-goc-20261005.md` — 19 hạng mục |
+| Bản làm rõ | `inception/requirements-analysis/requirements.md` v0.3 — `RC-01` đến `RC-20` |
+| Câu hỏi đã đóng | `inception/requirements-analysis/requirements-analysis-questions.md` — `OQ-xx`, `BA-xx` |
+| Nghiên cứu LMS khác | `ideation/market-research/competitive-analysis.md` v0.2 — TalentLMS · Docebo · Moodle · bốn bài TalentLMS; nguyên văn ở `inputs/talentlms-help-articles-20261007.md` |
+| Dữ liệu HRM | `inputs/lark-users-by-department.csv` — 384 nhân sự, 53 phòng ban |
+| Quyết định đã chốt | `decisions.md` — `DEC1` đến `DEC78`; bản v1 ở `archive/v1/project-decisions.md` |
+| Phạm vi hiện hành chi tiết | `inception/prd/prd.md` v0.2 — 20 US, 128 business rule, publish Lark 09/10/2026 |
+| Ảnh hưởng | `inception/impact-analysis/impact-matrix.md` v0.3 — 12 vùng, 6 conflict đã quyết |
+| Nguyên tắc mô hình hoá | KB `.claude/knowledge/domain/16-domain-principles.md` — nguyên tắc 6, ranh giới Nhóm với Lớp |
+| KB liên quan | `.claude/knowledge/domain/` — `04-class.md` · `06-user-account.md` · `12-data-model.md` · `14-api-surface.md` · `15-product-direction.md` §6 và §7 |
+| Intent liên quan | `.claude/intents/260923-gamification/` — `US16` của intent đó *(bộ lọc bảng xếp hạng theo nhóm)* chờ chức năng này · `.claude/intents/261006-report-phase-1/` — tham chiếu `US16` và `US18` |

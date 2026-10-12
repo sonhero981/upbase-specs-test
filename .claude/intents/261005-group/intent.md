@@ -45,13 +45,13 @@ Tenant: làm cho UpBase, dữ liệu và hạ tầng cho mọi tenant. Số cấ
 | Wiki space | `7660816820865093342` |
 | Node cha chung | `02. Execution — Epics & Features`, token `X3hhwv2MxizpFgkVudVl7e52gUc` |
 | Intent node | `Group`, token `FwwEwV4V7ilx77k6LColwj3OgDf` |
-| Published | initiative-brief: — · hld-brief: — · prd: **v0.2** (09/10/2026, revision 31, cập nhật đúng doc cũ bằng `lark-cli docs +update --command overwrite`; v0.1 publish 06/10/2026); tên trên Lark `[PRD] Group` (hồ sơ v1 ghi `[PRD] Study Group`, đã được đổi trên Lark trước 09/10; publish lại không đổi tên), node `UAIEw1tKfirmt3kUicZle3NTgfd`, doc `Jg7ld8UCzoeMiAxW5ielxlC4gGg`, https://upbasevn.sg.larksuite.com/docx/Jg7ld8UCzoeMiAxW5ielxlC4gGg, publish 06/10/2026 |
+| Published | initiative-brief: — · hld-brief: — · prd: **v0.3** (12/10/2026, revision 42, overwrite đúng doc cũ bằng `lark-cli docs +update --command overwrite`; v0.2 ngày 09/10/2026 revision 31; v0.1 publish 06/10/2026); tên trên Lark `[PRD] Group` (hồ sơ v1 ghi `[PRD] Study Group`, đã được đổi trên Lark trước 09/10; publish lại không đổi tên), node `UAIEw1tKfirmt3kUicZle3NTgfd`, doc `Jg7ld8UCzoeMiAxW5ielxlC4gGg`, https://upbasevn.sg.larksuite.com/docx/Jg7ld8UCzoeMiAxW5ielxlC4gGg, publish 06/10/2026 |
 
-Tên trên Lark khác tên file (`[PRD] Nhóm học viên`): lần publish sau giữ tên trên Lark, chỉ cập nhật nội dung. Đối chiếu sau publish 09/10 (v0.2, revision 31): heading 14/32/124/52, 46 bảng, 306 dòng bảng, 209 gạch đầu dòng khớp file; 4 bảng trắng, không còn code block sơ đồ. Lần 06/10 (v0.1): 2.326 block, heading 14/32/124/51, 45 bảng, 205 gạch đầu dòng.
+Tên trên Lark khác tên file (`[PRD] Nhóm học viên`): lần publish sau giữ tên trên Lark, chỉ cập nhật nội dung. Đối chiếu sau publish 12/10 (v0.3, revision 42): heading 14/32/124/52, 46 bảng, 308 dòng bảng, 211 gạch đầu dòng khớp file; 4 bảng trắng từ 4 sơ đồ, không còn code block sơ đồ; các ô Target release, Epic, Designer, Tech lead, QA trên Lark trống trước khi ghi đè nên không mất gì. Lần 09/10 (v0.2, revision 31): heading 14/32/124/52, 46 bảng, 306 dòng bảng, 209 gạch đầu dòng khớp file; 4 bảng trắng, không còn code block sơ đồ. Lần 06/10 (v0.1): 2.326 block, heading 14/32/124/51, 45 bảng, 205 gạch đầu dòng.
 
 ## Việc còn treo
 1. ~~`competitive-analysis.md` v0.2 §9.2, ba điểm chờ PO xem~~ Đã quyết 09/10/2026, CR1: `US16` ở Ops · thêm `MAIL-GRP-02` · câu cảnh báo trong `MAIL-GRP-01`. Duyệt lại và publish PRD v0.2 cùng ngày.
-2. PRD chưa có Designer, Tech lead, QA. Stage 2.41 HLD Brief chưa chạy vì chưa tồn tại khi làm v1; chạy bổ sung nếu cần họp bàn giao trước khi Dev bắt đầu.
+2. HLD Brief v0.1 đã soạn 12/10/2026 (`inception/hld-brief/hld-brief.md`), theo vai, không ghi tên lead. Chờ lead Design, Dev, QA ghi mục 8, 9, 10 và ký mục 12 qua merge request. Sau sign-off: publish `[HLD] Group` lên Lark, sửa PRD theo định hướng lead và đóng tồn đọng #3, #4 theo DEC84, DEC85.
 3. Jira Epic và Story trống. User Guide viết sau khi Dev xong, qua `/generate-user-guide`.
 
 ## Mapping từ luồng v1

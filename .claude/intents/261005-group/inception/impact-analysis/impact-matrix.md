@@ -1,10 +1,10 @@
 ---
 intent: 261005-group
 artifact: impact-matrix
-version: 0.3
+version: 0.4
 status: approved
-approved: 2026-10-09 (v0.3); 2026-10-06 (v0.2)
-cr: CR1 ngày 2026-10-09, vùng 9 và BI-6
+approved: 2026-10-12 (v0.4); 2026-10-09 (v0.3); 2026-10-06 (v0.2)
+cr: CR2 ngày 2026-10-12, CG-3 đã giải và OQ-31; CR1 ngày 2026-10-09, vùng 9 và BI-6
 gate: v1 Gate 2
 migrated-from: .claude/projects/Group/working/impact-analysis/impact-matrix-v0.2-20261006.md
 ---
@@ -13,11 +13,11 @@ migrated-from: .claude/projects/Group/working/impact-analysis/impact-matrix-v0.2
 | | |
 | --- | --- |
 | **Project** | Group |
-| **Version** | **v0.3** — 09/10/2026, CR1. v0.2 ngày 06/10/2026 |
+| **Version** | **v0.4** — 12/10/2026, CR2. v0.3 ngày 09/10/2026, CR1. v0.2 ngày 06/10/2026 |
 | **Ngày** | Dựng 05/10/2026 · duyệt Gate 2 ngày 06/10/2026 |
 | **Nguồn input** | `brd-v0.1-20261005.md` · `related-features-map-20261005.md` · KB `04` `05` `06` `09` `11` `12` `13` `14` `15` `16` · **Swagger đọc 05/10/2026** · **schema Lark tải và đọc 05/10/2026** |
-| **Trạng thái** | ✅ **Approved — Gate 2, 06/10/2026.** 6/6 conflict đã quyết |
-| **Cập nhật** | 09/10/2026 — CR1: thêm `MAIL-GRP-02` vào vùng 9 và `BI-6`. Trước đó 06/10/2026 ghi quyết định Gate 2 |
+| **Trạng thái** | ✅ **Approved** — v0.4 ngày 12/10/2026 (CR2) · v0.3 ngày 09/10/2026 (CR1) · Gate 2 ngày 06/10/2026. 6/6 conflict đã quyết, 15/15 coverage gap có luật hoặc có chỗ ghi |
+| **Cập nhật** | 12/10/2026 — CR2: `CG-3` đã giải bằng `BR-3.7` `BR-19.7`; `OQ-31` ghi rõ không chặn PRD. 09/10/2026 — CR1: thêm `MAIL-GRP-02` vào vùng 9 và `BI-6`. Trước đó 06/10/2026 ghi quyết định Gate 2 |
 
 > Bản phân tích **nội bộ**, không phải mục trong PRD. Kết quả chảy vào PRD ở `Solution` · `Out of scope` · `Acceptance criteria`.
 
@@ -283,7 +283,7 @@ Không tự chọn. Để Bước 7 so sánh.
 | --- | --- | --- |
 | `CG-1` | **Nhóm rỗng** được gán nội dung. Sau đó có người vào | Luật đứng phải chạy tại thời điểm người vào, không phải lúc gán |
 | `CG-2` | **Nhóm cha rỗng nhưng nhánh con có người.** Gán cho cha, chảy xuống con | Quy tắc *cha bao trùm con* áp cho gán nội dung hay chỉ cho báo cáo |
-| `CG-3` | Một người thuộc **nhiều nhóm cùng được gán một khoá** | `C2` nói một lượt ghi danh. Nhưng gỡ khỏi một nhóm thì lượt đó còn không |
+| `CG-3` | Một người thuộc **nhiều nhóm cùng được gán một khoá** | ✅ **Đã giải 12/10/2026, CR2:** gỡ khỏi một nhóm thì lượt ghi danh **giữ nguyên** khi còn nhóm khác đang giao; một lượt nhiều nguồn. PRD `BR-3.7` · `BR-19.7` · `BR-7.9`. Trước đó: `C2` nói một lượt ghi danh, nhưng gỡ khỏi một nhóm thì lượt đó còn không |
 | `CG-4` | Cây chạm **đúng 6 cấp**, rồi di chuyển một nhánh xuống sâu hơn | Chặn ở đâu, báo gì |
 | `CG-5` | Di chuyển nhánh tạo **vòng lặp** — A là cha B, B lại là cha A | `OQ-06` đã ghi: giới hạn số cấp **không** giải được việc này |
 
@@ -370,7 +370,7 @@ Không tự chọn. Để Bước 7 so sánh.
 | ~~`OQ-28`~~ | Cảnh báo vượt sức chứa lớp đi đâu | ✅ **Đóng 06/10 — một dòng ở màn danh sách học viên trong lớp, không realtime, không chặn** | PO | — |
 | ~~`OQ-29`~~ | Người bị chuyển lớp thì luật đứng xử lý sao | ✅ **Đóng 06/10 — chưa có chức năng chuyển lớp.** Endpoint `transfer` là endpoint chết. Chuyển lớp = xoá khỏi lớp cũ, thêm lớp mới, học lại từ đầu | PO | — |
 | `OQ-30` | **Loại quan hệ** *(quản lý / mentor)* do hệ thống định nghĩa cố định, hay tenant tự thêm được | Chiều tenant. Tổ chức khác có thể cần `coach`, `buddy` | PO | ❌ Không |
-| `OQ-31` | **Xin bản export `casbin_rule`** hoặc tài liệu mô tả role | Không thiết kế phạm vi dữ liệu trên nền chưa nhìn thấy | Dev | ❌ Không — nhưng chặn PRD |
+| `OQ-31` | **Xin bản export `casbin_rule`** hoặc tài liệu mô tả role | Không thiết kế phạm vi dữ liệu trên nền chưa nhìn thấy | Dev | ❌ Không. **Không chặn PRD** *(ghi rõ 12/10/2026, CR2)*: màn `US16` đọc theo quan hệ quản lý theo `CF-5`, không theo ma trận quyền; ma trận cần cho Dev khi nối hai phạm vi, ghi ở PRD Vấn đề tồn đọng #2 |
 | ~~`OQ-32`~~ | Đổi tên khái niệm `mentor` mới thành gì | ✅ **Đóng 06/10 — không cần đổi.** `CF-6` chốt: chỉ có **một** khái niệm mentor, nó đi theo nhóm vào lớp | PO | — |
 | `OQ-33` | **`roles.is_group` là gì?** Cột này có trong schema, có liên quan tới chức năng Nhóm không | Nếu hệ đã có khái niệm role dạng nhóm thì phải biết trước khi dựng cái mới | PO · Dev | ❌ Không |
 
