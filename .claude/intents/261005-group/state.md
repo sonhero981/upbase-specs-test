@@ -27,7 +27,7 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - [x] 2.31 impact-analysis · v1: inception/impact-analysis/impact-matrix.md v0.4 duyệt 2026-10-12 (CR2, CG-3 đã giải, OQ-31; DEC82). v0.3 duyệt 2026-10-09 (CR1, vùng 9 và BI-6). v0.2 Gate 2 duyệt 2026-10-06
 - [S] 2.32 solution-options · v1 không làm so sánh phương án; Bước 7 dùng để chốt nhóm câu hỏi D
 - [x] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story và 20 US, v0.3. Duyệt lại theo v2 2026-10-12 (DEC82) sau một lần Request Changes (DEC80, CR2); truy vết tay ở inception/prd/traceability.md. 20 US chốt ở 9A của v1 ngày 2026-10-06
-- [-] 2.41 hld-brief · mở 2026-10-12 (DEC83). Bản nháp v0.1 inception/hld-brief/hld-brief.md, chụp archive/hld-brief/hld-brief-draft-20261012.md. Chờ lead Design, Dev, QA ghi mục 8, 9, 10 và ký mục 12 qua merge request, không hạn (DEC86)
+- [-] 2.41 hld-brief · mở 2026-10-12 (DEC83). Bản nháp v0.1 inception/hld-brief/hld-brief.md, viết lại văn viết 2026-10-15 (DEC88); bản để so diff với lead: archive/hld-brief/hld-brief-draft-r1-20261015.md. Chờ lead Design, Dev, QA ghi mục 8, 9, 10 và ký mục 12 qua merge request, không hạn (DEC86)
 - [x] 2.42 prd-generation · v1: inception/prd/prd.md v0.3 duyệt 2026-10-12 (CR2, chạm US3 US7 US19 US20, danh sách US, tồn đọng; DEC82). v0.2 duyệt 2026-10-09 (CR1, chạm US9 US11 US13 US16 US20). v0.1 duyệt và publish Lark 2026-10-06
 
 ## Current
@@ -73,3 +73,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-12 Mở 2.41 HLD Brief (DEC83). Commit git để sau khi HLD Brief xong, theo lời PO
 - 2026-10-12 2.41 bước Ask: tạo inception/hld-brief/hld-brief-questions.md, 4 câu (Q1 lead, Q2 hạn, Q3 quyết định cần chốt, Q4 điểm nhấn), 2 câu chặn. Chờ PO trả lời theo cách Chat
 - 2026-10-12 2.41: PO trả lời 4 câu (DEC84 đến DEC86), soạn hld-brief.md v0.1: mục 1-7, 11 từ PRD v0.3, BRD v0.3, Impact Matrix v0.4; khung 8, 9, 10 kèm 5 dòng gợi ý mỗi vai; mục 12 theo vai. Phần PO viết 1.887 từ theo đếm âm tiết, PO chấp nhận (DEC87). Chụp draft. Chờ MR của lead. Commit thư mục intent
+- 2026-10-15 Viết lại HLD Brief theo văn viết (DEC88), không đổi nội dung; chụp draft-r1 làm mốc so diff với lead

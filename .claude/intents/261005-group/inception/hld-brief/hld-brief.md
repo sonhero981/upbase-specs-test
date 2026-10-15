@@ -10,134 +10,134 @@ lark: điền sau sign-off
 | | |
 |---|---|
 | Owner | Bùi Đức Huy (PO) |
-| Design lead | theo vai, lead tự điền tên khi ký |
-| Tech lead | theo vai, lead tự điền tên khi ký |
-| QA lead | theo vai, lead tự điền tên khi ký |
-| Họp | Không họp. Lead ghi mục của mình trên repo qua merge request, PO merge; không đặt hạn |
+| Design lead | Ghi theo vai; lead điền tên khi ký |
+| Tech lead | Ghi theo vai; lead điền tên khi ký |
+| QA lead | Ghi theo vai; lead điền tên khi ký |
+| Cách góp ý | Không tổ chức họp. Lead ghi phần của mình vào file này qua merge request, PO duyệt và merge. Không đặt hạn |
 
-Tài liệu này tối đa ba trang. Mục 1 đọc trong một phút. Mục 8, 9, 10 do lead các team tự viết, trực tiếp trong file này trên repo; mỗi người chỉ sửa mục của mình và dòng của mình ở mục 12. PRD chi tiết đã có bản v0.3 trên Lark; sau khi mục 12 đủ chữ ký, PRD được sửa theo định hướng của lead. Bản trên Lark của brief là bản cuối sau khi ký.
+Tài liệu dài tối đa ba trang; mục 1 đọc hết trong khoảng một phút. Lead của từng team viết mục 8, 9, 10 trực tiếp trong file này trên repo, mỗi người chỉ sửa mục của mình và dòng của mình ở mục 12. PRD chi tiết bản v0.3 đã có trên Lark. Sau khi mục 12 đủ chữ ký, PRD được cập nhật theo định hướng của các lead, và bản brief đã ký được đưa lên Lark làm bản chính thức.
 
-Mục 1 đến 7 và 11 là bản tổng hợp từ tài liệu đã duyệt: muốn đổi nội dung thì sửa ở nguồn qua change request rồi tổng hợp lại, không sửa thẳng ở đây. Mục 8, 9, 10 là của lead; dòng in nghiêng đầu mỗi mục là gợi ý của PO, lead viết bên dưới.
+Mục 1 đến 7 và mục 11 tổng hợp từ các tài liệu đã duyệt. Nội dung các mục này chỉ thay đổi qua change request ở tài liệu nguồn rồi tổng hợp lại vào đây, không sửa trực tiếp trong brief. Mục 8, 9, 10 thuộc về lead: các dòng in nghiêng ở đầu mỗi mục là gợi ý của PO, lead viết nội dung bên dưới.
 
 ## 1. Tóm tắt
-- Vấn đề: không gom được học viên thành tập ổn định để giao bài, theo dõi, cộng dồn; mọi thứ đi qua Lớp.
-- Cho ai: L&D giao bài, quản lý theo dõi người của mình, vận hành báo cáo theo phòng ban.
-- Đo được: 60% lượt ghi danh mới từ nhóm sau hai tháng; 0 lần gán bổ sung tay; báo cáo quý chạy lại đúng số đã chốt.
-- Phạm vi: nhóm nhiều cấp từ Lark và tự tạo; luật đứng dẫn người vào Lớp; quản lý, mentor; lịch sử thành viên; báo cáo theo mốc; rời nhóm. Phần lớn ở Ops.
-- Thay đổi lớn nhất: đường giao bài thứ hai chạy nền, và lớp lịch sử thành viên mà mọi báo cáo theo nhóm đọc qua.
-- Rủi ro lớn nhất: ma trận quyền chưa ai đọc được; lần đồng bộ đầu chạm 384 người.
-- Phụ thuộc lớn nhất: đồng bộ Lark mở rộng được từ người sang cơ cấu.
-- Không được phá: nhóm chỉ chứa người; một lượt ghi danh một khoá; thành viên lưu kèm thời điểm; luật đứng theo luật Lớp.
-- Cần quyết: bốn câu ở mục 7, đều thuộc Dev.
-- Chi tiết: PRD v0.3, 20 user story, 130 business rule, duyệt 12/10/2026.
+- Vấn đề: hệ thống chưa có cách gom học viên thành một tập ổn định để giao nội dung, theo dõi và tổng hợp số liệu; mọi thao tác hiện phải đi qua Lớp.
+- Đối tượng: L&D khi giao nội dung, quản lý trực tiếp khi theo dõi nhân sự của mình, nhân sự vận hành khi lập báo cáo theo phòng ban.
+- Chỉ số mục tiêu: 60% lượt ghi danh mới đến từ nhóm sau hai tháng; không còn trường hợp phải gán bổ sung thủ công; báo cáo quý khi chạy lại cho đúng số liệu đã chốt.
+- Phạm vi: nhóm nhiều cấp từ hai nguồn (đồng bộ Lark và tạo thủ công), luật đứng đưa thành viên vào Lớp, quan hệ quản lý và mentor, lịch sử thành viên, báo cáo theo mốc thời gian, xử lý khi rời nhóm. Phần lớn chức năng nằm ở UpLMS Ops.
+- Thay đổi lớn nhất: thêm một cách ghi danh thứ hai do hệ thống tự thực hiện, và một lớp dữ liệu lịch sử thành viên làm nguồn cho mọi báo cáo theo nhóm.
+- Rủi ro lớn nhất: ma trận phân quyền hiện có chưa được đối chiếu; lần đồng bộ đầu tiên tác động tới 384 người cùng lúc.
+- Phụ thuộc lớn nhất: cơ chế đồng bộ Lark hiện có phải mở rộng được từ dữ liệu người sang dữ liệu cơ cấu.
+- Ràng buộc bắt buộc: nhóm chỉ chứa người; mỗi người chỉ có một lượt ghi danh cho một khoá; mọi thay đổi thành viên được lưu kèm thời điểm; luật đứng tuân theo luật của Lớp.
+- Quyết định còn mở: bốn câu hỏi ở mục 7, đều do Dev quyết.
+- Tài liệu chi tiết: PRD v0.3 gồm 20 user story và 130 business rule, duyệt ngày 12/10/2026.
 
 ## 2. Vấn đề và mục tiêu
-Giao một khoá cho phòng 55 người là chọn tay hoặc nhập tệp; người mới vào sau bị sót. Quản lý không xem được tiến độ người mình phụ trách vì hệ thống không biết ai quản lý ai. Vận hành không cộng dồn được theo phòng ban. Gamification đã hoãn bộ lọc theo nhóm vì thiếu chức năng này. Cơ cấu đã có trên Lark: 384 nhân sự, 53 phòng ban, 4 cấp.
+Để giao một khoá cho một phòng 55 người, nhân sự vận hành phải chọn thủ công từng người hoặc nhập tệp danh sách, và người vào phòng sau thời điểm đó không được giao. Quản lý trực tiếp không xem được tiến độ của nhân sự mình phụ trách vì hệ thống không lưu quan hệ quản lý. Vận hành không tổng hợp được số liệu theo phòng ban. Dự án Gamification đã phải hoãn bộ lọc bảng xếp hạng theo nhóm vì thiếu chức năng này. Cơ cấu tổ chức đã có đủ trên Lark: 384 nhân sự, 53 phòng ban, 4 cấp.
 
 | Mục tiêu | Đo bằng |
 |---|---|
-| O1 Giao nội dung cho tập người ổn định | Lượt ghi danh từ nhóm: 60% sau hai tháng |
-| O2 Người mới tự nhận nội dung | Lần gán bổ sung tay ở nhóm bật tự ghi danh: 0 |
-| O3 Quản lý xem người mình phụ trách | Quản lý mở màn theo dõi mỗi tháng: 50% |
-| O4 Cộng dồn theo cơ cấu | Lượt xem báo cáo; ngưỡng đặt sau tháng đầu |
-| O5 Dựng lại thành viên tại mốc quá khứ | Chênh lệch chạy lại với bản chốt: 0 |
+| O1 Giao nội dung cho một tập người ổn định | Tỉ lệ lượt ghi danh sinh ra từ nhóm đạt 60% sau hai tháng |
+| O2 Thành viên mới tự nhận nội dung đã giao | Số lần phải gán bổ sung thủ công ở nhóm bật tự ghi danh bằng 0 |
+| O3 Quản lý xem được tiến độ nhân sự mình phụ trách | Tỉ lệ quản lý mở màn theo dõi nhánh mỗi tháng đạt 50% |
+| O4 Cộng dồn số liệu theo cơ cấu | Số lượt xem báo cáo cộng dồn; ngưỡng xác định sau tháng đầu |
+| O5 Tái dựng danh sách thành viên tại một mốc quá khứ | Chênh lệch giữa báo cáo chạy lại và bản đã chốt bằng 0 |
 
 ## 3. Phạm vi
 | In | Out | Để sau |
 |---|---|---|
-| Nhóm tối đa 6 cấp, cấu hình được; nguồn Lark chỉ đọc hoặc tự tạo; một người nhiều nhóm; cha bao trùm con khi đọc | Đồng bộ ngược về Lark: Lark là hệ gốc | Nhóm làm người nhận thông báo Ops |
-| Thành viên thêm gỡ tay, theo tệp; lịch sử vào ra kèm thời điểm, giữ vĩnh viễn | Nhóm cho nhân sự vận hành | Phạm vi dữ liệu nhiều mức theo vai |
-| Luật đứng giao nội dung; công tắc chảy xuống nhánh con, tự ghi danh người vào sau, mặc định tắt | Nhóm chứa nội dung: chỉ chứa người | |
-| Quản lý gán, suy ra theo cây, quản lý chính; mentor theo nhóm vào lớp; theo dõi nhánh ở Ops; học viên xem quản lý ở UpLMS | Sửa cơ chế ghi danh của Lớp | |
-| Báo cáo cộng dồn tại mốc; nhật ký; lưu trữ, chỉ xoá nhóm chưa có lịch sử | Xoá nhóm có lịch sử, dọn lịch sử, chia dữ liệu theo nhánh, nhóm động, chuyển lớp | |
-| Nghỉ việc đánh dấu lượt kết thúc; rời nhóm chưa học tự gỡ, đang học email quản lý; hai mail mới | | |
+| Nhóm tối đa 6 cấp, giá trị cấu hình được; nguồn là Lark (chỉ đọc) hoặc tạo thủ công; một người thuộc được nhiều nhóm; nhóm cha bao gồm nhánh con khi đọc dữ liệu | Đồng bộ ngược về Lark, vì Lark là hệ thống gốc | Dùng nhóm làm danh sách người nhận thông báo từ Ops |
+| Thêm và gỡ thành viên thủ công hoặc qua tệp; lưu lịch sử vào và ra nhóm kèm thời điểm, không giới hạn thời gian lưu | Nhóm dành cho nhân sự vận hành | Phạm vi dữ liệu nhiều mức theo vai trò |
+| Giao nội dung bằng luật đứng; hai công tắc "chảy xuống nhánh con" và "tự ghi danh người vào sau", mặc định tắt | Nhóm chứa nội dung, vì nhóm chỉ chứa người | |
+| Gán quản lý, suy ra quản lý theo cây, chỉ định quản lý chính; mentor đi theo nhóm vào lớp; màn theo dõi nhánh ở Ops; học viên xem quản lý của mình ở UpLMS | Thay đổi cơ chế ghi danh của Lớp | |
+| Báo cáo cộng dồn tại một mốc thời gian; nhật ký thành viên; lưu trữ nhóm, chỉ cho xoá nhóm chưa có lịch sử | Xoá nhóm đã có lịch sử, xoá bớt lịch sử, chia dữ liệu học theo nhánh, nhóm động theo điều kiện, chuyển lớp | |
+| Người nghỉ việc được đánh dấu kết thúc lượt ghi danh; người rời nhóm khi chưa học được hệ thống tự gỡ khỏi khoá; người rời nhóm khi đang học thì quản lý nhận email; hai mail event mới | | |
 
 ## 4. Giải pháp tổng thể
 ```mermaid
 flowchart LR
-    S["Lark"] -->|đồng bộ| G["Nhóm: chỉ người"]
-    M["Tạo tay"] --> G
+    S["Lark"] -->|đồng bộ theo lô| G["Nhóm (chỉ chứa người)"]
+    M["Tạo thủ công"] --> G
     G -->|luật đứng| L["Lớp"]
-    L -->|một lượt| E["Lượt ghi danh"]
-    G -->|quản lý| Q["Theo dõi, báo cáo"]
-    G -.->|kèm thời điểm| H["Lịch sử thành viên"]
+    L -->|một lượt ghi danh| E["Lượt ghi danh (giữ tiến độ)"]
+    G -->|quan hệ quản lý| Q["Theo dõi nhánh, báo cáo"]
+    G -.->|ghi kèm thời điểm| H["Lịch sử thành viên"]
     H --> Q
 ```
-Nhóm là địa chỉ để gán; tiến độ sống ở Lớp; báo cáo theo nhóm đọc qua lịch sử thành viên.
+Nhóm là đối tượng để gán. Nghĩa vụ học và tiến độ được lưu ở Lớp, còn báo cáo theo nhóm lấy dữ liệu từ lịch sử thành viên.
 
-- Nhóm chỉ chứa người; quan hệ người với nội dung chỉ ở Lớp.
-- Luật đứng chạy lúc giao, lúc có người vào, lúc bật công tắc; lớp kết thúc thì dừng im lặng.
-- Một lượt ghi danh một khoá, có thể nhiều nguồn nhóm; rời một nhóm không mất lượt khi nhóm khác còn giao.
-- Đồng bộ thì thuộc nhóm sâu nhất; cha bao trùm ở mức đọc.
-- Rời nhóm: nghỉ việc đánh dấu kết thúc; chưa học tự gỡ; đang học email quản lý quyết.
-- Phạm vi tách theo màn: theo dõi nhánh đọc theo quan hệ quản lý, giao bài theo vai trò.
-- Mỗi vai một tài khoản; tài khoản kiểm thử loại khỏi mọi logic.
+- Nhóm chỉ chứa người. Quan hệ giữa người và nội dung chỉ tồn tại trong Lớp.
+- Luật đứng được kích hoạt khi giao nội dung, khi có người vào nhóm và khi bật công tắc tự ghi danh. Khi lớp đã kết thúc, luật đứng dừng mà không báo lỗi và ghi nhật ký.
+- Mỗi người chỉ có một lượt ghi danh cho một khoá, và một lượt có thể có nhiều nhóm nguồn. Người rời một nhóm vẫn giữ lượt ghi danh nếu nhóm khác của họ còn giao lớp đó.
+- Khi đồng bộ, mỗi người thuộc nhóm sâu nhất trên nhánh của mình; nhóm cha bao gồm nhánh con ở mọi màn đọc dữ liệu.
+- Khi rời nhóm, người nghỉ việc được đánh dấu kết thúc lượt ghi danh, người chưa học được hệ thống tự gỡ, còn người đang học thì quản lý nhận email và quyết định.
+- Phạm vi dữ liệu xác định theo từng màn: màn theo dõi nhánh dùng quan hệ quản lý, màn giao nội dung dùng vai trò hệ thống.
+- Mỗi vai trò dùng một tài khoản riêng; tài khoản kiểm thử bị loại khỏi mọi logic và báo cáo.
 
 ## 5. User story theo nhóm bàn giao
 | Proto-Unit | US | Tên | Ý chính | Thứ tự |
 |---|---|---|---|---|
-| U1 Khung | US1 | Tạo, sửa nhóm | Mã duy nhất, tối đa 6 cấp | 1 |
-| U1 Khung | US2 | Di chuyển nhánh | Giữ thành viên, nội dung đã giao | 1 |
-| U1 Khung | US3 | Thêm gỡ tay | Gỡ xét tình trạng học | 1 |
-| U1 Khung | US4 | Thêm gỡ theo tệp | Dòng lỗi không chặn | 1 |
-| U1 Khung | US6 | Danh sách nhóm | Cây tải dần, đếm cả nhánh | 1 |
-| U3 Giao | US7 | Giao nội dung | Chọn lớp, không hồi tố | 2 |
-| U3 Giao | US8 | Tự ghi danh | Công tắc theo cặp nhóm lớp | 2 |
-| U7 Nền | US14 | Lưu trữ nhóm | Luật đứng ngừng, lượt giữ | 3 |
-| U7 Nền | US15 | Nhật ký thành viên | Chỉ đọc, giữ toàn bộ | 3 |
-| U7 Nền | US18 | Báo cáo cộng dồn | Theo thành viên tại mốc | 3 |
-| U2 Đồng bộ | US5 | Nhóm từ Lark | Theo lô, chỉ đọc, nhóm sâu nhất | 4 |
-| U4 Quan hệ | US9 | Gán quản lý | Nhiều quản lý, email báo | 5 |
-| U4 Quan hệ | US10 | Suy ra theo cây | Kế thừa, tính lúc đọc | 5 |
-| U4 Quan hệ | US11 | Quản lý chính | Một người một chính | 5 |
-| U4 Quan hệ | US12 | Gán mentor | Mentor nhóm thành mentor lớp | 5 |
-| U4 Quan hệ | US13 | Nhóm trống quản lý | Cảnh báo, chuyển phụ trách | 5 |
-| U5 Hiển thị | US16 | Theo dõi nhánh | Ở Ops, theo quan hệ quản lý | 6 |
-| U5 Hiển thị | US17 | Xem quản lý | Tên, ảnh, email | 6 |
-| U6 Vòng đời | US19 | Rời khi chưa học | Tự gỡ, trừ nhóm khác còn giao | 7 |
-| U6 Vòng đời | US20 | Báo quản lý | Một email gộp, cảnh báo mất tiến độ | 7 |
+| U1 Khung nhóm | US1 | Tạo và sửa nhóm | Mã nhóm duy nhất; cây tối đa 6 cấp | 1 |
+| U1 Khung nhóm | US2 | Di chuyển một nhánh | Giữ nguyên thành viên và nội dung đã giao | 1 |
+| U1 Khung nhóm | US3 | Thêm và gỡ thành viên thủ công | Khi gỡ, xét tình trạng học của từng khoá | 1 |
+| U1 Khung nhóm | US4 | Thêm và gỡ thành viên qua tệp | Dòng lỗi không chặn các dòng hợp lệ | 1 |
+| U1 Khung nhóm | US6 | Xem danh sách nhóm | Cây tải theo từng nhánh; số thành viên tính cả nhánh con | 1 |
+| U3 Giao nội dung | US7 | Giao nội dung cho nhóm | Chọn lớp cụ thể; không áp dụng hồi tố | 2 |
+| U3 Giao nội dung | US8 | Bật tắt tự ghi danh | Công tắc riêng cho từng cặp nhóm và lớp | 2 |
+| U7 Nền tảng | US14 | Lưu trữ nhóm | Luật đứng ngừng chạy; lượt ghi danh đã sinh giữ nguyên | 3 |
+| U7 Nền tảng | US15 | Tra nhật ký thành viên | Chỉ đọc; lưu toàn bộ lịch sử | 3 |
+| U7 Nền tảng | US18 | Báo cáo cộng dồn theo nhóm | Tính theo danh sách thành viên tại mốc đã chọn | 3 |
+| U2 Đồng bộ cơ cấu | US5 | Nhóm đồng bộ từ Lark | Đồng bộ theo lô; chỉ đọc; thành viên thuộc nhóm sâu nhất | 4 |
+| U4 Quan hệ người | US9 | Gán quản lý cho nhóm | Một nhóm có nhiều quản lý; email báo người được gán | 5 |
+| U4 Quan hệ người | US10 | Suy ra quản lý theo cây | Kế thừa từ nhóm cha gần nhất; tính tại thời điểm đọc | 5 |
+| U4 Quan hệ người | US11 | Chỉ định quản lý chính | Mỗi học viên có tối đa một quản lý chính | 5 |
+| U4 Quan hệ người | US12 | Gán mentor cho nhóm | Mentor của nhóm trở thành mentor của lớp được giao | 5 |
+| U4 Quan hệ người | US13 | Cảnh báo nhóm trống quản lý | Gắn nhãn cảnh báo; chuyển toàn bộ phụ trách sang người khác | 5 |
+| U5 Phạm vi và hiển thị | US16 | Quản lý theo dõi nhánh | Màn ở Ops; dữ liệu theo quan hệ quản lý | 6 |
+| U5 Phạm vi và hiển thị | US17 | Học viên xem quản lý | Hiển thị tên, ảnh, email | 6 |
+| U6 Vòng đời nhân sự | US19 | Rời nhóm khi chưa học | Tự gỡ khỏi khoá, trừ khi nhóm khác còn giao lớp đó | 7 |
+| U6 Vòng đời nhân sự | US20 | Báo quản lý khi còn nghĩa vụ học | Một email cho mỗi lần rời nhóm; cảnh báo việc mất tiến độ | 7 |
 
-Thứ tự: U1, U3 cho giá trị thấy ngay; U7 trước U2, U4 vì lịch sử phải có trước khi tích luỹ. Dev chốt thứ tự thật. Chi tiết từng US ở PRD `inception/prd/prd.md`; lead đọc trước khi ghi mục 8, 9, 10.
+Thứ tự gợi ý: U1 và U3 đi trước vì cho ra chức năng dùng được ngay; U7 đi trước U2 và U4 vì lịch sử thành viên phải sẵn sàng trước khi dữ liệu bắt đầu tích luỹ. Dev quyết định thứ tự thực tế. Chi tiết từng user story nằm trong PRD `inception/prd/prd.md`; lead đọc phần này trước khi viết mục 8, 9, 10.
 
 ## 6. Ảnh hưởng tới hệ thống hiện có và rủi ro
 | Vùng | Thay đổi | Mức |
 |---|---|---|
-| Lớp, ghi danh | Đường giao bài thứ hai; không lượt trùng; Foundation kéo theo | High |
-| Dữ liệu người dùng | users chưa có quan hệ cơ cấu, khoá ngoại của 15 bảng; class_user_instances của 6 bảng | High |
-| Phân quyền | Phạm vi theo nhánh là chiều mới; ma trận quyền chưa đọc được | High |
-| Báo cáo | Report LMS, Sis Dashboard lấy lớp làm khoá; đọc qua lịch sử thành viên; bộ lọc động | High |
-| Mail, đồng bộ Lark | Mail chào mừng theo từng người; hai mail mới; đồng bộ từ người sang cơ cấu, lần đầu 53 nhóm 384 người | High |
-| Rule, nhóm cũ, vùng chưa tra | 8 rule bị chạm; Group Management bỏ, bảng cũ chờ Dev xem; lịch dạy, phòng học chưa tra | Medium |
+| Lớp và ghi danh | Thêm cách ghi danh thứ hai qua nhóm; không sinh lượt ghi danh trùng; lớp Foundation đi kèm như khi thêm thủ công | High |
+| Dữ liệu người dùng | Bảng users chưa có quan hệ cơ cấu và là khoá ngoại của 15 bảng; class_user_instances là khoá ngoại của 6 bảng | High |
+| Phân quyền | Phạm vi theo nhánh là chiều phân quyền mới; ma trận quyền hiện có chưa được đối chiếu | High |
+| Báo cáo | Report LMS và Sis Dashboard dùng lớp làm khoá; báo cáo theo nhóm lấy dữ liệu từ lịch sử thành viên; bộ lọc chuyển sang dạng động | High |
+| Mail và đồng bộ Lark | Mail chào mừng gửi theo từng người được ghi danh; thêm hai mail event mới; đồng bộ mở rộng từ người sang cơ cấu, lần đầu tạo 53 nhóm và 384 quan hệ thành viên | High |
+| Rule hiện có, nhóm cũ, vùng chưa tra cứu | 8 rule bị tác động; Group Management bị bỏ, dữ liệu bảng cũ chờ Dev kiểm tra; lịch dạy và phòng học chưa được tra cứu | Medium |
 
-Cutover hai lần: đồng bộ cây trước, chưa giao; rồi mở giao, nếu không bắn mail hàng loạt. Lịch sử chỉ từ ngày bật. Lượt đã sinh không thu hồi tự động.
+Triển khai theo hai lần bật. Lần thứ nhất đồng bộ cây tổ chức và thành viên, chưa giao nội dung nào; lần thứ hai mở chức năng giao nội dung. Nếu bật cùng lúc, lần đồng bộ đầu có thể kích hoạt luật đứng và gửi mail hàng loạt. Lịch sử thành viên chỉ có từ ngày bật. Khi tắt luật đứng, các lượt ghi danh đã sinh không được thu hồi tự động.
 
 | # | Loại | Nội dung | Ai chấp nhận, ngày | Điều kiện kèm theo |
 |---|---|---|---|---|
-| 1 | Giả định | Đồng bộ Lark mở rộng được sang cơ cấu | PO, 05/10/2026 | Dev xác nhận ở mục 9 |
-| 2 | Giả định | Cây Lark đủ tin cậy | PO, 05/10/2026 | Có nhật ký đồng bộ |
-| 3 | Rủi ro | Báo cáo lùi tối đa tới ngày bật | PO, 06/10/2026 | Nói rõ với người dùng |
-| 4 | Rủi ro | Hai nhánh thì hai quản lý cùng thấy hết | PO, 05/10/2026 | Không muốn thì không xếp hai nhánh |
-| 5 | Rủi ro | Gỡ khỏi lớp mất tiến độ, chưa có chuyển lớp | PO, 06/10/2026 | Email có câu cảnh báo |
-| 6 | Finding mở | US13 gộp cảnh báo và chuyển | PO, 12/10/2026 | Giữ chung |
-| 7 | Giả định | Chưa có số liệu vận hành thật | PO, 06/10/2026 | Ngưỡng O4 đặt sau tháng đầu |
+| 1 | Giả định | Cơ chế đồng bộ Lark mở rộng được sang dữ liệu cơ cấu | PO, 05/10/2026 | Dev xác nhận ở mục 9 |
+| 2 | Giả định | Cây tổ chức trên Lark đủ tin cậy, không cần đối soát thủ công | PO, 05/10/2026 | Có nhật ký đồng bộ để tra cứu khi sai lệch |
+| 3 | Rủi ro chấp nhận | Báo cáo chỉ xem lại được tới ngày bật tính năng | PO, 06/10/2026 | Thông báo rõ cho người dùng khi bàn giao |
+| 4 | Rủi ro chấp nhận | Người thuộc hai nhánh thì cả hai quản lý đều xem được toàn bộ dữ liệu học của họ | PO, 05/10/2026 | Tổ chức không xếp một người vào hai nhánh nếu không chấp nhận điều này |
+| 5 | Rủi ro chấp nhận | Gỡ học viên khỏi lớp làm mất tiến độ; hệ thống chưa có chức năng chuyển lớp | PO, 06/10/2026 | Email gửi quản lý có câu cảnh báo cố định |
+| 6 | Finding còn mở | US13 gộp hai việc: cảnh báo nhóm trống quản lý và chuyển phụ trách | PO, 12/10/2026 | Giữ một user story vì cả hai thuộc cùng tình huống quản lý rời vị trí |
+| 7 | Giả định | Chưa có số liệu vận hành thực tế | PO, 06/10/2026 | Ngưỡng của O4 xác định sau tháng vận hành đầu tiên |
 
 ## 7. Quyết định cần chốt
 | # | Câu hỏi | Lựa chọn | Ai quyết | Hạn |
 |---|---|---|---|---|
-| 1 | Bảng groups cũ có dữ liệu thật không | Bỏ, giữ, hay chuyển đổi | Dev | Trước U1 |
-| 2 | Export ma trận quyền để nối phạm vi quản lý với vai trò ở màn theo dõi nhánh | Ghi cách nối ở mục 9 | Dev | Trước U5 |
-| 3 | Cột roles.is_group là gì | Dùng lại, tách bạch, hay không liên quan | Dev | Trước U4 |
-| 4 | Hộp xác nhận gỡ khỏi lớp đã cảnh báo mất tiến độ chưa | Chưa thì thêm một câu | Dev | Trước U6 |
+| 1 | Bảng groups và group_user_instances của chức năng nhóm cũ có dữ liệu thật hay không | Bỏ, giữ lại, hoặc chuyển đổi | Dev | Trước U1 |
+| 2 | Xuất ma trận quyền hiện có để nối phạm vi theo quan hệ quản lý với vai trò hệ thống ở màn theo dõi nhánh | Ghi cách nối ở mục 9 | Dev | Trước U5 |
+| 3 | Cột roles.is_group trong schema có ý nghĩa gì | Dùng lại, tách riêng, hoặc xác nhận không liên quan | Dev | Trước U4 |
+| 4 | Hộp xác nhận gỡ học viên khỏi lớp đã có cảnh báo mất tiến độ hay chưa | Nếu chưa, thêm một câu cảnh báo | Dev | Trước U6 |
 
-PO đã chốt 12/10/2026: loại quan hệ cố định, gồm quản lý và mentor; tài khoản kiểm thử và trả lời bình luận tạo trong Ops, không qua Lark.
+Hai điểm PO đã quyết ngày 12/10/2026: loại quan hệ là cố định, gồm quản lý và mentor; tài khoản kiểm thử và tài khoản trả lời bình luận được tạo trong UpLMS Ops, không qua Lark.
 
 ## 8. Design Direction
-*Điểm cần lưu ý cho Design, gợi từ tài liệu đã duyệt:*
-*1. Toàn bộ màn mới ở UpLMS Ops: cây nhóm hành xử như Drive, tải dần theo nhánh, số thành viên đếm cả nhánh con, tìm thấy nhóm con thì hiện đường dẫn từ gốc; nhóm lưu trữ ẩn mặc định ở mọi ô chọn nhóm.*
-*2. Nhóm đồng bộ chỉ đọc: nút Sửa, Di chuyển, Thêm gỡ thành viên ẩn, thay bằng một dòng giải thích; nút Xoá chỉ hiện với nhóm chưa có lịch sử.*
-*3. Hai công tắc khi giao nội dung, chảy xuống nhánh con và tự ghi danh người vào sau, mặc định tắt, mỗi cái một tooltip; cảnh báo vượt sức chứa là một dòng ở màn danh sách học viên trong lớp, không chặn.*
-*4. Chữ Nhóm dễ nhầm với support group đang có ở Ops; nhãn màn và ô chọn phải tách bạch.*
-*5. UpLMS chỉ thêm một khối Quản lý của tôi trên hồ sơ: ảnh, tên, email, không số điện thoại, quản lý chính lên đầu. Màn theo dõi nhánh ở Ops sắp theo số khoá quá hạn, cố ý không hiện phần trăm tiến độ.*
+*Điểm cần lưu ý cho Design, tổng hợp từ tài liệu đã duyệt:*
+*1. Các màn mới đều thuộc UpLMS Ops. Cây nhóm hoạt động tương tự cây thư mục: tải theo từng nhánh, số thành viên tính cả nhánh con, kết quả tìm kiếm hiển thị đường dẫn từ nhóm gốc. Nhóm đã lưu trữ được ẩn mặc định ở mọi ô chọn nhóm.*
+*2. Nhóm đồng bộ chỉ cho phép xem: các nút Sửa, Di chuyển, Thêm và gỡ thành viên được ẩn và thay bằng một dòng giải thích. Nút Xoá chỉ hiển thị với nhóm chưa có lịch sử.*
+*3. Màn giao nội dung có hai công tắc "chảy xuống nhánh con" và "tự ghi danh người vào sau", mặc định tắt, mỗi công tắc có tooltip. Cảnh báo vượt sức chứa là một dòng thông báo ở danh sách học viên của lớp và không chặn thao tác.*
+*4. Tên "Nhóm" dễ gây nhầm với support group đang có ở Ops; nhãn menu, nhãn màn và ô chọn cần phân biệt rõ hai khái niệm.*
+*5. UpLMS chỉ thêm khối "Quản lý của tôi" trên hồ sơ học viên, gồm ảnh, họ tên, email, không hiển thị số điện thoại, quản lý chính đứng đầu. Màn theo dõi nhánh ở Ops sắp xếp theo số khoá quá hạn và không hiển thị phần trăm tiến độ.*
 
 Design lead viết theo khung dưới. Ý không áp dụng ghi "không áp dụng", không bỏ trống.
 - Luồng màn chính:
@@ -147,12 +147,12 @@ Design lead viết theo khung dưới. Ý không áp dụng ghi "không áp dụ
 - Cần PO quyết:
 
 ## 9. Technical Direction
-*Điểm cần lưu ý cho Tech, gợi từ PRD và phân tích ảnh hưởng; mỗi dòng là một cụm, chi tiết đầy đủ ở mục 6 và PRD mục TDD, Dữ liệu phải lưu, Vấn đề tồn đọng:*
-*1. Bốn ràng buộc không được phá: nhóm chỉ chứa người; một người một lượt ghi danh cho một khoá, lượt có thể nhiều nguồn nhóm; mọi thay đổi thành viên lưu kèm thời điểm và không xoá kể cả khi nghỉ việc hay lưu trữ; luật đứng theo luật của Lớp. Năm thứ phải lưu: thời điểm vào ra nhóm, lý do rời, nguồn nhóm, nguồn lượt ghi danh, trạng thái lượt ghi danh.*
-*2. Thực thể dùng chung: users là khoá ngoại của 15 bảng, class_user_instances của 6 bảng dữ liệu học, groups cũ chưa rõ dữ liệu, support-groups trùng chữ và không có tenant_id. Quan hệ quản lý kế thừa tính lúc đọc, không lưu cứng.*
-*3. Luật đứng chạy nền ở ba thời điểm, dừng im lặng và ghi nhật ký khi lớp kết thúc, kéo theo Foundation như thêm tay, mail chào mừng bắn bình thường; đồng bộ theo lô; cutover hai lần để lần đồng bộ đầu không kích hoạt luật đứng; rollback không thu hồi lượt đã sinh.*
-*4. Phạm vi tách theo màn: màn theo dõi nhánh đọc theo quan hệ quản lý, màn giao bài theo vai trò hệ thống, không cộng không giao; ma trận quyền Casbin chưa đọc được. Tài khoản tách theo vai, tài khoản kiểm thử nhận diện bằng cờ is_operator và loại khỏi mọi logic.*
-*5. Tenant: số cấp tối đa cấu hình theo tổ chức, mặc định 6; bảng mới phải có tenant_id; loại quan hệ cố định; đồng bộ Lark nên là một bộ chuyển đổi đổ vào hình dạng dữ liệu cơ cấu chuẩn để tenant khác thay HRIS. Hai thứ chưa tra được: lịch dạy và phòng học.*
+*Điểm cần lưu ý cho Tech, tổng hợp từ PRD và phân tích ảnh hưởng. Mỗi dòng là một nhóm vấn đề; chi tiết đầy đủ ở mục 6 và các mục TDD, Dữ liệu phải lưu, Vấn đề tồn đọng của PRD:*
+*1. Bốn ràng buộc bắt buộc: nhóm chỉ chứa người; mỗi người chỉ có một lượt ghi danh cho một khoá, và một lượt có thể có nhiều nhóm nguồn; mọi thay đổi thành viên được lưu kèm thời điểm và không bị xoá, kể cả khi người đó nghỉ việc hoặc nhóm bị lưu trữ; luật đứng tuân theo luật của Lớp. Năm loại dữ liệu phải lưu: thời điểm vào và ra nhóm, lý do rời nhóm, nguồn của nhóm, nguồn của lượt ghi danh, trạng thái lượt ghi danh.*
+*2. Thực thể dùng chung: users là khoá ngoại của 15 bảng; class_user_instances là khoá ngoại của 6 bảng dữ liệu học; bảng groups cũ chưa rõ có dữ liệu hay không; support-groups trùng tên khái niệm và không có tenant_id. Quan hệ quản lý kế thừa được tính tại thời điểm đọc, không lưu thành dữ liệu riêng.*
+*3. Luật đứng chạy ở chế độ nền tại ba thời điểm. Khi gặp lớp đã kết thúc, luật dừng mà không báo lỗi và ghi nhật ký. Ghi danh qua nhóm cũng đưa học viên vào lớp Foundation như ghi danh thủ công, và mail chào mừng vẫn được gửi. Đồng bộ chạy theo lô. Triển khai hai lần bật để lần đồng bộ đầu không kích hoạt luật đứng. Khi rollback, lượt ghi danh đã sinh không được thu hồi.*
+*4. Phạm vi dữ liệu xác định theo từng màn: màn theo dõi nhánh dùng quan hệ quản lý, màn giao nội dung dùng vai trò hệ thống; hai phạm vi không được cộng gộp hay lấy phần giao. Ma trận quyền Casbin hiện có chưa được đối chiếu. Mỗi vai trò dùng một tài khoản riêng; tài khoản kiểm thử được nhận diện bằng cờ is_operator và bị loại khỏi mọi logic.*
+*5. Tenant: số cấp tối đa cấu hình theo tổ chức, mặc định là 6; mọi bảng mới phải có tenant_id; loại quan hệ là cố định. Đồng bộ Lark nên được thiết kế như một bộ chuyển đổi đưa dữ liệu vào một cấu trúc cơ cấu chuẩn, để tenant khác dùng được hệ thống nhân sự khác. Hai vùng chưa tra cứu: lịch dạy và phòng học.*
 
 Đây là định hướng kỹ thuật, đầu vào cho phần chi tiết của PRD. Tech lead viết theo khung dưới; ý không áp dụng ghi "không áp dụng", không bỏ trống.
 - Hướng tiếp cận:
@@ -165,12 +165,12 @@ Design lead viết theo khung dưới. Ý không áp dụng ghi "không áp dụ
 - Cần PO quyết:
 
 ## 10. Test Strategy
-*Điểm cần lưu ý cho QA, gợi từ business rule và các góc đã quét:*
-*1. Góc đã thành rule, phải có ca kiểm: lớp đã kết thúc thì luật đứng dừng im lặng; vượt sức chứa vẫn thêm, chỉ cảnh báo; tài khoản kiểm thử không xuất hiện ở đâu; người nghỉ việc đánh dấu kết thúc, báo cáo quá khứ vẫn tính; người thuộc hai nhóm cùng giao một lớp rời một nhóm thì giữ lượt; giao nội dung không hồi tố.*
-*2. Góc còn là giả định, cần PO hoặc Dev chốt trước khi viết ca: đồng bộ lỗi nửa chừng; quyền quản lý bị thu hồi khi đang xem báo cáo; cây Lark đổi lớn giữa hai lần đồng bộ.*
-*3. Vùng hồi quy: thêm gỡ học viên khỏi lớp, lớp Foundation, mail số 11, 12, 23 đến 26, mọi dashboard, phân quyền, đồng bộ Lark, Comment Replier.*
-*4. Dữ liệu test cần dựng sẵn: cây giả bốn cấp có người thuộc hai nhánh, lớp có Foundation, lớp đã kết thúc, lớp gần đầy sức chứa, tài khoản kiểm thử, một nhánh chưa gán quản lý để kiểm kế thừa.*
-*5. Báo cáo theo mốc quá khứ: chốt một con số, rồi thêm người mới và cho người khác nghỉ việc, chạy lại cùng mốc phải ra đúng con số cũ.*
+*Điểm cần lưu ý cho QA, tổng hợp từ business rule và các trường hợp biên đã rà soát:*
+*1. Các trường hợp đã có rule và cần ca kiểm thử: lớp đã kết thúc thì luật đứng dừng mà không báo lỗi; vượt sức chứa vẫn thêm học viên và chỉ cảnh báo; tài khoản kiểm thử không xuất hiện ở bất kỳ màn hay báo cáo nào; người nghỉ việc được đánh dấu kết thúc lượt ghi danh và vẫn được tính trong báo cáo quá khứ; người thuộc hai nhóm cùng giao một lớp vẫn giữ lượt ghi danh khi rời một nhóm; giao nội dung không áp dụng hồi tố.*
+*2. Các trường hợp chưa có rule, cần PO hoặc Dev quyết trước khi viết ca kiểm thử: đồng bộ bị lỗi giữa chừng; quyền quản lý bị thu hồi trong lúc đang xem báo cáo; cây tổ chức trên Lark thay đổi lớn giữa hai lần đồng bộ.*
+*3. Vùng kiểm thử hồi quy: thêm và gỡ học viên khỏi lớp, lớp Foundation, mail số 11, 12 và 23 đến 26, toàn bộ dashboard, phân quyền, đồng bộ Lark, Comment Replier.*
+*4. Dữ liệu kiểm thử cần chuẩn bị: một cây giả bốn cấp có người thuộc hai nhánh, lớp có Foundation, lớp đã kết thúc, lớp gần đạt sức chứa, tài khoản kiểm thử, một nhánh chưa gán quản lý để kiểm tra kế thừa.*
+*5. Báo cáo theo mốc quá khứ: ghi nhận số liệu tại một mốc, sau đó thêm thành viên mới và chuyển một thành viên sang trạng thái nghỉ việc; chạy lại báo cáo tại cùng mốc phải cho đúng số liệu ban đầu.*
 
 QA lead viết theo khung dưới. Ý không áp dụng ghi "không áp dụng", không bỏ trống.
 - Phạm vi test:
@@ -182,16 +182,16 @@ QA lead viết theo khung dưới. Ý không áp dụng ghi "không áp dụng",
 ## 11. Release và phụ thuộc
 | Việc | Phụ thuộc | Mốc |
 |---|---|---|
-| U1 rồi U3 | Không | Chưa có target release, Jira |
-| U7 | U1; trước khi dữ liệu tích luỹ | Trước lần bật đồng bộ đầu |
-| U2 | U1; quyết định 1 | Lần bật một, chưa giao |
-| U4, U5 | U1; quyết định 2, 3 | Sau lần bật một |
-| U6 | U2, U3; quyết định 4 | Lần bật hai |
-| Gamification, Report Phase 1 | Chức năng này | Theo lịch hai dự án đó |
-| Figma | Chưa có | Design ghi ở mục 8 |
+| U1, sau đó U3 | Không có | Chưa có target release; chưa tạo Epic và Story trên Jira |
+| U7 | U1; phải hoàn thành trước khi dữ liệu thành viên bắt đầu tích luỹ | Trước lần bật đồng bộ đầu tiên |
+| U2 | U1; quyết định số 1 ở mục 7 | Lần bật thứ nhất, chưa giao nội dung |
+| U4 và U5 | U1; quyết định số 2 và 3 | Sau lần bật thứ nhất |
+| U6 | U2 và U3; quyết định số 4 | Lần bật thứ hai |
+| Gamification và Report Phase 1 | Chức năng này | Theo lịch của hai dự án đó |
+| Thiết kế trên Figma | Chưa có | Design lead ghi ở mục 8 |
 
 ## 12. Sign-off
-Trạng thái: **Đồng ý** là duyệt · **Có ý kiến** là duyệt kèm ghi chú đã viết ở mục của mình · **Yêu cầu sửa** là chưa duyệt, ghi rõ sửa gì ở cột Ghi chú · **Chưa xem**.
+Trạng thái: "Đồng ý" là duyệt · "Có ý kiến" là duyệt kèm ghi chú đã viết trong mục của mình · "Yêu cầu sửa" là chưa duyệt, nội dung cần sửa ghi ở cột Ghi chú · "Chưa xem".
 
 | Vai trò | Tên | Trạng thái | Ngày | Ghi chú |
 |---|---|---|---|---|
