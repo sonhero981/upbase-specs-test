@@ -1,6 +1,6 @@
 # Review Protocol
 
-Review độc lập do `ai-reviewer` làm. Bám theo AWS AI-DLC `stage-protocol-reviewer.md` và `knowledge/aidlc-product-lead-agent/reviewing.md`. Ở các stage văn bản của PO, review là **tham vấn**: finding đi vào gate, PO quyết, không có vòng tự sửa.
+Review độc lập do `ai-reviewer` làm. Bám theo AWS AI-DLC `stage-protocol-reviewer.md` và `knowledge/aidlc-product-lead-agent/reviewing.md`. Ở các stage văn bản của PO, review là tham vấn: finding đi vào gate, PO quyết, không có vòng tự sửa.
 
 ## Khi nào chạy
 - Stage có Reviewer `ai-reviewer` và profile bật reviewer: sau kiểm bằng máy và checklist ở bước Verify, trước Gate.

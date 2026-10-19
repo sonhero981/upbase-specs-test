@@ -30,7 +30,7 @@ lark-cli auth status
 Trình trước khi đẩy: artifact và version, intent node đích, tạo mới hay cập nhật doc cũ, cảnh báo nếu References chứa tài khoản staging. PO có thể bỏ qua; không tự publish.
 
 ## B2. Fidelity 1:1
-Không tóm tắt, không gộp mục, không lược dòng. Bảng giữ đủ cột và dòng, bảng UI trong acceptance criteria thường 30 dòng trở lên. Mã tham chiếu, link, code block giữ nguyên. Mục đã xoá không tự thêm lại. **Bỏ khối frontmatter YAML** đầu file trước khi đẩy, Lark không hiển thị nó.
+Không tóm tắt, không gộp mục, không lược dòng. Bảng giữ đủ cột và dòng, bảng UI trong acceptance criteria thường 30 dòng trở lên. Mã tham chiếu, link, code block giữ nguyên. Mục đã xoá không tự thêm lại. Bỏ khối frontmatter YAML đầu file trước khi đẩy, Lark không hiển thị nó.
 
 Sơ đồ sống trong file dưới dạng khối ` ```mermaid `, đặt đúng chỗ từ lúc soạn. `lark-cli docs +create` và `+update --doc-format markdown` tự dựng Mermaid thành bảng trắng. Đẩy bằng `drive/v1/import_tasks` thì ra code block Plaintext, phải vá bằng `python3 engine/scripts/lark-mermaid-to-whiteboard.py <doc_token>`. Hai chỗ Mermaid trên Lark dựng sai: `stateDiagram-v2` mất dòng mô tả, dùng `flowchart`; `<br/>` trong nhãn mũi tên tách thành node rác, nhãn mũi tên viết một dòng.
 

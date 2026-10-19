@@ -36,7 +36,7 @@ Hộp chọn AskUserQuestion. Mỗi lựa chọn ghi rõ hệ quả. Lựa chọ
 | **Add [stage]** | Ideation và Inception, khi có stage bị bỏ qua mà stage hiện tại thấy cần | Thêm stage vào `state.md`, nói một dòng, tiếp tục |
 | **Reject Initiative** | Chỉ ở 1.7 | Kết thúc intent, ghi lý do, `state.md` chuyển Archived |
 
-Stage 2.41 HLD Brief là **Alignment gate**: Approve chỉ khi bảng sign-off mục 12 của file trong repo có Design PIC, Tech PIC, QA PIC ghi "Đồng ý" hoặc "Có ý kiến"; PIC tự ghi, hoặc PO ghi theo tin nhắn xác nhận lưu trong `decisions.md`. Một PIC ghi "Yêu cầu sửa" là Request Changes. Thiếu chữ ký thì PO chọn Accept as-is kèm lý do, hoặc chờ. Publish Lark chỉ sau Approve.
+Stage 2.41 HLD Brief là Alignment gate: Approve chỉ khi bảng sign-off mục 12 của file trong repo có Design PIC, Tech PIC, QA PIC ghi "Đồng ý" hoặc "Có ý kiến"; PIC tự ghi, hoặc PO ghi theo tin nhắn xác nhận lưu trong `decisions.md`. Một PIC ghi "Yêu cầu sửa" là Request Changes. Thiếu chữ ký thì PO chọn Accept as-is kèm lý do, hoặc chờ. Publish Lark chỉ sau Approve.
 
 Profile M: stage 1.1 và 1.4 duyệt chung một gate. Thông điệp hoàn thành gộp hai artifact. Request Changes nêu rõ sửa artifact nào. Profile M không chạy 1.7, nên phase check Ideation chạy ở gate chung này: năm điều kiện Ideation trong `engine/templates/phase-check.md`, ghi `verification/phase-check-ideation.md`.
 

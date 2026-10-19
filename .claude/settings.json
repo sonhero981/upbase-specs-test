@@ -4,7 +4,8 @@
       "Bash(python3 engine/scripts/po-tools.py *)"
     ],
     "deny": [
-      "Edit(intents/*/archive/**)"
+      "Edit(intents/*/archive/**)",
+      "Write(intents/*/archive/**)"
     ]
   },
   "hooks": {

@@ -27,7 +27,7 @@ Biến phạm vi thành yêu cầu có mã ổn định: FR, NFR, ràng buộc, 
 
 ## Load
 - S: đọc `inputs/` trực tiếp, viết intent summary gọn trong requirements.
-- Tra KB cho từng hạng mục của scope theo bản đồ KB trong `domain.md`: **đã có chưa** (file theo module); **rule hiện có chi phối** (`BR-*`, `KB-*`); **Hidden** (index mục Trạng thái); **sự kiện, mail liên quan**, đang bật hay tắt; **vùng KB chưa phủ** thì ghi `❓PO`, không kết luận.
+- Tra KB cho từng hạng mục của scope theo bản đồ KB trong `domain.md`: đã có chưa (file theo module); rule hiện có chi phối (`BR-*`, `KB-*`); Hidden (index mục Trạng thái); sự kiện, mail liên quan, đang bật hay tắt; vùng KB chưa phủ thì ghi `❓PO`, không kết luận.
 - Phát hiện yêu cầu trùng tính năng đã có: nêu ngay, kèm mã KB, không để tới Impact Analysis. Ví dụ của domain đang cài ở `domain.md` mục 4 phần 2.3.
 - Chạm dữ liệu: đọc lại nguồn sống nếu quá một tháng kể từ ngày đối chiếu của file data model.
 
@@ -46,7 +46,7 @@ Không hỏi kỹ thuật cho Dev. Depth Minimal ở S: chỉ câu chặn.
 5. Assumptions & Open Questions: `OQ1`... có cờ Chặn và owner.
 6. Out of scope.
 7. Sources read kèm Last verified, và mục "chưa tra được".
-FR viết **điều phải đúng**, không viết cách làm. Không có FR mô tả bảng, endpoint, hay thuật toán.
+FR viết điều phải đúng, không viết cách làm. Không có FR mô tả bảng, endpoint, hay thuật toán.
 
 ## Xác nhận giả định
 Theo `stage-protocol.md` bước 4b: liệt kê giả định trong requirements, PO chọn chấp nhận hay chuyển thành câu hỏi, trước khi gọi reviewer.

@@ -42,7 +42,7 @@ Stage AWS ngoài phạm vi PO, chỉ để mapping: 1.3, 1.5, 1.6, 2.1, 2.2, 2.5
 ## Quy tắc
 1. Chọn profile ở `/new-intent` sau khi quét nhanh KB, API spec, schema theo `domain.md`. Echo một dòng trước khi chạy: *"Profile M: 7 stage, 6 gate, Depth Standard, reviewer ở 3 stage, summary confirmation bật. Đồng ý không?"* PO có quyền đổi.
 2. Nghi ngờ giữa hai profile thì chọn profile lớn hơn.
-3. Phát hiện giữa chừng dấu hiệu vượt profile: nói ngay, tại gate gần nhất đưa lựa chọn **Add [stage]**. Thêm stage tức là nâng profile, ghi vào `state.md` kèm lý do và một dòng DEC.
+3. Phát hiện giữa chừng dấu hiệu vượt profile: nói ngay, tại gate gần nhất đưa lựa chọn Add [stage]. Thêm stage tức là nâng profile, ghi vào `state.md` kèm lý do và một dòng DEC.
 4. PO muốn tắt một nghi thức cho intent này ("intent này không cần reviewer"): ghi vào `state.md` phần Switches kèm nguyên văn. Áp cho intent này, intent sau về mặc định.
 5. S vẫn phải qua Field Intake ở 2.42. Đây là bước dễ sai nhất kể cả với yêu cầu nhỏ.
 6. Phase check Ideation: profile L chạy ở 1.7; profile M không có 1.7 nên chạy ở gate chung của 1.1 và 1.4; profile S không có Ideation nên không chạy.

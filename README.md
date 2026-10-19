@@ -164,7 +164,7 @@ Mọi stage chạy cùng 7 bước, định nghĩa một lần trong `engine/pro
 | 1. Load | Đọc trạng thái, quyết định cũ, artifact đầu vào, KB, bài học | |
 | 2. Ask | Viết questions file: mỗi câu gắn người trả lời, tối đa bốn lựa chọn, có đề xuất kèm nguồn và cờ chặn | Trả lời |
 | 3. Confirm | Tóm tắt câu trả lời | Xác nhận hoặc yêu cầu sửa |
-| 4. Generate | Viết artifact theo template, thẻ nguồn ở mỗi khẳng định; ở 1.1 và 2.3 trình giả định để PO chấp nhận hay chuyển thành câu hỏi | Xác nhận giả định |
+| 4. Generate | Viết artifact theo template, thẻ nguồn ở mỗi khẳng định; ở 1.1 và 2.3 trình giả định để PO chấp nhận hoặc chuyển thành câu hỏi | Xác nhận giả định |
 | 5. Verify | Chạy script kiểm, checklist, gọi AI Reviewer theo profile | |
 | 6. Learn | Ghi quan sát vào `memory.md` của intent | |
 | 7. Gate | Trình thông điệp hoàn thành, hỏi bài học, hỏi duyệt; ghi chép bằng script | Chọn bài học, duyệt |
@@ -248,7 +248,7 @@ Mỗi gate có hai lớp kiểm. Lớp thứ nhất do máy làm, lớp thứ ha
 | Phán đoán | Checklist trong `engine/verification/` | Phần cần đọc hiểu; mục có nhãn BLOCK chưa đạt thì gate không mở |
 | Phán đoán | AI Reviewer | Agent AI độc lập, không thấy hội thoại; kết luận READY hoặc NOT-READY với finding Critical, Major, Minor |
 
-AI Reviewer chỉ nhận đường dẫn file và kết quả kiểm bằng máy. Từ lần review thứ hai, reviewer nhận sổ finding của stage thay cho file review cũ; finding PO đã chấp nhận rủi ro hoặc bác bỏ không bị chấm lại. READY khi không có Critical và tối đa hai Major. AI không tự sửa theo finding; PO quyết sửa hay ghi Accepted risk.
+AI Reviewer chỉ nhận đường dẫn file và kết quả kiểm bằng máy. Từ lần review thứ hai, reviewer nhận sổ finding của stage thay cho file review cũ; finding PO đã chấp nhận rủi ro hoặc bác bỏ không bị chấm lại. READY khi không có Critical và tối đa hai Major. AI không tự sửa theo finding; PO quyết sửa hoặc ghi Accepted risk.
 
 Phase check chạy ở ranh giới phase: Ideation ở 1.7, hoặc ở gate chung của 1.1 và 1.4 với profile M; Inception ở 2.42. `po-tools.py status` phát hiện thêm artifact đã duyệt bị sửa ngoài change request, artifact dựa trên bản cũ của đầu vào, và nguồn KB quá hạn đối chiếu.
 
@@ -434,7 +434,7 @@ Mục này trả lời 2 câu hỏi: quy trình đã đủ để ai dùng, và �
 | 3. Liên team | Design, Tech, QA làm việc trên đầu ra của PO | Một intent qua HLD Brief đủ 3 chữ ký; story được import lên Jira, đạt điều kiện giao Dev và được QA dùng | Có chuẩn, chưa dùng. Chuẩn mã, AC và Story List có từ 19/10/2026; chưa HLD Brief nào đủ chữ ký |
 | 4. Nhân rộng | Team sản phẩm khác tự áp dụng | Một sản phẩm khác dựng domain pack theo DOMAIN-SETUP.md và chạy tới PRD mà engine không phải sửa | Chưa. Đã có DOMAIN-SETUP.md, `/new-domain`, MANIFEST, `engine-check`, `migrate`; chưa có sản phẩm thứ hai |
 
-Kết luận: quy trình đủ cho 1 người dùng. Công cụ cho mức team và liên team đã có trong bản 2.1.0 nhưng chưa chạy thật. Engine còn đổi nhanh, 47 commit trong 3 tuần đầu và bản 2.1.0 đang hoàn thiện, nên chưa nên đưa cho team sản phẩm khác trước khi đạt mức 2 và mức 3.
+Kết luận: quy trình đủ cho 1 người dùng. Công cụ cho mức team và liên team đã có trong bản 2.1.0 nhưng chưa chạy thật. Engine còn đổi nhanh: 47 commit từ 23/09 đến 15/10/2026, sau đó bản 2.1.0 đổi cấu trúc repo ngày 19/10/2026. Vì vậy chưa nên đưa cho team sản phẩm khác trước khi đạt mức 2 và mức 3.
 
 ### 9.2 Người và máy
 
@@ -491,7 +491,7 @@ Số liệu nên thu từ khi thử ở mức team, đều lấy được từ f
 | Cơ chế | Lấy từ | Ý gốc |
 |---|---|---|
 | Ideation trước, Inception sau, mỗi stage một artifact | AWS AI-DLC Workflows | Vòng đời phát triển có AI, người duyệt ở mỗi stage |
-| Gate giữa các stage | Stage-Gate, Robert G. Cooper, 1986 | Mỗi giai đoạn kết thúc bằng một quyết định đi tiếp, dừng hay làm lại |
+| Gate giữa các stage | Stage-Gate, Robert G. Cooper, 1986 | Mỗi giai đoạn kết thúc bằng một quyết định đi tiếp, dừng hoặc làm lại |
 | Profile S, M, L | Rolling wave planning, PMBOK | Mức chi tiết tỉ lệ với mức bất định |
 | Impact Matrix | Bohner và Arnold, 1996 | Trước khi sửa, xác định phần bị ảnh hưởng |
 | Unit | Modular decomposition, David Parnas, 1972 | Chia thành phần ghép lỏng, đổi được mà không kéo theo phần khác |

@@ -26,7 +26,7 @@ Chạy theo `engine/protocol/stage-protocol.md`. Dưới đây chỉ là phần 
 Khung vấn đề trước khi bàn giải pháp: ai gặp vấn đề gì, vì sao bây giờ, đo thành công bằng gì, ai liên quan và ai quyết. AWS: stage 1.1 do Product Agent dẫn.
 
 ## Load
-- Đọc nguyên văn `inputs/`. Tách **giải pháp người yêu cầu đã nghĩ sẵn** ra khỏi **vấn đề**. "Thêm nút export" là giải pháp; vấn đề có thể là "không lấy được dữ liệu ra để đối chiếu". Giải pháp đó là Recommendation, chưa phải yêu cầu.
+- Đọc nguyên văn `inputs/`. Tách giải pháp người yêu cầu đã nghĩ sẵn ra khỏi vấn đề. "Thêm nút export" là giải pháp; vấn đề có thể là "không lấy được dữ liệu ra để đối chiếu". Giải pháp đó là Recommendation, chưa phải yêu cầu.
 - KB định hướng và nguyên tắc mô hình hoá theo `domain.md`: yêu cầu thuộc tầng nào của sản phẩm, phục vụ một tenant hay mọi tenant, có đụng nguyên tắc mô hình hoá nào.
 - `intent.md` mục Related intents: trùng hay phụ thuộc intent khác không.
 

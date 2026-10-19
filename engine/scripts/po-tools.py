@@ -51,8 +51,8 @@ Ghi chép:
       Chép artifact vào archive/<slug>/<tên>-v<version>-<YYYYMMDD>.md, hoặc
       <tên>-<nhãn>-<YYYYMMDD>.md khi có --label. Từ chối ghi đè.
   po-tools.py index   [--write]
-      Bảng spec cho Dev, mỗi intent có PRD một dòng, có mã tính năng, số file story và số story
-      đạt DoR. --write ghi intents/INDEX.md.
+      Bảng spec cho Dev, mỗi intent có PRD một dòng, có mã tính năng, số story và số story
+      đạt điều kiện giao Dev. --write ghi intents/INDEX.md.
 
 Engine:
   po-tools.py doctor
@@ -3010,6 +3010,28 @@ def mig_text(text):
     return t
 
 
+def mig_live_part(text, name):
+    """memory.md: dòng mô tả đầu file lấy theo template. state.md: chuẩn hoá dòng stage chưa duyệt và hai mục
+    Current, Versions; giữ nguyên Log và dòng stage đã duyệt hoặc bỏ qua vì đó là lịch sử."""
+    lines = text.splitlines()
+    if name == "memory.md":
+        tpl = (read(REPO / "engine" / "templates" / "memory.md") or "").splitlines()
+        head = next((x for x in tpl if x.startswith("Nhật ký quan sát")), None)
+        for i, ln in enumerate(lines[:5]):
+            if head and ln.startswith("Nhật ký quan sát") and ln != head:
+                lines[i] = head
+    else:
+        sec = ""
+        for i, ln in enumerate(lines):
+            if ln.startswith("## "):
+                sec = ln[3:].strip()
+                continue
+            live = sec in ("Current", "Versions") or (sec == "Stages" and re.match(r"^- \[[ ?R-]\]", ln))
+            if live:
+                lines[i] = mig_text(ln).rstrip("\n")
+    return "\n".join(lines) + ("\n" if text.endswith("\n") else "")
+
+
 def mig_questions_v1(text, intent_name, code):
     """File câu hỏi luồng v1 (### `OQ-NN` — tiêu đề ... **Blocks:** Yes, bảng nhóm không chặn) sang dạng ## Q<n>.
     Giữ nguyên nội dung từng câu; mã cũ OQ-NN đứng trong tiêu đề. Trả về None nếu không nhận ra định dạng."""
@@ -3114,6 +3136,16 @@ def migrate(intent, words, feature=None, write_out=False):
         if new != old:
             writes[f] = new
             plan.append(("chuẩn hoá", r, sum(1 for a, b in zip(old.splitlines(), new.splitlines()) if a != b)))
+    # 1b. phần sống của file lịch sử: dòng mô tả memory.md; stage chưa duyệt, Current, Versions của state.md
+    for name in ("memory.md", "state.md"):
+        f = intent / name
+        old = read(f)
+        if old is None:
+            continue
+        new = mig_live_part(old, name)
+        if new != old:
+            writes[f] = new
+            plan.append(("chuẩn hoá phần sống", name, sum(1 for a, b in zip(old.splitlines(), new.splitlines()) if a != b)))
     # 2. file câu hỏi luồng v1 của stage chưa duyệt
     for e in so.stages:
         st = S.by_slug.get(e["slug"])

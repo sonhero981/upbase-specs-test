@@ -20,7 +20,7 @@ Chặn: có | không
 ```
 
 ## Quy tắc đặt câu hỏi
-- Chỉ hỏi câu mà đáp án **làm đổi phạm vi, business rule, dữ liệu, luồng, hoặc quyền**. Không hỏi kỹ thuật cho Dev.
+- Chỉ hỏi câu mà đáp án làm đổi phạm vi, business rule, dữ liệu, luồng, hoặc quyền. Không hỏi kỹ thuật cho Dev.
 - Tra KB, API spec, schema và `decisions.md` trước. Có đáp án rồi thì không hỏi. Còn mơ hồ thì hỏi hẹp, nêu đáp án cũ: "Trước đã chốt A ở DEC5, giờ có áp cho trường hợp B không?"
 - Mỗi câu tự giải thích. Mã nào xuất hiện thì kèm nội dung: "yêu cầu xuất báo cáo theo nhóm (FR3)", không viết "FR3 còn đúng không?".
 - Một dòng *Vì sao hỏi* khi lý do không hiển nhiên.
@@ -58,7 +58,7 @@ Hỏi cách trả lời một lần cho cả intent, ghi vào `state.md`. Stage 
 ## Xác nhận tóm tắt
 Khi mọi câu đã trả lời và stage có summary confirmation:
 - Thêm mục `## Consolidated Summary` vào cuối file: gạch đầu dòng, mỗi câu một dòng, nội dung đã chốt.
-- Hỏi bằng hộp chọn: **Looks correct**, sinh artifact từ những điều này. **Request changes**, sửa một vài câu trước.
+- Hỏi bằng hộp chọn: Looks correct, sinh artifact từ những điều này. Request changes, sửa một vài câu trước.
 - Request changes: PO đã nói cần sửa gì thì sửa luôn; chưa nói thì hỏi "sửa gì". Sửa file, xoá tóm tắt cũ, hỏi lại.
 - Chỉ sinh artifact sau Looks correct.
 

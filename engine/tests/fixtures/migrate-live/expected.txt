@@ -1,0 +1,22 @@
+# Intent chuyển từ engine cũ: state.md và memory.md còn chữ lead và đường dẫn trong .claude/ ở cả phần sống lẫn phần lịch sử.
+# migrate chuẩn hoá phần sống (dòng stage chưa duyệt, Current, Versions, dòng mô tả của memory.md), giữ nguyên Log, dòng stage đã duyệt và nhật ký memory.
+[migrate]
+mã thoát: 0
+có: | chuẩn hoá phần sống | memory.md | 1 |
+có: | chuẩn hoá phần sống | state.md | 4 |
+có: Chạy thử, chưa ghi gì.
+tệp state.md có: chờ lead ghi mục 8, 9, 10
+
+[migrate --write]
+mã thoát: 0
+có: Đã ghi 2 file, DEC2, nhật ký trong state.md.
+tệp state.md có: - [-] 2.41 hld-brief · chờ Design PIC, Tech PIC, QA PIC ghi mục 8, 9, 10; bản nháp ở intents/migrate-live/inception/hld-brief/
+tệp state.md có: | Stage | 2.41 hld-brief: chờ PIC ghi mục 8, 9, 10 |
+tệp state.md có: | Next action | Gửi PIC đường dẫn HLD Brief, sau đó mở Alignment gate |
+tệp state.md có: | hld-brief | v0.1 | draft, chờ PIC | - | - |
+tệp state.md có: - [x] 2.3 requirements-analysis · lead Design, Dev, QA đọc bản v1.0 ngày 2026-10-01
+tệp state.md có: - 2026-10-01 created, profile M; lead Design đọc bản nháp
+tệp memory.md có: sẽ chuyển sang `memory/project.md`, và sang `memory/team.md`
+tệp memory.md có: - 2026-10-01 2.3 lead Design muốn xem bản nháp sớm
+tệp memory.md không có: .claude/memory
+tệp decisions.md có: | DEC2 |

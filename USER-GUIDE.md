@@ -205,7 +205,7 @@ PO có thể để AI chọn theo đề xuất ở một câu hỏi. AI ghi `[u�
 
 ### 5.2 Tóm tắt và giả định
 
-Trước khi viết artifact, AI tóm tắt mọi câu trả lời và hỏi Looks correct hay Request changes. Ở 1.1 và 2.3, AI liệt kê thêm các giả định để PO chấp nhận hoặc chuyển thành câu hỏi. Đây là bước phát hiện hiểu nhầm với chi phí thấp nhất.
+Trước khi viết artifact, AI tóm tắt mọi câu trả lời và hỏi Looks correct hoặc Request changes. Ở 1.1 và 2.3, AI liệt kê thêm các giả định để PO chấp nhận hoặc chuyển thành câu hỏi. Đây là bước phát hiện hiểu nhầm với chi phí thấp nhất.
 
 ### 5.3 Gate
 
@@ -344,7 +344,7 @@ Lệnh của script, chạy từ thư mục gốc:
 | Lệnh | Việc |
 |---|---|
 | `po-tools.py doctor` | Kiểm môi trường và domain pack |
-| `po-tools.py status [intent]` | Trạng thái, artifact bị sửa ngoài change request, nguồn quá hạn |
+| `po-tools.py status` | Trạng thái mọi intent, artifact bị sửa ngoài change request, mã tính năng trùng, nguồn quá hạn |
 | `po-tools.py check <intent> <stage>` | Kiểm bằng máy trước gate |
 | `po-tools.py trace <intent>` | Truy vết FR, US, BR, AC |
 | `po-tools.py approve <intent> <stage>` | Ghi chép sau khi PO duyệt |
@@ -411,6 +411,6 @@ Các hành vi sau là đúng thiết kế:
 | AI dừng, không sang stage sau | Đang chờ PO duyệt gate |
 | AI hỏi nhiều câu `Chặn: có` | Thiếu thông tin làm đổi phạm vi, rule, dữ liệu hoặc luồng |
 | Artifact có nhiều `❓PO` | KB chưa phủ vùng đó và AI không được đoán |
-| AI không tự sửa theo finding của reviewer | PO quyết sửa hay chấp nhận rủi ro |
+| AI không tự sửa theo finding của reviewer | PO quyết sửa hoặc chấp nhận rủi ro |
 
 Người mới nên chạy một intent profile S với một yêu cầu nhỏ có thật trước, thử Request Changes ở một gate, đọc lại `decisions.md` và `state.md`, sau đó mới chạy intent profile M có HLD Brief với các PIC.

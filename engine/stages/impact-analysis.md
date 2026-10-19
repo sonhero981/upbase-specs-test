@@ -32,14 +32,14 @@ KB mỏng ở vùng này thì hỏi PO seed danh sách hệ liên quan trước,
 
 ## Bước B, Impact Matrix
 Theo đúng thứ tự:
-1. **Current Situation**: đọc để tìm dependency, không phải để hiểu feature. Module, entity và field, rule, process, permission, integration, mail event, Hidden.
-2. **Desired Situation**: từ requirements.
-3. **Impact Matrix 12 vùng**: business process, module, screen và report, data, API, role, business rule, NFR, notification và email, reporting, test, release. Mỗi dòng có severity và nguồn. Vùng không ảnh hưởng vẫn ghi lý do. Vùng KB chưa phủ ghi `❓PO`.
+1. Current Situation: đọc để tìm dependency, không phải để hiểu feature. Module, entity và field, rule, process, permission, integration, mail event, Hidden.
+2. Desired Situation: từ requirements.
+3. Impact Matrix 12 vùng: business process, module, screen và report, data, API, role, business rule, NFR, notification và email, reporting, test, release. Mỗi dòng có severity và nguồn. Vùng không ảnh hưởng vẫn ghi lý do. Vùng KB chưa phủ ghi `❓PO`.
    - 3a Conflict bốn chiều: rule, process, data, permission. Phát hiện thì escalate cho PO quyết, không tự resolve.
    - 3b Bidirectional: New sang Old và Old sang New, chiều sau hay bị bỏ.
    - 3c Coverage: boundary, exception, shared entity, side effect. Shared entity dễ vỡ của hệ lấy từ `domain.md` mục 4 phần 2.31.
-4. **Transition**: data, compatibility, cutover.
-5. **Tenant**: các câu kiểm chiều tenant ghi trong `domain.md` mục 4 phần 2.31.
+4. Transition: data, compatibility, cutover.
+5. Tenant: các câu kiểm chiều tenant ghi trong `domain.md` mục 4 phần 2.31.
 FR, NFR phát sinh: ghi trong impact-matrix, rồi bổ sung vào `requirements.md` dưới dạng FR mới với thẻ `[2.31]`, tăng version requirements, ghi DEC. Không sửa FR đã duyệt.
 Phụ lục nguồn đã đọc, kể cả "chưa tra được", bắt buộc.
 

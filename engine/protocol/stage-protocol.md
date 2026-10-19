@@ -56,21 +56,21 @@ File stage bắt đầu bằng tiêu đề `# <mã> <tên>` rồi một bảng. 
 ### 2. Ask
 - Tạo `<slug>-questions.md` theo `question-format.md`, trong thư mục của stage.
 - Lần đầu trong intent: hỏi PO chọn cách trả lời, Guide me, Edit file, hoặc Chat. Ghi vào `state.md`. Stage sau dùng lại và nói một dòng đang dùng cách nào.
-- Ghi câu trả lời **nguyên văn** vào `[Answer]:` ngay sau mỗi lô. Diễn giải của AI đứng dòng dưới, nếu cần.
+- Ghi câu trả lời nguyên văn vào `[Answer]:` ngay sau mỗi lô. Diễn giải của AI đứng dòng dưới, nếu cần.
 - Có đủ câu trả lời: quét từ mơ hồ, mâu thuẫn giữa các câu, dữ kiện còn thiếu. Có thì hỏi tiếp trong cùng file, đánh số tiếp.
 - PO uỷ quyền ("tuỳ anh"): chọn theo `[đề xuất]`, ghi `[uỷ quyền]` kèm nguyên văn, nói một dòng đã chọn gì. Uỷ quyền chỉ áp cho câu hỏi của stage đang chạy, không mang sang stage sau, và không bao giờ áp cho bước xác nhận tóm tắt, xác nhận giả định hay gate. Nói với PO một lần: "Duyệt vẫn là của anh/chị."
 - Câu có cờ *Chặn* còn trống: dừng ở bước này.
 - Trước khi kết thúc mỗi lượt: mọi câu trả lời PO đã nói và mọi câu hỏi đang chờ phải nằm trong questions file, ở cả ba cách trả lời. Điều đã bàn mà chưa ghi file sẽ mất khi phiên bị nén hoặc đổi phiên.
 
 ### 3. Confirm
-- Tóm tắt mọi câu trả lời thành gạch đầu dòng. Hỏi: **Looks correct** hoặc **Request changes**.
+- Tóm tắt mọi câu trả lời thành gạch đầu dòng. Hỏi: Looks correct hoặc Request changes.
 - Request changes: PO đã nói cần sửa gì thì sửa luôn, không hỏi lại "sửa gì". Chưa nói thì hỏi một câu. Sửa file, hỏi lại.
 - `off` thì bỏ bước này. `field-intake-only` chỉ áp cho 2.42.
 
 ### 4. Generate
 - Viết artifact theo template, giữ đúng heading. Mục có dấu `<!-- tuỳ chọn -->` trong template: viết theo depth ở `profiles.md`, không viết thì bỏ hẳn heading. Mục không có dấu là bắt buộc. Xoá mọi chữ hướng dẫn mẫu và dấu `<!-- tuỳ chọn -->`.
 - Frontmatter ghi `inputs:` là artifact đầu vào kèm version đã dùng, ví dụ `inputs: requirements@1.0, impact-matrix@1.1`. Nhờ dòng này `po-tools.py status` phát hiện khi đầu vào đổi sau khi artifact đã duyệt.
-- Artifact nội bộ (intent-statement, scope-document, requirements, impact-matrix, solution-options, stories): thẻ nguồn ở mỗi khối khẳng định theo `question-format.md`. Mục **Assumptions & Open Questions** bắt buộc, không có thì ghi "None".
+- Artifact nội bộ (intent-statement, scope-document, requirements, impact-matrix, solution-options, stories): thẻ nguồn ở mỗi khối khẳng định theo `question-format.md`. Mục Assumptions & Open Questions bắt buộc, không có thì ghi "None".
 - Artifact bàn giao (initiative-brief, hld-brief, prd): không thẻ nguồn, không từ ngữ quy trình, mã kèm nội dung, dấu `·` giữa các mã đứng liền.
 - Lựa chọn PO không chọn không phải là nguồn. Không biến lựa chọn bị bỏ thành một yêu cầu hay một loại trừ.
 - Mã ổn định theo `GLOSSARY.md`. Mã đã cấp không đánh lại, kể cả khi xoá một mục ở giữa. Mã viết trần trong cột đầu bảng, không bọc backtick.
@@ -79,7 +79,7 @@ File stage bắt đầu bằng tiêu đề `# <mã> <tên>` rồi một bảng. 
 
 ### 4b. Xác nhận giả định, ở 1.1 và 2.3
 - Sau khi sinh artifact, liệt kê mọi dòng trong mục Assumptions & Open Questions có nhãn assumption.
-- Hỏi bằng hộp chọn: **Chấp nhận các giả định** hoặc **Chuyển thành câu hỏi**. Chuyển thành câu hỏi thì thêm vào questions file, hỏi, rồi sửa artifact.
+- Hỏi bằng hộp chọn: Chấp nhận các giả định hoặc Chuyển thành câu hỏi. Chuyển thành câu hỏi thì thêm vào questions file, hỏi, rồi sửa artifact.
 - Chấp nhận giả định không biến nó thành fact: giữ thẻ `[assumption]`, ghi một dòng DEC.
 - Chưa có lựa chọn này thì chưa gọi reviewer.
 
@@ -103,7 +103,7 @@ Theo `gate-protocol.md`: đánh dấu `[?]`, thông điệp hoàn thành, câu h
 Execution `conditional` và điều kiện không xảy ra: ghi `[S]` kèm lý do vào `state.md`, nói một dòng, sang stage kế. Không mở gate.
 
 ## Vượt profile giữa chừng
-Phát hiện dấu hiệu vượt profile theo `profiles.md`: nói ngay, và tại gate gần nhất đưa lựa chọn **Add [stage]**. Không tự chạy tiếp đường cũ.
+Phát hiện dấu hiệu vượt profile theo `profiles.md`: nói ngay, và tại gate gần nhất đưa lựa chọn Add [stage]. Không tự chạy tiếp đường cũ.
 
 ## Luôn đúng
 - Tách `Fact`, `Assumption`, `Open Question`, `Recommendation`. Không tự điền dữ kiện. Thiếu nhẹ ghi Assumption. Thiếu làm đổi phạm vi, rule, dữ liệu, luồng thì ghi Open Question và dừng.
