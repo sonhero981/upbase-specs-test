@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 engine/scripts/po-tools.py *)"
+    ],
+    "deny": [
+      "Edit(intents/*/archive/**)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/engine/scripts/po-tools.py\" status"
+          }
+        ]
+      }
+    ]
+  }
+}
