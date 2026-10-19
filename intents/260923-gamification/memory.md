@@ -1,5 +1,5 @@
 # Memory: 260923-gamification
-Nhật ký quan sát trong lúc làm. AI ghi, PO đọc tại gate. Mỗi dòng: thời gian, stage, một câu, hai câu ngữ cảnh. Dòng được giữ tại gate sẽ chuyển sang `.claude/memory/team.md`.
+Nhật ký quan sát trong lúc làm. AI ghi, PO đọc tại gate. Mỗi dòng: thời gian, stage, một câu, hai câu ngữ cảnh. Dòng được giữ tại gate sẽ chuyển sang `memory/project.md`, và sang `memory/team.md` nếu PO xác nhận đúng cho mọi sản phẩm.
 
 ## Interpretations
 - 2026-10-09T18:00 [2.42] BRD và PRD dùng hai bộ số US khác nhau từ v1 (BRD US24 = PRD US22). Giữ nguyên để không làm gãy tham chiếu cũ; BRD ghi chú số PRD tương ứng.

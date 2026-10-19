@@ -1,5 +1,5 @@
 # Memory: 261005-group
-Nhật ký quan sát trong lúc làm. AI ghi, PO đọc tại gate. Mỗi dòng: thời gian, stage, một câu, hai câu ngữ cảnh. Dòng được giữ tại gate sẽ chuyển sang `.claude/memory/team.md`.
+Nhật ký quan sát trong lúc làm. AI ghi, PO đọc tại gate. Mỗi dòng: thời gian, stage, một câu, hai câu ngữ cảnh. Dòng được giữ tại gate sẽ chuyển sang `memory/project.md`, và sang `memory/team.md` nếu PO xác nhận đúng cho mọi sản phẩm.
 
 ## Interpretations
 - 2026-10-12T14:30 [1.1·1.4·1.7] "Chạy lại Group với po-workflow mới" được hiểu là review lại artifact đã migrate rồi trình gate theo nghi thức v2, không viết lại artifact. Ba cách hiểu khác nhau nhiều về khối lượng nên hỏi PO bằng hộp chọn trước; PO chọn cách này, theo tiền lệ Gamification cùng ngày.

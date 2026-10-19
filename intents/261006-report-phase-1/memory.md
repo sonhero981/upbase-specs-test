@@ -1,5 +1,5 @@
 # Memory: 261006-report-phase-1
-Nhật ký quan sát trong lúc làm. AI ghi, PO đọc tại gate. Mỗi dòng: thời gian, stage, một câu, hai câu ngữ cảnh. Dòng được giữ tại gate sẽ chuyển sang `.claude/memory/team.md`.
+Nhật ký quan sát trong lúc làm. AI ghi, PO đọc tại gate. Mỗi dòng: thời gian, stage, một câu, hai câu ngữ cảnh. Dòng được giữ tại gate sẽ chuyển sang `memory/project.md`, và sang `memory/team.md` nếu PO xác nhận đúng cho mọi sản phẩm.
 
 ## Interpretations
 - 2026-10-09T14:00 [migration] v1 bắt đầu từ làm rõ yêu cầu rồi mới BRD; v2 đi Ideation trước. Giữ bản làm rõ ở 2.3 đang dở và để Ideation chạy sau khi câu chặn có đáp án, vì 12 câu chặn thực chất là câu của 1.1 và 1.4.

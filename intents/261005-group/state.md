@@ -27,14 +27,14 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - [x] 2.31 impact-analysis · v1: inception/impact-analysis/impact-matrix.md v0.4 duyệt 2026-10-12 (CR2, CG-3 đã giải, OQ-31; DEC82). v0.3 duyệt 2026-10-09 (CR1, vùng 9 và BI-6). v0.2 Gate 2 duyệt 2026-10-06
 - [S] 2.32 solution-options · v1 không làm so sánh phương án; Bước 7 dùng để chốt nhóm câu hỏi D
 - [x] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story và 20 US, v0.3. Duyệt lại theo v2 2026-10-12 (DEC82) sau một lần Request Changes (DEC80, CR2); truy vết tay ở inception/prd/traceability.md. 20 US chốt ở 9A của v1 ngày 2026-10-06
-- [-] 2.41 hld-brief · mở 2026-10-12 (DEC83). Bản nháp v0.1 inception/hld-brief/hld-brief.md, viết lại văn viết 2026-10-15 (DEC88); bản để so diff với lead: archive/hld-brief/hld-brief-draft-r1-20261015.md. Chờ lead Design, Dev, QA ghi mục 8, 9, 10 và ký mục 12 qua merge request, không hạn (DEC86)
+- [-] 2.41 hld-brief · mở 2026-10-12 (DEC83). Bản nháp v0.1 inception/hld-brief/hld-brief.md, viết lại văn viết 2026-10-15 (DEC88); bản để so diff với PIC: archive/hld-brief/hld-brief-draft-r1-20261015.md. Chờ Design PIC, Tech PIC, QA PIC ghi mục 8, 9, 10 và ký mục 12 qua merge request, không hạn (DEC86)
 - [x] 2.42 prd-generation · v1: inception/prd/prd.md v0.3 duyệt 2026-10-12 (CR2, chạm US3 US7 US19 US20, danh sách US, tồn đọng; DEC82). v0.2 duyệt 2026-10-09 (CR1, chạm US9 US11 US13 US16 US20). v0.1 duyệt và publish Lark 2026-10-06
 
 ## Current
 | | |
 |---|---|
-| Stage | 2.41 HLD Brief: chờ lead ghi mục 8, 9, 10 và ký mục 12 qua merge request, không hạn |
-| Next action | PO push và gửi lead đường dẫn inception/hld-brief/hld-brief.md cùng quy ước MR. Khi lead ghi xong, gọi /po 261005-group: so diff với bản chụp draft, mở Alignment gate. Sau Approve: publish [HLD] Group lên Lark, rồi sửa PRD theo định hướng lead, đóng tồn đọng #3 #4 (DEC84, DEC85) |
+| Stage | 2.41 HLD Brief: chờ PIC ghi mục 8, 9, 10 và ký mục 12 qua merge request, không hạn |
+| Next action | PO push và gửi PIC đường dẫn inception/hld-brief/hld-brief.md cùng quy ước MR. Khi PIC ghi xong, gọi /po 261005-group: so diff với bản chụp draft, mở Alignment gate. Sau Approve: publish [HLD] Group lên Lark, rồi sửa PRD theo định hướng PIC, đóng tồn đọng #3 #4 (DEC84, DEC85) |
 | Blocking questions open | 0 |
 | Open CR | none. CR2 đóng 2026-10-12 (DEC82), CR1 đóng 2026-10-09 |
 | Parked | no |
@@ -47,7 +47,7 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 | requirements | v0.3 | approved | 2026-10-09 | — |
 | impact-matrix | v0.4 | approved | v0.4: 2026-10-12 · v0.3: 2026-10-09 | — |
 | initiative-brief | — | không có, v1 dùng BRD | — | — |
-| hld-brief | v0.1 | draft, chờ lead | — | — |
+| hld-brief | v0.1 | draft, chờ PIC | — | — |
 | prd | v0.3 | approved | v0.3: 2026-10-12 · v0.2: 2026-10-09 | v0.3 · Jg7ld8UCzoeMiAxW5ielxlC4gGg, revision 42, publish 2026-10-12 |
 
 ## Log
@@ -75,3 +75,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-12 2.41: PO trả lời 4 câu (DEC84 đến DEC86), soạn hld-brief.md v0.1: mục 1-7, 11 từ PRD v0.3, BRD v0.3, Impact Matrix v0.4; khung 8, 9, 10 kèm 5 dòng gợi ý mỗi vai; mục 12 theo vai. Phần PO viết 1.887 từ theo đếm âm tiết, PO chấp nhận (DEC87). Chụp draft. Chờ MR của lead. Commit thư mục intent
 - 2026-10-15 Viết lại HLD Brief theo văn viết (DEC88), không đổi nội dung; chụp draft-r1 làm mốc so diff với lead
 - 2026-10-19 10:12 migrate lên engine 2.1.0 bởi buidhui, DEC89
+- 2026-10-19 15:11 migrate lên engine 2.1.0 bởi buidhui, DEC90

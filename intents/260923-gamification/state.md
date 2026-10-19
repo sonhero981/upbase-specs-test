@@ -33,8 +33,8 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 ## Current
 | | |
 |---|---|
-| Stage | Mọi stage của profile đã duyệt. CR-012, CR-013 đã đóng |
-| Next action | Chạy 2.41 HLD Brief với Design, Dev, QA trước khi bàn giao. PO trả lời OQ-42, OQ-49, OQ-52 trước Unit Campaign. Dev cập nhật technical design theo PRD v0.14 |
+| Stage | Mọi stage của profile đã duyệt. CR-012, CR-013, CR-014 đã đóng |
+| Next action | Chạy 2.41 HLD Brief với Design, Dev, QA trước khi bàn giao. PO trả lời OQ-42, OQ-49, OQ-52 trước Unit Campaign. Dev cập nhật technical design theo PRD v0.15 |
 | Blocking questions open | 0 chặn gate; 15 câu hỏi mở trong PRD |
 | Open CR | none, CR-012 và CR-013 đóng 2026-10-12 |
 | Parked | no |
@@ -67,3 +67,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-14 CR-014: phần xem trước bảng xếp hạng bên Ops giữ khoảng ngày tự do. Re-entry 2.42, chỉ US11. PO duyệt PRD v0.15
 - 2026-10-14 Publish PRD v0.15 lên Lark, ghi đè doc Hjuxd3my6oG0UuxBGNOllABAgye. Bảng thông tin trên Lark đã bị sửa sau 12/10 (Target release xoá trắng, bỏ ❓ ở Designer, Tech lead, QA, Reviewer), đã chép theo Lark trước khi ghi đè. Đối chiếu: heading 15/32/141/23, 11 bảng trắng, 10 ảnh
 - 2026-10-19 15:04 migrate lên engine 2.1.0 bởi buidhui, DEC163
+- 2026-10-19 15:11 migrate lên engine 2.1.0 bởi buidhui, DEC164

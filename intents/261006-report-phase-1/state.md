@@ -51,3 +51,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-06 created ở luồng v1; bản làm rõ v0.1, 12 câu chặn, 4 câu không chặn, 7 giả định; cỡ L đề xuất
 - 2026-10-09 chuyển sang luồng v2; Ideation chưa chạy, 2.3 đang chờ PO trả lời câu chặn
 - 2026-10-19 10:12 migrate lên engine 2.1.0 bởi buidhui, DEC2
+- 2026-10-19 15:11 migrate lên engine 2.1.0 bởi buidhui, DEC3
