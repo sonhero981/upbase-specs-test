@@ -166,6 +166,7 @@ Nhật ký quyết định của intent. Chuyển từ `archive/v1/project-decis
 | DEC160 | 2026-10-12 | 2.42 | **Bảng quyền bên Ops; tắt `Gamification` vẫn xem được US12, kết quả campaign, nhật ký** (`BR-15.7`, `BR-15.8`). Review R-18 | "Theo đề xuất (Recommended)" | PO | 2.42, US15 |
 | DEC161 | 2026-10-14 | CR-014 → 2.42 | **Phần xem trước bảng xếp hạng bên Ops giữ bộ chọn khoảng ngày tự do**, mặc định `All time`. Đảo một phần quyết định ngày 08/10 cho phần xem trước đi theo phía học viên. Re-entry 2.42, chỉ chạm `US11` | "filter của leaderboard trong ops vẫn giữ cho chọn start với end. cho vận hành chọn khoảng trượt để động hơn trong vận hành" | PO | 2.42, US11 |
 | DEC162 | 2026-10-14 | 2.42 | **Approve PRD v0.15**, publish lại Lark. Đóng `CR-014` | "Chạy, duyệt luôn và publish (Recommended)" · mặc định "All time, giống US12 (Recommended)" | PO | 2.42 |
+| DEC163 | 2026-10-19 15:04 | migrate | Chuẩn hoá dữ liệu lên engine 2.1.0: đường dẫn mới, Unit, PIC, AI Reviewer, mã tính năng LMS-F001; chụp lại bản duyệt archive/prd-generation/prd-v0.15-20261019.md. Không đổi nội dung nghiệp vụ | "chuẩn hoá theo engine mới" | buidhui | migrate, phiên bản, mã tính năng |
 
 ## Change requests
 Phân tích chi tiết từng CR ở `inputs/change-requests.md` (nguyên văn PO, nhận định, điểm re-entry, trả lời của PO).

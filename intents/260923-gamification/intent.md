@@ -1,5 +1,6 @@
 ---
 intent: 260923-gamification
+feature: LMS-F001
 title: Gamification, điểm, huy hiệu, hạng và bảng xếp hạng
 created: 2026-09-23
 migrated: 2026-10-09
@@ -46,13 +47,13 @@ Quyết định giải pháp đã chốt: tính trong luồng, độ trễ bằn
 | Intent node | `Gamification`, token `LRVgwz5L9imG6WkQvJdllro5gNd` |
 | Published | initiative-brief: — · hld-brief: — · prd: **v0.15** ngày 14/10/2026, node `JGfawDSDviHEcAkWwdnlXrthgne`, doc `Hjuxd3my6oG0UuxBGNOllABAgye`, tên trên Lark `[PRD] Gamification`. Doc cũ `KeT8dkIStofZ0axlTW5l4S94gre` (v0.8) đã bị xoá trên Lark; trước lần publish này doc mới đang là v0.7, có Target release và Epic điền tay, đã chép vào PRD |
 
-Publish lại: dùng `lark-cli docs +update --command overwrite` vào doc `Hjuxd3my6oG0UuxBGNOllABAgye`, **đọc bảng thông tin đầu doc trên Lark trước** vì PO có thể điền tay, giữ tên trên Lark; sáu sơ đồ Mermaid tự thành bảng trắng; **ảnh design phải chèn lại** bằng `.claude/scripts/lark-insert-design-images.py` theo `design/order.txt` vì ảnh không nằm trong file `.md`.
+Publish lại: dùng `lark-cli docs +update --command overwrite` vào doc `Hjuxd3my6oG0UuxBGNOllABAgye`, **đọc bảng thông tin đầu doc trên Lark trước** vì PO có thể điền tay, giữ tên trên Lark; sáu sơ đồ Mermaid tự thành bảng trắng; **ảnh design phải chèn lại** bằng `engine/scripts/lark-insert-design-images.py` theo `design/order.txt` vì ảnh không nằm trong file `.md`.
 
 ## Việc còn treo
 1. Stage 2.41 HLD Brief chưa chạy. Nên chạy trước khi bàn giao Dev: dự án đã sinh nhiều CR do lệch design và technical design.
 2. 15 câu hỏi mở trong PRD. Unit Campaign chờ `OQ-42` (tắt Gamification khi campaign chạy), `OQ-49` (bảng Courses tuỳ chọn hay luôn có), `OQ-52` (độ dài tên campaign). `OQ-43` gom các mục `[đề xuất]`. `OQ-45` là design còn thiếu.
 3. Technical design backend và frontend cần Dev cập nhật theo PRD v0.14, theo khối lưu ý đầu mục `## Backend` và `## Frontend`.
-4. Metadata còn trống: Story, Designer, Tech lead, QA, Reviewer (`OQ-10`).
+4. Metadata còn trống: Story, Designer, Tech PIC, QA, Reviewer (`OQ-10`).
 
 ## Mapping từ luồng v1
 | File v1 | Vị trí v2 | Stage | Ghi chú |

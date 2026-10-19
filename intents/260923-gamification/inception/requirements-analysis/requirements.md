@@ -5,7 +5,7 @@ version: 0.1
 status: approved
 approved: 2026-09-23 (qua Gate 1)
 note: Không cập nhật sau các CR; nội dung CR nằm ở brd.md, prd.md và inputs/change-requests.md
-migrated-from: .claude/projects/Gamification/working/ai-drafts/clarified-requirements-20260923.md
+migrated-from: pre-aidlc:.claude/projects/Gamification/working/ai-drafts/clarified-requirements-20260923.md
 ---
 # Clarified Requirements — Gamification
 

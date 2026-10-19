@@ -1,15 +1,16 @@
 ---
 intent: 260923-gamification
+feature: LMS-F001
 artifact: prd
 version: 0.15
 status: approved
 approved_at: 2026-10-14
 approved: 2026-10-14 (v0.15, CR-014); 2026-10-12 (v0.14, Approved with Notes, kèm ba quyết định R-16 R-17 R-18); 2026-09-23 (v0.2, Approved with Notes)
-note: v0.14 mang CR-009 đến CR-013, design 01/10 và 12/10, US22, technical design backend; sửa theo review Product Lead lần 01 và 02
-lark: KeT8dkIStofZ0axlTW5l4S94gre
+note: v0.14 mang CR-009 đến CR-013, design 01/10 và 12/10, US22, technical design backend; sửa theo review AI Reviewer lần 01 và 02
+lark: Hjuxd3my6oG0UuxBGNOllABAgye
 lark-title: [PRD] Gamification
-lark-version: 0.8
-migrated-from: .claude/projects/Gamification/docs/prd/prd-gamification-v0.10-20261008.md
+lark-version: 0.15
+migrated-from: pre-aidlc:.claude/projects/Gamification/docs/prd/prd-gamification-v0.10-20261008.md
 ---
 # [PRD] Gamification — Điểm, huy hiệu, hạng và bảng xếp hạng
 
@@ -18,7 +19,7 @@ migrated-from: .claude/projects/Gamification/docs/prd/prd-gamification-v0.10-202
 | **Target release** |  |
 | **Epic** | [Gamification](https://jira.upbase.asia/browse/UPLNDEP-8) · [Leaderboard](https://jira.upbase.asia/browse/UPLNDEP-9) |
 | **Story** | ❓ *link Jira* |
-| **Related** | [BRD](https://github.com/buidhui/po_workflow/blob/main/.claude/intents/260923-gamification/ideation/brd.md) · [Impact Matrix](https://github.com/buidhui/po_workflow/blob/main/.claude/intents/260923-gamification/inception/impact-analysis/impact-matrix.md) · [Solution Options](https://github.com/buidhui/po_workflow/blob/main/.claude/intents/260923-gamification/inception/solution-options/solution-options.md) |
+| **Related** | [BRD](https://github.com/buidhui/po_workflow/blob/main/intents/260923-gamification/ideation/brd.md) · [Impact Matrix](https://github.com/buidhui/po_workflow/blob/main/intents/260923-gamification/inception/impact-analysis/impact-matrix.md) · [Solution Options](https://github.com/buidhui/po_workflow/blob/main/intents/260923-gamification/inception/solution-options/solution-options.md) |
 | **Document status** | ✅ **v0.15 PO duyệt ngày 14/10/2026** — mang `CR-009` đến `CR-013`, design đã chốt, nhật ký ghi nhận bên Ops và technical design backend. Bản v0.2 đã được PO duyệt 23/09/2026 |
 | **Document owner** | Bùi Đức Huy (PO) |
 | **Designer** |  |
@@ -3118,7 +3119,7 @@ Danh sách tải theo trang. Dữ liệu là của **cả tổ chức** và **gi
 | ~~OQ-07~~ | ✅ **Đã chốt 23/09: sổ giao dịch điểm giữ toàn bộ, không dọn.** Xem `BR-3.9` | PO | — |
 | ~~OQ-08~~ | ✅ **Đã chốt 06/10: múi giờ lấy theo tenant**, không có ô chọn trên màn Gamification. Cách lưu do Dev quyết trong technical design. Xem `BR-14.9` | PO | — |
 | ~~OQ-09~~ | ✅ **Đã rõ:** mọi học viên bắt đầu ở `0` điểm và **hạng `1`**, theo `BR-10.1` | — | — |
-| **OQ-10** | Metadata đầu tài liệu còn trống: `Story` · `Designer` · `Tech lead` · `QA` · `Reviewer`. `Target release` và `Epic` đã có | PO | Bàn giao |
+| **OQ-10** | Metadata đầu tài liệu còn trống: `Story` · `Designer` · `Tech PIC` · `QA` · `Reviewer`. `Target release` và `Epic` đã có | PO | Bàn giao |
 | **OQ-11** | Link Figma và tài khoản staging để đối chiếu giao diện | PO | `US1`–`US12` |
 | **OQ-12** | Học viên có tắt hoặc chỉnh được thông báo thành tích không? | PO | `US2` |
 | ~~OQ-16~~ | ✅ **Đã chốt 12/10 theo design:** `Level up! You've just reached Level {n}`. Xem `US2` | PO | — |

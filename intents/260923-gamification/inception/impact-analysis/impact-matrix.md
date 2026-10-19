@@ -6,7 +6,7 @@ status: approved
 approved_at: 2026-10-12
 approved: 2026-10-12 (v0.4); 2026-09-23 (v0.2, Gate 2)
 note: v0.4 mang CR-013 §14 và nhật ký ghi nhận bên Ops §15
-migrated-from: .claude/projects/Gamification/working/impact-analysis/impact-matrix-v0.3-20261008.md
+migrated-from: pre-aidlc:.claude/projects/Gamification/working/impact-analysis/impact-matrix-v0.3-20261008.md
 ---
 # Impact Matrix — Gamification
 

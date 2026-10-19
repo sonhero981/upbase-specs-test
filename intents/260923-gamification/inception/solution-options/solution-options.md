@@ -6,7 +6,7 @@ status: approved
 approved_at: 2026-10-12
 approved: 2026-10-12 (v0.2, chốt option K cho campaign); 2026-09-23 (v0.1, Gate 3)
 note: v0.2 thêm §10 cách tính campaign, PO chốt option K
-migrated-from: .claude/projects/Gamification/working/solution-options/solution-comparison-v0.2-20261008.md
+migrated-from: pre-aidlc:.claude/projects/Gamification/working/solution-options/solution-comparison-v0.2-20261008.md
 ---
 # Solution Comparison — Gamification
 

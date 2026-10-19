@@ -66,3 +66,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-12 Publish PRD v0.14 lên Lark: doc v0.8 cũ đã bị xoá, ghi đè doc `[PRD] Gamification` hiện có trong node (Hjuxd3my6oG0UuxBGNOllABAgye, đang v0.7); chép Target release, Epic điền tay vào PRD trước khi ghi đè. Đối chiếu: heading 15/32/141/23 khớp, 11 bảng trắng, 0 sơ đồ dạng code, 10 ảnh trong mục Design
 - 2026-10-14 CR-014: phần xem trước bảng xếp hạng bên Ops giữ khoảng ngày tự do. Re-entry 2.42, chỉ US11. PO duyệt PRD v0.15
 - 2026-10-14 Publish PRD v0.15 lên Lark, ghi đè doc Hjuxd3my6oG0UuxBGNOllABAgye. Bảng thông tin trên Lark đã bị sửa sau 12/10 (Target release xoá trắng, bỏ ❓ ở Designer, Tech lead, QA, Reviewer), đã chép theo Lark trước khi ghi đè. Đối chiếu: heading 15/32/141/23, 11 bảng trắng, 10 ảnh
+- 2026-10-19 15:04 migrate lên engine 2.1.0 bởi buidhui, DEC163
