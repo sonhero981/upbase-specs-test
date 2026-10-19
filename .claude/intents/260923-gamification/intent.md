@@ -44,7 +44,7 @@ Quyết định giải pháp đã chốt: tính trong luồng, độ trễ bằn
 | Wiki space | `7660816820865093342` |
 | Node cha chung | `02. Execution — Epics & Features`, token `X3hhwv2MxizpFgkVudVl7e52gUc` |
 | Intent node | `Gamification`, token `LRVgwz5L9imG6WkQvJdllro5gNd` |
-| Published | initiative-brief: — · hld-brief: — · prd: **v0.14** ngày 12/10/2026, node `JGfawDSDviHEcAkWwdnlXrthgne`, doc `Hjuxd3my6oG0UuxBGNOllABAgye`, tên trên Lark `[PRD] Gamification`. Doc cũ `KeT8dkIStofZ0axlTW5l4S94gre` (v0.8) đã bị xoá trên Lark; trước lần publish này doc mới đang là v0.7, có Target release và Epic điền tay, đã chép vào PRD |
+| Published | initiative-brief: — · hld-brief: — · prd: **v0.15** ngày 14/10/2026, node `JGfawDSDviHEcAkWwdnlXrthgne`, doc `Hjuxd3my6oG0UuxBGNOllABAgye`, tên trên Lark `[PRD] Gamification`. Doc cũ `KeT8dkIStofZ0axlTW5l4S94gre` (v0.8) đã bị xoá trên Lark; trước lần publish này doc mới đang là v0.7, có Target release và Epic điền tay, đã chép vào PRD |
 
 Publish lại: dùng `lark-cli docs +update --command overwrite` vào doc `Hjuxd3my6oG0UuxBGNOllABAgye`, **đọc bảng thông tin đầu doc trên Lark trước** vì PO có thể điền tay, giữ tên trên Lark; sáu sơ đồ Mermaid tự thành bảng trắng; **ảnh design phải chèn lại** bằng `.claude/scripts/lark-insert-design-images.py` theo `design/order.txt` vì ảnh không nằm trong file `.md`.
 

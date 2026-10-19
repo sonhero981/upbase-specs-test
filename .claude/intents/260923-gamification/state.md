@@ -28,7 +28,7 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - [x] 2.32 solution-options · v1: inception/solution-options/solution-options.md v0.2. Duyệt 2026-10-12, chốt option K (DEC147). v0.1 duyệt 2026-09-23
 - [x] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story. Duyệt 2026-10-12 cùng 2.42 (DEC157)
 - [S] 2.41 hld-brief · stage chưa tồn tại khi chạy v1; chạy bổ sung sau khi bốn gate duyệt lại, trước khi bàn giao Dev
-- [x] 2.42 prd-generation · v1: inception/prd/prd.md v0.14. Duyệt 2026-10-12 kèm ba quyết định (DEC157), sau một lần Request Changes. Archive prd-generation/prd-v0.14-20261012.md; (CR-009 đến CR-013, design, US22, technical design backend). v0.2 Gate 4 duyệt 2026-09-23. Lark đang v0.8
+- [x] 2.42 prd-generation · v1: inception/prd/prd.md v0.15. Duyệt lại 2026-10-14 sau CR-014 (DEC162); v0.14 duyệt 2026-10-12 kèm ba quyết định (DEC157), sau một lần Request Changes. Archive prd-generation/prd-v0.14-20261012.md; (CR-009 đến CR-013, design, US22, technical design backend). v0.2 Gate 4 duyệt 2026-09-23. Lark đang v0.8
 
 ## Current
 | | |
@@ -49,7 +49,7 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 | solution-options | v0.2 | approved | v0.1: 2026-09-23 | — |
 | initiative-brief | — | không có, v1 dùng BRD | — | — |
 | hld-brief | — | chưa chạy | — | — |
-| prd | v0.14 | approved | v0.14: 2026-10-12 · v0.2: 2026-09-23 | v0.14 · Hjuxd3my6oG0UuxBGNOllABAgye, publish 2026-10-12 |
+| prd | v0.15 | approved | v0.15: 2026-10-14 · v0.14: 2026-10-12 · v0.2: 2026-09-23 | v0.15 · Hjuxd3my6oG0UuxBGNOllABAgye, publish 2026-10-14 |
 
 ## Log
 - 2026-09-23 created ở luồng v1, cỡ L. Gate 1, 2, 3, 4 trong ngày; CR-001 đến CR-008
@@ -64,3 +64,5 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-12 Review Product Lead lần 01: BRD NOT-READY 11 finding, PRD NOT-READY 15 finding. PO Approve BRD v0.8 (1.1 · 1.4 · 1.7), Impact v0.4 (2.31), Solution v0.2 (2.32, option K); Request Changes PRD v0.13 (2.4 · 2.42). Progress: 6/8 | INCEPTION 3/5 · Next: sửa PRD rồi trình lại 2.4 · 2.42
 - 2026-10-12 Sửa PRD theo review lần 01 và tám quyết định của PO (DEC149 đến DEC156), PRD v0.14. Review lần 02: NOT-READY, 0 Critical, 3 Major mới. PO Approve kèm ba quyết định (DEC157 đến DEC160). Đóng CR-012, CR-013. Progress: 8/8 | INCEPTION 5/5 · Next: publish Lark, rồi 2.41 HLD Brief
 - 2026-10-12 Publish PRD v0.14 lên Lark: doc v0.8 cũ đã bị xoá, ghi đè doc `[PRD] Gamification` hiện có trong node (Hjuxd3my6oG0UuxBGNOllABAgye, đang v0.7); chép Target release, Epic điền tay vào PRD trước khi ghi đè. Đối chiếu: heading 15/32/141/23 khớp, 11 bảng trắng, 0 sơ đồ dạng code, 10 ảnh trong mục Design
+- 2026-10-14 CR-014: phần xem trước bảng xếp hạng bên Ops giữ khoảng ngày tự do. Re-entry 2.42, chỉ US11. PO duyệt PRD v0.15
+- 2026-10-14 Publish PRD v0.15 lên Lark, ghi đè doc Hjuxd3my6oG0UuxBGNOllABAgye. Bảng thông tin trên Lark đã bị sửa sau 12/10 (Target release xoá trắng, bỏ ❓ ở Designer, Tech lead, QA, Reviewer), đã chép theo Lark trước khi ghi đè. Đối chiếu: heading 15/32/141/23, 11 bảng trắng, 10 ảnh

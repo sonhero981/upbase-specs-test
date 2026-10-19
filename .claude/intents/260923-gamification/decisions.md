@@ -164,6 +164,8 @@ Nhật ký quyết định của intent. Chuyển từ `archive/v1/project-decis
 | DEC158 | 2026-10-12 | 2.42 | **Trao bù huy hiệu khi bật `Badges` hoặc bật lại một loại, không thông báo; số huy hiệu chỉ đếm loại đang bật** (`BR-9.9`, `BR-9.10`). Review R-16 | "Trao bù, không thông báo (Recommended)" | PO | 2.42, US9 |
 | DEC159 | 2026-10-12 | 2.42 | **Dòng lịch sử, thông báo, bảng `Points` của campaign ẩn theo chức năng sinh ra nó** (`BR-1.8`, `BR-3.10`, `BR-19.8`). Review R-17 | "Ẩn theo chức năng (Recommended)" | PO | 2.42, US1, US2, US3, US19 |
 | DEC160 | 2026-10-12 | 2.42 | **Bảng quyền bên Ops; tắt `Gamification` vẫn xem được US12, kết quả campaign, nhật ký** (`BR-15.7`, `BR-15.8`). Review R-18 | "Theo đề xuất (Recommended)" | PO | 2.42, US15 |
+| DEC161 | 2026-10-14 | CR-014 → 2.42 | **Phần xem trước bảng xếp hạng bên Ops giữ bộ chọn khoảng ngày tự do**, mặc định `All time`. Đảo một phần quyết định ngày 08/10 cho phần xem trước đi theo phía học viên. Re-entry 2.42, chỉ chạm `US11` | "filter của leaderboard trong ops vẫn giữ cho chọn start với end. cho vận hành chọn khoảng trượt để động hơn trong vận hành" | PO | 2.42, US11 |
+| DEC162 | 2026-10-14 | 2.42 | **Approve PRD v0.15**, publish lại Lark. Đóng `CR-014` | "Chạy, duyệt luôn và publish (Recommended)" · mặc định "All time, giống US12 (Recommended)" | PO | 2.42 |
 
 ## Change requests
 Phân tích chi tiết từng CR ở `inputs/change-requests.md` (nguyên văn PO, nhận định, điểm re-entry, trả lời của PO).
@@ -183,6 +185,7 @@ Phân tích chi tiết từng CR ở `inputs/change-requests.md` (nguyên văn P
 | CR-011 | Trang cấu hình Ops tự lưu | `inputs/change-requests.md` | Đóng ở v1 |
 | CR-012 | Bảng xếp hạng theo huy hiệu chỉ còn ở All time, thêm bảng Activities | `inputs/change-requests.md` | Đóng 12/10/2026, PRD v0.14 duyệt (DEC157). Trước đó: Mở. Gộp CR-012 vào CR-013 (PO 08/10/2026), chạy lại từ BRD; chờ duyệt lại BRD v0.7, Impact v0.3, Solution v0.2, PRD v0.10 |
 | CR-013 | Campaign trở lại, học viên bỏ khoảng ngày tự do | `inputs/change-requests.md` | Đóng 12/10/2026, bốn gate duyệt lại (DEC145 đến DEC147, DEC157). Trước đó: Mở. Gộp CR-012 vào CR-013 (PO 08/10/2026), chạy lại từ BRD; chờ duyệt lại BRD v0.7, Impact v0.3, Solution v0.2, PRD v0.10 |
+| CR-014 | Phần xem trước bảng xếp hạng bên Ops giữ khoảng ngày tự do | DEC161 | Đóng 14/10/2026, PRD v0.15 duyệt (DEC162) |
 
 ## Accepted risks
 | DEC | Finding | Vì sao chấp nhận |
