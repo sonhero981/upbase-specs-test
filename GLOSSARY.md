@@ -30,7 +30,7 @@ Thuật ngữ và họ mã của PO-Workflow, theo AWS AI-DLC Workflows 2.11, fi
 | Live source · Pinned record · Last verified | Nguồn sống, bản chốt, ngày đối chiếu của KB | Repo |
 | AI Reviewer | Agent `ai-reviewer` review độc lập, không thấy hội thoại, kết luận READY hoặc NOT-READY. Không phải người | AWS gọi vai này là Product Lead |
 | Sổ finding | `reviews/findings-<slug>.md`, danh sách finding của một stage và quyết định của PO; finding đã quyết không bị chấm lại | AWS, engine giữ danh sách finding |
-| Mã tính năng | `<mã sản phẩm>-F<NNN>`, ví dụ `LMS-F012`. Cấp khi tạo intent, đi theo tính năng tới PRD, story trên Jira, test case, nhánh code | Quy ước chung các team, `engine/standards/id-conventions.md` |
+| Mã tính năng | `<mã sản phẩm>-F<NNN>`, ví dụ `APP-F012`. Cấp khi tạo intent, đi theo tính năng tới PRD, story trên Jira, test case, nhánh code | Quy ước chung các team, `engine/standards/id-conventions.md` |
 | Story List | `intents/<intent>/stories/story-list-prd-v<phiên bản>.csv`, mỗi US trong PRD một dòng theo mẫu import CSV của Jira. Sinh bằng `/po-stories` sau khi PRD được duyệt; các team làm việc trên story Jira | Quy ước chung các team, `engine/standards/handoff-rules.md`, ADR 0002 |
 | Checkpoint | Buổi PO làm việc với Design PIC, Tech PIC, QA PIC trên HLD Brief ở 2.41, trước khi viết PRD | Quy ước chung các team |
 | Điều kiện giao Dev, DoR | Điều kiện để giao một story cho Dev: PRD đã duyệt, US có AC, mọi BR có AC, không còn `❓PO` và câu chặn. Kiểm bằng `po-tools.py dor` | Quy ước chung các team; Definition of Ready của AWS |
@@ -102,13 +102,13 @@ Mã trên là mã ngắn, dùng trong artifact của PO và PRD. Ra ngoài, trê
 
 | Họ | Mã đầy đủ | Ví dụ | Ai cấp |
 |---|---|---|---|
-| Tính năng | `<SP>-F<NNN>` | `LMS-F012` | PO, khi tạo intent |
-| User story | `US-<tính năng>-<NN>` | `US-LMS-F012-01` | Script đổi từ `US1` |
-| Acceptance criteria | `AC-<tính năng>-<NN>.<n>` | `AC-LMS-F012-01.1` | Script đổi từ `AC1.1` |
-| Business rule | `BR-<tính năng>-<NN>.<n>` | `BR-LMS-F012-01.2` | Script đổi từ `BR1.2` |
-| Câu hỏi trên story Jira | `Q-<tính năng>-<NN>.<n>` | `Q-LMS-F012-01.3` | Người hỏi |
-| Màn hình | `SCR-<tính năng>-<NN>` | `SCR-LMS-F012-02` | Design PIC |
-| Test case | `TC-<tính năng>-<NN>` | `TC-LMS-F012-01` | QA PIC |
+| Tính năng | `<SP>-F<NNN>` | `APP-F012` | PO, khi tạo intent |
+| User story | `US-<tính năng>-<NN>` | `US-APP-F012-01` | Script đổi từ `US1` |
+| Acceptance criteria | `AC-<tính năng>-<NN>.<n>` | `AC-APP-F012-01.1` | Script đổi từ `AC1.1` |
+| Business rule | `BR-<tính năng>-<NN>.<n>` | `BR-APP-F012-01.2` | Script đổi từ `BR1.2` |
+| Câu hỏi trên story Jira | `Q-<tính năng>-<NN>.<n>` | `Q-APP-F012-01.3` | Người hỏi |
+| Màn hình | `SCR-<tính năng>-<NN>` | `SCR-APP-F012-02` | Design PIC |
+| Test case | `TC-<tính năng>-<NN>` | `TC-APP-F012-01` | QA PIC |
 
 ## Ký hiệu
 | Ký hiệu | Nghĩa |

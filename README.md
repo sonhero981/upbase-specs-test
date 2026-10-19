@@ -309,15 +309,15 @@ PRD và artifact của PO dùng mã ngắn cho dễ đọc. Khi sinh Story List,
 
 | Đối tượng | Mã đầy đủ | Ví dụ | Ai cấp |
 |---|---|---|---|
-| Tính năng | `<SP>-F<NNN>` | `LMS-F012` | PO, khi tạo intent |
-| User story | `US-<tính năng>-<NN>` | `US-LMS-F012-01` | PO, ở 2.4 |
-| Acceptance criteria | `AC-<tính năng>-<NN>.<n>` | `AC-LMS-F012-01.1` | PO, ở 2.42 |
-| Business rule | `BR-<tính năng>-<NN>.<n>` | `BR-LMS-F012-01.2` | PO, ở 2.42 |
-| Câu hỏi mở | `Q-<tính năng>-<NN>.<n>` | `Q-LMS-F012-01.3` | Người hỏi |
-| Màn hình | `SCR-<tính năng>-<NN>` | `SCR-LMS-F012-02` | Design PIC |
-| Test case | `TC-<tính năng>-<NN>` | `TC-LMS-F012-01` | QA PIC |
-| Nhánh code | `feat/<tính năng>-<mô tả>` | `feat/LMS-F012-quiz-retake` | Dev |
-| Commit | Trailer `Feature:` và `Story:` | `Feature: LMS-F012` | Dev |
+| Tính năng | `<SP>-F<NNN>` | `APP-F012` | PO, khi tạo intent |
+| User story | `US-<tính năng>-<NN>` | `US-APP-F012-01` | PO, ở 2.4 |
+| Acceptance criteria | `AC-<tính năng>-<NN>.<n>` | `AC-APP-F012-01.1` | PO, ở 2.42 |
+| Business rule | `BR-<tính năng>-<NN>.<n>` | `BR-APP-F012-01.2` | PO, ở 2.42 |
+| Câu hỏi mở | `Q-<tính năng>-<NN>.<n>` | `Q-APP-F012-01.3` | Người hỏi |
+| Màn hình | `SCR-<tính năng>-<NN>` | `SCR-APP-F012-02` | Design PIC |
+| Test case | `TC-<tính năng>-<NN>` | `TC-APP-F012-01` | QA PIC |
+| Nhánh code | `feat/<tính năng>-<mô tả>` | `feat/APP-F012-quiz-retake` | Dev |
+| Commit | Trailer `Feature:` và `Story:` | `Feature: APP-F012` | Dev |
 
 Mã đã cấp không đổi và không dùng lại. Tách một story thì phần tách ra nhận số mới; AC chuyển đi nhận mã mới và dòng cũ ghi "chuyển sang", để test case trỏ mã cũ vẫn tìm được đường. Chi tiết ở `engine/standards/id-conventions.md`.
 

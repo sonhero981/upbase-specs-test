@@ -319,7 +319,7 @@ Lark là bản để người đọc. Việc được giao qua story trên Jira.
 
 1. Đọc `intents/INDEX.md` để biết tính năng nào đã có PRD duyệt, tag nào, service nào bị chạm, bao nhiêu story đạt điều kiện giao Dev.
 2. Lấy đúng bản theo tag, bằng `git show <tag>:<đường dẫn>` hoặc qua GitHub MCP server của công cụ đang dùng.
-3. Đặt tên nhánh `feat/<tính năng>-<mô tả>`, ví dụ `feat/LMS-F012-quiz-retake`.
+3. Đặt tên nhánh `feat/<tính năng>-<mô tả>`, ví dụ `feat/APP-F012-quiz-retake`.
 4. Thêm trailer vào commit: `Feature: <tính năng>`, và `Story: <US>` khi commit thuộc một story.
 
 Unit trong PRD là cách PO nhóm user story theo giá trị và ưu tiên. Dev chia việc trong phase Construction theo kiến trúc và có thể chia khác. Thiết kế kỹ thuật của Dev ghi ở tài liệu riêng của Dev và gắn link vào story trên Jira, không ghi đè mục nghiệp vụ trong PRD.

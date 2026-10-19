@@ -8,7 +8,7 @@ Dựng phần khung của một domain pack. Phần cần người, như duyệt
 
 ## 1. Hỏi PO, một lượt
 Hộp chọn hoặc chat, ghi nguyên văn:
-1. Tên sản phẩm, tên công ty, mã sản phẩm theo danh mục của công ty, dùng trong mã tính năng cho mọi team, ví dụ `LMS`, portal hoặc ứng dụng con
+1. Tên sản phẩm, tên công ty, mã sản phẩm theo danh mục của công ty, dùng trong mã tính năng cho mọi team, ví dụ `APP`, portal hoặc ứng dụng con
 2. Một tenant hay đa tenant; hằng số nào phải cấu hình theo tenant
 3. Vai người dùng chính
 4. Nguồn: tài liệu người dùng ở đâu, schema DB ở đâu, API spec ở đâu; nguồn nào còn cập nhật, nguồn nào là bản chốt

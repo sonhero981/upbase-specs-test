@@ -10,15 +10,15 @@ Mã dùng chung cho mọi team nhận việc từ PO: Design, Tech, QA. Mã đi 
 
 | Đối tượng | Mẫu | Ví dụ | Ai cấp | Ở đâu |
 |---|---|---|---|---|
-| Tính năng | `<SP>-F<NNN>` | `LMS-F012` | PO, khi tạo intent, bằng `po-tools.py feature-id` | `intent.md`, đầu PRD, nhãn của mọi story trên Jira |
-| User story | `US-<tính năng>-<NN>` | `US-LMS-F012-01` | PO, ở 2.4 | Nhãn và tham chiếu của story trên Jira |
-| Acceptance criteria | `AC-<tính năng>-<NN>.<n>` | `AC-LMS-F012-01.1` | PO, ở 2.42 | Description của story trên Jira |
-| Business rule | `BR-<tính năng>-<NN>.<n>` | `BR-LMS-F012-01.2` | PO, ở 2.42 | Description của story trên Jira |
-| Câu hỏi mở | `Q-<tính năng>-<NN>.<n>` | `Q-LMS-F012-01.3` | Người hỏi, bất kỳ team nào | Comment trên story Jira |
-| Màn hình | `SCR-<tính năng>-<NN>` | `SCR-LMS-F012-02` | Design PIC, ở HLD Brief mục 8 | Story trên Jira; PRD tham chiếu lại |
-| Test case | `TC-<tính năng>-<NN>` | `TC-LMS-F012-01` | QA PIC | Test case trên Jira |
-| Nhánh code | `feat/<tính năng>-<mô tả>` | `feat/LMS-F012-quiz-retake` | Dev | Git |
-| Commit | Trailer `Feature: <tính năng>`, thêm `Story: <US>` khi commit thuộc một story | `Feature: LMS-F012` | Dev | Git |
+| Tính năng | `<SP>-F<NNN>` | `APP-F012` | PO, khi tạo intent, bằng `po-tools.py feature-id` | `intent.md`, đầu PRD, nhãn của mọi story trên Jira |
+| User story | `US-<tính năng>-<NN>` | `US-APP-F012-01` | PO, ở 2.4 | Nhãn và tham chiếu của story trên Jira |
+| Acceptance criteria | `AC-<tính năng>-<NN>.<n>` | `AC-APP-F012-01.1` | PO, ở 2.42 | Description của story trên Jira |
+| Business rule | `BR-<tính năng>-<NN>.<n>` | `BR-APP-F012-01.2` | PO, ở 2.42 | Description của story trên Jira |
+| Câu hỏi mở | `Q-<tính năng>-<NN>.<n>` | `Q-APP-F012-01.3` | Người hỏi, bất kỳ team nào | Comment trên story Jira |
+| Màn hình | `SCR-<tính năng>-<NN>` | `SCR-APP-F012-02` | Design PIC, ở HLD Brief mục 8 | Story trên Jira; PRD tham chiếu lại |
+| Test case | `TC-<tính năng>-<NN>` | `TC-APP-F012-01` | QA PIC | Test case trên Jira |
+| Nhánh code | `feat/<tính năng>-<mô tả>` | `feat/APP-F012-quiz-retake` | Dev | Git |
+| Commit | Trailer `Feature: <tính năng>`, thêm `Story: <US>` khi commit thuộc một story | `Feature: APP-F012` | Dev | Git |
 
 `<NNN>` ba chữ số, `<NN>` hai chữ số, đều có số 0 ở đầu. `<n>` là số thứ tự trong story, bắt đầu từ 1.
 
@@ -26,11 +26,11 @@ Mã dùng chung cho mọi team nhận việc từ PO: Design, Tech, QA. Mã đi 
 
 Artifact nội bộ và PRD dùng mã ngắn cho dễ đọc: `US1`, `AC1.1`, `BR1.2`. Đầu PRD ghi mã tính năng. Quy đổi là cơ học:
 
-| Mã ngắn trong PRD của `LMS-F012` | Mã đầy đủ |
+| Mã ngắn trong PRD của `APP-F012` | Mã đầy đủ |
 |---|---|
-| `US1` | `US-LMS-F012-01` |
-| `AC1.1` | `AC-LMS-F012-01.1` |
-| `BR1.2`, hoặc `BR-1.2` ở PRD cũ | `BR-LMS-F012-01.2` |
+| `US1` | `US-APP-F012-01` |
+| `AC1.1` | `AC-APP-F012-01.1` |
+| `BR1.2`, hoặc `BR-1.2` ở PRD cũ | `BR-APP-F012-01.2` |
 
 `po-tools.py stories` đổi mã khi sinh Story List. Không đổi tay. Từ story trên Jira trở đi, mọi team chỉ dùng mã đầy đủ.
 

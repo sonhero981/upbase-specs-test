@@ -59,6 +59,7 @@ Phiên bản của engine PO-Workflow. Số phiên bản ở file `VERSION`. M�
 - USER-GUIDE.md viết lại theo người đọc: thêm mục cho Design PIC, Tech PIC, QA PIC, mục cho Dev, bảng lệnh của script; mục domain pack không còn dữ kiện của sản phẩm đang cài.
 - AGENTS.md, DOMAIN-SETUP.md, GLOSSARY.md viết lại bằng văn viết, bỏ in đậm. DOMAIN-SETUP.md thêm mục Chuẩn bàn giao cho các team. GLOSSARY.md thêm checkpoint, điều kiện giao Dev, Story List, nguyên tắc chia story, tiêu chí chấp nhận, tag bản duyệt, phiên bản artifact, mức độ trưởng thành.
 - Sửa chữ PU còn sót thành Unit trong template `scope-document`, `stories` và 2 checklist.
+- Mã ví dụ trong `id-conventions.md`, README, GLOSSARY, USER-GUIDE và `/new-domain` đổi từ `LMS-F012` sang `APP-F012`, để engine không gắn với sản phẩm đang cài.
 
 ### Đổi tên
 - Proto-Unit thành Unit, mã `PU1` thành `U1`, mục PRD Proto-Units thành Units, theo quyết định ngày 19/10/2026. GLOSSARY ghi khác biệt với Unit of work của AWS ở 2.7.
