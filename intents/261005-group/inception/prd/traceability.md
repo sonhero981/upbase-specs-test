@@ -1,15 +1,17 @@
 ---
 intent: 261005-group
 artifact: traceability
-version: 0.1
-date: 2026-10-12
-note: Làm tay ở gate 2.4 ngày 12/10/2026. Intent dùng họ mã v1 (RC thay FR), script po-tools.py trace không áp dụng
+version: 0.2
+date: 2026-10-20
+note: Bảng RC làm tay ở gate 2.4 ngày 12/10/2026, vì intent dùng họ mã v1 (RC thay FR). Bảng BR sang AC lấy từ po-tools.py trace ngày 20/10/2026, CR3
 ---
 # Traceability: Nhóm học viên (Group)
 
 Trạng thái: OK có đích · GAP chưa có · ORPHAN không truy về đâu · Deferred để đợt sau, ghi rõ · N/A không áp dụng, ghi lý do.
 
-## RC sang US
+## FR sang US
+Intent này dùng mã `RC` của bản làm rõ yêu cầu thay cho `FR`.
+
 | RC | US | Trạng thái | Ghi chú |
 |---|---|---|---|
 | `RC-01` cây nhóm nhiều cấp, mã tên mô tả nhóm cha | `US1` | OK | `BR-1.1` đến `BR-1.6` |
@@ -35,7 +37,7 @@ Trạng thái: OK có đích · GAP chưa có · ORPHAN không truy về đâu �
 
 Không có GAP: 20 trên 20 RC có US.
 
-## US sang RC
+## US sang FR
 | US | RC | Trạng thái |
 |---|---|---|
 | `US1` | `RC-01` · `RC-02` · `RC-04` | OK |
@@ -64,5 +66,141 @@ Ba US cuối truy về objective và quyết định ở Bước 5, Bước 7 c�
 ## BR sang US
 Mã business rule mang số US (`BR-<US>.<n>`), nên gắn vào US theo mã. Kiểm bằng máy ngày 12/10/2026 sau CR2: 130 BR định nghĩa trong 20 US, mọi mã trỏ tới US có thật, không BR nào được nhắc mà không định nghĩa.
 
+## BR sang AC
+CR3 ngày 20/10/2026 thêm 104 tiêu chí chấp nhận cho 20 user story. Mỗi business rule có ít nhất một tiêu chí kiểm nó. Các tiêu chí không gắn business rule kiểm validate của bảng giao diện hoặc nội dung email, ví dụ `AC1.3` · `AC6.5` · `AC20.4`.
+
+| BR | AC | Trạng thái |
+|---|---|---|
+| `BR-1.1` | `AC1.2` | OK |
+| `BR-1.2` | `AC1.4` | OK |
+| `BR-1.3` | `AC1.5` | OK |
+| `BR-1.4` | `AC1.5` | OK |
+| `BR-1.5` | `AC1.6` | OK |
+| `BR-1.6` | `AC1.1` | OK |
+| `BR-2.1` | `AC2.2` | OK |
+| `BR-2.2` | `AC2.3` | OK |
+| `BR-2.3` | `AC2.4` | OK |
+| `BR-2.4` | `AC2.5` | OK |
+| `BR-2.5` | `AC2.5` | OK |
+| `BR-2.6` | `AC2.6` | OK |
+| `BR-3.1` | `AC3.1` | OK |
+| `BR-3.2` | `AC3.2` | OK |
+| `BR-3.3` | `AC3.3` | OK |
+| `BR-3.4` | `AC3.4` | OK |
+| `BR-3.5` | `AC3.6` | OK |
+| `BR-3.6` | `AC3.5` | OK |
+| `BR-3.7` | `AC3.5` | OK |
+| `BR-4.1` | `AC4.2` | OK |
+| `BR-4.2` | `AC4.3` | OK |
+| `BR-4.3` | `AC4.4` | OK |
+| `BR-4.4` | `AC4.5` | OK |
+| `BR-4.5` | `AC4.6` | OK |
+| `BR-5.1` | `AC5.1` | OK |
+| `BR-5.2` | `AC5.2` | OK |
+| `BR-5.3` | `AC5.3` | OK |
+| `BR-5.4` | `AC5.2` | OK |
+| `BR-5.5` | `AC5.4` | OK |
+| `BR-5.6` | `AC5.4` | OK |
+| `BR-5.7` | `AC5.5` | OK |
+| `BR-5.8` | `AC5.5` | OK |
+| `BR-5.9` | `AC5.1` | OK |
+| `BR-5.10` | `AC5.6` | OK |
+| `BR-6.1` | `AC6.1` | OK |
+| `BR-6.2` | `AC6.2` | OK |
+| `BR-6.3` | `AC6.2` | OK |
+| `BR-6.4` | `AC6.3` | OK |
+| `BR-6.5` | `AC6.4` | OK |
+| `BR-7.1` | `AC7.1` | OK |
+| `BR-7.2` | `AC7.2` | OK |
+| `BR-7.3` | `AC7.3` | OK |
+| `BR-7.4` | `AC7.2` · `AC7.4` | OK |
+| `BR-7.5` | `AC7.4` | OK |
+| `BR-7.6` | `AC7.5` | OK |
+| `BR-7.7` | `AC7.5` | OK |
+| `BR-7.8` | `AC7.4` | OK |
+| `BR-7.9` | `AC7.3` | OK |
+| `BR-7.10` | `AC7.6` | OK |
+| `BR-7.11` | `AC7.1` | OK |
+| `BR-8.1` | `AC8.1` | OK |
+| `BR-8.2` | `AC8.3` | OK |
+| `BR-8.3` | `AC8.2` | OK |
+| `BR-8.4` | `AC8.4` | OK |
+| `BR-8.5` | `AC8.5` | OK |
+| `BR-9.1` | `AC9.1` | OK |
+| `BR-9.2` | `AC9.1` | OK |
+| `BR-9.3` | `AC9.3` | OK |
+| `BR-9.4` | `AC9.4` | OK |
+| `BR-9.5` | `AC9.4` | OK |
+| `BR-9.6` | `AC9.5` | OK |
+| `BR-9.7` | `AC9.5` | OK |
+| `BR-10.1` | `AC10.1` | OK |
+| `BR-10.2` | `AC10.2` | OK |
+| `BR-10.3` | `AC10.3` | OK |
+| `BR-10.4` | `AC10.3` | OK |
+| `BR-10.5` | `AC10.4` | OK |
+| `BR-11.1` | `AC11.1` | OK |
+| `BR-11.2` | `AC11.2` | OK |
+| `BR-11.3` | `AC11.3` | OK |
+| `BR-11.4` | `AC11.2` | OK |
+| `BR-11.5` | `AC11.4` | OK |
+| `BR-11.6` | `AC11.4` | OK |
+| `BR-11.7` | `AC11.5` | OK |
+| `BR-12.1` | `AC12.1` | OK |
+| `BR-12.2` | `AC12.2` | OK |
+| `BR-12.3` | `AC12.2` | OK |
+| `BR-12.4` | `AC12.3` | OK |
+| `BR-12.5` | `AC12.4` | OK |
+| `BR-12.6` | `AC12.4` | OK |
+| `BR-13.1` | `AC13.1` | OK |
+| `BR-13.2` | `AC13.2` | OK |
+| `BR-13.3` | `AC13.3` | OK |
+| `BR-13.4` | `AC13.3` | OK |
+| `BR-13.5` | `AC13.4` | OK |
+| `BR-13.6` | `AC13.5` | OK |
+| `BR-13.7` | `AC13.5` | OK |
+| `BR-14.1` | `AC14.1` | OK |
+| `BR-14.2` | `AC14.1` | OK |
+| `BR-14.3` | `AC14.3` | OK |
+| `BR-14.4` | `AC14.3` | OK |
+| `BR-14.5` | `AC14.4` | OK |
+| `BR-14.6` | `AC14.2` | OK |
+| `BR-14.7` | `AC14.4` | OK |
+| `BR-15.1` | `AC15.2` | OK |
+| `BR-15.2` | `AC15.1` | OK |
+| `BR-15.3` | `AC15.3` | OK |
+| `BR-15.4` | `AC15.4` | OK |
+| `BR-16.1` | `AC16.1` | OK |
+| `BR-16.2` | `AC16.2` | OK |
+| `BR-16.3` | `AC16.2` | OK |
+| `BR-16.4` | `AC16.3` | OK |
+| `BR-16.5` | `AC16.4` | OK |
+| `BR-16.6` | `AC16.4` | OK |
+| `BR-16.7` | `AC16.1` | OK |
+| `BR-17.1` | `AC17.3` | OK |
+| `BR-17.2` | `AC17.2` | OK |
+| `BR-17.3` | `AC17.1` | OK |
+| `BR-17.4` | `AC17.3` | OK |
+| `BR-18.1` | `AC18.3` | OK |
+| `BR-18.2` | `AC18.3` | OK |
+| `BR-18.3` | `AC18.2` | OK |
+| `BR-18.4` | `AC18.4` | OK |
+| `BR-18.5` | `AC18.4` | OK |
+| `BR-18.6` | `AC18.5` | OK |
+| `BR-18.7` | `AC18.6` | OK |
+| `BR-19.1` | `AC19.1` | OK |
+| `BR-19.2` | `AC19.1` | OK |
+| `BR-19.3` | `AC19.2` | OK |
+| `BR-19.4` | `AC19.4` | OK |
+| `BR-19.5` | `AC19.3` | OK |
+| `BR-19.6` | `AC19.1` | OK |
+| `BR-19.7` | `AC19.5` | OK |
+| `BR-20.1` | `AC20.1` | OK |
+| `BR-20.2` | `AC20.2` | OK |
+| `BR-20.3` | `AC20.2` | OK |
+| `BR-20.4` | `AC20.2` | OK |
+| `BR-20.5` | `AC20.3` | OK |
+| `BR-20.6` | `AC20.1` | OK |
+| `BR-20.7` | `AC20.1` | OK |
+
 ## Kết luận
-Đạt. 0 GAP, 0 ORPHAN. Ghi chú để xử lý ở CR kế tiếp, không chặn: thêm ba dòng RC cho báo cáo cộng dồn theo nhóm (`US18`), tự gỡ khoá chưa học khi rời nhóm (`US19`), báo quản lý khi rời nhóm còn nghĩa vụ học (`US20`) để bảng yêu cầu khớp với 20 US. Ngày kiểm: 12/10/2026.
+Đạt. 0 GAP, 0 ORPHAN ở cả lớp RC sang US và lớp BR sang AC (130 BR, 104 AC, kiểm lại ngày 20/10/2026). Ghi chú để xử lý ở CR kế tiếp, không chặn: thêm ba dòng RC cho báo cáo cộng dồn theo nhóm (`US18`), tự gỡ khoá chưa học khi rời nhóm (`US19`), báo quản lý khi rời nhóm còn nghĩa vụ học (`US20`) để bảng yêu cầu khớp với 20 US. Ngày kiểm: 12/10/2026.

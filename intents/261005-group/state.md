@@ -27,16 +27,16 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - [x] 2.31 impact-analysis · v1: inception/impact-analysis/impact-matrix.md v0.4 duyệt 2026-10-12 (CR2, CG-3 đã giải, OQ-31; DEC82). v0.3 duyệt 2026-10-09 (CR1, vùng 9 và BI-6). v0.2 Gate 2 duyệt 2026-10-06
 - [S] 2.32 solution-options · v1 không làm so sánh phương án; Bước 7 dùng để chốt nhóm câu hỏi D
 - [x] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story và 20 US, v0.3. Duyệt lại theo v2 2026-10-12 (DEC82) sau một lần Request Changes (DEC80, CR2); truy vết tay ở inception/prd/traceability.md. 20 US chốt ở 9A của v1 ngày 2026-10-06
-- [R] 2.42 prd-generation · v1: inception/prd/prd.md v0.3 duyệt 2026-10-12 (CR2, chạm US3 US7 US19 US20, danh sách US, tồn đọng; DEC82). v0.2 duyệt 2026-10-09 (CR1, chạm US9 US11 US13 US16 US20). v0.1 duyệt và publish Lark 2026-10-06. Đang sửa theo CR3 từ 2026-10-20: thêm khối AC và dòng Ưu tiên (DEC92)
+- [x] 2.42 prd-generation · v1: inception/prd/prd.md v0.3 duyệt 2026-10-12 (CR2, chạm US3 US7 US19 US20, danh sách US, tồn đọng; DEC82). v0.2 duyệt 2026-10-09 (CR1, chạm US9 US11 US13 US16 US20). v0.1 duyệt và publish Lark 2026-10-06. Đang sửa theo CR3 từ 2026-10-20: thêm khối AC và dòng Ưu tiên (DEC92)
 - [ ] 2.43 design-alignment
 
 ## Current
 | | |
 |---|---|
-| Stage | 2.42 đang sửa theo CR3: thêm AC và Ưu tiên cho 20 US trước khi giao ba team ở 2.43 |
-| Next action | Viết khối AC và dòng Ưu tiên, chạy trace và check, AI Reviewer, trình gate 2.42; sau Approve publish Lark, rồi tạo khung ba file thiết kế ở 2.43 |
+| Stage | 2.43 design-alignment |
+| Next action | Bắt đầu 2.43 Design Alignment |
 | Blocking questions open | 0 |
-| Open CR | CR3 mở 2026-10-20 (DEC92). CR2 đóng 2026-10-12, CR1 đóng 2026-10-09 |
+| Open CR | none. CR3 đóng 2026-10-20 (DEC94), CR2 đóng 2026-10-12, CR1 đóng 2026-10-09 |
 | Parked | no |
 
 ## Versions
@@ -47,7 +47,7 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 | requirements | v0.3 | approved | 2026-10-09 | — |
 | impact-matrix | v0.4 | approved | v0.4: 2026-10-12 · v0.3: 2026-10-09 | — |
 | initiative-brief | — | không có, v1 dùng BRD | — | — |
-| prd | v0.3 | approved | v0.3: 2026-10-12 · v0.2: 2026-10-09 | v0.3 · Jg7ld8UCzoeMiAxW5ielxlC4gGg, revision 42, publish 2026-10-12 |
+| prd | v0.4 | approved | v0.4: 2026-10-20 · v0.3: 2026-10-12 · v0.2: 2026-10-09 | v0.4 · Jg7ld8UCzoeMiAxW5ielxlC4gGg, revision 63, publish 2026-10-20 |
 
 ## Log
 - 2026-10-05 created ở luồng v1, cỡ L
@@ -77,3 +77,8 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-19 15:11 migrate lên engine 2.1.0 bởi buidhui, DEC90
 - 2026-10-20 09:26 migrate lên engine 2.1.0 bởi buidhui, DEC91
 - 2026-10-20 Mở CR3 (DEC92): thêm khối AC và dòng Ưu tiên vào PRD trước 2.43. Chụp archive/prd-generation/prd-pre-CR3-20261020.md. 2.42 về [R]
+- 2026-10-20 CR3: PRD thêm 104 AC và 20 dòng Ưu tiên; check và trace sạch. Review AI Reviewer lần 02: READY, 2 Major mới (R-05 AC nhánh lỗi, R-06 tồn đọng #3 #4). Trình gate 2.42
+- 2026-10-20 Gate 2.42 (CR3): PO Request Changes lần 1 (DEC93). Sửa R-05 (AC5.1, dòng v0.4, tồn đọng #8), R-06 (tồn đọng #3 #4 đã quyết)
+- 2026-10-20 Review AI Reviewer lần 03: READY, Verdict Dictated no; R-05 R-06 Fixed; mới 1 Major (R-07, US15 thiếu Ưu tiên, kiểm lại thấy có) và 3 Minor (R-08 tên mục References, R-09 hàng Mã tính năng, R-10 tiêu đề TDD). Trình lại gate 2.42
+- 2026-10-20 11:12 2.42 approved v0.4 bởi buidhui
+- 2026-10-20 PO duyệt PRD v0.4 (DEC94, chạy approve trong terminal). R-07 Rejected, R-08 R-09 R-10 Accepted risk. Đóng CR3. Publish Lark revision 63, đối chiếu khớp: heading 14/32/124/72, 46 bảng, 310 dòng bảng, 315 gạch đầu dòng, 4 bảng trắng, 104 AC

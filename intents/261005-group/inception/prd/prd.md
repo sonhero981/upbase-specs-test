@@ -2,14 +2,15 @@
 intent: 261005-group
 feature: LMS-F002
 artifact: prd
-version: 0.3
+version: 0.4
 status: approved
 approved: 2026-10-12 (v0.3); 2026-10-09 (v0.2); 2026-10-06 (v0.1)
-cr: CR2 ngày 2026-10-12, chạm US3 US7 US19 US20, danh sách US, Vấn đề tồn đọng; CR1 ngày 2026-10-09, chạm US9 US13 US16 US20
+cr: CR3 ngày 2026-10-20, thêm khối tiêu chí chấp nhận và dòng Ưu tiên cho 20 US; CR2 ngày 2026-10-12, chạm US3 US7 US19 US20, danh sách US, Vấn đề tồn đọng; CR1 ngày 2026-10-09, chạm US9 US13 US16 US20
 gate: v1 Gate 4
 lark: Jg7ld8UCzoeMiAxW5ielxlC4gGg
 lark-title: [PRD] Group
 migrated-from: pre-aidlc:.claude/projects/Group/docs/prd/prd-group-v0.1-20261006.md
+approved_at: 2026-10-20T11:12
 ---
 # [PRD] Nhóm học viên
 
@@ -21,7 +22,7 @@ migrated-from: pre-aidlc:.claude/projects/Group/docs/prd/prd-group-v0.1-20261006
 | **Related** | `[BRD] Group — Nhóm học viên` · Dự án Gamification *(`US16` bộ lọc bảng xếp hạng theo nhóm đang chờ chức năng này)* |
 | **Document status** | `PUBLISH` |
 | **Document owner** | Bùi Đức Huy |
-| **Người duyệt** | Bùi Đức Huy — v0.1 ngày 06/10/2026 · v0.2 ngày 09/10/2026 · v0.3 ngày 12/10/2026 |
+| **Người duyệt** | Bùi Đức Huy — v0.1 ngày 06/10/2026 · v0.2 ngày 09/10/2026 · v0.3 ngày 12/10/2026 · v0.4 ngày 20/10/2026 |
 | **Designer** | |
 | **Tech lead** | |
 | **QA** | |
@@ -36,6 +37,7 @@ migrated-from: pre-aidlc:.claude/projects/Group/docs/prd/prd-group-v0.1-20261006
 | v0.1 | Bùi Đức Huy | Bản đầu — 20 user story, 122 business rule, 7 nhóm bàn giao | — | 06/10/2026 |
 | v0.2 | Bùi Đức Huy | Sau khi đối chiếu với TalentLMS: `US16` ghi rõ màn theo dõi nhánh ở UpLMS Ops · thêm mail event `MAIL-GRP-02` báo người được gán quản lý hoặc nhận chuyển phụ trách · thêm câu cảnh báo mất tiến độ vào `MAIL-GRP-01`. Sau review: chỉ định quản lý chính (`US11`) cũng gửi `MAIL-GRP-02`, email gộp khi chuyển phụ trách chỉ liệt nhóm mới, phần mentor không báo. 128 business rule | `US9` · `US11` · `US13` · `US16` · `US20` | 09/10/2026 |
 | v0.3 | Bùi Đức Huy | Sau review user story: người thuộc **nhiều nhóm cùng giao một lớp** thì rời một nhóm vẫn giữ lượt ghi danh khi nhóm kia còn giao (`BR-3.7` · `BR-19.7`, mở rộng `BR-7.9`, thêm điều kiện không bắn `MAIL-GRP-01`) · cột Nguồn của danh sách user story dẫn thêm `RC-02` `RC-07` `RC-20` và trỏ bảng truy vết · Vấn đề tồn đọng #2 ghi lý do ma trận quyền không chặn viết PRD, thêm #7 ba góc chưa có luật. 130 business rule | `US3` · `US7` · `US19` · `US20` | 12/10/2026 |
+| v0.4 | Bùi Đức Huy | Thêm khối tiêu chí chấp nhận cho cả 20 user story, 104 tiêu chí, mỗi business rule có ít nhất một tiêu chí kiểm nó. Tiêu chí cho nhánh lỗi hoặc bị từ chối có ở mọi user story mà PRD đã định nghĩa nhánh đó; tám user story còn lại ghi ở Vấn đề tồn đọng #8. Thêm dòng Ưu tiên cho từng user story. Vấn đề tồn đọng #3 và #4 chuyển sang đã quyết. Không đổi business rule, màn, field | `US1` đến `US20` | 20/10/2026 |
 
 ---
 
@@ -372,6 +374,8 @@ Cột Nguồn dẫn hạng mục của yêu cầu gốc và, nơi yêu cầu đ�
 
 Là nhân sự vận hành, tôi cần tạo và sửa nhóm nhiều cấp, để dựng được cơ cấu mà tổ chức đang dùng.
 
+**Ưu tiên:** Must
+
 ### 2/ Pre - Condition
 
 - Có quyền quản lý nhóm trên UpLMS Ops
@@ -386,6 +390,15 @@ Người vận hành điền tên và mã, chọn nhóm cha nếu nhóm này n�
 Sửa nhóm: mở chi tiết nhóm, bấm sửa. Nhóm đồng bộ từ hệ thống nhân sự thì nút sửa không hiện.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC1.1` Khi tạo nhóm với tên, mã hợp lệ và để trống nhóm cha, nhóm mới được tạo ở cấp gốc với nguồn `Tự tạo` và trạng thái `Đang dùng`; người dùng không chọn được hai giá trị này. Theo `BR-1.6`
+- `AC1.2` Khi nhập mã nhóm đã tồn tại trong tổ chức, hệ thống báo *Mã nhóm đã tồn tại* và không cho lưu. Khi sửa một nhóm đã tạo, ô mã nhóm bị khoá. Theo `BR-1.1`
+- `AC1.3` Khi bỏ trống tên, nhập tên dài 256 ký tự hoặc mô tả dài 1001 ký tự, hệ thống không cho lưu theo cột Yêu cầu của bảng UI; tên đúng 255 ký tự và mô tả đúng 1000 ký tự thì lưu được
+- `AC1.4` Khi chọn nhóm cha cho nhóm tự tạo, ô chọn chỉ liệt kê nhóm tự tạo đang ở trạng thái `Đang dùng`, không có nhóm đồng bộ. Theo `BR-1.2`
+- `AC1.5` Khi tạo nhóm con dưới một nhóm đang ở cấp 6, hệ thống chặn và báo *Nhánh này đã đạt số cấp tối đa*; tạo nhóm ở cấp 6 thì được. Khi tổ chức đổi số cấp tối đa trong cấu hình, giới hạn mới áp dụng ngay. Theo `BR-1.3` · `BR-1.4`
+- `AC1.6` Khi mở chi tiết một nhóm nguồn `Đồng bộ`, nút Sửa không hiện, thay bằng dòng *Nhóm này đồng bộ từ hệ thống nhân sự, không chỉnh sửa trên UpLMS*. Theo `BR-1.5`
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -431,6 +444,8 @@ Sửa nhóm: mở chi tiết nhóm, bấm sửa. Nhóm đồng bộ từ hệ th
 
 Là nhân sự vận hành, tôi cần di chuyển một nhánh sang nhóm cha khác, để cơ cấu tổ chức đổi thì hệ thống theo kịp.
 
+**Ưu tiên:** Should
+
 ### 2/ Pre - Condition
 
 - Nhóm được di chuyển có nguồn `Tự tạo`
@@ -443,6 +458,15 @@ Là nhân sự vận hành, tôi cần di chuyển một nhánh sang nhóm cha k
 Hệ thống kiểm tra trước khi áp: không tạo vòng, không vượt số cấp. Hỏi xác nhận rồi mới di chuyển.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC2.1` Khi kéo một nhóm tự tạo thả vào vị trí hợp lệ, vị trí thả hiện viền xanh; hộp xác nhận hiện tên nhánh, số nhóm con, số người bị ảnh hưởng, nhóm cha cũ và mới; xác nhận xong thì nhánh nằm dưới nhóm cha mới. Theo bảng UI
+- `AC2.2` Khi thả một nhóm vào chính nó hoặc vào nhánh con của nó, vị trí thả hiện viền đỏ, hệ thống chặn và báo *Không thể di chuyển một nhóm vào nhánh con của chính nó*. Theo `BR-2.1`
+- `AC2.3` Khi di chuyển làm nhánh sâu 7 cấp, hệ thống chặn và báo nhánh sẽ sâu bao nhiêu cấp; di chuyển làm nhánh sâu đúng 6 cấp thì được. Theo `BR-2.2`
+- `AC2.4` Khi chọn một nhóm nguồn `Đồng bộ`, không kéo thả được nhóm đó và field nhóm cha không sửa được. Theo `BR-2.3`
+- `AC2.5` Khi di chuyển xong, mọi nhóm trong nhánh giữ nguyên thành viên, nội dung đã giao cho các nhóm đó không đổi, và nội dung giao cho nhóm cha mới không tự áp cho nhánh vừa chuyển. Theo `BR-2.4` · `BR-2.5`
+- `AC2.6` Khi di chuyển xong, nhật ký có một dòng ghi nhánh nào, từ đâu sang đâu, ai làm, lúc nào. Theo `BR-2.6`
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -476,6 +500,8 @@ Hệ thống kiểm tra trước khi áp: không tạo vòng, không vượt s�
 
 Là nhân sự vận hành, tôi cần thêm và gỡ thành viên thủ công, để xử lý những trường hợp lẻ mà đồng bộ không phủ.
 
+**Ưu tiên:** Must
+
 ### 2/ Pre - Condition
 
 - Nhóm có nguồn `Tự tạo` và trạng thái `Đang dùng`
@@ -488,6 +514,15 @@ Là nhân sự vận hành, tôi cần thêm và gỡ thành viên thủ công, 
 Người vận hành tìm theo tên, mã nhân viên hoặc email, chọn một hoặc nhiều người, xác nhận. Gỡ thì chọn người trong danh sách rồi bấm gỡ.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC3.1` Khi thêm một người đang thuộc nhóm khác, người đó được thêm và vẫn giữ các nhóm cũ. Trong kết quả tìm kiếm, người đã ở trong nhóm hiện mờ với nhãn *Đã trong nhóm* và không chọn được. Theo `BR-3.1`
+- `AC3.2` Khi tìm người để thêm hoặc bật mọi bộ lọc ở tab Thành viên, tài khoản kiểm thử không xuất hiện. Theo `BR-3.2`
+- `AC3.3` Khi mở tab Thành viên của nhóm nguồn `Đồng bộ`, nút Thêm và nút Gỡ không hiện, thay bằng dòng *Thành viên nhóm này do hệ thống nhân sự quyết định*. Theo `BR-3.3`
+- `AC3.4` Khi gỡ một người chưa học khoá nào giao qua nhóm, người đó rời nhóm và bị gỡ khỏi các lớp chưa học. Khi người đó có khoá đang học dở hoặc đã học xong, hộp xác nhận cảnh báo trước, người đó vẫn rời nhóm, lượt ghi danh giữ nguyên và quản lý nhận email `MAIL-GRP-01`. Theo `BR-3.4`
+- `AC3.5` Khi gỡ một người khỏi nhóm A trong khi nhóm B của họ cũng giao đúng lớp đó, lượt ghi danh giữ nguyên với nguồn còn lại là nhóm B; hệ thống không gỡ khỏi lớp và không gửi `MAIL-GRP-01`. Khi gỡ một người đã nghỉ việc, lượt ghi danh giữ trạng thái đã kết thúc, không bị xoá. Theo `BR-3.7` · `BR-3.6`
+- `AC3.6` Khi thêm hoặc gỡ thành viên thủ công, nhật ký có dòng ghi thời điểm và lý do `Thêm tay`. Theo `BR-3.5`
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -535,6 +570,8 @@ Người vận hành tìm theo tên, mã nhân viên hoặc email, chọn một 
 
 Là nhân sự vận hành, tôi cần thêm và gỡ thành viên bằng tệp, để không phải thao tác từng người với nhóm hàng chục người.
 
+**Ưu tiên:** Should
+
 ### 2/ Pre - Condition
 
 - Nhóm có nguồn `Tự tạo` và trạng thái `Đang dùng`
@@ -546,6 +583,15 @@ Là nhân sự vận hành, tôi cần thêm và gỡ thành viên bằng tệp,
 Người vận hành tải tệp mẫu, điền danh sách, tải lên. Hệ thống đọc từng dòng: dòng hợp lệ thì thêm, dòng lỗi thì bỏ qua và ghi vào log. Xong hiện kết quả kèm nút xem log.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC4.1` Khi tải tệp mẫu, người dùng nhận tệp `.xlsx` có sẵn tiêu đề cột và một dòng ví dụ. Khi chưa chọn hành động *Thêm vào nhóm* hoặc *Gỡ khỏi nhóm*, không tải tệp lên được. Theo bảng UI
+- `AC4.2` Khi tải tệp không phải `.csv` hoặc `.xlsx`, hoặc chọn hai tệp cùng lúc, hệ thống báo lỗi ngay và không tải lên. Theo `BR-4.1`
+- `AC4.3` Khi tệp có cả dòng hợp lệ và dòng lỗi, các dòng hợp lệ vẫn được xử lý; kết quả hiện *Đã xử lý N dòng: thành công X, lỗi Y*, và log ghi mỗi dòng lỗi kèm số dòng, giá trị đã nhập và lý do. Theo `BR-4.2`
+- `AC4.4` Khi tệp có người không tìm thấy, người đã ở trong nhóm và tài khoản kiểm thử, log báo ba loại lỗi này với ba lý do riêng. Theo `BR-4.3`
+- `AC4.5` Khi gỡ qua tệp một người đang học dở, người đó vẫn rời nhóm và quản lý nhận email, như khi gỡ thủ công. Theo `BR-4.4`
+- `AC4.6` Khi một dòng được xử lý thành công, nhật ký có dòng tương ứng với lý do `Nhập tệp`. Theo `BR-4.5`
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -580,6 +626,8 @@ Người vận hành tải tệp mẫu, điền danh sách, tải lên. Hệ th�
 
 Là nhân sự vận hành, tôi cần nhóm đồng bộ từ hệ thống nhân sự được đánh dấu riêng và không cho sửa, để biết nhóm nào là bản sao của nguồn ngoài và nhóm nào mình tự quản.
 
+**Ưu tiên:** Must
+
 ### 2/ Pre - Condition
 
 - Hệ thống nhân sự đã có cây tổ chức
@@ -592,6 +640,15 @@ Là nhân sự vận hành, tôi cần nhóm đồng bộ từ hệ thống nhâ
 Người vận hành không khởi động cũng không can thiệp. Họ chỉ xem kết quả và biết nhóm nào đến từ đâu.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC5.1` Khi đồng bộ chạy, cây phòng ban của hệ thống nhân sự được dựng hoặc cập nhật thành các nhóm nguồn `Đồng bộ`, và không dữ liệu nào được ghi ngược về hệ thống nhân sự. Đồng bộ chạy theo lô, không theo từng thay đổi. Khi một lần đồng bộ lỗi giữa chừng, lần chạy kế tiếp tự sửa chênh lệch giữa cây trên hệ thống nhân sự và các nhóm đồng bộ, không cần ai dọn tay. Theo `BR-5.1` · `BR-5.9` · NFR của US này
+- `AC5.2` Khi một người thuộc `ECOM / Trung tâm vận hành 1 / Growth 1 / Sub-Growth 1`, người đó là thành viên của `Sub-Growth 1`, không phải của ba nhóm cha. Người thuộc hai nhánh là thành viên của hai nhóm sâu nhất. Theo `BR-5.2` · `BR-5.4`
+- `AC5.3` Khi xem số thành viên, báo cáo hoặc phạm vi quản lý của một nhóm cha, kết quả gồm người ở mọi nhóm con. Theo `BR-5.3`
+- `AC5.4` Khi mở chi tiết nhóm đồng bộ, các nút sửa thông tin, thêm gỡ thành viên, di chuyển và xoá không hiện; giao nội dung, gán quản lý và gán mentor vẫn làm được; khối thông tin hiện nguồn, lần đồng bộ gần nhất và số thành viên của lần đó. Theo `BR-5.5` · `BR-5.6`
+- `AC5.5` Khi một người không còn trong nguồn ở lần đồng bộ kế tiếp, quan hệ thành viên được ghi là rời nhóm kèm thời điểm, không bị xoá. Khi một phòng ban không còn trong nguồn, nhóm tương ứng chuyển sang `Lưu trữ`, không bị xoá. Theo `BR-5.7` · `BR-5.8`
+- `AC5.6` Khi đồng bộ làm thay đổi thành viên, nhật ký có một dòng cho mỗi thay đổi với lý do `Đồng bộ` và người thao tác là *Hệ thống*. Theo `BR-5.10`
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -646,6 +703,8 @@ Người vận hành không khởi động cũng không can thiệp. Họ chỉ 
 
 Là nhân sự vận hành, tôi cần xem danh sách nhóm dạng cây hoặc bảng kèm bộ lọc, để tìm được nhóm mình cần trong số hàng chục nhóm.
 
+**Ưu tiên:** Must
+
 ### 2/ Pre - Condition
 
 - Có quyền xem nhóm trên UpLMS Ops
@@ -657,6 +716,14 @@ Là nhân sự vận hành, tôi cần xem danh sách nhóm dạng cây hoặc b
 Mặc định mở ở dạng cây, hiện các nhóm gốc đã gấp lại. Bấm vào một nhóm để mở nhánh con. Chuyển sang dạng bảng khi cần lọc và sắp xếp.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC6.1` Khi mở danh sách nhóm lần đầu, dạng Cây hiện các nhóm gốc ở trạng thái gấp; mở một nhánh thì chỉ nhánh đó được tải. Lần sau mở lại, màn giữ dạng xem người dùng chọn gần nhất. Theo `BR-6.1`
+- `AC6.2` Khi xem số thành viên của một nhóm, con số gồm người ở mọi nhóm con và không tính tài khoản kiểm thử, người đã nghỉ việc. Theo `BR-6.2` · `BR-6.3`
+- `AC6.3` Khi tìm theo tên hoặc mã và kết quả là một nhóm con, kết quả hiện đường dẫn đầy đủ từ gốc, ví dụ `ECOM / Trung tâm vận hành 1 / Growth 1`. Theo `BR-6.4`
+- `AC6.4` Khi công tắc *Hiện nhóm đã lưu trữ* đang tắt, nhóm `Lưu trữ` không xuất hiện ở danh sách và ở mọi ô chọn nhóm. Bật công tắc thì nhóm lưu trữ hiện chữ xám với nhãn *Lưu trữ*. Theo `BR-6.5`
+- `AC6.5` Khi dạng Bảng có 21 nhóm thoả bộ lọc, trang đầu hiện 20 dòng và có trang thứ hai; có đúng 20 nhóm thì chỉ có một trang. Khi lọc kết hợp nhiều điều kiện, bảng chỉ hiện nhóm thoả mọi điều kiện. Theo bảng UI
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -696,6 +763,8 @@ Mặc định mở ở dạng cây, hiện các nhóm gốc đã gấp lại. B�
 
 Là nhân sự vận hành, tôi cần giao nội dung cho một nhóm, tuỳ chọn chảy xuống nhánh con, để giao bài cho cả phòng bằng một thao tác thay vì chọn tay từng người.
 
+**Ưu tiên:** Must
+
 ### 2/ Pre - Condition
 
 - Nhóm đang ở trạng thái `Đang dùng`
@@ -708,6 +777,15 @@ Là nhân sự vận hành, tôi cần giao nội dung cho một nhóm, tuỳ ch
 Người vận hành chọn một hoặc nhiều lớp, bật tắt hai công tắc, xem trước số người sẽ vào lớp, rồi xác nhận. Từ lúc đó, ai thuộc nhóm thì vào lớp.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC7.1` Khi giao một lớp cho nhóm, mọi thành viên hiện tại vào lớp. Khi công tắc *Tự ghi danh người vào sau* đang bật, người vào nhóm sau đó cũng tự vào lớp. Người đã rời nhóm trước thời điểm giao thì không vào lớp. Theo `BR-7.1` · `BR-7.11`
+- `AC7.2` Khi mở ô chọn lớp, ô chỉ liệt kê lớp cụ thể đang nhận thêm học viên, tìm được theo tên lớp và tên khoá; lớp đã kết thúc không xuất hiện. Trước khi xác nhận, khối xem trước hiện số người sẽ vào lớp, số người đã có trong lớp và số người bị bỏ qua kèm lý do. Theo `BR-7.2` · `BR-7.4`
+- `AC7.3` Khi một người đã được thêm tay vào lớp và cũng thuộc nhóm được giao lớp đó, người đó chỉ có một lượt ghi danh. Khi hai nhóm cùng giao một lớp cho cùng một người, lượt đó ghi cả hai nhóm làm nguồn, và lượt sinh qua nhóm phân biệt được với lượt thêm tay. Theo `BR-7.3` · `BR-7.9`
+- `AC7.4` Khi luật đứng chạy nền gặp lớp đã kết thúc, không ai được thêm vào lớp, hệ thống không báo lỗi và ghi một dòng vào nhật ký. Tài khoản kiểm thử bị bỏ qua ở mọi bước của luật đứng. Theo `BR-7.4` · `BR-7.5` · `BR-7.8`
+- `AC7.5` Khi số học viên vượt sức chứa lớp, người vẫn được thêm, và tab Học viên của lớp hiện một dòng *Lớp này giới hạn N học viên, hiện có M người*, không có thông báo tức thời hay hộp xác nhận. Lớp có Foundation thì người vào lớp chính cũng vào Foundation. Theo `BR-7.6` · `BR-7.7`
+- `AC7.6` Khi đã có người trong nhóm học một lớp, nút *Gỡ lớp* của lớp đó không hiện, thay bằng dòng *Đã có học viên trong lớp này, không gỡ được*. Theo `BR-7.10`
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -786,6 +864,8 @@ Chỉ có **một cửa chặn thật**: lớp đã kết thúc. Sức chứa kh
 
 Là nhân sự vận hành, tôi cần bật tắt việc người mới vào nhóm tự nhận nội dung đã giao, để kiểm soát ai phải học gì.
 
+**Ưu tiên:** Must
+
 ### 2/ Pre - Condition
 
 - Nhóm đã được giao ít nhất một lớp
@@ -797,6 +877,14 @@ Công tắc nằm ngay ở dòng của từng lớp trong tab Nội dung đượ
 Bật công tắc với một lớp đang có người chưa vào thì hệ thống hỏi có muốn ghi danh những người đó luôn không.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC8.1` Khi một nhóm được giao hai lớp, mỗi lớp có công tắc *Tự ghi danh* riêng trên dòng của lớp; đổi công tắc của lớp này không đổi công tắc của lớp kia, và thay đổi được lưu ngay. Theo `BR-8.1`
+- `AC8.2` Khi bật công tắc trong lúc nhóm có N người chưa vào lớp, hộp xác nhận hỏi *Nhóm này có N người chưa vào lớp. Ghi danh luôn cho họ?*. Chọn *Ghi danh luôn* thì N người vào lớp; chọn *Chỉ áp dụng cho người vào sau* thì không ai trong N người được thêm. Theo `BR-8.3`
+- `AC8.3` Khi tắt công tắc, hộp xác nhận báo người đã vào vẫn học bình thường, và không ai bị gỡ khỏi lớp. Theo `BR-8.2`
+- `AC8.4` Khi công tắc đang bật và có người vào nhóm qua thêm tay, nhập tệp hoặc đồng bộ, người đó tự vào lớp. Theo `BR-8.4`
+- `AC8.5` Khi đổi trạng thái công tắc, nhật ký ghi người thao tác và thời điểm. Theo `BR-8.5`
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -829,6 +917,8 @@ Bật công tắc với một lớp đang có người chưa vào thì hệ th�
 
 Là nhân sự vận hành, tôi cần gán một hoặc nhiều người quản lý cho nhóm, để hệ thống biết ai phụ trách ai.
 
+**Ưu tiên:** Must
+
 ### 2/ Pre - Condition
 
 - Nhóm ở trạng thái `Đang dùng`
@@ -841,6 +931,14 @@ Là nhân sự vận hành, tôi cần gán một hoặc nhiều người quản
 Chọn một hoặc nhiều người, lưu. Từ đó họ xem được dữ liệu học của mọi người trong nhóm và nhánh con.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC9.1` Khi gán nhiều người làm quản lý cho một nhóm, tất cả cùng hiện trong tab Người phụ trách với nguồn quan hệ là gán trực tiếp. Một người được gán thêm cho nhóm ở nhánh khác thì quan hệ ở các nhóm cũ giữ nguyên. Theo `BR-9.1` · `BR-9.2`
+- `AC9.2` Khi tìm người để gán quản lý, ô chọn chỉ hiện tài khoản nhân sự vận hành đang hoạt động; tài khoản học viên và tài khoản đã khoá không xuất hiện. Theo bảng UI
+- `AC9.3` Khi quản lý của một nhóm mở màn theo dõi nhánh, họ thấy người của nhóm đó và của mọi nhóm con. Theo `BR-9.3`
+- `AC9.4` Khi gán quản lý cho một nhóm nguồn `Đồng bộ`, thao tác thành công như với nhóm tự tạo. Người được gán không tự trở thành mentor của nhóm. Theo `BR-9.4` · `BR-9.5`
+- `AC9.5` Khi gán trực tiếp hai người trong một thao tác, mỗi người nhận một email `MAIL-GRP-02` riêng, ghi nhóm, người gán, thời điểm, số người trong nhánh và đường dẫn tới màn theo dõi nhánh. Nhóm con kế thừa quan hệ đó thì không gửi thêm email; gán lại người đã là quản lý của chính nhóm đó thì không gửi. Theo `BR-9.6` · `BR-9.7`
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -885,6 +983,8 @@ Chọn một hoặc nhiều người, lưu. Từ đó họ xem được dữ li�
 
 Là nhân sự vận hành, tôi cần hệ thống tự suy ra quản lý theo cây khi nhóm con chưa gán ai, để không phải gán lại cho từng nhánh nhỏ.
 
+**Ưu tiên:** Should
+
 ### 2/ Pre - Condition
 
 - Nhóm cha ở đâu đó trên nhánh đã có ít nhất một quản lý
@@ -894,6 +994,13 @@ Là nhân sự vận hành, tôi cần hệ thống tự suy ra quản lý theo 
 Không có thao tác. Khi mở một nhóm chưa gán quản lý, hệ thống đi ngược lên cây tìm nhóm cha gần nhất có quản lý, rồi hiện người đó kèm ghi chú kế thừa từ đâu.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC10.1` Khi nhóm chưa gán quản lý và nhóm cha gần nhất có quản lý, tab Người phụ trách hiện quản lý đó kèm dòng *Kế thừa từ nhóm `<tên nhóm cha>`*. Hồ sơ học viên phân biệt ba loại quản lý: chính, theo nhóm, kế thừa. Theo `BR-10.1`
+- `AC10.2` Khi không nhóm nào trên nhánh, tính tới nhóm gốc, có quản lý, nhóm không có quản lý và hiện cảnh báo nhóm trống quản lý. Theo `BR-10.2`
+- `AC10.3` Khi bấm *Gán riêng cho nhóm này* và gán một người, nhóm ngừng kế thừa toàn bộ và khối kế thừa biến mất, kể cả khi nhóm cha có nhiều quản lý hơn. Theo `BR-10.3` · `BR-10.4`
+- `AC10.4` Khi đổi quản lý của nhóm cha, mọi nhóm con đang kế thừa hiện quản lý mới ở lần mở kế tiếp, không cần thao tác nào ở nhóm con. Theo `BR-10.5`
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -926,6 +1033,8 @@ Không có thao tác. Khi mở một nhóm chưa gán quản lý, hệ thống �
 
 Là nhân sự vận hành, tôi cần chỉ định quản lý đích danh trên hồ sơ một người, để xử lý trường hợp họ báo cáo cho người ở nhánh khác.
 
+**Ưu tiên:** Should
+
 ### 2/ Pre - Condition
 
 - Học viên đã có tài khoản
@@ -938,6 +1047,14 @@ Là nhân sự vận hành, tôi cần chỉ định quản lý đích danh trê
 Dùng khi cơ cấu thật không khớp cây tổ chức: người làm ở phòng A nhưng báo cáo cho trưởng phòng B.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC11.1` Khi chỉ định quản lý chính cho một học viên đã có quản lý chính, nút hiện *Thay quản lý chính* và người cũ bị thay; một học viên không bao giờ có hai quản lý chính. Theo `BR-11.1`
+- `AC11.2` Khi mở Overview của hồ sơ học viên, khối Quản lý xếp quản lý chính lên đầu với nhãn riêng, rồi quản lý theo nhóm, rồi quản lý kế thừa; khối Nhóm đang thuộc hiện đường dẫn từ gốc của từng nhóm, hoặc *Chưa thuộc nhóm nào*. Theo `BR-11.2` · `BR-11.4`
+- `AC11.3` Khi một người là quản lý chính của học viên và một người khác là quản lý theo nhóm, cả hai thấy cùng toàn bộ dữ liệu học của học viên đó. Theo `BR-11.3`
+- `AC11.4` Khi chỉ định quản lý chính cho học viên có thông tin đồng bộ từ hệ thống nhân sự, thao tác vẫn thành công dù thông tin học viên không sửa được trên Ops. Mỗi lần gán, thay hoặc gỡ đều ghi nhật ký. Theo `BR-11.5` · `BR-11.6`
+- `AC11.5` Khi chỉ định hoặc thay quản lý chính, chỉ người mới được chỉ định nhận một email `MAIL-GRP-02` cho hồ sơ đó. Khi gỡ chỉ định hoặc chỉ định lại chính người đang là quản lý chính, không có email nào được gửi. Theo `BR-11.7`
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -979,6 +1096,8 @@ Dùng khi cơ cấu thật không khớp cây tổ chức: người làm ở ph�
 
 Là nhân sự vận hành, tôi cần gán mentor cho nhóm, để mentor đi theo nhóm vào lớp và phụ trách đúng nhóm đó.
 
+**Ưu tiên:** Should
+
 ### 2/ Pre - Condition
 
 - Nhóm ở trạng thái `Đang dùng`
@@ -991,6 +1110,14 @@ Là nhân sự vận hành, tôi cần gán mentor cho nhóm, để mentor đi t
 Khi nhóm được giao một lớp, mentor của nhóm tự thành mentor trong lớp đó và phụ trách những người đến từ nhóm này.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC12.1` Khi nhóm có mentor được giao một lớp, mentor đó xuất hiện ở tab Mentor của lớp với cột *Phụ trách nhóm* ghi tên nhóm; mentor thêm tay thì cột này để trống. Theo `BR-12.1`
+- `AC12.2` Khi lớp nhận nhóm A và nhóm B, mỗi nhóm một mentor, tab Mentor có hai dòng và mỗi mentor chỉ phụ trách người đến từ nhóm của mình. Theo `BR-12.2` · `BR-12.3`
+- `AC12.3` Khi lớp chưa có mentor và nhóm đầu tiên được giao, mentor của nhóm đó mang nhãn người chịu trách nhiệm chính; người vận hành đổi được nhãn này sang mentor khác. Theo `BR-12.4`
+- `AC12.4` Khi gỡ mentor khỏi nhóm, mentor đó bị gỡ khỏi các lớp sinh ra từ quan hệ này. Mentor đã được thêm tay vào lớp từ trước thì không bị gỡ và không bị ảnh hưởng bởi thay đổi ở nhóm. Theo `BR-12.5` · `BR-12.6`
+- `AC12.5` Khi tìm người để gán mentor, ô chọn chỉ hiện tài khoản nhân sự vận hành; gán mentor không gửi email nào. Theo bảng UI
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -1032,6 +1159,8 @@ Khi nhóm được giao một lớp, mentor của nhóm tự thành mentor trong
 
 Là nhân sự vận hành, tôi cần được cảnh báo khi một nhóm không còn ai quản lý, và chuyển được toàn bộ quan hệ sang người khác.
 
+**Ưu tiên:** Should
+
 ### 2/ Pre - Condition
 
 - Có ít nhất một nhóm đang ở trạng thái `Đang dùng`
@@ -1041,6 +1170,14 @@ Là nhân sự vận hành, tôi cần được cảnh báo khi một nhóm khô
 Khi một người rời vị trí, người vận hành mở màn danh sách nhóm và thấy ngay những nhóm đang trống quản lý. Từ hồ sơ người sắp rời, chuyển toàn bộ quan hệ quản lý và mentor sang người thay thế bằng một thao tác.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC13.1` Khi một nhóm không có quản lý gán trực tiếp và không kế thừa được từ nhánh trên, danh sách nhóm gắn nhãn *Chưa có quản lý* và bộ lọc *Chỉ nhóm chưa có quản lý* trả về nhóm đó; nhóm kế thừa được quản lý thì không có nhãn. Theo `BR-13.1`
+- `AC13.2` Khi nhóm mang nhãn *Chưa có quản lý*, mọi thao tác trên nhóm vẫn làm được, cảnh báo không chặn thao tác nào. Theo `BR-13.2`
+- `AC13.3` Khi chuyển toàn bộ phụ trách từ người A sang người B, sau bước xem trước và xác nhận, B nhận mọi quan hệ quản lý và mentor của A; hộp xác nhận hiện số nhóm, số người bị ảnh hưởng và người nhận. Quản lý chính gắn trên hồ sơ từng học viên không đổi. Theo `BR-13.3` · `BR-13.4`
+- `AC13.4` Khi chuyển xong, nhật ký ghi từ ai sang ai, bao nhiêu nhóm, lúc nào. Theo `BR-13.5`
+- `AC13.5` Khi B nhận chuyển 5 nhóm, trong đó B đã quản lý sẵn 2 nhóm, B nhận đúng một email `MAIL-GRP-02` liệt 3 nhóm mới. Khi B đã quản lý sẵn mọi nhóm được chuyển, không có email nào được gửi. Phần quan hệ mentor được chuyển không được báo qua email. Theo `BR-13.6` · `BR-13.7`
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -1077,6 +1214,8 @@ Khi một người rời vị trí, người vận hành mở màn danh sách nh
 
 Là nhân sự vận hành, tôi cần lưu trữ một nhóm để nó ngừng nhận nội dung mới mà vẫn giữ nguyên lịch sử.
 
+**Ưu tiên:** Must
+
 ### 2/ Pre - Condition
 
 - Nhóm ở trạng thái `Đang dùng`
@@ -1086,6 +1225,14 @@ Là nhân sự vận hành, tôi cần lưu trữ một nhóm để nó ngừng 
 Phòng ban giải thể hoặc nhóm tạm không dùng tới. Người vận hành lưu trữ nhóm đó. Nhóm biến khỏi mọi danh sách chọn, nhưng báo cáo quá khứ vẫn đọc được.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC14.1` Khi nhóm chưa từng có thành viên và chưa từng được giao nội dung, nút Xoá hiện và xoá được. Khi nhóm đã có một trong hai, nút Xoá không hiện và màn hiện dòng *Nhóm đã có lịch sử, chỉ lưu trữ được*. Theo `BR-14.1` · `BR-14.2`
+- `AC14.2` Khi lưu trữ một nhóm có nhánh con, hộp xác nhận hiện số thành viên, số lớp đang giao, số nhóm bị lưu trữ theo và hệ quả; sau khi xác nhận, nhóm và cả nhánh con chuyển sang `Lưu trữ`. Theo `BR-14.6`
+- `AC14.3` Khi nhóm đã lưu trữ, luật đứng không thêm ai mới vào lớp qua nhóm này; người đang học dở vẫn học tiếp và lượt ghi danh đã sinh không đổi. Theo `BR-14.3` · `BR-14.4`
+- `AC14.4` Khi nhóm đã lưu trữ, danh sách thành viên và lịch sử giữ nguyên; nhóm vẫn xuất hiện trong báo cáo theo mốc quá khứ và trong nhật ký, nhưng không xuất hiện ở bất kỳ ô chọn nhóm nào. Theo `BR-14.5` · `BR-14.7`
+- `AC14.5` Khi bấm *Khôi phục* ở một nhóm đang `Lưu trữ`, nhóm về trạng thái `Đang dùng`. Theo bảng UI
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -1122,6 +1269,8 @@ Phòng ban giải thể hoặc nhóm tạm không dùng tới. Người vận h�
 
 Là nhân sự vận hành, tôi cần tra được nhật ký thay đổi thành viên khi có vấn đề cần làm rõ, không giới hạn thời gian.
 
+**Ưu tiên:** Should
+
 ### 2/ Pre - Condition
 
 - Có quyền xem nhật ký nhóm
@@ -1131,6 +1280,14 @@ Là nhân sự vận hành, tôi cần tra được nhật ký thay đổi thàn
 Có người thắc mắc vì sao họ bị gán một khoá, hoặc vì sao số liệu báo cáo lệch. Người vận hành mở nhật ký, lọc theo người hoặc theo nhóm, tìm ra thời điểm và lý do.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC15.1` Khi mở nhật ký, bảng hiện thời điểm, người bị thay đổi, nhóm, hành động `Vào nhóm` hoặc `Rời nhóm`, lý do thuộc năm giá trị và người thao tác; dòng do đồng bộ ghi người thao tác là *Hệ thống*; mặc định dòng mới nhất lên đầu. Theo `BR-15.2`
+- `AC15.2` Khi lọc theo một khoảng thời gian bất kỳ kể từ ngày bật tính năng, nhật ký trả đủ mọi dòng trong khoảng đó, không thiếu dòng cũ. Theo `BR-15.1`
+- `AC15.3` Khi xem một dòng nhật ký, không có thao tác sửa hay xoá dòng đó. Theo `BR-15.3`
+- `AC15.4` Khi đổi tên một nhóm, nhật ký thành viên không có dòng mới. Theo `BR-15.4`
+- `AC15.5` Khi vào nhật ký từ chi tiết nhóm, bộ lọc nhóm đã chọn sẵn nhóm đó; khi vào từ hồ sơ học viên, bộ lọc người đã chọn sẵn người đó. Theo bảng UI
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -1172,6 +1329,8 @@ Có người thắc mắc vì sao họ bị gán một khoá, hoặc vì sao s�
 
 Là quản lý, tôi cần xem toàn bộ dữ liệu học của người trong nhánh mình phụ trách, và chỉ những người đó.
 
+**Ưu tiên:** Must
+
 ### 2/ Pre - Condition
 
 - Người dùng được gán là quản lý của ít nhất một nhóm, hoặc là quản lý chính của ít nhất một người
@@ -1181,6 +1340,14 @@ Là quản lý, tôi cần xem toàn bộ dữ liệu học của người trong
 Trên **UpLMS Ops**, quản lý mở màn theo dõi, thấy danh sách người mình phụ trách, sắp xếp sẵn theo ai đang chậm nhất. Bấm vào một người để xem chi tiết.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC16.1` Khi quản lý mở màn theo dõi nhánh trên UpLMS Ops bằng tài khoản nhân sự vận hành đã được gán, màn hiện người trong toàn bộ nhánh mình phụ trách, gồm cả nhóm con, sắp theo số khoá quá hạn giảm dần. Học viên không có màn này trên UpLMS. Theo `BR-16.1` · `BR-16.7`
+- `AC16.2` Khi bấm vào một người, hồ sơ mở ra với toàn bộ dữ liệu học, kể cả khoá nhận qua nhánh khác. Người thuộc hai nhánh thì quản lý của cả hai nhánh đều thấy đủ dữ liệu đó. Theo `BR-16.2` · `BR-16.3`
+- `AC16.3` Khi một người vừa quản lý một nhóm vừa có vai trò xem toàn công ty mở màn này, họ chỉ thấy người trong nhánh mình phụ trách. Theo `BR-16.4`
+- `AC16.4` Khi xem ở chế độ hiện tại, danh sách không có tài khoản kiểm thử và không có người đã nghỉ việc. Theo `BR-16.5` · `BR-16.6`
+- `AC16.5` Khi quản lý nhiều nhóm, ô chọn nhóm mặc định là tất cả; lọc theo nhóm hoặc theo có khoá quá hạn thì danh sách chỉ còn người thoả điều kiện; danh sách dài được phân trang. Theo bảng UI
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -1224,6 +1391,8 @@ Trên **UpLMS Ops**, quản lý mở màn theo dõi, thấy danh sách người 
 
 Là học viên, tôi cần thấy ai là quản lý của mình và cách liên hệ.
 
+**Ưu tiên:** Could
+
 ### 2/ Pre - Condition
 
 - Học viên đăng nhập được vào UpLMS
@@ -1234,6 +1403,13 @@ Là học viên, tôi cần thấy ai là quản lý của mình và cách liên
 `UpLMS → Hồ sơ → khối Quản lý của tôi`
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC17.1` Khi học viên có một quản lý chính và hai quản lý theo nhóm, khối Quản lý của tôi hiện ba người, quản lý chính đứng đầu với nhãn phân biệt. Theo `BR-17.3`
+- `AC17.2` Khi xem mỗi dòng quản lý, học viên thấy ảnh, họ tên và email, không thấy số điện thoại. Theo `BR-17.2`
+- `AC17.3` Khi học viên mở khối này, không có thao tác sửa quan hệ quản lý và không có thông tin học viên thuộc nhóm nào. Theo `BR-17.1` · `BR-17.4`
+- `AC17.4` Khi học viên không có quản lý nào, khối hiện dòng *Chưa có thông tin quản lý. Liên hệ bộ phận vận hành nếu cần.* Theo bảng UI
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -1266,6 +1442,8 @@ Là học viên, tôi cần thấy ai là quản lý của mình và cách liên
 
 Là nhân sự vận hành, tôi cần xem số liệu học cộng dồn theo nhóm và theo cả nhánh, ở thời điểm hiện tại hoặc tại một mốc quá khứ, để báo cáo theo cơ cấu tổ chức.
 
+**Ưu tiên:** Must
+
 ### 2/ Pre - Condition
 
 - Nhóm đã có thành viên và đã được giao ít nhất một nội dung
@@ -1275,6 +1453,15 @@ Là nhân sự vận hành, tôi cần xem số liệu học cộng dồn theo n
 Người vận hành mở dashboard, chọn nhóm thay vì chọn lớp, xem số liệu của cả phòng. Muốn biết quý trước thế nào thì chọn mốc thời gian lùi về.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC18.1` Khi chọn một nhóm ở dashboard, bộ lọc không bắt buộc chọn khoá và lớp, ô chọn nhóm không có nhóm lưu trữ, công tắc *Gồm nhánh con* mặc định bật, và khối số liệu hiện số người có nghĩa vụ, số hoàn thành, tỉ lệ hoàn thành, số quá hạn, số chưa bắt đầu, tiến độ trung bình. Theo bảng UI
+- `AC18.2` Khi công tắc *Gồm nhánh con* bật, số liệu của nhóm cha gồm người ở mọi nhóm con. Theo `BR-18.3`
+- `AC18.3` Khi chọn một ngày trong quá khứ, mọi chỉ số tính theo danh sách thành viên và trạng thái tại ngày đó, gồm cả người sau này nghỉ việc. Sau khi thêm người mới và có người nghỉ việc, chạy lại cùng mốc vẫn ra đúng số cũ. Theo `BR-18.1` · `BR-18.2`
+- `AC18.4` Khi xem chế độ hiện tại, người đã nghỉ việc không được tính; tài khoản kiểm thử không được tính ở bất kỳ chỉ số nào, ở cả chế độ hiện tại và quá khứ. Theo `BR-18.4` · `BR-18.5`
+- `AC18.5` Khi xem bảng so sánh, các dòng là nhóm cùng cấp và cùng nhóm cha, không có nhóm khác cấp. Theo `BR-18.6`
+- `AC18.6` Khi chọn mốc thời gian, ngày bật tính năng là ngày sớm nhất chọn được; ngày trước đó không chọn được. Theo `BR-18.7`
 
 #### UI / UX / Rule UX / Rule UI
 
@@ -1319,6 +1506,8 @@ Người vận hành mở dashboard, chọn nhóm thay vì chọn lớp, xem s�
 
 Là nhân sự vận hành, tôi cần hệ thống tự gỡ người khỏi các khoá chưa học rồi thêm vào nhóm mới, để không phải can thiệp vào việc đơn giản.
 
+**Ưu tiên:** Must
+
 ### 2/ Pre - Condition
 
 - Một người rời nhóm vì bị gỡ thủ công hoặc vì đồng bộ phát hiện họ chuyển phòng ban
@@ -1328,6 +1517,14 @@ Là nhân sự vận hành, tôi cần hệ thống tự gỡ người khỏi c�
 Không có thao tác. Hệ thống xét từng khoá người đó nhận qua nhóm cũ. Khoá nào chưa học, và không còn nhóm nào khác của người đó đang giao, thì gỡ luôn. Rồi thêm họ vào nhóm mới và áp luật đứng của nhóm đó.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC19.1` Khi một người rời nhóm vì bị gỡ thủ công hoặc điều chuyển và chưa có hoạt động học nào ở một khoá nhận qua nhóm cũ, hệ thống tự gỡ họ khỏi khoá đó mà không hỏi ai, và ghi nhật ký với lý do `Điều chuyển`. Theo `BR-19.1` · `BR-19.2` · `BR-19.6`
+- `AC19.2` Khi người đó có khoá được thêm tay vào lớp, khoá đó giữ nguyên, không bị gỡ. Theo `BR-19.3`
+- `AC19.3` Khi người đó có một khoá chưa học và một khoá đang học dở nhận qua nhóm cũ, khoá chưa học bị gỡ, khoá đang học dở không bị gỡ và được xử lý theo `US20`. Theo `BR-19.5`
+- `AC19.4` Khi người đó vào nhóm mới, luật đứng của nhóm mới chạy và họ vào các lớp mà nhóm mới đang giao với công tắc tự ghi danh bật. Theo `BR-19.4`
+- `AC19.5` Khi một khoá chưa học còn được nhóm khác của người đó giao, khoá không bị gỡ, lượt ghi danh giữ nguyên với nguồn là nhóm còn lại, và nhật ký có dòng *Giữ lại vì nhóm `<tên nhóm>` vẫn giao*. Theo `BR-19.7`
 
 #### Business requirement — Business rule
 
@@ -1354,6 +1551,8 @@ Không có thao tác. Hệ thống xét từng khoá người đó nhận qua nh
 
 Là quản lý, tôi cần nhận email khi một người tôi phụ trách rời nhóm mà đang học dở hoặc đã học xong, để tự quyết xử lý thay vì để hệ thống tự làm.
 
+**Ưu tiên:** Must
+
 ### 2/ Pre - Condition
 
 - Một người rời nhóm và còn ít nhất một khoá đang học dở hoặc đã học xong, nhận qua nhóm đó
@@ -1363,6 +1562,13 @@ Là quản lý, tôi cần nhận email khi một người tôi phụ trách r�
 Hệ thống phát hiện tình huống, gửi email. Quản lý đọc, vào hệ thống xử lý bằng tay: giữ nguyên lớp, hoặc gỡ họ khỏi lớp.
 
 ### 4/ Acceptance criteria
+
+#### Tiêu chí chấp nhận
+
+- `AC20.1` Khi một người rời nhóm mà còn ít nhất một khoá đang học dở hoặc đã học xong nhận qua nhóm đó, hệ thống không tự gỡ khoá nào, lượt ghi danh giữ nguyên tới khi có người xử lý, và gửi email `MAIL-GRP-01`. Theo `BR-20.1` · `BR-20.6` · `BR-20.7`
+- `AC20.2` Khi người đó có quản lý chính, quản lý chính ở dòng người nhận và các quản lý khác ở dòng đồng gửi. Khi không có quản lý chính, mọi quản lý theo nhóm ở dòng người nhận. Khi không có quản lý nào, quản trị viên hệ thống nhận email. Theo `BR-20.2` · `BR-20.3` · `BR-20.4`
+- `AC20.3` Khi người đó còn ba khoá đang học, hệ thống gửi đúng một email liệt kê cả ba khoá kèm tình trạng từng khoá, đường dẫn tới hồ sơ người đó và câu cảnh báo cố định về việc gỡ khỏi lớp sẽ xoá tiến độ. Theo `BR-20.5`
+- `AC20.4` Khi người rời nhóm vì nghỉ việc, chưa học khoá nào, hoặc vẫn thuộc một nhóm khác đang giao đúng lớp đó, không có email nào được gửi cho khoá đó. Theo bảng Nội dung email
 
 #### Nội dung email — `MAIL-GRP-01`
 
@@ -1399,11 +1605,12 @@ Hệ thống phát hiện tình huống, gửi email. Quản lý đọc, vào h�
 |---|---|---|---|
 | 1 | **Số liệu vận hành thật** — một tháng giao bài bao nhiêu lần, mỗi lần mất bao lâu, đã từng sót người chưa | Người viết | Mục `Analytics` còn `❓PO` |
 | 2 | **Ma trận phân quyền hiện có** — chưa ai đọc được, nó nằm trong dữ liệu chứ không nằm trong cấu trúc | Dev | `US16` ở phía Dev: phạm vi dữ liệu dựng trên nền chưa nhìn thấy. **Không chặn viết PRD**, vì màn theo dõi nhánh đọc theo **quan hệ quản lý**, không theo vai trò hệ thống *(`BR-16.4`; phạm vi tách theo màn chốt 06/10, đơn giản hoá phạm vi chốt 05/10)*. Dev xin bản export ma trận quyền trước khi làm `US16` để nối hai phạm vi |
-| 3 | **Loại quan hệ** *(quản lý, mentor)* do hệ thống định nghĩa cố định hay tổ chức tự thêm được | Người viết | `US12` — ảnh hưởng chiều đa tổ chức |
-| 4 | **Tài khoản kiểm thử và tài khoản trả lời bình luận tạo bằng cách nào**, khi chúng không phải nhân sự nên không có trong cây tổ chức | Người viết · Dev | Không chặn |
+| 3 | ~~**Loại quan hệ** *(quản lý, mentor)* do hệ thống định nghĩa cố định hay tổ chức tự thêm được~~ **Đã quyết 12/10/2026:** loại quan hệ do hệ thống định nghĩa cố định, gồm quản lý và mentor; tổ chức không tự thêm loại mới | PO | Không chặn |
+| 4 | ~~**Tài khoản kiểm thử và tài khoản trả lời bình luận tạo bằng cách nào**, khi chúng không phải nhân sự nên không có trong cây tổ chức~~ **Đã quyết 12/10/2026:** hai loại tài khoản này được tạo hoặc chọn thẳng trong UpLMS Ops, không qua cây tổ chức trên Lark | PO | Không chặn |
 | 5 | **Mốc lùi tối đa của báo cáo quá khứ** là ngày bật tính năng *(`BR-18.7`)*. Cần nói rõ với người dùng, đừng để họ tưởng có dữ liệu cũ hơn | Người viết | Không chặn, nhưng phải truyền đạt |
 | 6 | **Hộp xác nhận gỡ học viên khỏi lớp** bên chức năng Lớp đã có cảnh báo mất tiến độ chưa | Dev | Không chặn. Thuộc chức năng Lớp, ngoài phạm vi dự án này; `MAIL-GRP-01` đã có câu cảnh báo riêng |
 | 7 | **Ba góc chưa có luật**, từ bản phân tích ảnh hưởng: đồng bộ lỗi nửa chừng thì áp toàn bộ hay chấp nhận dở dang · quyền quản lý bị thu hồi khi họ đang xem báo cáo · tên *Nhóm* dễ nhầm với *support group* đang có ở Ops | Người viết · Dev | Không chặn. Hai góc đầu Dev đề xuất khi làm `US5` và `US16`; góc tên gọi Design xử lý ở nhãn màn hình |
+| 8 | **Nhánh lỗi hoặc bị từ chối chưa định nghĩa** ở tám user story: `US6` · `US8` · `US9` · `US10` · `US12` · `US13` · `US19` · `US20`. PRD mới mô tả luồng chính cho các user story này, chưa có tiêu chí cho trường hợp thao tác bị chặn hoặc sai, ví dụ gán trùng quản lý, chuyển phụ trách khi chưa chọn người nhận | QA · PO | Không chặn. QA đề xuất trong test-design; nhánh nào làm đổi yêu cầu thì PO bổ sung vào PRD |
 
 ---
 

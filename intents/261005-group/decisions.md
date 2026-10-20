@@ -96,13 +96,15 @@ Nhật ký quyết định của intent. Chuyển từ `archive/v1/project-decis
 | DEC90 | 2026-10-19 15:11 | migrate | Chuẩn hoá dữ liệu lên engine 2.1.0: đường dẫn mới, Unit, PIC, AI Reviewer, mã tính năng LMS-F002. Không đổi nội dung nghiệp vụ | "chuẩn hoá theo engine mới" | buidhui | migrate, phiên bản, mã tính năng |
 | DEC91 | 2026-10-20 09:26 | migrate | Chuẩn hoá dữ liệu lên engine 2.1.0: đường dẫn mới, Unit, PIC, AI Reviewer, mã tính năng LMS-F002; luồng 2.43 thay 2.41 HLD Brief. Không đổi nội dung nghiệp vụ | "chuyển sang luồng 2.43, bỏ HLD Brief" | buidhui | migrate, phiên bản, mã tính năng |
 | DEC92 | 2026-10-20 | 2.42 | **Mở CR3 trước khi giao ba team ở 2.43**: bổ sung khối tiêu chí chấp nhận `AC<US>.<n>` cho 20 US, phủ đủ 130 business rule, mỗi US có ít nhất một AC cho nhánh lỗi hoặc bị từ chối, và dòng Ưu tiên Must, Should, Could cho từng US theo template PRD của engine 2.1.0. Không đổi business rule, màn, field. Re-entry 2.42, AI Reviewer xem lại, PO duyệt lại PRD, publish lại Lark rồi mới giao. PIC ở 2.43 giữ theo vai, không ghi tên, không đặt hạn, tiếp tục DEC86 | "Mở CR3 trước, rồi mới giao (Recommended)" · "Giữ theo vai (Recommended)" | buidhui | 2.42, 2.43, CR |
+| DEC93 | 2026-10-20 | 2.42 · CR3 | **Request Changes PRD v0.4.** Review AI Reviewer lần 02: READY, 2 Major (`reviews/review-prd-generation-02.md`). Sửa `R-05`: luật đồng bộ lỗi giữa chừng của NFR `US5` thành tiêu chí trong `AC5.1`; dòng Document version v0.4 sửa cho đúng; tám US chưa có nhánh lỗi được định nghĩa ghi thành Vấn đề tồn đọng #8 để QA đề xuất, không tự đặt luật mới. Sửa `R-06`: Vấn đề tồn đọng #3, #4 ghi đã quyết theo DEC84, DEC85. Review lại rồi trình lại gate. Lần Request Changes thứ 1 của CR3 | "Request Changes: sửa R-05 R-06 theo hướng trên (Recommended)" | buidhui | 2.42, 2.43, CR |
+| DEC94 | 2026-10-20 11:12 | 2.42 | Approve PRD Generation, prd.md v0.4 | "duyệt hãy chạy luôn giúp tôi" | buidhui | prd-generation |
 
 ## Change requests
 | CR | Ngày | Nguồn | Nội dung | Stage mở lại | Artifact đổi | Trạng thái |
 |---|---|---|---|---|---|---|
 | CR1 | 2026-10-09 | competitive-analysis v0.2 §9.2, DEC72 đến DEC75 | Ba điểm a, b, c | 2.3, 2.31, 2.42 (Modify, chỉ phần bị chạm) | requirements v0.3 · impact-matrix v0.3 · prd v0.2 | Đóng 2026-10-09 (DEC77). PRD v0.2 đã publish Lark cùng ngày, revision 31 |
 | CR2 | 2026-10-12 | Review 2.4 lần 01 `R-02` `R-03` `R-04`, DEC80 đến DEC81 | Luật `CG-3` người thuộc nhiều nhóm cùng giao một lớp · tag `RC` ở danh sách US · lý do `OQ-31` không chặn PRD | 2.42 (Modify: `US3` `US7` `US19` `US20`, danh sách US, tồn đọng #2) · 2.31 (Modify: đánh dấu `CG-3` đã giải, `OQ-31`) | prd v0.3 · impact-matrix v0.4 | Đóng 2026-10-12 (DEC82). PRD v0.3 publish lại Lark cùng ngày |
-| CR3 | 2026-10-20 | Engine 2.1.0 đòi PRD có khối AC và dòng Ưu tiên; `check` báo 21 cảnh báo, `dor` 0/20 story đạt, DEC92 | Thêm AC cho 20 US phủ 130 BR · dòng Ưu tiên từng US | 2.42 (Modify: mục 4/ và mục 1/ của US1 đến US20, Document version) | prd v0.4 | Đang xử lý. Gate 2.42 chờ duyệt lại |
+| CR3 | 2026-10-20 | Engine 2.1.0 đòi PRD có khối AC và dòng Ưu tiên; `check` báo 21 cảnh báo, `dor` 0/20 story đạt, DEC92 | Thêm AC cho 20 US phủ 130 BR · dòng Ưu tiên từng US | 2.42 (Modify: mục 4/ và mục 1/ của US1 đến US20, Document version) | prd v0.4 | Đóng 2026-10-20 (DEC94). PRD v0.4 publish lại Lark cùng ngày |
 
 ## Accepted risks
 | DEC | Finding | Vì sao chấp nhận |
@@ -112,3 +114,6 @@ Nhật ký quyết định của intent. Chuyển từ `archive/v1/project-decis
 | DEC78 | `R-06` Minor: stakeholder thiếu cột nguồn, ai quyết | Stakeholder lấy từ yêu cầu gốc 19 hạng mục; PO là người quyết duy nhất, ghi ở `intent.md` |
 | DEC80 | 2.4 `R-05` Minor: `US13` nối hai việc bằng "và" | Cùng một tình huống quản lý rời vị trí, cùng Unit `U4`, cùng người dùng; tách thì đổi mã `US13` và `BR-13.x` trên PRD đã publish Lark |
 | DEC80 | 2.4 `R-01` Critical: Conner case trống ở 20 US — **Rejected** | Template PRD của công ty: *"Conner case — Để trống. QA điền."* Nhánh đáng kể đã nằm trong business rule của từng US; 11/15 coverage gap của Impact Matrix đã thành rule, `CG-3` giải ở CR2, `CG-7` `CG-9` `CG-14` ghi vào Vấn đề tồn đọng |
+| DEC94 | 2.42 `R-08` Minor: mục Preferences chưa đổi tên thành References theo template mới | Tên mục cũ của PRD đã publish; đổi tên mục chờ chủ template công ty xác nhận |
+| DEC94 | 2.42 `R-09` Minor: bảng đầu PRD thiếu hàng Mã tính năng | Mã LMS-F002 có trong frontmatter, Story List lấy mã từ đó; bổ sung ở lần sửa PRD sau |
+| DEC94 | 2.42 `R-10` Minor: tiêu đề TDD viết tắt, template gọi là Technical Direction | Cùng lý do R-08 |
