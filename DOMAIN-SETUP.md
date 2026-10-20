@@ -9,12 +9,11 @@ Engine là phần không phụ thuộc sản phẩm: protocol, lệnh, template 
 ```
 domain/
 ├── domain.md                      manifest: sản phẩm, nguồn, bản đồ KB, dữ kiện cho từng stage
-├── 00-index.md … 16-*.md          knowledge base của sản phẩm
+├── 00-index.md, 01-<module>.md …  knowledge base của sản phẩm
 ├── corner-checklist.md            góc hay sót, viết lại theo nghiệp vụ của domain
 └── templates/
-    ├── prd.md                     template PRD theo chuẩn công ty
     ├── user-guide.md              template User Guide theo chuẩn tài liệu của công ty
-    └── prd-template-goc-lark.md   bản gốc của chủ template, để đối chiếu
+    └── prd.md                     chỉ khi công ty bắt buộc template PRD riêng; ghi đè template chuẩn
 ```
 
 Hai phần nằm ngoài thư mục đó nhưng thuộc về domain, phải làm mới khi đổi domain: `memory/project.md` chứa bài học riêng của sản phẩm hiện tại, và `intents/` chứa việc của sản phẩm hiện tại. `memory/team.md` là bài học dùng chung cho mọi sản phẩm, như cách đánh version, cách hỏi, cách viết PRD và publish; file này đi theo engine, giữ nguyên.
@@ -23,13 +22,14 @@ Engine, gồm file stage, lệnh, checklist và `AGENTS.md`, không ghi cứng d
 
 ## 2. Tạo space mới
 
-Mỗi domain một repo, AWS gọi là một space. Không dựng domain mới trên repo đang có intent.
+Mỗi sản phẩm một repo riêng, AWS gọi là một space. Repo `po-workflow` chỉ chứa engine và tài liệu chung: `domain/` và `intents/` để trống, `memory/project.md` là bản trống. Engine được phát triển và kiểm thử ở repo này; repo sản phẩm không sửa engine.
 
-1. Clone repo này sang thư mục mới, đặt tên theo sản phẩm, ví dụ `po-workflow-crm`.
-2. Xoá mọi thư mục trong `intents/` và file `intents/INDEX.md`, giữ `.gitkeep`.
-3. Đưa `memory/project.md` về bản trống: giữ đoạn mở đầu, xoá mọi heading và dòng bài học, thêm một dòng ghi ngày khởi tạo domain. Giữ nguyên `memory/team.md`.
-4. Xoá thư mục `domain/`, trừ `templates/` giữ làm điểm xuất phát nếu công ty mới chưa có template riêng.
-5. Tạo remote mới, push nhánh `main`. Giữ `.github/workflows/gitleaks.yml` để quét thông tin nhạy cảm mỗi lần push.
+1. Clone repo `po-workflow` sang thư mục mới, đặt tên theo sản phẩm, ví dụ `crm-po-workflow`.
+2. Đổi tên remote đang có thành `engine`: `git remote rename origin engine`. Remote này dùng để lấy bản engine mới.
+3. Tạo remote mới cho repo sản phẩm, đặt tên `origin`, push nhánh `main`. Giữ `.github/workflows/gitleaks.yml` để quét thông tin nhạy cảm mỗi lần push.
+4. Chạy `/new-domain` và làm tiếp từ mục 3.
+
+Lấy bản engine mới: `git pull engine main`, sau đó làm theo mục Nâng cấp của bản mới trong `CHANGELOG.md`, gồm `po-tools.py migrate` khi bản đó yêu cầu. Repo sản phẩm chỉ thêm file trong `domain/`, `intents/` và `memory/project.md`, nên lần pull không đụng phần của sản phẩm. Repo sản phẩm có từ trước khi tách engine ra repo riêng thì không chung lịch sử git với `po-workflow`; lấy bản mới bằng cách chép đè các file có trong `engine/MANIFEST.txt`, theo đầu `CHANGELOG.md`.
 
 ## 3. Thu nguồn sống
 

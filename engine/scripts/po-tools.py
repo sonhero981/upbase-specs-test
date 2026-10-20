@@ -3153,10 +3153,17 @@ def doctor():
         add("Thay đổi chưa commit ở intents/, memory/", "Cảnh báo" if ch else "Đạt",
             ("%d file: %s" % (len(ch), ", ".join(l[3:] for l in ch[:3]) + (", ..." if len(ch) > 3 else ""))) if ch else "không có",
             "Commit và push để người khác thấy" if ch else "-")
-    srcs = live_sources()
-    stale = stale_sources()
+    # repo engine chưa có domain là trạng thái hợp lệ: báo một dòng, bỏ các kiểm phụ thuộc domain
+    no_domain = not DOMAIN_MD.exists()
+    if no_domain:
+        add("Domain pack", "Cảnh báo", "chưa có domain/domain.md; đây là repo engine hoặc sản phẩm chưa dựng domain",
+            "Tạo repo cho sản phẩm từ repo này, chạy /new-domain theo DOMAIN-SETUP.md")
+    srcs = [] if no_domain else live_sources()
+    stale = [] if no_domain else stale_sources()
     nodate = [s for s in srcs if s["kind"] == "sống" and not s["date"]]
-    if not srcs:
+    if no_domain:
+        pass
+    elif not srcs:
         add("Nguồn sống trong domain.md mục 2", "Cảnh báo", "không đọc được bảng nguồn", "Kiểm bảng mục 2 của domain.md")
     else:
         lvl = "Cảnh báo" if stale or nodate else "Đạt"
@@ -3171,17 +3178,19 @@ def doctor():
               and stage_file(p, "prd-generation").exists() and not intent_feature(p)] if INTENTS.is_dir() else []
     add("Intent có PRD chưa có mã tính năng", "Cảnh báo" if nofeat else "Đạt", ", ".join(nofeat) or "không có",
         "python3 engine/scripts/po-tools.py feature-id --assign intents/<intent>" if nofeat else "-")
-    if not domain_code():
+    if not no_domain and not domain_code():
         add("Khoá code trong domain.md", "Cảnh báo", "chưa có, feature-id không cấp được mã", "Thêm code: <mã sản phẩm> vào frontmatter domain/domain.md")
     jk, jn, jt = jira_config()
-    add("Dự án Jira trong domain.md", "Đạt" if jk and jn else "Cảnh báo", "%s, %s, %s" % (jk, jn, jt) if jk and jn else "thiếu jira_project_key hoặc jira_project_name, Story List sẽ để trống cột Project",
-        "-" if jk and jn else "Thêm jira_project_key, jira_project_name vào frontmatter domain/domain.md, xem DOMAIN-SETUP.md mục 5")
+    if not no_domain:
+        add("Dự án Jira trong domain.md", "Đạt" if jk and jn else "Cảnh báo", "%s, %s, %s" % (jk, jn, jt) if jk and jn else "thiếu jira_project_key hoặc jira_project_name, Story List sẽ để trống cột Project",
+            "-" if jk and jn else "Thêm jira_project_key, jira_project_name vào frontmatter domain/domain.md, xem DOMAIN-SETUP.md mục 5")
     dl = (read(DOMAIN_MD) or "").splitlines()
     nums = set(int(m.group(1)) for _, lvl, t in headings(dl) if lvl == 2 for m in [re.match(r"(\d+)\.", clean(t))] if m)
     miss = [str(n) for n in range(1, 7) if n not in nums]
-    add("domain.md đủ mục 1 đến 6", "Lỗi" if miss or not dl else "Đạt",
-        ("thiếu mục %s" % ", ".join(miss)) if dl and miss else ("không thấy domain/domain.md" if not dl else "đủ"),
-        "Viết theo DOMAIN-SETUP.md" if miss or not dl else "-")
+    if not no_domain:
+        add("domain.md đủ mục 1 đến 6", "Lỗi" if miss or not dl else "Đạt",
+            ("thiếu mục %s" % ", ".join(miss)) if dl and miss else ("không thấy domain/domain.md" if not dl else "đủ"),
+            "Viết theo DOMAIN-SETUP.md" if miss or not dl else "-")
     kb = [show(p) for p in sorted((ROOT / "domain").rglob("*.md")) if "chưa viết" in (read(p) or "")] if (ROOT / "domain").is_dir() else []
     add("KB còn chữ 'chưa viết'", "Cảnh báo" if kb else "Đạt", ", ".join(kb) or "không có", "Viết nốt KB hoặc ghi vùng chưa phủ" if kb else "-")
     S = load_stages()
@@ -3193,6 +3202,8 @@ def doctor():
                 if not re.search(r"\.md\b|/", tok):
                     continue
                 t, ok = resolve_ref(tok)
+                if no_domain and (tok.startswith("domain/") or "/" not in tok):
+                    continue  # file của domain, chưa có ở repo engine
                 if t and not ok:
                     bad.append("%s %s: %s" % (f.name, key, t))
     add("Đường dẫn Template, Checklist, Knowledge", "Lỗi" if bad else "Đạt", "; ".join(bad) or "mọi đường dẫn đều có", "Sửa bảng metadata của file stage" if bad else "-")

@@ -1,9 +1,0 @@
-{
- "hook_event_name": "PreToolUse",
- "tool_name": "Write",
- "agent_type": "ai-reviewer",
- "tool_input": {
-  "file_path": "{intent}/reviews/review-requirements-analysis-02.md",
-  "content": "# Review"
- }
-}

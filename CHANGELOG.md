@@ -9,6 +9,8 @@ Phiên bản của engine PO-Workflow. Số phiên bản ở file `VERSION`. M�
 Tương thích: chép engine và chạy migrate.
 
 ### Cấu trúc
+- Tách hai repo. `po-workflow` chỉ chứa engine và tài liệu chung, `domain/` và `intents/` để trống, lịch sử git mới để không mang dữ liệu sản phẩm. Mỗi sản phẩm một repo clone từ `po-workflow`, lấy bản engine mới bằng `git pull engine main`; DOMAIN-SETUP mục 2.
+- `po-tools.py doctor` trên repo chưa có `domain/domain.md` báo một dòng Domain pack và bỏ các kiểm phụ thuộc domain, thay vì báo lỗi.
 - Engine chuyển ra khỏi `.claude/`: `engine/stages/` cho mười stage, `engine/commands/` cho lệnh tiện ích, cùng `engine/protocol/`, `engine/templates/`, `engine/verification/`, `engine/agents/`, `engine/knowledge/`, `engine/scripts/`.
 - Domain pack ở `domain/`, intent ở `intents/`, bộ nhớ ở `memory/`, ngoài mọi thư mục công cụ, theo cách AWS đặt dữ liệu của team ở `aidlc/spaces/`.
 - `.claude/` chỉ còn phần cấu hình riêng cho Claude Code: mỗi lệnh tiện ích và AI Reviewer là một lối tắt trỏ tới file trong `engine/`. Bỏ mười lệnh riêng của stage như `/requirements-analysis`: `/po` là lối vào duy nhất, như `/aidlc` của AWS; chạy một stage cụ thể bằng "nhảy tới 2.3".
