@@ -1,12 +1,12 @@
 # PO-Workflow
 
-PO-Workflow là quy trình để PO hoặc BA phân tích yêu cầu cùng AI, đi từ một yêu cầu thô tới PRD theo template của công ty, sau đó bàn giao cho Design, Tech và QA theo một chuẩn chung. AI đọc tài liệu, đặt câu hỏi, soạn bản nháp và tự kiểm; PO trả lời, quyết định và duyệt ở cuối mỗi bước.
+PO-Workflow là quy trình để PO phân tích yêu cầu cùng AI, đi từ một yêu cầu thô tới PRD theo template của công ty, sau đó bàn giao cho Design, Tech và QA theo một chuẩn chung. AI đọc tài liệu, đặt câu hỏi, soạn bản nháp và tự kiểm; PO trả lời, quyết định và duyệt ở cuối mỗi bước.
 
 Khung phase, stage, gate và thuật ngữ tham khảo [AWS AI-DLC Workflows](https://github.com/awslabs/aidlc-workflows) bản 2.11, giới hạn trong hai phase thuộc phạm vi PO là Ideation và Inception. Quy trình viết bằng Markdown và một script Python, không cài engine của AWS. Engine không phụ thuộc sản phẩm và không phụ thuộc công cụ AI; dữ kiện của sản phẩm nằm trong domain pack.
 
 | Tài liệu | Dành cho | Nội dung |
 |---|---|---|
-| README.md, file này | Mọi người | Phương pháp, từng stage, chuẩn bàn giao, mức độ trưởng thành |
+| README.md, file này | Mọi người | Phương pháp, từng stage, chuẩn bàn giao, mức độ sẵn sàng áp dụng |
 | [USER-GUIDE.md](USER-GUIDE.md) | PO, các PIC | Thao tác hằng ngày |
 | [GLOSSARY.md](GLOSSARY.md) | Mọi người | Thuật ngữ và họ mã |
 | [DOMAIN-SETUP.md](DOMAIN-SETUP.md) | Người phụ trách quy trình | Đưa một sản phẩm mới vào quy trình |
@@ -24,7 +24,7 @@ Khung phase, stage, gate và thuật ngữ tham khảo [AWS AI-DLC Workflows](ht
 6. [Đầu ra chuẩn cho các phase sau](#6-đầu-ra-chuẩn-cho-các-phase-sau)
 7. [Sau PRD](#7-sau-prd)
 8. [Cấu trúc repo và nâng cấp](#8-cấu-trúc-repo-và-nâng-cấp)
-9. [Mức độ trưởng thành](#9-mức-độ-trưởng-thành)
+9. [Mức độ sẵn sàng áp dụng](#9-mức-độ-sẵn-sàng-áp-dụng)
 10. [Đối chiếu với AWS AI-DLC](#10-đối-chiếu-với-aws-ai-dlc)
 11. [Phương pháp luận và quy tắc rút từ sự cố](#11-phương-pháp-luận-và-quy-tắc-rút-từ-sự-cố)
 12. [Lịch sử và nguồn](#12-lịch-sử-và-nguồn)
@@ -33,7 +33,7 @@ Khung phase, stage, gate và thuật ngữ tham khảo [AWS AI-DLC Workflows](ht
 
 ### Phạm vi
 
-Một yêu cầu là một intent, lưu tại `intents/<YYMMDD-slug>/`. Intent đi qua 10 stage chia làm 2 phase. Ideation xác định vấn đề và phạm vi; Inception chuyển phạm vi thành yêu cầu, phân tích ảnh hưởng lên hệ thống đang chạy, chia user story, viết PRD chi tiết, sau đó các team thiết kế từ PRD và chốt trên Decision Brief. Mỗi stage sinh một artifact và kết thúc bằng một gate do PO duyệt.
+Một yêu cầu là một intent, lưu tại `intents/<YYMMDD-slug>/`. Intent đi qua 10 stage chia làm 2 phase. Ideation xác định vấn đề và phạm vi; Inception chuyển phạm vi thành yêu cầu, phân tích ảnh hưởng lên hệ thống đang chạy, đề xuất và chọn phương án giải pháp, chia user story, viết PRD chi tiết, sau đó các team thiết kế từ PRD và chốt trên Decision Brief. Mỗi stage sinh một artifact và kết thúc bằng một gate do PO duyệt.
 
 Phần lớn sản phẩm dùng quy trình này đã có người dùng và dữ liệu. Vì vậy quy trình dành nhiều công sức cho việc xác định tính năng mới chạm tới những gì đang chạy, trước khi viết chi tiết.
 
@@ -100,6 +100,51 @@ Từ các nguyên lý trên, quy trình rút ra 4 quy tắc làm việc áp cho 
 - AI dừng ở mức phân tích. Cần biết một cơ chế kỹ thuật có tồn tại hay không thì hỏi PO. Có endpoint trong API spec không có nghĩa là tính năng còn hoạt động.
 - Knowledge base là bản chụp. Schema dữ liệu, API spec, tài liệu người dùng là nguồn sống; yêu cầu chạm tới vùng nào thì đọc lại nguồn vùng đó, và quá 30 ngày kể từ lần đối chiếu cuối cũng phải đọc lại.
 - Câu trả lời và quyết định của PO được ghi nguyên văn. AI tra nhật ký quyết định trước khi hỏi để không hỏi lại.
+
+### Nghiệp vụ và năng lực của PO theo BABOK v3 và Scrum Guide
+
+Quy trình dùng hai chuẩn để soát độ phủ nghiệp vụ của PO: BABOK v3 của IIBA cho công việc phân tích yêu cầu, và Scrum Guide 2020 cho trách nhiệm của PO với backlog. Kỹ thuật cụ thể như phỏng vấn, khung ưu tiên, cách viết user story lấy từ knowledge pack vai Product của AWS AI-DLC trong `engine/knowledge/`.
+
+BABOK v3 chia công việc phân tích thành 6 nhóm nghiệp vụ. Bảng sau cho biết quy trình đáp ứng từng nhóm ở stage nào.
+
+| Nhóm nghiệp vụ theo BABOK v3 | Việc chính | Trong PO-Workflow | Mức đáp ứng |
+|---|---|---|---|
+| Lập kế hoạch và giám sát | Chọn cách tiếp cận, xác định cách làm việc với các bên liên quan, quản trị quyết định, quản lý thông tin, cải tiến cách làm | Profile S, M, L chọn độ sâu cho từng yêu cầu; gate và `decisions.md` là khung quản trị quyết định; cấu trúc intent quản lý thông tin; bài học ghi lại tại gate | Có |
+| Khơi gợi và cộng tác | Chuẩn bị và tiến hành khơi gợi, xác nhận kết quả, truyền đạt thông tin, cộng tác với các bên liên quan | Tra knowledge base trước khi hỏi; file câu hỏi gắn người trả lời; bước tóm tắt để PO xác nhận; buổi họp với Design, Tech, QA trên Decision Brief | Có |
+| Phân tích chiến lược | Phân tích hiện trạng, xác định trạng thái mong muốn, đánh giá rủi ro, xác định chiến lược thay đổi | 1.1 vấn đề, hiện trạng và mục tiêu đo được; 1.2 so sánh với sản phẩm khác; 1.4 phạm vi và Unit; 1.7 Initiative Brief với khuyến nghị đi tiếp hay dừng | Có; 1.2 chạy khi cần |
+| Phân tích yêu cầu và định nghĩa thiết kế | Đặc tả và mô hình hoá yêu cầu, kiểm chứng và xác nhận yêu cầu, xác định phương án giải pháp, phân tích giá trị và đề xuất giải pháp | 2.3 yêu cầu chức năng và phi chức năng; 2.31 phân tích ảnh hưởng; 2.32 so sánh phương án theo 7 tiêu chí và đề xuất; 2.4 user story; 2.42 PRD với tiêu chí chấp nhận và business rule; checklist và AI Reviewer | Có; 2.32 chạy khi có nhiều hướng giải |
+| Quản lý vòng đời yêu cầu | Truy vết, duy trì, sắp ưu tiên, đánh giá thay đổi, phê duyệt yêu cầu | Mã ổn định và bảng truy vết; dòng Ưu tiên của từng user story; change request; duyệt tại gate; bản duyệt lưu trong `archive/` và gắn tag | Có |
+| Đánh giá giải pháp | Đo hiệu quả của giải pháp sau khi đưa vào sử dụng, phân tích hạn chế, đề xuất hành động | Mục tiêu đo được ghi từ 1.1; User Guide viết sau khi Dev làm xong | Chưa có bước đo hiệu quả sau phát hành |
+
+BABOK v3 cũng nêu 6 nhóm năng lực nền. Quy trình hỗ trợ PO thể hiện các năng lực này một cách nhất quán; phần đánh giá và quyết định vẫn do PO đảm nhận.
+
+| Năng lực nền theo BABOK v3 | Nội dung | Quy trình hỗ trợ bằng |
+|---|---|---|
+| Tư duy phân tích và giải quyết vấn đề | Tư duy hệ thống, ra quyết định, giải quyết vấn đề | Tách vấn đề khỏi giải pháp ở 1.1; phân tích ảnh hưởng theo 12 vùng ở 2.31; so sánh phương án theo 7 tiêu chí ở 2.32; corner checklist của sản phẩm |
+| Phẩm chất cá nhân | Đạo đức nghề nghiệp, trách nhiệm cá nhân, sự tin cậy, tổ chức công việc | Quyết định ghi nguyên văn kèm người quyết định và thời điểm; AI không tự duyệt; `state.md` ghi việc kế tiếp và người thực hiện |
+| Kiến thức nghiệp vụ | Hiểu ngành, tổ chức và giải pháp đang có | Knowledge base của sản phẩm trong domain pack; đọc lại nguồn sống như schema, API spec khi yêu cầu chạm tới |
+| Kỹ năng giao tiếp | Viết, trình bày, lắng nghe | Template thống nhất cho mọi artifact; Decision Brief tối đa 1.500 từ; văn phong bàn giao có mã kèm nội dung |
+| Kỹ năng tương tác | Điều phối, thuyết phục, làm việc nhóm, thương lượng và giải quyết bất đồng | File câu hỏi gắn người trả lời; buổi họp chốt trên Decision Brief; ý kiến phản đối được chép nguyên văn |
+| Công cụ và công nghệ | Công cụ văn phòng, công cụ phân tích, công cụ giao tiếp | Claude Code, script kiểm tra, Git, Jira qua import CSV, Lark |
+
+Scrum Guide 2020 giao cho PO 4 trách nhiệm với backlog. PO có thể giao việc cho người khác nhưng vẫn chịu trách nhiệm cuối.
+
+| Trách nhiệm của PO theo Scrum Guide 2020 | Trong PO-Workflow |
+|---|---|
+| Xây dựng và truyền đạt rõ mục tiêu sản phẩm | Mục tiêu đo được của từng intent ở 1.1; định hướng sản phẩm trong knowledge base của domain pack; Initiative Brief ở 1.7 |
+| Tạo và truyền đạt rõ các hạng mục backlog | PRD và Story List import lên Jira; mỗi story có tiêu chí chấp nhận và business rule có mã |
+| Sắp thứ tự các hạng mục backlog | MoSCoW cho Unit ở 1.4; dòng Ưu tiên của từng user story chuyển thành Priority trên Jira |
+| Bảo đảm backlog minh bạch, dễ thấy và được hiểu | Repo là nguồn chính thức; bản duyệt đăng Lark cho người đọc; `intents/INDEX.md`; Decision Brief cho các team |
+
+Kỹ thuật theo thực hành ngành mà AI dùng, lấy từ knowledge pack trong `engine/knowledge/`:
+
+| Nhóm kỹ thuật | Kỹ thuật | Stage dùng |
+|---|---|---|
+| Khơi gợi yêu cầu | Phỏng vấn, workshop, quan sát, phân tích tài liệu, prototype | 1.1, 2.3 |
+| Nghiên cứu thị trường | Phân tích đối thủ, SWOT, build vs buy, ước lượng thị trường | 1.2 |
+| Sắp ưu tiên | MoSCoW, WSJF, RICE, Kano | 1.4, 2.4 |
+| Sản phẩm | Persona, MVP, story mapping | 1.1, 1.4, 2.4 |
+| User story | INVEST, cách tách story, Given/When/Then, Definition of Ready | 2.4, 2.42 |
 
 ## 3. Quy trình
 
@@ -467,7 +512,7 @@ intents/<YYMMDD-slug>/
 
 Repo của sản phẩm khác nhận bản engine mới theo 3 bước: chạy `po-tools.py engine-check` để biết file engine nào đã bị sửa tay; chép đè các file trong `engine/MANIFEST.txt`; gộp `memory/team.md` theo dòng. Dòng Tương thích của bản đó trong CHANGELOG cho biết có phải chạy migrate hoặc sửa intent bằng tay hay không. Sau khi chép, chạy `po-tools.py selftest`: dữ liệu kiểm thử đi kèm engine và dùng domain mẫu riêng, nên kết quả không phụ thuộc domain của repo đó. Intent tạo từ bản engine cũ được chuyển bằng `po-tools.py migrate`: lệnh đổi đường dẫn và thuật ngữ trong file đang dùng, cấp mã tính năng, chuyển file câu hỏi theo định dạng cũ, chụp lại bản duyệt kèm một dòng quyết định, và không sửa `archive/` hoặc `reviews/`.
 
-## 9. Mức độ trưởng thành
+## 9. Mức độ sẵn sàng áp dụng
 
 Mục này trả lời 2 câu hỏi: quy trình đã đủ để ai dùng, và đầu ra đã đủ để máy dùng hay mới đủ cho người đọc. Đánh giá ngày 19/10/2026 trên engine 2.1.0, căn cứ đợt chạy đầu tiên từ 23/09/2026 với 1 PO trên 1 sản phẩm.
 

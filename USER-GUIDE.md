@@ -4,7 +4,7 @@ Tài liệu này hướng dẫn thao tác. Phương pháp và lý do của từn
 
 | Người đọc | Đọc mục |
 |---|---|
-| PO, BA | 1 tới 7, 10 tới 12 |
+| PO | 1 tới 7, 10 tới 12 |
 | Design PIC, Tech PIC, QA PIC | 1, 8 |
 | Dev và agent AI của Dev | 9 |
 | Người phụ trách quy trình | 2, 11, và [DOMAIN-SETUP.md](DOMAIN-SETUP.md) |
@@ -26,7 +26,7 @@ Tài liệu này hướng dẫn thao tác. Phương pháp và lý do của từn
 
 ## 1. Quy trình tóm tắt
 
-Một yêu cầu là một intent. Intent đi qua 2 phase: Ideation xác định vấn đề và phạm vi; Inception chuyển phạm vi thành yêu cầu, phân tích ảnh hưởng, chia user story, viết PRD chi tiết, sau đó các team thiết kế từ PRD và chốt trên Decision Brief. Mỗi stage sinh một artifact và dừng ở một gate cho tới khi PO duyệt.
+Một yêu cầu là một intent. Intent đi qua 2 phase: Ideation xác định vấn đề và phạm vi; Inception chuyển phạm vi thành yêu cầu, phân tích ảnh hưởng, đề xuất và chọn phương án giải pháp, chia user story, viết PRD chi tiết, sau đó các team thiết kế từ PRD và chốt trên Decision Brief. Mỗi stage sinh một artifact và dừng ở một gate cho tới khi PO duyệt.
 
 | Stage | Artifact | Gate | Thư mục trong intent |
 |---|---|---|---|
@@ -102,7 +102,7 @@ Lệnh kiểm tên git, Python, `lark-cli`, thư mục đang mở, hook ghi lư�
 po-workflow/
 ├── AGENTS.md                  luật cho mọi công cụ AI
 ├── CLAUDE.md                  một dòng, nhập AGENTS.md cho Claude Code
-├── README.md                  phương pháp, chuẩn bàn giao, mức độ trưởng thành
+├── README.md                  phương pháp, chuẩn bàn giao, mức độ sẵn sàng áp dụng
 ├── USER-GUIDE.md              file này
 ├── DOMAIN-SETUP.md            đưa một sản phẩm mới vào quy trình
 ├── GLOSSARY.md                thuật ngữ, tên stage, họ mã

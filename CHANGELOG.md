@@ -83,11 +83,12 @@ Theo cách AWS giữ chất lượng repo, ở quy mô một người giữ engi
 - AGENTS.md có mục Sửa engine: thứ tự sửa, bảng selftest bắt được gì, quy tắc phát hành. CHANGELOG có dòng Tương thích.
 
 ### Tài liệu
-- README.md viết lại, trung lập sản phẩm. Thêm mục 6 Đầu ra chuẩn cho các phase sau: mỗi team nhận gì, checkpoint và giao Dev, nguyên tắc chia story, mã chung, cách viết tiêu chí chấp nhận, Story List, điều kiện giao Dev, tag và chỉ mục, thay đổi sau bàn giao. Thêm mục 9 Mức độ trưởng thành theo 2 trục: phạm vi sử dụng, từ cá nhân tới nhân rộng; và giao tiếp, từ người với người tới máy với máy. Kèm hiện trạng, việc cần làm để lên mức kế và chỉ số cần thu.
+- README.md viết lại, trung lập sản phẩm. Thêm mục 6 Đầu ra chuẩn cho các phase sau: mỗi team nhận gì, checkpoint và giao Dev, nguyên tắc chia story, mã chung, cách viết tiêu chí chấp nhận, Story List, điều kiện giao Dev, tag và chỉ mục, thay đổi sau bàn giao. Thêm mục 9 Mức độ sẵn sàng áp dụng theo 2 trục: phạm vi sử dụng, từ cá nhân tới nhân rộng; và giao tiếp, từ người với người tới máy với máy. Kèm hiện trạng, việc cần làm để lên mức kế và chỉ số cần thu.
 - USER-GUIDE.md viết lại theo người đọc: thêm mục cho Design PIC, Tech PIC, QA PIC, mục cho Dev, bảng lệnh của script; mục domain pack không còn dữ kiện của sản phẩm đang cài.
-- AGENTS.md, DOMAIN-SETUP.md, GLOSSARY.md viết lại bằng văn viết, bỏ in đậm. DOMAIN-SETUP.md thêm mục Chuẩn bàn giao cho các team. GLOSSARY.md thêm checkpoint, điều kiện giao Dev, Story List, nguyên tắc chia story, tiêu chí chấp nhận, tag bản duyệt, phiên bản artifact, mức độ trưởng thành.
+- AGENTS.md, DOMAIN-SETUP.md, GLOSSARY.md viết lại bằng văn viết, bỏ in đậm. DOMAIN-SETUP.md thêm mục Chuẩn bàn giao cho các team. GLOSSARY.md thêm checkpoint, điều kiện giao Dev, Story List, nguyên tắc chia story, tiêu chí chấp nhận, tag bản duyệt, phiên bản artifact, mức độ sẵn sàng áp dụng.
 - Sửa chữ PU còn sót thành Unit trong template `scope-document`, `stories` và 2 checklist.
 - Mã ví dụ trong `id-conventions.md`, README, GLOSSARY, USER-GUIDE và `/new-domain` đổi từ `LMS-F012` sang `APP-F012`, để engine không gắn với sản phẩm đang cài.
+- README mục 2 thêm phần Nghiệp vụ và năng lực của PO theo BABOK v3 và Scrum Guide 2020: 6 nhóm nghiệp vụ đối chiếu với stage, kể cả nhóm chưa đáp ứng; 6 năng lực nền; 4 trách nhiệm của PO với backlog; kỹ thuật ngành AI dùng từ `engine/knowledge/`. Câu tóm tắt quy trình ở README và USER-GUIDE thêm bước đề xuất và chọn phương án giải pháp.
 - README mục 1 thêm phần Giá trị của quy trình: mỗi giá trị gắn với cơ chế tạo ra nó và bằng chứng hiện có; thêm bảng so sánh với việc dùng trực tiếp AI hội thoại để soạn PRD.
 
 ### Đổi tên
