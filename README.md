@@ -1,6 +1,6 @@
 # PO-Workflow
 
-PO-Workflow là quy trình để PO phân tích yêu cầu cùng AI, đi từ một yêu cầu thô tới PRD theo template của công ty, sau đó bàn giao cho Design, Tech và QA theo một chuẩn chung. AI đọc tài liệu, đặt câu hỏi, soạn bản nháp và tự kiểm; PO trả lời, quyết định và duyệt ở cuối mỗi bước.
+PO-Workflow là quy trình để PO phân tích yêu cầu cùng AI, đi từ một yêu cầu thô tới PRD theo template chuẩn chung, sau đó bàn giao cho Design, Tech và QA theo một chuẩn chung. AI đọc tài liệu, đặt câu hỏi, soạn bản nháp và tự kiểm; PO trả lời, quyết định và duyệt ở cuối mỗi bước.
 
 Khung phase, stage, gate và thuật ngữ tham khảo [AWS AI-DLC Workflows](https://github.com/awslabs/aidlc-workflows) bản 2.11, giới hạn trong hai phase thuộc phạm vi PO là Ideation và Inception. Quy trình viết bằng Markdown và một script Python, không cài engine của AWS. Engine không phụ thuộc sản phẩm và không phụ thuộc công cụ AI; dữ kiện của sản phẩm nằm trong domain pack.
 
@@ -183,7 +183,7 @@ Số stage 1.1, 1.2, 1.4, 1.7, 2.3, 2.4 giữ theo AWS. 4 stage do PO-Workflow t
 | 2.31 Impact Analysis | Xác định phần nào của hệ thống đang chạy bị ảnh hưởng; tìm conflict | `impact-matrix.md` | M, L | PO-Workflow |
 | 2.32 Solution Options | So sánh các hướng giải theo bảy tiêu chí | `solution-options.md` | L, có điều kiện | PO-Workflow |
 | 2.4 User Stories | Chia yêu cầu thành user story; mỗi US một thẻ chín mục đủ để viết PRD | `stories.md` | M, L | AWS |
-| 2.42 PRD Generation | PRD theo template công ty, chi tiết từng US, có tiêu chí chấp nhận và truy vết | `prd.md` | S, M, L | PO-Workflow |
+| 2.42 PRD Generation | PRD theo template chuẩn, chi tiết từng US, có tiêu chí chấp nhận, trường hợp ngoại lệ, yêu cầu chuyển đổi và truy vết | `prd.md` | S, M, L | PO-Workflow |
 | 2.43 Design Alignment | Ba team viết thiết kế từ PRD; AI đối chiếu và viết Decision Brief; họp, 3 PIC ký | `decision-brief.md` | M, L | PO-Workflow |
 
 Mỗi file stage trong `engine/stages/` có bảng metadata với hàng "Lệch so với AWS", ghi điểm khác với stage cùng số của AWS. 2 stage gốc được điều chỉnh: 1.4 gộp intent backlog vào scope-document, và 2.4 không viết acceptance criteria, không chạy nhiều agent cùng góp ý.
@@ -310,7 +310,7 @@ AI chia yêu cầu thành user story, mỗi US gắn một Unit và mỗi FR có
 
 Bước hỏi là Field Intake: AI tra Impact Matrix, data model, API spec và KB, phân loại mỗi màn là mới, sửa màn có sẵn hoặc chỉ đọc, sau đó lập một bảng field, rule, validate để PO duyệt. Với field hiện có, AI chỉ hỏi phần thay đổi. Profile S cũng phải qua bước này.
 
-PRD theo template của công ty. Phần đầu lấy từ artifact đã duyệt: intent statement, scope, stories, solution options. Phần Specific Requirement viết từng US với sáu mục: User story, Pre-Condition, Scenario, Acceptance criteria, Out of scope, Conner case để trống vì QA viết corner case ở `test-design.md`. Mục Acceptance criteria mở đầu bằng danh sách tiêu chí chấp nhận có mã `AC<US>.<n>`, tiếp theo là bảng UI, business rule mã `BR<US>.<n>`, data field và NFR. Cách viết tiêu chí chấp nhận ở mục 6.5.
+PRD theo template chuẩn `engine/templates/prd.md`, dùng chung cho mọi sản phẩm. Cơ sở của từng mục và bảng ánh xạ từ template công ty cũ ở `engine/standards/adr/0004-template-prd-chuan.md`: template lấy thành phần từ các artifact của AWS AI-DLC, ISO/IEC/IEEE 29148, mẫu câu EARS, GitHub Spec Kit và bốn loại yêu cầu của BABOK. PRD có 11 mục: 1. Bối cảnh và mục tiêu; 2. Tiêu chí thành công đo được, mã `SC<n>`; 3. Ngoài phạm vi; 4. Giải pháp tổng thể; 5. Units; 6. Yêu cầu theo user story; 7. Yêu cầu phi chức năng; 8. Chuyển đổi và triển khai; 9. Giả định; 10. Câu hỏi mở; 11. Truy vết. Mục 1 tới 5 tóm tắt từ artifact đã duyệt. Mỗi US ở mục 6 có mười mục con: User story kèm ưu tiên, Tiền điều kiện, Luồng chính, Business rule mã `BR<US>.<n>` theo mẫu EARS, Tiêu chí chấp nhận mã `AC<US>.<n>`, Giao diện và validate, Dữ liệu, NFR riêng nếu có, Trường hợp ngoại lệ lấy từ coverage gap của Impact Matrix, Ngoài phạm vi của US. Một dữ kiện chỉ ghi ở một nơi: câu thông báo ở bảng giao diện, luật ở business rule, tiêu chí chấp nhận trỏ về hai nơi đó. Công ty bắt buộc template riêng cho một sản phẩm thì đặt ở `domain/templates/prd.md`, file đó ghi đè template chuẩn. Cách viết tiêu chí chấp nhận ở mục 6.5.
 
 PRD viết trước khi các team thiết kế. Với điểm phụ thuộc thiết kế hoặc kỹ thuật mà artifact đã duyệt chưa nói, AI ghi đề xuất có đánh dấu kèm câu hỏi gắn tên PIC; các team trả lời ở 2.43. Quy tắc cố định: không có mục Database và API, không thiết kế bảng hoặc thuật toán, hằng số ghi rõ là giá trị cứng hoặc cấu hình, field hiện có không mô tả như mới, không dấu vết quy trình, không viết tắt.
 
@@ -410,8 +410,8 @@ Mã đã cấp không đổi và không dùng lại. Tách một story thì ph�
 Tiêu chí chấp nhận là hợp đồng giữa PO và QA. Business rule định nghĩa luật; bảng UI đặc tả màn hình; mỗi tiêu chí chấp nhận là một câu kiểm được, có đạt hoặc không đạt, viết theo hành vi người dùng thấy, và ghi rõ business rule mà nó kiểm.
 
 ```
-- AC1.1 Khi tạo nhóm làm nhánh vượt 6 cấp, hệ thống chặn và báo "Nhánh này đã đạt số cấp tối đa". Theo BR1.3
-- AC1.2 Khi bỏ trống field bắt buộc ở màn Tạo nhóm, hệ thống báo lỗi và không cho lưu, theo cột Yêu cầu của bảng UI
+- AC1.1 Cho một nhánh đang sâu 6 cấp, khi tạo nhóm con dưới nhóm cấp 6, thì hệ thống chặn và hiện câu thông báo của bảng giao diện. Theo BR1.3
+- AC1.2 Khi bỏ trống field bắt buộc ở màn Tạo nhóm, hệ thống báo lỗi và không cho lưu, theo cột Yêu cầu của bảng giao diện
 ```
 
 Độ phủ bắt buộc: luồng chính và mỗi nhánh đáng kể trong thẻ US có ít nhất một tiêu chí; mỗi US có ít nhất một tiêu chí cho nhánh lỗi hoặc bị từ chối, như AC1.1 ở trên, và mỗi ngưỡng số có tiêu chí ở giá trị biên, theo AWS requirements-guide; mỗi business rule có ít nhất một tiêu chí trỏ tới. Validate của cùng một màn gom thành một tiêu chí trỏ về bảng UI thay vì mỗi dòng bảng một tiêu chí, để số test case không tăng theo số field. Checklist của 2.42 chặn khi còn business rule chưa có tiêu chí chấp nhận hoặc US chưa có tiêu chí cho nhánh lỗi. Ở 2.43, QA PIC lập kế hoạch phủ từng tiêu chí trong `test-design.md` và ghi tiêu chí nào không kiểm thử được ở mục Ý kiến về PRD; Decision Brief đưa ra họp. AWS giao việc đánh giá tính kiểm thử được cho quality agent ở 2.4; PO-Workflow làm ở 2.43 vì tiêu chí chấp nhận viết ở PRD.
@@ -483,7 +483,7 @@ File CSV lưu trong `intents/<intent>/stories/` của repo PO, mỗi phiên bả
 | Thư mục | Nội dung | Thuộc về |
 |---|---|---|
 | `engine/` | Stage, lệnh, protocol, template, checklist, agent, script, chuẩn bàn giao, kiến thức vai PO | Engine |
-| `domain/` | Domain pack: manifest `domain.md`, KB, corner checklist, template của công ty | Sản phẩm |
+| `domain/` | Domain pack: manifest `domain.md`, KB, corner checklist, template User Guide; template PRD riêng chỉ khi công ty bắt buộc | Sản phẩm |
 | `intents/` | Hồ sơ từng yêu cầu | Sản phẩm |
 | `memory/` | `team.md` bài học dùng chung; `project.md` bài học của sản phẩm | Cả hai |
 | `.claude/` | Phần cấu hình riêng cho Claude Code: lối tắt cho các lệnh gạch chéo và cho AI Reviewer, trỏ tới file trong `engine/`; quyền và hook trong `settings.json` | Công cụ |
@@ -611,4 +611,4 @@ Một số quy tắc rút ra từ lỗi gặp khi chạy thật:
 Luồng đầu tiên chạy từ tháng 9/2026, giữ ở tag `pre-aidlc`. Ngày 09/10/2026, quy trình được chuẩn hoá theo AWS AI-DLC và phần riêng của sản phẩm tách thành domain pack. Ngày 19/10/2026, bản 2.1.0 chuyển engine, domain, intent và bộ nhớ ra khỏi `.claude/`, thêm script kiểm tra và duyệt, thêm chuẩn bàn giao cho các team, và đối chiếu lại với AWS bản 2.11. Chi tiết ở [CHANGELOG.md](CHANGELOG.md).
 
 - AWS AI-DLC Workflows 2.11, commit `0488aff`, https://github.com/awslabs/aidlc-workflows, giấy phép MIT-0. Repo này lấy từ đó cấu trúc phase và stage, nghi thức stage và gate, vai Product Lead, cách tách core và harness, vòng học team và project, và gói kiến thức vai PO trong `engine/knowledge/`.
-- Template PRD của công ty nằm trong domain pack, kèm bản gốc của chủ template để đối chiếu.
+- Template PRD chuẩn: ISO/IEC/IEEE 29148:2018 mục 5.2.5, 5.2.6, 9.6; EARS của Mavin và cộng sự, RE'09; template spec của GitHub Spec Kit; BABOK v3 mục 2.3; chi tiết và nguồn ở ADR 0004. Template gốc của công ty giữ ở `domain/templates/prd-template-goc-lark.md` để đối chiếu.

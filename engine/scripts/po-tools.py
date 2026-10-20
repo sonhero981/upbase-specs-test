@@ -1210,6 +1210,13 @@ def check_artifact(ctx, W, st, path):
     tpls = [data_path(t) for t in st.templates if Path(t).stem == stem]
     if not tpls and (REPO / "engine/templates" / (stem + ".md")).exists():
         tpls = [REPO / "engine/templates" / (stem + ".md")]
+    # template của sản phẩm ở domain/templates ghi đè template engine, cùng thứ tự với AWS (stage-protocol, Template overrides)
+    dom_tpl = ROOT / "domain" / "templates" / (stem + ".md")
+    if dom_tpl.exists():
+        tpls = [dom_tpl]
+    if stem == "prd" and prd_is_legacy(lines):
+        tpls = [t for t in tpls if "engine/templates" not in t.as_posix()]
+        W.info.append("%s: PRD theo template công ty cũ (có mục Specific Requirement), không kiểm heading của template chuẩn" % f)
     eng = [t for t in tpls if t.exists() and "engine/templates" in t.as_posix()]
     fm = frontmatter(text)
     W.info.append("%s: version %s, status %s" % (f, fm.get("version", "?"), fm.get("status", "?")))
@@ -1346,6 +1353,7 @@ def check_artifact(ctx, W, st, path):
             elif st_.lower() not in SIGNED:
                 W.add("sign", f, None, "%s chưa ký, đang ghi '%s'%s" % (who, st_ or "trống", ": gate là Request Changes" if st_.lower() == "yêu cầu sửa" else ""))
     if stem == "prd":
+        legacy = prd_is_legacy(lines)
         per_us = {}
         for a in prd_acs(lines, b0):
             per_us.setdefault(a["us"], []).append(a)
@@ -1360,6 +1368,11 @@ def check_artifact(ctx, W, st, path):
                 continue
             if not us_priority("\n".join(blines))[0]:
                 W.add("prd", f, b["start"] + 1, "US%d chưa có dòng Ưu tiên (Must, Should, Could): Story List sẽ để trống cột Priority" % b["num"])
+            if not legacy and not split_us_block(lines, b["start"], b["end"])["corner"]:
+                W.add("prd", f, b["start"] + 1, "US%d chưa ghi Trường hợp ngoại lệ: ghi góc từ Impact Matrix mục Coverage Gaps, hoặc ghi 'Không có góc nào từ Impact Matrix chạm US này'" % b["num"])
+        qpo = sum(len(re.findall(r"❓\s*`?PO", ln)) for ln in lines[b0:])
+        if not legacy and qpo > PRD_QPO_MAX:
+            W.add("prd", f, None, "PRD còn %d chỗ ❓PO, quá %d khi trình duyệt: trả lời bớt hoặc chuyển thành câu hỏi mở có người trả lời" % (qpo, PRD_QPO_MAX))
         for i, lvl, t in headings(lines, b0):
             if re.search(r"\b(database|api)\b", clean(t), re.I):
                 W.add("prd", f, i + 1, "PRD không có mục thiết kế kỹ thuật như Database, API: '%s'" % clean(t))
@@ -2437,21 +2450,21 @@ def classify_label(label):
     """Loại của một heading hoặc nhãn in đậm trong khối US: us, pre, scenario, ac, ui, br, data, nfr, oos, corner."""
     t = clean(re.sub(r"<!--.*?-->", "", label or "")).lower()
     t = re.sub(r"^\d+\s*[/.)]\s*", "", t).strip(" :")
-    if "conner case" in t or "corner case" in t:
+    if "conner case" in t or "corner case" in t or "ngoại lệ" in t or "edge case" in t:
         return "corner"
     if "out of scope" in t or "ngoài phạm vi" in t:
         return "oos"
     if t.startswith("user story"):
         return "us"
-    if ("pre" in t and "condition" in t) or "điều kiện trước" in t:
+    if ("pre" in t and "condition" in t) or "điều kiện trước" in t or "tiền điều kiện" in t:
         return "pre"
-    if "scenario" in t or "kịch bản" in t:
+    if "scenario" in t or "kịch bản" in t or t.startswith("luồng"):
         return "scenario"
     if "acceptance" in t or "tiêu chí chấp nhận" in t:
         return "ac"
     if "business" in t or "rule nghiệp vụ" in t or "luật nghiệp vụ" in t:
         return "br"
-    if re.search(r"\b(ui|ux)\b", t):
+    if re.search(r"\b(ui|ux)\b", t) or "giao diện" in t:
         return "ui"
     if "data field" in t or t.startswith("dữ liệu"):
         return "data"
@@ -2460,12 +2473,25 @@ def classify_label(label):
     return None
 
 
+US_SECTION_NAMES = ("specific requirement", "yêu cầu theo user story")
+
+
+def is_us_section(t):
+    """Heading cấp 1 chứa các khối US: Specific Requirement của template công ty, Yêu cầu theo user story của template chuẩn."""
+    return re.sub(r"^\d+\.\s*", "", clean(t)).lower().startswith(US_SECTION_NAMES)
+
+
+def prd_is_legacy(lines):
+    """PRD viết theo template công ty cũ: có heading cấp 1 Specific Requirement."""
+    return any(l == 1 and clean(t).lower().startswith("specific requirement") for _, l, t in headings(lines, body_start(lines)))
+
+
 def prd_us_blocks(lines):
     """Khối ## US<n> của PRD, trong mục Specific Requirement nếu có. Khối hết ở heading cấp 1 hoặc 2 kế tiếp."""
     b0 = body_start(lines)
     hs = headings(lines, b0)
     lo, hi = b0, len(lines)
-    sr = next((k for k, (i, l, t) in enumerate(hs) if l == 1 and clean(t).lower().startswith("specific requirement")), None)
+    sr = next((k for k, (i, l, t) in enumerate(hs) if l == 1 and is_us_section(t)), None)
     if sr is not None:
         lo = hs[sr][0]
         hi = next((i for i, l, _ in hs[sr + 1:] if l == 1), len(lines))
@@ -2649,7 +2675,7 @@ def ac_layer(prd, prd_us):
 
 
 def prd_open_issues(lines):
-    rng = section_lines(lines, lambda t: "open issues" in t.lower() or "vấn đề tồn đọng" in t.lower())
+    rng = section_lines(lines, lambda t: "open issues" in t.lower() or "vấn đề tồn đọng" in t.lower() or "câu hỏi mở" in t.lower())
     out = []
     if not rng:
         return out
@@ -2668,8 +2694,12 @@ def prd_open_issues(lines):
 
 
 def issue_blocks(it):
-    if clean(it["block_txt"]).lower().startswith(("có", "yes")):
+    b = clean(it["block_txt"]).lower()
+    if b.startswith(("có", "yes")):
         return True
+    if b.startswith(("không", "no")):
+        # cột Chặn ghi rõ không chặn thì chữ "chặn" ở nội dung câu hỏi không làm câu đó thành câu chặn
+        return False
     t = re.sub(r"không\s+chặn|non-?blocking|not\s+blocking", " ", clean(it["all"]).lower())
     return bool(re.search(r"chặn|blocking", t))
 
@@ -2700,9 +2730,10 @@ JIRA_COLS = ["Project key", "Project name", "Project type", "Issue Type", "Summa
 JIRA_KEY = re.compile(r"\b([A-Z][A-Z0-9]+-\d+)\b")
 JIRA_DESC_MAX = 32000
 STORY_AC_MAX = 6
+PRD_QPO_MAX = 3  # Spec Kit giới hạn 3 chỗ chưa rõ trong spec, xem ADR 0004
 JIRA_SECTIONS = (("us", "MÔ TẢ"), ("pre", "ĐIỀU KIỆN TRƯỚC"), ("scenario", "KỊCH BẢN"), ("ac", "TIÊU CHÍ CHẤP NHẬN"),
                  ("ui", "GIAO DIỆN VÀ VALIDATE"), ("br", "BUSINESS RULE"), ("data", "DỮ LIỆU"), ("nfr", "NFR"),
-                 ("oos", "NGOÀI PHẠM VI"))
+                 ("corner", "TRƯỜNG HỢP NGOẠI LỆ"), ("oos", "NGOÀI PHẠM VI"))
 
 
 def jira_config():
@@ -2737,7 +2768,8 @@ def prd_unit_map(lines):
         if not ln.strip().startswith("|"):
             continue
         cells = split_cells(ln)
-        m = re.fullmatch(r"U(\d+)", clean(cell(cells, 0)))
+        # ô đầu là U<n>, có thể kèm tên Unit như "U1 — Khung nhóm"
+        m = re.match(r"U(\d+)\b", clean(cell(cells, 0)))
         if not m:
             continue
         for u in re.findall(r"(?<![\w-])US(\d+)\b", " ".join(cells[1:])):
@@ -2862,7 +2894,7 @@ def us_handoff(intent):
         mine = [it for it in issues if re.search(r"(?<![\w-])US%d\b" % n, it["all"])]
         blk = [it for it in mine if issue_blocks(it)]
         if blk:
-            reasons.append("câu chặn còn mở trong Open Issues: %s" % ", ".join("#" + it["no"] if it["no"] else snippet(it["text"], 40) for it in blk))
+            reasons.append("câu chặn còn mở ở Câu hỏi mở: %s" % ", ".join("#" + it["no"] if it["no"] else snippet(it["text"], 40) for it in blk))
         secs = split_us_block(lines, b["start"], b["end"])
         secs["us"] = tidy([l for l in secs["us"] if not PRIORITY_RE.search(l)])  # ưu tiên đã thành cột Priority
         screens = (smap or {}).get(n, [])

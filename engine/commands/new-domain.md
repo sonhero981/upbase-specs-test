@@ -1,6 +1,6 @@
 # /new-domain
 
-Dựng phần khung của một domain pack. Phần cần người, như duyệt KB, viết corner checklist, chọn template công ty, vẫn là người làm; lệnh này chỉ tạo khung, hỏi đúng câu, và ghi đúng nơi. Đọc `DOMAIN-SETUP.md` trước khi chạy.
+Dựng phần khung của một domain pack. Phần cần người, như duyệt KB, viết corner checklist, vẫn là người làm; lệnh này chỉ tạo khung, hỏi đúng câu, và ghi đúng nơi. Đọc `DOMAIN-SETUP.md` trước khi chạy.
 
 ## 0. Kiểm an toàn
 - `intents/` còn intent nào thì dừng: domain mới dựng ở repo mới, không đè lên repo đang có việc. Nói PO clone sang thư mục mới, sau đó chạy lại.
@@ -16,8 +16,8 @@ Hộp chọn hoặc chat, ghi nguyên văn:
 6. Sản phẩm so sánh mặc định cho Market Research, tối đa ba
 7. Đích publish tài liệu: Lark, Confluence, Notion, khác; space và node cha nếu có
 8. Đích User Guide: GitBook hoặc công cụ khác, repo nào, cho đối tượng nào
-9. Template PRD của công ty: có sẵn thì đường dẫn hoặc dán nội dung; chưa có thì dùng bản hiện tại trong `templates/` làm nền
-10. Tên mục của template mà công ty cấm đổi
+9. Công ty có bắt buộc template PRD riêng cho sản phẩm này không. Mặc định là không: PRD theo template chuẩn `engine/templates/prd.md`, cơ sở ở `engine/standards/adr/0004-template-prd-chuan.md`
+10. Nếu câu 9 là có: đường dẫn hoặc nội dung template, và tên mục công ty cấm đổi
 11. Dự án Jira nhận Story List: project key, project name, project type nếu khác `software`
 
 ## 2. Dựng khung
@@ -27,7 +27,7 @@ Hộp chọn hoặc chat, ghi nguyên văn:
 - Viết `00-index.md` khung: danh sách file KB dự kiến, mục Trạng thái tính năng trống, mục câu hỏi để sau trống
 - Tạo từng file KB trong bản đồ với frontmatter `status: chưa viết`, một dòng mô tả câu hỏi file sẽ trả lời
 - Chép `engine/knowledge/corner-checklist-aws.md` thành `corner-checklist.md`, thêm đầu file dòng "Chưa viết lại cho <sản phẩm>, xem DOMAIN-SETUP.md mục 6"
-- `templates/prd.md`: từ câu 9 và 10; ghi danh sách tên mục bắt buộc giữ vào `domain.md` mục 4 phần 2.42
+- `templates/prd.md`: chỉ tạo khi câu 9 là có, từ câu 10; ghi danh sách tên mục bắt buộc giữ vào `domain.md` mục 4 phần 2.42. File này ghi đè template chuẩn, script không kiểm tên mục của nó
 - `memory/project.md` về bản trống: giữ đoạn mở đầu, xoá mọi heading và dòng bài học, thêm dòng ghi ngày khởi tạo domain. `memory/team.md` giữ nguyên, vì đó là bài học dùng chung đi theo engine
 - `intents/` chỉ còn `.gitkeep`
 

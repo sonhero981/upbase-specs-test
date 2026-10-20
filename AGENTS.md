@@ -1,6 +1,6 @@
 # PO-Workflow
 
-Repo này dùng để nhận yêu cầu, phân tích, viết PRD theo template công ty làm đầu vào cho Design, Tech và QA, sinh Story List để import lên Jira, và viết User Guide sau khi Dev làm xong. Repo chỉ phân tích yêu cầu và viết tài liệu. Engine không phụ thuộc sản phẩm; dữ kiện sản phẩm nằm trong domain pack.
+Repo này dùng để nhận yêu cầu, phân tích, viết PRD theo template PRD chuẩn làm đầu vào cho Design, Tech và QA, sinh Story List để import lên Jira, và viết User Guide sau khi Dev làm xong. Repo chỉ phân tích yêu cầu và viết tài liệu. Engine không phụ thuộc sản phẩm; dữ kiện sản phẩm nằm trong domain pack.
 
 File này là luật chung cho mọi công cụ AI làm việc trên repo; `CLAUDE.md` chỉ nhập lại file này cho Claude Code. Quy tắc chi tiết nằm trong `engine/protocol/` và từng file stage, không lặp lại ở đây. Tài liệu liên quan:
 

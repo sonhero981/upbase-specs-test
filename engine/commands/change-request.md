@@ -33,7 +33,7 @@ Trình bằng hộp chọn: stage re-entry kèm lý do, artifact sẽ đổi, ga
 
 ## 5. Chạy lại xuôi, chế độ sửa
 - Mỗi stage mở lại: hỏi Giữ, Sửa, hay Làm lại từ đầu. `state.md` đặt stage đó `[R]`, stage sau bị chạm về `[ ]`.
-- Chỉ sửa phần bị chạm, không viết lại cả artifact. Thêm dòng Document version với Impact `CR<n>`; version chính thức tăng khi duyệt lại, theo quy tắc phiên bản ở `gate-protocol.md`: đã duyệt 1.0 thì bản duyệt sau CR là 1.1. Cập nhật `inputs:` ở frontmatter theo bản đầu vào mới. PRD chỉ chạm US bị ảnh hưởng, Document status về `IN REVIEW`.
+- Chỉ sửa phần bị chạm, không viết lại cả artifact. Thêm dòng ở bảng Lịch sử phiên bản ghi `CR<n>`, PRD theo template cũ dùng bảng Document version; version chính thức tăng khi duyệt lại, theo quy tắc phiên bản ở `gate-protocol.md`: đã duyệt 1.0 thì bản duyệt sau CR là 1.1. Cập nhật `inputs:` ở frontmatter theo bản đầu vào mới. PRD chỉ chạm US bị ảnh hưởng, frontmatter `status` về `draft` cho tới khi duyệt lại.
 - Reviewer theo profile ở stage bị chạm; finding đi vào gate, không tự sửa theo finding.
 - Trình lại gate theo `gate-protocol.md`. Nhiều stage nhỏ có thể gộp trong một thông điệp nhưng ghi rõ duyệt từng artifact.
 - 2.43 bị chạm thì ba PIC ký lại Decision Brief; 2.42 bị chạm thì publish lại PRD sau Approve và báo các team xem lại file thiết kế theo bản PRD mới.

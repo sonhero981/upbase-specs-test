@@ -11,8 +11,8 @@
 
 ## Chế độ sửa
 - [ ] **[BLOCK]** Chỉ sửa phần bị chạm, không viết lại cả artifact
-- [ ] Version frontmatter tăng; Document version có dòng Impact `CR<n>`
-- [ ] PRD chỉ chạm US bị ảnh hưởng; Document status về `IN REVIEW`
+- [ ] Version frontmatter tăng; Lịch sử phiên bản có dòng `CR<n>`, PRD theo template cũ dùng bảng Document version
+- [ ] PRD chỉ chạm US bị ảnh hưởng; frontmatter `status` về `draft` cho tới khi duyệt lại
 - [ ] `state.md`: stage mở lại và stage sau bị chạm đã về `[R]` hoặc `[ ]`
 - [ ] Reviewer đã chạy ở stage có reviewer theo profile
 

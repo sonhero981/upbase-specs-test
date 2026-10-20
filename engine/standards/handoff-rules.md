@@ -50,9 +50,9 @@ Checkpoint là buổi họp trên Decision Brief ở 2.43. Story được giao c
 2. Profile M, L: 2.43 Design Alignment đã duyệt.
 3. US có ít nhất một tiêu chí chấp nhận.
 4. Mọi business rule của US có ít nhất một tiêu chí chấp nhận trỏ tới.
-5. US không còn `❓PO`, và Open Issues của PRD không còn câu chặn gắn với US đó.
+5. US không còn `❓PO`, và mục Câu hỏi mở của PRD không còn câu chặn gắn với US đó. PRD theo template cũ dùng mục Open Issues.
 6. US có bảng giao diện thì có màn trong `ux-design.md`, bảng Danh sách màn.
-7. US nêu ở Pre-Condition là phải xong trước cũng đạt các điều kiện trên.
+7. US nêu ở Tiền điều kiện là phải xong trước cũng đạt các điều kiện trên.
 
 Đây là bản hẹp phía PO của Definition of Ready bên AWS. AWS có thêm hai mục mà PO-Workflow để cho team khác: thiết kế đã được xem, do Design PIC xác nhận trên Jira; story đã được ước lượng, do Dev làm trên Jira. Kiểm bằng `python3 engine/scripts/po-tools.py dor intents/<intent>`. Kết quả cũng ghi ở cột Comment của CSV. Độ phủ test case, tức mọi AC có test case, do QA theo dõi trên Jira; script không kiểm.
 

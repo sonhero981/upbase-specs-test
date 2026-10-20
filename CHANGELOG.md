@@ -16,6 +16,8 @@ Tương thích: chép engine và chạy migrate.
 - Dòng mô tả sản phẩm đang cài rút khỏi `AGENTS.md`; tên sản phẩm chỉ còn trong `domain/`.
 
 ### Sửa lỗi
+- `po-tools.py stories` và `dor` coi câu hỏi mở là câu chặn khi nội dung có chữ "chặn", kể cả khi cột Chặn ghi "Không chặn". Nay cột Chặn bắt đầu bằng "Không" thì câu đó không chặn.
+- Story List để trống cột Unit khi ô đầu của bảng Units ghi kèm tên Unit, như "U1 — Khung nhóm". Nay đọc được.
 - `po-tools.py trace` báo "Đạt" khi mã FR, US viết trong dấu backtick vì không đọc ra mã nào. Nay nhận mã có backtick, báo lỗi khi không đọc ra mã nào, bắt Deferred và N/A phải có lý do, và cho FR cha đạt khi mọi FR con đạt.
 - Câu hỏi bài học được hỏi trước thông điệp hoàn thành. Nay hỏi sau, thành một lượt riêng.
 - Dựng domain mới làm mất bài học dùng chung vì `team.md` bị xoá trắng. Nay tách `memory/team.md` dùng chung và `memory/project.md` riêng sản phẩm.
@@ -45,6 +47,7 @@ Tương thích: chép engine và chạy migrate.
 - Quy tắc nói với PO: bảng từ không nói và cách nói thay, cách báo khi script từ chối.
 
 ### Bàn giao liên team
+- Template PRD chuẩn `engine/templates/prd.md` thay template PRD theo sản phẩm ở `domain/templates/prd.md`. Cơ sở và nguồn ở ADR 0004: thành phần lấy từ artifact của AWS AI-DLC, ISO/IEC/IEEE 29148, mẫu câu EARS, template spec của GitHub Spec Kit, bốn loại yêu cầu của BABOK. PRD có 11 mục; thêm Tiêu chí thành công có mã `SC<n>`, Yêu cầu phi chức năng, Chuyển đổi và triển khai, Giả định; mỗi US thêm Trường hợp ngoại lệ lấy từ coverage gap của Impact Matrix, thay quy tắc để trống mục Conner case. Bỏ trạng thái tài liệu khỏi thân PRD. Mã `US`, `AC`, `BR` không đổi. Domain có `domain/templates/prd.md` thì file đó ghi đè, theo thứ tự ghi đè template của AWS.
 - Chuẩn chung với Design, Tech, QA trong `engine/standards/`: nguyên tắc chia story, quy ước mã, quy tắc bàn giao, ADR 0002 chọn giao việc theo story trên Jira. ADR 0001 chọn file story trong repo được thay bằng ADR 0002 trong cùng bản này.
 - Bỏ stage 2.41 HLD Brief. Các team không thiết kế được từ một bản định hướng ngắn; họ cần PRD chi tiết. Thêm stage 2.43 Design Alignment sau PRD, ở profile M và L: Design PIC, Tech PIC, QA PIC viết `ux-design.md`, `tech-design.md`, `test-design.md` từ PRD đã duyệt, mỗi team một file; AI của PO không sửa ba file này. AI đối chiếu ba file với PRD và viết Decision Brief, chỉ gồm điểm cần quyết; họp trên Decision Brief, ba PIC ký. Story List chỉ sinh sau gate này. Quyết định và so sánh với AWS ở ADR 0003.
 - Checkpoint là buổi họp trên Decision Brief ở 2.43. Tech PIC ghi story quá lớn trong `tech-design.md`.
@@ -97,6 +100,7 @@ Theo cách AWS giữ chất lượng repo, ở quy mô một người giữ engi
 - Lead các team thành Design PIC, Tech PIC, QA PIC. Hàng "Lead" trong bảng metadata giữ nghĩa agent dẫn stage của AWS.
 
 ### Nâng cấp
+- PRD đã duyệt theo template công ty giữ nguyên; script nhận ra PRD cũ qua mục Specific Requirement và không kiểm tên mục của template chuẩn. Chuyển sang template chuẩn qua change request, như Group ở CR5.
 - Intent đang làm dở chuyển cùng thư mục, nội dung không đổi. Đường dẫn `.claude/...` còn trong artifact và archive của intent cũ là lịch sử: `.claude/knowledge/domain/` nay là `domain/`, `.claude/intents/` nay là `intents/`.
 - Intent có stage 2.41 HLD Brief: `po-tools.py migrate` bỏ dòng 2.41, thêm 2.43 sau 2.42 với profile M, L, chuyển bản HLD Brief đang làm dở vào `archive/hld-brief/` và đưa mục Current sang 2.43. Intent đã có Epic trên Jira và PRD đã duyệt thì 2.43 ghi bỏ qua, vì đã giao Dev trước khi có stage này.
 - Review đã có giữ nguyên. Lần review sau của một stage: AI dựng sổ finding `reviews/findings-<slug>.md` từ các file review cũ và quyết định trong `decisions.md`, sau đó mới gọi reviewer.

@@ -27,16 +27,16 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - [x] 2.31 impact-analysis · v1: inception/impact-analysis/impact-matrix.md v0.4 duyệt 2026-10-12 (CR2, CG-3 đã giải, OQ-31; DEC82). v0.3 duyệt 2026-10-09 (CR1, vùng 9 và BI-6). v0.2 Gate 2 duyệt 2026-10-06
 - [S] 2.32 solution-options · v1 không làm so sánh phương án; Bước 7 dùng để chốt nhóm câu hỏi D
 - [x] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story và 20 US, v0.3. Duyệt lại theo v2 2026-10-12 (DEC82) sau một lần Request Changes (DEC80, CR2); truy vết tay ở inception/prd/traceability.md. 20 US chốt ở 9A của v1 ngày 2026-10-06
-- [x] 2.42 prd-generation · v1: inception/prd/prd.md v0.3 duyệt 2026-10-12 (CR2, chạm US3 US7 US19 US20, danh sách US, tồn đọng; DEC82). v0.2 duyệt 2026-10-09 (CR1, chạm US9 US11 US13 US16 US20). v0.1 duyệt và publish Lark 2026-10-06. Đang sửa theo CR3 từ 2026-10-20: thêm khối AC và dòng Ưu tiên (DEC92). CR4 ngày 2026-10-20: chỉ bảng đầu, chờ duyệt v0.5 (DEC95)
-- [-] 2.43 design-alignment · mở 2026-10-20; khung ba file thiết kế đã tạo, inputs prd@0.5. Chờ ba PIC viết, không đặt hạn (DEC86, DEC92)
+- [?] 2.42 prd-generation · v1: inception/prd/prd.md v0.3 duyệt 2026-10-12 (CR2, chạm US3 US7 US19 US20, danh sách US, tồn đọng; DEC82). v0.2 duyệt 2026-10-09 (CR1, chạm US9 US11 US13 US16 US20). v0.1 duyệt và publish Lark 2026-10-06. Đang sửa theo CR3 từ 2026-10-20: thêm khối AC và dòng Ưu tiên (DEC92). CR4 ngày 2026-10-20: chỉ bảng đầu, chờ duyệt v0.5 (DEC95). CR5 ngày 2026-10-20: chuyển sang template PRD chuẩn, prd.md v0.6 draft, chờ PO duyệt (DEC98)
+- [-] 2.43 design-alignment · mở 2026-10-20; khung ba file thiết kế đã tạo, inputs prd@0.5. Chờ ba PIC viết, không đặt hạn (DEC86, DEC92). Chờ PRD v0.6 duyệt; ba file khung sẽ đổi inputs sang prd@0.6
 
 ## Current
 | | |
 |---|---|
-| Stage | 2.43 design-alignment: chờ Design PIC, Tech PIC, QA PIC viết file thiết kế từ PRD v0.5, không đặt hạn |
-| Next action | Ba PIC viết ux-design.md, tech-design.md, test-design.md và commit. Khi đủ, gọi /po 261005-group: chạy check design-alignment, viết Decision Brief, họp, ký |
+| Stage | 2.42 prd-generation: CR5 chờ PO duyệt PRD v0.6 theo template chuẩn. 2.43 design-alignment chờ sau đó |
+| Next action | PO đọc PRD v0.6 và duyệt hoặc yêu cầu sửa. Sau khi duyệt: đổi inputs của ba file thiết kế sang prd@0.6, publish lại Lark, gửi ba PIC; ba PIC viết ux-design.md, tech-design.md, test-design.md |
 | Blocking questions open | 0 |
-| Open CR | none. CR4 đóng 2026-10-20 (DEC96), CR3 đóng 2026-10-20 (DEC94) |
+| Open CR | CR5 mở 2026-10-20 (DEC98): chuyển PRD sang template chuẩn. CR4 đóng 2026-10-20 (DEC96), CR3 đóng 2026-10-20 (DEC94) |
 | Parked | no |
 
 ## Versions
@@ -47,7 +47,7 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 | requirements | v0.3 | approved | 2026-10-09 | — |
 | impact-matrix | v0.4 | approved | v0.4: 2026-10-12 · v0.3: 2026-10-09 | — |
 | initiative-brief | — | không có, v1 dùng BRD | — | — |
-| prd | v0.5 | approved | v0.5: 2026-10-20 · v0.4: 2026-10-20 · v0.3: 2026-10-12 · v0.2: 2026-10-09 | v0.5 · Jg7ld8UCzoeMiAxW5ielxlC4gGg, revision 75, publish 2026-10-20 |
+| prd | v0.6 | draft, CR5 | v0.5: 2026-10-20 · v0.4: 2026-10-20 · v0.3: 2026-10-12 · v0.2: 2026-10-09 | v0.5 · Jg7ld8UCzoeMiAxW5ielxlC4gGg, revision 75, publish 2026-10-20 |
 
 ## Log
 - 2026-10-05 created ở luồng v1, cỡ L
@@ -86,3 +86,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-20 11:26 2.42 approved v0.5 bởi buidhui
 - 2026-10-20 PO duyệt PRD v0.5 (DEC96), đóng CR4. Publish Lark revision 75, đối chiếu khớp file
 - 2026-10-20 Mở 2.43 Design Alignment: tạo khung ux-design.md, tech-design.md, test-design.md (owner theo vai, inputs prd@0.5); intent.md ghi PIC theo vai. Chờ ba PIC, không đặt hạn
+- 2026-10-20 Mở CR5 (DEC98): chuyển PRD sang template PRD chuẩn. Chụp pre-CR5. prd.md v0.6 draft giữ nguyên 20 US, 104 AC, 130 BR; thêm Chuyển đổi và triển khai, Trường hợp ngoại lệ, Giả định, câu hỏi mở #9 #10 #11. 2.42 về [?]

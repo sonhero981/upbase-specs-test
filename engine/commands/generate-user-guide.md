@@ -13,12 +13,13 @@ Theo template của domain, đúng chuẩn tài liệu công ty đang dùng: I. 
 ## Chuyển PRD sang User Guide
 | PRD | User Guide |
 |---|---|
-| Scenario | §II các bước thao tác |
-| Pre-Condition | §I Điều kiện tiên quyết |
+| Luồng chính, hoặc Scenario ở PRD theo template cũ | §II các bước thao tác |
+| Tiền điều kiện, hoặc Pre-Condition | §I Điều kiện tiên quyết |
 | Business rule | §III Lưu ý và quy tắc nghiệp vụ |
-| Bảng UI: validate, disable, tooltip | §IV Lỗi thường gặp |
-| Out of scope | Không đưa vào |
-| Conner case do QA điền | §IV nếu là tình huống người dùng gặp thật |
+| Bảng giao diện: validate, disable, tooltip, câu thông báo | §IV Lỗi thường gặp |
+| Ngoài phạm vi | Không đưa vào |
+| Trường hợp ngoại lệ | §IV nếu là tình huống người dùng gặp thật |
+| Chuyển đổi và triển khai: hướng dẫn người dùng, mốc dữ liệu | §III nếu người dùng cần biết, ví dụ báo cáo chỉ có dữ liệu từ ngày bật |
 
 Đổi giọng: PRD viết cho Dev và QA, User Guide viết cho người dùng cuối; ví dụ đổi giọng của domain ở `domain.md` mục 4 phần User Guide. Bỏ hết tên bảng, tên field kỹ thuật, endpoint, mã rule.
 

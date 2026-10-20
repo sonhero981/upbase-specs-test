@@ -26,7 +26,7 @@ Thuật ngữ và họ mã của PO-Workflow, theo AWS AI-DLC Workflows 2.11, fi
 | Learnings | Vòng học tại gate | AWS |
 | Knowledge | Domain pack ở `domain/` và kiến thức vai PO ở `engine/knowledge/` | AWS |
 | Engine | Phần không phụ thuộc sản phẩm: protocol, lệnh, template chung, checklist, agent, script, chuẩn bàn giao | PO-Workflow |
-| Domain pack | Toàn bộ phần riêng của sản phẩm: manifest `domain.md`, KB, corner checklist, template công ty. Đổi sản phẩm là thay thư mục này, engine giữ nguyên | PO-Workflow |
+| Domain pack | Toàn bộ phần riêng của sản phẩm: manifest `domain.md`, KB, corner checklist, template User Guide; template PRD riêng chỉ khi công ty bắt buộc. Đổi sản phẩm là thay thư mục này, engine giữ nguyên | PO-Workflow |
 | Live source · Pinned record · Last verified | Nguồn sống, bản chốt, ngày đối chiếu của KB | Repo |
 | AI Reviewer | Agent `ai-reviewer` review độc lập, không thấy hội thoại, kết luận READY hoặc NOT-READY | AWS gọi vai này là Product Lead |
 | Sổ finding | `reviews/findings-<slug>.md`, danh sách finding của một stage và quyết định của PO; finding đã quyết không bị chấm lại | AWS, engine giữ danh sách finding |
@@ -36,6 +36,9 @@ Thuật ngữ và họ mã của PO-Workflow, theo AWS AI-DLC Workflows 2.11, fi
 | Điều kiện giao Dev, DoR | Điều kiện để giao một story cho Dev: PRD đã duyệt, với profile M, L thì 2.43 đã duyệt, US có AC, mọi BR có AC, không còn `❓PO` và câu chặn, giao diện có màn trong `ux-design.md`, story phụ thuộc đã đạt. Kiểm bằng `po-tools.py dor` | Quy ước chung các team. Bản hẹp phía PO của Definition of Ready của AWS; hai mục thiết kế đã xem và đã ước lượng do Design, Dev làm trên Jira |
 | Nguyên tắc chia story | Định nghĩa story, tiêu chí INVEST, dấu hiệu quá lớn, 8 cách tách, các cách không chia, ở `engine/standards/story-splitting.md` | PO-Workflow, theo AWS user-story-patterns |
 | Tiêu chí chấp nhận, AC | Câu kiểm được, đạt hoặc không đạt, viết theo hành vi người dùng thấy, ghi rõ BR mà nó kiểm. Viết trong PRD ở 2.42, trước khi các team thiết kế | Quy ước chung các team; ISO/IEC/IEEE 29148 |
+| Template PRD chuẩn | `engine/templates/prd.md`, dùng chung cho mọi sản phẩm: 11 mục, mỗi US mười mục con. Cơ sở của từng mục ở ADR 0004. Domain chỉ có template PRD riêng khi công ty bắt buộc, khi đó file của domain ghi đè | PO-Workflow; thứ tự ghi đè theo AWS |
+| EARS | Easy Approach to Requirements Syntax: năm mẫu câu cho một yêu cầu, gồm luôn đúng, theo sự kiện "Khi…", theo trạng thái "Trong khi…", hành vi không mong muốn "Nếu…", tuỳ chọn "Với … đang bật". Business rule trong PRD viết theo mẫu này | Mavin và cộng sự, Rolls-Royce, RE'09; Kiro của AWS dùng cho tiêu chí chấp nhận |
+| Tiêu chí thành công, SC | Chỉ số đo sau phát hành cho từng mục tiêu `O<n>` của PRD, mã `SC<n>`, có cách đo và ngưỡng | GitHub Spec Kit; Success Metrics của AWS |
 | PIC | Người phụ trách một mảng của tính năng: Design PIC, Tech PIC, QA PIC. Viết file thiết kế của mình và ký Decision Brief ở 2.43 | PO-Workflow |
 | Verification checklist | Checklist tự kiểm của stage cho phần cần phán đoán, mục blocking | PO-Workflow. AWS không có tên tương đương; compartment `## Sensors` của AWS là phần kiểm tự động, ứng với Kiểm bằng máy |
 | Kiểm bằng máy | `po-tools.py check` và `trace`: phần kiểm được bằng script, chạy trước checklist | Tương đương sensor của AWS |

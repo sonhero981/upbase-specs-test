@@ -118,7 +118,7 @@ po-workflow/
 │   ├── knowledge/             kiến thức vai PO lấy từ AWS
 │   ├── scripts/               po-tools.py kiểm tra, truy vết, duyệt, sinh story, chỉ mục; po-hook.py hook của Claude Code
 │   └── tests/                 dữ liệu kiểm thử của script, PO không cần đọc
-├── domain/                    domain pack: domain.md, KB, corner checklist, template của công ty
+├── domain/                    domain pack: domain.md, KB, corner checklist, template User Guide
 ├── memory/
 │   ├── team.md                bài học dùng chung, đi theo engine
 │   └── project.md             bài học của sản phẩm đang cài
@@ -179,7 +179,7 @@ Stage 1.7 chỉ có ở profile L: AI tóm tắt thành Initiative Brief một t
 
 Ở 2.4 User Stories, AI chia story theo `engine/standards/story-splitting.md`: dựng bản đồ story theo vai và bước trong hành trình, xét dấu hiệu story quá lớn, đề xuất cách tách. Mỗi US gắn một Unit, mỗi FR có US phủ. Mỗi US có một thẻ 9 mục: vai và mục tiêu, bối cảnh, luồng chính, nhánh đáng kể, rule đã biết, dữ liệu và vùng chạm, ngoài phạm vi, phụ thuộc, chưa rõ. Thẻ chưa có tiêu chí chấp nhận. PO duyệt cả danh sách lẫn từng thẻ.
 
-Ở 2.42 PRD Generation, AI tra Impact Matrix, data model, API spec, KB, sau đó lập bảng Field Intake về field, rule, validate cho từng màn; PO điền và duyệt. Sau đó AI viết PRD theo template công ty: phần đầu lấy từ artifact đã duyệt, phần Specific Requirement viết từng US với 6 mục. Mỗi US có dòng Ưu tiên và danh sách tiêu chí chấp nhận mã `AC1.1`, mỗi tiêu chí ghi rõ business rule mà nó kiểm. Với điểm phụ thuộc thiết kế hoặc kỹ thuật chưa rõ, AI ghi đề xuất kèm câu hỏi gắn tên PIC để các team trả lời ở 2.43. Trước gate, AI chạy kiểm truy vết FR, US, BR, AC và sửa phần thiếu.
+Ở 2.42 PRD Generation, AI tra Impact Matrix, data model, API spec, KB, sau đó lập bảng Field Intake về field, rule, validate cho từng màn; PO điền và duyệt. Sau đó AI viết PRD theo template chuẩn `engine/templates/prd.md`: mục 1 tới 5 tóm tắt từ artifact đã duyệt, mục 6 viết từng US với mười mục con, mục 7 tới 10 gom yêu cầu phi chức năng, yêu cầu chuyển đổi lấy từ Impact Matrix, giả định và câu hỏi mở. Mỗi US có dòng Ưu tiên, business rule viết theo mẫu EARS, danh sách tiêu chí chấp nhận mã `AC1.1` ghi rõ business rule mà nó kiểm, và mục Trường hợp ngoại lệ lấy từ coverage gap của Impact Matrix. Với điểm phụ thuộc thiết kế hoặc kỹ thuật chưa rõ, AI ghi đề xuất kèm câu hỏi gắn tên PIC để các team trả lời ở 2.43. Trước gate, AI chạy kiểm truy vết FR, US, BR, AC và sửa phần thiếu.
 
 2.43 Design Alignment chạy với profile M và L. Sau khi PRD được duyệt, AI tạo ba file thiết kế từ template, chỉ điền phần đầu file; PO gửi ba PIC đường dẫn PRD và file của họ, kèm hạn; cách viết của PIC ở mục 8. Khi các team viết xong, PO gọi lại `/po`: AI đối chiếu ba file với PRD, báo phần còn thiếu, và viết Decision Brief chỉ gồm điểm cần quyết. Họp trên Decision Brief; quyết định đổi yêu cầu được xử lý qua change request. Gate duyệt khi cả 3 PIC ghi Đồng ý hoặc Có ý kiến ở bảng Ký; PIC quá hạn chưa ký thì PO được chọn Accept as-is kèm lý do. Story List chỉ sinh sau khi gate này được duyệt.
 
@@ -379,7 +379,7 @@ Mọi dữ kiện riêng của sản phẩm nằm trong `domain/`. AI đọc `do
 | 5. Ví dụ dùng trong engine | Ví dụ thật của sản phẩm để AI hiểu đúng quy tắc |
 | 6. Thành phần của domain pack | Danh sách file |
 
-Cùng thư mục có KB theo module, `corner-checklist.md` liệt kê corner case thường bị bỏ sót của sản phẩm, và `templates/` chứa template PRD và User Guide của công ty. Kiến thức vai PO không phụ thuộc sản phẩm nằm ở `engine/knowledge/`.
+Cùng thư mục có KB theo module, `corner-checklist.md` liệt kê corner case thường bị bỏ sót của sản phẩm, và `templates/` chứa template User Guide của công ty cùng bản gốc template PRD cũ để đối chiếu. PRD dùng template chuẩn `engine/templates/prd.md`. Kiến thức vai PO không phụ thuộc sản phẩm nằm ở `engine/knowledge/`.
 
 Ba giới hạn của KB:
 

@@ -73,7 +73,7 @@ KB theo module `01` đến `11`; mail event `13`; data model `12` khi chạm d�
 - Tenant: bốn câu ở `15-product-direction.md` mục 6
 
 ### 2.42 PRD Generation
-Nguồn field: Swagger `components.schemas`, sau đó `12-data-model.md`, cuối cùng là KB theo module. Template PRD: `templates/prd.md`; tên mục do chủ template công ty quyết giữ nguyên: Metrics success, Specific Requirement, Pre - Condition, Conner case. Template gốc của công ty: `templates/prd-template-goc-lark.md`.
+Nguồn field: Swagger `components.schemas`, sau đó `12-data-model.md`, cuối cùng là KB theo module. Template PRD: template chuẩn `engine/templates/prd.md`, theo ADR 0004 ngày 20/10/2026; domain không có template PRD riêng. Template gốc của công ty giữ ở `templates/prd-template-goc-lark.md` để đối chiếu; ánh xạ tên mục cũ sang mới ở ADR 0004. PRD đã duyệt theo template cũ, như Gamification, giữ nguyên cho tới khi có change request.
 
 ### Publish
 Lark wiki space `7660816820865093342`; node cha chung `02. Execution — Epics & Features`, token `X3hhwv2MxizpFgkVudVl7e52gUc`; mỗi intent một node con, tài liệu nằm trong node đó. Tên tài liệu: `[Brief]`, `[PRD]`, `[Decision Brief]` kèm tên tính năng. Công cụ: `lark-cli`, xem `/publish-lark`.
@@ -90,6 +90,6 @@ GitBook repo `uplms` cho học viên ở `LMS/User Guide/uplms/`, `uplms-ops` ch
 - `domain.md`, file này
 - `00-index.md` đến `16-domain-principles.md`
 - `corner-checklist.md`, viết lại từ `engine/knowledge/corner-checklist-aws.md`
-- `templates/prd.md`, `templates/user-guide.md`, `templates/prd-template-goc-lark.md`
+- `templates/user-guide.md`, và `templates/prd-template-goc-lark.md` để đối chiếu
 
 Ngoài pack nhưng thuộc về domain này, phải làm mới khi đổi domain: `memory/project.md` và `intents/`.

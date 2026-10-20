@@ -98,7 +98,7 @@ Chép `engine/knowledge/corner-checklist-aws.md` thành `domain/corner-checklist
 
 ## 7. Template của công ty
 
-Template PRD: giữ tên mục do chủ template công ty quyết, ghi rõ danh sách đó trong `domain.md` mục 4 phần 2.42 để stage không đổi; phần mục do repo quyết dùng thuật ngữ AWS như Technical Direction, Data to Retain, Units, Traceability, Open Issues. Giữ bản gốc của công ty cạnh bên để đối chiếu.
+Template PRD: mặc định dùng template chuẩn `engine/templates/prd.md`, chung cho mọi sản phẩm, nên domain không cần file template PRD. Cơ sở của từng mục và bảng ánh xạ từ template công ty sang template chuẩn ở `engine/standards/adr/0004-template-prd-chuan.md`. Chỉ khi công ty bắt buộc template riêng cho sản phẩm thì đặt file đó ở `domain/templates/prd.md` và ghi tên mục cấm đổi trong `domain.md` mục 4 phần 2.42; file này ghi đè template chuẩn, theo cùng thứ tự với AWS.
 
 Template User Guide: theo cấu trúc tài liệu người dùng mà công ty đang dùng, như GitBook, Confluence, Notion. Đích publish ghi ở `domain.md` phần Publish; nếu không dùng Lark thì `/publish-lark` không áp dụng và cần một lệnh publish khác cho công cụ đó.
 
@@ -124,7 +124,7 @@ Chuẩn trong `engine/standards/` áp dụng nguyên vẹn cho sản phẩm mớ
 - [ ] `domain.md` mục 2 có bảng nguồn kèm ngày đối chiếu; `00-index.md` có mục vùng chưa phủ
 - [ ] Mỗi file KB đã được PO duyệt
 - [ ] `corner-checklist.md` viết theo domain, không còn ví dụ của sản phẩm trước
-- [ ] `templates/prd.md` đúng tên mục của chủ template công ty
+- [ ] Không có `templates/prd.md`, hoặc có vì công ty bắt buộc và tên mục cấm đổi đã ghi ở `domain.md` mục 4 phần 2.42
 - [ ] `project.md` trống, `intents/` trống, `team.md` giữ nguyên
 - [ ] `python3 engine/scripts/po-tools.py doctor` không còn dòng Lỗi. Lệnh kiểm `domain.md` đủ 6 mục, file Template và Checklist của mọi stage tồn tại, và engine không còn tên nào trong khoá `names` của `domain.md`
 - [ ] Mã sản phẩm `code` đã chốt và không trùng sản phẩm khác; các PIC đã nhận chuẩn bàn giao và có quyền ghi repo
