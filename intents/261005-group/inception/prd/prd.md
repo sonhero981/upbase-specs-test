@@ -2,15 +2,15 @@
 intent: 261005-group
 feature: LMS-F002
 artifact: prd
-version: 0.4
+version: 0.5
 status: approved
 approved: 2026-10-12 (v0.3); 2026-10-09 (v0.2); 2026-10-06 (v0.1)
-cr: CR3 ngày 2026-10-20, thêm khối tiêu chí chấp nhận và dòng Ưu tiên cho 20 US; CR2 ngày 2026-10-12, chạm US3 US7 US19 US20, danh sách US, Vấn đề tồn đọng; CR1 ngày 2026-10-09, chạm US9 US13 US16 US20
+cr: CR4 ngày 2026-10-20, cập nhật thông tin tài liệu ở bảng đầu sau khi duyệt v0.4; CR3 ngày 2026-10-20, thêm khối tiêu chí chấp nhận và dòng Ưu tiên cho 20 US; CR2 ngày 2026-10-12, chạm US3 US7 US19 US20, danh sách US, Vấn đề tồn đọng; CR1 ngày 2026-10-09, chạm US9 US13 US16 US20
 gate: v1 Gate 4
 lark: Jg7ld8UCzoeMiAxW5ielxlC4gGg
 lark-title: [PRD] Group
 migrated-from: pre-aidlc:.claude/projects/Group/docs/prd/prd-group-v0.1-20261006.md
-approved_at: 2026-10-20T11:12
+approved_at: 2026-10-20T11:26
 ---
 # [PRD] Nhóm học viên
 
@@ -22,7 +22,7 @@ approved_at: 2026-10-20T11:12
 | **Related** | `[BRD] Group — Nhóm học viên` · Dự án Gamification *(`US16` bộ lọc bảng xếp hạng theo nhóm đang chờ chức năng này)* |
 | **Document status** | `PUBLISH` |
 | **Document owner** | Bùi Đức Huy |
-| **Người duyệt** | Bùi Đức Huy — v0.1 ngày 06/10/2026 · v0.2 ngày 09/10/2026 · v0.3 ngày 12/10/2026 · v0.4 ngày 20/10/2026 |
+| **Người duyệt** | Bùi Đức Huy — v0.1 ngày 06/10/2026 · v0.2 ngày 09/10/2026 · v0.3 ngày 12/10/2026 · v0.4 và v0.5 ngày 20/10/2026 |
 | **Designer** | |
 | **Tech lead** | |
 | **QA** | |
@@ -38,6 +38,7 @@ approved_at: 2026-10-20T11:12
 | v0.2 | Bùi Đức Huy | Sau khi đối chiếu với TalentLMS: `US16` ghi rõ màn theo dõi nhánh ở UpLMS Ops · thêm mail event `MAIL-GRP-02` báo người được gán quản lý hoặc nhận chuyển phụ trách · thêm câu cảnh báo mất tiến độ vào `MAIL-GRP-01`. Sau review: chỉ định quản lý chính (`US11`) cũng gửi `MAIL-GRP-02`, email gộp khi chuyển phụ trách chỉ liệt nhóm mới, phần mentor không báo. 128 business rule | `US9` · `US11` · `US13` · `US16` · `US20` | 09/10/2026 |
 | v0.3 | Bùi Đức Huy | Sau review user story: người thuộc **nhiều nhóm cùng giao một lớp** thì rời một nhóm vẫn giữ lượt ghi danh khi nhóm kia còn giao (`BR-3.7` · `BR-19.7`, mở rộng `BR-7.9`, thêm điều kiện không bắn `MAIL-GRP-01`) · cột Nguồn của danh sách user story dẫn thêm `RC-02` `RC-07` `RC-20` và trỏ bảng truy vết · Vấn đề tồn đọng #2 ghi lý do ma trận quyền không chặn viết PRD, thêm #7 ba góc chưa có luật. 130 business rule | `US3` · `US7` · `US19` · `US20` | 12/10/2026 |
 | v0.4 | Bùi Đức Huy | Thêm khối tiêu chí chấp nhận cho cả 20 user story, 104 tiêu chí, mỗi business rule có ít nhất một tiêu chí kiểm nó. Tiêu chí cho nhánh lỗi hoặc bị từ chối có ở mọi user story mà PRD đã định nghĩa nhánh đó; tám user story còn lại ghi ở Vấn đề tồn đọng #8. Thêm dòng Ưu tiên cho từng user story. Vấn đề tồn đọng #3 và #4 chuyển sang đã quyết. Không đổi business rule, màn, field | `US1` đến `US20` | 20/10/2026 |
+| v0.5 | Bùi Đức Huy | Cập nhật thông tin tài liệu ở bảng đầu sau khi duyệt v0.4: trạng thái tài liệu và người duyệt. Không đổi nội dung | — | 20/10/2026 |
 
 ---
 
