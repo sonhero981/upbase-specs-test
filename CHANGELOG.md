@@ -100,7 +100,7 @@ Theo cách AWS giữ chất lượng repo, ở quy mô một người giữ engi
 - Lead các team thành Design PIC, Tech PIC, QA PIC. Hàng "Lead" trong bảng metadata giữ nghĩa agent dẫn stage của AWS.
 
 ### Nâng cấp
-- PRD đã duyệt theo template công ty giữ nguyên; script nhận ra PRD cũ qua mục Specific Requirement và không kiểm tên mục của template chuẩn. Chuyển sang template chuẩn qua change request, như Group ở CR5.
+- PRD đã duyệt theo template công ty giữ nguyên; script nhận ra PRD cũ qua mục Specific Requirement và không kiểm tên mục của template chuẩn. Chuyển sang template chuẩn qua change request.
 - Intent đang làm dở chuyển cùng thư mục, nội dung không đổi. Đường dẫn `.claude/...` còn trong artifact và archive của intent cũ là lịch sử: `.claude/knowledge/domain/` nay là `domain/`, `.claude/intents/` nay là `intents/`.
 - Intent có stage 2.41 HLD Brief: `po-tools.py migrate` bỏ dòng 2.41, thêm 2.43 sau 2.42 với profile M, L, chuyển bản HLD Brief đang làm dở vào `archive/hld-brief/` và đưa mục Current sang 2.43. Intent đã có Epic trên Jira và PRD đã duyệt thì 2.43 ghi bỏ qua, vì đã giao Dev trước khi có stage này.
 - Review đã có giữ nguyên. Lần review sau của một stage: AI dựng sổ finding `reviews/findings-<slug>.md` từ các file review cũ và quyết định trong `decisions.md`, sau đó mới gọi reviewer.

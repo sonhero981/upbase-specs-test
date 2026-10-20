@@ -3490,7 +3490,7 @@ MIG_PROTECT = [("aidlc-product-lead-agent", "\x00A\x00"), ("**Tech lead**", "\x0
 
 
 def mig_project_map():
-    """Tên dự án ở luồng v1 sang thư mục intent: Group sang 261005-group."""
+    """Tên dự án ở luồng v1 sang thư mục intent, ví dụ Billing sang 261005-billing."""
     out = {}
     if INTENTS.is_dir():
         for d in INTENTS.iterdir():

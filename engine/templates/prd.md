@@ -13,7 +13,7 @@ services: <service hoặc repo code bị chạm theo Impact Matrix; lệch với
 
 | | |
 | --- | --- |
-| Mã tính năng | *<SP>-F<NNN>. Mã ngắn trong tài liệu đổi sang mã đầy đủ theo quy ước: US1 là US-LMS-F012-01, AC1.1 là AC-LMS-F012-01.1* |
+| Mã tính năng | *<SP>-F<NNN>. Mã ngắn trong tài liệu đổi sang mã đầy đủ theo quy ước: US1 là US-APP-F012-01, AC1.1 là AC-APP-F012-01.1* |
 | PO | |
 | Design PIC · Tech PIC · QA PIC | |
 | Mốc phát hành | *Sprint hoặc quý, nếu đã có* |

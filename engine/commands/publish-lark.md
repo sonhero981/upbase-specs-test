@@ -57,7 +57,7 @@ Wiki hai tầng, tài liệu không bao giờ nằm thẳng dưới node cha chu
 cat <file-đã-bỏ-frontmatter>.md | lark-cli docs +create --doc-format markdown \
   --title "<tên tài liệu>" --parent-token <intent_node_token> --content - --as user
 
-# cập nhật doc đã có, đã chạy được ngày 09/10/2026 cho PRD Group v0.2
+# cập nhật doc đã có
 lark-cli docs +update --doc <document_token> --command overwrite \
   --doc-format markdown --content @<file-đã-bỏ-frontmatter>.md --as user
 ```

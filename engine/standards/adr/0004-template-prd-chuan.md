@@ -8,7 +8,7 @@
 
 ## Bối cảnh
 
-Trước quyết định này, PRD viết theo template của công ty, đặt trong domain pack của từng sản phẩm, với bốn tên mục do chủ template giữ cố định. Template có hai nguồn: bản gốc trên Lark wiki `Arz6w5xvpihQcRkBLe0ljJghgsl` và bản điều chỉnh trong repo. Khi chạy thật trên intent Group (`LMS-F002`), template gây ra năm sự việc có ghi nhận:
+Trước quyết định này, PRD viết theo template của công ty, đặt trong domain pack của từng sản phẩm, với bốn tên mục do chủ template giữ cố định. Template có hai nguồn: bản gốc trên wiki của công ty và bản điều chỉnh trong repo. Khi chạy thật trên intent thí điểm có 20 US, template gây ra năm sự việc có ghi nhận trong nhật ký quyết định của intent:
 
 | Sự việc | Bằng chứng | Nguyên nhân |
 |---|---|---|
@@ -18,7 +18,7 @@ Trước quyết định này, PRD viết theo template của công ty, đặt t
 | PRD lệch bản đã duyệt | CR4: AI sửa hai ô "Document status" và "Người duyệt" sau khi duyệt v0.4 (DEC95) | Trạng thái và người duyệt ghi trong thân tài liệu, trùng với frontmatter và git |
 | Không sửa được tên mục | DEC94: đổi tên mục "Preferences" phải chờ chủ template xác nhận; lỗi chính tả "Conner case" giữ nguyên | Tên mục bị khoá theo sản phẩm |
 
-Ngoài ra, một dữ kiện thường được viết lại ở hai hoặc ba nơi trong cùng US. Ví dụ ở Group US1: thông báo "Mã nhóm đã tồn tại" có ở AC1.2 và ở bảng UI; thông báo "Nhánh này đã đạt số cấp tối đa" có ở BR-1.3 và ở AC1.5. Mỗi change request phải sửa đủ các nơi đó. PRD Group v0.5 dài 20.120 từ, 76% nằm ở phần yêu cầu theo US.
+Ngoài ra, một dữ kiện thường được viết lại ở hai hoặc ba nơi trong cùng US. Ví dụ ở US1 của intent thí điểm: câu thông báo trùng mã có ở AC1.2 và ở bảng UI; câu thông báo vượt số cấp tối đa có ở BR-1.3 và ở AC1.5. Mỗi change request phải sửa đủ các nơi đó. PRD của intent thí điểm, bản v0.5, dài 20.120 từ, 76% nằm ở phần yêu cầu theo US.
 
 ## So với AWS AI-DLC 2.11
 
@@ -99,4 +99,4 @@ Mã `US1`, `AC1.1`, `BR1.1` không đổi, nên `po-tools.py` truy vết, kiểm
 
 ## Cách đo hiệu quả
 
-So intent đầu tiên viết theo template chuẩn với PRD Group v0.5 (20 US, 104 AC, 130 BR, 20.120 từ, bốn change request trong 11 ngày từ 09/10 tới 20/10/2026) theo sáu chỉ số: số từ trên mỗi US; số change request sau khi duyệt; số lỗi Critical và Major ở review; tỉ lệ BR có AC trỏ tới; số câu Design, Tech, QA hỏi lại sau khi nhận PRD; số ngày từ 2.3 tới khi PRD được duyệt. Hai intent là mẫu nhỏ, nên kết quả là tín hiệu để quyết định tiếp, chưa phải bằng chứng thống kê.
+So intent đầu tiên viết theo template chuẩn với PRD v0.5 của intent thí điểm (20 US, 104 AC, 130 BR, 20.120 từ, bốn change request trong 11 ngày từ 09/10 tới 20/10/2026) theo sáu chỉ số: số từ trên mỗi US; số change request sau khi duyệt; số lỗi Critical và Major ở review; tỉ lệ BR có AC trỏ tới; số câu Design, Tech, QA hỏi lại sau khi nhận PRD; số ngày từ 2.3 tới khi PRD được duyệt. Hai intent là mẫu nhỏ, nên kết quả là tín hiệu để quyết định tiếp, chưa phải bằng chứng thống kê.
