@@ -23,7 +23,7 @@ Bản phân tích nội bộ. Kết quả chảy vào `stories.md`, PRD mục Da
 | Conflict cần PO quyết | |
 | FR, NFR bổ sung | |
 | Coverage gap | |
-| Chỗ đóng cứng tenant tăng thêm | |
+| Điểm đóng cứng tenant tăng thêm | |
 
 ## 2. Current Situation, Dependency Map
 | Loại | Mục | Nguồn | Ghi chú |

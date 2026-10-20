@@ -28,7 +28,7 @@ inputs: <artifact đầu vào@version, ví dụ requirements@1.0; stage đầu t
 ## Vai trong tính năng <!-- tuỳ chọn -->
 | Vai | Mục tiêu trong tính năng | Khó khăn hiện tại | Mức quen công nghệ | Tần suất dùng |
 |---|---|---|---|---|
-<Chỉ các vai có trong story của intent này, để Design PIC dùng khi vẽ. Vai mới, chưa có trong `domain.md` mục 1, ghi rõ là vai mới. Theo persona của AWS product-guide.>
+<Chỉ các vai có trong story của intent này, để Design PIC dùng khi thiết kế ở 2.43. Vai mới, chưa có trong `domain.md` mục 1, ghi rõ là vai mới. Theo persona của AWS product-guide.>
 
 ## FR sang US
 | FR | US | Trạng thái: OK, GAP, Deferred, N/A | Ghi chú |

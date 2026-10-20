@@ -17,7 +17,7 @@ Tài liệu này hướng dẫn thao tác. Phương pháp và lý do của từn
 4. [Chạy một intent tới PRD](#4-chạy-một-intent-tới-prd)
 5. [Trả lời AI](#5-trả-lời-ai)
 6. [Đổi yêu cầu giữa chừng](#6-đổi-yêu-cầu-giữa-chừng)
-7. [Bàn giao sau khi PRD được duyệt](#7-bàn-giao-sau-khi-prd-được-duyệt)
+7. [Bàn giao sau khi chốt](#7-bàn-giao-sau-khi-chốt)
 8. [Dành cho Design PIC, Tech PIC, QA PIC](#8-dành-cho-design-pic-tech-pic-qa-pic)
 9. [Dành cho Dev](#9-dành-cho-dev)
 10. [Lệnh](#10-lệnh)
@@ -181,7 +181,7 @@ Mỗi stage đi qua 7 bước: AI đọc nền, hỏi, tóm tắt để PO xác 
 
 2.42 PRD Generation. AI tra Impact Matrix, data model, API spec, KB, sau đó lập bảng Field Intake về field, rule, validate cho từng màn; PO điền và duyệt. Sau đó AI viết PRD theo template công ty: phần đầu lấy từ artifact đã duyệt, phần Specific Requirement viết từng US với 6 mục. Mỗi US có dòng Ưu tiên và danh sách tiêu chí chấp nhận mã `AC1.1`, mỗi tiêu chí ghi rõ business rule mà nó kiểm. Điểm phụ thuộc thiết kế hay kỹ thuật chưa rõ, AI ghi đề xuất kèm câu hỏi gắn tên PIC để các team trả lời ở 2.43. Trước gate, AI chạy kiểm truy vết FR, US, BR, AC và sửa phần thiếu.
 
-2.43 Design Alignment, profile M và L. Sau khi PRD được duyệt, AI tạo ba file thiết kế từ template, chỉ điền phần đầu file; PO gửi ba PIC đường dẫn PRD và file của họ, kèm hạn; cách viết của PIC ở mục 8. Khi các team viết xong, PO gọi lại `/po`: AI đối chiếu ba file với PRD, báo phần còn thiếu, và viết Decision Brief chỉ gồm điểm cần quyết. Họp trên Decision Brief; quyết định đổi yêu cầu đi change request. Gate chỉ duyệt được khi cả 3 PIC ghi Đồng ý hoặc Có ý kiến ở bảng Ký. Sau khi duyệt mới sinh Story List.
+2.43 Design Alignment, profile M và L. Sau khi PRD được duyệt, AI tạo ba file thiết kế từ template, chỉ điền phần đầu file; PO gửi ba PIC đường dẫn PRD và file của họ, kèm hạn; cách viết của PIC ở mục 8. Khi các team viết xong, PO gọi lại `/po`: AI đối chiếu ba file với PRD, báo phần còn thiếu, và viết Decision Brief chỉ gồm điểm cần quyết. Họp trên Decision Brief; quyết định đổi yêu cầu đi change request. Gate duyệt khi cả 3 PIC ghi Đồng ý hoặc Có ý kiến ở bảng Ký; PIC quá hạn chưa ký thì PO được chọn Accept as-is kèm lý do. Sau khi duyệt mới sinh Story List.
 
 ## 5. Trả lời AI
 
@@ -262,7 +262,7 @@ Trước lần đầu, kiểm 2 điểm:
 
 ### 7.2 Gắn tag và cập nhật chỉ mục
 
-Mỗi lần duyệt PRD hoặc Decision Brief, script in tên tag gợi ý. PO commit PRD cùng file CSV, gắn tag và đẩy tag lên:
+Mỗi lần duyệt PRD hoặc Decision Brief, script in tên tag gợi ý: `<intent>/prd-v1.0` hoặc `<intent>/decision-brief-v1.0`. PO commit artifact vừa duyệt, gắn tag và đẩy tag lên. File CSV commit cùng PRD với profile S, cùng Decision Brief với profile M, L. Ví dụ với PRD:
 
 ```bash
 git tag <intent>/prd-v1.0
@@ -303,7 +303,7 @@ PIC không mở được repo thì gửi nội dung cho PO. PO dán nguyên văn
 
 ### 8.2 Làm việc trên story Jira
 
-Sau khi PRD được duyệt, PO import Story List lên Jira. Mỗi US trong PRD là một story; phần Description chép từ PRD, gồm tiêu chí chấp nhận và business rule có mã đầy đủ.
+Sau gate 2.43, hoặc sau gate 2.42 với profile S, PO import Story List lên Jira. Mỗi US trong PRD là một story; phần Description chép từ PRD, gồm tiêu chí chấp nhận và business rule có mã đầy đủ.
 
 | Người | Việc trên story |
 |---|---|
@@ -341,7 +341,7 @@ Unit trong PRD là cách PO nhóm user story theo giá trị và ưu tiên. Dev 
 | `/po-status [intent]` | Xem trạng thái mọi intent, phát hiện lệch giữa `state.md` và file |
 | `/po-review <file>` | Review độc lập bằng AI Reviewer; thêm `--shadow` cho tài liệu người khác viết |
 | `/po-replay <intent>` | Kể lại intent theo dòng thời gian: quyết định, review, việc còn chặn. Dùng khi chuyển intent cho PO khác |
-| `/po-stories <intent>` | Sinh Story List để import lên Jira từ PRD đã duyệt |
+| `/po-stories <intent>` | Sinh Story List để import lên Jira từ PRD đã duyệt; profile M, L chạy sau gate 2.43 |
 | `/change-request <intent>` | Đổi hoặc bổ sung yêu cầu sau khi đã duyệt |
 | `/publish-lark <intent> <artifact>` | Đẩy Initiative Brief, PRD hoặc Decision Brief đã duyệt lên Lark |
 | `/generate-user-guide <intent>` | Viết User Guide sau khi Dev làm xong |
@@ -396,7 +396,7 @@ Ký hiệu chung trong artifact:
 | `[Q3]`, `[DEC5]`, `[KB-04 §3]` | Thẻ nguồn: câu trả lời, quyết định, đoạn KB |
 | Hidden | Tính năng có code nhưng đang ẩn, vẫn phải xét khi phân tích ảnh hưởng |
 
-Đưa một sản phẩm khác vào quy trình: đọc [DOMAIN-SETUP.md](DOMAIN-SETUP.md) , sau đó chạy `/new-domain` trong repo mới. Engine giữ nguyên, chỉ thay domain pack và `memory/project.md`.
+Đưa một sản phẩm khác vào quy trình: đọc [DOMAIN-SETUP.md](DOMAIN-SETUP.md), sau đó chạy `/new-domain` trong repo mới. Engine giữ nguyên, chỉ thay domain pack và `memory/project.md`.
 
 ## 12. Xử lý tình huống
 
@@ -413,7 +413,7 @@ Ký hiệu chung trong artifact:
 | Lỡ sửa tay artifact đã duyệt | `/po-status` báo lệch. Thay đổi có chủ đích thì chạy `/change-request`; nếu không, lấy lại bản trong `archive/` |
 | Chọn nhầm tại gate | Báo ngay; AI ghi một dòng đính chính và trình lại gate |
 | Reviewer báo NOT-READY nhưng PO chấp nhận | Nêu finding nào chấp nhận; AI ghi Accepted risk vào `decisions.md` |
-| PIC chưa viết file thiết kế hoặc chưa ký Decision Brief | Chờ tới hạn; quá hạn thì PO quyết đi tiếp, hoặc Accept as-is kèm lý do |
+| PIC chưa viết file thiết kế hoặc chưa ký Decision Brief | Chờ tới hạn. Quá hạn mà thiếu file: PO quyết viết Decision Brief với phần đã có, ghi DEC. Quá hạn mà thiếu chữ ký: PO chọn Accept as-is ngay tại gate, lý do ghi DEC |
 | Story không đạt điều kiện giao Dev | Chạy `po-tools.py dor`, xử lý theo lý do script in ra |
 | Lark báo hết hạn đăng nhập | Chạy `lark-cli auth login` |
 | Không chụp được màn hình | Gõ `skip-screenshot`; AI để trống vị trí ảnh và liệt kê ảnh còn thiếu |

@@ -1,6 +1,6 @@
 # /publish-lark
 
-Lark là bản cho người đọc. Nguồn chính thức cho agent của Dev là file trong repo theo tag đã gắn, xem mục Bàn giao cho Design, Tech, QA trong README. Không sửa tài liệu trên Lark để chép ngược về repo; sửa trong repo qua change request.
+Lark là bản cho người đọc. Nguồn chính thức cho agent của Dev là file trong repo theo tag đã gắn, xem README mục 6. Không sửa tài liệu trên Lark để chép ngược về repo; sửa trong repo qua change request.
 
 Chỉ publish artifact có `status: approved` trong frontmatter. Input: tham số lệnh gồm intent và artifact; thiếu thì hỏi, không đoán. Echo và confirm trước khi đẩy.
 
@@ -34,7 +34,7 @@ Không tóm tắt, không gộp mục, không lược dòng. Bảng giữ đủ 
 
 Sơ đồ sống trong file dưới dạng khối ` ```mermaid `, đặt đúng vị trí từ lúc soạn. `lark-cli docs +create` và `+update --doc-format markdown` tự dựng Mermaid thành bảng trắng. Đẩy bằng `drive/v1/import_tasks` thì ra code block Plaintext, phải vá bằng `python3 engine/scripts/lark-mermaid-to-whiteboard.py <doc_token>`. Hai loại sơ đồ Mermaid Lark dựng sai: `stateDiagram-v2` mất dòng mô tả, dùng `flowchart`; `<br/>` trong nhãn mũi tên tách thành node rác, nhãn mũi tên viết một dòng.
 
-Ảnh design không nằm trong `.md`, mỗi lần đẩy lại phải chèn lại: `python3 engine/scripts/lark-insert-design-images.py <doc_token> <intent>/design` theo `order.txt` (`<tên file>|<chú thích>` mỗi dòng), tài liệu phải có heading `Design`. Script chèn, sau đó kéo cả cụm vào đúng mục và đếm lại.
+Tài liệu có heading `Design` thì ảnh design không nằm trong `.md`, mỗi lần đẩy lại phải chèn lại: `python3 engine/scripts/lark-insert-design-images.py <doc_token> <intent>/design` theo `order.txt` (`<tên file>|<chú thích>` mỗi dòng). Script chèn, sau đó kéo cả cụm vào đúng mục và đếm lại.
 
 ## B3. Tạo hay cập nhật
 Wiki hai tầng, tài liệu không bao giờ nằm thẳng dưới node cha chung:

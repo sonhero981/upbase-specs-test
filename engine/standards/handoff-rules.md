@@ -7,7 +7,7 @@
 | Mốc | Khi nào | Đầu vào | Kết quả |
 |---|---|---|---|
 | Checkpoint | Stage 2.43, sau khi PRD được duyệt | PRD đã duyệt; ba team viết `ux-design.md`, `tech-design.md`, `test-design.md` từ PRD | Họp trên Decision Brief, 3 PIC ký; cỡ story và thay đổi PRD được chốt |
-| Giao Dev | Sau khi PRD được duyệt | Story List import lên Jira | Story đạt điều kiện giao Dev |
+| Giao Dev | Sau gate 2.43; profile S sau gate 2.42 | Story List import lên Jira | Story đạt điều kiện giao Dev |
 
 ## Story và chia việc
 
@@ -64,4 +64,4 @@ Checkpoint là buổi họp trên Decision Brief ở 2.43. Story được giao c
 
 ## Git
 
-Commit file CSV cùng lần commit PRD đã duyệt, trước khi gắn tag.
+Commit file CSV trước khi gắn tag: profile S cùng lần commit PRD đã duyệt, profile M, L cùng lần commit Decision Brief đã duyệt.

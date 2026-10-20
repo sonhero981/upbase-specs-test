@@ -26,7 +26,7 @@ Dùng bộ tiêu chí INVEST. Bảng dưới ghi nơi kiểm từng tiêu chí t
 | Tiêu chí | Nghĩa | Kiểm ở đâu |
 |---|---|---|
 | Độc lập | Làm và giao được mà không chờ story khác, hoặc chỉ phụ thuộc một chiều | Mục Phụ thuộc của thẻ US; bảng Unit trong `stories.md` |
-| Còn thương lượng được | Chi tiết còn mở tới khi các PIC chốt định hướng | Thẻ US chưa có tiêu chí chấp nhận; chi tiết viết ở 2.42 |
+| Còn thương lượng được | Chi tiết còn mở tới khi PO viết PRD và các team chốt ở 2.43 | Thẻ US chưa có tiêu chí chấp nhận; chi tiết viết ở 2.42 |
 | Có giá trị | Vai thấy được lợi ích của mình | Mục Vai và mục tiêu của thẻ US có vế "để ..." |
 | Ước lượng được | Tech PIC ước được cỡ | 2.43, `tech-design.md` mục 6 |
 | Nhỏ | Làm xong trong một sprint | 2.42 có từ 3 tới 6 tiêu chí chấp nhận; 2.43 Tech PIC xác nhận |
@@ -126,6 +126,6 @@ Cách chia đúng:
 | Cách tách | 6 cách: bước trong luồng, biến thể rule, biến thể dữ liệu, giao diện, xem tạo sửa xoá, hiệu năng | 8 cách: giữ 6 cách của AWS, thêm theo vai và luồng đơn giản trước; giao diện hiểu là kênh dùng được riêng | Sản phẩm có nhiều vai và nhiều cổng, 2 cách thêm gặp thường xuyên |
 | Lỗi thường gặp | Quá lớn, quá kỹ thuật, không có giá trị, tên ghép nhiều việc, mô tả giải pháp | Giữ cả 5; thêm chia theo màn hình, theo tầng kỹ thuật, theo từng rule | 3 lỗi thêm là lỗi thường gặp khi PO viết PRD theo màn hình |
 | Bản đồ story | Có, để thấy khoảng trống trong hành trình người dùng | Bước 1 của quy trình chia | Không khác |
-| Chia việc kỹ thuật | Unit of work ở 2.7, theo kiến trúc, có bảng ghép Unit với story | Dev làm sau khi PRD được duyệt, trên Jira | Ngoài phạm vi PO |
+| Chia việc kỹ thuật | Unit of work ở 2.7, theo kiến trúc, có bảng ghép Unit với story | Tech PIC chia Unit of work ở `tech-design.md` tại 2.43 với profile M, L; Dev chia việc chi tiết trên Jira | Ngoài phạm vi PO |
 
 Nguồn: AWS AI-DLC Workflows 2.11; INVEST của Bill Wake, 2003; Patterns for Splitting User Stories của Richard Lawrence, 2009, cho cách 6 và cách 7.

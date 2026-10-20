@@ -31,7 +31,7 @@ File stage bắt đầu bằng tiêu đề `# <mã> <tên>`, tiếp theo là m�
 | Thư mục | Thư mục artifact trong intent. Thường trùng slug, ngoại lệ ghi rõ, ví dụ PRD ở `inception/prd` |
 | Artifact chính | Chỉ ghi khi stage sinh nhiều file: file được duyệt và chụp vào archive, ví dụ `impact-matrix.md` ở 2.31 |
 | Phase | `ideation` hoặc `inception` |
-| Plugin | `po-workflow` với stage repo thêm (2.31, 2.32, 2.42, 2.43). Bỏ trống với stage gốc AWS. Đây là nhãn, không phải plugin theo cơ chế của AWS |
+| Plugin | `po-workflow` với stage repo thêm (2.31, 2.32, 2.42, 2.43). Bỏ trống với stage gốc AWS. Đây chỉ là nhãn; cơ chế plugin của AWS không dùng ở repo này |
 | Lệch so với AWS | Điểm khác stage cùng số của AWS, để khi AWS ra bản mới biết phải so điểm nào |
 | Execution | `always`, hoặc `conditional` kèm điều kiện |
 | Lead | Agent dẫn stage theo AWS, luôn là `product` trong phạm vi PO. Với 2.43 ghi thêm các PIC viết thiết kế và ký |
@@ -92,7 +92,7 @@ File stage bắt đầu bằng tiêu đề `# <mã> <tên>`, tiếp theo là m�
 - Trong lúc làm, thêm dòng vào `memory.md` của intent: `- <ISO time> [<stage>] <một câu>; <hai câu ngữ cảnh>` dưới một trong bốn mục Interpretations, Deviations, Tradeoffs, Open questions.
 - Câu hỏi chọn bài học hỏi ở gate, sau thông điệp hoàn thành, theo `gate-protocol.md`. PO cần thấy stage làm ra gì, sau đó mới biết điều gì đáng nhớ.
 - Dòng được giữ: đối chiếu với `AGENTS.md` và `memory/team.md`. Mâu thuẫn thì hỏi PO sửa, bỏ, hay nâng lên luật trong `AGENTS.md`.
-- Ghi vào `memory/project.md` trước, dưới heading phù hợp, dạng `- <nội dung> (learned YYYY-MM-DD · <intent> <mã stage> · <tên người duyệt>)`. Rồi hỏi một câu: bài học này đúng cho mọi sản phẩm không. Có thì chuyển sang `memory/team.md`. `project.md` là của sản phẩm, xoá khi dựng domain mới; `team.md` đi theo engine.
+- Ghi vào `memory/project.md` trước, dưới heading phù hợp, dạng `- <nội dung> (learned YYYY-MM-DD · <intent> <mã stage> · <tên người duyệt>)`. Sau đó hỏi một câu: bài học này đúng cho mọi sản phẩm không. Có thì chuyển sang `memory/team.md`. `project.md` là của sản phẩm, xoá khi dựng domain mới; `team.md` đi theo engine.
 - Bài học kiểm được bằng máy hoặc bằng một câu có hay không: đề xuất thêm một dòng vào `engine/verification/<slug>.md`, PO đồng ý mới thêm.
 - Open questions không ghi thành bài học, chúng là việc cần tra.
 

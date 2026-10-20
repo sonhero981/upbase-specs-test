@@ -7,11 +7,11 @@ AI đọc file này ở bước Load của mọi stage. Bài học có hiệu l�
 Dạng một dòng: `- <nội dung> (learned YYYY-MM-DD · <intent> <mã stage> · <tên người duyệt>)`. Các dòng đầu tiên chuyển từ sự cố và quyết định trước khi có quy ước này, nên chỉ có ngày; ngày là ngày sự việc xảy ra.
 
 ## Versioning
-- Mốc tăng version là mỗi lần PO duyệt hoặc trả lời một đợt câu hỏi, không phải mỗi lần sửa một dòng. Bản đã duyệt phải được chụp lại trước khi sửa tiếp; một lần đã ghi đè bản duyệt ở Gate 1 mười lăm lần liên tiếp (learned 2026-10-06)
+- Mốc tăng version là mỗi lần PO duyệt hoặc trả lời một đợt câu hỏi; sửa một dòng không tăng version. Bản đã duyệt phải được chụp lại trước khi sửa tiếp; một lần đã ghi đè bản duyệt ở Gate 1 mười lăm lần liên tiếp (learned 2026-10-06)
 
 ## Questions
 - Không dựng danh sách câu hỏi kỹ thuật cho Dev. Chỉ hỏi câu mà đáp án làm đổi phạm vi hoặc business rule (learned 2026-10-05)
-- Cần biết một cơ chế kỹ thuật có tồn tại không thì hỏi PO, không tự đào Swagger rồi kết luận (learned 2026-10-05)
+- Cần biết một cơ chế kỹ thuật có tồn tại không thì hỏi PO, không tự đào Swagger để kết luận (learned 2026-10-05)
 
 ## PRD
 - PRD không có mục Database và API. Thay bằng Data to Retain: thông tin nào phải lưu và vì sao (learned 2026-10-06)
@@ -24,7 +24,7 @@ Dạng một dòng: `- <nội dung> (learned YYYY-MM-DD · <intent> <mã stage> 
 ## Lark
 - Node intent phải có trước. Tài liệu nằm trong node intent, không nằm thẳng dưới node cha chung (learned 2026-10-06)
 - Tên tài liệu trên Lark có thể khác tên file. Lần publish sau giữ tên trên Lark, định danh là token (learned 2026-10-06)
-- API trả 200 không có nghĩa nội dung vào đúng chỗ. Đếm lại heading, bảng, sơ đồ, ảnh sau mỗi lần publish (learned 2026-09-23)
+- API trả 200 không có nghĩa nội dung vào đúng vị trí. Đếm lại heading, bảng, sơ đồ, ảnh sau mỗi lần publish (learned 2026-09-23)
 - Mermaid trên Lark: stateDiagram-v2 mất dòng mô tả, dùng flowchart. Xuống dòng trong nhãn mũi tên thành node rác (learned 2026-10-06)
 - Cảnh báo trước khi publish nếu tài liệu chứa tài khoản staging; người đọc trên Lark rộng hơn thư mục local (learned 2026-09-23)
 

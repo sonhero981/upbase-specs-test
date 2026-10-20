@@ -26,10 +26,9 @@
 - [ ] Hằng số ghi cứng hay cấu hình
 - [ ] Sự kiện, mail bị chạm đối chiếu file sự kiện trong KB
 - [ ] **[BLOCK]** M, L: điểm phụ thuộc thiết kế hay kỹ thuật mà artifact đã duyệt chưa nói có `[đề xuất]` và OQ gắn tên PIC ở Open Issues. PRD không quy định cách làm kỹ thuật
-- [ ] PRD không quy định phần mục 9 ghi "Dev tự quyết ở detailed design"
 
 ## Truy vết và review
-- [ ] **[BLOCK]** Traceability: không GAP, không ORPHAN. `verification/phase-check-inception.md` đạt
+- [ ] **[BLOCK]** Traceability: không GAP, không ORPHAN. `verification/phase-check-inception.md` đạt; profile M, L để dòng 6 tới 2.43
 - [ ] Reviewer ai-reviewer đã chạy, sau `po-tools.py review-start`, và artifact không đổi sau lần review đó
 
 ## Bàn giao

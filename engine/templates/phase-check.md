@@ -17,8 +17,8 @@ Kiểm ranh giới phase trước khi mở gate cuối của phase. Giữ bảng
 | 4 | Câu hỏi mở có cờ Chặn đã đóng, hoặc chuyển thành assumption có lý do | | |
 | 5 | Mọi khối khẳng định có thẻ nguồn | | |
 
-## Inception, kiểm ở 2.42
-Phần máy kiểm: chạy `python3 engine/scripts/po-tools.py trace <intent-dir> --write`, script điền năm dòng đầu.
+## Inception, kiểm ở gate cuối của phase: 2.43 với profile M, L; 2.42 với profile S
+Ở 2.42, mọi profile: chạy `python3 engine/scripts/po-tools.py trace <intent-dir> --write`, script điền năm dòng đầu; AI kiểm dòng 7 đến 9. Profile M, L: dòng 6 ghi "Chờ 2.43" ở 2.42; trước gate 2.43, AI điền dòng 6 và cập nhật Kết luận.
 | # | Điều kiện | Kết quả | Chi tiết |
 |---|---|---|---|
 | 1 | Mọi FR có US, hoặc Deferred, N/A có lý do | | |

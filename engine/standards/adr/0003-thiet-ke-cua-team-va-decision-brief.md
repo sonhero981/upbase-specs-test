@@ -29,7 +29,7 @@ Ba cách đã xét:
 
 Chọn cách 3.
 - Bỏ stage 2.41 HLD Brief. Thêm stage 2.43 Design Alignment sau PRD, chạy ở profile M và L.
-- Ba team viết `ux-design.md`, `tech-design.md`, `test-design.md` từ PRD đã duyệt, mỗi team chỉ sửa file của mình. AI của PO không viết và không sửa ba file này.
+- Ba team viết `ux-design.md`, `tech-design.md`, `test-design.md` từ PRD đã duyệt, mỗi team chỉ sửa file của mình. Ngoài khung file tạo lúc giao việc, AI của PO không viết và không sửa ba file này.
 - AI đối chiếu ba file với PRD, bằng máy và bằng đọc hiểu, và viết Decision Brief. Họp trên Decision Brief; ba PIC ký. Thay đổi yêu cầu đi change request trên PRD.
 - Story List chỉ sinh sau khi 2.43 được duyệt. Mã màn `SCR` lấy từ `ux-design.md`.
 

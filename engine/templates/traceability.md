@@ -19,5 +19,9 @@ Trạng thái: OK có đích · GAP chưa có · ORPHAN không truy về đâu �
 | BR | US | Trạng thái |
 |---|---|---|
 
+## BR sang AC
+| BR | AC | Trạng thái |
+|---|---|---|
+
 ## Kết luận
 Đạt hay Không đạt. Số GAP, số ORPHAN. Ngày kiểm.

@@ -24,7 +24,7 @@ Cấp mã tính năng ngay sau khi tạo `intent.md`: `python3 engine/scripts/po
 Có mô tả yêu cầu trong tham số lệnh thì ghi nguyên văn vào `inputs/request-<YYYYMMDD>.md`. Chưa có thì chép `engine/templates/request.md` vào `inputs/request.md` và nói PO: gửi mẫu này cho người yêu cầu điền, hoặc đặt sẵn email, biên bản họp, ảnh vào `inputs/`, sau đó gọi `/po`.
 
 ## 0.2 Detection
-Quét nhanh để chọn profile, không phải Impact Analysis:
+Quét nhanh để chọn profile; Impact Analysis đầy đủ chạy ở 2.31:
 - Đọc `inputs/`, `domain/domain.md`, index KB mà nó trỏ tới, `memory/team.md`, `memory/project.md`.
 - Đoán module, màn, bảng, mail event bị chạm. Kiểm vùng có thuộc phần KB chưa phủ không, có tính năng Hidden không, có tích hợp ngoài không, có dữ liệu cũ cần migration không.
 - Tìm intent liên quan: so module bị chạm với `intent.md` của intent khác. Có thì ghi vào Related intents.

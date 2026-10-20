@@ -18,8 +18,8 @@ Hỏi: *thay đổi này làm sai lệch kết luận của stage nào?* Lấy s
 | Phát hiện ảnh hưởng mới | 2.31 | 2.32 trở đi |
 | Đổi hướng giải | 2.32 | 2.4 trở đi |
 | Danh sách US, Unit | 2.4 | 2.42, 2.43 |
+| Chi tiết US, field, rule, màn | 2.42 | chỉ US bị chạm; profile M, L sang 2.43: team xem lại phần bị chạm, ký lại |
 | Thiết kế của các team, quyết định ở buổi họp trên Decision Brief | 2.43 | Team sửa file của mình. Phải lấy lại chữ ký |
-| Chi tiết US, field, rule, màn | 2.42 | chỉ US bị chạm |
 | Chỉ đổi User Guide | user-guide | — |
 
 Ví dụ: một rule mới như "người dùng bị khoá thì không gửi được" là business rule, nhưng nó thêm một nhánh mà Impact Matrix chưa quét, nên re-entry từ 2.3 và chảy qua 2.31; sửa riêng PRD là chưa đủ. Ví dụ của domain ở `domain.md` mục 5.

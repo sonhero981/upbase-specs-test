@@ -56,7 +56,7 @@ Tương thích: chép engine và chạy migrate.
 - `po-tools.py`: `feature-id` cấp mã tính năng; `stories` sinh Story List; `dor` kiểm điều kiện giao Dev trên PRD, gồm PRD đã duyệt, US có AC, mọi BR có AC, không còn `❓PO` và câu chặn; `trace` kiểm thêm lớp BR sang AC; `index` dùng mã tính năng và đếm story đạt điều kiện giao Dev; `check` cảnh báo nhóm Cỡ story khi tên US có chữ "và" ở 2.4 hoặc US có hơn 6 AC ở 2.42.
 - Design PIC đặt mã màn `SCR` ở bảng Danh sách màn của `ux-design.md`; Story List lấy mã màn từ bảng này.
 - Điều kiện giao Dev thêm ba mục: với profile M, L thì 2.43 đã duyệt; US có bảng giao diện phải có màn trong `ux-design.md`; US nêu ở Pre-Condition phải đạt trước. Ghi rõ đây là bản hẹp phía PO của Definition of Ready bên AWS.
-- PRD theo AWS requirements-guide và Product Lead: mỗi US có ít nhất một AC cho nhánh lỗi hoặc bị từ chối, ngưỡng số có AC ở giá trị biên; mỗi US có dòng Ưu tiên; BR có điều kiện ghi khi nào áp và nếu vi phạm thì sao; mục tuỳ chọn Vòng đời trạng thái. `check` cảnh báo US thiếu Ưu tiên, giao diện chưa có mã màn, chưa thấy AC nhánh lỗi.
+- PRD theo AWS requirements-guide và Product Lead: mỗi US có ít nhất một AC cho nhánh lỗi hoặc bị từ chối, ngưỡng số có AC ở giá trị biên; mỗi US có dòng Ưu tiên; BR có điều kiện ghi khi nào áp và nếu vi phạm thì sao; mục tuỳ chọn Vòng đời trạng thái. `check` cảnh báo US thiếu Ưu tiên, chưa thấy AC nhánh lỗi; `check` của 2.43 cảnh báo US có giao diện chưa có màn trong `ux-design.md`.
 - QA PIC góp ý tính kiểm thử được của tiêu chí chấp nhận trong `test-design.md` ở 2.43; Decision Brief đưa ra họp. AWS cho quality agent kiểm việc này ở 2.4.
 - `po-tools.py check` của 2.43 đối chiếu ba file thiết kế với PRD: file có chưa, dựng từ bản PRD nào, còn chữ mẫu không, US có giao diện đã có màn chưa, AC đã có trong kế hoạch test chưa, US đã có trong tech-design chưa; Decision Brief không quá 1.500 từ, ba PIC đã ký chưa. `status` báo khi file thiết kế dựng từ bản PRD cũ.
 - Dev chưa xác định có dùng AWS AI-DLC hay không: `id-conventions.md` ghi phía Dev luôn dùng mã đầy đủ, vì `BR1.1` của PRD trùng dạng với mã AI-DLC sinh ở 3.1.
@@ -77,7 +77,7 @@ Theo AWS: mọi scope của AWS hạ các guard khác nhưng giữ kiểm có ng
 Theo cách AWS giữ chất lượng repo, ở quy mô một người giữ engine.
 - Fixture tự chứa: mỗi fixture chạy trên gốc dữ liệu tạm gồm domain mẫu `engine/tests/root/`, ngày cố định. Biến `PO_TOOLS_ROOT` và `PO_TOOLS_TODAY` cho script. Repo sản phẩm khác chạy selftest không phụ thuộc domain của mình; `engine/tests/` vào MANIFEST.
 - Selftest báo lỗi khi một lệnh của `po-tools.py` chưa có ca kiểm, trừ danh sách miễn có lý do; khi `expected.txt` có dòng không nhận ra hoặc ca không có điều kiện; khi tài liệu nhắc lệnh `po-tools.py` không có hoặc đường dẫn `engine/...` không có; khi README mục 3.2 thiếu stage; khi VERSION lệch CHANGELOG hoặc MANIFEST, hoặc bản từ 2.1.0 thiếu mục Nâng cấp, dòng Tương thích.
-- Ca kiểm tăng từ 35 lên 70: chuỗi duyệt thật, `archive`, `trace --write`, `index`, `doctor`, `status` với bảy loại lệch, `check` với giới hạn từ và luật PRD, `review-start`, và 15 ca hook. Fixture `good` sửa cho nhất quán khi chạy `status`.
+- Ca kiểm tăng từ 35 lên 77: chuỗi duyệt thật, `archive`, `trace --write`, `index`, `doctor`, `status` với bảy loại lệch, `check` với giới hạn từ và luật PRD, `review-start`, và 15 ca hook. Fixture `good` sửa cho nhất quán khi chạy `status`.
 - `engine-check --strict` coi file engine mới chưa ghi manifest là lỗi.
 - GitHub Actions `engine.yml` chạy `selftest` trên Python 3.9 và bản mới nhất, cùng `engine-check --strict`, ở mỗi lần push.
 - AGENTS.md có mục Sửa engine: thứ tự sửa, bảng selftest bắt được gì, quy tắc phát hành. CHANGELOG có dòng Tương thích.
@@ -88,6 +88,7 @@ Theo cách AWS giữ chất lượng repo, ở quy mô một người giữ engi
 - AGENTS.md, DOMAIN-SETUP.md, GLOSSARY.md viết lại bằng văn viết, bỏ in đậm. DOMAIN-SETUP.md thêm mục Chuẩn bàn giao cho các team. GLOSSARY.md thêm checkpoint, điều kiện giao Dev, Story List, nguyên tắc chia story, tiêu chí chấp nhận, tag bản duyệt, phiên bản artifact, mức độ trưởng thành.
 - Sửa chữ PU còn sót thành Unit trong template `scope-document`, `stories` và 2 checklist.
 - Mã ví dụ trong `id-conventions.md`, README, GLOSSARY, USER-GUIDE và `/new-domain` đổi từ `LMS-F012` sang `APP-F012`, để engine không gắn với sản phẩm đang cài.
+- README mục 1 thêm phần Lợi ích cho PO và điểm khác biệt: mỗi lợi ích gắn với cơ chế tạo ra nó và mức bằng chứng hiện có; bảng so sánh với việc PO tự dùng AI chat để viết PRD.
 
 ### Đổi tên
 - Proto-Unit thành Unit, mã `PU1` thành `U1`, mục PRD Proto-Units thành Units, theo quyết định ngày 19/10/2026. GLOSSARY ghi khác biệt với Unit of work của AWS ở 2.7.
@@ -103,8 +104,8 @@ Theo cách AWS giữ chất lượng repo, ở quy mô một người giữ engi
 - Dữ liệu cũ chuyển bằng `po-tools.py migrate intents/<intent> --write`: đổi đường dẫn và thuật ngữ trong file đang dùng, cấp mã tính năng, chuyển file câu hỏi luồng v1 sang dạng `## Q<n>` nếu stage chưa duyệt, chụp lại bản duyệt kèm một DEC. Không sửa `archive/`, `reviews/`, `verification/`; `decisions.md` chỉ thêm một dòng DEC. Ở `memory.md` chỉ đổi dòng mô tả đầu file. Ở `state.md` chỉ đổi dòng stage chưa duyệt, mục Current và mục Versions, cộng một dòng Log; Log và dòng stage đã duyệt giữ nguyên vì là lịch sử. Mỗi intent đã chuyển có một dòng DEC migrate trong `decisions.md` của chính nó.
 - Hook ghi lượt PO chạy từ lượt đầu tiên sau khi kéo bản này, ở phiên Claude Code mở tại gốc repo. Trước đó approve từ chối; PO có thể tự chạy approve trong terminal.
 - Review cũ không có file digest. Lần duyệt kế tiếp của stage có reviewer: chạy `review-start` và review lại, hoặc PO quyết duyệt không review lại qua `--accept-review-gap`.
-- PRD viết trước bản này chưa có dòng Ưu tiên, mã màn và AC nhánh lỗi. `check` cảnh báo và approve đòi PO chấp nhận hoặc sửa; Story List để trống cột Priority. Story List cũ 11 cột vẫn so được với bản mới.
-- Template PRD của công ty thêm dòng Ưu tiên, hướng dẫn mã màn, mẫu BR có điều kiện, mục tuỳ chọn Vòng đời trạng thái và góp ý của QA ở Comments; cần chủ template xác nhận như khối AC.
+- PRD viết trước bản này chưa có dòng Ưu tiên và AC nhánh lỗi. `check` cảnh báo và approve đòi PO chấp nhận hoặc sửa; Story List để trống cột Priority. Story List cũ 11 cột vẫn so được với bản mới.
+- Template PRD của công ty thêm dòng Ưu tiên, mẫu BR có điều kiện, mục tuỳ chọn Vòng đời trạng thái, cột Màn hình ghi tên màn với mã màn đặt ở `ux-design.md`; cần chủ template xác nhận như khối AC.
 - Khối AC và hàng Mã tính năng là phần thêm vào template PRD của công ty, chưa đổi tên mục nào; cần chủ template xác nhận trước khi áp cho mọi PRD.
 - Có thay đổi chưa commit ở repo cũ thì commit trước khi gộp nhánh này; git nhận ra file đã dời và áp thay đổi vào đúng vị trí mới.
 

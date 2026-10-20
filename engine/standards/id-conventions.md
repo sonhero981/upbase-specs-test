@@ -22,11 +22,11 @@ Mã dùng chung cho mọi team nhận việc từ PO: Design, Tech, QA. Mã đi 
 
 `<NNN>` ba chữ số, `<NN>` hai chữ số, đều có số 0 ở đầu. `<n>` là số thứ tự trong story, bắt đầu từ 1.
 
-## Mã ngắn trong tài liệu của PO
+## Mã ngắn trong tài liệu của intent
 
 Artifact nội bộ và PRD dùng mã ngắn cho dễ đọc: `US1`, `AC1.1`, `BR1.2`. Đầu PRD ghi mã tính năng. Quy đổi là cơ học:
 
-| Mã ngắn trong PRD của `APP-F012` | Mã đầy đủ |
+| Mã ngắn trong tài liệu của `APP-F012` | Mã đầy đủ |
 |---|---|
 | `US1` | `US-APP-F012-01` |
 | `AC1.1` | `AC-APP-F012-01.1` |

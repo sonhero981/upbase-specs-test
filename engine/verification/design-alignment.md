@@ -17,4 +17,5 @@
 
 ## Sau họp
 - [ ] Mỗi quyết định một DEC. Quyết định đổi PRD đã đi change request, PRD đã duyệt lại
-- [ ] **[BLOCK]** Ba PIC ký Đồng ý hoặc Có ý kiến, hoặc PO chấp nhận thiếu chữ ký kèm lý do
+- [ ] **[BLOCK]** Ba PIC ký Đồng ý hoặc Có ý kiến; PIC quá hạn chưa ký thì PO chọn Accept as-is, lý do ghi DEC
+- [ ] **[BLOCK]** `verification/phase-check-inception.md` đã điền dòng 6 và cập nhật Kết luận

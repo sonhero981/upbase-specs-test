@@ -45,7 +45,7 @@ Nguồn sống: yêu cầu chạm tới vùng nào thì đọc lại nguồn vù
 | `12-data-model.md` | 85 bảng, khoá ngoại, quan hệ | 2.31, 2.42 |
 | `13-mail-events.md` | 30 mail tự động, mail nào đang bật hay tắt | 2.3, 2.31 |
 | `14-api-surface.md` | 708 operation; mục 1 và 2 là vùng KB chưa phủ; mục 2.2 là endpoint có nhưng tính năng không có | 1.4, 2.3, 2.31 |
-| `15-product-direction.md` | bốn portal, chỗ đóng cứng UpBase, mục 6 bốn câu tenant | 1.1, 1.4, 2.31 |
+| `15-product-direction.md` | bốn portal, điểm đóng cứng UpBase, mục 6 bốn câu tenant | 1.1, 1.4, 2.31 |
 | `16-domain-principles.md` | quan hệ chứa và ranh giới giữa các thực thể | 1.1, 2.3 |
 
 Vùng KB chưa phủ: Ops có 25 nhóm API và LMS có 8 nhóm không có trong User Guide, gồm lịch dạy, phòng học, thi cử, phòng ban, phân quyền. KB chỉ phủ khoảng một nửa hệ thống; vùng chưa phủ ghi `❓PO`, không kết luận. 110 rule `KB-*` do AI trích, chưa duyệt. Mã trong KB: `BR-<MODULE>-NN` là rule có trong User Guide, `KB-<MODULE>-NN` là rule AI trích từ văn xuôi.

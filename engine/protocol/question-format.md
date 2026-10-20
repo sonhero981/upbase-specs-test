@@ -70,6 +70,6 @@ Khi mọi câu đã trả lời và stage có summary confirmation:
 | `[KB-<file> §<mục>]` | Nguồn trong KB |
 | `[DEC5]` | Quyết định đã ghi |
 | `[assumption]` | Giả định, chưa xác nhận |
-| `[suy ra]` | AI suy luận từ nguồn, không phải câu chữ trực tiếp |
+| `[suy ra]` | AI suy luận từ nguồn; nguồn không nói thẳng |
 
 Mỗi khối khẳng định trong artifact nội bộ có ít nhất một thẻ. Nội dung không có nguồn thì bỏ, hoặc hỏi, hoặc đưa vào Assumptions & Open Questions với `[assumption]`. Không nâng assumption thành fact ở stage sau khi PO chưa xác nhận.

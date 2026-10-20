@@ -46,3 +46,4 @@ Stage AWS ngoài phạm vi PO, chỉ để mapping: 1.3, 1.5, 1.6, 2.1, 2.2, 2.5
 4. PO muốn tắt một nghi thức cho intent này ("intent này không cần reviewer"): ghi vào `state.md` phần Switches kèm nguyên văn. Áp cho intent này, intent sau về mặc định.
 5. S vẫn phải qua Field Intake ở 2.42. Đây là bước dễ sai nhất kể cả với yêu cầu nhỏ.
 6. Phase check Ideation: profile L chạy ở 1.7; profile M không có 1.7 nên chạy ở gate chung của 1.1 và 1.4; profile S không có Ideation nên không chạy.
+7. Phase check Inception: profile M, L chạy ở gate 2.43; profile S chạy ở gate 2.42.

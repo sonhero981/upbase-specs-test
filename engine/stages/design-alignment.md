@@ -37,7 +37,7 @@ Quy ước cho PIC:
 - Ý kiến về PRD ghi ở mục Ý kiến về PRD của file mình, mỗi dòng một lập trường: Đồng ý, Đề xuất sửa, Phản đối, kèm mã và lý do. Không sửa PRD.
 - PIC không mở được repo: gửi nội dung cho PO; PO dán nguyên văn, mở đầu bằng "(ghi theo <tên>, <ngày>)".
 
-AI của PO không viết và không sửa ba file thiết kế. Thiếu nội dung thì báo PO hỏi PIC.
+Ngoài khung file và frontmatter tạo ở bước 2, AI của PO không viết và không sửa ba file thiết kế. Thiếu nội dung thì báo PO hỏi PIC.
 
 ## Load
 Khi PO gọi `/po <intent>` và stage đang `[-]`: đọc PRD đã duyệt, ba file thiết kế, `scope-document.md` để lấy mốc cứng, Impact Matrix để lấy vùng hồi quy, `decisions.md`. File nào còn khung trống thì báo PO team nào chưa xong và dừng. Không viết Decision Brief khi chưa đủ ba file, trừ khi PO quyết đi tiếp; khi đó ghi DEC.
@@ -65,7 +65,8 @@ Chỉ hỏi PO khi cần:
 - PIC ghi trạng thái của mình ở bảng Ký: Chưa xem, Có ý kiến, Đồng ý, Yêu cầu sửa. Ký trên repo, hoặc PO ghi theo tin nhắn xác nhận và lưu nguyên văn vào `decisions.md`.
 
 ## Gate, Alignment
-Trình: điểm đã chốt kèm DEC, điểm còn mở, trạng thái ký từng PIC, ý kiến Phản đối nguyên văn, thay đổi PRD đã làm qua change request. Approve chỉ khi ba PIC ghi Đồng ý hoặc Có ý kiến. Script coi thiếu chữ ký là cảnh báo, nên duyệt khi còn thiếu chữ ký cần lời chấp nhận của PO qua `--accept-warnings`, ứng với lựa chọn Accept as-is. Một PIC ghi Yêu cầu sửa thì gate là Request Changes.
+Trình: điểm đã chốt kèm DEC, điểm còn mở, trạng thái ký từng PIC, ý kiến Phản đối nguyên văn, thay đổi PRD đã làm qua change request. Approve khi ba PIC ghi Đồng ý hoặc Có ý kiến. Một PIC ghi Yêu cầu sửa thì gate là Request Changes. Tới hạn mà còn PIC chưa ký thì PO được chọn Accept as-is ngay, không cần chờ lần Request Changes thứ ba; lý do ghi một DEC, lệnh approve chạy với `--accept-warnings` vì script coi thiếu chữ ký là cảnh báo.
+Trước khi trình gate: điền dòng 6 của `verification/phase-check-inception.md` và cập nhật Kết luận. Với profile M, L, đây là phase check Inception.
 Sau Approve: decision-brief lên version 1.0 và được chụp archive. Gợi ý `/publish-lark decision-brief`. Sau đó chạy `/po-stories` để sinh Story List cho Jira. File thiết kế đổi sau khi duyệt thì team sửa file của mình; thay đổi chạm yêu cầu đi change request.
 
 Phần PO của intent hoàn tất. `/generate-user-guide` sau khi Dev xong, và cập nhật ngược KB.

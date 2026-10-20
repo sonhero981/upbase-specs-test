@@ -12,6 +12,14 @@ created: <YYYY-MM-DD>
 ## Product boundary
 <Portal nào theo domain.md mục 1. Ràng buộc tenant theo domain.md.>
 
+## Người phụ trách
+| Vai | Tên |
+|---|---|
+| PO | |
+| Design PIC | |
+| Tech PIC | |
+| QA PIC | |
+
 ## Related intents
 | Intent liên quan | Liên quan ở đâu |
 |---|---|
@@ -22,6 +30,7 @@ created: <YYYY-MM-DD>
 | Figma | |
 | Jira Epic / Story | <mã Epic, ví dụ ABC-12. Nhiều Epic thì ghi thêm U2: ABC-13 để gán theo Unit> |
 | KB cần đọc | |
+| Thiết kế và Decision Brief | <sau 2.43: link Lark hoặc Figma của từng team, nếu có ngoài repo> |
 
 ## Lark
 | | |

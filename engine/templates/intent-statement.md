@@ -16,7 +16,7 @@ inputs: <artifact đầu vào@version, ví dụ requirements@1.0; stage đầu t
 ## Objectives and success metrics
 | Objective | Đo bằng | Nguồn số | Nguồn |
 |---|---|---|---|
-| O1 <kết quả, không phải việc làm> | <chỉ số> | <bảng, báo cáo> | [Q3] |
+| O1 <kết quả cần đạt; việc làm ghi ở scope> | <chỉ số> | <bảng, báo cáo> | [Q3] |
 
 ## Why now
 <Áp lực, cơ hội, hay nợ cũ.> [Q4]

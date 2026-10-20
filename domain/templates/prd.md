@@ -5,7 +5,7 @@ feature: <SP-FNNN, lấy từ intent.md>
 version: 0.1
 status: draft
 inputs: <stories@version, requirements@version>
-services: <service hoặc repo code bị chạm theo Impact Matrix; Tech PIC sửa ở 2.43 nếu khác>
+services: <service hoặc repo code bị chạm theo Impact Matrix; lệch với tech-design.md thì sửa qua change request>
 ---
 # [PRD] <Tên tính năng>
 
@@ -18,7 +18,7 @@ services: <service hoặc repo code bị chạm theo Impact Matrix; Tech PIC s�
 | **Target release** | *Sprint, quý* |
 | **Epic** | *Link Jira* |
 | **Story** | *Link Jira* |
-| **Related** | *Tài liệu liên quan; sau 2.43 thêm link ux-design, tech-design, test-design và Decision Brief* |
+| **Related** | *Tài liệu liên quan lúc viết PRD. Link ba file thiết kế và Decision Brief ghi ở `intent.md` mục References, không sửa PRD đã duyệt để thêm link* |
 | **Document status** | `DRAFT`, `IN REVIEW`, `PUBLISHED` |
 | **Document owner** | |
 | **Designer** | |
@@ -194,7 +194,7 @@ services: <service hoặc repo code bị chạm theo Impact Matrix; Tech PIC s�
 
 ### 6/ Conner case
 
-*Để trống. QA điền.*
+*Để trống. QA viết corner case ở test-design.md; corner case làm đổi yêu cầu thì đưa vào PRD qua change request.*
 
 ---
 

@@ -20,7 +20,7 @@ Theo thứ tự:
 1. Có stage `[?]`: trình lại gate của stage đó theo `gate-protocol.md`. Không làm lại việc.
 2. Có stage `[-]` hoặc `[R]`: tiếp tục stage đó từ bước còn dở. Đọc file stage trong `engine/stages/`, nhảy tới đúng bước còn thiếu: câu chưa trả lời, tóm tắt chưa xác nhận, artifact chưa sinh, review chưa chạy. Nói một dòng: "Tiếp tục ở 2.3 Requirements Analysis, còn 2 câu chưa trả lời."
 3. Không có stage dở: lấy stage `[ ]` đầu tiên theo thứ tự trong `state.md`, đúng như `po-tools.py next` in ra. Nói: "Stage kế: <mã> <tên>. Bắt đầu?" PO đồng ý thì đọc `engine/stages/<slug>.md` và chạy theo nó.
-4. Mọi stage đều `[x]` hoặc `[S]`: intent xong. Gợi ý `/publish-lark`, `/generate-user-guide`, hoặc đóng intent.
+4. Mọi stage đều `[x]` hoặc `[S]`: intent xong. Gợi ý `/po-stories` khi chưa có Story List cho bản PRD đã duyệt, `/publish-lark`, `/generate-user-guide` sau khi Dev xong, hoặc đóng intent.
 
 Parked: nói "intent đang dừng từ <ngày>", hỏi có tiếp tục không, bỏ dấu Parked khi PO đồng ý.
 
@@ -34,7 +34,7 @@ Parked: nói "intent đang dừng từ <ngày>", hỏi có tiếp tục không, 
 | "tôi đổi yêu cầu", "bổ sung" | Chuyển sang `/change-request` |
 
 ## 5. Trước khi chạy một stage
-Đọc theo thứ tự: `engine/protocol/stage-protocol.md`, `domain/domain.md`, file stage trong `engine/stages/`, `state.md`, `decisions.md` theo cột Read when, `intent.md`, `memory/team.md`, `memory/project.md`. Rồi mới bắt đầu bước Load của stage.
+Đọc theo thứ tự: `engine/protocol/stage-protocol.md`, `domain/domain.md`, file stage trong `engine/stages/`, `state.md`, `decisions.md` theo cột Read when, `intent.md`, `memory/team.md`, `memory/project.md`. Sau đó mới bắt đầu bước Load của stage.
 
 ## Luôn
 - Trước stage đầu tiên của một phiên, nói một dòng: intent nào, profile, stage nào, cách trả lời đang dùng.

@@ -30,7 +30,7 @@ inputs: <prd@1.0>
 | Mã | Lập trường | Nội dung | Lý do |
 |---|---|---|---|
 
-<AC không kiểm thử được, thiếu nhánh lỗi hoặc giá trị biên, BR mơ hồ. Lập trường: Đồng ý, Đề xuất sửa, Phản đối.>
+<AC không kiểm thử được, thiếu nhánh lỗi hoặc giá trị biên, corner case PRD chưa nói, BR mơ hồ. Lập trường: Đồng ý, Đề xuất sửa, Phản đối.>
 
 ## 6. Rủi ro và câu hỏi cần chốt
 | # | Nội dung | Cần ai trả lời | Chặn |

@@ -14,7 +14,7 @@ Thuật ngữ và họ mã của PO-Workflow, theo AWS AI-DLC Workflows 2.11, fi
 | Workflow profile | `S`, `M`, `L`. Tập stage, công tắc nghi thức, depth | AWS gọi là scope trong engine. Không dùng chữ Scope vì đã dùng cho phạm vi tính năng |
 | Depth | Minimal, Standard, Comprehensive. Mức chi tiết artifact | AWS |
 | Approval gate | Điểm duyệt cuối mỗi stage | AWS. Thay "Gate 1 đến 4" và "điểm dừng" |
-| Alignment gate | Gate của 2.43, cần chữ ký của 3 PIC ở bảng Ký của Decision Brief | PO-Workflow |
+| Alignment gate | Gate của 2.43, cần chữ ký của 3 PIC ở bảng Ký của Decision Brief. PIC quá hạn chưa ký thì PO được chọn Accept as-is kèm lý do | PO-Workflow |
 | Summary confirmation | Xác nhận tóm tắt câu trả lời trước khi sinh artifact | AWS |
 | Field Intake | Summary confirmation riêng của 2.42 về field, rule, validate | Repo |
 | Questions file | `<stage>-questions.md`, nguồn sự thật của câu trả lời | AWS |
@@ -28,10 +28,10 @@ Thuật ngữ và họ mã của PO-Workflow, theo AWS AI-DLC Workflows 2.11, fi
 | Engine | Phần không phụ thuộc sản phẩm: protocol, lệnh, template chung, checklist, agent, script, chuẩn bàn giao | PO-Workflow |
 | Domain pack | Toàn bộ phần riêng của sản phẩm: manifest `domain.md`, KB, corner checklist, template công ty. Đổi sản phẩm là thay thư mục này, engine giữ nguyên | PO-Workflow |
 | Live source · Pinned record · Last verified | Nguồn sống, bản chốt, ngày đối chiếu của KB | Repo |
-| AI Reviewer | Agent `ai-reviewer` review độc lập, không thấy hội thoại, kết luận READY hoặc NOT-READY. Không phải người | AWS gọi vai này là Product Lead |
+| AI Reviewer | Agent `ai-reviewer` review độc lập, không thấy hội thoại, kết luận READY hoặc NOT-READY. Đây là agent AI | AWS gọi vai này là Product Lead |
 | Sổ finding | `reviews/findings-<slug>.md`, danh sách finding của một stage và quyết định của PO; finding đã quyết không bị chấm lại | AWS, engine giữ danh sách finding |
 | Mã tính năng | `<mã sản phẩm>-F<NNN>`, ví dụ `APP-F012`. Cấp khi tạo intent, đi theo tính năng tới PRD, story trên Jira, test case, nhánh code | Quy ước chung các team, `engine/standards/id-conventions.md` |
-| Story List | `intents/<intent>/stories/story-list-prd-v<phiên bản>.csv`, mỗi US trong PRD một dòng theo mẫu import CSV của Jira. Sinh bằng `/po-stories` sau khi PRD được duyệt; các team làm việc trên story Jira | Quy ước chung các team, `engine/standards/handoff-rules.md`, ADR 0002 |
+| Story List | `intents/<intent>/stories/story-list-prd-v<phiên bản>.csv`, mỗi US trong PRD một dòng theo mẫu import CSV của Jira. Sinh bằng `/po-stories` sau gate 2.43, profile S thì sau gate 2.42; các team làm việc trên story Jira | Quy ước chung các team, `engine/standards/handoff-rules.md`, ADR 0002 |
 | Checkpoint | Buổi PO họp với Design PIC, Tech PIC, QA PIC trên Decision Brief ở 2.43, sau khi các team thiết kế từ PRD | Quy ước chung các team |
 | Điều kiện giao Dev, DoR | Điều kiện để giao một story cho Dev: PRD đã duyệt, với profile M, L thì 2.43 đã duyệt, US có AC, mọi BR có AC, không còn `❓PO` và câu chặn, giao diện có màn trong `ux-design.md`, story phụ thuộc đã đạt. Kiểm bằng `po-tools.py dor` | Quy ước chung các team. Bản hẹp phía PO của Definition of Ready bên AWS; hai mục thiết kế đã xem và đã ước lượng do Design, Dev làm trên Jira |
 | Nguyên tắc chia story | Định nghĩa story, tiêu chí INVEST, dấu hiệu quá lớn, 8 cách tách, các cách không chia, ở `engine/standards/story-splitting.md` | PO-Workflow, theo AWS user-story-patterns |
@@ -43,7 +43,7 @@ Thuật ngữ và họ mã của PO-Workflow, theo AWS AI-DLC Workflows 2.11, fi
 | Hook | `engine/scripts/po-hook.py`, chạy khi PO gửi câu, khi PO chọn trong hộp chọn, và trước mỗi lần AI sửa file hoặc chạy lệnh shell. Ghi sổ lượt người và chặn sửa trái quy trình | AWS core/hooks |
 | Review digest | `reviews/review-<slug>-<NN>.digest`, dấu của artifact lúc gọi reviewer, ghi bằng `po-tools.py review-start`. `approve` so dấu này để biết review còn ứng với bản hiện tại | AWS gắn biên nhận review với đúng bản đã review |
 | Bản chỉ mục cho Dev | `intents/INDEX.md` do `po-tools.py index` sinh: mã tính năng, bản PRD đã duyệt, service bị chạm, tag, số story đạt điều kiện giao Dev | PO-Workflow |
-| Tag bản duyệt | `<intent>/prd-v<X.Y>`, gắn mỗi lần PRD hoặc Decision Brief được duyệt; agent của Dev đọc theo tag | PO-Workflow |
+| Tag bản duyệt | `<intent>/prd-v<X.Y>` hoặc `<intent>/decision-brief-v<X.Y>`, gắn mỗi lần PRD hoặc Decision Brief được duyệt; agent của Dev đọc theo tag | PO-Workflow |
 | Phiên bản artifact | 0.x là bản nháp; lần duyệt đầu là 1.0; mỗi lần duyệt lại sau change request tăng số phụ | PO-Workflow |
 | Mức độ trưởng thành | Quy trình đã sẵn sàng tới đâu, theo 2 trục: phạm vi sử dụng (cá nhân, team, liên team, nhân rộng) và giao tiếp (người với người, người với máy, máy với máy). Đánh giá ở README mục 9 | PO-Workflow |
 | Archive | Bản chụp tại gate và trước CR, không sửa | AWS |

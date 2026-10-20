@@ -28,6 +28,7 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - [ ] 2.32 solution-options
 - [ ] 2.4 user-stories
 - [ ] 2.42 prd-generation
+- [ ] 2.43 design-alignment
 
 ## Current
 | | |
