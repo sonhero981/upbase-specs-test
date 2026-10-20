@@ -100,6 +100,7 @@ Nhật ký quyết định của intent. Chuyển từ `archive/v1/project-decis
 | DEC94 | 2026-10-20 11:12 | 2.42 | Approve PRD Generation, prd.md v0.4 | "duyệt hãy chạy luôn giúp tôi" | buidhui | prd-generation |
 | DEC95 | 2026-10-20 | 2.42 · CR4 | **Mở CR4 và duyệt lại PRD thành v0.5.** Sau khi duyệt v0.4 (DEC94), AI sửa hai ô ở bảng đầu PRD (trạng thái tài liệu, người duyệt) ngoài change request, làm `prd.md` lệch bản lưu đã duyệt. CR4 chỉ chạm bảng đầu và dòng Document version, không đổi nội dung nghiệp vụ, không review lại | "Duyệt lại nhanh thành v0.5 (Recommended)" | buidhui | 2.42, CR |
 | DEC96 | 2026-10-20 11:26 | 2.42 | Approve PRD Generation, prd.md v0.5; duyệt khi review không ứng với bản hiện tại | "Duyệt lại nhanh thành v0.5" · "CR4 chỉ sửa hai ô bảng đầu, không review lại" | buidhui | prd-generation |
+| DEC97 | 2026-10-20 | 2.43 | **Mở 2.43 Design Alignment, giao ba team.** Khung ba file thiết kế tạo từ template, chỉ điền frontmatter: owner theo vai, `inputs: prd@0.5`. Không đặt hạn, PIC ghi theo vai, theo DEC86 và DEC92 | "Group: bắt đầu 2.43 (Recommended)" | buidhui | 2.43 |
 
 ## Change requests
 | CR | Ngày | Nguồn | Nội dung | Stage mở lại | Artifact đổi | Trạng thái |

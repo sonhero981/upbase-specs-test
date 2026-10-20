@@ -28,13 +28,13 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - [S] 2.32 solution-options · v1 không làm so sánh phương án; Bước 7 dùng để chốt nhóm câu hỏi D
 - [x] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story và 20 US, v0.3. Duyệt lại theo v2 2026-10-12 (DEC82) sau một lần Request Changes (DEC80, CR2); truy vết tay ở inception/prd/traceability.md. 20 US chốt ở 9A của v1 ngày 2026-10-06
 - [x] 2.42 prd-generation · v1: inception/prd/prd.md v0.3 duyệt 2026-10-12 (CR2, chạm US3 US7 US19 US20, danh sách US, tồn đọng; DEC82). v0.2 duyệt 2026-10-09 (CR1, chạm US9 US11 US13 US16 US20). v0.1 duyệt và publish Lark 2026-10-06. Đang sửa theo CR3 từ 2026-10-20: thêm khối AC và dòng Ưu tiên (DEC92). CR4 ngày 2026-10-20: chỉ bảng đầu, chờ duyệt v0.5 (DEC95)
-- [ ] 2.43 design-alignment
+- [-] 2.43 design-alignment · mở 2026-10-20; khung ba file thiết kế đã tạo, inputs prd@0.5. Chờ ba PIC viết, không đặt hạn (DEC86, DEC92)
 
 ## Current
 | | |
 |---|---|
-| Stage | 2.43 design-alignment |
-| Next action | Bắt đầu 2.43 Design Alignment |
+| Stage | 2.43 design-alignment: chờ Design PIC, Tech PIC, QA PIC viết file thiết kế từ PRD v0.5, không đặt hạn |
+| Next action | Ba PIC viết ux-design.md, tech-design.md, test-design.md và commit. Khi đủ, gọi /po 261005-group: chạy check design-alignment, viết Decision Brief, họp, ký |
 | Blocking questions open | 0 |
 | Open CR | none. CR4 đóng 2026-10-20 (DEC96), CR3 đóng 2026-10-20 (DEC94) |
 | Parked | no |
@@ -85,3 +85,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-20 status báo prd.md lệch bản lưu v0.4 vì AI sửa hai ô bảng đầu sau duyệt. PO chọn CR4 duyệt lại thành v0.5 (DEC95). Chụp pre-CR4. 2.42 về [?]
 - 2026-10-20 11:26 2.42 approved v0.5 bởi buidhui
 - 2026-10-20 PO duyệt PRD v0.5 (DEC96), đóng CR4. Publish Lark revision 75, đối chiếu khớp file
+- 2026-10-20 Mở 2.43 Design Alignment: tạo khung ux-design.md, tech-design.md, test-design.md (owner theo vai, inputs prd@0.5); intent.md ghi PIC theo vai. Chờ ba PIC, không đặt hạn

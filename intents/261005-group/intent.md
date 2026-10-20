@@ -32,6 +32,7 @@ Tenant: làm cho UpBase, dữ liệu và hạ tầng cho mọi tenant. Số cấ
 |---|---|
 | Figma | chưa có |
 | Jira Epic / Story | chưa có |
+| Design PIC · Tech PIC · QA PIC | Ghi theo vai, PIC điền tên khi ký Decision Brief (DEC86, DEC92) |
 | KB cần đọc | `04-class.md` (phân biệt với Lớp) · `06-user-account.md` · `12-data-model.md` · `14-api-surface.md` · `16-domain-principles.md` nguyên tắc 6, ranh giới Nhóm với Lớp |
 | Schema DB | [Lark Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd), đã đối chiếu 05/10/2026 |
 | Swagger | `uplms-api.staging.upbase.asia/{lms\|ops}/api/v1/docs`, tên miền mới từ 05/10/2026; hai host cũ `lms-be`, `ops-be` đã bỏ |
@@ -52,7 +53,7 @@ Tên trên Lark khác tên file (`[PRD] Nhóm học viên`): lần publish sau g
 
 ## Việc còn treo
 1. ~~`competitive-analysis.md` v0.2 §9.2, ba điểm chờ PO xem~~ Đã quyết 09/10/2026, CR1: `US16` ở Ops · thêm `MAIL-GRP-02` · câu cảnh báo trong `MAIL-GRP-01`. Duyệt lại và publish PRD v0.2 cùng ngày.
-2. HLD Brief v0.1 đã soạn 12/10/2026 (`inception/hld-brief/hld-brief.md`), theo vai, không ghi tên PIC. Chờ Design PIC, Tech PIC, QA PIC ghi mục 8, 9, 10 và ký mục 12 qua merge request. Sau sign-off: publish `[HLD] Group` lên Lark, sửa PRD theo định hướng PIC và đóng tồn đọng #3, #4 theo DEC84, DEC85.
+2. Stage 2.43 Design Alignment mở 20/10/2026, thay cho HLD Brief đã bỏ (bản cũ ở `archive/hld-brief/`). Chờ Design PIC, Tech PIC, QA PIC viết `inception/ux-design/ux-design.md`, `inception/tech-design/tech-design.md`, `inception/test-design/test-design.md` từ PRD v0.5, không đặt hạn. Đủ ba file thì AI viết Decision Brief để họp chốt.
 3. Jira Epic và Story trống. User Guide viết sau khi Dev xong, qua `/generate-user-guide`.
 
 ## Mapping từ luồng v1
