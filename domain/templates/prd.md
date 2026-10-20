@@ -56,7 +56,7 @@ services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
 
 # Out of scope
 
-*Chép từ HLD Brief mục 3. Cấp tính năng, kèm lý do một câu. Gồm cả thứ từng nằm trong phạm vi rồi bị loại theo CR nào.*
+*Chép từ HLD Brief mục 3. Cấp tính năng, kèm lý do một câu. Gồm cả thứ từng nằm trong phạm vi nhưng bị loại theo CR nào.*
 
 | Không làm | Vì sao |
 | --- | --- |
@@ -100,6 +100,13 @@ services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
 
 *Chép từ HLD Brief mục 9 do Tech PIC viết, cộng ràng buộc nghiệp vụ mà cách làm nào cũng phải thoả. Ghi điều phải đúng, để Dev quyết làm thế nào. Không sequence diagram, không cấu trúc bảng, không thuật toán, không thư viện.*
 
+## Vòng đời trạng thái
+
+*Tuỳ chọn. Chỉ viết khi tính năng có đối tượng đổi trạng thái mà người dùng thấy, như lớp, đơn, chứng chỉ. Mức nghiệp vụ, không thiết kế bảng. Không áp dụng thì xoá mục.*
+
+| Trạng thái | Sự kiện chuyển | Ai kích hoạt | Điều kiện | Trạng thái sau |
+| --- | --- | --- | --- | --- |
+
 ## Data to Retain
 
 *Thông tin nghiệp vụ nào bắt buộc phải lưu và vì sao. Không khai bảng, cột, kiểu dữ liệu.*
@@ -116,7 +123,7 @@ services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
 | Unit | Gồm US | Phụ thuộc | Release độc lập được? |
 | --- | --- | --- | --- |
 
-**Thứ tự đề xuất:** *U1 rồi U2*. Chỉ đề xuất, Dev chốt.
+**Thứ tự đề xuất:** *U1, sau đó U2*. Chỉ đề xuất, Dev chốt.
 
 *Profile S bỏ mục này.*
 
@@ -132,9 +139,11 @@ services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
 
 *Một câu tự nhiên theo vai. Ví dụ: "Là vận hành, tôi cần mapping kho vật lý với kho kênh bán để xử lý đơn và trừ tồn đúng kho."*
 
+**Ưu tiên:** *Must, Should hoặc Could, lấy từ stories.md. Story List đổi sang cột Priority trên Jira.*
+
 ### 2/ Pre - Condition
 
-*Trạng thái dữ liệu, quyền, cấu hình, US khác đã xong.*
+*Trạng thái dữ liệu, quyền, cấu hình. US khác phải xong trước thì ghi mã, ví dụ `US2`: story này chỉ đủ điều kiện giao Dev khi US đó đạt.*
 
 ### 3/ Scenario
 
@@ -144,12 +153,14 @@ services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
 
 **Tiêu chí chấp nhận**
 
-*Mỗi dòng một tiêu chí kiểm được, có đạt hoặc không đạt, viết theo hành vi người dùng thấy. Luồng chính và mỗi nhánh đáng kể có ít nhất một AC. Mỗi BR bên dưới có ít nhất một AC trỏ tới. Validate của cùng một màn gom thành một AC trỏ về bảng UI, không mỗi dòng bảng một AC. Mã ổn định, không đánh lại.*
+*Mỗi dòng một tiêu chí kiểm được, có đạt hoặc không đạt, viết theo hành vi người dùng thấy. Luồng chính và mỗi nhánh đáng kể có ít nhất một AC. Mỗi US có ít nhất một AC cho nhánh lỗi hoặc bị từ chối; mỗi ngưỡng số có AC ở giá trị biên. Mỗi BR bên dưới có ít nhất một AC trỏ tới. Validate của cùng một màn gom thành một AC trỏ về bảng UI, không mỗi dòng bảng một AC. Mã ổn định, không đánh lại.*
 
 - `AC1.1` *Khi <điều kiện hoặc hành động>, <kết quả quan sát được>. Theo `BR1.1`*
 - `AC1.2` *Khi bỏ trống field bắt buộc ở màn <tên màn>, hệ thống báo lỗi và không cho lưu, theo cột Yêu cầu của bảng UI*
 
 **UI / UX / Rule UX / Rule UI**
+
+*Cột Màn hình ghi mã màn do Design PIC đặt ở HLD Brief mục 8, ví dụ `SCR2` Trang khoá học.*
 
 *Dạng A, tính năng mới:*
 
@@ -164,7 +175,7 @@ services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
 
 **Business requirement — Business rule**
 
-- `BR1.1` *Rule nghiệp vụ, khẳng định kiểm chứng được. Rule chạm tính năng có sẵn thì dẫn mã KB, ví dụ `BR-EDIT-07`, `KB-CLASS-03`*
+- `BR1.1` *Rule nghiệp vụ, khẳng định kiểm chứng được. Rule chạm tính năng có sẵn thì dẫn mã KB, ví dụ `BR-EDIT-07`, `KB-CLASS-03`. Rule có điều kiện thì ghi thêm: khi nào áp · nếu vi phạm thì hệ thống làm gì*
 - `BR1.2` *…*
 
 **Data Field**
@@ -212,4 +223,4 @@ services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
 
 # Comments
 
-*Trao đổi trong quá trình review.*
+*Trao đổi trong quá trình review, gồm góp ý của QA PIC về tiêu chí chấp nhận: nguyên văn, tên người góp ý, quyết định của PO.*

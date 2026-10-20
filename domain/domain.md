@@ -20,6 +20,7 @@ File này là manifest của domain pack. Engine đọc nó ở đầu mỗi phi
 - Tenant: tính năng làm cho UpBase, nhưng dữ liệu và hạ tầng thiết kế cho đa tenant ngay từ đầu. Mọi hằng số cứng phải khai báo là cứng hay cấu hình được. Bốn câu kiểm chiều tenant ở `15-product-direction.md` mục 6
 - Vai người dùng hay gặp: học viên, mentor và mentor chính, nhân sự vận hành, L&D, quản lý trực tiếp, admin tenant
 - Ngôn ngữ tài liệu: tiếng Việt, thuật ngữ sản phẩm giữ tiếng Anh
+- Thiết bị và accessibility mặc định cho mọi intent: ❓PO. Ghi thiết bị hỗ trợ, ví dụ web máy tính và điện thoại, và mức accessibility, ví dụ WCAG 2.1 AA; 2.3 chỉ hỏi khi intent khác mặc định
 
 ## 2. Nguồn sống và bản chốt
 
@@ -72,7 +73,7 @@ KB theo module `01` đến `11`; mail event `13`; data model `12` khi chạm d�
 - Tenant: bốn câu ở `15-product-direction.md` mục 6
 
 ### 2.42 PRD Generation
-Nguồn field: Swagger `components.schemas`, rồi `12-data-model.md`, rồi KB theo module. Template PRD: `templates/prd.md`; tên mục do chủ template công ty quyết giữ nguyên: Metrics success, Specific Requirement, Pre - Condition, Conner case. Template gốc của công ty: `templates/prd-template-goc-lark.md`.
+Nguồn field: Swagger `components.schemas`, sau đó `12-data-model.md`, cuối cùng là KB theo module. Template PRD: `templates/prd.md`; tên mục do chủ template công ty quyết giữ nguyên: Metrics success, Specific Requirement, Pre - Condition, Conner case. Template gốc của công ty: `templates/prd-template-goc-lark.md`.
 
 ### Publish
 Lark wiki space `7660816820865093342`; node cha chung `02. Execution — Epics & Features`, token `X3hhwv2MxizpFgkVudVl7e52gUc`; mỗi intent một node con, tài liệu nằm trong node đó. Tên tài liệu: `[Brief]`, `[HLD]`, `[PRD]` kèm tên tính năng. Công cụ: `lark-cli`, xem `/publish-lark`.
