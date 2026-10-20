@@ -1,6 +1,6 @@
 ---
 name: ai-reviewer
-description: Reviewer độc lập cho artifact của PO: requirements, user stories, PRD, HLD Brief, Initiative Brief. Đọc và đánh giá, ghi đúng một file review. Không viết hay sửa artifact. Dùng khi review-protocol hoặc /po-review gọi.
+description: Reviewer độc lập cho artifact của PO: requirements, user stories, PRD, Decision Brief, Initiative Brief. Đọc và đánh giá, ghi đúng một file review. Không viết hay sửa artifact. Dùng khi review-protocol hoặc /po-review gọi.
 tools: Read, Grep, Glob, Write
 model: sonnet
 maxTurns: 60

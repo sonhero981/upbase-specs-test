@@ -40,8 +40,8 @@ Phần lớn sản phẩm dùng quy trình này đã có người dùng và dữ
 | Đầu ra | Người nhận | Khi nào |
 |---|---|---|
 | Initiative Brief | Người quyết đầu tư | Cuối Ideation, profile L |
-| HLD Brief | Design PIC, Tech PIC, QA PIC | Trước khi viết PRD, profile M và L |
-| PRD | Design, Dev, QA | Cuối Inception |
+| PRD | Design, Dev, QA | Sau 2.4; các team thiết kế từ bản này |
+| Decision Brief | Design PIC, Tech PIC, QA PIC, PO | Sau khi các team viết thiết kế, profile M và L |
 | Story List để import lên Jira, mỗi user story một dòng | Design, Tech, QA | Sau khi PRD được duyệt |
 | User Guide | Người dùng cuối | Sau khi Dev làm xong |
 
@@ -57,7 +57,7 @@ Mọi quy tắc trong quy trình xuất phát từ 7 nguyên lý. Gặp một qu
 | Requirements Engineering | Khơi gợi, phân tích, đặc tả, kiểm chứng là bốn việc tách biệt | Questions file, phân tích yêu cầu và ảnh hưởng, PRD, kiểm tra | BABOK v3, IIBA |
 | Context Engineering | AI làm tốt khi được nạp đúng và đủ thông tin | Bước Load đầu mỗi stage đọc domain pack, nhật ký quyết định, bài học | Anthropic, 2025 |
 | Quality Gate | Mỗi đầu ra là nền cho đầu ra sau, nên phải được kiểm trước khi đi tiếp | Script kiểm, checklist có mục chặn, AI Reviewer, năm lựa chọn tại gate | Stage-Gate, Robert G. Cooper, 1986 |
-| Iterative Refinement | Chi tiết tăng theo mức chắc chắn | Profile S, M, L; thẻ user story trước, acceptance criteria sau HLD Brief | PMBOK, progressive elaboration |
+| Iterative Refinement | Chi tiết tăng theo mức chắc chắn | Profile S, M, L; thẻ user story trước, PRD chi tiết sau, thiết kế của các team sau PRD | PMBOK, progressive elaboration |
 | Requirement Traceability | Yêu cầu, user story, rule, tiêu chí chấp nhận truy được về nhau và về nguồn | Mã ổn định, thẻ nguồn, bảng truy vết, mã đầy đủ khi bàn giao | Gotel và Finkelstein, 1994; ISO/IEC/IEEE 29148 |
 | Responsible AI | AI không tự điền khi thiếu thông tin; người chịu trách nhiệm cuối | Ký hiệu `❓PO`, đọc lại nguồn sống, chỉ đăng bản đã duyệt | NIST AI RMF 1.0, 2023 |
 
@@ -84,15 +84,15 @@ flowchart TD
     S231 ==>|"gate"| S232["2.32 Solution Options<br/>có điều kiện"]
     S231 --> S24
     S232 ==>|"gate"| S24["2.4 User Stories<br/>thẻ US"]
-    S24 ==>|"gate"| S241["2.41 HLD Brief & Alignment"]
-    S241 ==>|"Alignment gate<br/>3 PIC ký"| S242["2.42 PRD Generation<br/>AC, BR"]
-    S242 ==>|"gate"| ST["Story List<br/>import lên Jira"]
+    S24 ==>|"gate"| S242["2.42 PRD Generation<br/>AC, BR"]
+    S242 ==>|"gate"| S243["2.43 Design Alignment<br/>3 file thiết kế, Decision Brief"]
+    S243 ==>|"Alignment gate<br/>3 PIC ký"| ST["Story List<br/>import lên Jira"]
     ST --> UG["User Guide<br/>sau khi Dev xong"]
 ```
 
 ### 3.2 10 stage
 
-Số stage 1.1, 1.2, 1.4, 1.7, 2.3, 2.4 giữ theo AWS. 4 stage PO-Workflow thêm mang số thập phân để chen vào giữa: 2.31 và 2.32 sau 2.3, 2.41 và 2.42 sau 2.4. Định danh của stage là slug, ví dụ `impact-analysis`; số chỉ để hiển thị thứ tự. Các stage AWS giao cho kiến trúc sư, delivery, design hoặc developer, như 1.3, 1.5, 1.6, 2.1, 2.2 và 2.5 tới 2.9, không có trong repo này.
+Số stage 1.1, 1.2, 1.4, 1.7, 2.3, 2.4 giữ theo AWS. 4 stage PO-Workflow thêm mang số thập phân để chen vào giữa: 2.31 và 2.32 sau 2.3, 2.42 và 2.43 sau 2.4. Số 2.41 từng dùng cho HLD Brief, đã bỏ ngày 20/10/2026 và không dùng lại. Định danh của stage là slug, ví dụ `impact-analysis`; số chỉ để hiển thị thứ tự. Các stage AWS giao cho kiến trúc sư, delivery, design hoặc developer, như 1.3, 1.5, 1.6, 2.1, 2.2 và 2.5 tới 2.9, không có trong repo này.
 
 | Stage | Mục đích | Artifact chính | Profile | Nguồn |
 |---|---|---|---|---|
@@ -104,9 +104,9 @@ Số stage 1.1, 1.2, 1.4, 1.7, 2.3, 2.4 giữ theo AWS. 4 stage PO-Workflow thê
 | 2.3 Requirements Analysis | Chuyển phạm vi thành yêu cầu có mã; tra KB tìm trùng lặp và rule chi phối | `requirements.md` | S, M, L | AWS |
 | 2.31 Impact Analysis | Xác định phần nào của hệ thống đang chạy bị ảnh hưởng; tìm conflict | `impact-matrix.md` | M, L | PO-Workflow |
 | 2.32 Solution Options | So sánh các hướng giải theo bảy tiêu chí | `solution-options.md` | L, có điều kiện | PO-Workflow |
-| 2.4 User Stories | Chia yêu cầu thành user story; mỗi US một thẻ chín mục đủ cho các PIC viết định hướng | `stories.md` | M, L | AWS |
-| 2.41 HLD Brief & Alignment | Tài liệu tối đa ba trang để các PIC ghi định hướng và ký | `hld-brief.md` | M, L | PO-Workflow |
-| 2.42 PRD Generation | PRD theo template công ty, chi tiết từng US theo HLD Brief, có tiêu chí chấp nhận và truy vết | `prd.md` | S, M, L | PO-Workflow |
+| 2.4 User Stories | Chia yêu cầu thành user story; mỗi US một thẻ chín mục đủ để viết PRD | `stories.md` | M, L | AWS |
+| 2.42 PRD Generation | PRD theo template công ty, chi tiết từng US, có tiêu chí chấp nhận và truy vết | `prd.md` | S, M, L | PO-Workflow |
+| 2.43 Design Alignment | Ba team viết thiết kế từ PRD; AI đối chiếu và viết Decision Brief; họp, 3 PIC ký | `decision-brief.md` | M, L | PO-Workflow |
 
 Mỗi file stage trong `engine/stages/` có bảng metadata với hàng "Lệch so với AWS", ghi điểm khác với stage cùng số của AWS. 2 stage gốc có chỉnh: 1.4 gộp intent backlog vào scope-document, và 2.4 không viết acceptance criteria, không chạy nhiều agent cùng góp ý.
 
@@ -117,7 +117,7 @@ Khi tạo intent, AI quét nhanh và đề xuất profile kèm lý do; PO có qu
 | Profile | Độ lớn và độ phức tạp | Stage chạy | AI Reviewer | Số gate |
 |---|---|---|---|---|
 | S | Một màn, không đổi data model, không đổi rule có sẵn, không chạm module khác, không chạm tính năng ẩn, không tích hợp ngoài, không migration | 2.3 và 2.42, PRD rút gọn | 2.42 | 2 |
-| M | Tối đa hai module, thêm field nhưng không đổi quan hệ bảng, không conflict, hướng giải đã rõ | 1.1 và 1.4 duyệt chung, 2.3, 2.31, 2.4, 2.41, 2.42 | 2.3, 2.4, 2.42 | 6 |
+| M | Tối đa hai module, thêm field nhưng không đổi quan hệ bảng, không conflict, hướng giải đã rõ | 1.1 và 1.4 duyệt chung, 2.3, 2.31, 2.4, 2.42, 2.43 | 2.3, 2.4, 2.42 | 6 |
 | L | Có ít nhất một yếu tố: từ ba module, đổi data model, conflict với rule hiện có, chạm tính năng ẩn, nhiều hướng giải, tích hợp ngoài, migration, thao tác không hoàn tác được | Đủ 10 stage; 1.2 và 2.32 khi cần | 1.1, 2.3, 2.4, 2.42 | 8 đến 10 |
 
 Depth quyết định mức chi tiết của artifact. Template đánh dấu mục tuỳ chọn bằng `<!-- tuỳ chọn -->`; mục không có dấu là bắt buộc.
@@ -130,7 +130,7 @@ Depth quyết định mức chi tiết của artifact. Template đánh dấu m�
 
 ### 3.4 Chuỗi đầu ra
 
-Các artifact sinh ra theo thứ tự: Unit ở 1.4, FR ở 2.3, user story ở 2.4, HLD Brief ở 2.41, cuối cùng là acceptance criteria và business rule trong PRD ở 2.42. Acceptance criteria chỉ viết sau khi các PIC đã ký định hướng, vì viết trước sẽ phải sửa lại khi hướng làm đổi.
+Các artifact sinh ra theo thứ tự: Unit ở 1.4, FR ở 2.3, user story ở 2.4, acceptance criteria và business rule trong PRD ở 2.42, sau đó ba file thiết kế của các team và Decision Brief ở 2.43. Các team thiết kế từ PRD chi tiết, vì định hướng ngắn không đủ để làm Technical Design, Test Design và UI/UX Design. PRD chỉ chứa yêu cầu; thiết kế nằm ở file của từng team.
 
 ```mermaid
 flowchart LR
@@ -138,19 +138,22 @@ flowchart LR
         direction LR
         S14["1.4 Unit<br/>U1, U2"] --> S23["2.3 Yêu cầu<br/>FR1, NFR1"]
         S23 --> S24["2.4 Thẻ US<br/>gắn Unit, chưa có AC"]
-        S24 --> S241["2.41 HLD Brief<br/>3 PIC ký"]
-        S241 --> S242["2.42 PRD<br/>AC, BR, truy vết"]
-        S242 --> ST["Story trên Jira<br/>mã đầy đủ"]
+        S24 --> S242["2.42 PRD<br/>AC, BR, truy vết"]
+        S242 --> DB["2.43 Decision Brief<br/>3 PIC ký"]
+        DB --> ST["Story trên Jira<br/>mã đầy đủ, mã màn"]
     end
-    subgraph NEXT["Phase sau, các team"]
+    subgraph TEAMS["Các team, ở 2.43"]
         direction LR
-        D["Design<br/>màn hình SCR"]
-        T["Tech<br/>chia việc, nhánh code"]
-        Q["QA<br/>test case TC"]
+        D["ux-design<br/>màn hình SCR"]
+        T["tech-design<br/>thành phần, Unit of work"]
+        Q["test-design<br/>phủ AC"]
     end
-    ST ==> D
-    ST ==> T
-    ST ==> Q
+    S242 ==> D
+    S242 ==> T
+    S242 ==> Q
+    D ==> DB
+    T ==> DB
+    Q ==> DB
 ```
 
 Unit trong PO-Workflow là nhóm user story theo giá trị và ưu tiên; AWS gọi khái niệm này là proto-Unit. Dev chia việc của mình trong phase Construction theo kiến trúc, có thể khác cách nhóm của PO.
@@ -223,21 +226,21 @@ Stage có điều kiện, chạy khi có từ hai hướng giải hoặc PO chư
 
 ### 2.4 User Stories
 
-AI chia yêu cầu thành user story, mỗi US gắn một Unit và mỗi FR có US phủ. Mỗi US có một thẻ chín mục: vai và mục tiêu, bối cảnh, luồng chính, nhánh đáng kể, rule đã biết, dữ liệu và vùng chạm, ngoài phạm vi, phụ thuộc, chưa rõ. Thẻ đủ để các PIC đọc và viết định hướng mà không cần mở requirements; thẻ chưa có acceptance criteria. Script truy vết kiểm FR chưa có US và US không truy về FR.
-
-### 2.41 HLD Brief & Alignment
-
-HLD Brief là tài liệu tối đa ba trang, dùng cho buổi checkpoint, tức buổi PO làm việc với Design PIC, Tech PIC, QA PIC trước khi viết PRD. AI viết mục 1 tới 7 và mục 11 từ artifact đã duyệt, không thêm nội dung mới. Design PIC viết mục 8, Tech PIC mục 9, QA PIC mục 10, trực tiếp trên repo; đầu mỗi mục có tối đa năm dòng điểm cần lưu ý cho vai đó. Mục 9 là định hướng kỹ thuật gồm tám ý, trong đó có service hoặc repo code bị chạm, dùng đúng tên Dev dùng. Design PIC cấp mã màn hình `SCR-` ở mục 8. Câu hỏi và ý kiến về mục của người khác ghi vào mục 7 theo cùng định dạng bảng câu hỏi mở.
-
-Gate của stage là Alignment gate. Approve khi cả ba PIC ghi Đồng ý hoặc Có ý kiến ở mục 12. Một PIC ghi Yêu cầu sửa thì gate là Request Changes.
+AI chia yêu cầu thành user story, mỗi US gắn một Unit và mỗi FR có US phủ. Mỗi US có một thẻ chín mục: vai và mục tiêu, bối cảnh, luồng chính, nhánh đáng kể, rule đã biết, dữ liệu và vùng chạm, ngoài phạm vi, phụ thuộc, chưa rõ. Thẻ đủ để PO viết PRD chi tiết mà không cần mở lại requirements; thẻ chưa có acceptance criteria. Các PIC không xem thẻ ở bước này; họ đọc PRD chi tiết một lần ở 2.43. Script truy vết kiểm FR chưa có US và US không truy về FR.
 
 ### 2.42 PRD Generation
 
 Bước hỏi là Field Intake: AI tra Impact Matrix, data model, API spec và KB, phân loại mỗi màn là mới, sửa màn có sẵn hoặc chỉ đọc, sau đó lập một bảng field, rule, validate để PO duyệt. Field hiện có chỉ hỏi phần thay đổi. Profile S cũng phải qua bước này.
 
-PRD theo template của công ty. Phần đầu chép từ HLD Brief. Phần Specific Requirement viết từng US với sáu mục: User story, Pre-Condition, Scenario, Acceptance criteria, Out of scope, Conner case để QA điền. Mục Acceptance criteria mở đầu bằng danh sách tiêu chí chấp nhận có mã `AC<US>.<n>`, tiếp theo là bảng UI, business rule mã `BR<US>.<n>`, data field và NFR. Cách viết tiêu chí chấp nhận ở mục 6.5.
+PRD theo template của công ty. Phần đầu lấy từ artifact đã duyệt: intent statement, scope, stories, solution options. Phần Specific Requirement viết từng US với sáu mục: User story, Pre-Condition, Scenario, Acceptance criteria, Out of scope, Conner case để QA điền. Mục Acceptance criteria mở đầu bằng danh sách tiêu chí chấp nhận có mã `AC<US>.<n>`, tiếp theo là bảng UI, business rule mã `BR<US>.<n>`, data field và NFR. Cách viết tiêu chí chấp nhận ở mục 6.5.
 
-Chi tiết của từng US bám HLD Brief. Điểm brief chưa nói, AI ghi đề xuất có đánh dấu kèm câu hỏi gắn tên PIC. Điểm mâu thuẫn với brief, AI hỏi PO; đổi hướng thì đi qua change request và brief phải ký lại. Quy tắc cố định: không có mục Database và API, không thiết kế bảng hoặc thuật toán, hằng số ghi rõ là giá trị cứng hay cấu hình, field hiện có không mô tả như mới, không dấu vết quy trình, không viết tắt.
+PRD viết trước khi các team thiết kế. Điểm phụ thuộc thiết kế hay kỹ thuật mà artifact đã duyệt chưa nói, AI ghi đề xuất có đánh dấu kèm câu hỏi gắn tên PIC; các team trả lời ở 2.43. Quy tắc cố định: không có mục Database và API, không thiết kế bảng hoặc thuật toán, hằng số ghi rõ là giá trị cứng hay cấu hình, field hiện có không mô tả như mới, không dấu vết quy trình, không viết tắt.
+
+### 2.43 Design Alignment
+
+Chạy ở profile M và L, sau khi PRD được duyệt. Design PIC, Tech PIC, QA PIC đọc PRD và viết ba file riêng trong intent: `inception/ux-design/ux-design.md` gồm danh sách màn có mã `SCR`, luồng, accessibility; `inception/tech-design/tech-design.md` gồm thành phần bị chạm, quyết định kỹ thuật, dữ liệu, cách đáp ứng BR và NFR, Unit of work và độ lớn; `inception/test-design/test-design.md` gồm chiến lược, kế hoạch phủ từng AC, vùng hồi quy. Mỗi file có mục Ý kiến về PRD với lập trường Đồng ý, Đề xuất sửa, Phản đối. AI của PO không viết và không sửa ba file này.
+
+AI đối chiếu ba file với PRD: script kiểm US có giao diện đã có màn chưa, AC đã có trong kế hoạch test chưa, US đã có trong thiết kế kỹ thuật chưa, file có dựng từ bản PRD hiện tại không; AI đọc thêm mâu thuẫn giữa các thiết kế, độ lớn so với mốc, ý kiến của các team. Kết quả là Decision Brief, tối đa 1.500 từ cho phần tổng hợp, chỉ ghi điểm cần người quyết, kèm bảng Ký. Họp trên Decision Brief; quyết định đổi yêu cầu đi change request trên PRD. Gate là Alignment gate: Approve khi cả ba PIC ghi Đồng ý hoặc Có ý kiến. Story List chỉ sinh sau gate này. Quyết định chọn cách làm này và so sánh với AWS ở `engine/standards/adr/0003-thiet-ke-cua-team-va-decision-brief.md`.
 
 ## 5. Kiểm tra chất lượng
 
@@ -245,7 +248,7 @@ Mỗi gate có hai lớp kiểm. Lớp thứ nhất do máy làm, lớp thứ ha
 
 | Lớp | Công cụ | Kiểm gì |
 |---|---|---|
-| Máy | `po-tools.py check` | Heading bắt buộc theo template, thẻ nguồn, `[Qn]` và `[DECn]` có thật, thẻ US đủ chín mục, chữ mẫu còn sót, giới hạn từ của HLD Brief, mục cấm trong PRD, mã AC không trùng, US thiếu Ưu tiên, giao diện chưa có mã màn, chưa thấy AC nhánh lỗi |
+| Máy | `po-tools.py check` | Heading bắt buộc theo template, thẻ nguồn, `[Qn]` và `[DECn]` có thật, thẻ US đủ chín mục, chữ mẫu còn sót, mục cấm trong PRD, mã AC không trùng, US thiếu Ưu tiên, chưa thấy AC nhánh lỗi; ở 2.43 thêm độ phủ của ba file thiết kế, giới hạn từ và chữ ký của Decision Brief |
 | Máy | `po-tools.py trace` | FR sang US, US sang FR, BR sang AC, US trong PRD; báo GAP và ORPHAN; dừng với lỗi khi không đọc được mã nào |
 | Phán đoán | Checklist trong `engine/verification/` | Phần cần đọc hiểu; mục có nhãn BLOCK chưa đạt thì gate không mở |
 | Phán đoán | AI Reviewer | Agent AI độc lập, không thấy hội thoại, dùng tiêu chí của Product Lead bên AWS; kết luận READY hoặc NOT-READY với finding Critical, Major, Minor |
@@ -265,10 +268,10 @@ Bản thân script có dữ liệu kiểm thử trong `engine/tests/fixtures/`: 
 
 | Team | Nhận | Ở đâu | Khi nào |
 |---|---|---|---|
-| Design | Thẻ US, HLD Brief mục 1 tới 7 để viết mục 8; PRD với bảng UI; story trên Jira để gắn màn hình | `inception/`, Jira | Từ 2.41 |
-| Tech | Thẻ US, Impact Matrix, HLD Brief để viết mục 9; PRD với Technical Direction, Data to Retain, Units, danh sách service bị chạm; story trên Jira để chia Unit of work và sub-task | `inception/`, Jira | Từ 2.41 |
-| QA | HLD Brief để viết mục 10; PRD với tiêu chí chấp nhận có mã; story trên Jira để gắn test case | `inception/`, Jira | Từ 2.41 |
-| Agent AI của Dev | PRD theo tag của bản đã duyệt; bảng chỉ mục; story trên Jira | Repo, `intents/INDEX.md`, Jira | Sau gate 2.42 |
+| Design | PRD với bảng UI để viết `ux-design.md`; Decision Brief để chốt; story trên Jira có mã màn | `inception/`, Jira | Từ khi PRD được duyệt |
+| Tech | PRD, Impact Matrix để viết `tech-design.md`; Decision Brief; story trên Jira để chia Unit of work và sub-task | `inception/`, Jira | Từ khi PRD được duyệt |
+| QA | PRD với tiêu chí chấp nhận có mã để viết `test-design.md`; Decision Brief; story trên Jira để gắn test case | `inception/`, Jira | Từ khi PRD được duyệt |
+| Agent AI của Dev | PRD theo tag của bản đã duyệt; ba file thiết kế; bảng chỉ mục; story trên Jira | Repo, `intents/INDEX.md`, Jira | Sau gate 2.43 |
 
 ### 6.2 Checkpoint và giao Dev
 
@@ -276,14 +279,14 @@ PO làm việc với các team ở 2 mốc.
 
 | Mốc | Khi nào | Đầu vào | Kết quả |
 |---|---|---|---|
-| Checkpoint | Stage 2.41, trước khi viết PRD | Thẻ US đã duyệt ở 2.4; HLD Brief đã xong mục 1 tới 7 và 11 | 3 PIC ghi mục 8, 9, 10 và ký mục 12; cách chia story và cỡ story được xác nhận |
-| Giao Dev | Sau khi PRD được duyệt | Story List import lên Jira | Story đạt điều kiện giao Dev, xem mục 6.7 |
+| Checkpoint | Stage 2.43, sau khi PRD được duyệt | PRD đã duyệt; ba file thiết kế của các team; Decision Brief | Họp trên Decision Brief, 3 PIC ký; cỡ story và thay đổi PRD được chốt |
+| Giao Dev | Sau gate 2.43 | Story List import lên Jira | Story đạt điều kiện giao Dev, xem mục 6.7 |
 
-Chi tiết nghiệp vụ, gồm business rule và tiêu chí chấp nhận, chỉ viết sau checkpoint. Vì vậy buổi checkpoint không đòi tiêu chí chấp nhận hoặc test case.
+Các team đọc PRD chi tiết một lần, thiết kế, sau đó chốt mọi điểm vướng trên một tài liệu ngắn. Luồng trước đó họp trên HLD Brief trước khi có PRD; bỏ ngày 20/10/2026 vì định hướng ngắn không đủ để các team thiết kế, lý do ở ADR 0003.
 
 ### 6.3 Nguyên tắc chia story
 
-Story là đơn vị nghiệm thu. Mỗi story là một việc người dùng làm trọn được và kiểm được bằng tiêu chí chấp nhận; mọi phần việc của Design, Tech, QA truy về story qua mã. PO chia story một lần ở 2.4, trước checkpoint. Story List sinh sau PRD giữ nguyên cách chia đó, mỗi US một story, và chỉ dùng để chia việc, không chia lại story.
+Story là đơn vị nghiệm thu. Mỗi story là một việc người dùng làm trọn được và kiểm được bằng tiêu chí chấp nhận; mọi phần việc của Design, Tech, QA truy về story qua mã. PO chia story một lần ở 2.4. Story List sinh sau checkpoint giữ nguyên cách chia đó, mỗi US một story, và chỉ dùng để chia việc, không chia lại story.
 
 PO chia story ở 2.4 theo nguyên tắc trong `engine/standards/story-splitting.md`. Tóm tắt:
 
@@ -294,7 +297,7 @@ PO chia story ở 2.4 theo nguyên tắc trong `engine/standards/story-splitting
 5. Không chia theo màn hình, tầng kỹ thuật, từng business rule, việc kỹ thuật thuần hoặc người làm.
 6. Mỗi story thuộc đúng một Unit.
 
-Cỡ story được xác nhận ở checkpoint: Tech PIC ghi ở mục 9 của HLD Brief story nào quá lớn để làm trong một sprint, PO tách trước khi viết PRD. Phát hiện story quá lớn sau khi PRD đã duyệt thì tách qua change request, phần tách ra nhận mã mới.
+Cỡ story được xác nhận ở checkpoint: Tech PIC ghi trong `tech-design.md` story nào quá lớn để làm trong một sprint; Decision Brief đưa ra họp; tách thì đi change request trên PRD trước khi sinh Story List, phần tách ra nhận mã mới.
 
 Mỗi team tự chia việc của mình từ story:
 
@@ -333,11 +336,11 @@ Tiêu chí chấp nhận là hợp đồng giữa PO và QA. Business rule đị
 - AC1.2 Khi bỏ trống field bắt buộc ở màn Tạo nhóm, hệ thống báo lỗi và không cho lưu, theo cột Yêu cầu của bảng UI
 ```
 
-Độ phủ bắt buộc: luồng chính và mỗi nhánh đáng kể trong thẻ US có ít nhất một tiêu chí; mỗi US có ít nhất một tiêu chí cho nhánh lỗi hoặc bị từ chối, như AC1.1 ở trên, và mỗi ngưỡng số có tiêu chí ở giá trị biên, theo AWS requirements-guide; mỗi business rule có ít nhất một tiêu chí trỏ tới. Validate của cùng một màn gom thành một tiêu chí trỏ về bảng UI, không mỗi dòng bảng một tiêu chí, để số test case không phình theo số field. Checklist của 2.42 chặn khi còn business rule chưa có tiêu chí chấp nhận hoặc US chưa có tiêu chí cho nhánh lỗi. Trước gate 2.42, QA PIC góp ý danh sách tiêu chí có kiểm thử được không, không chặn, có hạn; ý kiến ghi ở mục Comments của PRD và trình nguyên văn ở gate. AWS giao việc này cho quality agent ở 2.4; PO-Workflow làm ở 2.42 vì tiêu chí chấp nhận viết ở đây.
+Độ phủ bắt buộc: luồng chính và mỗi nhánh đáng kể trong thẻ US có ít nhất một tiêu chí; mỗi US có ít nhất một tiêu chí cho nhánh lỗi hoặc bị từ chối, như AC1.1 ở trên, và mỗi ngưỡng số có tiêu chí ở giá trị biên, theo AWS requirements-guide; mỗi business rule có ít nhất một tiêu chí trỏ tới. Validate của cùng một màn gom thành một tiêu chí trỏ về bảng UI, không mỗi dòng bảng một tiêu chí, để số test case không phình theo số field. Checklist của 2.42 chặn khi còn business rule chưa có tiêu chí chấp nhận hoặc US chưa có tiêu chí cho nhánh lỗi. Ở 2.43, QA PIC lập kế hoạch phủ từng tiêu chí trong `test-design.md` và ghi tiêu chí nào không kiểm thử được ở mục Ý kiến về PRD; Decision Brief đưa ra họp. AWS giao việc kiểm tính kiểm thử được cho quality agent ở 2.4; PO-Workflow làm ở 2.43 vì tiêu chí chấp nhận viết ở PRD.
 
 ### 6.6 Story List
 
-Sau khi PRD được duyệt, lệnh `/po-stories` sinh `intents/<intent>/stories/story-list-prd-v<phiên bản>.csv` theo mẫu import CSV của Jira, mỗi US trong PRD một dòng. PO import file này lên Jira; các team làm việc trên story Jira. Nội dung nghiệp vụ chỉ có một nguồn là PRD.
+Sau khi PRD được duyệt, và với profile M, L sau gate 2.43, lệnh `/po-stories` sinh `intents/<intent>/stories/story-list-prd-v<phiên bản>.csv` theo mẫu import CSV của Jira, mỗi US trong PRD một dòng. PO import file này lên Jira; các team làm việc trên story Jira. Nội dung nghiệp vụ chỉ có một nguồn là PRD.
 
 | Cột | Nội dung |
 |---|---|
@@ -345,7 +348,7 @@ Sau khi PRD được duyệt, lệnh `/po-stories` sinh `intents/<intent>/storie
 | Issue Type | `Story` |
 | Summary | Tên user story |
 | Priority | Từ dòng Ưu tiên của US trong PRD: Must thành Highest, Should thành High, Could thành Medium |
-| Description | Mô tả, điều kiện trước, kịch bản, tiêu chí chấp nhận, giao diện và validate, business rule, dữ liệu, NFR, ngoài phạm vi, tham chiếu tới PRD và tag. Cú pháp Jira, mã đầy đủ |
+| Description | Mô tả, điều kiện trước, kịch bản, tiêu chí chấp nhận, giao diện và validate, business rule, dữ liệu, NFR, ngoài phạm vi, tham chiếu tới PRD, tag và mã màn lấy từ `ux-design.md`. Cú pháp Jira, mã đầy đủ |
 | Epic Link | Mã Epic ở dòng Jira Epic của `intent.md`; nhiều Epic thì ghi `U2: <mã Epic>` để gán theo Unit |
 | Labels, 3 cột | Mã tính năng, mã story, mã tính năng kèm Unit |
 | Comment | Nguồn PRD và tag, kết quả điều kiện giao Dev, câu hỏi còn mở của story, nhắc Dev điền story point và thứ tự |
@@ -354,20 +357,21 @@ Trên Jira, Design gắn mã màn hình và link thiết kế, Tech gom story v�
 
 ### 6.7 Điều kiện giao Dev
 
-Một story được giao cho Dev khi đạt đủ 6 điều kiện:
+Một story được giao cho Dev khi đạt đủ 7 điều kiện:
 
 1. PRD đã duyệt.
-2. US có ít nhất một tiêu chí chấp nhận.
-3. Mọi business rule của US có ít nhất một tiêu chí chấp nhận trỏ tới.
-4. US không còn `❓PO`, và Open Issues của PRD không còn câu chặn gắn với US đó.
-5. US có bảng giao diện thì trỏ mã màn `SCR` do Design PIC đặt ở HLD Brief mục 8.
-6. US nêu ở Pre-Condition là phải xong trước cũng đạt các điều kiện trên.
+2. Profile M, L: 2.43 Design Alignment đã duyệt, tức các team đã thiết kế và đã chốt trên Decision Brief.
+3. US có ít nhất một tiêu chí chấp nhận.
+4. Mọi business rule của US có ít nhất một tiêu chí chấp nhận trỏ tới.
+5. US không còn `❓PO`, và Open Issues của PRD không còn câu chặn gắn với US đó.
+6. US có bảng giao diện thì có màn trong `ux-design.md`; Story List lấy mã màn `SCR` từ đó.
+7. US nêu ở Pre-Condition là phải xong trước cũng đạt các điều kiện trên.
 
 Đây là bản hẹp phía PO của Definition of Ready bên AWS. Hai mục còn lại của AWS là thiết kế đã được xem và story đã được ước lượng; Design và Dev làm hai việc này trên Jira. Lệnh `po-tools.py dor intents/<intent>` in story nào đạt, story nào chưa và vì sao; kết quả cũng ghi ở cột Comment của file CSV. Độ phủ test case do QA theo dõi trên Jira.
 
 ### 6.8 Phiên bản, tag và chỉ mục
 
-Mỗi lần duyệt PRD hoặc HLD Brief, script in tên tag dạng `<intent>/prd-v1.0`. PO commit PRD cùng file CSV, gắn tag và đẩy tag lên. Lệnh `po-tools.py index --write` sinh `intents/INDEX.md` gồm mã tính năng, bản PRD đã duyệt, ngày duyệt, service bị chạm, tag, link Lark và số story đạt điều kiện giao Dev. Agent AI của Dev, dùng công cụ nào cũng được, đọc PRD theo tag, nên luôn lấy đúng bản đã chốt. Lark là bản để người đọc; không sửa trên Lark và chép ngược về repo.
+Mỗi lần duyệt PRD hoặc Decision Brief, script in tên tag dạng `<intent>/prd-v1.0`. PO commit PRD cùng file CSV, gắn tag và đẩy tag lên. Lệnh `po-tools.py index --write` sinh `intents/INDEX.md` gồm mã tính năng, bản PRD đã duyệt, ngày duyệt, service bị chạm, tag, link Lark và số story đạt điều kiện giao Dev. Agent AI của Dev, dùng công cụ nào cũng được, đọc PRD theo tag, nên luôn lấy đúng bản đã chốt. Lark là bản để người đọc; không sửa trên Lark và chép ngược về repo.
 
 ### 6.9 Khi yêu cầu thay đổi sau bàn giao
 
@@ -375,11 +379,11 @@ Thay đổi chạm stage đã duyệt đi qua `/change-request`. PRD duyệt l�
 
 ### 6.10 Nơi lưu
 
-File CSV lưu trong `intents/<intent>/stories/` của repo PO, mỗi phiên bản PRD một file. Việc chia và theo dõi nằm trên Jira, theo `engine/standards/adr/0002-story-tren-jira.md`. Các PIC vẫn cần quyền ghi repo để viết HLD Brief. Phần làm việc nội bộ của PO hiển thị với người có quyền đọc repo, nên trước khi mở quyền, PO rà thông tin nhạy cảm như tài khoản staging; workflow gitleaks quét mỗi lần đẩy lên.
+File CSV lưu trong `intents/<intent>/stories/` của repo PO, mỗi phiên bản PRD một file. Việc chia và theo dõi nằm trên Jira, theo `engine/standards/adr/0002-story-tren-jira.md`. Các PIC cần quyền ghi repo để viết file thiết kế của mình và ký Decision Brief. Phần làm việc nội bộ của PO hiển thị với người có quyền đọc repo, nên trước khi mở quyền, PO rà thông tin nhạy cảm như tài khoản staging; workflow gitleaks quét mỗi lần đẩy lên.
 
 ## 7. Sau PRD
 
-`/publish-lark` đẩy Initiative Brief, HLD Brief hoặc PRD đã duyệt lên Lark wiki, vào node của intent. Lần đầu tạo doc mới; các lần sau cập nhật đúng doc cũ, giữ token và tên đã đặt trên Lark. Sau khi đẩy, AI đọc lại và đếm heading, bảng, sơ đồ so với file nguồn, vì API trả về thành công chưa chắc nội dung đã vào đúng vị trí.
+`/publish-lark` đẩy Initiative Brief, PRD hoặc Decision Brief đã duyệt lên Lark wiki, vào node của intent. Lần đầu tạo doc mới; các lần sau cập nhật đúng doc cũ, giữ token và tên đã đặt trên Lark. Sau khi đẩy, AI đọc lại và đếm heading, bảng, sơ đồ so với file nguồn, vì API trả về thành công chưa chắc nội dung đã vào đúng vị trí.
 
 `/change-request` phân loại thay đổi trước. Thay đổi nhỏ trong stage đang mở chỉ cần sửa và trình lại gate. Thay đổi chạm stage đã duyệt thì ghi `CR<n>` kèm nguyên văn, chụp artifact bị chạm với nhãn pre-CR, trình bảng ảnh hưởng, sau đó quay về stage thấp nhất bị sai lệch:
 
@@ -391,8 +395,8 @@ File CSV lưu trong `intents/<intent>/stories/` của repo PO, mỗi phiên bả
 | Ảnh hưởng mới | 2.31 |
 | Hướng giải | 2.32 |
 | Danh sách user story | 2.4 |
-| Định hướng của PIC | 2.41, PIC ký lại |
 | Chi tiết user story | 2.42 |
+| Thiết kế của các team, quyết định ở buổi họp | 2.43, PIC ký lại |
 
 `/generate-user-guide` viết hướng dẫn cho người dùng cuối từ PRD đã duyệt, sau khi Dev làm xong, theo template và đích ghi trong domain pack. Sau đó AI cập nhật ngược KB với rule mới và field đã đổi, để lần phân tích ảnh hưởng sau không dựa trên dữ liệu cũ.
 
@@ -438,7 +442,7 @@ Mục này trả lời 2 câu hỏi: quy trình đã đủ để ai dùng, và �
 |---|---|---|---|
 | 1. Cá nhân | Một PO dùng được | PO tự chạy trọn intent tới PRD; khi gặp lỗi vẫn cần người tạo quy trình hỗ trợ | Đạt. 1 PO đã chạy 3 intent, 2 intent có PRD được duyệt |
 | 2. Team | Nhiều PO trong một team dùng được | PO khác tự chạy trọn một intent chỉ với tài liệu; nhiều PO làm song song trên một repo mà không xung đột | Chưa kiểm chứng. Đã có USER-GUIDE, `doctor`, `/po-replay`, bài học chung trong `team.md`, kiểm trùng mã tính năng |
-| 3. Liên team | Design, Tech, QA làm việc trên đầu ra của PO | Một intent qua HLD Brief đủ 3 chữ ký; story được import lên Jira, đạt điều kiện giao Dev và được QA dùng | Có chuẩn, chưa dùng. Chuẩn mã, AC và Story List có từ 19/10/2026; chưa HLD Brief nào đủ chữ ký |
+| 3. Liên team | Design, Tech, QA làm việc trên đầu ra của PO | Một intent qua Decision Brief đủ 3 chữ ký; story được import lên Jira, đạt điều kiện giao Dev và được QA dùng | Có chuẩn, chưa dùng. Chuẩn mã, AC và Story List có từ 19/10/2026; luồng 2.43 có từ 20/10/2026, chưa intent nào chạy qua |
 | 4. Nhân rộng | Team sản phẩm khác tự áp dụng | Một sản phẩm khác dựng domain pack theo DOMAIN-SETUP.md và chạy tới PRD mà engine không phải sửa | Chưa. Đã có DOMAIN-SETUP.md, `/new-domain`, MANIFEST, `engine-check`, `migrate`; chưa có sản phẩm thứ hai |
 
 Kết luận: quy trình đủ cho 1 người dùng. Công cụ cho mức team và liên team đã có trong bản 2.1.0 nhưng chưa chạy thật. Engine còn đổi nhanh: 47 commit từ 23/09 đến 15/10/2026, sau đó bản 2.1.0 đổi cấu trúc repo ngày 19/10/2026. Vì vậy chưa nên đưa cho team sản phẩm khác trước khi đạt mức 2 và mức 3.
@@ -447,7 +451,7 @@ Kết luận: quy trình đủ cho 1 người dùng. Công cụ cho mức team v
 
 | Mức | Nghĩa | Hiện trạng |
 |---|---|---|
-| Người với người | Người viết, người đọc tự diễn giải | Đạt. PRD và HLD Brief viết bằng lời, mã kèm nội dung, bản duyệt đăng Lark cho người đọc |
+| Người với người | Người viết, người đọc tự diễn giải | Đạt. PRD và Decision Brief viết bằng lời, mã kèm nội dung, bản duyệt đăng Lark cho người đọc |
 | Người với máy | AI soạn theo template, người duyệt; máy kiểm tài liệu trước khi người duyệt | Đạt. Questions file có định dạng cố định; script `check`, `trace`, `approve`; AI Reviewer độc lập |
 | Máy với máy | Agent của team khác đọc đúng bản đã duyệt, trích nội dung theo mã, ghi kết quả ngược lại mà không cần người diễn giải | Một phần. Đã có: mã đầy đủ ổn định, tag cho bản duyệt, `intents/INDEX.md`, Story List dạng CSV import thẳng lên Jira, `AGENTS.md` cho mọi công cụ. Chưa có: agent phía Dev hoặc QA đọc thật; định dạng mới là quy ước Markdown, chưa có schema để máy của hai bên cùng kiểm; chưa ghi ngược tự động từ Jira về repo, như trạng thái story hoặc test case |
 
@@ -518,7 +522,7 @@ Một số quy tắc rút ra từ lỗi gặp khi chạy thật:
 | Chạm vùng nào thì đọc lại nguồn vùng đó | 4 rule trong KB sai so với hệ thống, phát hiện trong một intent |
 | Có endpoint không có nghĩa là có tính năng | 6 lần kết luận nhầm vì thấy endpoint trong khi tính năng đã gỡ khỏi giao diện |
 | Chụp bản duyệt trước khi sửa tiếp | Một bản đã duyệt bị ghi đè 15 lần liên tiếp |
-| HLD Brief trước PRD | Một intent có 4 change request sau khi PRD đã viết, vì lệch định hướng với Design và Dev |
+| Các team thiết kế từ PRD và chốt trên Decision Brief trước khi sinh Story List | Một intent có 4 change request sau khi PRD đã viết, vì lệch định hướng với Design và Dev. Bản đầu của quy tắc đặt HLD Brief trước PRD; ngày 20/10/2026 đổi vì HLD không đủ để các team thiết kế, xem ADR 0003 |
 | Thiết kế kỹ thuật của Dev vào mục riêng, không thay mục nghiệp vụ | Một lần thiết kế kỹ thuật ghi đè mất ràng buộc nghiệp vụ và định nghĩa chỉ số trong PRD |
 | Script truy vết dừng khi không đọc được mã | Script cũ báo đạt khi mã viết trong dấu backtick, vì không đọc ra mã nào |
 

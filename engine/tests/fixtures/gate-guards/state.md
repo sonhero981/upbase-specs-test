@@ -19,8 +19,8 @@ status: Running
 - [?] 2.3 requirements-analysis
 - [ ] 2.31 impact-analysis
 - [ ] 2.4 user-stories
-- [ ] 2.41 hld-brief
 - [ ] 2.42 prd-generation
+- [ ] 2.43 design-alignment
 
 ## Current
 | | |

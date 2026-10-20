@@ -31,10 +31,10 @@ File stage bắt đầu bằng tiêu đề `# <mã> <tên>`, tiếp theo là m�
 | Thư mục | Thư mục artifact trong intent. Thường trùng slug, ngoại lệ ghi rõ, ví dụ PRD ở `inception/prd` |
 | Artifact chính | Chỉ ghi khi stage sinh nhiều file: file được duyệt và chụp vào archive, ví dụ `impact-matrix.md` ở 2.31 |
 | Phase | `ideation` hoặc `inception` |
-| Plugin | `po-workflow` với stage repo thêm (2.31, 2.32, 2.41, 2.42). Bỏ trống với stage gốc AWS. Đây là nhãn, không phải plugin theo cơ chế của AWS |
+| Plugin | `po-workflow` với stage repo thêm (2.31, 2.32, 2.42, 2.43). Bỏ trống với stage gốc AWS. Đây là nhãn, không phải plugin theo cơ chế của AWS |
 | Lệch so với AWS | Điểm khác stage cùng số của AWS, để khi AWS ra bản mới biết phải so điểm nào |
 | Execution | `always`, hoặc `conditional` kèm điều kiện |
-| Lead | Agent dẫn stage theo AWS, luôn là `product` trong phạm vi PO. Với 2.41 ghi thêm các PIC góp và ký |
+| Lead | Agent dẫn stage theo AWS, luôn là `product` trong phạm vi PO. Với 2.43 ghi thêm các PIC viết thiết kế và ký |
 | Produces | Artifact sinh ra, kèm questions file |
 | Consumes | Artifact đọc vào, ghi rõ bắt buộc hay tuỳ |
 | Requires | Stage phải xong trước |
@@ -71,7 +71,7 @@ File stage bắt đầu bằng tiêu đề `# <mã> <tên>`, tiếp theo là m�
 - Viết artifact theo template, giữ đúng heading. Mục có dấu `<!-- tuỳ chọn -->` trong template: viết theo depth ở `profiles.md`, không viết thì bỏ hẳn heading. Mục không có dấu là bắt buộc. Xoá mọi chữ hướng dẫn mẫu và dấu `<!-- tuỳ chọn -->`.
 - Frontmatter ghi `inputs:` là artifact đầu vào kèm version đã dùng, ví dụ `inputs: requirements@1.0, impact-matrix@1.1`. Nhờ dòng này `po-tools.py status` phát hiện khi đầu vào đổi sau khi artifact đã duyệt.
 - Artifact nội bộ (intent-statement, scope-document, requirements, impact-matrix, solution-options, stories): thẻ nguồn ở mỗi khối khẳng định theo `question-format.md`. Mục Assumptions & Open Questions bắt buộc, không có thì ghi "None".
-- Artifact bàn giao (initiative-brief, hld-brief, prd): không thẻ nguồn, không từ ngữ quy trình, mã kèm nội dung, dấu `·` giữa các mã đứng liền.
+- Artifact bàn giao (initiative-brief, prd, decision-brief): không thẻ nguồn, không từ ngữ quy trình, mã kèm nội dung, dấu `·` giữa các mã đứng liền.
 - Lựa chọn PO không chọn không phải là nguồn. Không biến lựa chọn bị bỏ thành một yêu cầu hay một loại trừ.
 - Mã ổn định theo `GLOSSARY.md`. Mã đã cấp không đánh lại, kể cả khi xoá một mục ở giữa. Mã viết trần trong cột đầu bảng, không bọc backtick.
 - Tên file ổn định. Phiên bản và trạng thái ghi ở frontmatter `version`, `status`. Không tạo file `v0.x`.

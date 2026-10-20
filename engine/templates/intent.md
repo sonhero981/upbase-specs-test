@@ -28,4 +28,4 @@ created: <YYYY-MM-DD>
 |---|---|
 | Wiki space | |
 | Intent node | <tạo trước khi publish tài liệu đầu tiên, tên là tên intent> |
-| Published | initiative-brief: — · hld-brief: — · prd: — |
+| Published | initiative-brief: — · prd: — · decision-brief: — |

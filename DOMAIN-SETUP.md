@@ -107,7 +107,7 @@ Template User Guide: theo cấu trúc tài liệu người dùng mà công ty đ
 Chuẩn trong `engine/standards/` áp nguyên cho sản phẩm mới; chỉ phần sau phải làm cho từng sản phẩm:
 
 1. Chốt mã sản phẩm `code` trong `domain.md` với người quản lý danh mục sản phẩm của công ty. Mã phải khác mã của mọi sản phẩm khác, vì mã tính năng `<code>-F<NNN>` đi vào story trên Jira, test case, tên nhánh và commit của mọi team. Số tính năng bắt đầu từ `F001`.
-2. Thống nhất với Design, Tech và QA rằng HLD Brief, PRD và story trên Jira là đầu vào chính thức, theo README mục 6. Dự án Jira nhận Story List đã ghi ở frontmatter `domain.md` từ mục 5; kiểm lại với người quản trị Jira. Gửi các PIC `engine/standards/id-conventions.md` và `engine/standards/handoff-rules.md`.
+2. Thống nhất với Design, Tech và QA rằng PRD, ba file thiết kế ở 2.43, Decision Brief và story trên Jira là đầu vào chính thức; template của ba file thiết kế ở `engine/templates/`, team đã có mẫu riêng thì sửa template cho khớp, theo README mục 6. Dự án Jira nhận Story List đã ghi ở frontmatter `domain.md` từ mục 5; kiểm lại với người quản trị Jira. Gửi các PIC `engine/standards/id-conventions.md` và `engine/standards/handoff-rules.md`.
 3. Cấp quyền ghi repo cho Design PIC, Tech PIC, QA PIC, và quyền đọc cho Dev. Trước khi cấp, rà `domain/` và `intents/` để loại tài khoản staging và thông tin nhạy cảm.
 4. Việc chia và theo dõi nằm trên Jira theo `engine/standards/adr/0002-story-tren-jira.md`; repo chỉ giữ file CSV theo phiên bản PRD. Quy ước mã và quy tắc bàn giao giữ nguyên.
 
@@ -115,7 +115,7 @@ Chuẩn trong `engine/standards/` áp nguyên cho sản phẩm mới; chỉ ph�
 
 1. Chạy `/new-intent` với một yêu cầu nhỏ, profile S, đi tới PRD. Mục tiêu là kiểm tra stage tra đúng KB và manifest, chưa cần PRD hoàn chỉnh.
 2. `python3 engine/scripts/po-tools.py status` báo khớp, `po-tools.py doctor` không còn dòng Lỗi.
-3. Chạy một intent profile M có HLD Brief để kiểm vòng ký của các PIC, sau đó sinh Story List bằng `/po-stories`, import thử lên Jira và kiểm `po-tools.py dor`.
+3. Chạy một intent profile M qua 2.43 để kiểm vòng viết thiết kế và ký Decision Brief của các PIC, sau đó sinh Story List bằng `/po-stories`, import thử lên Jira và kiểm `po-tools.py dor`.
 4. Bài học đầu tiên ghi vào `project.md` qua câu hỏi tại gate; bài học đúng cho mọi sản phẩm thì chuyển sang `team.md`.
 
 ## 10. Checklist domain đã sẵn sàng

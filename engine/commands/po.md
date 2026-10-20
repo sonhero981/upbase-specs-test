@@ -41,5 +41,5 @@ Parked: nói "intent đang dừng từ <ngày>", hỏi có tiếp tục không, 
 - Không chạy hai stage trong một lượt. Mỗi stage kết thúc ở gate.
 - Chỉ dừng intent (Parked) khi PO yêu cầu. Không tự dừng vì thấy phiên đã dài; trước khi phiên bị nén, mọi câu trả lời phải đã nằm trong file.
 - Muốn đổi phiên hay đổi model thì làm ngay sau một gate, khi mọi thứ đã ghi vào file.
-- Stage không có lệnh riêng; `/po` là lối vào duy nhất. File stage trong `engine/stages/` theo slug trong `state.md`: intent-capture, market-research, scope-definition, approval-handoff, requirements-analysis, impact-analysis, solution-options, user-stories, hld-brief, prd-generation. Không tìm thấy thì nói rõ, không bịa cách làm.
-- Stage 2.41 đang `[-]` chờ PIC: khi PO gọi lại, so file với bản chụp trong `archive/`, trình diff theo mục, sau đó mở Alignment gate, theo command hld-brief.
+- Stage không có lệnh riêng; `/po` là lối vào duy nhất. File stage trong `engine/stages/` theo slug trong `state.md`: intent-capture, market-research, scope-definition, approval-handoff, requirements-analysis, impact-analysis, solution-options, user-stories, prd-generation, design-alignment. Không tìm thấy thì nói rõ, không bịa cách làm.
+- Stage 2.43 đang `[-]` chờ các team: khi PO gọi lại, kiểm ba file thiết kế đã đủ chưa bằng `po-tools.py check`, báo team nào chưa xong; đủ thì viết Decision Brief theo `engine/stages/design-alignment.md`. AI không viết và không sửa file thiết kế của team.

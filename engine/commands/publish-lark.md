@@ -7,7 +7,7 @@ Chỉ publish artifact có `status: approved` trong frontmatter. Input: tham s�
 | Artifact | Đường dẫn trong intent | Tên trên Lark | Khi nào |
 |---|---|---|---|
 | Initiative Brief | `ideation/approval-handoff/initiative-brief.md` | `[Brief] <tên tính năng>` | Sau gate 1.7, PO muốn |
-| HLD Brief | `inception/hld-brief/hld-brief.md` | `[HLD] <tên tính năng>` | Sau gate 2.41, bản 1.0 đủ sign-off |
+| Decision Brief | `inception/decision-brief/decision-brief.md` | `[Decision Brief] <tên tính năng>` | Sau gate 2.43, bản 1.0 đủ chữ ký |
 | PRD | `inception/prd/prd.md` | `[PRD] <tên tính năng>` | Sau gate 2.42 và sau mỗi CR đã duyệt |
 
 ## Tiền điều kiện

@@ -1,6 +1,6 @@
 # Nguyên tắc chia story
 
-Áp cho stage 2.4, khi PO chia yêu cầu thành user story. Cỡ story được Tech PIC xác nhận ở checkpoint, tức buổi làm việc trên HLD Brief ở 2.41. Sau khi PRD được duyệt, Story List giữ nguyên cách chia này: mỗi US một story trên Jira. Phần so sánh với AWS AI-DLC ở mục 10.
+Áp cho stage 2.4, khi PO chia yêu cầu thành user story. Cỡ story được Tech PIC xác nhận ở 2.43, trong `tech-design.md` mục Unit of work, thứ tự và độ lớn. Sau khi 2.43 được duyệt, Story List giữ nguyên cách chia này: mỗi US một story trên Jira. Phần so sánh với AWS AI-DLC ở mục 10.
 
 ## 1. Story là gì
 
@@ -28,8 +28,8 @@ Dùng bộ tiêu chí INVEST. Bảng dưới ghi nơi kiểm từng tiêu chí t
 | Độc lập | Làm và giao được mà không chờ story khác, hoặc chỉ phụ thuộc một chiều | Mục Phụ thuộc của thẻ US; bảng Unit trong `stories.md` |
 | Còn thương lượng được | Chi tiết còn mở tới khi các PIC chốt định hướng | Thẻ US chưa có tiêu chí chấp nhận; chi tiết viết ở 2.42 |
 | Có giá trị | Vai thấy được lợi ích của mình | Mục Vai và mục tiêu của thẻ US có vế "để ..." |
-| Ước lượng được | Tech PIC ước được cỡ | Checkpoint, mục 9 của HLD Brief |
-| Nhỏ | Làm xong trong một sprint | Checkpoint; ở 2.42 có từ 3 tới 6 tiêu chí chấp nhận |
+| Ước lượng được | Tech PIC ước được cỡ | 2.43, `tech-design.md` mục 6 |
+| Nhỏ | Làm xong trong một sprint | 2.42 có từ 3 tới 6 tiêu chí chấp nhận; 2.43 Tech PIC xác nhận |
 | Kiểm được | Có tiêu chí chấp nhận đạt hoặc không đạt | 2.42; script kiểm US có AC và mọi BR có AC |
 
 ## 3. Các bước chia ở 2.4
@@ -53,7 +53,7 @@ Các dấu hiệu dưới đây dùng để xem lại. Gặp một dấu hiệu 
 | Gồm cả phần cấu hình của quản trị và phần sử dụng của người dùng cuối | "Cấu hình và dùng mã giảm giá" | Không |
 | Chạm hơn 2 module | | Không |
 | Có hơn 6 tiêu chí chấp nhận | | `po-tools.py check` ở 2.42, cảnh báo |
-| Tech PIC ước hơn một sprint | | Checkpoint |
+| Tech PIC ước hơn một sprint | | 2.43 |
 
 ## 5. Cách tách
 
@@ -90,7 +90,7 @@ Gặp các dấu hiệu này thì gộp vào story có cùng vai và cùng mục
 
 ## 8. Xác nhận và thay đổi
 
-- Ở checkpoint, Tech PIC ghi ở mục 9 của HLD Brief story nào quá lớn để làm trong một sprint. Design PIC báo story nào trải qua nhiều luồng màn tách được. PO tách trước khi viết PRD và ghi quyết định vào `decisions.md`.
+- Ở 2.43, Tech PIC ghi trong `tech-design.md` story nào quá lớn để làm trong một sprint; Design PIC báo story nào trải qua nhiều luồng màn tách được. Decision Brief đưa ra họp; tách thì đi change request trên PRD trước khi sinh Story List, và ghi quyết định vào `decisions.md`.
 - Sau khi PRD đã duyệt, tách story qua change request. Story cũ giữ mã; phần tách ra nhận số mới; tiêu chí chấp nhận chuyển đi nhận mã mới, theo `id-conventions.md`. Story List được sinh lại.
 - Trên Jira, Dev có thể gom nhiều story vào một Unit of work hoặc chia một story thành nhiều sub-task. Việc đó không đổi story và không đổi mã.
 
@@ -120,9 +120,9 @@ Cách chia đúng:
 
 | Nội dung | AWS | PO-Workflow | Lý do khác |
 |---|---|---|---|
-| Ai chia story | Product agent ở 2.4; Design, Dev, QA góp ý cùng lúc khi bật cộng tác | PO chia ở 2.4; 3 PIC xác nhận cỡ và cách chia ở checkpoint 2.41 | Các PIC là người thật, nên gom vào một buổi làm việc |
+| Ai chia story | Product agent ở 2.4; Design, Dev, QA góp ý cùng lúc khi bật cộng tác | PO chia ở 2.4; 3 PIC xác nhận cỡ và cách chia ở 2.43 sau khi đọc PRD | Các PIC là người thật, nên đọc PRD chi tiết một lần và chốt trong một buổi họp |
 | Tiêu chí | INVEST | INVEST, kèm nơi kiểm cụ thể trong quy trình | Không khác |
-| Tiêu chí chấp nhận | Viết ngay ở 2.4, mỗi story 3 tới 6 | Viết ở 2.42 sau checkpoint; con số 3 tới 6 dùng làm dấu hiệu cỡ story | Tránh viết lại khi định hướng của các PIC thay đổi |
+| Tiêu chí chấp nhận | Viết ngay ở 2.4, mỗi story 3 tới 6 | Viết ở 2.42, trước khi các team thiết kế; con số 3 tới 6 dùng làm dấu hiệu cỡ story | Các team cần AC để thiết kế và lập kế hoạch test |
 | Cách tách | 6 cách: bước trong luồng, biến thể rule, biến thể dữ liệu, giao diện, xem tạo sửa xoá, hiệu năng | 8 cách: giữ 6 cách của AWS, thêm theo vai và luồng đơn giản trước; giao diện hiểu là kênh dùng được riêng | Sản phẩm có nhiều vai và nhiều cổng, 2 cách thêm gặp thường xuyên |
 | Lỗi thường gặp | Quá lớn, quá kỹ thuật, không có giá trị, tên ghép nhiều việc, mô tả giải pháp | Giữ cả 5; thêm chia theo màn hình, theo tầng kỹ thuật, theo từng rule | 3 lỗi thêm là lỗi thường gặp khi PO viết PRD theo màn hình |
 | Bản đồ story | Có, để thấy khoảng trống trong hành trình người dùng | Bước 1 của quy trình chia | Không khác |

@@ -23,7 +23,7 @@ inputs: <artifact đầu vào@version, ví dụ requirements@1.0; stage đầu t
 - Phụ thuộc: <US, Unit khác, hệ ngoài, hoặc "không có">
 - Chưa rõ: <câu hỏi gắn vai phải trả lời, hoặc "không có">
 
-<Thẻ đủ để Design PIC, Tech PIC, QA PIC đọc và viết mục 8, 9, 10 của HLD Brief mà không cần mở requirements. Không acceptance criteria, không validate theo field, không kiểu dữ liệu; phần đó ở PRD, sau khi có HLD.>
+<Thẻ đủ để PO viết PRD chi tiết ở 2.42 mà không cần mở lại requirements. Không acceptance criteria, không validate theo field, không kiểu dữ liệu; phần đó ở PRD.>
 
 ## Vai trong tính năng <!-- tuỳ chọn -->
 | Vai | Mục tiêu trong tính năng | Khó khăn hiện tại | Mức quen công nghệ | Tần suất dùng |

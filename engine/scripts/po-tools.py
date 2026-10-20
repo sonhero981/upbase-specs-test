@@ -15,7 +15,8 @@ Theo dõi và kiểm:
       Stage cần làm tiếp, dòng tiến độ, số câu hỏi còn trống và số câu chặn còn trống.
   po-tools.py check   <intent> <stage-slug> [--strict]
       Kiểm máy artifact của stage: heading bắt buộc, thẻ nguồn, [Qn] và [DECn] có thật,
-      chữ mẫu còn sót, thẻ US đủ chín mục, giới hạn từ của HLD Brief, mục cấm trong PRD,
+      chữ mẫu còn sót, thẻ US đủ chín mục, mục cấm trong PRD; ở 2.43 thêm giới hạn từ và chữ ký của
+      Decision Brief, độ phủ của ba file thiết kế so với PRD,
       cột ưu tiên của FR. Với PRD còn kiểm: mã AC trùng, BR chưa có AC trỏ tới, frontmatter
       thiếu feature; AC không có chữ "Khi" chỉ là gợi ý. Mã thoát 0; --strict trả 1 khi có cảnh báo.
   po-tools.py trace   <intent> [--write]
@@ -153,17 +154,23 @@ FALLBACK_STAGES = [
     ("2.31", "impact-analysis", "Impact Analysis", "inception", "inception/impact-analysis", "impact-matrix.md", "impact-analysis-questions.md"),
     ("2.32", "solution-options", "Solution Options", "inception", "inception/solution-options", "solution-options.md", "solution-options-questions.md"),
     ("2.4", "user-stories", "User Stories", "inception", "inception/user-stories", "stories.md", "user-stories-questions.md"),
-    ("2.41", "hld-brief", "HLD Brief & Alignment", "inception", "inception/hld-brief", "hld-brief.md", "hld-brief-questions.md"),
     ("2.42", "prd-generation", "PRD Generation", "inception", "inception/prd", "prd.md", "field-intake-questions.md"),
+    ("2.43", "design-alignment", "Design Alignment", "inception", "inception/decision-brief", "decision-brief.md", "design-alignment-questions.md"),
 ]
 
 INTERNAL = ("intent-statement", "scope-document", "requirements", "impact-matrix", "solution-options",
             "stories", "competitive-analysis", "related-features-map")
-HANDOFF = ("initiative-brief", "hld-brief", "prd")
+HANDOFF = ("initiative-brief", "decision-brief", "prd")
 US_CARD_LABELS = ("Vai và mục tiêu", "Bối cảnh", "Luồng chính", "Nhánh đáng kể", "Rule đã biết",
                   "Dữ liệu và vùng chạm", "Ngoài phạm vi", "Phụ thuộc", "Chưa rõ")
-HLD_AI_SECTIONS = (1, 2, 3, 4, 5, 6, 7, 11)
-HLD_WORD_LIMIT = 1500
+BRIEF_AI_SECTIONS = (1, 2, 3, 4, 5, 6, 7, 8, 9)
+BRIEF_WORD_LIMIT = 1500
+# Ba file thiết kế các team viết ở 2.43, từ PRD đã duyệt: (tên, đường dẫn trong intent, người viết)
+TEAM_DESIGNS = (("ux-design", "inception/ux-design/ux-design.md", "Design PIC"),
+                ("tech-design", "inception/tech-design/tech-design.md", "Tech PIC"),
+                ("test-design", "inception/test-design/test-design.md", "QA PIC"))
+SIGNERS = ("Design PIC", "Tech PIC", "QA PIC")
+SIGNED = ("đồng ý", "có ý kiến")
 STALE_DAYS = 30
 
 FR_RE = re.compile(r"\bN?FR\d+(?:\.\d+)?\b")
@@ -1027,7 +1034,7 @@ def trace(intent, write_out=False):
             ("4", "Mọi BR thuộc một US có trong PRD", "Chưa kiểm" if prd is None else ("Không đạt" if [o for o in orphans if o.startswith("BR")] else "Đạt")),
             ("5", "Mọi BR có AC trỏ tới", "Chưa kiểm" if prd is None else ("Không đạt" if [g for g in gaps if g.endswith("chưa có AC")] else "Đạt")),
         ]
-        write(pc, "---\nintent: %s\nphase: inception\ndate: %s\nresult: %s\n---\n# Phase check: INCEPTION · %s\n\nSinh bởi po-tools.py trace. Điều kiện ngữ nghĩa (OQ chặn đã đóng, HLD Brief đủ chữ ký) AI kiểm thêm theo template phase-check.md.\n\n%s\n\n## Kết luận\n%s. GAP: %d. ORPHAN: %d. Chi tiết trong %s.\n"
+        write(pc, "---\nintent: %s\nphase: inception\ndate: %s\nresult: %s\n---\n# Phase check: INCEPTION · %s\n\nSinh bởi po-tools.py trace. Điều kiện ngữ nghĩa (OQ chặn đã đóng; với profile M, L thì Decision Brief đủ chữ ký ở 2.43) AI kiểm thêm theo template phase-check.md.\n\n%s\n\n## Kết luận\n%s. GAP: %d. ORPHAN: %d. Chi tiết trong %s.\n"
               % (intent.name, day0, result, intent.name, md_table(["#", "Điều kiện", "Kết quả"], pc_rows), result, len(gaps), len(orphans), rel(out, intent)))
         print("Đã ghi:", out, "và", pc)
     return 0 if result == "Đạt" else 1
@@ -1037,7 +1044,7 @@ def trace(intent, write_out=False):
 class Warns(object):
     KINDS = [("heading", "Mục bắt buộc"), ("tag", "Thẻ nguồn"), ("ref", "Thẻ trỏ sai"),
              ("handoff", "Artifact bàn giao"), ("card", "Thẻ US"), ("split", "Cỡ story"), ("words", "Giới hạn từ"),
-             ("prd", "PRD"), ("fr", "Cột của FR")]
+             ("prd", "PRD"), ("fr", "Cột của FR"), ("design", "Thiết kế của các team"), ("sign", "Chữ ký")]
 
     def __init__(self):
         self.items, self.info, self.seen = [], [], set()
@@ -1317,20 +1324,27 @@ def check_artifact(ctx, W, st, path):
             name = clean(t).split(":", 1)[1] if ":" in clean(t) else ""
             if re.search(r"(?<!\w)và(?!\w)", name):
                 W.add("split", f, i + 1, "Tên %s có chữ 'và': xem có phải hai việc người dùng làm riêng được không, theo engine/standards/story-splitting.md mục 4" % clean(t).split(":")[0])
-    if stem == "hld-brief":
+    if stem == "decision-brief":
         h2 = [(i, t) for i, lvl, t in headings(lines, b0) if lvl == 2]
         total, parts = 0, []
         for k, (i, t) in enumerate(h2):
             m = re.match(r"(\d+)\.", clean(t))
-            if not m or int(m.group(1)) not in HLD_AI_SECTIONS:
+            if not m or int(m.group(1)) not in BRIEF_AI_SECTIONS:
                 continue
             end = h2[k + 1][0] if k + 1 < len(h2) else len(lines)
             n = count_words(lines[i + 1:end])
             total += n
             parts.append("%s: %d" % (m.group(1), n))
-        W.info.append("%s: mục 1 đến 7 và 11 có %d từ, giới hạn %d (%s)" % (f, total, HLD_WORD_LIMIT, ", ".join(parts)))
-        if total > HLD_WORD_LIMIT:
-            W.add("words", f, None, "Phần AI viết (mục 1 đến 7 và 11) có %d từ, quá giới hạn %d" % (total, HLD_WORD_LIMIT))
+        W.info.append("%s: mục 1 đến 9 có %d từ, giới hạn %d (%s)" % (f, total, BRIEF_WORD_LIMIT, ", ".join(parts)))
+        if total > BRIEF_WORD_LIMIT:
+            W.add("words", f, None, "Phần AI viết (mục 1 đến 9) có %d từ, quá giới hạn %d" % (total, BRIEF_WORD_LIMIT))
+        signs = sign_status(lines)
+        for who in SIGNERS:
+            st_ = signs.get(who)
+            if st_ is None:
+                W.add("sign", f, None, "Bảng Ký thiếu dòng %s" % who)
+            elif st_.lower() not in SIGNED:
+                W.add("sign", f, None, "%s chưa ký, đang ghi '%s'%s" % (who, st_ or "trống", ": gate là Request Changes" if st_.lower() == "yêu cầu sửa" else ""))
     if stem == "prd":
         per_us = {}
         for a in prd_acs(lines, b0):
@@ -1346,8 +1360,6 @@ def check_artifact(ctx, W, st, path):
                 continue
             if not us_priority("\n".join(blines))[0]:
                 W.add("prd", f, b["start"] + 1, "US%d chưa có dòng Ưu tiên (Must, Should, Could): Story List sẽ để trống cột Priority" % b["num"])
-            if us_has_ui(split_us_block(lines, b["start"], b["end"])["ui"]) and not SCR_ANY.search("\n".join(blines)):
-                W.add("prd", f, b["start"] + 1, "US%d có bảng giao diện nhưng chưa trỏ mã màn SCR do Design PIC ghi ở HLD Brief mục 8" % b["num"])
         for i, lvl, t in headings(lines, b0):
             if re.search(r"\b(database|api)\b", clean(t), re.I):
                 W.add("prd", f, i + 1, "PRD không có mục thiết kế kỹ thuật như Database, API: '%s'" % clean(t))
@@ -1434,6 +1446,89 @@ def count_words(lines):
     return n
 
 
+def sign_status(lines):
+    """{vai: trạng thái} từ bảng Ký của Decision Brief: cột Vai và cột Trạng thái."""
+    out = {}
+    for t in parse_tables(lines):
+        vc, sc = col(t["header"], "Vai"), col(t["header"], "Trạng thái")
+        if vc is None or sc is None:
+            continue
+        for cells, _ in t["rows"]:
+            who = clean(cell(cells, vc))
+            if who in SIGNERS:
+                out[who] = clean(cell(cells, sc))
+    return out
+
+
+def exact_col(header, name):
+    for idx, h in enumerate(header):
+        if clean(h).strip().lower() == name.lower():
+            return idx
+    return None
+
+
+def ux_screen_map(text):
+    """{số US: [(mã SCR ngắn, tên màn)]} từ bảng Danh sách màn của ux-design.md: cột SCR, cột US, cột Tên màn."""
+    out = {}
+    for t in parse_tables((text or "").splitlines()):
+        sc, uc, nc = exact_col(t["header"], "SCR"), exact_col(t["header"], "US"), col(t["header"], "Tên màn")
+        if sc is None or uc is None:
+            continue
+        for cells, _ in t["rows"]:
+            m = re.search(r"SCR(?:-[A-Z][A-Z0-9]*-F\d{3,}-)?(\d+)", clean(cell(cells, sc)))
+            if not m:
+                continue
+            name = clean(cell(cells, nc)) if nc is not None else ""
+            for u in re.findall(r"(?<![\w-])US(?:-[A-Z][A-Z0-9]*-F\d{3,}-)?(\d+)\b", cell(cells, uc)):
+                out.setdefault(int(u), []).append(("SCR%d" % int(m.group(1)), name))
+    return out
+
+
+def design_coverage(intent, W):
+    """Đối chiếu ba file thiết kế ở 2.43 với PRD: file có chưa, dựng từ bản PRD nào, còn chữ mẫu không,
+    US có giao diện có màn chưa, AC có trong kế hoạch test chưa, US có trong tech-design chưa."""
+    intent = Path(intent)
+    prd_p = stage_file(intent, "prd-generation")
+    prd = read(prd_p)
+    if prd is None:
+        W.add("design", rel(prd_p, intent), None, "Chưa có PRD; 2.43 chạy sau khi PRD được duyệt")
+        return
+    pl = prd.splitlines()
+    pver = clean(frontmatter(prd).get("version", ""))
+    blocks = [b for b in prd_us_blocks(pl) if "chưa làm" not in clean(b["title"]).lower()]
+    texts = {}
+    for name, rp, who in TEAM_DESIGNS:
+        t = read(intent / rp)
+        texts[name] = t
+        if t is None:
+            W.add("design", rp, None, "Chưa có file thiết kế của %s" % who)
+            continue
+        m = re.search(r"prd@v?(\d+(?:\.\d+)*)", frontmatter(t).get("inputs", ""))
+        if not m:
+            W.add("design", rp, None, "Frontmatter chưa ghi inputs: prd@<version> mà %s đã đọc" % who)
+        elif pver and ver_tuple(m.group(1)) != ver_tuple(pver):
+            W.add("design", rp, None, "Dựng từ prd@%s, PRD hiện là %s: %s xem lại theo bản mới" % (m.group(1), pver, who))
+        tl = t.splitlines()
+        left = [k for k in range(body_start(tl), len(tl)) if PLACEHOLDER_RE.search(re.sub(r"`[^`]*`", "", tl[k]))]
+        if left:
+            W.add("design", rp, left[0] + 1, "Còn %d dòng chữ mẫu của template: %s chưa viết xong" % (len(left), who))
+    if texts.get("ux-design") is not None:
+        smap = ux_screen_map(texts["ux-design"])
+        for b in blocks:
+            if us_has_ui(split_us_block(pl, b["start"], b["end"])["ui"]) and b["num"] not in smap:
+                W.add("design", TEAM_DESIGNS[0][1], None, "US%d có giao diện trong PRD nhưng ux-design chưa có màn" % b["num"])
+    if texts.get("test-design") is not None:
+        have = set("AC%d.%s" % (int(a), c) for a, c in re.findall(r"AC-?(?:[A-Z][A-Z0-9]*-F\d{3,}-)?(\d+)\.(\d+)", texts["test-design"]))
+        for a in prd_acs(pl):
+            if a["id"] not in have:
+                W.add("design", TEAM_DESIGNS[2][1], None, "%s chưa có trong kế hoạch test" % a["id"])
+    if texts.get("tech-design") is not None:
+        have = set(int(u) for u in re.findall(r"(?<![\w-])US(?:-[A-Z][A-Z0-9]*-F\d{3,}-)?(\d+)\b", texts["tech-design"]))
+        for b in blocks:
+            if b["num"] not in have:
+                W.add("design", TEAM_DESIGNS[1][1], None, "US%d chưa có trong tech-design" % b["num"])
+
+
 def check(intent, slug, strict=False):
     intent = resolve_intent(intent)
     S = stages()
@@ -1446,7 +1541,7 @@ def check(intent, slug, strict=False):
         return 2
     d = intent / st.dir
     files = [d / a for a in st.artifacts if (d / a).exists()]
-    if not files:
+    if not files and slug != "design-alignment":
         print("Chưa có artifact của %s %s trong %s, chưa có gì để kiểm." % (st.code, st.name, rel(d, intent)))
         so = load_state(intent)
         e = next((x for x in (so.stages if so else []) if x["slug"] == slug), None)
@@ -1458,6 +1553,8 @@ def check(intent, slug, strict=False):
     W = Warns()
     for p in files:
         check_artifact(ctx, W, st, p)
+    if slug == "design-alignment":
+        design_coverage(intent, W)
     print("# Kiểm máy: %s · %s %s\n" % (intent.name, st.code, st.name))
     for x in W.info:
         print("- " + x)
@@ -1514,12 +1611,9 @@ def table_line(cells):
 
 
 def next_entry(entries, idx):
-    after = entries[idx + 1:]
-    for marks in (" ", "-?R"):
-        e = next((x for x in after if x["mark"] in marks), None)
-        if e:
-            return e
-    return next((x for x in entries if x["mark"] not in "xS"), None)
+    """Stage kế theo thứ tự: stage đầu tiên sau idx chưa duyệt và không bỏ qua, kể cả stage đang làm dở."""
+    e = next((x for x in entries[idx + 1:] if x["mark"] not in "xS"), None)
+    return e or next((x for x in entries if x["mark"] not in "xS"), None)
 
 
 def set_current(lines, key, value):
@@ -1661,6 +1755,8 @@ def machine_warnings(intent, st):
     ctx, W = CheckCtx(intent, st), Warns()
     for p in files:
         check_artifact(ctx, W, st, p)
+    if st.slug == "design-alignment":
+        design_coverage(intent, W)
     return len(W.items)
 
 
@@ -1854,7 +1950,7 @@ def approve(intent, slug, words, who=None, version=None, dry=False, accept_warni
         write(intent / "decisions.md", new_dec)
         write(so.path, new_state)
     print(prog)
-    if slug in ("prd-generation", "hld-brief"):
+    if slug in ("prd-generation", "design-alignment"):
         tag = "%s/%s-v%s" % (intent.name, stem, newv)
         print("Gợi ý tag git cho bản bàn giao: %s" % tag)
         print('Sau khi commit: git tag -a %s -m "%s v%s đã duyệt" && git push origin %s' % (tag, stem, newv, tag))
@@ -1922,6 +2018,9 @@ def status(root):
         return 2
     S = stages()
     amap = S.artifact_map()
+    if "design-alignment" in S.by_slug:
+        for name, rp, _ in TEAM_DESIGNS:
+            amap.setdefault(name, (S.by_slug["design-alignment"], rp))
     intents = sorted(p for p in root.iterdir() if p.is_dir() and (p / "state.md").exists())
     day0 = today()
     rows, findings = [], []
@@ -1949,7 +2048,7 @@ def status(root):
             m, n, slug, rest = e["mark"], e["code"], e["slug"], e["rest"]
             stg = S.by_slug.get(slug)
             if stg is None:
-                findings.append((it.name, "1. %s %s: slug không có trong engine/stages" % (n, slug), "Sửa state.md theo tên file stage"))
+                findings.append((it.name, "1. %s %s: slug không có trong engine/stages" % (n, slug), "Sửa state.md theo tên file stage, hoặc chạy po-tools.py migrate"))
                 continue
             d = it / stg.dir
             main = d / stg.main
@@ -2297,7 +2396,6 @@ SHORT_US = re.compile(r"(?<![\w-])US(\d+)\b")
 SHORT_AC = re.compile(r"(?<![\w-])AC-?(\d+)\.(\d+)\b")
 SHORT_BR = re.compile(r"(?<![\w-])BR-?(\d+)\.(\d+)([a-z]?)\b")
 SHORT_SCR = re.compile(r"(?<![\w-])SCR(\d+)\b")
-SCR_ANY = re.compile(r"(?<![\w-])SCR(?:\d+|-[A-Z][A-Z0-9]*-F\d{3,}-\d+)\b")
 PRIORITY_RE = re.compile(r"Ưu tiên\W{0,8}(Must|Should|Could|Won[’']?t)\b", re.I)
 PRIORITY_JIRA = {"must": "Highest", "should": "High", "could": "Medium", "wont": "Low"}
 # AC cho nhánh lỗi hoặc bị từ chối: chỉ là gợi ý bằng từ khoá, PO và reviewer quyết.
@@ -2727,11 +2825,17 @@ def us_handoff(intent):
     approved_at = "%s/%s/%s" % (m.group(3), m.group(2), m.group(1)) if m else approved_at
     epic, epic_by_unit, epics = jira_epics(imd)
     units = prd_unit_map(lines)
+    so = load_state(intent)
+    prof = clean(so.fm.get("profile", "")).upper()[:1] if so else ""
+    ae = next((e for e in (so.stages if so else []) if e["slug"] == "design-alignment"), None)
+    aligned = not (so is not None and prof in ("M", "L")) or (ae is not None and ae["mark"] in "xS")
+    ux = read(intent / TEAM_DESIGNS[0][1])
+    smap = ux_screen_map(ux) if ux is not None else None
     figma = re.findall(r"https?://[^\s|)\]]*figma[^\s|)\]]*", intent_row(imd, "Figma"))
     issues = prd_open_issues(lines)
     meta = {"intent": intent, "iname": iname, "feat": feat, "ifeat": ifeat, "pfeat": pfeat, "ver": ver, "status": status,
             "approved": status == "approved", "approved_at": approved_at, "tag": "%s/prd-v%s" % (iname, ver),
-            "title": title, "prd_path": show(prd_p), "epic": epic, "epics": epics}
+            "title": title, "prd_path": show(prd_p), "epic": epic, "epics": epics, "aligned": aligned}
     stories = []
     for b in blocks:
         n = b["num"]
@@ -2740,6 +2844,8 @@ def us_handoff(intent):
         reasons = []
         if not meta["approved"]:
             reasons.append("PRD chưa duyệt (status %s)" % (status or "trống"))
+        if not aligned:
+            reasons.append("2.43 Design Alignment chưa duyệt")
         if re.search(r"❓\s*PO\b", "\n".join(blines)):
             reasons.append("US còn ❓PO")
         bacs = [a for a in prd_acs(blines, 0) if a["us"] == n]
@@ -2759,13 +2865,16 @@ def us_handoff(intent):
             reasons.append("câu chặn còn mở trong Open Issues: %s" % ", ".join("#" + it["no"] if it["no"] else snippet(it["text"], 40) for it in blk))
         secs = split_us_block(lines, b["start"], b["end"])
         secs["us"] = tidy([l for l in secs["us"] if not PRIORITY_RE.search(l)])  # ưu tiên đã thành cột Priority
-        if us_has_ui(secs["ui"]) and not SCR_ANY.search("\n".join(blines)):
-            reasons.append("giao diện chưa trỏ mã màn SCR")
+        screens = (smap or {}).get(n, [])
+        if smap is not None and us_has_ui(secs["ui"]) and not screens:
+            reasons.append("giao diện chưa có màn trong ux-design")
         prio, jprio = us_priority("\n".join(blines))
         deps = sorted(set(int(k) for k in re.findall(r"(?<![\w-])US(\d+)\b", "\n".join(secs["pre"])) if int(k) != n))
         unit = units.get(n, "")
         ref = "PRD %s v%s%s, %s · tag %s · US%d trong PRD" % (
             title, ver, (", duyệt ngày " + approved_at) if approved_at else "", meta["prd_path"], meta["tag"], n)
+        if screens:
+            ref += " · Màn: " + ", ".join(("%s %s" % (to_full(c, feat), nm)).strip() for c, nm in screens)
         if figma:
             ref += " · Figma: " + " · ".join(figma)
         uepic = epic_by_unit.get(int(unit[1:])) if unit else None
@@ -2773,7 +2882,7 @@ def us_handoff(intent):
                         "prio": prio, "jprio": jprio, "deps": deps,
                         "reasons": reasons, "issues": mine, "desc": jira_description(secs, feat, ref)})
     # story phụ thuộc: US nêu ở Pre-Condition chưa đạt vì lý do riêng của nó thì story này cũng chưa giao được
-    own = dict((st["num"], [r for r in st["reasons"] if not r.startswith("PRD chưa duyệt")]) for st in stories)
+    own = dict((st["num"], [r for r in st["reasons"] if not r.startswith(("PRD chưa duyệt", "2.43 Design Alignment"))]) for st in stories)
     for st in stories:
         bad = [k for k in st["deps"] if own.get(k)]
         if bad:
@@ -2866,6 +2975,9 @@ def stories_cmd(intent, write_out=False, only=None):
         return 0
     if not meta["approved"]:
         print("\nChỉ ghi Story List từ PRD đã duyệt. PRD đang %s." % (meta["status"] or "chưa ghi status"))
+        return 2
+    if not meta["aligned"]:
+        print("\nChỉ ghi Story List sau khi 2.43 Design Alignment được duyệt: các team đã thiết kế từ PRD và đã chốt trên Decision Brief.")
         return 2
     write(path, jira_csv_text(rows))
     print("\nĐã ghi %s, %d story. Import lên Jira bằng chức năng import CSV." % (rel(path, meta["intent"]), len(rows)))
@@ -3416,6 +3528,42 @@ def mig_live_part(text, name):
     return "\n".join(lines) + ("\n" if text.endswith("\n") else "")
 
 
+def mig_alignment(intent, text):
+    """Luồng 2.43: bỏ dòng 2.41 hld-brief và dòng hld-brief ở Versions; profile M, L thêm 2.43 design-alignment ngay sau 2.42.
+    Intent đã có Epic trên Jira và PRD đã duyệt thì 2.43 ghi [S], vì đã giao Dev trước khi có stage này.
+    2.41 đang dở thì Current chuyển sang 2.43. Trả (text mới, việc, [(file HLD Brief, đích trong archive)])."""
+    lines = (text or "").splitlines()
+    plan, moves = [], []
+    hld = [i for i, ln in enumerate(lines) if re.match(r"^- \[.\] 2\.41 hld-brief\b", ln)]
+    was_open = any(re.match(r"^- \[[-?R]\]", lines[i]) for i in hld)
+    for i in reversed(hld):
+        plan.append(("bỏ stage 2.41 hld-brief", "state.md", lines[i][:6]))
+        del lines[i]
+    vrows = [i for i, ln in enumerate(lines) if re.match(r"^\|\s*hld-brief\s*\|", ln)]
+    for i in reversed(vrows):
+        del lines[i]
+    prof = clean(frontmatter(text).get("profile", "")).upper()[:1]
+    if prof in ("M", "L") and not any(re.match(r"^- \[.\] 2\.43 design-alignment\b", ln) for ln in lines):
+        k = next((i for i, ln in enumerate(lines) if re.match(r"^- \[.\] 2\.42 prd-generation\b", ln)), None)
+        if k is not None:
+            handed = lines[k].startswith("- [x]") and bool(JIRA_KEY.search(intent_row(read(Path(intent) / "intent.md") or "", "Jira Epic")))
+            new = ("- [S] 2.43 design-alignment · intent đã có Epic trên Jira và đã giao Dev trước khi có stage này" if handed
+                   else "- [ ] 2.43 design-alignment")
+            lines.insert(k + 1, new)
+            plan.append(("thêm stage 2.43 design-alignment", "state.md", "bỏ qua, đã giao Dev" if handed else "chưa làm"))
+    if was_open:
+        set_current(lines, "Stage", "2.43 design-alignment: chờ Design PIC, Tech PIC, QA PIC viết file thiết kế từ PRD đã duyệt")
+        set_current(lines, "Next action", "Tạo ux-design.md, tech-design.md, test-design.md từ template theo engine/stages/design-alignment.md; "
+                                          "gửi ba PIC đường dẫn PRD đã duyệt kèm hạn")
+        plan.append(("đổi Current sang 2.43", "state.md", ""))
+    d = Path(intent) / "inception" / "hld-brief"
+    if hld and d.is_dir():
+        for f in sorted(d.glob("*.md")):
+            moves.append((f, Path(intent) / "archive" / "hld-brief" / ("%s-luong-cu-%s.md" % (f.stem, today().strftime("%Y%m%d")))))
+    out = "\n".join(lines) + ("\n" if (text or "").endswith("\n") else "")
+    return out, plan, moves
+
+
 def mig_questions_v1(text, intent_name, code):
     """File câu hỏi luồng v1 (### `OQ-NN` — tiêu đề ... **Blocks:** Yes, bảng nhóm không chặn) sang dạng ## Q<n>.
     Giữ nguyên nội dung từng câu; mã cũ OQ-NN đứng trong tiêu đề. Trả về None nếu không nhận ra định dạng."""
@@ -3530,6 +3678,15 @@ def migrate(intent, words, feature=None, write_out=False):
         if new != old:
             writes[f] = new
             plan.append(("chuẩn hoá phần sống", name, sum(1 for a, b in zip(old.splitlines(), new.splitlines()) if a != b)))
+    # 1c. luồng 2.43 thay 2.41 HLD Brief
+    sp = intent / "state.md"
+    old = writes.get(sp, read(sp))
+    new, aplan, moves = mig_alignment(intent, old)
+    if new != old:
+        writes[sp] = new
+    plan += aplan
+    for src, dst in moves:
+        plan.append(("chuyển HLD Brief của luồng cũ vào archive", rel(src, intent), rel(dst, intent)))
     # 2. file câu hỏi luồng v1 của stage chưa duyệt
     for e in so.stages:
         st = S.by_slug.get(e["slug"])
@@ -3600,6 +3757,12 @@ def migrate(intent, words, feature=None, write_out=False):
         return 0
     for f, t in writes.items():
         write(f, t)
+    for src, dst in moves:
+        if src.exists() and not dst.exists():
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(src), str(dst))
+    if moves and (intent / "inception" / "hld-brief").is_dir() and not any((intent / "inception" / "hld-brief").iterdir()):
+        (intent / "inception" / "hld-brief").rmdir()
     for g in keeps:
         g.unlink()
     snap_names = []
@@ -3614,8 +3777,9 @@ def migrate(intent, words, feature=None, write_out=False):
         snap_names.append(rel(dst, intent))
     dtext = read(intent / "decisions.md") or ""
     dec = next_dec(dtext)
-    summary = "Chuẩn hoá dữ liệu lên engine %s: đường dẫn mới, Unit, PIC, AI Reviewer%s%s. Không đổi nội dung nghiệp vụ" % (
+    summary = "Chuẩn hoá dữ liệu lên engine %s: đường dẫn mới, Unit, PIC, AI Reviewer%s%s%s. Không đổi nội dung nghiệp vụ" % (
         (read(REPO / "VERSION") or "").strip(), ", mã tính năng %s" % fid if fid else "",
+        "; luồng 2.43 thay 2.41 HLD Brief" if aplan else "",
         "; chụp lại bản duyệt " + " · ".join(snap_names) if snap_names else "")
     dtext, _ = add_decision(dtext, {"DEC": dec, "Ngày": t_now, "Stage": "migrate", "Quyết định": summary,
                                      "Nguyên văn": '"%s"' % words, "Người quyết": who, "Read when": "migrate, phiên bản, mã tính năng"})

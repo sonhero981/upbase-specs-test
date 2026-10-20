@@ -27,7 +27,6 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - [ ] 2.31 impact-analysis
 - [ ] 2.32 solution-options
 - [ ] 2.4 user-stories
-- [ ] 2.41 hld-brief
 - [ ] 2.42 prd-generation
 
 ## Current
@@ -43,7 +42,7 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 | Artifact | Version | Status | Approved | Lark |
 |---|---|---|---|---|
 | initiative-brief | | | | |
-| hld-brief | | | | |
+| decision-brief | | | | |
 | prd | | | | |
 
 ## Log

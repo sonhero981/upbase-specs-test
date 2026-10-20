@@ -76,7 +76,7 @@ KB theo module `01` đến `11`; mail event `13`; data model `12` khi chạm d�
 Nguồn field: Swagger `components.schemas`, sau đó `12-data-model.md`, cuối cùng là KB theo module. Template PRD: `templates/prd.md`; tên mục do chủ template công ty quyết giữ nguyên: Metrics success, Specific Requirement, Pre - Condition, Conner case. Template gốc của công ty: `templates/prd-template-goc-lark.md`.
 
 ### Publish
-Lark wiki space `7660816820865093342`; node cha chung `02. Execution — Epics & Features`, token `X3hhwv2MxizpFgkVudVl7e52gUc`; mỗi intent một node con, tài liệu nằm trong node đó. Tên tài liệu: `[Brief]`, `[HLD]`, `[PRD]` kèm tên tính năng. Công cụ: `lark-cli`, xem `/publish-lark`.
+Lark wiki space `7660816820865093342`; node cha chung `02. Execution — Epics & Features`, token `X3hhwv2MxizpFgkVudVl7e52gUc`; mỗi intent một node con, tài liệu nằm trong node đó. Tên tài liệu: `[Brief]`, `[PRD]`, `[Decision Brief]` kèm tên tính năng. Công cụ: `lark-cli`, xem `/publish-lark`.
 
 ### User Guide
 GitBook repo `uplms` cho học viên ở `LMS/User Guide/uplms/`, `uplms-ops` cho vận hành ở `LMS/User Guide/uplms-ops/`. Template: `templates/user-guide.md`. Ví dụ đổi giọng từ PRD sang User Guide: "Field `status` disable khi `class.type = Foundation`" thành "Không đổi được trạng thái với lớp Foundation"; "`BR-EDIT-06`: không xoá Test đã có attempt" thành "Không xoá được bài kiểm tra đã có học viên làm".

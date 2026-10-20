@@ -20,8 +20,8 @@ status: Running
 - [x] 2.3 requirements-analysis
 - [S] 2.31 impact-analysis · fixture
 - [?] 2.4 user-stories
-- [ ] 2.41 hld-brief
-- [-] 2.42 prd-generation · PRD nháp v0.1, chờ 2.4 và 2.41
+- [-] 2.42 prd-generation · PRD nháp v0.1, chờ 2.4
+- [ ] 2.43 design-alignment
 
 ## Current
 | | |

@@ -17,8 +17,8 @@ Hỏi: *thay đổi này làm sai lệch kết luận của stage nào?* Lấy s
 | FR, NFR, rule nghiệp vụ mới | 2.3 | 2.31 trở đi |
 | Phát hiện ảnh hưởng mới | 2.31 | 2.32 trở đi |
 | Đổi hướng giải | 2.32 | 2.4 trở đi |
-| Danh sách US, Unit | 2.4 | 2.41, 2.42 |
-| Định hướng Design, Tech, Test, quyết định ở họp liên team | 2.41 | 2.42. Phải lấy lại sign-off |
+| Danh sách US, Unit | 2.4 | 2.42, 2.43 |
+| Thiết kế của các team, quyết định ở buổi họp trên Decision Brief | 2.43 | Team sửa file của mình. Phải lấy lại chữ ký |
 | Chi tiết US, field, rule, màn | 2.42 | chỉ US bị chạm |
 | Chỉ đổi User Guide | user-guide | — |
 
@@ -36,13 +36,13 @@ Trình bằng hộp chọn: stage re-entry kèm lý do, artifact sẽ đổi, ga
 - Chỉ sửa phần bị chạm, không viết lại cả artifact. Thêm dòng Document version với Impact `CR<n>`; version chính thức tăng khi duyệt lại, theo quy tắc phiên bản ở `gate-protocol.md`: đã duyệt 1.0 thì bản duyệt sau CR là 1.1. Cập nhật `inputs:` ở frontmatter theo bản đầu vào mới. PRD chỉ chạm US bị ảnh hưởng, Document status về `IN REVIEW`.
 - Reviewer theo profile ở stage bị chạm; finding đi vào gate, không tự sửa theo finding.
 - Trình lại gate theo `gate-protocol.md`. Nhiều stage nhỏ có thể gộp trong một thông điệp nhưng ghi rõ duyệt từng artifact.
-- 2.41 bị chạm thì PIC ký lại; 2.42 bị chạm thì publish lại PRD sau Approve.
+- 2.43 bị chạm thì ba PIC ký lại Decision Brief; 2.42 bị chạm thì publish lại PRD sau Approve và báo các team xem lại file thiết kế theo bản PRD mới.
 
 ## 6. Tác động ngược
 Trước gate 2.42: chạy `po-tools.py trace`; kiểm business rule mồ côi (rule cũ còn US nào dùng không), mã tham chiếu gãy (`BR-2.3` bị xoá mà nơi khác còn trỏ), Out of scope lỗi thời (thứ từng ghi "không làm" nay đã làm, hoặc ngược lại).
 
 ## 7. Sau khi duyệt
-Duyệt từng artifact bằng `po-tools.py approve`: script chụp archive bản mới, cập nhật Versions và Log trong `state.md`. Đóng CR trong bảng. PRD hoặc HLD Brief duyệt lại thì gắn tag mới sau khi commit. PRD duyệt lại thì chạy `/po-stories`: script sinh lại mục 1 của các story bị chạm, đặt `changed` cho mục đó và `review` cho mục của Design, Tech, QA đã `ready`, ghi nhật ký; báo các PIC xem lại. Sau đó chạy `po-tools.py index --write`, để agent của Dev lấy đúng bản. Publish lại artifact bàn giao đã lên Lark. Chạy `po-tools.py status` để chắc không còn stage nào dựa trên bản cũ.
+Duyệt từng artifact bằng `po-tools.py approve`: script chụp archive bản mới, cập nhật Versions và Log trong `state.md`. Đóng CR trong bảng. PRD hoặc Decision Brief duyệt lại thì gắn tag mới sau khi commit. PRD duyệt lại: profile M, L cập nhật Decision Brief nếu thay đổi chạm điểm đã chốt và lấy lại chữ ký; sau đó chạy `/po-stories`, script sinh CSV mới và in story nào đổi, story nào mới để sửa trên Jira; báo các PIC xem lại. Sau đó chạy `po-tools.py index --write`, để agent của Dev lấy đúng bản. Publish lại artifact bàn giao đã lên Lark. Chạy `po-tools.py status` để chắc không còn stage nào dựa trên bản cũ.
 
 ## Output
 CR đã ghi; stage mở lại; artifact đã sửa và version; gate chờ duyệt lại; tác động ngược phát hiện được. Tự kiểm theo `engine/verification/change-request.md`.

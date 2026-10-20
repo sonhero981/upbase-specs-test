@@ -43,7 +43,7 @@ Hộp chọn AskUserQuestion. Mỗi lựa chọn ghi rõ hệ quả. Lựa chọ
 | **Add [stage]** | Ideation và Inception, khi có stage bị bỏ qua mà stage hiện tại thấy cần | Thêm stage vào `state.md`, nói một dòng, tiếp tục |
 | **Reject Initiative** | Chỉ ở 1.7 | Kết thúc intent, ghi lý do, `state.md` chuyển Archived |
 
-Stage 2.41 HLD Brief là Alignment gate: Approve chỉ khi bảng sign-off mục 12 của file trong repo có Design PIC, Tech PIC, QA PIC ghi "Đồng ý" hoặc "Có ý kiến"; PIC tự ghi, hoặc PO ghi theo tin nhắn xác nhận lưu trong `decisions.md`. Một PIC ghi "Yêu cầu sửa" là Request Changes. Thiếu chữ ký thì PO chọn Accept as-is kèm lý do, hoặc chờ. Publish Lark chỉ sau Approve.
+Stage 2.43 Design Alignment là Alignment gate: Approve chỉ khi bảng Ký của Decision Brief có Design PIC, Tech PIC, QA PIC ghi "Đồng ý" hoặc "Có ý kiến"; PIC tự ghi, hoặc PO ghi theo tin nhắn xác nhận lưu trong `decisions.md`. Một PIC ghi "Yêu cầu sửa" là Request Changes. Thiếu chữ ký thì PO chọn Accept as-is kèm lý do, hoặc chờ; script coi thiếu chữ ký là cảnh báo, nên lời chấp nhận đưa vào `--accept-warnings`. Publish Lark chỉ sau Approve.
 
 Profile M: stage 1.1 và 1.4 duyệt chung một gate. Thông điệp hoàn thành gộp hai artifact. Request Changes nêu rõ sửa artifact nào. Profile M không chạy 1.7, nên phase check Ideation chạy ở gate chung này: năm điều kiện Ideation trong `engine/templates/phase-check.md`, ghi `verification/phase-check-ideation.md`.
 
@@ -81,7 +81,7 @@ Sau script, AI tự làm hai việc: finding Accepted risk ghi vào bảng Accep
 - Intent cũ đã duyệt ở 0.x trước quy tắc này giữ nhánh 0.x và tăng số phụ.
 
 ### Gắn tag cho bản bàn giao
-Duyệt `hld-brief` hoặc `prd`: script in tên tag gợi ý dạng `<intent>/prd-v1.0`. Sau khi commit, gắn tag và push tag. Agent của Dev đọc PRD theo tag nên luôn lấy đúng bản đã duyệt, xem mục "Bàn giao cho Design, Tech, QA" trong README. Duyệt `prd` xong thì chạy `/po-stories` để sinh Story List cho Jira.
+Duyệt `prd` hoặc `decision-brief`: script in tên tag gợi ý dạng `<intent>/prd-v1.0`. Sau khi commit, gắn tag và push tag. Agent của Dev đọc PRD theo tag nên luôn lấy đúng bản đã duyệt, xem README mục 6. Profile S: duyệt `prd` xong thì chạy `/po-stories`. Profile M, L: duyệt `prd` xong thì giao ba team viết file thiết kế theo 2.43; chỉ chạy `/po-stories` sau khi 2.43 được duyệt.
 
 ## Sửa lựa chọn bị ghi nhầm
 PO nói vừa rồi chọn nhầm:

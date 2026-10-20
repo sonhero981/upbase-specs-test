@@ -44,7 +44,7 @@ Học viên mở trang khoá học, bấm Tải chứng chỉ.
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 | --- | --- | --- | --- |
-| `SCR1` Trang khoá học | Nút | **Tải chứng chỉ** | Chỉ hiện khi đã hoàn thành, xem `US1` |
+| Trang khoá học | Nút | **Tải chứng chỉ** | Chỉ hiện khi đã hoàn thành, xem `US1` |
 
 **Business requirement — Business rule**
 

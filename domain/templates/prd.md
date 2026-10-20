@@ -4,8 +4,8 @@ artifact: prd
 feature: <SP-FNNN, lấy từ intent.md>
 version: 0.1
 status: draft
-inputs: <hld-brief@version, stories@version, requirements@version>
-services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
+inputs: <stories@version, requirements@version>
+services: <service hoặc repo code bị chạm theo Impact Matrix; Tech PIC sửa ở 2.43 nếu khác>
 ---
 # [PRD] <Tên tính năng>
 
@@ -18,7 +18,7 @@ services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
 | **Target release** | *Sprint, quý* |
 | **Epic** | *Link Jira* |
 | **Story** | *Link Jira* |
-| **Related** | *HLD Brief, tài liệu liên quan* |
+| **Related** | *Tài liệu liên quan; sau 2.43 thêm link ux-design, tech-design, test-design và Decision Brief* |
 | **Document status** | `DRAFT`, `IN REVIEW`, `PUBLISHED` |
 | **Document owner** | |
 | **Designer** | |
@@ -38,25 +38,25 @@ services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
 
 # Problem
 
-*Chép từ HLD Brief mục 2. Ai gặp, gặp khi nào, hậu quả. Không mô tả giải pháp.*
+*Lấy từ intent-statement. Ai gặp, gặp khi nào, hậu quả. Không mô tả giải pháp.*
 
 ---
 
 # Analytics
 
-*Chép từ HLD Brief mục 2 và intent-statement mục Current workaround. Mô tả người dùng đang xoay xở thế nào, đủ chi tiết để hiểu vì sao cần thay đổi. Có số thì thêm, không có vẫn viết được.*
+*Lấy từ intent-statement, mục Current workaround. Mô tả người dùng đang xoay xở thế nào, đủ chi tiết để hiểu vì sao cần thay đổi. Có số thì thêm, không có vẫn viết được.*
 
 ---
 
 # Objective
 
-*Chép từ HLD Brief mục 2. Kết quả, không phải danh sách việc làm.*
+*Lấy từ intent-statement. Ghi kết quả mong muốn, không ghi danh sách việc làm.*
 
 ---
 
 # Out of scope
 
-*Chép từ HLD Brief mục 3. Cấp tính năng, kèm lý do một câu. Gồm cả thứ từng nằm trong phạm vi nhưng bị loại theo CR nào.*
+*Lấy từ scope-document. Cấp tính năng, kèm lý do một câu. Gồm cả thứ từng nằm trong phạm vi nhưng bị loại theo CR nào.*
 
 | Không làm | Vì sao |
 | --- | --- |
@@ -74,7 +74,6 @@ services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
 
 *Mọi thứ Dev và QA cần để bắt đầu. Thiếu link ở đây thì họ phải đi hỏi.*
 
-- **HLD Brief:** *link Lark*
 - **UX:** *link Figma*
 - **Tài liệu kỹ thuật bên thứ ba:** *spec, docs đối tác*
 - **API tham chiếu:** *endpoint hệ ngoài đang tích hợp*
@@ -85,7 +84,7 @@ services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
 
 # Metrics success
 
-*Chép từ HLD Brief mục 2. Mỗi objective ít nhất một cách đo, chỉ giữ factor đo được. Tuyệt đối không giữ bảng ví dụ của template.*
+*Lấy từ intent-statement. Mỗi objective ít nhất một cách đo, chỉ giữ factor đo được. Tuyệt đối không giữ bảng ví dụ của template.*
 
 | Factor (HEART) | Goal | Signal | Metrics |
 | --- | --- | --- | --- |
@@ -94,11 +93,11 @@ services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
 
 # Solution
 
-*Chép từ HLD Brief mục 4. Giải pháp tổng thể, đủ để hình dung cách làm trước khi vào từng US.*
+*Lấy từ solution-options nếu có. Giải pháp tổng thể ở mức nghiệp vụ, đủ để hình dung trước khi vào từng US.*
 
 ## Technical Direction
 
-*Chép từ HLD Brief mục 9 do Tech PIC viết, cộng ràng buộc nghiệp vụ mà cách làm nào cũng phải thoả. Ghi điều phải đúng, để Dev quyết làm thế nào. Không sequence diagram, không cấu trúc bảng, không thuật toán, không thư viện.*
+*Ràng buộc nghiệp vụ mà cách làm nào cũng phải thoả. Ghi điều phải đúng, để Dev quyết làm thế nào; hướng kỹ thuật do Tech PIC viết ở tech-design.md tại 2.43. Không sequence diagram, không cấu trúc bảng, không thuật toán, không thư viện.*
 
 ## Vòng đời trạng thái
 
@@ -118,7 +117,7 @@ services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
 
 # Units
 
-*Chép từ HLD Brief mục 5 và stories.md. Nhóm US làm độc lập được, để Dev biết bắt đầu từ đâu. Dev chốt Unit thật.*
+*Lấy từ stories.md. Nhóm US làm độc lập được, để Dev biết bắt đầu từ đâu. Dev chốt Unit thật.*
 
 | Unit | Gồm US | Phụ thuộc | Release độc lập được? |
 | --- | --- | --- | --- |
@@ -160,7 +159,7 @@ services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
 
 **UI / UX / Rule UX / Rule UI**
 
-*Cột Màn hình ghi mã màn do Design PIC đặt ở HLD Brief mục 8, ví dụ `SCR2` Trang khoá học.*
+*Cột Màn hình ghi tên màn. Mã màn `SCR` do Design PIC đặt ở ux-design.md tại 2.43; Story List lấy mã từ đó.*
 
 *Dạng A, tính năng mới:*
 
@@ -223,4 +222,4 @@ services: <service hoặc repo code bị chạm, lấy từ HLD Brief mục 9>
 
 # Comments
 
-*Trao đổi trong quá trình review, gồm góp ý của QA PIC về tiêu chí chấp nhận: nguyên văn, tên người góp ý, quyết định của PO.*
+*Trao đổi trong quá trình review.*

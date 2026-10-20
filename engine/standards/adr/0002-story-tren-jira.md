@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Trạng thái | Đã quyết, thay ADR 0001 |
+| Trạng thái | Đã quyết, thay ADR 0001. Phần checkpoint trên HLD Brief đã thay bằng ADR 0003 |
 | Ngày | 2026-10-19 |
 | Người quyết | PO phụ trách PO-Workflow |
 

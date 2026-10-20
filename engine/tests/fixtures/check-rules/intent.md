@@ -7,4 +7,4 @@ created: 2026-10-01
 # Intent: Luật kiểm máy
 
 ## Request
-Fixture cho selftest: HLD Brief quá giới hạn từ, PRD vi phạm luật của 2.42.
+Fixture cho selftest: Decision Brief quá giới hạn từ và thiếu chữ ký, chưa có file thiết kế; PRD vi phạm luật của 2.42.

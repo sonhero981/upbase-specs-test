@@ -34,7 +34,7 @@ Tương thích: chép engine và chạy migrate.
 - Bước xác nhận giả định ở 1.1 và 2.3.
 - Câu hỏi gắn nhãn người trả lời; tối đa bốn lựa chọn để vừa hộp chọn; uỷ quyền chỉ trong stage đang chạy.
 - Định nghĩa depth, mục tuỳ chọn đánh dấu trong template, frontmatter `inputs:` ghi version đầu vào.
-- Quy tắc phiên bản: nháp 0.x, lần duyệt đầu 1.0, duyệt lại tăng số phụ. Gắn git tag cho bản PRD và HLD Brief đã duyệt.
+- Quy tắc phiên bản: nháp 0.x, lần duyệt đầu 1.0, duyệt lại tăng số phụ. Gắn git tag cho bản PRD và Decision Brief đã duyệt.
 - Mẫu yêu cầu `engine/templates/request.md` cho `inputs/`.
 - Bài học ghi kèm ngày, intent, stage, người duyệt; bài học kiểm được thì đề xuất thêm vào checklist. Bài học có hiệu lực từ stage kế tiếp, theo AWS.
 - Cột Người quyết ghi tên thật từ `git config user.name`, kèm giờ.
@@ -46,17 +46,19 @@ Tương thích: chép engine và chạy migrate.
 
 ### Bàn giao liên team
 - Chuẩn chung với Design, Tech, QA trong `engine/standards/`: nguyên tắc chia story, quy ước mã, quy tắc bàn giao, ADR 0002 chọn giao việc theo story trên Jira. ADR 0001 chọn file story trong repo được thay bằng ADR 0002 trong cùng bản này.
-- Checkpoint là buổi PO làm việc với Design PIC, Tech PIC, QA PIC trên HLD Brief ở 2.41, trước khi viết PRD. Tech PIC ghi story quá lớn ở mục 9 của HLD Brief.
+- Bỏ stage 2.41 HLD Brief. Các team không thiết kế được từ một bản định hướng ngắn; họ cần PRD chi tiết. Thêm stage 2.43 Design Alignment sau PRD, ở profile M và L: Design PIC, Tech PIC, QA PIC viết `ux-design.md`, `tech-design.md`, `test-design.md` từ PRD đã duyệt, mỗi team một file; AI của PO không sửa ba file này. AI đối chiếu ba file với PRD và viết Decision Brief, chỉ gồm điểm cần quyết; họp trên Decision Brief, ba PIC ký. Story List chỉ sinh sau gate này. Quyết định và so sánh với AWS ở ADR 0003.
+- Checkpoint là buổi họp trên Decision Brief ở 2.43. Tech PIC ghi story quá lớn trong `tech-design.md`.
 - Mã tính năng `<mã sản phẩm>-F<NNN>` cấp khi tạo intent; mã sản phẩm chốt khi dựng domain pack.
 - PRD có khối tiêu chí chấp nhận mã `AC<US>.<n>` ở đầu mục Acceptance criteria. Mỗi AC kiểm được và ghi BR mà nó kiểm; mọi BR có AC; validate của một màn gom thành một AC. Checklist 2.42 chặn khi BR chưa có AC.
-- Story List: sau khi PRD được duyệt, `/po-stories` sinh `intents/<intent>/stories/story-list-prd-v<phiên bản>.csv` theo mẫu import CSV của Jira, mỗi US trong PRD một dòng, 12 cột: Project key, Project name, Project type, Issue Type, Summary, Priority, Description, Epic Link, 3 cột Labels, Comment. Priority đổi từ dòng Ưu tiên của US: Must thành Highest, Should thành High, Could thành Medium. Description theo cú pháp Jira với mã đầy đủ; Comment ghi nguồn PRD, kết quả điều kiện giao Dev và câu hỏi còn mở. Script so với bản CSV trước và in story đổi, story mới.
+- Story List: sau khi PRD được duyệt, và với profile M, L sau gate 2.43, `/po-stories` sinh `intents/<intent>/stories/story-list-prd-v<phiên bản>.csv` theo mẫu import CSV của Jira, mỗi US trong PRD một dòng, 12 cột: Project key, Project name, Project type, Issue Type, Summary, Priority, Description, Epic Link, 3 cột Labels, Comment. Priority đổi từ dòng Ưu tiên của US: Must thành Highest, Should thành High, Could thành Medium. Description theo cú pháp Jira với mã đầy đủ; Comment ghi nguồn PRD, kết quả điều kiện giao Dev và câu hỏi còn mở. Script so với bản CSV trước và in story đổi, story mới.
 - Dự án Jira khai ở bước dựng domain: `/new-domain` hỏi, DOMAIN-SETUP mục 5 hướng dẫn, frontmatter `domain.md` có `jira_project_key`, `jira_project_name`, `jira_project_type`, `doctor` cảnh báo khi thiếu. Dòng Jira Epic của `intent.md` nhận `U<n>: <mã Epic>` để gán Epic theo Unit.
 - Nguyên tắc chia story ở `engine/standards/story-splitting.md`: định nghĩa story, tiêu chí INVEST và nơi kiểm, các bước chia ở 2.4, dấu hiệu quá lớn, 8 cách tách, dấu hiệu quá nhỏ, các cách không chia, ví dụ, so sánh với AWS. Stage 2.4 và checklist 2.4 dùng nguyên tắc này.
 - `po-tools.py`: `feature-id` cấp mã tính năng; `stories` sinh Story List; `dor` kiểm điều kiện giao Dev trên PRD, gồm PRD đã duyệt, US có AC, mọi BR có AC, không còn `❓PO` và câu chặn; `trace` kiểm thêm lớp BR sang AC; `index` dùng mã tính năng và đếm story đạt điều kiện giao Dev; `check` cảnh báo nhóm Cỡ story khi tên US có chữ "và" ở 2.4 hoặc US có hơn 6 AC ở 2.42.
-- HLD Brief: câu hỏi và ý kiến về mục của người khác ghi vào mục 7; Design PIC cấp mã màn hình `SCR-` ở mục 8.
-- Điều kiện giao Dev thêm hai mục: US có bảng giao diện phải trỏ mã màn `SCR`; US nêu ở Pre-Condition phải đạt trước. Ghi rõ đây là bản hẹp phía PO của Definition of Ready bên AWS.
+- Design PIC đặt mã màn `SCR` ở bảng Danh sách màn của `ux-design.md`; Story List lấy mã màn từ bảng này.
+- Điều kiện giao Dev thêm ba mục: với profile M, L thì 2.43 đã duyệt; US có bảng giao diện phải có màn trong `ux-design.md`; US nêu ở Pre-Condition phải đạt trước. Ghi rõ đây là bản hẹp phía PO của Definition of Ready bên AWS.
 - PRD theo AWS requirements-guide và Product Lead: mỗi US có ít nhất một AC cho nhánh lỗi hoặc bị từ chối, ngưỡng số có AC ở giá trị biên; mỗi US có dòng Ưu tiên; BR có điều kiện ghi khi nào áp và nếu vi phạm thì sao; mục tuỳ chọn Vòng đời trạng thái. `check` cảnh báo US thiếu Ưu tiên, giao diện chưa có mã màn, chưa thấy AC nhánh lỗi.
-- QA PIC góp ý tiêu chí chấp nhận ở 2.42 trước gate, không chặn, có hạn; ý kiến ghi ở Comments và trình nguyên văn ở gate. AWS cho quality agent kiểm tính kiểm thử được ở 2.4.
+- QA PIC góp ý tính kiểm thử được của tiêu chí chấp nhận trong `test-design.md` ở 2.43; Decision Brief đưa ra họp. AWS cho quality agent kiểm việc này ở 2.4.
+- `po-tools.py check` của 2.43 đối chiếu ba file thiết kế với PRD: file có chưa, dựng từ bản PRD nào, còn chữ mẫu không, US có giao diện đã có màn chưa, AC đã có trong kế hoạch test chưa, US đã có trong tech-design chưa; Decision Brief không quá 1.500 từ, ba PIC đã ký chưa. `status` báo khi file thiết kế dựng từ bản PRD cũ.
 - Dev chưa xác định có dùng AWS AI-DLC hay không: `id-conventions.md` ghi phía Dev luôn dùng mã đầy đủ, vì `BR1.1` của PRD trùng dạng với mã AI-DLC sinh ở 3.1.
 - Fixture mới: `story-list` cho Story List và điều kiện giao Dev, `split-signals` cho dấu hiệu story quá lớn.
 
@@ -94,7 +96,7 @@ Theo cách AWS giữ chất lượng repo, ở quy mô một người giữ engi
 
 ### Nâng cấp
 - Intent đang dở chuyển cùng thư mục, nội dung không đổi. Đường dẫn `.claude/...` còn trong artifact và archive của intent cũ là lịch sử: `.claude/knowledge/domain/` nay là `domain/`, `.claude/intents/` nay là `intents/`.
-- Đường dẫn HLD Brief đã gửi cho PIC đổi thành `intents/<intent>/inception/hld-brief/hld-brief.md`. Gửi lại đường dẫn mới.
+- Intent có stage 2.41 HLD Brief: `po-tools.py migrate` bỏ dòng 2.41, thêm 2.43 sau 2.42 với profile M, L, chuyển bản HLD Brief đang dở vào `archive/hld-brief/` và đưa mục Current sang 2.43. Intent đã có Epic trên Jira và PRD đã duyệt thì 2.43 ghi bỏ qua, vì đã giao Dev trước khi có stage này.
 - Review đã có giữ nguyên. Lần review sau của một stage: AI dựng sổ finding `reviews/findings-<slug>.md` từ các file review cũ và quyết định trong `decisions.md`, sau đó mới gọi reviewer.
 - Intent đã duyệt ở 0.x giữ nhánh 0.x và tăng số phụ ở lần duyệt sau; quy tắc 1.0 áp cho artifact chưa duyệt lần nào.
 - PRD đã duyệt trước bản này chưa có khối AC, nên `trace` báo mỗi US "chưa có AC". Thêm AC qua change request khi PRD đó còn được bàn giao tiếp; PRD đã xong thì giữ nguyên.

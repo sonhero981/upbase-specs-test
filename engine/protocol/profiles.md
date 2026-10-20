@@ -7,8 +7,8 @@ Profile quyết định stage nào chạy, nghi thức nào bật, Depth bao nhi
 | Profile | Độ lớn và độ phức tạp | Stage | Depth | Summary confirmation | Reviewer | Learnings | Gate |
 |---|---|---|---|---|---|---|---|
 | **S** | Đúng tất cả: chạm 1 màn · không đổi data model · không đổi rule hiện có · không chạm module khác · không chạm Hidden · không tích hợp ngoài · không migration | 2.3, 2.42 | Minimal | Chỉ Field Intake | 2.42 | Tắt | 2 |
-| **M** | Chạm tối đa 2 module · thêm field nhưng không đổi quan hệ bảng · không conflict · đã rõ hướng giải | 1.1 và 1.4 duyệt chung, 2.3, 2.31, 2.4, 2.41, 2.42 | Standard | Bật | 2.3, 2.4, 2.42 | Bật | 6 |
-| **L** | Một trong số: từ 3 module · đổi data model hoặc quan hệ · conflict với rule hiện có · chạm Hidden · nhiều hướng giải · tích hợp ngoài hoặc job nền · migration dữ liệu cũ · không hoàn tác được | 1.1, 1.2 nếu PO yêu cầu, 1.4, 1.7, 2.3, 2.31, 2.32 nếu có nhiều hướng, 2.4, 2.41, 2.42 | Standard, Comprehensive khi PO yêu cầu | Bật | 1.1, 2.3, 2.4, 2.42 | Bật | 8 đến 10 |
+| **M** | Chạm tối đa 2 module · thêm field nhưng không đổi quan hệ bảng · không conflict · đã rõ hướng giải | 1.1 và 1.4 duyệt chung, 2.3, 2.31, 2.4, 2.42, 2.43 | Standard | Bật | 2.3, 2.4, 2.42 | Bật | 6 |
+| **L** | Một trong số: từ 3 module · đổi data model hoặc quan hệ · conflict với rule hiện có · chạm Hidden · nhiều hướng giải · tích hợp ngoài hoặc job nền · migration dữ liệu cũ · không hoàn tác được | 1.1, 1.2 nếu PO yêu cầu, 1.4, 1.7, 2.3, 2.31, 2.32 nếu có nhiều hướng, 2.4, 2.42, 2.43 | Standard, Comprehensive khi PO yêu cầu | Bật | 1.1, 2.3, 2.4, 2.42 | Bật | 8 đến 10 |
 
 Depth nói mức chi tiết của artifact, không nói số câu hỏi. Số câu hỏi do logic câu chặn quyết định.
 
@@ -34,8 +34,8 @@ Depth đổi được ở mọi gate. Đổi thì ghi vào `state.md` và một 
 | 2.31 | Impact Analysis | PO-Workflow thêm | Luôn chạy ở M, L |
 | 2.32 | Solution Options | PO-Workflow thêm | Khi có từ hai hướng giải, hoặc PO chưa có hướng |
 | 2.4 | User Stories | AWS | Luôn chạy ở M, L |
-| 2.41 | HLD Brief & Alignment | PO-Workflow thêm | Luôn chạy ở M, L |
 | 2.42 | PRD Generation | PO-Workflow thêm | Luôn chạy |
+| 2.43 | Design Alignment | PO-Workflow thêm | Luôn chạy ở M, L, sau khi PRD được duyệt |
 
 Stage AWS ngoài phạm vi PO, chỉ để mapping: 1.3, 1.5, 1.6, 2.1, 2.2, 2.5, 2.6, 2.7, 2.8, 2.9 và toàn bộ Construction, Operation.
 

@@ -15,7 +15,7 @@ Mã dùng chung cho mọi team nhận việc từ PO: Design, Tech, QA. Mã đi 
 | Acceptance criteria | `AC-<tính năng>-<NN>.<n>` | `AC-APP-F012-01.1` | PO, ở 2.42 | Description của story trên Jira |
 | Business rule | `BR-<tính năng>-<NN>.<n>` | `BR-APP-F012-01.2` | PO, ở 2.42 | Description của story trên Jira |
 | Câu hỏi mở | `Q-<tính năng>-<NN>.<n>` | `Q-APP-F012-01.3` | Người hỏi, bất kỳ team nào | Comment trên story Jira |
-| Màn hình | `SCR-<tính năng>-<NN>` | `SCR-APP-F012-02` | Design PIC, ở HLD Brief mục 8 | Story trên Jira; PRD tham chiếu lại |
+| Màn hình | `SCR-<tính năng>-<NN>` | `SCR-APP-F012-02` | Design PIC, ở `ux-design.md` tại 2.43 | Story trên Jira, lấy từ bảng Danh sách màn |
 | Test case | `TC-<tính năng>-<NN>` | `TC-APP-F012-01` | QA PIC | Test case trên Jira |
 | Nhánh code | `feat/<tính năng>-<mô tả>` | `feat/APP-F012-quiz-retake` | Dev | Git |
 | Commit | Trailer `Feature: <tính năng>`, thêm `Story: <US>` khi commit thuộc một story | `Feature: APP-F012` | Dev | Git |
