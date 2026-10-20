@@ -340,7 +340,7 @@ Unit trong PRD là cách PO nhóm user story theo giá trị và ưu tiên. Dev 
 | `/po <intent>` | Chạy stage kế tiếp hoặc tiếp tục stage đang làm dở |
 | `/po-status [intent]` | Xem trạng thái mọi intent, phát hiện lệch giữa `state.md` và file |
 | `/po-review <file>` | Review độc lập bằng AI Reviewer; thêm `--shadow` cho tài liệu người khác viết |
-| `/po-replay <intent>` | Kể lại intent theo dòng thời gian: quyết định, review, việc còn chặn. Dùng khi chuyển intent cho PO khác |
+| `/po-replay <intent>` | Tóm lược diễn biến của intent theo dòng thời gian: quyết định, review, việc còn chặn. Dùng khi chuyển intent cho PO khác |
 | `/po-stories <intent>` | Sinh Story List để import lên Jira từ PRD đã duyệt; profile M, L chạy sau gate 2.43 |
 | `/change-request <intent>` | Đổi hoặc bổ sung yêu cầu sau khi đã duyệt |
 | `/publish-lark <intent> <artifact>` | Đẩy Initiative Brief, PRD hoặc Decision Brief đã duyệt lên Lark |
@@ -358,7 +358,7 @@ Lệnh của script, chạy từ thư mục gốc:
 | `po-tools.py trace <intent>` | Truy vết FR, US, BR, AC |
 | `po-tools.py review-start <intent> <stage>` | Ghi dấu artifact trước khi gọi AI Reviewer |
 | `po-tools.py approve <intent> <stage> --words "<lời PO>"` | Ghi chép sau khi PO duyệt; lời PO phải có trong sổ lượt người, trừ khi PO tự chạy trong terminal |
-| `po-tools.py replay <intent>` | Kể lại intent cho người tiếp quản |
+| `po-tools.py replay <intent>` | Tóm lược diễn biến của intent cho người tiếp nhận |
 | `po-tools.py stories <intent> [--write]` | Xem trước hoặc ghi Story List cho Jira |
 | `po-tools.py dor <intent>` | Kiểm điều kiện giao Dev |
 | `po-tools.py index --write` | Cập nhật `intents/INDEX.md` |

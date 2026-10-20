@@ -76,13 +76,13 @@ Tiện ích:
 - `/po`: chạy stage kế tiếp hoặc tiếp tục
 - `/po-status`: trạng thái mọi intent, kiểm lệch
 - `/po-review`: review độc lập bằng AI Reviewer
-- `/po-replay`: kể lại một intent khi bàn giao giữa các PO
+- `/po-replay`: tóm lược diễn biến của một intent khi bàn giao giữa các PO
 - `/po-stories`: sinh Story List để import lên Jira từ PRD đã duyệt, sau gate 2.43 với profile M, L; kiểm điều kiện giao Dev
 - `/change-request`: đổi yêu cầu sau khi đã duyệt
 - `/publish-lark`: đẩy artifact đã duyệt lên Lark
 - `/generate-user-guide`: viết User Guide sau khi Dev làm xong
 - `/new-domain`: dựng khung domain pack cho sản phẩm mới
-- Script `engine/scripts/po-tools.py`: `next` stage kế tiếp; `check` kiểm bằng máy; `approve` ghi chép sau khi duyệt, chỉ khi lời PO có trong sổ lượt người; `review-start` ghi dấu artifact trước khi gọi reviewer; `trace` truy vết FR, US, BR, AC; `archive` chụp bản duyệt; `status` kiểm lệch giữa state và file; `feature-id` cấp mã tính năng; `stories` sinh Story List cho Jira; `dor` kiểm điều kiện giao Dev; `index` sinh chỉ mục; `replay` kể lại intent; `migrate` chuyển intent từ bản engine cũ; `doctor` kiểm môi trường
+- Script `engine/scripts/po-tools.py`: `next` stage kế tiếp; `check` kiểm bằng máy; `approve` ghi chép sau khi duyệt, chỉ khi lời PO có trong sổ lượt người; `review-start` ghi dấu artifact trước khi gọi reviewer; `trace` truy vết FR, US, BR, AC; `archive` chụp bản duyệt; `status` kiểm lệch giữa state và file; `feature-id` cấp mã tính năng; `stories` sinh Story List cho Jira; `dor` kiểm điều kiện giao Dev; `index` sinh chỉ mục; `replay` tóm lược diễn biến của intent; `migrate` chuyển intent từ bản engine cũ; `doctor` kiểm môi trường
 
 ## Họ mã
 | Họ | Dạng | Phạm vi | Ví dụ | Thay cho |

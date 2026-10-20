@@ -16,7 +16,7 @@ Khung phase, stage, gate và thuật ngữ tham khảo [AWS AI-DLC Workflows](ht
 
 ## Mục lục
 
-1. [Phạm vi, đầu ra và lợi ích](#1-phạm-vi-đầu-ra-và-lợi-ích)
+1. [Phạm vi, đầu ra và giá trị](#1-phạm-vi-đầu-ra-và-giá-trị)
 2. [Nguyên lý nền](#2-nguyên-lý-nền)
 3. [Quy trình](#3-quy-trình)
 4. [Từng stage](#4-từng-stage)
@@ -29,7 +29,7 @@ Khung phase, stage, gate và thuật ngữ tham khảo [AWS AI-DLC Workflows](ht
 11. [Phương pháp luận và quy tắc rút từ sự cố](#11-phương-pháp-luận-và-quy-tắc-rút-từ-sự-cố)
 12. [Lịch sử và nguồn](#12-lịch-sử-và-nguồn)
 
-## 1. Phạm vi, đầu ra và lợi ích
+## 1. Phạm vi, đầu ra và giá trị
 
 ### Phạm vi
 
@@ -51,32 +51,34 @@ Phần lớn sản phẩm dùng quy trình này đã có người dùng và dữ
 
 Ngoài phạm vi: thiết kế kỹ thuật chi tiết, cách Dev chia việc và triển khai trong phase Construction, vận hành sau phát hành.
 
-### Lợi ích cho PO và điểm khác biệt
+### Giá trị của quy trình
 
-Mỗi lợi ích dưới đây gắn với một cơ chế cụ thể của quy trình. Cột cuối ghi mức bằng chứng hiện có, theo đánh giá ở mục 9: quy trình mới chạy với 1 PO trên 1 sản phẩm, nên phần lớn lợi ích hiện chỉ là kết quả thiết kế và còn chờ số đo.
+Mỗi giá trị dưới đây gắn với một cơ chế cụ thể của quy trình. Cột cuối ghi bằng chứng hiện có, theo đánh giá ở mục 9. Quy trình mới được áp dụng cho 1 PO trên 1 sản phẩm, nên phần lớn giá trị hiện dựa trên thiết kế và chưa được đo lường.
 
-| Lợi ích | Nhờ cơ chế nào | Bằng chứng hiện có |
+| Giá trị | Cơ chế | Bằng chứng hiện có |
 |---|---|---|
-| PO làm người quyết định, AI làm phần soạn | AI đọc tài liệu, đặt câu hỏi, soạn artifact theo template; PO trả lời và duyệt ở gate. Lời duyệt phải có trong lượt PO thật, AI không tự duyệt được | 3 intent đã chạy; 2 PRD được duyệt |
-| AI làm phần việc phân tích của BA | Tra knowledge base của sản phẩm trước khi hỏi, quét ảnh hưởng theo 12 vùng, đối chiếu corner checklist; AI Reviewer xem độc lập, không thấy hội thoại | Mục 11 ghi các lỗi đã gặp khi chạy thật và quy tắc sinh ra để chặn từng lỗi |
-| Nhất quán từ yêu cầu tới kiểm thử | Mã ổn định FR, US, BR, AC; mỗi US có tiêu chí chấp nhận cho nhánh lỗi; QA lập kế hoạch phủ từng AC; story trên Jira và test case trỏ về mã đầy đủ | Script `trace` và `dor` kiểm được; chưa có test case nào của QA chạy theo chuẩn này |
-| Một bộ quy trình dùng chung, cài được cho sản phẩm khác | Engine tách khỏi domain pack; hướng dẫn dựng domain, lệnh nâng cấp engine, 77 ca kiểm thử tự động của chính quy trình | Chưa có sản phẩm thứ hai; mục 9 khuyến nghị chưa đưa cho team khác trước khi đạt mức team và liên team |
-| Quyết định không mất khi đổi người | `decisions.md` ghi nguyên văn, người quyết định và giờ; `/po-replay` kể lại intent cho người tiếp quản | Group và Gamification giữ đủ quyết định qua hai lần đổi engine |
-| Hiểu hệ thống đang chạy trước khi viết | Bước phân tích ảnh hưởng chạy trước khi chọn giải pháp; nguồn sống như schema, API spec được đọc lại khi chạm vùng đó | Một intent tìm ra 4 rule trong knowledge base sai so với hệ thống |
-| Các team đọc một lần, chốt một lần | Các team thiết kế từ PRD chi tiết, mỗi team một file; AI gom điểm vướng vào Decision Brief để họp | Luồng có từ 20/10/2026, chưa intent nào chạy qua |
-| Thay đổi có kiểm soát | Change request quay về đúng stage bị chạm, giữ bản đã duyệt trong `archive/`; Story List mới so với bản trước và in story nào đổi | Gamification ghi 14 change request, mỗi change request có trạng thái và quyết định đi kèm |
+| PO tập trung vào phân tích và ra quyết định | AI đọc tài liệu, đặt câu hỏi và soạn artifact theo template; PO trả lời và duyệt tại gate. Lời duyệt phải có trong lượt nhập của PO; AI không tự duyệt được | 3 intent đã áp dụng; 2 PRD đã được duyệt |
+| AI đảm nhận phần phân tích nghiệp vụ | Tra cứu knowledge base của sản phẩm trước khi đặt câu hỏi, rà soát ảnh hưởng theo 12 vùng, đối chiếu corner checklist; AI Reviewer đánh giá độc lập và không thấy nội dung hội thoại | Mục 11 ghi các lỗi phát sinh khi áp dụng thực tế và quy tắc được bổ sung để ngăn từng lỗi |
+| Tính nhất quán từ yêu cầu tới kiểm thử | Mã định danh ổn định cho FR, US, BR, AC; mỗi US có tiêu chí chấp nhận cho nhánh lỗi; QA lập kế hoạch kiểm thử phủ từng AC; story trên Jira và test case trỏ về mã đầy đủ | Script `trace` và `dor` kiểm tra được; chưa có test case nào của QA áp dụng chuẩn này |
+| Quy trình được chuẩn hoá và đóng gói để dùng chung | Engine tách khỏi domain pack; có hướng dẫn dựng domain, lệnh nâng cấp engine và 77 ca kiểm thử tự động cho chính quy trình | Chưa áp dụng cho sản phẩm thứ hai; mục 9 khuyến nghị chưa mở rộng sang team khác trước khi đạt mức team và liên team |
+| Quyết định được lưu giữ khi chuyển giao người phụ trách | `decisions.md` ghi nguyên văn quyết định, người quyết định và thời điểm; `/po-replay` tóm lược diễn biến của intent cho người tiếp nhận | Group và Gamification giữ đầy đủ quyết định qua hai lần nâng cấp engine |
+| Ảnh hưởng lên hệ thống hiện hành được đánh giá trước khi đặc tả | Phân tích ảnh hưởng thực hiện trước khi chọn giải pháp; nguồn sống như schema, API spec được đọc lại khi intent chạm tới vùng liên quan | Một intent phát hiện 4 rule trong knowledge base không khớp với hệ thống |
+| Các team rà soát và thống nhất trong một vòng | Các team thiết kế từ PRD chi tiết, mỗi team một file; AI tổng hợp các điểm cần quyết định vào Decision Brief cho buổi họp chốt | Luồng áp dụng từ 20/10/2026, chưa có intent nào hoàn thành |
+| Thay đổi yêu cầu được kiểm soát | Change request quay về đúng stage bị ảnh hưởng và lưu bản đã duyệt trong `archive/`; Story List mới được so sánh với bản trước và liệt kê các story thay đổi | Gamification ghi nhận 14 change request, mỗi change request có trạng thái và quyết định kèm theo |
 
-So với việc PO tự dùng AI chat để viết PRD:
+### Điểm khác biệt so với việc dùng trực tiếp AI hội thoại
 
-| Việc | Tự dùng AI chat | PO-Workflow |
+Bảng sau so sánh PO-Workflow với cách PO dùng trực tiếp một công cụ AI hội thoại để soạn PRD.
+
+| Khía cạnh | Dùng trực tiếp AI hội thoại | PO-Workflow |
 |---|---|---|
-| Hiểu hệ thống đang chạy | AI suy theo kiến thức chung | Đọc knowledge base của sản phẩm, quét ảnh hưởng, đọc lại nguồn sống |
-| Khi thiếu thông tin | AI dễ tự điền cho đủ câu | Ghi `❓PO` hoặc câu hỏi chặn, dừng chờ PO |
-| Quyết định | Nằm rải trong lịch sử chat | Ghi nguyên văn, có người và giờ; AI không tự duyệt |
-| Chất lượng trước khi giao | PO tự đọc lại | Script kiểm, checklist có mục chặn, AI Reviewer độc lập |
-| Từ yêu cầu tới test | Mỗi lần viết một cách khác | Mã ổn định, Story List import thẳng lên Jira, test case trỏ về mã |
-| Khi yêu cầu đổi | Viết lại hoặc sửa tay | Change request quay về đúng stage, giữ bản đã duyệt |
-| Khi đổi người phụ trách | Mất bối cảnh | Hồ sơ intent đầy đủ, `/po-replay` kể lại |
+| Hiểu biết về hệ thống hiện hành | AI suy luận từ kiến thức chung | Đọc knowledge base của sản phẩm, phân tích ảnh hưởng, đọc lại nguồn sống |
+| Xử lý thông tin còn thiếu | AI có xu hướng tự bổ sung cho đủ nội dung | Ghi `❓PO` hoặc câu hỏi chặn và dừng chờ PO trả lời |
+| Lưu vết quyết định | Phân tán trong lịch sử hội thoại | Ghi nguyên văn kèm người quyết định và thời điểm; AI không tự duyệt |
+| Kiểm soát chất lượng trước khi bàn giao | PO tự rà soát | Script kiểm tra, checklist có điều kiện chặn, AI Reviewer đánh giá độc lập |
+| Truy vết từ yêu cầu tới kiểm thử | Cấu trúc khác nhau giữa các lần soạn | Mã định danh ổn định, Story List import trực tiếp lên Jira, test case trỏ về mã |
+| Thay đổi yêu cầu | Soạn lại hoặc sửa thủ công | Change request quay về đúng stage, lưu bản đã duyệt |
+| Chuyển giao người phụ trách | Mất bối cảnh | Hồ sơ intent đầy đủ, `/po-replay` tóm lược diễn biến |
 
 ## 2. Nguyên lý nền
 
@@ -526,7 +528,7 @@ Số liệu nên thu từ khi thử ở mức team, đều lấy được từ f
 | Core và harness | `engine/` là phần trung lập; `.claude/` là phần cấu hình riêng cho Claude Code; `AGENTS.md` cho mọi công cụ |
 | Product Agent, Product Lead | AI trong phiên làm vai Product; AI Reviewer là agent review độc lập |
 | proto-Unit | Unit, nhóm user story theo giá trị và ưu tiên |
-| Engine điều phối, sensor | Không cài. `po-tools.py` làm phần tất định: check thay sensor, approve và next cho điều phối, status phát hiện lệch |
+| Engine điều phối, sensor | Không cài. `po-tools.py` đảm nhận phần tất định: check thay sensor, approve và next cho điều phối, status phát hiện lệch |
 | Hook, HUMAN_TURN, guard | `engine/scripts/po-hook.py` bằng Python: ghi lượt PO, approve đòi lời PO có trong sổ như HUMAN_TURN; chặn tự đánh dấu đã duyệt, sửa artifact đã duyệt ngoài CR, sửa quyết định cũ, reviewer ghi ngoài phạm vi. AWS tắt sẵn phần lớn guard ở 10/11 scope nhưng giữ kiểm có người thật; PO-Workflow bật các guard này vì đã gặp sự cố một bản đã duyệt bị ghi đè 15 lần. Bỏ qua: sổ audit 119 sự kiện, sensor chạy mỗi lần ghi, statusline |
 | Review receipt, reviewer scope | `review-start` ghi dấu artifact; approve đòi review lại khi artifact đổi. Tiêu chí review lấy từ Product Lead của AWS; reviewer tự khai Verdict Dictated |
 | Test suite, CI, release metadata | Fixture tự chứa với domain mẫu; selftest bắt lệnh chưa có ca kiểm, tài liệu nhắc lệnh hoặc đường dẫn không có, VERSION lệch CHANGELOG; CI chạy selftest và `engine-check --strict`; CHANGELOG có dòng Tương thích. Bỏ qua: chia tầng smoke, unit, integration, shard, live test, build binary |

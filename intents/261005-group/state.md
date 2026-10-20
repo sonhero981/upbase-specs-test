@@ -27,16 +27,16 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - [x] 2.31 impact-analysis · v1: inception/impact-analysis/impact-matrix.md v0.4 duyệt 2026-10-12 (CR2, CG-3 đã giải, OQ-31; DEC82). v0.3 duyệt 2026-10-09 (CR1, vùng 9 và BI-6). v0.2 Gate 2 duyệt 2026-10-06
 - [S] 2.32 solution-options · v1 không làm so sánh phương án; Bước 7 dùng để chốt nhóm câu hỏi D
 - [x] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story và 20 US, v0.3. Duyệt lại theo v2 2026-10-12 (DEC82) sau một lần Request Changes (DEC80, CR2); truy vết tay ở inception/prd/traceability.md. 20 US chốt ở 9A của v1 ngày 2026-10-06
-- [x] 2.42 prd-generation · v1: inception/prd/prd.md v0.3 duyệt 2026-10-12 (CR2, chạm US3 US7 US19 US20, danh sách US, tồn đọng; DEC82). v0.2 duyệt 2026-10-09 (CR1, chạm US9 US11 US13 US16 US20). v0.1 duyệt và publish Lark 2026-10-06
+- [R] 2.42 prd-generation · v1: inception/prd/prd.md v0.3 duyệt 2026-10-12 (CR2, chạm US3 US7 US19 US20, danh sách US, tồn đọng; DEC82). v0.2 duyệt 2026-10-09 (CR1, chạm US9 US11 US13 US16 US20). v0.1 duyệt và publish Lark 2026-10-06. Đang sửa theo CR3 từ 2026-10-20: thêm khối AC và dòng Ưu tiên (DEC92)
 - [ ] 2.43 design-alignment
 
 ## Current
 | | |
 |---|---|
-| Stage | 2.43 design-alignment: chờ Design PIC, Tech PIC, QA PIC viết file thiết kế từ PRD đã duyệt |
-| Next action | Tạo ux-design.md, tech-design.md, test-design.md từ template theo engine/stages/design-alignment.md; gửi ba PIC đường dẫn PRD đã duyệt kèm hạn |
+| Stage | 2.42 đang sửa theo CR3: thêm AC và Ưu tiên cho 20 US trước khi giao ba team ở 2.43 |
+| Next action | Viết khối AC và dòng Ưu tiên, chạy trace và check, AI Reviewer, trình gate 2.42; sau Approve publish Lark, rồi tạo khung ba file thiết kế ở 2.43 |
 | Blocking questions open | 0 |
-| Open CR | none. CR2 đóng 2026-10-12 (DEC82), CR1 đóng 2026-10-09 |
+| Open CR | CR3 mở 2026-10-20 (DEC92). CR2 đóng 2026-10-12, CR1 đóng 2026-10-09 |
 | Parked | no |
 
 ## Versions
@@ -76,3 +76,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-19 10:12 migrate lên engine 2.1.0 bởi buidhui, DEC89
 - 2026-10-19 15:11 migrate lên engine 2.1.0 bởi buidhui, DEC90
 - 2026-10-20 09:26 migrate lên engine 2.1.0 bởi buidhui, DEC91
+- 2026-10-20 Mở CR3 (DEC92): thêm khối AC và dòng Ưu tiên vào PRD trước 2.43. Chụp archive/prd-generation/prd-pre-CR3-20261020.md. 2.42 về [R]

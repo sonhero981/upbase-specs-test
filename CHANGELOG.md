@@ -29,7 +29,7 @@ Tương thích: chép engine và chạy migrate.
 - USER-GUIDE ghi `/compact` không mất dữ liệu, trong khi câu trả lời chưa ghi file thì mất. Nay có quy tắc ghi file trước khi hết lượt.
 
 ### Thêm
-- `po-tools.py`: `check` kiểm phần máy kiểm được, `approve` làm trọn ghi chép sau gate, `next` chọn stage kế, `doctor` kiểm môi trường, `index` sinh bảng chỉ mục PRD cho Dev, `replay` kể lại intent, `manifest` và `engine-check` cho nâng cấp, `selftest` chạy bộ intent mẫu trong `engine/tests/`. `status` thêm kiểm tra artifact lệch đầu vào và nguồn KB quá 30 ngày.
+- `po-tools.py`: `check` kiểm phần máy kiểm được, `approve` làm trọn ghi chép sau gate, `next` chọn stage kế, `doctor` kiểm môi trường, `index` sinh bảng chỉ mục PRD cho Dev, `replay` tóm lược diễn biến của intent, `manifest` và `engine-check` cho nâng cấp, `selftest` chạy bộ intent mẫu trong `engine/tests/`. `status` thêm kiểm tra artifact lệch đầu vào và nguồn KB quá 30 ngày.
 - Lệnh `/po-replay`.
 - Bước xác nhận giả định ở 1.1 và 2.3.
 - Câu hỏi gắn nhãn người trả lời; tối đa bốn lựa chọn để vừa hộp chọn; uỷ quyền chỉ trong stage đang chạy.
@@ -88,7 +88,7 @@ Theo cách AWS giữ chất lượng repo, ở quy mô một người giữ engi
 - AGENTS.md, DOMAIN-SETUP.md, GLOSSARY.md viết lại bằng văn viết, bỏ in đậm. DOMAIN-SETUP.md thêm mục Chuẩn bàn giao cho các team. GLOSSARY.md thêm checkpoint, điều kiện giao Dev, Story List, nguyên tắc chia story, tiêu chí chấp nhận, tag bản duyệt, phiên bản artifact, mức độ trưởng thành.
 - Sửa chữ PU còn sót thành Unit trong template `scope-document`, `stories` và 2 checklist.
 - Mã ví dụ trong `id-conventions.md`, README, GLOSSARY, USER-GUIDE và `/new-domain` đổi từ `LMS-F012` sang `APP-F012`, để engine không gắn với sản phẩm đang cài.
-- README mục 1 thêm phần Lợi ích cho PO và điểm khác biệt: mỗi lợi ích gắn với cơ chế tạo ra nó và mức bằng chứng hiện có; bảng so sánh với việc PO tự dùng AI chat để viết PRD.
+- README mục 1 thêm phần Giá trị của quy trình: mỗi giá trị gắn với cơ chế tạo ra nó và bằng chứng hiện có; thêm bảng so sánh với việc dùng trực tiếp AI hội thoại để soạn PRD.
 
 ### Đổi tên
 - Proto-Unit thành Unit, mã `PU1` thành `U1`, mục PRD Proto-Units thành Units, theo quyết định ngày 19/10/2026. GLOSSARY ghi khác biệt với Unit of work của AWS ở 2.7.

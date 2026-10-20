@@ -95,12 +95,14 @@ Nhật ký quyết định của intent. Chuyển từ `archive/v1/project-decis
 | DEC89 | 2026-10-19 10:12 | migrate | Chuẩn hoá dữ liệu lên engine 2.1.0: đường dẫn mới, Unit, PIC, AI Reviewer, mã tính năng LMS-F002; chụp lại bản duyệt archive/market-research/competitive-analysis-v0.2-20261019.md · archive/approval-handoff/brd-v0.3-20261019.md · archive/prd-generation/prd-v0.3-20261019.md. Không đổi nội dung nghiệp vụ | "cứ tối ưu triệt để nếu thực sự cần thiết kể cả phải migrate lại dữ liệu cũ" | buidhui | migrate, phiên bản, mã tính năng |
 | DEC90 | 2026-10-19 15:11 | migrate | Chuẩn hoá dữ liệu lên engine 2.1.0: đường dẫn mới, Unit, PIC, AI Reviewer, mã tính năng LMS-F002. Không đổi nội dung nghiệp vụ | "chuẩn hoá theo engine mới" | buidhui | migrate, phiên bản, mã tính năng |
 | DEC91 | 2026-10-20 09:26 | migrate | Chuẩn hoá dữ liệu lên engine 2.1.0: đường dẫn mới, Unit, PIC, AI Reviewer, mã tính năng LMS-F002; luồng 2.43 thay 2.41 HLD Brief. Không đổi nội dung nghiệp vụ | "chuyển sang luồng 2.43, bỏ HLD Brief" | buidhui | migrate, phiên bản, mã tính năng |
+| DEC92 | 2026-10-20 | 2.42 | **Mở CR3 trước khi giao ba team ở 2.43**: bổ sung khối tiêu chí chấp nhận `AC<US>.<n>` cho 20 US, phủ đủ 130 business rule, mỗi US có ít nhất một AC cho nhánh lỗi hoặc bị từ chối, và dòng Ưu tiên Must, Should, Could cho từng US theo template PRD của engine 2.1.0. Không đổi business rule, màn, field. Re-entry 2.42, AI Reviewer xem lại, PO duyệt lại PRD, publish lại Lark rồi mới giao. PIC ở 2.43 giữ theo vai, không ghi tên, không đặt hạn, tiếp tục DEC86 | "Mở CR3 trước, rồi mới giao (Recommended)" · "Giữ theo vai (Recommended)" | buidhui | 2.42, 2.43, CR |
 
 ## Change requests
 | CR | Ngày | Nguồn | Nội dung | Stage mở lại | Artifact đổi | Trạng thái |
 |---|---|---|---|---|---|---|
 | CR1 | 2026-10-09 | competitive-analysis v0.2 §9.2, DEC72 đến DEC75 | Ba điểm a, b, c | 2.3, 2.31, 2.42 (Modify, chỉ phần bị chạm) | requirements v0.3 · impact-matrix v0.3 · prd v0.2 | Đóng 2026-10-09 (DEC77). PRD v0.2 đã publish Lark cùng ngày, revision 31 |
 | CR2 | 2026-10-12 | Review 2.4 lần 01 `R-02` `R-03` `R-04`, DEC80 đến DEC81 | Luật `CG-3` người thuộc nhiều nhóm cùng giao một lớp · tag `RC` ở danh sách US · lý do `OQ-31` không chặn PRD | 2.42 (Modify: `US3` `US7` `US19` `US20`, danh sách US, tồn đọng #2) · 2.31 (Modify: đánh dấu `CG-3` đã giải, `OQ-31`) | prd v0.3 · impact-matrix v0.4 | Đóng 2026-10-12 (DEC82). PRD v0.3 publish lại Lark cùng ngày |
+| CR3 | 2026-10-20 | Engine 2.1.0 đòi PRD có khối AC và dòng Ưu tiên; `check` báo 21 cảnh báo, `dor` 0/20 story đạt, DEC92 | Thêm AC cho 20 US phủ 130 BR · dòng Ưu tiên từng US | 2.42 (Modify: mục 4/ và mục 1/ của US1 đến US20, Document version) | prd v0.4 | Đang xử lý. Gate 2.42 chờ duyệt lại |
 
 ## Accepted risks
 | DEC | Finding | Vì sao chấp nhận |
