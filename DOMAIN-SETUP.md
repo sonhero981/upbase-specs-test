@@ -1,6 +1,6 @@
 # Đưa một sản phẩm mới vào quy trình
 
-Tài liệu này dành cho người phụ trách quy trình, làm một lần khi đưa quy trình sang một sản phẩm hoặc công ty khác. Thao tác hằng ngày của PO ở [USER-GUIDE.md](USER-GUIDE.md); phương pháp ở [README.md](README.md).
+Tài liệu này dành cho người phụ trách quy trình và mô tả việc làm một lần khi đưa quy trình sang một sản phẩm hoặc công ty khác. Thao tác hằng ngày của PO ở [USER-GUIDE.md](USER-GUIDE.md); phương pháp ở [README.md](README.md).
 
 ## 1. Hai tầng của repo
 
@@ -17,9 +17,9 @@ domain/
     └── prd-template-goc-lark.md   bản gốc của chủ template, để đối chiếu
 ```
 
-Hai thứ nằm ngoài thư mục đó nhưng thuộc về domain, phải làm mới khi đổi: `memory/project.md` chứa bài học riêng của sản phẩm hiện tại, và `intents/` chứa việc của sản phẩm hiện tại. `memory/team.md` là bài học dùng chung cho mọi sản phẩm, như cách đánh version, cách hỏi, cách viết PRD và publish; file này đi theo engine, giữ nguyên.
+Hai phần nằm ngoài thư mục đó nhưng thuộc về domain, phải làm mới khi đổi domain: `memory/project.md` chứa bài học riêng của sản phẩm hiện tại, và `intents/` chứa việc của sản phẩm hiện tại. `memory/team.md` là bài học dùng chung cho mọi sản phẩm, như cách đánh version, cách hỏi, cách viết PRD và publish; file này đi theo engine, giữ nguyên.
 
-Engine, gồm file stage, lệnh, checklist và `AGENTS.md`, không ghi cứng dữ kiện sản phẩm, kể cả tên sản phẩm; các file này trỏ về `domain.md` theo mục. Vì vậy đổi domain không ảnh hưởng tới engine. Lệnh `/new-domain` dựng khung cho các bước dưới đây; phần cần người quyết vẫn do người làm.
+Engine, gồm file stage, lệnh, checklist và `AGENTS.md`, không ghi cứng dữ kiện sản phẩm, kể cả tên sản phẩm; các file này trỏ về `domain.md` theo mục. Vì vậy đổi domain không ảnh hưởng tới engine. Lệnh `/new-domain` dựng khung cho các bước dưới đây; phần cần người quyết định vẫn do người làm.
 
 ## 2. Tạo space mới
 
@@ -47,11 +47,11 @@ Mỗi nguồn ghi vào `domain.md` mục 2 với đường dẫn hoặc link, lo
 
 ## 4. Dựng KB cùng AI
 
-KB là bản chắt lọc từ nguồn. Mỗi file trả lời một câu hỏi: có gì, ràng buộc gì, chạm vào đâu. Thứ tự và quy ước, giữ cho mọi domain để command tra được:
+KB là bản chắt lọc từ nguồn. Mỗi file trả lời ba câu hỏi: có gì, ràng buộc gì, chạm vào đâu. Thứ tự và quy ước dưới đây giữ nguyên cho mọi domain để command tra được:
 
 | File | Nội dung | Bắt buộc |
 |---|---|---|
-| `00-index.md` | mục lục, trạng thái tính năng kể cả Hidden, mục "câu hỏi để sau". Bảng nguồn không nằm ở đây mà ở `domain.md` mục 2 | có |
+| `00-index.md` | mục lục, trạng thái tính năng kể cả Hidden, mục "câu hỏi để sau". Bảng nguồn ghi ở `domain.md` mục 2 | có |
 | `01` đến `NN` | mỗi module nghiệp vụ một file: khái niệm, luồng chính, rule có mã, màn, dữ liệu | có |
 | `data-model` | bảng, khoá ngoại, quan hệ, shared entity dễ vỡ | có |
 | `events` hoặc `mail-events` | sự kiện, thông báo, mail tự động và trạng thái bật tắt | nếu sản phẩm có |
@@ -59,7 +59,7 @@ KB là bản chắt lọc từ nguồn. Mỗi file trả lời một câu hỏi:
 | `product-direction` | portal, tenant, phần đóng cứng, hướng sản phẩm | có |
 | `domain-principles` | quan hệ chứa giữa các thực thể, ranh giới thực thể | có |
 
-Số thứ tự tự do; tên file ghi vào bản đồ KB trong `domain.md` mục 3, command tra theo bản đồ chứ không theo số.
+Số thứ tự tự do, vì command tra file theo bản đồ KB trong `domain.md` mục 3; tên file phải ghi vào bản đồ này.
 
 Cách làm với AI, từng file một:
 
@@ -87,7 +87,7 @@ Về khối lượng: KB của sản phẩm đầu tiên áp dụng quy trình c
 2. Nguồn sống và bản chốt, kèm ngày đối chiếu và phiên bản nguồn
 3. Bản đồ KB: file nào trả lời câu gì, dùng ở stage nào; vùng chưa phủ; quy ước mã
 4. Dữ kiện cho từng stage: KB đọc ở 1.1 và 1.4; sản phẩm so sánh mặc định cho 1.2; KB và ví dụ cho 2.3; shared entity, hệ thông báo, phân quyền, luồng tự sinh, tenant cho 2.31; nguồn field và template PRD cho 2.42; đích publish; đích User Guide
-5. Ví dụ dùng trong engine, để command giữ chung
+5. Ví dụ dùng trong engine, để command dùng chung cho mọi domain
 6. Thành phần của pack
 
 Mục 4 quyết định chất lượng của từng stage: mỗi stage chỉ đọc phần của mình trong mục này, nên thiếu phần nào thì stage đó chạy thiếu dữ kiện.
@@ -104,7 +104,7 @@ Template User Guide: theo cấu trúc tài liệu người dùng mà công ty đ
 
 ## 8. Chuẩn bàn giao cho các team
 
-Chuẩn trong `engine/standards/` áp nguyên cho sản phẩm mới; chỉ phần sau phải làm cho từng sản phẩm:
+Chuẩn trong `engine/standards/` áp dụng nguyên vẹn cho sản phẩm mới; chỉ phần sau phải làm cho từng sản phẩm:
 
 1. Chốt mã sản phẩm `code` trong `domain.md` với người quản lý danh mục sản phẩm của công ty. Mã phải khác mã của mọi sản phẩm khác, vì mã tính năng `<code>-F<NNN>` đi vào story trên Jira, test case, tên nhánh và commit của mọi team. Số tính năng bắt đầu từ `F001`.
 2. Thống nhất với Design, Tech và QA rằng PRD, ba file thiết kế ở 2.43, Decision Brief và story trên Jira là đầu vào chính thức; template của ba file thiết kế ở `engine/templates/`, team đã có mẫu riêng thì sửa template cho khớp, theo README mục 6. Dự án Jira nhận Story List đã ghi ở frontmatter `domain.md` từ mục 5; kiểm lại với người quản trị Jira. Gửi các PIC `engine/standards/id-conventions.md` và `engine/standards/handoff-rules.md`.

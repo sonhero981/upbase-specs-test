@@ -43,7 +43,7 @@ Phần lớn sản phẩm dùng quy trình này đã có người dùng và dữ
 
 | Đầu ra | Người nhận | Khi nào |
 |---|---|---|
-| Initiative Brief | Người quyết đầu tư | Cuối Ideation, profile L |
+| Initiative Brief | Người quyết định đầu tư | Cuối Ideation, profile L |
 | PRD | Design, Dev, QA | Khi 2.42 được duyệt; các team thiết kế từ bản này |
 | Decision Brief | Design PIC, Tech PIC, QA PIC, PO | Sau khi các team viết thiết kế, profile M và L |
 | Story List để import lên Jira, mỗi user story một dòng | Design, Tech, QA | Sau gate 2.43; profile S thì sau khi PRD được duyệt |
@@ -53,7 +53,7 @@ Ngoài phạm vi: thiết kế kỹ thuật chi tiết, cách Dev chia việc v�
 
 ### Lợi ích cho PO và điểm khác biệt
 
-Mỗi lợi ích dưới đây gắn với một cơ chế cụ thể của quy trình. Cột cuối ghi mức bằng chứng hiện có, theo đánh giá ở mục 9: quy trình mới chạy với 1 PO trên 1 sản phẩm, nên phần lớn lợi ích mới là kết quả thiết kế và còn chờ số đo.
+Mỗi lợi ích dưới đây gắn với một cơ chế cụ thể của quy trình. Cột cuối ghi mức bằng chứng hiện có, theo đánh giá ở mục 9: quy trình mới chạy với 1 PO trên 1 sản phẩm, nên phần lớn lợi ích hiện chỉ là kết quả thiết kế và còn chờ số đo.
 
 | Lợi ích | Nhờ cơ chế nào | Bằng chứng hiện có |
 |---|---|---|
@@ -61,7 +61,7 @@ Mỗi lợi ích dưới đây gắn với một cơ chế cụ thể của quy 
 | AI làm phần việc phân tích của BA | Tra knowledge base của sản phẩm trước khi hỏi, quét ảnh hưởng theo 12 vùng, đối chiếu corner checklist; AI Reviewer xem độc lập, không thấy hội thoại | Mục 11 ghi các lỗi đã gặp khi chạy thật và quy tắc sinh ra để chặn từng lỗi |
 | Nhất quán từ yêu cầu tới kiểm thử | Mã ổn định FR, US, BR, AC; mỗi US có tiêu chí chấp nhận cho nhánh lỗi; QA lập kế hoạch phủ từng AC; story trên Jira và test case trỏ về mã đầy đủ | Script `trace` và `dor` kiểm được; chưa có test case nào của QA chạy theo chuẩn này |
 | Một bộ quy trình dùng chung, cài được cho sản phẩm khác | Engine tách khỏi domain pack; hướng dẫn dựng domain, lệnh nâng cấp engine, 77 ca kiểm thử tự động của chính quy trình | Chưa có sản phẩm thứ hai; mục 9 khuyến nghị chưa đưa cho team khác trước khi đạt mức team và liên team |
-| Quyết định không mất khi đổi người | `decisions.md` ghi nguyên văn, người quyết và giờ; `/po-replay` kể lại intent cho người tiếp quản | Group và Gamification giữ đủ quyết định qua hai lần đổi engine |
+| Quyết định không mất khi đổi người | `decisions.md` ghi nguyên văn, người quyết định và giờ; `/po-replay` kể lại intent cho người tiếp quản | Group và Gamification giữ đủ quyết định qua hai lần đổi engine |
 | Hiểu hệ thống đang chạy trước khi viết | Bước phân tích ảnh hưởng chạy trước khi chọn giải pháp; nguồn sống như schema, API spec được đọc lại khi chạm vùng đó | Một intent tìm ra 4 rule trong knowledge base sai so với hệ thống |
 | Các team đọc một lần, chốt một lần | Các team thiết kế từ PRD chi tiết, mỗi team một file; AI gom điểm vướng vào Decision Brief để họp | Luồng có từ 20/10/2026, chưa intent nào chạy qua |
 | Thay đổi có kiểm soát | Change request quay về đúng stage bị chạm, giữ bản đã duyệt trong `archive/`; Story List mới so với bản trước và in story nào đổi | Gamification ghi 14 change request, mỗi change request có trạng thái và quyết định đi kèm |
@@ -74,7 +74,7 @@ So với việc PO tự dùng AI chat để viết PRD:
 | Khi thiếu thông tin | AI dễ tự điền cho đủ câu | Ghi `❓PO` hoặc câu hỏi chặn, dừng chờ PO |
 | Quyết định | Nằm rải trong lịch sử chat | Ghi nguyên văn, có người và giờ; AI không tự duyệt |
 | Chất lượng trước khi giao | PO tự đọc lại | Script kiểm, checklist có mục chặn, AI Reviewer độc lập |
-| Từ yêu cầu tới test | Mỗi lần viết một kiểu | Mã ổn định, Story List import thẳng lên Jira, test case trỏ về mã |
+| Từ yêu cầu tới test | Mỗi lần viết một cách khác | Mã ổn định, Story List import thẳng lên Jira, test case trỏ về mã |
 | Khi yêu cầu đổi | Viết lại hoặc sửa tay | Change request quay về đúng stage, giữ bản đã duyệt |
 | Khi đổi người phụ trách | Mất bối cảnh | Hồ sơ intent đầy đủ, `/po-replay` kể lại |
 
@@ -92,7 +92,7 @@ Mọi quy tắc trong quy trình xuất phát từ 7 nguyên lý. Gặp một qu
 | Requirement Traceability | Yêu cầu, user story, rule, tiêu chí chấp nhận truy được về nhau và về nguồn | Mã ổn định, thẻ nguồn, bảng truy vết, mã đầy đủ khi bàn giao | Gotel và Finkelstein, 1994; ISO/IEC/IEEE 29148 |
 | Responsible AI | AI không tự điền khi thiếu thông tin; người chịu trách nhiệm cuối | Ký hiệu `❓PO`, đọc lại nguồn sống, chỉ đăng bản đã duyệt | NIST AI RMF 1.0, 2023 |
 
-4 quy tắc làm việc rút từ các nguyên lý trên áp cho mọi stage:
+Từ các nguyên lý trên, quy trình rút ra 4 quy tắc làm việc áp cho mọi stage:
 
 - AI không tự điền dữ kiện. Thiếu thông tin nhỏ thì ghi giả định; thiếu thông tin làm đổi phạm vi, rule, dữ liệu hoặc luồng thì ghi câu hỏi mở và dừng; ô không suy ra được thì đánh dấu `❓PO`.
 - AI dừng ở mức phân tích. Cần biết một cơ chế kỹ thuật có tồn tại hay không thì hỏi PO. Có endpoint trong API spec không có nghĩa là tính năng còn hoạt động.
@@ -118,12 +118,12 @@ flowchart TD
     S24 ==>|"gate"| S242["2.42 PRD Generation<br/>AC, BR"]
     S242 ==>|"gate"| S243["2.43 Design Alignment<br/>3 file thiết kế, Decision Brief"]
     S243 ==>|"Alignment gate<br/>3 PIC ký"| ST["Story List<br/>import lên Jira"]
-    ST --> UG["User Guide<br/>sau khi Dev xong"]
+    ST --> UG["User Guide<br/>sau khi Dev làm xong"]
 ```
 
 ### 3.2 10 stage
 
-Số stage 1.1, 1.2, 1.4, 1.7, 2.3, 2.4 giữ theo AWS. 4 stage PO-Workflow thêm mang số thập phân để chen vào giữa: 2.31 và 2.32 sau 2.3, 2.42 và 2.43 sau 2.4. Số 2.41 từng dùng cho HLD Brief, đã bỏ ngày 20/10/2026 và không dùng lại. Định danh của stage là slug, ví dụ `impact-analysis`; số chỉ để hiển thị thứ tự. Các stage AWS giao cho kiến trúc sư, delivery, design hoặc developer, như 1.3, 1.5, 1.6, 2.1, 2.2 và 2.5 tới 2.9, không có trong repo này.
+Số stage 1.1, 1.2, 1.4, 1.7, 2.3, 2.4 giữ theo AWS. 4 stage do PO-Workflow thêm mang số thập phân để xếp vào giữa: 2.31 và 2.32 sau 2.3, 2.42 và 2.43 sau 2.4. Số 2.41 từng dùng cho HLD Brief, đã bỏ ngày 20/10/2026 và không dùng lại. Định danh của stage là slug, ví dụ `impact-analysis`; số chỉ để hiển thị thứ tự. Các stage AWS giao cho kiến trúc sư, delivery, design hoặc developer, như 1.3, 1.5, 1.6, 2.1, 2.2 và 2.5 tới 2.9, không có trong repo này.
 
 | Stage | Mục đích | Artifact chính | Profile | Nguồn |
 |---|---|---|---|---|
@@ -131,7 +131,7 @@ Số stage 1.1, 1.2, 1.4, 1.7, 2.3, 2.4 giữ theo AWS. 4 stage PO-Workflow thê
 | 1.1 Intent Capture & Framing | Xác định vấn đề, mục tiêu đo được, stakeholder; tách giải pháp người yêu cầu đề xuất khỏi vấn đề | `intent-statement.md` | M, L | AWS |
 | 1.2 Market Research | So sánh với sản phẩm khác theo khía cạnh đã chọn | `competitive-analysis.md` | L, có điều kiện | AWS |
 | 1.4 Scope Definition | Chốt In, Out, Potential; chia nhu cầu thành Unit có ưu tiên | `scope-document.md` | M, L | AWS |
-| 1.7 Approval & Handoff | Tóm tắt Ideation thành một trang để quyết đi tiếp hay dừng | `initiative-brief.md` | L | AWS |
+| 1.7 Approval & Handoff | Tóm tắt Ideation thành một trang để quyết định đi tiếp hay dừng | `initiative-brief.md` | L | AWS |
 | 2.3 Requirements Analysis | Chuyển phạm vi thành yêu cầu có mã; tra KB tìm trùng lặp và rule chi phối | `requirements.md` | S, M, L | AWS |
 | 2.31 Impact Analysis | Xác định phần nào của hệ thống đang chạy bị ảnh hưởng; tìm conflict | `impact-matrix.md` | M, L | PO-Workflow |
 | 2.32 Solution Options | So sánh các hướng giải theo bảy tiêu chí | `solution-options.md` | L, có điều kiện | PO-Workflow |
@@ -139,7 +139,7 @@ Số stage 1.1, 1.2, 1.4, 1.7, 2.3, 2.4 giữ theo AWS. 4 stage PO-Workflow thê
 | 2.42 PRD Generation | PRD theo template công ty, chi tiết từng US, có tiêu chí chấp nhận và truy vết | `prd.md` | S, M, L | PO-Workflow |
 | 2.43 Design Alignment | Ba team viết thiết kế từ PRD; AI đối chiếu và viết Decision Brief; họp, 3 PIC ký | `decision-brief.md` | M, L | PO-Workflow |
 
-Mỗi file stage trong `engine/stages/` có bảng metadata với hàng "Lệch so với AWS", ghi điểm khác với stage cùng số của AWS. 2 stage gốc có chỉnh: 1.4 gộp intent backlog vào scope-document, và 2.4 không viết acceptance criteria, không chạy nhiều agent cùng góp ý.
+Mỗi file stage trong `engine/stages/` có bảng metadata với hàng "Lệch so với AWS", ghi điểm khác với stage cùng số của AWS. 2 stage gốc được điều chỉnh: 1.4 gộp intent backlog vào scope-document, và 2.4 không viết acceptance criteria, không chạy nhiều agent cùng góp ý.
 
 ### 3.3 Profile và depth
 
@@ -157,7 +157,7 @@ Depth quyết định mức chi tiết của artifact. Template đánh dấu m�
 |---|---|---|
 | Minimal | Viết ngắn, chỉ điều đã chốt | Bỏ |
 | Standard | Viết đủ | Viết khi có nội dung |
-| Comprehensive | Viết đủ | Viết hết, mục không áp dụng ghi lý do |
+| Comprehensive | Viết đủ | Viết toàn bộ, mục không áp dụng ghi lý do |
 
 ### 3.4 Chuỗi đầu ra
 
@@ -215,17 +215,17 @@ Tại gate, PO có 5 lựa chọn:
 - Add stage, chạy thêm một stage ngoài profile
 - Reject Initiative, chỉ ở 1.7
 
-Lời duyệt bằng câu tự nhiên được hiểu theo ý. "Ok nhưng đổi tên trường X" là duyệt kèm chỉ thị: AI sửa trước, hỏi lại một câu, ghi Approve khi PO trả lời. Nhờ thêm một việc mà không nói duyệt thì gate vẫn mở. Chọn nhầm thì ghi một dòng đính chính và trình lại.
+AI hiểu lời duyệt viết bằng câu tự nhiên theo ý của PO. "Ok nhưng đổi tên trường X" là duyệt kèm chỉ thị: AI sửa trước, hỏi lại một câu, ghi Approve khi PO trả lời. PO nhờ thêm một việc mà không nói duyệt thì gate vẫn mở. PO chọn nhầm thì AI ghi một dòng đính chính và trình lại gate.
 
-Quyết định ở gate chỉ đến từ PO, theo cách AWS giữ kiểm có người thật ở mọi scope. Hook của Claude Code ghi mỗi lượt PO gõ hoặc chọn vào `.po/turns.jsonl`. Lệnh approve chỉ ghi khi lời duyệt có nguyên văn trong một lượt PO ghi sau lần sửa artifact cuối; kiểm máy còn cảnh báo, hoặc stage có reviewer mà artifact đổi sau review, thì approve đòi thêm lời chấp nhận của PO. Hook cũng chặn AI tự đánh dấu đã duyệt, sửa artifact đã duyệt ngoài change request, sửa dòng quyết định cũ. Công cụ không có hook thì PO tự chạy approve trong terminal.
+Quyết định ở gate chỉ đến từ PO, theo cách AWS giữ bước kiểm có người thật ở mọi scope. Hook của Claude Code ghi mỗi lượt PO gõ hoặc chọn vào `.po/turns.jsonl`. Lệnh approve chỉ ghi khi lời duyệt có nguyên văn trong một lượt của PO được ghi sau lần sửa artifact cuối. Nếu kiểm máy còn cảnh báo, hoặc stage có reviewer mà artifact đổi sau review, approve đòi thêm lời chấp nhận của PO. Hook cũng chặn AI tự đánh dấu đã duyệt, sửa artifact đã duyệt ngoài change request, sửa dòng quyết định cũ. Công cụ không có hook thì PO tự chạy approve trong terminal.
 
-Sau Approve, lệnh `po-tools.py approve` làm toàn bộ phần ghi chép: đặt phiên bản, chụp bản duyệt vào `archive/`, ghi quyết định nguyên văn kèm tên người quyết và giờ, đổi trạng thái stage, in dòng tiến độ và stage kế. Bản nháp mang phiên bản 0.x. Lần duyệt đầu là 1.0. Mỗi lần duyệt lại sau change request tăng số phụ, 1.0 thành 1.1. Bản trong `archive/` không bao giờ bị sửa.
+Sau Approve, lệnh `po-tools.py approve` làm toàn bộ phần ghi chép: đặt phiên bản, chụp bản duyệt vào `archive/`, ghi quyết định nguyên văn kèm tên người quyết định và giờ, đổi trạng thái stage, in dòng tiến độ và stage kế. Bản nháp mang phiên bản 0.x. Lần duyệt đầu là 1.0. Mỗi lần duyệt lại sau change request tăng số phụ, 1.0 thành 1.1. Bản trong `archive/` không bao giờ bị sửa.
 
 ## 4. Từng stage
 
 ### 0 Khởi tạo, lệnh /new-intent
 
-AI dựng cây thư mục intent từ template và cấp mã tính năng dạng `<mã sản phẩm>-F<NNN>`. Mã sản phẩm lấy từ `domain/domain.md`. Nếu chưa có mô tả yêu cầu, AI đặt sẵn mẫu `inputs/request.md` để người yêu cầu điền: hiện trạng, muốn đổi gì, trong và ngoài phạm vi, điều không được thay đổi, mốc, câu hỏi mở. AI quét nhanh inputs và KB để ước lượng vùng bị chạm, đề xuất profile và ghi quyết định profile thành `DEC1`.
+AI dựng cây thư mục intent từ template và cấp mã tính năng dạng `<mã sản phẩm>-F<NNN>`. Mã sản phẩm lấy từ `domain/domain.md`. Nếu chưa có mô tả yêu cầu, AI đặt sẵn mẫu `inputs/request.md` để người yêu cầu điền: hiện trạng, điều muốn thay đổi, trong và ngoài phạm vi, điều không được thay đổi, mốc, câu hỏi mở. AI quét nhanh inputs và KB để ước lượng vùng bị chạm, đề xuất profile và ghi quyết định profile thành `DEC1`.
 
 ### 1.1 Intent Capture & Framing
 
@@ -233,11 +233,11 @@ AI tách giải pháp người yêu cầu nêu sẵn khỏi vấn đề. "Thêm 
 
 ### 1.2 Market Research
 
-Stage có điều kiện, chỉ chạy khi PO muốn so sánh với sản phẩm khác hoặc cách làm phổ biến trên thị trường ảnh hưởng tới phạm vi. Danh sách sản phẩm so sánh mặc định ghi trong `domain.md`. AI trích nguồn kèm link và ngày đọc, không suy diễn tính năng từ tên menu. Artifact gồm bảng so sánh, điểm nên và không nên áp dụng, và đối chiếu với yêu cầu hiện tại.
+Stage có điều kiện, chỉ chạy khi PO muốn so sánh với sản phẩm khác, hoặc khi cách làm phổ biến trên thị trường ảnh hưởng tới phạm vi. Danh sách sản phẩm so sánh mặc định ghi trong `domain.md`. AI trích nguồn kèm link và ngày đọc, không suy diễn tính năng từ tên menu. Artifact gồm bảng so sánh, điểm nên và không nên áp dụng, và đối chiếu với yêu cầu hiện tại.
 
 ### 1.4 Scope Definition
 
-AI chốt In, Out, Potential và chia nhu cầu thành Unit, mã `U1`, `U2`, sắp theo MoSCoW. Bốn quy tắc chia: theo cơ chế chứ không theo màn hình; xác định hạng mục nền; tách riêng hạng mục chạm toàn hệ thống như phân quyền, bật tắt, lịch sử; phụ thuộc một chiều. Hạng mục Won't vẫn được định nghĩa để bước phân tích ảnh hưởng quét đúng. Profile M duyệt 1.1 và 1.4 chung một gate và chạy phase check Ideation tại gate đó.
+AI chốt In, Out, Potential và chia nhu cầu thành Unit, mã `U1`, `U2`, sắp theo MoSCoW. Bốn quy tắc chia: theo cơ chế thay vì theo màn hình; xác định hạng mục nền; tách riêng hạng mục chạm toàn hệ thống như phân quyền, bật tắt, lịch sử; phụ thuộc một chiều. Hạng mục Won't vẫn được định nghĩa để bước phân tích ảnh hưởng quét đúng. Profile M duyệt 1.1 và 1.4 chung một gate và chạy phase check Ideation tại gate đó.
 
 ### 1.7 Approval & Handoff
 
@@ -245,15 +245,15 @@ AI tóm tắt phase thành Initiative Brief một trang: vấn đề và mục t
 
 ### 2.3 Requirements Analysis
 
-AI tra KB cho từng hạng mục trước khi hỏi: đã có chưa, rule nào chi phối, có tính năng ẩn liên quan không, thông báo nào liên quan, có rơi vào vùng KB chưa phủ không. Yêu cầu trùng tính năng đã có được nêu ngay kèm mã KB. Sau đó AI quét sáu chiều theo AWS và corner checklist của domain để tìm phần thiếu. Artifact `requirements.md` có FR mã `FR1`, `FR1.1` với ưu tiên và cờ Existing, New, Changed; NFR khi đo được; constraints; câu hỏi mở `OQ1`; out of scope; nguồn đã đọc. FR mô tả điều phải đúng, không nói tới bảng, endpoint hoặc thuật toán.
+AI tra KB cho từng hạng mục trước khi hỏi: đã có chưa, rule nào chi phối, có tính năng ẩn liên quan không, thông báo nào liên quan, có rơi vào vùng KB chưa phủ không. AI nêu ngay yêu cầu trùng tính năng đã có, kèm mã KB. Sau đó AI quét sáu chiều theo AWS và corner checklist của domain để tìm phần thiếu. Artifact `requirements.md` có FR mã `FR1`, `FR1.1` với ưu tiên và cờ Existing, New, Changed; NFR khi đo được; constraints; câu hỏi mở `OQ1`; out of scope; nguồn đã đọc. FR mô tả điều phải đúng, không nói tới bảng, endpoint hoặc thuật toán.
 
 ### 2.31 Impact Analysis
 
-Thay vì đặt câu hỏi, AI dựng Related Features Map từ requirements, KB, schema và API spec để PO rà soát; nhận ra phần thiếu trong bản nháp dễ hơn liệt kê từ đầu. Sau khi PO xác nhận bản đồ, AI dựng Impact Matrix theo năm bước: hiện trạng và phụ thuộc, trạng thái mong muốn, ma trận 12 vùng, chuyển đổi dữ liệu, các câu kiểm theo `domain.md`. Conflict theo bốn chiều rule, process, data, permission được chuyển cho PO quyết, mỗi conflict một DEC. Ảnh hưởng được xét hai chiều, cả từ tính năng mới sang phần cũ và ngược lại.
+Thay vì đặt câu hỏi, AI dựng Related Features Map từ requirements, KB, schema và API spec để PO rà soát; nhận ra phần thiếu trong bản nháp dễ hơn liệt kê từ đầu. Sau khi PO xác nhận bản đồ, AI dựng Impact Matrix theo năm bước: hiện trạng và phụ thuộc, trạng thái mong muốn, ma trận 12 vùng, chuyển đổi dữ liệu, các câu kiểm theo `domain.md`. Conflict theo bốn chiều rule, process, data, permission được chuyển cho PO quyết định, mỗi conflict một DEC. Ảnh hưởng được xét hai chiều, cả từ tính năng mới sang phần cũ và ngược lại.
 
 ### 2.32 Solution Options
 
-Stage có điều kiện, chạy khi có từ hai hướng giải hoặc PO chưa có hướng. AI dựng option từ các hướng khác nhau: đổi quy trình, cấu hình, mở rộng tính năng có sẵn, làm mới, cắt phạm vi. Mọi option so bằng bảy tiêu chí: phù hợp nghiệp vụ, tác động người dùng, tác động hệ thống và dữ liệu, effort, risk, phụ thuộc, nợ đóng cứng. Effort và risk ghi Cao, Trung bình, Thấp kèm lý do, không ước lượng số giờ.
+Stage có điều kiện, chạy khi có từ hai hướng giải hoặc PO chưa có hướng. AI dựng option từ các hướng khác nhau: đổi quy trình, cấu hình, mở rộng tính năng có sẵn, làm mới, cắt phạm vi. Mọi option được so theo bảy tiêu chí: phù hợp nghiệp vụ, tác động người dùng, tác động hệ thống và dữ liệu, effort, risk, phụ thuộc, nợ đóng cứng. Effort và risk ghi Cao, Trung bình, Thấp kèm lý do, không ước lượng số giờ.
 
 ### 2.4 User Stories
 
@@ -261,17 +261,17 @@ AI chia yêu cầu thành user story, mỗi US gắn một Unit và mỗi FR có
 
 ### 2.42 PRD Generation
 
-Bước hỏi là Field Intake: AI tra Impact Matrix, data model, API spec và KB, phân loại mỗi màn là mới, sửa màn có sẵn hoặc chỉ đọc, sau đó lập một bảng field, rule, validate để PO duyệt. Field hiện có chỉ hỏi phần thay đổi. Profile S cũng phải qua bước này.
+Bước hỏi là Field Intake: AI tra Impact Matrix, data model, API spec và KB, phân loại mỗi màn là mới, sửa màn có sẵn hoặc chỉ đọc, sau đó lập một bảng field, rule, validate để PO duyệt. Với field hiện có, AI chỉ hỏi phần thay đổi. Profile S cũng phải qua bước này.
 
 PRD theo template của công ty. Phần đầu lấy từ artifact đã duyệt: intent statement, scope, stories, solution options. Phần Specific Requirement viết từng US với sáu mục: User story, Pre-Condition, Scenario, Acceptance criteria, Out of scope, Conner case để trống vì QA viết corner case ở `test-design.md`. Mục Acceptance criteria mở đầu bằng danh sách tiêu chí chấp nhận có mã `AC<US>.<n>`, tiếp theo là bảng UI, business rule mã `BR<US>.<n>`, data field và NFR. Cách viết tiêu chí chấp nhận ở mục 6.5.
 
-PRD viết trước khi các team thiết kế. Điểm phụ thuộc thiết kế hay kỹ thuật mà artifact đã duyệt chưa nói, AI ghi đề xuất có đánh dấu kèm câu hỏi gắn tên PIC; các team trả lời ở 2.43. Quy tắc cố định: không có mục Database và API, không thiết kế bảng hoặc thuật toán, hằng số ghi rõ là giá trị cứng hay cấu hình, field hiện có không mô tả như mới, không dấu vết quy trình, không viết tắt.
+PRD viết trước khi các team thiết kế. Với điểm phụ thuộc thiết kế hoặc kỹ thuật mà artifact đã duyệt chưa nói, AI ghi đề xuất có đánh dấu kèm câu hỏi gắn tên PIC; các team trả lời ở 2.43. Quy tắc cố định: không có mục Database và API, không thiết kế bảng hoặc thuật toán, hằng số ghi rõ là giá trị cứng hoặc cấu hình, field hiện có không mô tả như mới, không dấu vết quy trình, không viết tắt.
 
 ### 2.43 Design Alignment
 
 Chạy ở profile M và L, sau khi PRD được duyệt. Design PIC, Tech PIC, QA PIC đọc PRD và viết ba file riêng trong intent: `inception/ux-design/ux-design.md` gồm danh sách màn có mã `SCR`, luồng, accessibility; `inception/tech-design/tech-design.md` gồm thành phần bị chạm, quyết định kỹ thuật, dữ liệu, cách đáp ứng BR và NFR, Unit of work và độ lớn; `inception/test-design/test-design.md` gồm chiến lược, kế hoạch phủ từng AC, vùng hồi quy. Mỗi file có mục Ý kiến về PRD với lập trường Đồng ý, Đề xuất sửa, Phản đối. AI của PO chỉ tạo khung file, không viết và không sửa nội dung.
 
-AI đối chiếu ba file với PRD: script kiểm US có giao diện đã có màn chưa, AC đã có trong kế hoạch test chưa, US đã có trong thiết kế kỹ thuật chưa, file có dựng từ bản PRD hiện tại không; AI đọc thêm mâu thuẫn giữa các thiết kế, độ lớn so với mốc, ý kiến của các team. Kết quả là Decision Brief, tối đa 1.500 từ cho phần tổng hợp, chỉ ghi điểm cần người quyết, kèm bảng Ký. Họp trên Decision Brief; quyết định đổi yêu cầu đi change request trên PRD. Gate là Alignment gate: Approve khi cả ba PIC ghi Đồng ý hoặc Có ý kiến; PIC quá hạn chưa ký thì PO được chọn Accept as-is kèm lý do. Story List chỉ sinh sau gate này. Quyết định chọn cách làm này và so sánh với AWS ở `engine/standards/adr/0003-thiet-ke-cua-team-va-decision-brief.md`.
+AI đối chiếu ba file với PRD: script kiểm US có giao diện đã có màn chưa, AC đã có trong kế hoạch test chưa, US đã có trong thiết kế kỹ thuật chưa, file có dựng từ bản PRD hiện tại không; AI xét thêm mâu thuẫn giữa các thiết kế, độ lớn so với mốc, ý kiến của các team. Kết quả là Decision Brief, tối đa 1.500 từ cho phần tổng hợp, chỉ ghi điểm cần người quyết định, kèm bảng Ký. Họp trên Decision Brief; quyết định đổi yêu cầu đi qua change request trên PRD. Gate là Alignment gate: Approve khi cả ba PIC ghi Đồng ý hoặc Có ý kiến; PIC quá hạn chưa ký thì PO được chọn Accept as-is kèm lý do. Story List chỉ sinh sau gate này. Quyết định chọn cách làm này và so sánh với AWS ghi ở `engine/standards/adr/0003-thiet-ke-cua-team-va-decision-brief.md`.
 
 ## 5. Kiểm tra chất lượng
 
@@ -282,14 +282,14 @@ Mỗi gate có hai lớp kiểm. Lớp thứ nhất do máy làm, lớp thứ ha
 | Máy | `po-tools.py check` | Heading bắt buộc theo template, thẻ nguồn, `[Qn]` và `[DECn]` có thật, thẻ US đủ chín mục, chữ mẫu còn sót, mục cấm trong PRD, mã AC không trùng, US thiếu Ưu tiên, chưa thấy AC nhánh lỗi; ở 2.43 thêm độ phủ của ba file thiết kế, giới hạn từ và chữ ký của Decision Brief |
 | Máy | `po-tools.py trace` | FR sang US, US sang FR, BR sang AC, US trong PRD; báo GAP và ORPHAN; dừng với lỗi khi không đọc được mã nào |
 | Phán đoán | Checklist trong `engine/verification/` | Phần cần đọc hiểu; mục có nhãn BLOCK chưa đạt thì gate không mở |
-| Phán đoán | AI Reviewer | Agent AI độc lập, không thấy hội thoại, dùng tiêu chí của Product Lead bên AWS; kết luận READY hoặc NOT-READY với finding Critical, Major, Minor |
+| Phán đoán | AI Reviewer | Agent AI độc lập, không thấy hội thoại, dùng tiêu chí của Product Lead của AWS; kết luận READY hoặc NOT-READY với finding Critical, Major, Minor |
 | Chặn | Hook `engine/scripts/po-hook.py` | Lời duyệt phải có trong lượt PO; AI không tự đánh dấu đã duyệt, không sửa artifact đã duyệt ngoài change request, không sửa dòng quyết định cũ; reviewer chỉ ghi file review của mình |
 
-AI Reviewer chỉ nhận đường dẫn file và kết quả kiểm bằng máy. Trước khi gọi reviewer, `po-tools.py review-start` ghi dấu của artifact; artifact đổi sau mốc đó thì approve đòi review lại hoặc lời chấp nhận của PO. Từ lần review thứ hai, reviewer nhận sổ finding của stage thay cho file review cũ; finding PO đã chấp nhận rủi ro hoặc bác bỏ không bị chấm lại. READY khi không có Critical, và tối đa hai Major đã có cách xử lý rõ. Finding chỉ dựa trên khẩu vị tối đa là Minor. AI không tự sửa theo finding; PO quyết sửa hoặc ghi Accepted risk.
+AI Reviewer chỉ nhận đường dẫn file và kết quả kiểm bằng máy. Trước khi gọi reviewer, `po-tools.py review-start` ghi dấu của artifact; artifact đổi sau mốc đó thì approve đòi review lại hoặc lời chấp nhận của PO. Từ lần review thứ hai, reviewer nhận sổ finding của stage thay cho file review cũ; finding PO đã chấp nhận rủi ro hoặc bác bỏ không bị chấm lại. READY khi không có Critical, và tối đa hai Major đã có cách xử lý rõ. Finding chỉ dựa trên sở thích chủ quan được xếp tối đa ở mức Minor. AI không tự sửa theo finding; PO quyết định sửa hoặc ghi Accepted risk.
 
 Phase check chạy ở ranh giới phase: Ideation ở 1.7, hoặc ở gate chung của 1.1 và 1.4 với profile M; Inception ở gate cuối của phase, tức 2.43 với profile M, L và 2.42 với profile S. `po-tools.py status` phát hiện thêm artifact đã duyệt bị sửa ngoài change request, artifact dựa trên bản cũ của đầu vào, và nguồn KB quá hạn đối chiếu.
 
-Bản thân script có dữ liệu kiểm thử trong `engine/tests/fixtures/`: mỗi thư mục là một intent nhỏ dựng sẵn một tình huống, kèm `expected.txt` ghi lệnh cần chạy và kết quả đúng; `engine/tests/root/` là domain mẫu dùng chung, để kiểm thử không phụ thuộc domain đang cài. Thư mục này dành cho người giữ engine, PO không cần đọc. Lệnh `po-tools.py selftest` chạy lại toàn bộ sau mỗi lần sửa script hoặc file stage, kiểm thêm mọi lệnh đều có ca kiểm, tài liệu chỉ nhắc lệnh và đường dẫn có thật, VERSION khớp CHANGELOG. GitHub Actions chạy lệnh này trên Python 3.9 và bản mới nhất ở mỗi lần push. Quy trình sửa engine ở `AGENTS.md` mục Sửa engine.
+Dữ liệu kiểm thử của script nằm trong `engine/tests/fixtures/`: mỗi thư mục là một intent nhỏ dựng sẵn một tình huống, kèm `expected.txt` ghi lệnh cần chạy và kết quả đúng; `engine/tests/root/` là domain mẫu dùng chung, để kiểm thử không phụ thuộc domain đang cài. Thư mục này dành cho người giữ engine, PO không cần đọc. Lệnh `po-tools.py selftest` chạy lại toàn bộ sau mỗi lần sửa script hoặc file stage, đồng thời kiểm mọi lệnh đều có ca kiểm, tài liệu chỉ nhắc lệnh và đường dẫn có thật, VERSION khớp CHANGELOG. GitHub Actions chạy lệnh này trên Python 3.9 và bản mới nhất ở mỗi lần push. Quy trình sửa engine ở `AGENTS.md` mục Sửa engine.
 
 ## 6. Đầu ra chuẩn cho các phase sau
 
@@ -313,13 +313,13 @@ PO làm việc với các team ở 2 mốc.
 | Checkpoint | Stage 2.43, sau khi PRD được duyệt | PRD đã duyệt; ba file thiết kế của các team; Decision Brief | Họp trên Decision Brief, 3 PIC ký; cỡ story và thay đổi PRD được chốt |
 | Giao Dev | Sau gate 2.43; profile S sau gate 2.42 | Story List import lên Jira | Story đạt điều kiện giao Dev, xem mục 6.7 |
 
-Các team đọc PRD chi tiết một lần, thiết kế, sau đó chốt mọi điểm vướng trên một tài liệu ngắn. Luồng trước đó họp trên HLD Brief trước khi có PRD; bỏ ngày 20/10/2026 vì định hướng ngắn không đủ để các team thiết kế, lý do ở ADR 0003.
+Các team đọc PRD chi tiết một lần, thiết kế, sau đó chốt mọi điểm vướng mắc trên một tài liệu ngắn. Luồng trước đó họp trên HLD Brief trước khi có PRD. Luồng này bỏ từ ngày 20/10/2026 vì một bản định hướng ngắn không đủ để các team thiết kế; chi tiết ở ADR 0003.
 
 ### 6.3 Nguyên tắc chia story
 
-Story là đơn vị nghiệm thu. Mỗi story là một việc người dùng làm trọn được và kiểm được bằng tiêu chí chấp nhận; mọi phần việc của Design, Tech, QA truy về story qua mã. PO chia story một lần ở 2.4. Story List sinh sau checkpoint giữ nguyên cách chia đó, mỗi US một story, và chỉ dùng để chia việc, không chia lại story.
+Story là đơn vị nghiệm thu. Mỗi story là một việc người dùng làm trọn được và kiểm được bằng tiêu chí chấp nhận; mọi phần việc của Design, Tech, QA truy về story qua mã. PO chia story một lần ở 2.4. Story List sinh sau checkpoint giữ nguyên cách chia đó, mỗi US một story; các team dùng story để chia việc của mình và không chia lại story.
 
-PO chia story ở 2.4 theo nguyên tắc trong `engine/standards/story-splitting.md`. Tóm tắt:
+Nguyên tắc chia story nằm trong `engine/standards/story-splitting.md`, tóm tắt như sau:
 
 1. Mỗi story là một mục tiêu hoàn chỉnh của một vai, đi trọn từ giao diện tới rule và dữ liệu, và đạt bộ tiêu chí INVEST.
 2. Cách chia: dựng bản đồ story theo vai và bước trong hành trình người dùng; mỗi ô "vai và mục tiêu" là một story ứng viên.
@@ -328,7 +328,7 @@ PO chia story ở 2.4 theo nguyên tắc trong `engine/standards/story-splitting
 5. Không chia theo màn hình, tầng kỹ thuật, từng business rule, việc kỹ thuật thuần hoặc người làm.
 6. Mỗi story thuộc đúng một Unit.
 
-Cỡ story được xác nhận ở checkpoint: Tech PIC ghi trong `tech-design.md` story nào quá lớn để làm trong một sprint; Decision Brief đưa ra họp; tách thì đi change request trên PRD trước khi sinh Story List, phần tách ra nhận mã mới.
+Cỡ story được xác nhận ở checkpoint: Tech PIC ghi trong `tech-design.md` story nào quá lớn để làm trong một sprint; Decision Brief đưa ra họp; story cần tách thì đi qua change request trên PRD trước khi sinh Story List, phần tách ra nhận mã mới.
 
 Mỗi team tự chia việc của mình từ story:
 
@@ -342,7 +342,7 @@ AWS AI-DLC làm tương tự: story ở 2.4, Unit of work ở 2.7 kèm bảng gh
 
 ### 6.4 Mã chung
 
-PRD và artifact của PO dùng mã ngắn cho dễ đọc. Khi sinh Story List, script đổi sang mã đầy đủ có mã tính năng; từ đó mọi team chỉ dùng mã đầy đủ.
+PRD và artifact của PO dùng mã ngắn để dễ đọc. Khi sinh Story List, script đổi sang mã đầy đủ có mã tính năng; từ đó mọi team chỉ dùng mã đầy đủ.
 
 | Đối tượng | Mã đầy đủ | Ví dụ | Ai cấp |
 |---|---|---|---|
@@ -356,7 +356,7 @@ PRD và artifact của PO dùng mã ngắn cho dễ đọc. Khi sinh Story List,
 | Nhánh code | `feat/<tính năng>-<mô tả>` | `feat/APP-F012-quiz-retake` | Dev |
 | Commit | Trailer `Feature:` và `Story:` | `Feature: APP-F012` | Dev |
 
-Mã đã cấp không đổi và không dùng lại. Tách một story thì phần tách ra nhận số mới; AC chuyển đi nhận mã mới và dòng cũ ghi "chuyển sang", để test case trỏ mã cũ vẫn tìm được đường. Chi tiết ở `engine/standards/id-conventions.md`.
+Mã đã cấp không đổi và không dùng lại. Tách một story thì phần tách ra nhận số mới; AC chuyển đi nhận mã mới và dòng cũ ghi "chuyển sang", để test case trỏ mã cũ vẫn truy được tới mã mới. Chi tiết ở `engine/standards/id-conventions.md`.
 
 ### 6.5 Tiêu chí chấp nhận trong PRD
 
@@ -367,11 +367,11 @@ Tiêu chí chấp nhận là hợp đồng giữa PO và QA. Business rule đị
 - AC1.2 Khi bỏ trống field bắt buộc ở màn Tạo nhóm, hệ thống báo lỗi và không cho lưu, theo cột Yêu cầu của bảng UI
 ```
 
-Độ phủ bắt buộc: luồng chính và mỗi nhánh đáng kể trong thẻ US có ít nhất một tiêu chí; mỗi US có ít nhất một tiêu chí cho nhánh lỗi hoặc bị từ chối, như AC1.1 ở trên, và mỗi ngưỡng số có tiêu chí ở giá trị biên, theo AWS requirements-guide; mỗi business rule có ít nhất một tiêu chí trỏ tới. Validate của cùng một màn gom thành một tiêu chí trỏ về bảng UI, không mỗi dòng bảng một tiêu chí, để số test case không phình theo số field. Checklist của 2.42 chặn khi còn business rule chưa có tiêu chí chấp nhận hoặc US chưa có tiêu chí cho nhánh lỗi. Ở 2.43, QA PIC lập kế hoạch phủ từng tiêu chí trong `test-design.md` và ghi tiêu chí nào không kiểm thử được ở mục Ý kiến về PRD; Decision Brief đưa ra họp. AWS giao việc kiểm tính kiểm thử được cho quality agent ở 2.4; PO-Workflow làm ở 2.43 vì tiêu chí chấp nhận viết ở PRD.
+Độ phủ bắt buộc: luồng chính và mỗi nhánh đáng kể trong thẻ US có ít nhất một tiêu chí; mỗi US có ít nhất một tiêu chí cho nhánh lỗi hoặc bị từ chối, như AC1.1 ở trên, và mỗi ngưỡng số có tiêu chí ở giá trị biên, theo AWS requirements-guide; mỗi business rule có ít nhất một tiêu chí trỏ tới. Validate của cùng một màn gom thành một tiêu chí trỏ về bảng UI thay vì mỗi dòng bảng một tiêu chí, để số test case không tăng theo số field. Checklist của 2.42 chặn khi còn business rule chưa có tiêu chí chấp nhận hoặc US chưa có tiêu chí cho nhánh lỗi. Ở 2.43, QA PIC lập kế hoạch phủ từng tiêu chí trong `test-design.md` và ghi tiêu chí nào không kiểm thử được ở mục Ý kiến về PRD; Decision Brief đưa ra họp. AWS giao việc đánh giá tính kiểm thử được cho quality agent ở 2.4; PO-Workflow làm ở 2.43 vì tiêu chí chấp nhận viết ở PRD.
 
 ### 6.6 Story List
 
-Sau khi PRD được duyệt, và với profile M, L sau gate 2.43, lệnh `/po-stories` sinh `intents/<intent>/stories/story-list-prd-v<phiên bản>.csv` theo mẫu import CSV của Jira, mỗi US trong PRD một dòng. PO import file này lên Jira; các team làm việc trên story Jira. Nội dung nghiệp vụ chỉ có một nguồn là PRD.
+Sau khi PRD được duyệt (với profile M, L: sau gate 2.43), lệnh `/po-stories` sinh `intents/<intent>/stories/story-list-prd-v<phiên bản>.csv` theo mẫu import CSV của Jira, mỗi US trong PRD một dòng. PO import file này lên Jira; các team làm việc trên story Jira. Nội dung nghiệp vụ chỉ có một nguồn là PRD.
 
 | Cột | Nội dung |
 |---|---|
@@ -396,17 +396,17 @@ Một story được giao cho Dev khi đạt đủ 7 điều kiện:
 4. Mọi business rule của US có ít nhất một tiêu chí chấp nhận trỏ tới.
 5. US không còn `❓PO`, và Open Issues của PRD không còn câu chặn gắn với US đó.
 6. US có bảng giao diện thì có màn trong `ux-design.md`; Story List lấy mã màn `SCR` từ đó.
-7. US nêu ở Pre-Condition là phải xong trước cũng đạt các điều kiện trên.
+7. Các US mà Pre-Condition yêu cầu phải xong trước cũng đạt các điều kiện trên.
 
-Đây là bản hẹp phía PO của Definition of Ready bên AWS. Hai mục còn lại của AWS là thiết kế đã được xem và story đã được ước lượng; Design và Dev làm hai việc này trên Jira. Lệnh `po-tools.py dor intents/<intent>` in story nào đạt, story nào chưa và vì sao; kết quả cũng ghi ở cột Comment của file CSV. Độ phủ test case do QA theo dõi trên Jira.
+Đây là bản hẹp phía PO của Definition of Ready của AWS. Hai mục còn lại của AWS là thiết kế đã được xem và story đã được ước lượng; Design và Dev làm hai việc này trên Jira. Lệnh `po-tools.py dor intents/<intent>` in story nào đạt, story nào chưa và vì sao; kết quả cũng ghi ở cột Comment của file CSV. Độ phủ test case do QA theo dõi trên Jira.
 
 ### 6.8 Phiên bản, tag và chỉ mục
 
-Mỗi lần duyệt PRD hoặc Decision Brief, script in tên tag dạng `<intent>/prd-v1.0` hoặc `<intent>/decision-brief-v1.0`. PO commit artifact vừa duyệt, gắn tag và đẩy tag lên. File CSV của Story List commit cùng PRD với profile S, cùng Decision Brief với profile M, L. Lệnh `po-tools.py index --write` sinh `intents/INDEX.md` gồm mã tính năng, bản PRD đã duyệt, ngày duyệt, service bị chạm, tag, link Lark và số story đạt điều kiện giao Dev. Agent AI của Dev, dùng công cụ nào cũng được, đọc PRD theo tag, nên luôn lấy đúng bản đã chốt. Lark là bản để người đọc; không sửa trên Lark và chép ngược về repo.
+Mỗi lần duyệt PRD hoặc Decision Brief, script in tên tag dạng `<intent>/prd-v1.0` hoặc `<intent>/decision-brief-v1.0`. PO commit artifact vừa duyệt, gắn tag và đẩy tag lên. File CSV của Story List commit cùng PRD với profile S, cùng Decision Brief với profile M, L. Lệnh `po-tools.py index --write` sinh `intents/INDEX.md` gồm mã tính năng, bản PRD đã duyệt, ngày duyệt, service bị chạm, tag, link Lark và số story đạt điều kiện giao Dev. Agent AI của Dev, dù chạy trên công cụ nào, đọc PRD theo tag nên luôn lấy đúng bản đã chốt. Bản trên Lark dành cho người đọc; không sửa trên Lark để chép ngược về repo.
 
 ### 6.9 Khi yêu cầu thay đổi sau bàn giao
 
-Thay đổi chạm stage đã duyệt đi qua `/change-request`. PRD duyệt lại lên bản mới, ví dụ 1.1. `/po-stories` sinh file CSV mới và so với bản trước, in story nào đổi, story nào mới. PO sửa story đã import trên Jira theo danh sách đó, import riêng các story mới, và báo đúng PIC phải xem lại. Test case ghi bản PRD đã dùng khi chạy, để xác định kết quả còn đúng hay không.
+Thay đổi chạm stage đã duyệt đi qua `/change-request`. PRD được duyệt lại thành bản mới, ví dụ 1.1. `/po-stories` sinh file CSV mới và so với bản trước, in story nào đổi, story nào mới. PO sửa story đã import trên Jira theo danh sách đó, import riêng các story mới, và báo đúng PIC phải xem lại. Test case ghi bản PRD đã dùng khi chạy, để xác định kết quả còn đúng hay không.
 
 ### 6.10 Nơi lưu
 
@@ -414,7 +414,7 @@ File CSV lưu trong `intents/<intent>/stories/` của repo PO, mỗi phiên bả
 
 ## 7. Sau PRD
 
-`/publish-lark` đẩy Initiative Brief, PRD hoặc Decision Brief đã duyệt lên Lark wiki, vào node của intent. Lần đầu tạo doc mới; các lần sau cập nhật đúng doc cũ, giữ token và tên đã đặt trên Lark. Sau khi đẩy, AI đọc lại và đếm heading, bảng, sơ đồ so với file nguồn, vì API trả về thành công chưa chắc nội dung đã vào đúng vị trí.
+`/publish-lark` đẩy Initiative Brief, PRD hoặc Decision Brief đã duyệt lên Lark wiki, vào node của intent. Lần đầu tạo doc mới; các lần sau cập nhật đúng doc cũ, giữ token và tên đã đặt trên Lark. Sau khi đẩy, AI đọc lại và đếm heading, bảng, sơ đồ so với file nguồn, vì API báo thành công không bảo đảm nội dung đã vào đúng vị trí.
 
 `/change-request` phân loại thay đổi trước. Thay đổi nhỏ trong stage đang mở chỉ cần sửa và trình lại gate. Thay đổi chạm stage đã duyệt thì ghi `CR<n>` kèm nguyên văn, chụp artifact bị chạm với nhãn pre-CR, trình bảng ảnh hưởng, sau đó quay về stage thấp nhất bị sai lệch:
 
@@ -443,7 +443,7 @@ File CSV lưu trong `intents/<intent>/stories/` của repo PO, mỗi phiên bả
 | `.po/` | Sổ lượt người và giờ chạy hook trên máy đang dùng; không commit | Công cụ |
 | `AGENTS.md`, `CLAUDE.md` | Luật cho AI; `CLAUDE.md` nhập lại `AGENTS.md` | Engine |
 
-Thư mục `engine/`, phần cấu hình trong `.claude/` và `AGENTS.md` không chứa dữ kiện sản phẩm, kể cả tên sản phẩm; `po-tools.py doctor` báo lỗi khi gặp tên sản phẩm ghi trong `domain.md`. Stage không có lệnh riêng; `/po` là lối vào duy nhất, như lệnh `/aidlc` của AWS. Dùng công cụ AI khác thì yêu cầu AI đọc `AGENTS.md`, sau đó đọc file trong `engine/commands/` hoặc `engine/stages/`; phần cấu hình riêng cho công cụ khác chỉ dựng khi thật sự dùng công cụ đó.
+Thư mục `engine/`, phần cấu hình trong `.claude/` và `AGENTS.md` không chứa dữ kiện sản phẩm, kể cả tên sản phẩm; `po-tools.py doctor` báo lỗi khi gặp tên sản phẩm ghi trong `domain.md`. Stage không có lệnh riêng; `/po` là lối vào duy nhất, như lệnh `/aidlc` của AWS. Dùng công cụ AI khác thì yêu cầu AI đọc `AGENTS.md`, sau đó đọc file trong `engine/commands/` hoặc `engine/stages/`; phần cấu hình riêng cho công cụ khác chỉ dựng khi dùng công cụ đó.
 
 Mỗi intent có cấu trúc:
 
@@ -451,19 +451,19 @@ Mỗi intent có cấu trúc:
 intents/<YYMMDD-slug>/
 ├── intent.md        bối cảnh, mã tính năng, liên kết Figma, Jira, Lark
 ├── state.md         trạng thái từng stage, việc kế tiếp, phiên bản, nhật ký
-├── decisions.md     quyết định nguyên văn, người quyết, change request, rủi ro chấp nhận
+├── decisions.md     quyết định nguyên văn, người quyết định, change request, rủi ro chấp nhận
 ├── memory.md        quan sát của AI trong lúc làm
 ├── inputs/          yêu cầu gốc và tài liệu đầu vào
 ├── ideation/  inception/   artifact theo stage
 ├── stories/         Story List để import lên Jira, mỗi phiên bản PRD một file
 ├── design/          ảnh design để chèn khi đẩy Lark
-├── user-guide/      User Guide viết sau khi Dev xong
+├── user-guide/      User Guide viết sau khi Dev làm xong
 ├── reviews/         review của AI Reviewer, dấu artifact lúc review, sổ finding
 ├── verification/    phase check, kết quả kiểm bằng máy
 └── archive/         bản đã duyệt và bản trước change request, không sửa
 ```
 
-Repo của sản phẩm khác nhận bản engine mới theo 3 bước: chạy `po-tools.py engine-check` để biết file engine nào đã bị sửa tay; chép đè các file trong `engine/MANIFEST.txt`; gộp `memory/team.md` theo dòng. Dòng Tương thích của bản đó trong CHANGELOG cho biết có phải chạy migrate hay sửa intent bằng tay không. Sau khi chép, chạy `po-tools.py selftest`: dữ liệu kiểm thử đi kèm engine và dùng domain mẫu riêng, nên kết quả không phụ thuộc domain của repo đó. Intent tạo từ bản engine cũ được chuyển bằng `po-tools.py migrate`: lệnh đổi đường dẫn và thuật ngữ trong file đang dùng, cấp mã tính năng, chuyển file câu hỏi theo định dạng cũ, chụp lại bản duyệt kèm một dòng quyết định, và không sửa `archive/` hoặc `reviews/`.
+Repo của sản phẩm khác nhận bản engine mới theo 3 bước: chạy `po-tools.py engine-check` để biết file engine nào đã bị sửa tay; chép đè các file trong `engine/MANIFEST.txt`; gộp `memory/team.md` theo dòng. Dòng Tương thích của bản đó trong CHANGELOG cho biết có phải chạy migrate hoặc sửa intent bằng tay hay không. Sau khi chép, chạy `po-tools.py selftest`: dữ liệu kiểm thử đi kèm engine và dùng domain mẫu riêng, nên kết quả không phụ thuộc domain của repo đó. Intent tạo từ bản engine cũ được chuyển bằng `po-tools.py migrate`: lệnh đổi đường dẫn và thuật ngữ trong file đang dùng, cấp mã tính năng, chuyển file câu hỏi theo định dạng cũ, chụp lại bản duyệt kèm một dòng quyết định, và không sửa `archive/` hoặc `reviews/`.
 
 ## 9. Mức độ trưởng thành
 
@@ -488,7 +488,7 @@ Kết luận: quy trình đủ cho 1 người dùng. Công cụ cho mức team v
 | Người với máy | AI soạn theo template, người duyệt; máy kiểm tài liệu trước khi người duyệt | Đạt. Questions file có định dạng cố định; script `check`, `trace`, `approve`; AI Reviewer độc lập |
 | Máy với máy | Agent của team khác đọc đúng bản đã duyệt, trích nội dung theo mã, ghi kết quả ngược lại mà không cần người diễn giải | Một phần. Đã có: mã đầy đủ ổn định, tag cho bản duyệt, `intents/INDEX.md`, Story List dạng CSV import thẳng lên Jira, `AGENTS.md` cho mọi công cụ. Chưa có: agent phía Dev hoặc QA đọc thật; định dạng mới là quy ước Markdown, chưa có schema để máy của hai bên cùng kiểm; chưa ghi ngược tự động từ Jira về repo, như trạng thái story hoặc test case |
 
-Kết luận: đầu ra đã được thiết kế để máy đọc được, nhưng mới được kiểm bằng script của chính PO-Workflow; chưa có máy của team khác dùng.
+Kết luận: đầu ra đã được thiết kế để máy đọc được, nhưng mới được kiểm bằng script của chính PO-Workflow; máy của team khác chưa dùng đầu ra này.
 
 ### 9.3 Việc cần làm để lên mức kế
 
@@ -529,7 +529,7 @@ Số liệu nên thu từ khi thử ở mức team, đều lấy được từ f
 | Engine điều phối, sensor | Không cài. `po-tools.py` làm phần tất định: check thay sensor, approve và next cho điều phối, status phát hiện lệch |
 | Hook, HUMAN_TURN, guard | `engine/scripts/po-hook.py` bằng Python: ghi lượt PO, approve đòi lời PO có trong sổ như HUMAN_TURN; chặn tự đánh dấu đã duyệt, sửa artifact đã duyệt ngoài CR, sửa quyết định cũ, reviewer ghi ngoài phạm vi. AWS tắt sẵn phần lớn guard ở 10/11 scope nhưng giữ kiểm có người thật; PO-Workflow bật các guard này vì đã gặp sự cố một bản đã duyệt bị ghi đè 15 lần. Bỏ qua: sổ audit 119 sự kiện, sensor chạy mỗi lần ghi, statusline |
 | Review receipt, reviewer scope | `review-start` ghi dấu artifact; approve đòi review lại khi artifact đổi. Tiêu chí review lấy từ Product Lead của AWS; reviewer tự khai Verdict Dictated |
-| Test suite, CI, release metadata | Fixture tự chứa với domain mẫu; selftest bắt lệnh chưa có ca kiểm, tài liệu nhắc lệnh hay đường dẫn không có, VERSION lệch CHANGELOG; CI chạy selftest và `engine-check --strict`; CHANGELOG có dòng Tương thích. Bỏ qua: chia tầng smoke, unit, integration, shard, live test, build binary |
+| Test suite, CI, release metadata | Fixture tự chứa với domain mẫu; selftest bắt lệnh chưa có ca kiểm, tài liệu nhắc lệnh hoặc đường dẫn không có, VERSION lệch CHANGELOG; CI chạy selftest và `engine-check --strict`; CHANGELOG có dòng Tương thích. Bỏ qua: chia tầng smoke, unit, integration, shard, live test, build binary |
 | Memory team và project | `memory/team.md` và `memory/project.md` |
 | Construction, Operation | Ngoài phạm vi |
 

@@ -20,10 +20,10 @@ File này là luật chung cho mọi công cụ AI làm việc trên repo; `CLAU
 | `intents/` | Hồ sơ từng yêu cầu | Sản phẩm |
 | `memory/` | `team.md` bài học dùng chung, gộp theo dòng khi nâng cấp engine; `project.md` bài học của sản phẩm | Cả hai |
 | `.claude/` | Phần cấu hình riêng cho Claude Code, chỉ chứa lối tắt: mỗi file trong `commands/` là một lệnh gạch chéo trỏ tới file lệnh trong `engine/commands/`, stage chạy qua `/po` nên không có lệnh riêng; `agents/` trỏ tới `engine/agents/`; `settings.json` là quyền và hook, hook chạy `engine/scripts/po-hook.py` | Công cụ |
-| `.po/` | Sổ lượt người `turns.jsonl` và giờ chạy hook trên máy này. Không commit, AI không đọc hay sửa | Công cụ |
+| `.po/` | Sổ lượt người `turns.jsonl` và giờ chạy hook trên máy này. Không commit, AI không đọc và không sửa | Công cụ |
 | `.mcp.json` | MCP server cho Claude Code, ví dụ trình duyệt để chụp màn hình User Guide. Phải nằm ở gốc repo vì Claude Code chỉ đọc ở đó | Công cụ |
 
-Công cụ AI khác: đọc file này, sau đó chạy lệnh bằng cách đọc `engine/commands/<lệnh>.md` hoặc `engine/stages/<stage>.md` và làm theo. Phần cấu hình riêng cho công cụ khác chỉ dựng khi thật sự dùng công cụ đó.
+Công cụ AI khác: đọc file này, sau đó chạy lệnh bằng cách đọc `engine/commands/<lệnh>.md` hoặc `engine/stages/<stage>.md` và làm theo. Phần cấu hình riêng cho công cụ khác chỉ dựng khi dùng công cụ đó.
 
 ## Luồng làm việc
 
@@ -72,7 +72,7 @@ KB là bản chụp. Nguồn sống là nguồn còn bản gốc bên ngoài, nh
 - Gate: đánh `[?]`, trình, kết thúc lượt và chờ PO. Chỉ `po-tools.py approve` được đánh `[x]`, và lệnh này chỉ ghi khi `--words` có nguyên văn trong một lượt PO gõ hoặc chọn sau lần sửa artifact cuối. Không tự duyệt, không chép lời duyệt từ lượt cũ. Công cụ không có hook thì PO tự chạy approve trong terminal.
 - Sửa artifact đã duyệt phải qua `/change-request`; `decisions.md` chỉ thêm dòng; file review chỉ AI Reviewer ghi; ba file thiết kế `ux-design.md`, `tech-design.md`, `test-design.md` chỉ các team ghi, AI của PO đọc để đối chiếu và viết Decision Brief. Hook của Claude Code chặn các việc trái quy tắc này, trừ việc sửa ba file thiết kế: hook không phân biệt được phiên của PO với phiên của PIC, nên quy tắc đó AI tự giữ. Hook chỉ chặn lỗi vô ý, nên AI không tìm cách đi vòng qua lệnh shell.
 - Không thiết kế kỹ thuật chi tiết. Ghi điều phải đúng, để Dev quyết cách làm. Không hỏi câu kỹ thuật thay Dev; chỉ hỏi câu mà đáp án làm đổi phạm vi hoặc business rule. Cần biết một cơ chế kỹ thuật có tồn tại không thì hỏi PO; có endpoint không có nghĩa là có tính năng.
-- Tài liệu bàn giao, gồm Initiative Brief, PRD, Decision Brief, Story List và User Guide: không để lại dấu vết quy trình, không viết tắt, mã nào cũng kèm nội dung, các mã đứng cạnh nhau ngăn bằng dấu `·`. Trạng thái duyệt ghi ai duyệt, không ghi gate số mấy. Giữ `❓PO` và bảng lịch sử phiên bản viết bằng lời.
+- Tài liệu bàn giao, gồm Initiative Brief, PRD, Decision Brief, Story List và User Guide: không để lại dấu vết quy trình, không viết tắt, mã nào cũng kèm nội dung, các mã đứng cạnh nhau ngăn bằng dấu `·`. Trạng thái duyệt ghi ai duyệt, không ghi số gate. Giữ `❓PO` và bảng lịch sử phiên bản viết bằng lời.
 - Trích mã trong trao đổi thì kèm nội dung một dòng. Một intent profile L sinh hàng trăm mã; buộc người đọc mở file để tra là lỗi của người viết.
 - Viết tài liệu bằng văn viết: câu đầy đủ chủ vị, không dùng khẩu ngữ, không in đậm trong đoạn văn, không dùng gạch ngang dài để nối ý.
 
@@ -90,10 +90,10 @@ Gặp điều đáng chú ý nhưng ngoài phạm vi thì ghi một dòng vào m
 
 ## Sửa engine
 
-Phần này cho người giữ engine và AI được nhờ sửa engine, theo mục Working on This Project trong `AGENTS.md` của AWS. Engine là mọi file trong `engine/`, `.claude/commands/`, `.claude/agents/` và các file tài liệu ở gốc ghi trong `engine/MANIFEST.txt`.
+Phần này cho người giữ engine và AI được giao sửa engine, theo mục Working on This Project trong `AGENTS.md` của AWS. Engine là mọi file trong `engine/`, `.claude/commands/`, `.claude/agents/` và các file tài liệu ở gốc ghi trong `engine/MANIFEST.txt`.
 
 Thứ tự mỗi lần sửa:
-1. Sửa lỗi script: thêm ca tái hiện lỗi vào `engine/tests/fixtures/` trước, thấy ca đó hỏng, sau đó mới sửa.
+1. Sửa lỗi script: thêm ca tái hiện lỗi vào `engine/tests/fixtures/` trước, chạy để xác nhận ca đó hỏng, sau đó mới sửa.
 2. Chạy `python3 engine/scripts/po-tools.py selftest`. Phải đạt.
 3. Chạy `python3 engine/scripts/po-tools.py manifest --write`.
 4. Ghi vào CHANGELOG, dưới bản chưa phát hành. VERSION chỉ tăng khi phát hành: đổi VERSION, đổi tiêu đề mục CHANGELOG, chạy lại `manifest --write`, commit, gắn tag `engine-v<X.Y.Z>`.

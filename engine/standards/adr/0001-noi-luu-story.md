@@ -4,7 +4,7 @@
 |---|---|
 | Trạng thái | Đã thay bằng ADR 0002 ngày 2026-10-19 |
 | Ngày | 2026-10-19 |
-| Người quyết | PO phụ trách PO-Workflow |
+| Người quyết định | PO phụ trách PO-Workflow |
 
 ## Bối cảnh
 

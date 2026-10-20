@@ -55,7 +55,7 @@ Tương thích: chép engine và chạy migrate.
 - Nguyên tắc chia story ở `engine/standards/story-splitting.md`: định nghĩa story, tiêu chí INVEST và nơi kiểm, các bước chia ở 2.4, dấu hiệu quá lớn, 8 cách tách, dấu hiệu quá nhỏ, các cách không chia, ví dụ, so sánh với AWS. Stage 2.4 và checklist 2.4 dùng nguyên tắc này.
 - `po-tools.py`: `feature-id` cấp mã tính năng; `stories` sinh Story List; `dor` kiểm điều kiện giao Dev trên PRD, gồm PRD đã duyệt, US có AC, mọi BR có AC, không còn `❓PO` và câu chặn; `trace` kiểm thêm lớp BR sang AC; `index` dùng mã tính năng và đếm story đạt điều kiện giao Dev; `check` cảnh báo nhóm Cỡ story khi tên US có chữ "và" ở 2.4 hoặc US có hơn 6 AC ở 2.42.
 - Design PIC đặt mã màn `SCR` ở bảng Danh sách màn của `ux-design.md`; Story List lấy mã màn từ bảng này.
-- Điều kiện giao Dev thêm ba mục: với profile M, L thì 2.43 đã duyệt; US có bảng giao diện phải có màn trong `ux-design.md`; US nêu ở Pre-Condition phải đạt trước. Ghi rõ đây là bản hẹp phía PO của Definition of Ready bên AWS.
+- Điều kiện giao Dev thêm ba mục: với profile M, L thì 2.43 đã duyệt; US có bảng giao diện phải có màn trong `ux-design.md`; US nêu ở Pre-Condition phải đạt trước. Ghi rõ đây là bản hẹp phía PO của Definition of Ready của AWS.
 - PRD theo AWS requirements-guide và Product Lead: mỗi US có ít nhất một AC cho nhánh lỗi hoặc bị từ chối, ngưỡng số có AC ở giá trị biên; mỗi US có dòng Ưu tiên; BR có điều kiện ghi khi nào áp và nếu vi phạm thì sao; mục tuỳ chọn Vòng đời trạng thái. `check` cảnh báo US thiếu Ưu tiên, chưa thấy AC nhánh lỗi; `check` của 2.43 cảnh báo US có giao diện chưa có màn trong `ux-design.md`.
 - QA PIC góp ý tính kiểm thử được của tiêu chí chấp nhận trong `test-design.md` ở 2.43; Decision Brief đưa ra họp. AWS cho quality agent kiểm việc này ở 2.4.
 - `po-tools.py check` của 2.43 đối chiếu ba file thiết kế với PRD: file có chưa, dựng từ bản PRD nào, còn chữ mẫu không, US có giao diện đã có màn chưa, AC đã có trong kế hoạch test chưa, US đã có trong tech-design chưa; Decision Brief không quá 1.500 từ, ba PIC đã ký chưa. `status` báo khi file thiết kế dựng từ bản PRD cũ.
@@ -63,19 +63,19 @@ Tương thích: chép engine và chạy migrate.
 - Fixture mới: `story-list` cho Story List và điều kiện giao Dev, `split-signals` cho dấu hiệu story quá lớn.
 
 ### Có người thật tại gate
-Theo AWS: mọi scope của AWS hạ các guard khác nhưng giữ kiểm có người thật ở gate.
+Theo AWS: mọi scope của AWS nới lỏng các guard khác nhưng vẫn giữ bước kiểm có người thật ở gate.
 - Hook `engine/scripts/po-hook.py` đăng ký trong `.claude/settings.json`. Mỗi lượt PO gõ và mỗi lựa chọn trong hộp chọn ghi vào `.po/turns.jsonl`, không commit.
-- `approve` chỉ ghi khi `--words` có nguyên văn trong một lượt PO ghi sau lần sửa artifact cuối. PO tự chạy lệnh trong terminal thì không cần sổ, cho công cụ không có hook.
-- `approve` từ chối khi kiểm máy còn cảnh báo, trừ khi PO chấp nhận qua `--accept-warnings`; từ chối khi stage có reviewer mà artifact đổi sau review, trừ khi PO quyết qua `--accept-review-gap`. Lời chấp nhận cũng phải có trong sổ và vào DEC.
+- `approve` chỉ ghi khi `--words` có nguyên văn trong một lượt PO ghi sau lần sửa artifact cuối. Với công cụ không có hook, PO tự chạy lệnh trong terminal và không cần sổ.
+- `approve` từ chối khi kiểm máy còn cảnh báo, trừ khi PO chấp nhận qua `--accept-warnings`; từ chối khi stage có reviewer mà artifact đổi sau review, trừ khi PO chấp nhận qua `--accept-review-gap`. Lời chấp nhận cũng phải có trong sổ và vào DEC.
 - Lệnh mới `review-start` ghi dấu artifact vào `reviews/review-<slug>-<NN>.digest` trước khi gọi reviewer, như AWS gắn biên nhận review với đúng bản đã review.
-- Hook chặn trước khi sửa: AI tự đánh `[x]` trong `state.md`; sửa phần thân artifact đã duyệt khi không có change request mở, cho phép đổi khoá `lark`; sửa hay xoá dòng DEC cũ; AI Reviewer ghi ngoài `reviews/`; phiên chính sửa file review hoặc digest; lệnh shell đụng sổ lượt người, sửa `state.md`, `decisions.md`, `archive/`; subagent chạy lệnh ghi của `po-tools.py`. Hook gặp lỗi bất ngờ thì cho qua, như AWS.
-- AI Reviewer nhận đủ tiêu chí của Product Lead bên AWS: năm câu hỏi chung, khối Intent và Scope, INVEST đủ sáu chữ, AC nhánh lỗi và giá trị biên, năm tiêu chí thiết kế. Finding chỉ dựa trên khẩu vị tối đa là Minor; READY khi tối đa hai Major đã có cách xử lý. File review có dòng Verdict Dictated và cột Severity ở Prior findings.
+- Hook chặn trước khi sửa: AI tự đánh `[x]` trong `state.md`; sửa phần thân artifact đã duyệt khi không có change request mở, cho phép đổi khoá `lark`; sửa hoặc xoá dòng DEC cũ; AI Reviewer ghi ngoài `reviews/`; phiên chính sửa file review hoặc digest; lệnh shell đụng sổ lượt người, sửa `state.md`, `decisions.md`, `archive/`; subagent chạy lệnh ghi của `po-tools.py`. Hook gặp lỗi bất ngờ thì không chặn, như AWS.
+- AI Reviewer nhận đủ tiêu chí của Product Lead của AWS: năm câu hỏi chung, khối Intent và Scope, INVEST đủ sáu chữ, AC nhánh lỗi và giá trị biên, năm tiêu chí thiết kế. Finding chỉ dựa trên sở thích chủ quan được xếp tối đa ở mức Minor; READY khi tối đa hai Major đã có cách xử lý. File review có dòng Verdict Dictated và cột Severity ở Prior findings.
 - Quy tắc gate "duyệt kèm chỉ thị" đổi: sửa trước, hỏi lại một câu, ghi Approve khi PO trả lời. Lời duyệt phải đến sau lần sửa cuối.
 - `doctor` báo khi hook ghi lượt PO chưa chạy lần nào.
 
 ### Kiểm thử và phát hành
 Theo cách AWS giữ chất lượng repo, ở quy mô một người giữ engine.
-- Fixture tự chứa: mỗi fixture chạy trên gốc dữ liệu tạm gồm domain mẫu `engine/tests/root/`, ngày cố định. Biến `PO_TOOLS_ROOT` và `PO_TOOLS_TODAY` cho script. Repo sản phẩm khác chạy selftest không phụ thuộc domain của mình; `engine/tests/` vào MANIFEST.
+- Fixture tự chứa: mỗi fixture chạy trên gốc dữ liệu tạm gồm domain mẫu `engine/tests/root/`, ngày cố định. Script nhận biến `PO_TOOLS_ROOT` và `PO_TOOLS_TODAY`. Repo sản phẩm khác chạy selftest không phụ thuộc domain của mình; `engine/tests/` vào MANIFEST.
 - Selftest báo lỗi khi một lệnh của `po-tools.py` chưa có ca kiểm, trừ danh sách miễn có lý do; khi `expected.txt` có dòng không nhận ra hoặc ca không có điều kiện; khi tài liệu nhắc lệnh `po-tools.py` không có hoặc đường dẫn `engine/...` không có; khi README mục 3.2 thiếu stage; khi VERSION lệch CHANGELOG hoặc MANIFEST, hoặc bản từ 2.1.0 thiếu mục Nâng cấp, dòng Tương thích.
 - Ca kiểm tăng từ 35 lên 77: chuỗi duyệt thật, `archive`, `trace --write`, `index`, `doctor`, `status` với bảy loại lệch, `check` với giới hạn từ và luật PRD, `review-start`, và 15 ca hook. Fixture `good` sửa cho nhất quán khi chạy `status`.
 - `engine-check --strict` coi file engine mới chưa ghi manifest là lỗi.
@@ -96,14 +96,14 @@ Theo cách AWS giữ chất lượng repo, ở quy mô một người giữ engi
 - Lead các team thành Design PIC, Tech PIC, QA PIC. Hàng "Lead" trong bảng metadata giữ nghĩa agent dẫn stage của AWS.
 
 ### Nâng cấp
-- Intent đang dở chuyển cùng thư mục, nội dung không đổi. Đường dẫn `.claude/...` còn trong artifact và archive của intent cũ là lịch sử: `.claude/knowledge/domain/` nay là `domain/`, `.claude/intents/` nay là `intents/`.
-- Intent có stage 2.41 HLD Brief: `po-tools.py migrate` bỏ dòng 2.41, thêm 2.43 sau 2.42 với profile M, L, chuyển bản HLD Brief đang dở vào `archive/hld-brief/` và đưa mục Current sang 2.43. Intent đã có Epic trên Jira và PRD đã duyệt thì 2.43 ghi bỏ qua, vì đã giao Dev trước khi có stage này.
+- Intent đang làm dở chuyển cùng thư mục, nội dung không đổi. Đường dẫn `.claude/...` còn trong artifact và archive của intent cũ là lịch sử: `.claude/knowledge/domain/` nay là `domain/`, `.claude/intents/` nay là `intents/`.
+- Intent có stage 2.41 HLD Brief: `po-tools.py migrate` bỏ dòng 2.41, thêm 2.43 sau 2.42 với profile M, L, chuyển bản HLD Brief đang làm dở vào `archive/hld-brief/` và đưa mục Current sang 2.43. Intent đã có Epic trên Jira và PRD đã duyệt thì 2.43 ghi bỏ qua, vì đã giao Dev trước khi có stage này.
 - Review đã có giữ nguyên. Lần review sau của một stage: AI dựng sổ finding `reviews/findings-<slug>.md` từ các file review cũ và quyết định trong `decisions.md`, sau đó mới gọi reviewer.
 - Intent đã duyệt ở 0.x giữ nhánh 0.x và tăng số phụ ở lần duyệt sau; quy tắc 1.0 áp cho artifact chưa duyệt lần nào.
 - PRD đã duyệt trước bản này chưa có khối AC, nên `trace` báo mỗi US "chưa có AC". Thêm AC qua change request khi PRD đó còn được bàn giao tiếp; PRD đã xong thì giữ nguyên.
 - Dữ liệu cũ chuyển bằng `po-tools.py migrate intents/<intent> --write`: đổi đường dẫn và thuật ngữ trong file đang dùng, cấp mã tính năng, chuyển file câu hỏi luồng v1 sang dạng `## Q<n>` nếu stage chưa duyệt, chụp lại bản duyệt kèm một DEC. Không sửa `archive/`, `reviews/`, `verification/`; `decisions.md` chỉ thêm một dòng DEC. Ở `memory.md` chỉ đổi dòng mô tả đầu file. Ở `state.md` chỉ đổi dòng stage chưa duyệt, mục Current và mục Versions, cộng một dòng Log; Log và dòng stage đã duyệt giữ nguyên vì là lịch sử. Mỗi intent đã chuyển có một dòng DEC migrate trong `decisions.md` của chính nó.
 - Hook ghi lượt PO chạy từ lượt đầu tiên sau khi kéo bản này, ở phiên Claude Code mở tại gốc repo. Trước đó approve từ chối; PO có thể tự chạy approve trong terminal.
-- Review cũ không có file digest. Lần duyệt kế tiếp của stage có reviewer: chạy `review-start` và review lại, hoặc PO quyết duyệt không review lại qua `--accept-review-gap`.
+- Review cũ không có file digest. Lần duyệt kế tiếp của stage có reviewer: chạy `review-start` và review lại, hoặc PO quyết định duyệt mà không review lại, qua `--accept-review-gap`.
 - PRD viết trước bản này chưa có dòng Ưu tiên và AC nhánh lỗi. `check` cảnh báo và approve đòi PO chấp nhận hoặc sửa; Story List để trống cột Priority. Story List cũ 11 cột vẫn so được với bản mới.
 - Template PRD của công ty thêm dòng Ưu tiên, mẫu BR có điều kiện, mục tuỳ chọn Vòng đời trạng thái, cột Màn hình ghi tên màn với mã màn đặt ở `ux-design.md`; cần chủ template xác nhận như khối AC.
 - Khối AC và hàng Mã tính năng là phần thêm vào template PRD của công ty, chưa đổi tên mục nào; cần chủ template xác nhận trước khi áp cho mọi PRD.
