@@ -168,6 +168,7 @@ Nhật ký quyết định của intent. Chuyển từ `archive/v1/project-decis
 | DEC162 | 2026-10-14 | 2.42 | **Approve PRD v0.15**, publish lại Lark. Đóng `CR-014` | "Chạy, duyệt luôn và publish (Recommended)" · mặc định "All time, giống US12 (Recommended)" | PO | 2.42 |
 | DEC163 | 2026-10-19 15:04 | migrate | Chuẩn hoá dữ liệu lên engine 2.1.0: đường dẫn mới, Unit, PIC, AI Reviewer, mã tính năng LMS-F001; chụp lại bản duyệt archive/prd-generation/prd-v0.15-20261019.md. Không đổi nội dung nghiệp vụ | "chuẩn hoá theo engine mới" | buidhui | migrate, phiên bản, mã tính năng |
 | DEC164 | 2026-10-19 15:11 | migrate | Chuẩn hoá dữ liệu lên engine 2.1.0: đường dẫn mới, Unit, PIC, AI Reviewer, mã tính năng LMS-F001. Không đổi nội dung nghiệp vụ | "chuẩn hoá theo engine mới" | buidhui | migrate, phiên bản, mã tính năng |
+| DEC165 | 2026-10-20 09:26 | migrate | Chuẩn hoá dữ liệu lên engine 2.1.0: đường dẫn mới, Unit, PIC, AI Reviewer, mã tính năng LMS-F001; luồng 2.43 thay 2.41 HLD Brief. Không đổi nội dung nghiệp vụ | "chuyển sang luồng 2.43, bỏ HLD Brief" | buidhui | migrate, phiên bản, mã tính năng |
 
 ## Change requests
 Phân tích chi tiết từng CR ở `inputs/change-requests.md` (nguyên văn PO, nhận định, điểm re-entry, trả lời của PO).

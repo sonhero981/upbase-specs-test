@@ -27,8 +27,8 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - [ ] 2.31 impact-analysis
 - [ ] 2.32 solution-options
 - [ ] 2.4 user-stories
-- [ ] 2.41 hld-brief
 - [ ] 2.42 prd-generation
+- [ ] 2.43 design-alignment
 
 ## Current
 | | |
@@ -44,7 +44,6 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 |---|---|---|---|---|
 | requirements | v0.1 | draft | — | — |
 | initiative-brief | — | — | — | — |
-| hld-brief | — | — | — | — |
 | prd | — | — | — | — |
 
 ## Log
@@ -52,3 +51,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-09 chuyển sang luồng v2; Ideation chưa chạy, 2.3 đang chờ PO trả lời câu chặn
 - 2026-10-19 10:12 migrate lên engine 2.1.0 bởi buidhui, DEC2
 - 2026-10-19 15:11 migrate lên engine 2.1.0 bởi buidhui, DEC3
+- 2026-10-20 09:26 migrate lên engine 2.1.0 bởi buidhui, DEC4

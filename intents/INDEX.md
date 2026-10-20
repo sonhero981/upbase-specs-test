@@ -1,6 +1,6 @@
 # Spec index
 
-Sinh bởi `python3 engine/scripts/po-tools.py index --write` ngày 2026-10-19. Không sửa tay, chạy lại lệnh khi PRD đổi.
+Sinh bởi `python3 engine/scripts/po-tools.py index --write` ngày 2026-10-20. Không sửa tay, chạy lại lệnh khi PRD đổi.
 
 Repo này là nguồn chuẩn của spec cho agent và Dev: đọc PRD theo đường dẫn archive (bản đã duyệt, không bao giờ sửa) hoặc theo tag git ở bảng dưới. Bản trên Lark là bản cho người đọc, chép từ repo, có thể chậm hơn repo.
 

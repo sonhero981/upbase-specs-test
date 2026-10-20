@@ -27,14 +27,14 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - [x] 2.31 impact-analysis · v1: inception/impact-analysis/impact-matrix.md v0.4. Duyệt 2026-10-12 (DEC146). v0.2 Gate 2 duyệt 2026-09-23
 - [x] 2.32 solution-options · v1: inception/solution-options/solution-options.md v0.2. Duyệt 2026-10-12, chốt option K (DEC147). v0.1 duyệt 2026-09-23
 - [x] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story. Duyệt 2026-10-12 cùng 2.42 (DEC157)
-- [S] 2.41 hld-brief · stage chưa tồn tại khi chạy v1; chạy bổ sung sau khi bốn gate duyệt lại, trước khi bàn giao Dev
 - [x] 2.42 prd-generation · v1: inception/prd/prd.md v0.15. Duyệt lại 2026-10-14 sau CR-014 (DEC162); v0.14 duyệt 2026-10-12 kèm ba quyết định (DEC157), sau một lần Request Changes. Archive prd-generation/prd-v0.14-20261012.md; (CR-009 đến CR-013, design, US22, technical design backend). v0.2 Gate 4 duyệt 2026-09-23. Lark đang v0.8
+- [S] 2.43 design-alignment · intent đã có Epic trên Jira và đã giao Dev trước khi có stage này
 
 ## Current
 | | |
 |---|---|
 | Stage | Mọi stage của profile đã duyệt. CR-012, CR-013, CR-014 đã đóng |
-| Next action | Chạy 2.41 HLD Brief với Design, Dev, QA trước khi bàn giao. PO trả lời OQ-42, OQ-49, OQ-52 trước Unit Campaign. Dev cập nhật technical design theo PRD v0.15 |
+| Next action | PO trả lời OQ-42, OQ-49, OQ-52 trước Unit Campaign. Dev cập nhật technical design theo PRD v0.15 |
 | Blocking questions open | 0 chặn gate; 15 câu hỏi mở trong PRD |
 | Open CR | none, CR-012 và CR-013 đóng 2026-10-12 |
 | Parked | no |
@@ -48,7 +48,6 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 | impact-matrix | v0.4 | approved | v0.2: 2026-09-23 | — |
 | solution-options | v0.2 | approved | v0.1: 2026-09-23 | — |
 | initiative-brief | — | không có, v1 dùng BRD | — | — |
-| hld-brief | — | chưa chạy | — | — |
 | prd | v0.15 | approved | v0.15: 2026-10-14 · v0.14: 2026-10-12 · v0.2: 2026-09-23 | v0.15 · Hjuxd3my6oG0UuxBGNOllABAgye, publish 2026-10-14 |
 
 ## Log
@@ -68,3 +67,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-14 Publish PRD v0.15 lên Lark, ghi đè doc Hjuxd3my6oG0UuxBGNOllABAgye. Bảng thông tin trên Lark đã bị sửa sau 12/10 (Target release xoá trắng, bỏ ❓ ở Designer, Tech lead, QA, Reviewer), đã chép theo Lark trước khi ghi đè. Đối chiếu: heading 15/32/141/23, 11 bảng trắng, 10 ảnh
 - 2026-10-19 15:04 migrate lên engine 2.1.0 bởi buidhui, DEC163
 - 2026-10-19 15:11 migrate lên engine 2.1.0 bởi buidhui, DEC164
+- 2026-10-20 09:26 migrate lên engine 2.1.0 bởi buidhui, DEC165
