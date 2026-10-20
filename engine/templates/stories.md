@@ -25,6 +25,11 @@ inputs: <artifact đầu vào@version, ví dụ requirements@1.0; stage đầu t
 
 <Thẻ đủ để Design PIC, Tech PIC, QA PIC đọc và viết mục 8, 9, 10 của HLD Brief mà không cần mở requirements. Không acceptance criteria, không validate theo field, không kiểu dữ liệu; phần đó ở PRD, sau khi có HLD.>
 
+## Vai trong tính năng <!-- tuỳ chọn -->
+| Vai | Mục tiêu trong tính năng | Khó khăn hiện tại | Mức quen công nghệ | Tần suất dùng |
+|---|---|---|---|---|
+<Chỉ các vai có trong story của intent này, để Design PIC dùng khi vẽ. Vai mới, chưa có trong `domain.md` mục 1, ghi rõ là vai mới. Theo persona của AWS product-guide.>
+
 ## FR sang US
 | FR | US | Trạng thái: OK, GAP, Deferred, N/A | Ghi chú |
 |---|---|---|---|

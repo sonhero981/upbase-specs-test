@@ -13,7 +13,7 @@ approved_at: 2026-10-15T10:00
 | Unit | Gồm US | Phụ thuộc | Release độc lập được? |
 |---|---|---|---|
 | U1 | US1 | không | có |
-| U2 | US2 | U1 | có |
+| U2 | US2, US3 | U1 | có |
 
 # Specific Requirement
 
@@ -22,6 +22,8 @@ approved_at: 2026-10-15T10:00
 ### 1/ User story
 
 Là học viên, tôi tải chứng chỉ dạng PDF sau khi hoàn thành khoá học.
+
+**Ưu tiên:** Must
 
 ### 2/ Pre - Condition
 
@@ -42,7 +44,7 @@ Học viên mở trang khoá học, bấm Tải chứng chỉ.
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 | --- | --- | --- | --- |
-| Trang khoá học | Nút | **Tải chứng chỉ** | Chỉ hiện khi đã hoàn thành, xem `US1` |
+| `SCR1` Trang khoá học | Nút | **Tải chứng chỉ** | Chỉ hiện khi đã hoàn thành, xem `US1` |
 
 **Business requirement — Business rule**
 
@@ -62,6 +64,8 @@ Học viên mở trang khoá học, bấm Tải chứng chỉ.
 ### 1/ User story
 
 Là học viên, tôi xem lại các chứng chỉ đã được cấp.
+
+Ưu tiên: Should
 
 ### 4/ Acceptance criteria
 
@@ -89,6 +93,31 @@ Là học viên, tôi xem lại các chứng chỉ đã được cấp.
 ### 6/ Conner case
 
 - Học viên có hơn 100 chứng chỉ
+
+---
+
+## US3: Chia sẻ đường dẫn chứng chỉ
+
+### 1/ User story
+
+Là học viên, tôi gửi đường dẫn chứng chỉ cho nhà tuyển dụng.
+
+**Ưu tiên:** Could
+
+### 2/ Pre - Condition
+
+- US2 đã xong: học viên thấy danh sách chứng chỉ
+
+### 4/ Acceptance criteria
+
+**Tiêu chí chấp nhận**
+
+- `AC3.1` Khi học viên bấm Sao chép đường dẫn, đường dẫn mở được chứng chỉ mà không cần đăng nhập. Theo `BR3.1`
+- `AC3.2` Khi chứng chỉ đã bị thu hồi, đường dẫn báo chứng chỉ không còn hiệu lực. Theo `BR3.1`
+
+**Business requirement — Business rule**
+
+- `BR3.1` Đường dẫn chỉ mở được chứng chỉ còn hiệu lực
 
 ---
 

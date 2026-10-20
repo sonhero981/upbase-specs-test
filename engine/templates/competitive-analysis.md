@@ -23,8 +23,13 @@ inputs: <artifact đầu vào@version, ví dụ requirements@1.0; stage đầu t
 |---|---|---|---|---|
 
 ## Điểm nên áp dụng
-| # | Điều gì | Từ đâu | Vì sao hợp với sản phẩm |
-|---|---|---|---|
+| # | Điều gì | Từ đâu | Chuẩn tối thiểu hay khác biệt | Vì sao hợp với sản phẩm |
+|---|---|---|---|---|
+
+<Chuẩn tối thiểu: mọi sản phẩm so sánh đều có, thiếu thì người dùng thấy sản phẩm kém. Khác biệt: ít sản phẩm có, là lý do để chọn sản phẩm này. Phân loại theo AWS market-research.>
+
+## Tự làm, tích hợp hay mua <!-- tuỳ chọn -->
+<Khi có dịch vụ hoặc sản phẩm bên ngoài làm được việc này. Mỗi phương án: chi phí ước lượng, thời gian, rủi ro phụ thuộc, mức kiểm soát. Theo `engine/knowledge/market-research-methods.md` §Build vs Buy Assessment. Kết luận là đề xuất, PO quyết.>
 
 ## Điểm không áp dụng <!-- tuỳ chọn -->
 | # | Điều gì | Vì sao |

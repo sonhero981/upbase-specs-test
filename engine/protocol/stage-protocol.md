@@ -11,7 +11,7 @@ PO đang làm tài liệu của họ, không học quy trình. Nói về công v
 | Không nói | Nói thay |
 |---|---|
 | "theo gate-protocol tôi phải hỏi" | hỏi thẳng câu cần hỏi |
-| "đã chạy checklist", "đang ghi state", "metadata", "protocol" | không nói gì, hoặc "đã kiểm xong, có 2 chỗ cần anh/chị xem" |
+| "đã chạy checklist", "đang ghi state", "metadata", "protocol" | không nói gì, hoặc "đã kiểm xong, có 2 điểm cần anh/chị xem" |
 | "po-tools.py trả về exit 1" | "Còn FR3 chưa có user story nào" |
 | "stage chuyển sang [x]" | "Đã duyệt Requirements Analysis. Bước kế là Impact Analysis" |
 
@@ -22,7 +22,7 @@ PO đang làm tài liệu của họ, không học quy trình. Nói về công v
 
 ## Khối metadata ở đầu mỗi file stage
 
-File stage bắt đầu bằng tiêu đề `# <mã> <tên>` rồi một bảng. Công cụ nào cũng đọc được; `po-tools.py` đọc bảng này để biết thư mục, template và checklist của stage, nên đây là nguồn duy nhất của danh sách stage.
+File stage bắt đầu bằng tiêu đề `# <mã> <tên>`, tiếp theo là một bảng. Công cụ nào cũng đọc được; `po-tools.py` đọc bảng này để biết thư mục, template và checklist của stage, nên đây là nguồn duy nhất của danh sách stage.
 
 | Khoá | Nghĩa |
 |---|---|
@@ -32,7 +32,7 @@ File stage bắt đầu bằng tiêu đề `# <mã> <tên>` rồi một bảng. 
 | Artifact chính | Chỉ ghi khi stage sinh nhiều file: file được duyệt và chụp vào archive, ví dụ `impact-matrix.md` ở 2.31 |
 | Phase | `ideation` hoặc `inception` |
 | Plugin | `po-workflow` với stage repo thêm (2.31, 2.32, 2.41, 2.42). Bỏ trống với stage gốc AWS. Đây là nhãn, không phải plugin theo cơ chế của AWS |
-| Lệch so với AWS | Điểm khác stage cùng số của AWS, để khi AWS ra bản mới biết phải so chỗ nào |
+| Lệch so với AWS | Điểm khác stage cùng số của AWS, để khi AWS ra bản mới biết phải so điểm nào |
 | Execution | `always`, hoặc `conditional` kèm điều kiện |
 | Lead | Agent dẫn stage theo AWS, luôn là `product` trong phạm vi PO. Với 2.41 ghi thêm các PIC góp và ký |
 | Produces | Artifact sinh ra, kèm questions file |
@@ -79,25 +79,25 @@ File stage bắt đầu bằng tiêu đề `# <mã> <tên>` rồi một bảng. 
 
 ### 4b. Xác nhận giả định, ở 1.1 và 2.3
 - Sau khi sinh artifact, liệt kê mọi dòng trong mục Assumptions & Open Questions có nhãn assumption.
-- Hỏi bằng hộp chọn: Chấp nhận các giả định hoặc Chuyển thành câu hỏi. Chuyển thành câu hỏi thì thêm vào questions file, hỏi, rồi sửa artifact.
+- Hỏi bằng hộp chọn: Chấp nhận các giả định hoặc Chuyển thành câu hỏi. Chuyển thành câu hỏi thì thêm vào questions file, hỏi, sau đó sửa artifact.
 - Chấp nhận giả định không biến nó thành fact: giữ thẻ `[assumption]`, ghi một dòng DEC.
 - Chưa có lựa chọn này thì chưa gọi reviewer.
 
 ### 5. Verify
 - Chạy `python3 engine/scripts/po-tools.py check intents/<slug> <slug-stage>`. Script kiểm phần máy kiểm được: heading bắt buộc, thẻ nguồn, `[Qn]` và `[DECn]` có thật, thẻ US đủ chín mục, chữ mẫu còn sót, giới hạn từ, mục cấm. Sửa cảnh báo trước. Không chạy được python thì kiểm tay.
 - Chạy checklist của stage cho phần cần phán đoán. Mục blocking chưa đạt thì sửa trước, chưa trình gate.
-- Reviewer `ai-reviewer` và profile bật reviewer: gọi review theo `review-protocol.md`, truyền kèm kết quả kiểm bằng máy. Chờ file review. Không tự sửa theo finding, finding đi vào gate.
+- Reviewer `ai-reviewer` và profile bật reviewer: chạy `po-tools.py review-start`, sau đó gọi review theo `review-protocol.md`, truyền kèm kết quả kiểm bằng máy. Chờ file review. Không tự sửa theo finding, finding đi vào gate. Sửa artifact sau khi review thì phải review lại, vì approve so artifact với dấu ghi lúc review.
 
 ### 6. Learn
 - Trong lúc làm, thêm dòng vào `memory.md` của intent: `- <ISO time> [<stage>] <một câu>; <hai câu ngữ cảnh>` dưới một trong bốn mục Interpretations, Deviations, Tradeoffs, Open questions.
-- Câu hỏi chọn bài học hỏi ở gate, sau thông điệp hoàn thành, theo `gate-protocol.md`. PO cần thấy stage làm ra gì rồi mới biết điều gì đáng nhớ.
+- Câu hỏi chọn bài học hỏi ở gate, sau thông điệp hoàn thành, theo `gate-protocol.md`. PO cần thấy stage làm ra gì, sau đó mới biết điều gì đáng nhớ.
 - Dòng được giữ: đối chiếu với `AGENTS.md` và `memory/team.md`. Mâu thuẫn thì hỏi PO sửa, bỏ, hay nâng lên luật trong `AGENTS.md`.
 - Ghi vào `memory/project.md` trước, dưới heading phù hợp, dạng `- <nội dung> (learned YYYY-MM-DD · <intent> <mã stage> · <tên người duyệt>)`. Rồi hỏi một câu: bài học này đúng cho mọi sản phẩm không. Có thì chuyển sang `memory/team.md`. `project.md` là của sản phẩm, xoá khi dựng domain mới; `team.md` đi theo engine.
 - Bài học kiểm được bằng máy hoặc bằng một câu có hay không: đề xuất thêm một dòng vào `engine/verification/<slug>.md`, PO đồng ý mới thêm.
 - Open questions không ghi thành bài học, chúng là việc cần tra.
 
 ### 7. Gate
-Theo `gate-protocol.md`: đánh dấu `[?]`, thông điệp hoàn thành, câu hỏi bài học, câu hỏi duyệt, ghi quyết định nguyên văn bằng `po-tools.py approve`, dòng tiến độ, tên stage kế.
+Theo `gate-protocol.md`: đánh dấu `[?]`, thông điệp hoàn thành, câu hỏi bài học, câu hỏi duyệt, kết thúc lượt và chờ PO trả lời. Chỉ sau khi PO trả lời mới ghi quyết định nguyên văn bằng `po-tools.py approve`, in dòng tiến độ và tên stage kế. AI không tự đánh `[x]`: hook chặn, và approve chỉ ghi khi lời duyệt có trong lượt PO thật.
 
 ## Stage có điều kiện không áp dụng
 Execution `conditional` và điều kiện không xảy ra: ghi `[S]` kèm lý do vào `state.md`, nói một dòng, sang stage kế. Không mở gate.
@@ -112,3 +112,4 @@ Phát hiện dấu hiệu vượt profile theo `profiles.md`: nói ngay, và t�
 - KB là bản chụp. Chạm vùng nào thì đọc lại nguồn vùng đó. Quá một tháng kể từ ngày đối chiếu cuối thì đọc lại trước. Vùng KB chưa phủ: `❓PO`, không kết luận.
 - Có endpoint không có nghĩa là có tính năng. Hidden vẫn phải xét.
 - Một stage một lượt. Mỗi stage kết thúc ở gate.
+- Quyết định của PO chỉ đến từ lượt PO gõ hoặc chọn. AI không tự duyệt, không diễn đạt lại lời duyệt, không chép lời duyệt từ lượt cũ hơn lần sửa artifact cuối cùng.

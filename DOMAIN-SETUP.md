@@ -75,7 +75,7 @@ Về khối lượng: KB của sản phẩm đầu tiên áp dụng quy trình c
 
 `domain.md` có 6 mục; `/new-domain` dựng khung và hỏi PO để điền:
 
-1. Sản phẩm và phạm vi: tên, portal, ràng buộc tenant, vai người dùng. Frontmatter có `product`, `company`, `code`, `names`, và các khoá Jira `jira_project_key`, `jira_project_name`, `jira_project_type`. `code` là mã sản phẩm theo danh mục của công ty, dùng trong mã tính năng `<code>-F<NNN>` cho mọi team; mã này chốt khi dựng domain và không ghi cứng trong engine. `names` là các tên sản phẩm và công ty mà engine không được chứa. `jira_project_key`, `jira_project_name`, `jira_project_type` là dự án Jira nhận Story List, ví dụ:
+1. Sản phẩm và phạm vi: tên, portal, ràng buộc tenant, vai người dùng, thiết bị hỗ trợ và mức accessibility mặc định để 2.3 không phải hỏi lại mỗi intent. Frontmatter có `product`, `company`, `code`, `names`, và các khoá Jira `jira_project_key`, `jira_project_name`, `jira_project_type`. `code` là mã sản phẩm theo danh mục của công ty, dùng trong mã tính năng `<code>-F<NNN>` cho mọi team; mã này chốt khi dựng domain và không ghi cứng trong engine. `names` là các tên sản phẩm và công ty mà engine không được chứa. `jira_project_key`, `jira_project_name`, `jira_project_type` là dự án Jira nhận Story List, ví dụ:
 
    ```yaml
    jira_project_key: ABC

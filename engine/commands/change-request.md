@@ -22,14 +22,14 @@ Hỏi: *thay đổi này làm sai lệch kết luận của stage nào?* Lấy s
 | Chi tiết US, field, rule, màn | 2.42 | chỉ US bị chạm |
 | Chỉ đổi User Guide | user-guide | — |
 
-Ví dụ: một rule mới kiểu "người dùng bị khoá thì không gửi được" là business rule, nhưng nó thêm một nhánh mà Impact Matrix chưa quét, nên re-entry từ 2.3 và chảy qua 2.31, không phải chỉ sửa PRD. Ví dụ của domain ở `domain.md` mục 5.
+Ví dụ: một rule mới như "người dùng bị khoá thì không gửi được" là business rule, nhưng nó thêm một nhánh mà Impact Matrix chưa quét, nên re-entry từ 2.3 và chảy qua 2.31; sửa riêng PRD là chưa đủ. Ví dụ của domain ở `domain.md` mục 5.
 
 ## 3. Ghi CR và chụp archive
 - Thêm `CR<n>` vào bảng Change requests của `decisions.md` kèm một DEC ghi nguyên văn PO. Không có file change-requests riêng; phân tích dài thì viết vào `inputs/change-requests.md` và trỏ từ bảng.
 - Trước khi sửa bất kỳ artifact nào: `python3 engine/scripts/po-tools.py archive intents/<intent> <stage-slug> <artifact> --label pre-CR<n>`.
 
 ## 4. Impact preview, PO xác nhận
-Trình bằng hộp chọn: stage re-entry kèm lý do, artifact sẽ đổi, gate phải duyệt lại. PO xác nhận rồi mới chạy. Nếu bảng này đã nằm trong thông điệp gate ngay trước và PO đã trả lời "theo đề xuất", không hỏi lại.
+Trình bằng hộp chọn: stage re-entry kèm lý do, artifact sẽ đổi, gate phải duyệt lại. PO xác nhận trước khi chạy. Nếu bảng này đã nằm trong thông điệp gate ngay trước và PO đã trả lời "theo đề xuất", không hỏi lại.
 
 ## 5. Chạy lại xuôi, chế độ sửa
 - Mỗi stage mở lại: hỏi Giữ, Sửa, hay Làm lại từ đầu. `state.md` đặt stage đó `[R]`, stage sau bị chạm về `[ ]`.
@@ -39,7 +39,7 @@ Trình bằng hộp chọn: stage re-entry kèm lý do, artifact sẽ đổi, ga
 - 2.41 bị chạm thì PIC ký lại; 2.42 bị chạm thì publish lại PRD sau Approve.
 
 ## 6. Tác động ngược
-Trước gate 2.42: chạy `po-tools.py trace`; kiểm business rule mồ côi (rule cũ còn US nào dùng không), mã tham chiếu gãy (`BR-2.3` bị xoá mà chỗ khác còn trỏ), Out of scope lỗi thời (thứ từng ghi "không làm" nay đã làm, hoặc ngược lại).
+Trước gate 2.42: chạy `po-tools.py trace`; kiểm business rule mồ côi (rule cũ còn US nào dùng không), mã tham chiếu gãy (`BR-2.3` bị xoá mà nơi khác còn trỏ), Out of scope lỗi thời (thứ từng ghi "không làm" nay đã làm, hoặc ngược lại).
 
 ## 7. Sau khi duyệt
 Duyệt từng artifact bằng `po-tools.py approve`: script chụp archive bản mới, cập nhật Versions và Log trong `state.md`. Đóng CR trong bảng. PRD hoặc HLD Brief duyệt lại thì gắn tag mới sau khi commit. PRD duyệt lại thì chạy `/po-stories`: script sinh lại mục 1 của các story bị chạm, đặt `changed` cho mục đó và `review` cho mục của Design, Tech, QA đã `ready`, ghi nhật ký; báo các PIC xem lại. Sau đó chạy `po-tools.py index --write`, để agent của Dev lấy đúng bản. Publish lại artifact bàn giao đã lên Lark. Chạy `po-tools.py status` để chắc không còn stage nào dựa trên bản cũ.

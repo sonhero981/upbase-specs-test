@@ -8,4 +8,4 @@ Theo `engine/protocol/review-protocol.md`. Không sửa artifact. Không ghi `st
 4. Đọc file review, cấp ID cho finding mới và cập nhật sổ finding. Trình verdict, finding Open và Reopened, summary. PO quyết: sửa, hoặc ghi quyết định vào sổ finding và `decisions.md` (Accepted risk, Rejected kèm lý do, Reopened). Review không hoàn tất thì làm theo mục Review không hoàn tất của review-protocol.
 
 ## Chế độ shadow, tài liệu người khác viết
-Trước khi gọi agent: tóm tắt tài liệu để PO xác nhận hiểu đúng. Agent nhận thêm nhiệm vụ: quét KB, API spec, so với hệ thống thật; findings chia ba nhóm sai, thiếu, mơ hồ; phụ lục A nguồn đã đọc kể cả chưa tra được; phụ lục B câu AI tự trả lời được kèm nguồn và độ chắc. Mục đích là tìm chỗ sai so với hệ thống thật, không chấm cách viết.
+Trước khi gọi agent: tóm tắt tài liệu để PO xác nhận hiểu đúng. Agent nhận thêm nhiệm vụ: quét KB, API spec, so với hệ thống thật; findings chia ba nhóm sai, thiếu, mơ hồ; phụ lục A nguồn đã đọc kể cả chưa tra được; phụ lục B câu AI tự trả lời được kèm nguồn và độ chắc. Mục đích là tìm điểm sai so với hệ thống thật; cách viết không chấm.

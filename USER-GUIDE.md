@@ -76,7 +76,9 @@ git config --global user.email "email@congty.vn"
 
 ### 2.3 Python
 
-Script `engine/scripts/po-tools.py` cần Python 3.9 trở lên. Không có Python thì quy trình vẫn chạy, nhưng AI phải kiểm thủ công và mất các bước kiểm bằng máy.
+Script `engine/scripts/po-tools.py` và hook `engine/scripts/po-hook.py` cần Python 3.9 trở lên. Không có Python thì quy trình vẫn chạy, nhưng AI phải kiểm thủ công, mất các bước kiểm bằng máy, và PO phải tự chạy lệnh duyệt.
+
+Mở Claude Code ở thư mục gốc của repo để hook trong `.claude/settings.json` chạy. Hook ghi mỗi câu PO gõ và mỗi lựa chọn PO bấm vào `.po/turns.jsonl` trên máy, file này không commit; lệnh duyệt dựa vào sổ này để biết lời duyệt là của PO.
 
 Kiểm môi trường sau khi cài và mỗi khi thấy bất thường:
 
@@ -84,7 +86,7 @@ Kiểm môi trường sau khi cài và mỗi khi thấy bất thường:
 python3 engine/scripts/po-tools.py doctor
 ```
 
-Lệnh kiểm tên git, Python, `lark-cli`, thư mục đang mở, file chưa commit, nguồn KB quá hạn đối chiếu, domain pack, mã tính năng trùng, và tên sản phẩm lọt vào engine. Mỗi dòng không đạt có gợi ý cách sửa.
+Lệnh kiểm tên git, Python, `lark-cli`, thư mục đang mở, hook ghi lượt PO đã chạy chưa, file chưa commit, nguồn KB quá hạn đối chiếu, domain pack, mã tính năng trùng, và tên sản phẩm lọt vào engine. Mỗi dòng không đạt có gợi ý cách sửa.
 
 ### 2.4 Lark CLI
 
@@ -114,13 +116,14 @@ po-workflow/
 │   ├── agents/ai-reviewer.md  reviewer độc lập
 │   ├── standards/             quy ước mã, quy tắc bàn giao, quyết định nơi lưu story
 │   ├── knowledge/             kiến thức vai PO lấy từ AWS
-│   ├── scripts/po-tools.py    kiểm tra, truy vết, duyệt, sinh story, chỉ mục
-│   └── tests/                 intent mẫu để kiểm script
+│   ├── scripts/               po-tools.py kiểm tra, truy vết, duyệt, sinh story, chỉ mục; po-hook.py hook của Claude Code
+│   └── tests/                 dữ liệu kiểm thử của script, PO không cần đọc
 ├── domain/                    domain pack: domain.md, KB, corner checklist, template của công ty
 ├── memory/
 │   ├── team.md                bài học dùng chung, đi theo engine
 │   └── project.md             bài học của sản phẩm đang cài
-├── .claude/                   cấu hình riêng cho Claude Code: lối tắt cho lệnh, trỏ tới engine/
+├── .claude/                   cấu hình riêng cho Claude Code: lối tắt cho lệnh, trỏ tới engine/; quyền và hook
+├── .po/                       sổ lượt người trên máy này, không commit
 └── intents/
     ├── INDEX.md               chỉ mục PRD đã duyệt cho Dev
     └── 261009-ten-intent/
@@ -219,7 +222,12 @@ AI trình thông điệp hoàn thành gồm: artifact ở đâu, điểm chính,
 | Add stage | Chạy thêm một stage ngoài profile, ví dụ thêm 2.32 |
 | Reject Initiative | Chỉ ở 1.7, dừng intent |
 
-Lời duyệt bằng câu tự nhiên được hiểu theo ý. "Ok nhưng đổi tên trường X" là Approve kèm chỉ thị; AI sửa và báo một dòng. Câu trả lời không rõ thì AI hỏi lại, không tự coi là duyệt.
+Lời duyệt bằng câu tự nhiên được hiểu theo ý. "Ok nhưng đổi tên trường X" là duyệt kèm chỉ thị: AI sửa, báo một dòng và hỏi lại "Duyệt bản đã sửa?"; PO trả lời thì AI mới ghi duyệt. Câu trả lời không rõ thì AI hỏi lại, không tự coi là duyệt.
+
+AI không tự duyệt được. Mỗi câu PO gõ và mỗi lựa chọn PO bấm được hook ghi vào `.po/turns.jsonl` trên máy; lệnh approve chỉ ghi khi lời duyệt có nguyên văn trong một lượt của PO sau lần sửa artifact cuối. Script từ chối thì AI nói lý do và hỏi lại PO. Ba trường hợp PO sẽ được hỏi thêm một câu:
+- Kiểm máy còn cảnh báo: PO sửa, hoặc nói chấp nhận kèm lý do.
+- Artifact đổi sau lần AI Reviewer xem: chạy review lại, hoặc PO nói duyệt không cần review lại.
+- Dùng công cụ AI không có hook: PO tự chạy lệnh approve trong terminal theo lệnh AI đưa.
 
 Bản nháp mang phiên bản 0.x. Lần duyệt đầu là 1.0; mỗi lần duyệt lại sau change request tăng số phụ.
 
@@ -246,7 +254,7 @@ HLD Brief đổi thì các PIC ký lại. PRD đổi thì phiên bản tăng, St
 /po-stories <intent>
 ```
 
-AI xem trước danh sách: mỗi US trong PRD một story, kèm Unit, Epic và kết quả điều kiện giao Dev. PO đồng ý thì AI ghi `intents/<intent>/stories/story-list-prd-v<phiên bản>.csv`, chỉ khi PRD đã duyệt. File có 11 cột theo mẫu import CSV của Jira; PO import lên Jira bằng chức năng import CSV.
+AI xem trước danh sách: mỗi US trong PRD một story, kèm ưu tiên, Unit, Epic và kết quả điều kiện giao Dev. PO đồng ý thì AI ghi `intents/<intent>/stories/story-list-prd-v<phiên bản>.csv`, chỉ khi PRD đã duyệt. File có 12 cột theo mẫu import CSV của Jira, gồm cột Priority đổi từ dòng Ưu tiên của US: Must thành Highest, Should thành High, Could thành Medium. PO import lên Jira bằng chức năng import CSV.
 
 Trước lần đầu, kiểm 2 điểm:
 - `domain/domain.md` có `jira_project_key` và `jira_project_name` ở frontmatter. Hai khoá này khai khi dựng domain pack, theo DOMAIN-SETUP.md mục 5.
@@ -270,7 +278,7 @@ Lệnh cuối cập nhật `intents/INDEX.md` với mã tính năng, bản PRD �
 python3 engine/scripts/po-tools.py dor intents/<intent>
 ```
 
-Script in story nào đạt, story nào chưa và vì sao, theo 4 điều kiện: PRD đã duyệt; US có tiêu chí chấp nhận; mọi business rule có tiêu chí chấp nhận trỏ tới; US không còn `❓PO` và không còn câu chặn trong Open Issues. Kết quả cũng ghi ở cột Comment của file CSV. Chỉ giao Dev các story đạt. Độ phủ test case do QA theo dõi trên Jira.
+Script in story nào đạt, story nào chưa và vì sao, theo 6 điều kiện: PRD đã duyệt; US có tiêu chí chấp nhận; mọi business rule có tiêu chí chấp nhận trỏ tới; US không còn `❓PO` và không còn câu chặn trong Open Issues; US có bảng giao diện thì trỏ mã màn `SCR`; US nêu ở Pre-Condition là phải xong trước cũng đạt. Kết quả cũng ghi ở cột Comment của file CSV. Chỉ giao Dev các story đạt. Độ phủ test case do QA theo dõi trên Jira.
 
 ### 7.4 Trước khi mở quyền repo cho các team
 
@@ -292,6 +300,8 @@ Buổi checkpoint là buổi PO làm việc với 3 PIC trên HLD Brief, trướ
 6. Commit với message `hld(<intent>): design direction`, `tech direction` hoặc `qa direction`, sau đó push.
 
 PIC không mở được repo thì gửi nội dung cho PO. PO dán nguyên văn, mở đầu bằng "(ghi theo <tên>, <ngày>)", và lưu tin nhắn xác nhận vào `decisions.md`.
+
+QA PIC có thêm một việc ở 2.42, trước khi PRD được duyệt: PO gửi đường dẫn PRD và hạn trả lời; QA xem từng tiêu chí chấp nhận có kiểm thử được không, có thiếu nhánh lỗi hay giá trị biên không. Ý kiến ghi vào mục Comments của PRD hoặc gửi PO để ghi nguyên văn. Việc này không chặn: quá hạn thì PO đi tiếp và gate ghi QA chưa góp ý.
 
 ### 8.2 Làm việc trên story Jira
 
@@ -345,14 +355,18 @@ Lệnh của script, chạy từ thư mục gốc:
 |---|---|
 | `po-tools.py doctor` | Kiểm môi trường và domain pack |
 | `po-tools.py status` | Trạng thái mọi intent, artifact bị sửa ngoài change request, mã tính năng trùng, nguồn quá hạn |
+| `po-tools.py next <intent>` | Stage cần làm tiếp và số câu hỏi còn trống |
 | `po-tools.py check <intent> <stage>` | Kiểm bằng máy trước gate |
 | `po-tools.py trace <intent>` | Truy vết FR, US, BR, AC |
-| `po-tools.py approve <intent> <stage>` | Ghi chép sau khi PO duyệt |
+| `po-tools.py review-start <intent> <stage>` | Ghi dấu artifact trước khi gọi AI Reviewer |
+| `po-tools.py approve <intent> <stage> --words "<lời PO>"` | Ghi chép sau khi PO duyệt; lời PO phải có trong sổ lượt người, trừ khi PO tự chạy trong terminal |
+| `po-tools.py replay <intent>` | Kể lại intent cho người tiếp quản |
 | `po-tools.py stories <intent> [--write]` | Xem trước hoặc ghi Story List cho Jira |
 | `po-tools.py dor <intent>` | Kiểm điều kiện giao Dev |
 | `po-tools.py index --write` | Cập nhật `intents/INDEX.md` |
 | `po-tools.py migrate <intent> [--feature <mã>] [--write]` | Chuyển intent tạo từ bản engine cũ |
 | `po-tools.py engine-check` | Liệt kê file engine đã bị sửa tay, trước khi nâng cấp |
+| `po-tools.py selftest` | Chạy dữ liệu kiểm thử của script, sau khi nâng cấp hoặc sửa engine |
 
 ## 11. Domain pack
 
@@ -395,7 +409,9 @@ Ký hiệu chung trong artifact:
 | Không biết intent đang ở đâu | `/po-status` |
 | AI viết dài hoặc mở rộng phạm vi | Yêu cầu AI quay về phạm vi đã duyệt |
 | Phiên làm việc dài, AI bắt đầu sót | Nén phiên, sau đó gọi lại `/po`. Trạng thái và câu trả lời đã ghi vào file thì không mất; nén ngay sau một gate là an toàn nhất |
-| Xung đột git ở `state.md`, `decisions.md` hoặc `memory/` | Với `decisions.md`, giữ dòng của cả hai bên và đánh lại số DEC trùng; với `state.md`, lấy trạng thái mới hơn, sau đó chạy `/po-status` |
+| Xung đột git ở `state.md`, `decisions.md` hoặc `memory/` | Với `decisions.md`, giữ dòng của cả hai bên và đánh lại số DEC trùng; với `state.md`, lấy trạng thái mới hơn, sau đó chạy `/po-status`. Gỡ xung đột trong trình soạn thảo: hook chặn AI sửa dòng DEC cũ |
+| Script từ chối ghi duyệt vì không thấy lời PO | Trả lời lại câu hỏi duyệt. Vẫn bị từ chối thì chạy `po-tools.py doctor`, xem dòng Hook ghi lượt PO; hoặc tự chạy lệnh approve trong terminal |
+| Hook chặn AI sửa một file | Đọc lý do AI báo lại. Artifact đã duyệt thì đi `/change-request`; quyết định đổi thì thêm dòng DEC mới |
 | Lỡ sửa tay artifact đã duyệt | `/po-status` báo lệch. Thay đổi có chủ đích thì chạy `/change-request`; nếu không, lấy lại bản trong `archive/` |
 | Chọn nhầm tại gate | Báo ngay; AI ghi một dòng đính chính và trình lại gate |
 | Reviewer báo NOT-READY nhưng PO chấp nhận | Nêu finding nào chấp nhận; AI ghi Accepted risk vào `decisions.md` |
@@ -409,6 +425,7 @@ Các hành vi sau là đúng thiết kế:
 | Hiện tượng | Nguyên nhân |
 |---|---|
 | AI dừng, không sang stage sau | Đang chờ PO duyệt gate |
+| AI không tự ghi duyệt khi đã sửa thêm sau câu duyệt của PO | Lời duyệt phải đến sau lần sửa cuối; AI hỏi lại một câu |
 | AI hỏi nhiều câu `Chặn: có` | Thiếu thông tin làm đổi phạm vi, rule, dữ liệu hoặc luồng |
 | Artifact có nhiều `❓PO` | KB chưa phủ vùng đó và AI không được đoán |
 | AI không tự sửa theo finding của reviewer | PO quyết sửa hoặc chấp nhận rủi ro |

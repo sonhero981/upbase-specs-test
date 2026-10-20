@@ -8,7 +8,7 @@ Xác định intent từ tham số lệnh; thiếu thì hỏi. Đọc theo thứ
 Đích, repo và đối tượng ghi ở `domain.md` mục 4 phần User Guide. Tính năng chạm nhiều đối tượng thì mỗi đối tượng một bài riêng, hậu tố theo đối tượng; người dùng cuối và vận hành cần thông tin khác nhau.
 
 ## Cấu trúc bài viết
-Theo template của domain, đúng chuẩn tài liệu công ty đang dùng: I. Thông tin chung với khối `Dành cho`, `Đường dẫn`, `Phạm vi & Module liên quan`, `Điều kiện tiên quyết` · II. Hướng dẫn chi tiết theo `{% stepper %}` · III. Lưu ý và quy tắc nghiệp vụ · IV. Lỗi thường gặp và cách xử lý. Mục `Phạm vi & Module liên quan` bắt buộc: thiếu nó thì KB không dựng được quan hệ chéo và Impact Analysis bỏ sót đúng chỗ dày quan hệ nhất.
+Theo template của domain, đúng chuẩn tài liệu công ty đang dùng: I. Thông tin chung với khối `Dành cho`, `Đường dẫn`, `Phạm vi & Module liên quan`, `Điều kiện tiên quyết` · II. Hướng dẫn chi tiết theo `{% stepper %}` · III. Lưu ý và quy tắc nghiệp vụ · IV. Lỗi thường gặp và cách xử lý. Mục `Phạm vi & Module liên quan` bắt buộc: thiếu nó thì KB không dựng được quan hệ chéo và Impact Analysis bỏ sót đúng vùng dày quan hệ nhất.
 
 ## Chuyển PRD sang User Guide
 | PRD | User Guide |

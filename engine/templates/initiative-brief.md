@@ -20,6 +20,8 @@ inputs: <artifact đầu vào@version, ví dụ requirements@1.0; stage đầu t
 |---|---|
 | O1 | |
 
+<Khi có chạy 1.2 Market Research: một câu tóm tắt kết quả so sánh, gồm chuẩn tối thiểu phải có và điểm khác biệt, theo mục Market validation summary của AWS. Không chạy 1.2 thì xoá dòng này.>
+
 ## 2. Phạm vi
 | In | Out | Để sau |
 |---|---|---|

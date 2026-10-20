@@ -33,12 +33,15 @@ Thuật ngữ và họ mã của PO-Workflow, theo AWS AI-DLC Workflows 2.11, fi
 | Mã tính năng | `<mã sản phẩm>-F<NNN>`, ví dụ `APP-F012`. Cấp khi tạo intent, đi theo tính năng tới PRD, story trên Jira, test case, nhánh code | Quy ước chung các team, `engine/standards/id-conventions.md` |
 | Story List | `intents/<intent>/stories/story-list-prd-v<phiên bản>.csv`, mỗi US trong PRD một dòng theo mẫu import CSV của Jira. Sinh bằng `/po-stories` sau khi PRD được duyệt; các team làm việc trên story Jira | Quy ước chung các team, `engine/standards/handoff-rules.md`, ADR 0002 |
 | Checkpoint | Buổi PO làm việc với Design PIC, Tech PIC, QA PIC trên HLD Brief ở 2.41, trước khi viết PRD | Quy ước chung các team |
-| Điều kiện giao Dev, DoR | Điều kiện để giao một story cho Dev: PRD đã duyệt, US có AC, mọi BR có AC, không còn `❓PO` và câu chặn. Kiểm bằng `po-tools.py dor` | Quy ước chung các team; Definition of Ready của AWS |
+| Điều kiện giao Dev, DoR | Điều kiện để giao một story cho Dev: PRD đã duyệt, US có AC, mọi BR có AC, không còn `❓PO` và câu chặn, giao diện có mã màn `SCR`, story phụ thuộc đã đạt. Kiểm bằng `po-tools.py dor` | Quy ước chung các team. Bản hẹp phía PO của Definition of Ready bên AWS; hai mục thiết kế đã xem và đã ước lượng do Design, Dev làm trên Jira |
 | Nguyên tắc chia story | Định nghĩa story, tiêu chí INVEST, dấu hiệu quá lớn, 8 cách tách, các cách không chia, ở `engine/standards/story-splitting.md` | PO-Workflow, theo AWS user-story-patterns |
 | Tiêu chí chấp nhận, AC | Câu kiểm được, đạt hoặc không đạt, viết theo hành vi người dùng thấy, ghi rõ BR mà nó kiểm. Viết trong PRD ở 2.42, sau khi các PIC đã ký HLD Brief | Quy ước chung các team; ISO/IEC/IEEE 29148 |
 | PIC | Người phụ trách một mảng của tính năng: Design PIC, Tech PIC, QA PIC. Ghi định hướng và ký HLD Brief ở 2.41 | PO-Workflow |
-| Verification checklist | Checklist tự kiểm của stage cho phần cần phán đoán, mục blocking | AWS gọi là compartment 2 |
+| Verification checklist | Checklist tự kiểm của stage cho phần cần phán đoán, mục blocking | PO-Workflow. AWS không có tên tương đương; compartment `## Sensors` của AWS là phần kiểm tự động, ứng với Kiểm bằng máy |
 | Kiểm bằng máy | `po-tools.py check` và `trace`: phần kiểm được bằng script, chạy trước checklist | Tương đương sensor của AWS |
+| Sổ lượt người | `.po/turns.jsonl`, hook ghi mỗi lượt PO gõ hoặc chọn; `approve` chỉ ghi duyệt khi lời PO có trong sổ. Không commit, AI không sửa được | AWS gọi là HUMAN_TURN, kiểm có người thật ở gate |
+| Hook | `engine/scripts/po-hook.py`, chạy khi PO gửi câu, khi PO chọn trong hộp chọn, và trước mỗi lần AI sửa file hoặc chạy lệnh shell. Ghi sổ lượt người và chặn sửa trái quy trình | AWS core/hooks |
+| Review digest | `reviews/review-<slug>-<NN>.digest`, dấu của artifact lúc gọi reviewer, ghi bằng `po-tools.py review-start`. `approve` so dấu này để biết review còn ứng với bản hiện tại | AWS gắn biên nhận review với đúng bản đã review |
 | Bản chỉ mục cho Dev | `intents/INDEX.md` do `po-tools.py index` sinh: mã tính năng, bản PRD đã duyệt, service bị chạm, tag, số story đạt điều kiện giao Dev | PO-Workflow |
 | Tag bản duyệt | `<intent>/prd-v<X.Y>`, gắn mỗi lần PRD hoặc HLD Brief được duyệt; agent của Dev đọc theo tag | PO-Workflow |
 | Phiên bản artifact | 0.x là bản nháp; lần duyệt đầu là 1.0; mỗi lần duyệt lại sau change request tăng số phụ | PO-Workflow |
@@ -48,7 +51,7 @@ Thuật ngữ và họ mã của PO-Workflow, theo AWS AI-DLC Workflows 2.11, fi
 | HLD Brief | Tài liệu đồng thuận liên team, stage 2.41 | PO-Workflow |
 | Mob, Mob Elaboration | Không dùng làm tên stage hoặc artifact. Hai nghĩa ở AWS: bài blog AI-DLC (Raja SP, 07/2025) gọi Mob Elaboration là cả team người cùng kiểm câu hỏi và đề xuất của AI trong Inception; bản Workflows từ v2.10 gọi mob là chế độ nhiều agent ở stage 2.4 User Stories; từ v2.11 chế độ này mặc định tắt, chỉ bật ở scope `enterprise`. Trong PO-Workflow, 2.41 HLD Brief & Alignment là bản do người thật thực hiện theo nghĩa trong bài blog; mob agent không chạy | AWS, hai nguồn |
 | Unit `U` | Hạng mục trong intent backlog, sinh ở stage 1.4, nhóm user story theo giá trị và ưu tiên để chốt phạm vi và thứ tự. Ở 2.4 mỗi US gắn vào một Unit. PRD có mục Units. Unit of work của Dev ở 2.7 chia theo kiến trúc, có thể khác | AWS gọi là proto-Unit, stage 1.4. PO-Workflow gọi gọn là Unit, quyết định ngày 19/10/2026 |
-| Thẻ US | Mô tả 9 mục của một user story ở 2.4: vai và mục tiêu, bối cảnh, luồng chính, nhánh đáng kể, rule đã biết, dữ liệu và vùng chạm, ngoài phạm vi, phụ thuộc, chưa rõ. Đủ cho PIC viết HLD, chưa có acceptance criteria | Repo, theo Definition of Ready của AWS |
+| Thẻ US | Mô tả 9 mục của một user story ở 2.4: vai và mục tiêu, bối cảnh, luồng chính, nhánh đáng kể, rule đã biết, dữ liệu và vùng chạm, ngoài phạm vi, phụ thuộc, chưa rõ. Đủ cho PIC viết HLD, chưa có acceptance criteria | Repo. Gần mẫu mô tả luồng người dùng trong ux-guide của AWS hơn là Definition of Ready, vì chưa có AC và chưa ước lượng |
 | Impact Analysis · Solution Options · Hidden · KB · CR · PRD · US · BR | Giữ nguyên | |
 
 ## Stage
@@ -77,7 +80,7 @@ Tiện ích:
 - `/publish-lark`: đẩy artifact đã duyệt lên Lark
 - `/generate-user-guide`: viết User Guide sau khi Dev xong
 - `/new-domain`: dựng khung domain pack cho sản phẩm mới
-- Script `engine/scripts/po-tools.py`: `next` stage kế tiếp; `check` kiểm bằng máy; `approve` ghi chép sau khi duyệt; `trace` truy vết FR, US, BR, AC; `archive` chụp bản duyệt; `status` kiểm lệch giữa state và file; `feature-id` cấp mã tính năng; `stories` sinh Story List cho Jira; `dor` kiểm điều kiện giao Dev; `index` sinh chỉ mục; `replay` kể lại intent; `migrate` chuyển intent từ bản engine cũ; `doctor` kiểm môi trường
+- Script `engine/scripts/po-tools.py`: `next` stage kế tiếp; `check` kiểm bằng máy; `approve` ghi chép sau khi duyệt, chỉ khi lời PO có trong sổ lượt người; `review-start` ghi dấu artifact trước khi gọi reviewer; `trace` truy vết FR, US, BR, AC; `archive` chụp bản duyệt; `status` kiểm lệch giữa state và file; `feature-id` cấp mã tính năng; `stories` sinh Story List cho Jira; `dor` kiểm điều kiện giao Dev; `index` sinh chỉ mục; `replay` kể lại intent; `migrate` chuyển intent từ bản engine cũ; `doctor` kiểm môi trường
 
 ## Họ mã
 | Họ | Dạng | Phạm vi | Ví dụ | Thay cho |
@@ -130,4 +133,5 @@ Mã trên là mã ngắn, dùng trong artifact của PO và PRD. Ra ngoài, trê
 - "Gate 1" đến "Gate 4" là tên cũ. Gọi theo stage: "gate của 2.3".
 - Dữ kiện sản phẩm không ghi vào lệnh hoặc checklist. Ghi vào `domain.md` hoặc KB, để lệnh trỏ tới.
 - Mã ngắn `US1`, `AC1.1` chỉ dùng trong tài liệu của PO. Trao đổi với Design, Tech, QA và trên Jira dùng mã đầy đủ `US-<tính năng>-<NN>`.
+- "Checkpoint" trong AWS là điểm duyệt ở Construction. Trong PO-Workflow, checkpoint là buổi làm việc trên HLD Brief ở 2.41. Khi đọc tài liệu AWS, phân biệt hai nghĩa này.
 - "Mob" không phải tên của 2.41. Buổi ký HLD Brief tương đương Mob Elaboration trong bài blog AWS, nhưng tên stage giữ là HLD Brief & Alignment để không trùng chữ mob của AWS ở 2.4.

@@ -21,14 +21,14 @@ Chặn: có | không
 
 ## Quy tắc đặt câu hỏi
 - Chỉ hỏi câu mà đáp án làm đổi phạm vi, business rule, dữ liệu, luồng, hoặc quyền. Không hỏi kỹ thuật cho Dev.
-- Tra KB, API spec, schema và `decisions.md` trước. Có đáp án rồi thì không hỏi. Còn mơ hồ thì hỏi hẹp, nêu đáp án cũ: "Trước đã chốt A ở DEC5, giờ có áp cho trường hợp B không?"
+- Tra KB, API spec, schema và `decisions.md` trước. Đã có đáp án thì không hỏi. Còn mơ hồ thì hỏi hẹp, nêu đáp án cũ: "Trước đã chốt A ở DEC5, giờ có áp cho trường hợp B không?"
 - Mỗi câu tự giải thích. Mã nào xuất hiện thì kèm nội dung: "yêu cầu xuất báo cáo theo nhóm (FR3)", không viết "FR3 còn đúng không?".
 - Một dòng *Vì sao hỏi* khi lý do không hiển nhiên.
-- Lựa chọn A đến D, tối đa bốn, để vừa hộp chọn; trong file luôn có thêm dòng X. Khi không chắc có lựa chọn nào hợp, dùng một trong bốn chỗ cho "Chưa xác định" để PO không bị ép chọn bừa. Câu thật sự cần năm lựa chọn thì không đưa vào hộp chọn: trình dạng chữ, PO gõ chữ cái.
+- Lựa chọn A đến D, tối đa bốn, để vừa hộp chọn; trong file luôn có thêm dòng X. Khi không chắc có lựa chọn nào hợp, dùng một trong bốn ô cho "Chưa xác định" để PO không bị ép chọn bừa. Câu thật sự cần năm lựa chọn thì không đưa vào hộp chọn: trình dạng chữ, PO gõ chữ cái.
 - `[đề xuất]` là đáp án AI thấy hợp lý nhất, kèm nguồn. PO chỉ cần nói "đồng ý hết trừ Q3".
 - *Chặn: có* khi thiếu đáp án thì không viết được artifact đúng. Câu chặn còn trống thì stage không đi tiếp.
 - Hỏi theo lô tối đa bốn câu. Câu chặn hỏi trước. Câu là tiền đề của câu khác thì hỏi trước câu phụ thuộc vào nó.
-- Mỗi câu gắn nhãn người trả lời ngay sau số câu: `[PO]`, `[Người yêu cầu]`, `[Design]`, `[Tech]`, `[QA]`, hoặc vai khác ghi trong `domain.md`. Câu cùng nhãn đứng cạnh nhau, để PO chuyển cả nhóm cho đúng người hoặc họp theo nhóm rồi điền theo cách Edit file. Câu kỹ thuật vẫn không hỏi; nhãn `[Tech]` chỉ dùng cho câu mà đáp án làm đổi phạm vi, như "có giữ được dữ liệu cũ không".
+- Mỗi câu gắn nhãn người trả lời ngay sau số câu: `[PO]`, `[Người yêu cầu]`, `[Design]`, `[Tech]`, `[QA]`, hoặc vai khác ghi trong `domain.md`. Câu cùng nhãn đứng cạnh nhau, để PO chuyển cả nhóm cho đúng người hoặc họp theo nhóm, sau đó điền theo cách Edit file. Câu kỹ thuật vẫn không hỏi; nhãn `[Tech]` chỉ dùng cho câu mà đáp án làm đổi phạm vi, như "có giữ được dữ liệu cũ không".
 - Chọn nhiều được: ghi "chọn nhiều" trong câu hỏi, PO trả lời "A, C".
 
 ## Ba cách trả lời

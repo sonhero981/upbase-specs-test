@@ -13,24 +13,29 @@
 ## Specific Requirement
 - [ ] US đánh số liên tục. US chưa làm ghi rõ trong tiêu đề
 - [ ] Mỗi US đủ sáu mục. Conner case để trống
+- [ ] Mỗi US có dòng Ưu tiên Must, Should hoặc Could, khớp `stories.md`
 - [ ] Bảng UI đúng dạng A hoặc B, cột Yêu cầu đủ định dạng, placeholder, options, mặc định, disable, tooltip, validate, hành vi
+- [ ] **[BLOCK]** US có giao diện trỏ mã màn `SCR<n>` của HLD Brief mục 8. Có `design/` hoặc Figma thì mọi màn trong thiết kế ứng với US, có trạng thái lỗi, rỗng, đang tải
 - [ ] BR mã `BR<US>.<n>`, không trùng. Rule chạm tính năng có sẵn dẫn mã KB
 - [ ] **[BLOCK]** Mỗi US có danh sách AC mã `AC<US>.<n>`, không trùng. Mỗi AC kiểm được, có đạt hoặc không đạt, dạng "Khi..., ..."
 - [ ] **[BLOCK]** Mọi BR có ít nhất một AC trỏ tới. Luồng chính và mỗi nhánh đáng kể trong thẻ US có AC
+- [ ] **[BLOCK]** Mỗi US có ít nhất một AC cho nhánh lỗi hoặc bị từ chối. Mỗi ngưỡng số có AC ở giá trị biên
+- [ ] US phụ thuộc US khác ghi mã `US<n>` ở Pre-Condition
 - [ ] Validate của một màn gom thành một AC trỏ về bảng UI, không mỗi dòng bảng một AC
 - [ ] **[BLOCK]** Frontmatter `feature:` và hàng Mã tính năng có mã tính năng của intent
 - [ ] **[BLOCK]** Field hiện có ghi là hiện có. Không tự thêm field
 - [ ] Hằng số ghi cứng hay cấu hình
 - [ ] Sự kiện, mail bị chạm đối chiếu file sự kiện trong KB
-- [ ] **[BLOCK]** M, L: Scenario, AC, Data Field, NFR của từng US dẫn được về mục 4, 8, 9, 10 của HLD Brief. Chỗ brief chưa nói có `[đề xuất]` và OQ gắn tên PIC. Không còn chỗ mâu thuẫn brief chưa xử lý
+- [ ] **[BLOCK]** M, L: Scenario, AC, Data Field, NFR của từng US dẫn được về mục 4, 8, 9, 10 của HLD Brief. Điểm brief chưa nói có `[đề xuất]` và OQ gắn tên PIC. Không còn điểm mâu thuẫn với brief chưa xử lý
 - [ ] PRD không quy định phần mục 9 ghi "Dev tự quyết ở detailed design"
 
 ## Truy vết và review
 - [ ] **[BLOCK]** Traceability: không GAP, không ORPHAN. `verification/phase-check-inception.md` đạt
-- [ ] Reviewer ai-reviewer đã chạy
+- [ ] M, L: đã gửi AC cho QA PIC góp ý; ý kiến ghi ở Comments kèm quyết định của PO, hoặc ghi QA chưa góp ý khi quá hạn
+- [ ] Reviewer ai-reviewer đã chạy, sau `po-tools.py review-start`, và artifact không đổi sau lần review đó
 
 ## Bàn giao
 - [ ] **[BLOCK]** Không còn chữ mẫu template. Mục không áp dụng đã xoá
 - [ ] **[BLOCK]** Không dấu vết quy trình. Không viết tắt. Dấu `·` giữa mã
-- [ ] Sơ đồ Mermaid đặt đúng chỗ, tránh hai lỗi trên Lark
+- [ ] Sơ đồ Mermaid đặt đúng vị trí, tránh hai lỗi trên Lark
 - [ ] Profile S: PRD rút gọn đúng danh mục mục

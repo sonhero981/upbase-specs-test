@@ -16,6 +16,8 @@ services: reminder-svc, notification-svc
 
 Là học viên, tôi nhận email nhắc trước buổi học để không quên giờ học.
 
+**Ưu tiên:** Must
+
 ### 2/ Pre - Condition
 
 - Học viên đã ghi danh vào lớp có lịch học
@@ -47,11 +49,14 @@ Hệ thống tìm buổi học bắt đầu sau 24 giờ, gửi email nhắc, gh
 
 Là học viên, tôi nhận thông báo trong ứng dụng trước giờ học.
 
+**Ưu tiên:** Should
+
 ### 4/ Acceptance criteria
 
 **Tiêu chí chấp nhận**
 
 - `AC2.1` Khi còn 1 giờ tới buổi học, học viên thấy thông báo trong ứng dụng. Theo `BR2.1`
+- `AC2.2` Khi còn hơn 1 giờ tới buổi học, học viên không thấy thông báo. Theo `BR2.1`
 
 **Business requirement — Business rule**
 

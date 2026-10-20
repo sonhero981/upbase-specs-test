@@ -31,7 +31,7 @@ Khung vấn đề trước khi bàn giải pháp: ai gặp vấn đề gì, vì 
 - `intent.md` mục Related intents: trùng hay phụ thuộc intent khác không.
 
 ## Ask
-Gợi ý, không phải kịch bản. Bỏ câu đã có đáp án trong inputs.
+Đây là gợi ý, không bắt hỏi đủ hay đúng thứ tự. Bỏ câu đã có đáp án trong inputs.
 1. Vấn đề nghiệp vụ, theo góc nhìn người dùng: ai gặp, khi nào, hậu quả.
 2. Người dùng đang xoay xở thế nào khi chưa có tính năng: làm gì, theo thứ tự nào, dựa vào tiêu chí gì, mất bao lâu, hay sai ở đâu.
 3. Thành công trông như thế nào, đo bằng chỉ số nào, lấy số ở đâu.
@@ -49,7 +49,7 @@ Success metrics: tự đề xuất ít nhất một cách đo cho mỗi objectiv
 Theo `stage-protocol.md` bước 4b: liệt kê giả định trong intent-statement, PO chọn chấp nhận hay chuyển thành câu hỏi, trước khi gọi reviewer.
 
 ## Verify
-`po-tools.py check`, rồi checklist của stage. Reviewer ai-reviewer ở L.
+`po-tools.py check`, sau đó checklist của stage. Reviewer ai-reviewer ở L.
 
 ## Gate
 - Profile L: gate riêng. Trình: vấn đề một đoạn, objective kèm cách đo, stakeholder, ràng buộc, assumption đáng chú ý, OQ còn chặn.

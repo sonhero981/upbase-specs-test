@@ -44,9 +44,19 @@ Ghi chép:
       Epic từ dòng Jira Epic của intent.md, ghi "U2: KEY" để gán Epic theo Unit. Description theo cú pháp
       Jira, mã đầy đủ. Labels: mã tính năng, mã story, Unit. So với bản CSV trước thì in story đổi và mới.
       --write ghi intents/<intent>/stories/story-list-prd-v<version>.csv, chỉ khi PRD đã duyệt.
+  po-tools.py review-start <intent> <stage-slug>
+      Trước khi gọi AI Reviewer: ghi dấu artifact vào reviews/review-<slug>-NN.digest. approve so dấu này để biết
+      review còn ứng với bản hiện tại không.
   po-tools.py approve <intent> <stage-slug> --words "<lời PO>" [--who <tên>] [--version X.Y] [--dry-run]
+                      [--accept-warnings "<lời PO>"] [--accept-review-gap "<lời PO>"]
       Ghi một lần duyệt: version, status, approved_at ở frontmatter; chụp archive; thêm DEC;
-      cập nhật state.md; in dòng tiến độ. Chỉ chạy khi stage đang [?]. --dry-run chỉ in.
+      cập nhật state.md; in dòng tiến độ. Chỉ chạy khi stage đang [?], và khi:
+      - lời PO có nguyên văn trong sổ lượt người .po/turns.jsonl, ghi sau lần sửa artifact cuối;
+        PO tự gõ lệnh trong terminal thì không cần sổ;
+      - kiểm máy không còn cảnh báo, hoặc PO chấp nhận bằng --accept-warnings;
+      - stage bật AI Reviewer thì lần review mới nhất ứng với đúng bản hiện tại, hoặc PO chấp nhận
+        bằng --accept-review-gap. Lời chấp nhận cũng phải có trong sổ và được ghi vào DEC.
+      --dry-run kiểm như thật, chỉ in, không ghi.
   po-tools.py archive <intent> <stage-slug> <artifact> [--label <nhãn>]
       Chép artifact vào archive/<slug>/<tên>-v<version>-<YYYYMMDD>.md, hoặc
       <tên>-<nhãn>-<YYYYMMDD>.md khi có --label. Từ chối ghi đè.
@@ -60,17 +70,20 @@ Engine:
       Mã thoát 1 khi có Lỗi.
   po-tools.py manifest [--write]
       sha256 của mọi file engine. --write ghi engine/MANIFEST.txt.
-  po-tools.py engine-check
-      So file engine hiện tại với engine/MANIFEST.txt. Mã thoát 1 khi có file bị sửa hoặc mất.
+  po-tools.py engine-check [--strict]
+      So file engine hiện tại với engine/MANIFEST.txt. Mã thoát 1 khi có file bị sửa hoặc mất;
+      --strict coi cả file mới chưa ghi vào manifest là lỗi, dùng trong CI.
   po-tools.py selftest
-      Chạy các lệnh trên bản sao tạm của engine/tests/fixtures, kiểm cấu trúc file stage.
-      Lệnh ghi file chỉ chạy trên bản sao, không sửa fixture.
+      Chạy các ca trong engine/tests/fixtures/*/expected.txt, mỗi fixture trên một gốc dữ liệu tạm gồm
+      domain mẫu ở engine/tests/root và ngày cố định. Kiểm thêm: cấu trúc file stage, mọi lệnh đều có ca
+      (trừ UNTESTED), tài liệu chỉ nhắc lệnh và đường dẫn có thật, VERSION khớp CHANGELOG và MANIFEST.
   po-tools.py migrate <intent-dir> [--feature <mã>] [--words "<lời PO>"] [--write]
       Chuyển dữ liệu intent cũ lên engine hiện tại: đường dẫn, Unit, PIC, AI Reviewer, mã tính năng,
       file câu hỏi luồng v1 sang dạng ## Q<n>, chụp lại bản duyệt kèm DEC. Không đụng archive, reviews.
 """
 import datetime
 import hashlib
+import json
 import os
 import re
 import shlex
@@ -83,12 +96,51 @@ from pathlib import Path
 
 SCRIPT = Path(__file__).resolve()
 REPO = SCRIPT.parents[2]
-INTENTS = REPO / "intents"
+# Gốc dữ liệu: domain/, intents/, memory/, .po/. Mặc định là repo; selftest đặt PO_TOOLS_ROOT sang thư mục tạm
+# để mỗi fixture chạy trên domain riêng, không phụ thuộc domain đang cài.
+ROOT = Path(os.environ["PO_TOOLS_ROOT"]).resolve() if os.environ.get("PO_TOOLS_ROOT") else REPO
+DATA_DIRS = ("domain/", "intents/", "memory/", ".po/")
+INTENTS = ROOT / "intents"
 STAGES_DIR = REPO / "engine" / "stages"
 PROFILES_MD = REPO / "engine" / "protocol" / "profiles.md"
-DOMAIN_MD = REPO / "domain" / "domain.md"
-FIXTURES = REPO / "engine" / "tests" / "fixtures"
+DOMAIN_MD = ROOT / "domain" / "domain.md"
+TURNS = ROOT / ".po" / "turns.jsonl"
+TESTS = REPO / "engine" / "tests"
+FIXTURES = TESTS / "fixtures"
+TEST_ROOT = TESTS / "root"
+TEST_TODAY = "2026-10-20"
 MANIFEST = REPO / "engine" / "MANIFEST.txt"
+
+
+
+def data_path(t):
+    """Đường dẫn trong file engine: domain/, intents/, memory/ tính từ gốc dữ liệu, còn lại tính từ repo."""
+    return (ROOT if str(t).startswith(DATA_DIRS) else REPO) / t
+
+
+def show(p):
+    """Đường dẫn để in: tương đối với gốc dữ liệu nếu nằm trong đó, không thì với repo."""
+    p = Path(p)
+    for base in (ROOT, REPO):
+        try:
+            return p.resolve().relative_to(base.resolve()).as_posix()
+        except ValueError:
+            continue
+    return str(p)
+
+
+def today():
+    """Ngày hiện tại; PO_TOOLS_TODAY=YYYY-MM-DD cố định ngày khi kiểm thử."""
+    v = os.environ.get("PO_TOOLS_TODAY", "")
+    m = re.fullmatch(r"(\d{4})-(\d{2})-(\d{2})", v.strip())
+    return datetime.date(int(m.group(1)), int(m.group(2)), int(m.group(3))) if m else datetime.date.today()
+
+
+def now():
+    if os.environ.get("PO_TOOLS_TODAY"):
+        return datetime.datetime.combine(today(), datetime.time(9, 0))
+    return datetime.datetime.now()
+
 
 # Dự phòng, chỉ dùng khi không đọc được engine/stages/*.md.
 # (mã, slug, tên, phase, thư mục, artifact chính, file câu hỏi)
@@ -783,8 +835,8 @@ def live_sources():
 
 
 def stale_sources(days=STALE_DAYS):
-    today = datetime.date.today()
-    return [s for s in live_sources() if s["kind"] == "sống" and s["date"] and (today - s["date"]).days > days]
+    day0 = today()
+    return [s for s in live_sources() if s["kind"] == "sống" and s["date"] and (day0 - s["date"]).days > days]
 
 
 # ================================================================ trace
@@ -937,12 +989,12 @@ def trace(intent, write_out=False):
         orphans += ac_orph
         ac_note = "prd.md chưa có dòng AC nào"
 
-    today = datetime.date.today().isoformat()
+    day0 = today().isoformat()
     result = "Đạt" if not gaps and not orphans else "Không đạt"
     body = [
         "# Traceability: %s" % intent.name,
         "",
-        "Kiểm ngày %s bằng po-tools.py. Trạng thái: OK có đích · OK qua FR con khi mọi FR con đã phủ · GAP chưa có · ORPHAN không truy về đâu · TRÙNG mã AC lặp · Deferred, N/A ghi ở stories.md kèm lý do." % today,
+        "Kiểm ngày %s bằng po-tools.py. Trạng thái: OK có đích · OK qua FR con khi mọi FR con đã phủ · GAP chưa có · ORPHAN không truy về đâu · TRÙNG mã AC lặp · Deferred, N/A ghi ở stories.md kèm lý do." % day0,
         "",
         "## FR sang US",
         md_table(["FR", "US", "Trạng thái"], fr_rows),
@@ -965,7 +1017,7 @@ def trace(intent, write_out=False):
 
     if write_out:
         out = prd_p.parent / "traceability.md"
-        write(out, "---\nintent: %s\nartifact: traceability\nchecked: %s\n---\n" % (intent.name, today) + text)
+        write(out, "---\nintent: %s\nartifact: traceability\nchecked: %s\n---\n" % (intent.name, day0) + text)
         pc = intent / "verification/phase-check-inception.md"
         fr_gap = any(s == "GAP" for s in status.values())
         pc_rows = [
@@ -976,7 +1028,7 @@ def trace(intent, write_out=False):
             ("5", "Mọi BR có AC trỏ tới", "Chưa kiểm" if prd is None else ("Không đạt" if [g for g in gaps if g.endswith("chưa có AC")] else "Đạt")),
         ]
         write(pc, "---\nintent: %s\nphase: inception\ndate: %s\nresult: %s\n---\n# Phase check: INCEPTION · %s\n\nSinh bởi po-tools.py trace. Điều kiện ngữ nghĩa (OQ chặn đã đóng, HLD Brief đủ chữ ký) AI kiểm thêm theo template phase-check.md.\n\n%s\n\n## Kết luận\n%s. GAP: %d. ORPHAN: %d. Chi tiết trong %s.\n"
-              % (intent.name, today, result, intent.name, md_table(["#", "Điều kiện", "Kết quả"], pc_rows), result, len(gaps), len(orphans), rel(out, intent)))
+              % (intent.name, day0, result, intent.name, md_table(["#", "Điều kiện", "Kết quả"], pc_rows), result, len(gaps), len(orphans), rel(out, intent)))
         print("Đã ghi:", out, "và", pc)
     return 0 if result == "Đạt" else 1
 
@@ -1148,7 +1200,7 @@ def check_artifact(ctx, W, st, path):
     b0 = body_start(lines)
     f = rel(path, intent)
     stem = path.stem
-    tpls = [REPO / t for t in st.templates if Path(t).stem == stem]
+    tpls = [data_path(t) for t in st.templates if Path(t).stem == stem]
     if not tpls and (REPO / "engine/templates" / (stem + ".md")).exists():
         tpls = [REPO / "engine/templates" / (stem + ".md")]
     eng = [t for t in tpls if t.exists() and "engine/templates" in t.as_posix()]
@@ -1163,7 +1215,7 @@ def check_artifact(ctx, W, st, path):
             if lvl == 2 and not is_optional_heading(t) and norm_heading(t) not in have:
                 W.add("heading", f, None, "Thiếu mục bắt buộc của template %s: '## %s'" % (rel(eng[0], REPO), clean(re.sub(r"<!--.*?-->", "", t))))
     elif tpls:
-        W.info.append("%s: template là của công ty (%s), không kiểm heading" % (f, ", ".join(rel(t, REPO) for t in tpls)))
+        W.info.append("%s: template là của công ty (%s), không kiểm heading" % (f, ", ".join(show(t) for t in tpls)))
 
     # 2. artifact nội bộ: Assumptions & Open Questions và thẻ nguồn
     if stem in INTERNAL:
@@ -1286,6 +1338,16 @@ def check_artifact(ctx, W, st, path):
         for u, al in sorted(per_us.items()):
             if len(al) > STORY_AC_MAX:
                 W.add("split", f, al[0]["line"], "US%d có %d AC, quá %d: story có thể quá lớn, xem engine/standards/story-splitting.md mục 4" % (u, len(al), STORY_AC_MAX))
+            if not any(SAD_RE.search(clean(a["text"])) for a in al):
+                W.add("prd", f, al[0]["line"], "US%d chưa thấy AC cho nhánh lỗi hoặc bị từ chối; mỗi US cần ít nhất một, ngưỡng số cần AC ở giá trị biên" % u)
+        for b in prd_us_blocks(lines):
+            blines = lines[b["start"]:b["end"]]
+            if "chưa làm" in clean(b["title"]).lower():
+                continue
+            if not us_priority("\n".join(blines))[0]:
+                W.add("prd", f, b["start"] + 1, "US%d chưa có dòng Ưu tiên (Must, Should, Could): Story List sẽ để trống cột Priority" % b["num"])
+            if us_has_ui(split_us_block(lines, b["start"], b["end"])["ui"]) and not SCR_ANY.search("\n".join(blines)):
+                W.add("prd", f, b["start"] + 1, "US%d có bảng giao diện nhưng chưa trỏ mã màn SCR do Design PIC ghi ở HLD Brief mục 8" % b["num"])
         for i, lvl, t in headings(lines, b0):
             if re.search(r"\b(database|api)\b", clean(t), re.I):
                 W.add("prd", f, i + 1, "PRD không có mục thiết kế kỹ thuật như Database, API: '%s'" % clean(t))
@@ -1420,7 +1482,7 @@ def check(intent, slug, strict=False):
 
 # ================================================================ archive
 def archive_dst(intent, slug, src, tag, day=None):
-    day = day or datetime.date.today().strftime("%Y%m%d")
+    day = day or today().strftime("%Y%m%d")
     return Path(intent) / "archive" / slug / ("%s-%s-%s.md" % (Path(src).stem, tag, day))
 
 
@@ -1544,7 +1606,131 @@ def next_dec(text):
     return "DEC%d" % ((max(nums) if nums else 0) + 1)
 
 
-def approve(intent, slug, words, who=None, version=None, dry=False):
+def norm_words(t):
+    t = unicodedata.normalize("NFC", t or "").casefold()
+    t = re.sub(r"[\"“”'‘’`]", "", t)
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def human_turns():
+    """Lượt người thật do engine/scripts/po-hook.py ghi vào .po/turns.jsonl: [(thời điểm, nội dung)]. None khi chưa có sổ."""
+    text = read(TURNS)
+    if text is None:
+        return None
+    out = []
+    for ln in text.splitlines():
+        try:
+            d = json.loads(ln)
+            ts = datetime.datetime.strptime(str(d["ts"])[:19], "%Y-%m-%dT%H:%M:%S")
+        except (ValueError, KeyError, TypeError):
+            continue
+        out.append((ts, str(d.get("text") or "")))
+    return out
+
+
+def presence(words, since, label):
+    """Lời PO phải có nguyên văn trong một lượt người ghi sau mốc since, như HUMAN_TURN của AWS AI-DLC.
+    Trả None khi đạt, câu lý do khi không. PO tự gõ lệnh trong terminal thì coi là có mặt."""
+    if sys.stdin.isatty() and sys.stdout.isatty():
+        return None
+    turns = human_turns()
+    if turns is None:
+        return ("không thấy sổ lượt người %s. Lời %s phải do PO nói: mở phiên Claude Code ở gốc repo để hook trong "
+                ".claude/settings.json ghi sổ, hoặc PO tự chạy lệnh này trong terminal." % (show(TURNS), label))
+    w = norm_words(words)
+    if len(w) < 2:
+        return "lời %s quá ngắn để đối chiếu với lời PO." % label
+    for ts, text in turns:
+        if ts >= since and w in norm_words(text):
+            return None
+    return ("không thấy lời %s \"%s\" trong lượt nào của PO từ %s, lúc artifact được sửa lần cuối. Trình gate, chờ PO trả lời, "
+            "sau đó chép đúng lời PO vào tham số." % (label, (words or "").strip(), since.strftime("%H:%M %d/%m/%Y")))
+
+
+def stage_artifacts(intent, st, fallback=None):
+    d = Path(intent) / st.dir
+    arts = [d / a for a in st.artifacts if (d / a).exists()]
+    return arts or ([fallback] if fallback is not None and Path(fallback).exists() else [])
+
+
+def machine_warnings(intent, st):
+    """Số cảnh báo của po-tools.py check cho stage; 0 khi stage chưa có artifact theo template mới."""
+    files = [p for p in stage_artifacts(intent, st)]
+    if not files:
+        return 0
+    ctx, W = CheckCtx(intent, st), Warns()
+    for p in files:
+        check_artifact(ctx, W, st, p)
+    return len(W.items)
+
+
+def art_digest(intent, arts):
+    h = hashlib.sha256()
+    for p in sorted(arts):
+        h.update(rel(p, intent).encode("utf-8") + b"\0" + norm_body(read(p)).encode("utf-8") + b"\0")
+    return h.hexdigest()
+
+
+def review_files(intent, slug):
+    d = Path(intent) / "reviews"
+    out = []
+    if d.is_dir():
+        for p in d.glob("review-%s-*.md" % slug):
+            m = re.fullmatch(r"review-%s-(\d+)\.md" % re.escape(slug), p.name)
+            if m:
+                out.append((int(m.group(1)), p))
+    return sorted(out)
+
+
+def reviewer_needed(so, st):
+    """Stage có bật AI Reviewer với profile của intent, và state.md không tắt reviewer."""
+    if re.search(r"reviewer:\s*off", so.text or "", re.I):
+        return False
+    prof = clean(so.fm.get("profile", "")).upper()[:1]
+    return st.code in stages().reviewers.get(prof, [])
+
+
+def review_gap(intent, st, arts):
+    """None khi lần review mới nhất có Verdict và ứng với đúng bản artifact hiện tại; không thì câu lý do."""
+    revs = review_files(intent, st.slug)
+    if not revs:
+        return "%s %s bật AI Reviewer nhưng reviews/ chưa có file review nào của stage này." % (st.code, st.name)
+    n, rp = revs[-1]
+    if not re.search(r"Verdict\W*\s*(READY|NOT-READY)", read(rp) or ""):
+        return "%s chưa có dòng Verdict." % rel(rp, intent)
+    dg = read(rp.with_suffix(".digest"))
+    m = re.search(r"sha256 ([0-9a-f]{64})", dg or "")
+    if not m:
+        return ("%s không có bản ghi artifact lúc review, nên không biết review ứng với bản nào. Trước khi gọi reviewer, chạy "
+                "po-tools.py review-start." % rel(rp, intent))
+    if m.group(1) != art_digest(intent, arts):
+        return "artifact đã đổi sau review lần %02d; theo review-protocol phải review lại trước khi trình gate." % n
+    return None
+
+
+def review_start(intent, slug):
+    """Ghi dấu artifact trước khi gọi AI Reviewer: reviews/review-<slug>-NN.digest, để approve biết review ứng với bản nào."""
+    intent = resolve_intent(intent)
+    st = stages().by_slug.get(slug)
+    if st is None:
+        print("Không có stage '%s'." % slug)
+        return 2
+    arts = stage_artifacts(intent, st)
+    if not arts:
+        print("Chưa có artifact của %s %s trong %s, chưa có gì để review." % (st.code, st.name, rel(intent / st.dir, intent)))
+        return 2
+    revs = review_files(intent, slug)
+    n = (revs[-1][0] + 1) if revs else 1
+    dst = intent / "reviews" / ("review-%s-%02d.digest" % (slug, n))
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    write(dst, "sha256 %s\nartifacts: %s\ncreated: %s\n" % (art_digest(intent, arts), ", ".join(rel(a, intent) for a in arts),
+                                                         now().strftime("%Y-%m-%d %H:%M")))
+    print("Review lần %02d của %s %s. Đã ghi %s." % (n, st.code, st.name, rel(dst, intent)))
+    print("Reviewer ghi kết quả vào reviews/review-%s-%02d.md. Artifact đổi sau mốc này thì approve đòi review lại." % (slug, n))
+    return 0
+
+
+def approve(intent, slug, words, who=None, version=None, dry=False, accept_warnings=None, accept_review_gap=None):
     intent = resolve_intent(intent)
     S = stages()
     st = S.by_slug.get(slug)
@@ -1574,6 +1760,37 @@ def approve(intent, slug, words, who=None, version=None, dry=False):
     if text is None:
         print("Không thấy artifact để duyệt:", rel(path, intent))
         return 2
+    arts = stage_artifacts(intent, st, path)
+    since = datetime.datetime.fromtimestamp(max(p.stat().st_mtime for p in arts))
+    msg = presence(words, since, "duyệt")
+    if msg:
+        print("Không ghi duyệt: " + msg)
+        return 2
+    notes, said = [], [words.strip()]
+    nwarn = machine_warnings(intent, st)
+    if nwarn:
+        if not (accept_warnings or "").strip():
+            print("Không ghi duyệt: kiểm máy còn %d cảnh báo. Xem bằng python3 engine/scripts/po-tools.py check intents/%s %s. "
+                  "Sửa, hoặc trình cho PO; PO chấp nhận thì thêm --accept-warnings \"<lời PO>\"." % (nwarn, intent.name, slug))
+            return 2
+        msg = presence(accept_warnings, since, "chấp nhận cảnh báo")
+        if msg:
+            print("Không ghi duyệt: " + msg)
+            return 2
+        notes.append("chấp nhận %d cảnh báo kiểm máy" % nwarn)
+        said.append(accept_warnings.strip())
+    if reviewer_needed(so, st):
+        gap = review_gap(intent, st, arts)
+        if gap:
+            if not (accept_review_gap or "").strip():
+                print("Không ghi duyệt: %s PO quyết duyệt không review lại thì thêm --accept-review-gap \"<lời PO>\"." % gap)
+                return 2
+            msg = presence(accept_review_gap, since, "duyệt không review lại")
+            if msg:
+                print("Không ghi duyệt: " + msg)
+                return 2
+            notes.append("duyệt khi review không ứng với bản hiện tại")
+            said.append(accept_review_gap.strip())
     stem = path.stem
     cur = frontmatter(text).get("version", "")
     if version:
@@ -1588,10 +1805,10 @@ def approve(intent, slug, words, who=None, version=None, dry=False):
         else:
             last, c = prev[-1], ver_tuple(cur)
             newv = fmt_ver(c) if c and c > last else "%d.%d" % (last[0], (last[1] if len(last) > 1 else 0) + 1)
-    now = datetime.datetime.now()
-    stamp, day = now.strftime("%Y-%m-%d %H:%M"), now.strftime("%Y-%m-%d")
-    approved_at = now.strftime("%Y-%m-%dT%H:%M")
-    dst = archive_dst(intent, slug, path, "v" + newv, now.strftime("%Y%m%d"))
+    t_now = now()
+    stamp, day = t_now.strftime("%Y-%m-%d %H:%M"), t_now.strftime("%Y-%m-%d")
+    approved_at = t_now.strftime("%Y-%m-%dT%H:%M")
+    dst = archive_dst(intent, slug, path, "v" + newv, t_now.strftime("%Y%m%d"))
     if dst.exists():
         print("Không ghi duyệt: bản chụp %s đã có, script không ghi đè. Kiểm lại version, hoặc dùng --version." % rel(dst, intent))
         return 2
@@ -1600,10 +1817,9 @@ def approve(intent, slug, words, who=None, version=None, dry=False):
 
     dec_text = read(intent / "decisions.md") or "# Decisions: %s\n" % intent.name
     dec_id = next_dec(dec_text)
-    w = words.strip()
-    quoted = w if (w[:1] in "\"“" and w[-1:] in "\"”" and len(w) > 1) else '"%s"' % w
+    quoted = " · ".join(w if (w[:1] in "\"“" and w[-1:] in "\"”" and len(w) > 1) else '"%s"' % w for w in said)
     new_dec, dec_line = add_decision(dec_text, {"DEC": dec_id, "Ngày": stamp, "Stage": e["code"],
-                                                "Quyết định": "Approve %s, %s v%s" % (st.name, path.name, newv),
+                                                "Quyết định": "Approve %s, %s v%s%s" % (st.name, path.name, newv, "".join("; " + x for x in notes)),
                                                 "Nguyên văn": quoted, "Người quyết": who, "Read when": slug})
 
     lines = so.text.splitlines()
@@ -1707,7 +1923,7 @@ def status(root):
     S = stages()
     amap = S.artifact_map()
     intents = sorted(p for p in root.iterdir() if p.is_dir() and (p / "state.md").exists())
-    today = datetime.date.today()
+    day0 = today()
     rows, findings = [], []
     for it in intents:
         so = load_state(it)
@@ -1761,7 +1977,7 @@ def status(root):
                     if q["blocking"] and q["has_answer"] and not q["answered"]:
                         findings.append((it.name, "5. %s %s: %s chặn chưa trả lời nhưng stage đã [%s]" % (n, slug, q["id"], m), "Trả lời hoặc hạ cờ chặn"))
             if m in "?-":
-                age = (today - datetime.date.fromtimestamp((it / "state.md").stat().st_mtime)).days
+                age = (day0 - datetime.date.fromtimestamp((it / "state.md").stat().st_mtime)).days
                 if age > 7:
                     findings.append((it.name, "6. %s %s ở [%s] đã %d ngày không đổi" % (n, slug, m, age), "Nhắc PO, hoặc park"))
             if m == "x" and approved_file is not None and approved_file.exists():
@@ -1813,7 +2029,7 @@ def status(root):
         findings.append((", ".join(i.name for i in its), "10. Mã tính năng %s trùng ở %d intent" % (fid, len(its)),
                          "PO đến sau đổi số bằng feature-id --next, sửa feature trong intent.md và prd.md"))
     for s in stale_sources():
-        findings.append(("domain.md", "Nguồn sống '%s' đối chiếu lần cuối %s, đã %d ngày" % (s["name"], s["date_txt"], (today - s["date"]).days),
+        findings.append(("domain.md", "Nguồn sống '%s' đối chiếu lần cuối %s, đã %d ngày" % (s["name"], s["date_txt"], (day0 - s["date"]).days),
                          "Đọc lại nguồn, sửa KB và ngày đối chiếu"))
 
     print("## Intent\n")
@@ -1842,7 +2058,7 @@ def replay(intent):
     title = ifm.get("title") or h1 or intent.name
     cur = dict((k, clean(v[0])) for k, v in so.current.items())
     out = ["# Bàn giao intent: %s" % title, "",
-           "In bởi po-tools.py replay ngày %s, chỉ đọc, không sửa gì." % datetime.date.today().isoformat(), "",
+           "In bởi po-tools.py replay ngày %s, chỉ đọc, không sửa gì." % today().isoformat(), "",
            md_table(["", ""], [("Intent", intent.name), ("Profile", so.fm.get("profile", "?")), ("Trạng thái", so.fm.get("status", "?")),
                                ("Stage hiện tại", cur.get("Stage", "-")), ("Việc kế tiếp", cur.get("Next action", "-")),
                                ("Câu chặn", cur.get("Blocking questions open", "-")), ("CR mở", cur.get("Open CR", "-"))]),
@@ -1957,10 +2173,10 @@ def index(write_out=False):
         hmeta, hst = us_handoff(it)
         scell = "%d, %d đạt" % (len(hst), sum(1 for x in hst if not x["reasons"])) if hmeta is not None else "-"
         rows.append((feat or "%s-%s (chưa cấp mã)" % (code, it.name), title, "v" + ver, fm.get("status", "-") or "-", at or "-",
-                     fm.get("services", "") or "-", scell, rel(arch, REPO) if arch else "-", "%s/prd-v%s" % (it.name, ver),
+                     fm.get("services", "") or "-", scell, show(arch) if arch else "-", "%s/prd-v%s" % (it.name, ver),
                      fm.get("lark", "") or "-"))
     out = ["# Spec index", "",
-           "Sinh bởi `python3 engine/scripts/po-tools.py index --write` ngày %s. Không sửa tay, chạy lại lệnh khi PRD đổi." % datetime.date.today().isoformat(),
+           "Sinh bởi `python3 engine/scripts/po-tools.py index --write` ngày %s. Không sửa tay, chạy lại lệnh khi PRD đổi." % today().isoformat(),
            "",
            "Repo này là nguồn chuẩn của spec cho agent và Dev: đọc PRD theo đường dẫn archive (bản đã duyệt, không bao giờ sửa) hoặc theo tag git ở bảng dưới. Bản trên Lark là bản cho người đọc, chép từ repo, có thể chậm hơn repo.",
            ""]
@@ -2060,15 +2276,15 @@ def feature_id(root=None, assign=None, dry=False):
         return 2
     raw = clean(frontmatter(text).get("feature", ""))
     if raw and not raw.startswith("<"):
-        print("%s đã có feature: %s, không cấp mã mới. Mã đã cấp không đổi. Nếu mã này trùng với intent khác thì PO đến sau đổi số: chạy feature-id --next rồi sửa feature trong intent.md và prd.md." % (rel(imd, REPO), raw))
+        print("%s đã có feature: %s, không cấp mã mới. Mã đã cấp không đổi. Nếu mã này trùng với intent khác thì PO đến sau đổi số: chạy feature-id --next rồi sửa feature trong intent.md và prd.md." % (show(imd), raw))
         return 2
     fid = next_feature(code, [base] if base is not None else [INTENTS, Path(it).parent])
     print(fid)
     if dry:
-        print("Chạy thử, chưa ghi gì. Sẽ ghi feature: %s vào %s." % (fid, rel(imd, REPO)))
+        print("Chạy thử, chưa ghi gì. Sẽ ghi feature: %s vào %s." % (fid, show(imd)))
         return 0
     write(imd, insert_feature(text, fid))
-    print("Đã ghi feature: %s vào %s. Khi viết PRD, ghi cùng mã này ở khoá feature của prd.md." % (fid, rel(imd, REPO)))
+    print("Đã ghi feature: %s vào %s. Khi viết PRD, ghi cùng mã này ở khoá feature của prd.md." % (fid, show(imd)))
     return 0
 
 
@@ -2080,6 +2296,30 @@ AC_CODE = re.compile(r"AC-?\d+\.\d+")
 SHORT_US = re.compile(r"(?<![\w-])US(\d+)\b")
 SHORT_AC = re.compile(r"(?<![\w-])AC-?(\d+)\.(\d+)\b")
 SHORT_BR = re.compile(r"(?<![\w-])BR-?(\d+)\.(\d+)([a-z]?)\b")
+SHORT_SCR = re.compile(r"(?<![\w-])SCR(\d+)\b")
+SCR_ANY = re.compile(r"(?<![\w-])SCR(?:\d+|-[A-Z][A-Z0-9]*-F\d{3,}-\d+)\b")
+PRIORITY_RE = re.compile(r"Ưu tiên\W{0,8}(Must|Should|Could|Won[’']?t)\b", re.I)
+PRIORITY_JIRA = {"must": "Highest", "should": "High", "could": "Medium", "wont": "Low"}
+# AC cho nhánh lỗi hoặc bị từ chối: chỉ là gợi ý bằng từ khoá, PO và reviewer quyết.
+SAD_RE = re.compile(r"\b(không|lỗi|từ chối|sai|thiếu|quá|vượt|hết hạn|chặn|trống|bị khoá|tối đa|tối thiểu|giới hạn)\b", re.I)
+
+
+def us_priority(text):
+    m = PRIORITY_RE.search(text or "")
+    if not m:
+        return "", ""
+    k = re.sub(r"[’']", "", m.group(1).lower())
+    return m.group(1).capitalize().replace("’", "'"), PRIORITY_JIRA.get(k, "")
+
+
+def us_has_ui(ui_lines):
+    """US có bảng giao diện với ít nhất một dòng nội dung thật, không tính dòng hướng dẫn in nghiêng của template."""
+    for t in parse_tables(ui_lines):
+        for cells, _ in t["rows"]:
+            vals = [clean(c) for c in cells if clean(c)]
+            if vals and not all(v.startswith("*") or "<" in v for v in vals):
+                return True
+    return False
 FULL_AC = re.compile(r"\bAC-[A-Z][A-Z0-9]*-F\d+-\d+\.\d+\b")
 FULL_BR = re.compile(r"\bBR-[A-Z][A-Z0-9]*-F\d+-\d+\.\d+[a-z]?\b")
 FULL_AC_ITEM = re.compile(LIST_HEAD + r"(AC-[A-Z][A-Z0-9]*-F\d+-\d+\.\d+)\b")
@@ -2088,17 +2328,11 @@ CONT_RE = re.compile(r"^\s{2,}\S")
 
 
 def to_full(text, feat):
-    """Đổi mã ngắn US1, AC1.1, BR1.1, BR-1.1 sang mã đầy đủ; mã KB như BR-EDIT-07 giữ nguyên."""
+    """Đổi mã ngắn US1, AC1.1, BR1.1, BR-1.1, SCR2 sang mã đầy đủ; mã KB như BR-EDIT-07 giữ nguyên."""
     text = SHORT_BR.sub(lambda m: "BR-%s-%02d.%s%s" % (feat, int(m.group(1)), m.group(2), m.group(3)), text)
     text = SHORT_AC.sub(lambda m: "AC-%s-%02d.%s" % (feat, int(m.group(1)), m.group(2)), text)
+    text = SHORT_SCR.sub(lambda m: "SCR-%s-%02d" % (feat, int(m.group(1))), text)
     return SHORT_US.sub(lambda m: "US-%s-%02d" % (feat, int(m.group(1))), text)
-
-
-def col_eq(header, name):
-    for idx, h in enumerate(header):
-        if clean(h).lower() == name.lower():
-            return idx
-    return None
 
 
 def classify_label(label):
@@ -2363,7 +2597,7 @@ def us_number(arg):
 
 
 # ================================================================ Story List cho Jira
-JIRA_COLS = ["Project key", "Project name", "Project type", "Issue Type", "Summary", "Description",
+JIRA_COLS = ["Project key", "Project name", "Project type", "Issue Type", "Summary", "Priority", "Description",
              "Epic Link", "Labels", "Labels", "Labels", "Comment"]
 JIRA_KEY = re.compile(r"\b([A-Z][A-Z0-9]+-\d+)\b")
 JIRA_DESC_MAX = 32000
@@ -2478,7 +2712,7 @@ def us_handoff(intent):
     feat = ifeat or pfeat
     if not feat:
         return None, ("Intent %s chưa có mã tính năng: intent.md và frontmatter prd.md đều thiếu feature. PO cấp mã trước: "
-                      "python3 engine/scripts/po-tools.py feature-id --assign %s" % (intent.name, rel(intent, REPO)))
+                      "python3 engine/scripts/po-tools.py feature-id --assign %s" % (intent.name, show(intent)))
     lines = prd.splitlines()
     blocks = prd_us_blocks(lines)
     if not blocks:
@@ -2497,7 +2731,7 @@ def us_handoff(intent):
     issues = prd_open_issues(lines)
     meta = {"intent": intent, "iname": iname, "feat": feat, "ifeat": ifeat, "pfeat": pfeat, "ver": ver, "status": status,
             "approved": status == "approved", "approved_at": approved_at, "tag": "%s/prd-v%s" % (iname, ver),
-            "title": title, "prd_path": rel(prd_p, REPO), "epic": epic, "epics": epics}
+            "title": title, "prd_path": show(prd_p), "epic": epic, "epics": epics}
     stories = []
     for b in blocks:
         n = b["num"]
@@ -2523,15 +2757,27 @@ def us_handoff(intent):
         blk = [it for it in mine if issue_blocks(it)]
         if blk:
             reasons.append("câu chặn còn mở trong Open Issues: %s" % ", ".join("#" + it["no"] if it["no"] else snippet(it["text"], 40) for it in blk))
+        secs = split_us_block(lines, b["start"], b["end"])
+        secs["us"] = tidy([l for l in secs["us"] if not PRIORITY_RE.search(l)])  # ưu tiên đã thành cột Priority
+        if us_has_ui(secs["ui"]) and not SCR_ANY.search("\n".join(blines)):
+            reasons.append("giao diện chưa trỏ mã màn SCR")
+        prio, jprio = us_priority("\n".join(blines))
+        deps = sorted(set(int(k) for k in re.findall(r"(?<![\w-])US(\d+)\b", "\n".join(secs["pre"])) if int(k) != n))
         unit = units.get(n, "")
         ref = "PRD %s v%s%s, %s · tag %s · US%d trong PRD" % (
             title, ver, (", duyệt ngày " + approved_at) if approved_at else "", meta["prd_path"], meta["tag"], n)
         if figma:
             ref += " · Figma: " + " · ".join(figma)
-        secs = split_us_block(lines, b["start"], b["end"])
         uepic = epic_by_unit.get(int(unit[1:])) if unit else None
         stories.append({"num": n, "sid": sid, "title": clean(b["title"]) or sid, "unit": unit, "epic": uepic or epic,
+                        "prio": prio, "jprio": jprio, "deps": deps,
                         "reasons": reasons, "issues": mine, "desc": jira_description(secs, feat, ref)})
+    # story phụ thuộc: US nêu ở Pre-Condition chưa đạt vì lý do riêng của nó thì story này cũng chưa giao được
+    own = dict((st["num"], [r for r in st["reasons"] if not r.startswith("PRD chưa duyệt")]) for st in stories)
+    for st in stories:
+        bad = [k for k in st["deps"] if own.get(k)]
+        if bad:
+            st["reasons"].append("phụ thuộc %s chưa đạt" % ", ".join("US-%s-%02d" % (feat, k) for k in bad))
     return meta, stories
 
 
@@ -2545,7 +2791,7 @@ def jira_rows(meta, stories):
             com.append("Câu hỏi còn mở trong PRD:")
             com += ["- %s" % clean(to_full(it["text"], meta["feat"])) for it in st["issues"]]
         com.append("Story point và thứ tự thực hiện: Dev điền.")
-        rows.append([key, name, ptype, "Story", st["title"], st["desc"], st["epic"], meta["feat"], st["sid"],
+        rows.append([key, name, ptype, "Story", st["title"], st["jprio"], st["desc"], st["epic"], meta["feat"], st["sid"],
                      ("%s-%s" % (meta["feat"], st["unit"])) if st["unit"] else "", "\n".join(com)])
     return rows
 
@@ -2590,8 +2836,12 @@ def stories_cmd(intent, write_out=False, only=None):
         print("Lưu ý: " + x)
     if notes:
         print()
-    print(md_table(["Story", "Tên", "Unit", "Epic", "Giao Dev", "Lý do"],
-                   [(s["sid"], s["title"], s["unit"] or "-", s["epic"] or "-", "đạt" if not s["reasons"] else "chưa đạt", "; ".join(s["reasons"]) or "-") for s in stories]))
+    print(md_table(["Story", "Tên", "Ưu tiên", "Unit", "Epic", "Giao Dev", "Lý do"],
+                   [(s["sid"], s["title"], s["prio"] or "-", s["unit"] or "-", s["epic"] or "-", "đạt" if not s["reasons"] else "chưa đạt",
+                     "; ".join(s["reasons"]) or "-") for s in stories]))
+    noprio = [s["sid"] for s in stories if not s["prio"]]
+    if noprio:
+        print("\nLưu ý: %d story chưa có dòng Ưu tiên trong PRD, cột Priority để trống: %s." % (len(noprio), ", ".join(noprio)))
     rows = jira_rows(meta, stories)
     path = jira_csv_path(meta)
     prev = sorted(p for p in (meta["intent"] / "stories").glob("story-list-prd-v*.csv") if p != path) if (meta["intent"] / "stories").is_dir() else []
@@ -2599,11 +2849,16 @@ def stories_cmd(intent, write_out=False, only=None):
         import csv
         old = {}
         with open(prev[-1], encoding="utf-8", newline="") as f:
-            for r in list(csv.reader(f))[1:]:
-                if len(r) > 8:
-                    old[r[8]] = r[5]
-        changed = [r[8] for r in rows if r[8] in old and old[r[8]] != r[5]]
-        added = [r[8] for r in rows if r[8] not in old]
+            data = list(csv.reader(f))
+        hdr = data[0] if data else []
+        if "Labels" in hdr and "Description" in hdr:
+            li, di = hdr.index("Labels") + 1, hdr.index("Description")
+            for r in data[1:]:
+                if len(r) > max(li, di):
+                    old[r[li]] = r[di]
+        si, di = JIRA_COLS.index("Labels") + 1, JIRA_COLS.index("Description")
+        changed = [r[si] for r in rows if r[si] in old and old[r[si]] != r[di]]
+        added = [r[si] for r in rows if r[si] not in old]
         print("\nSo với %s: đổi %s; mới %s. Story đã import thì sửa trên Jira theo danh sách này." % (
             prev[-1].name, ", ".join(changed) or "không có", ", ".join(added) or "không có"))
     if not write_out:
@@ -2653,7 +2908,7 @@ def engine_files():
                     continue
                 found.add((Path(root) / fn).relative_to(REPO).as_posix())
     found.update(f for f in MANIFEST_FILES if (REPO / f).is_file())
-    return sorted(p for p in found if p != "engine/MANIFEST.txt" and not p.startswith("engine/tests/fixtures/"))
+    return sorted(p for p in found if p != "engine/MANIFEST.txt")
 
 
 def sha256(path):
@@ -2667,7 +2922,7 @@ def sha256(path):
 def manifest(write_out=False):
     files = engine_files()
     ver = (read(REPO / "VERSION") or "").strip() or "chưa có file VERSION"
-    lines = ["# PO-Workflow engine manifest · VERSION %s · %d file · sinh ngày %s bằng po-tools.py manifest" % (ver, len(files), datetime.date.today().isoformat())]
+    lines = ["# PO-Workflow engine manifest · VERSION %s · %d file · sinh ngày %s bằng po-tools.py manifest" % (ver, len(files), today().isoformat())]
     lines += ["%s  %s" % (sha256(REPO / p), p) for p in files]
     text = "\n".join(lines) + "\n"
     if write_out:
@@ -2678,7 +2933,7 @@ def manifest(write_out=False):
     return 0
 
 
-def engine_check():
+def engine_check(strict=False):
     text = read(MANIFEST)
     if text is None:
         print("Chưa có engine/MANIFEST.txt. Chạy: python3 engine/scripts/po-tools.py manifest --write")
@@ -2703,10 +2958,11 @@ def engine_check():
         for p in items:
             print("- " + p)
         print("")
-    if modified or missing:
-        print("Kết luận: engine khác bản manifest. Sửa engine là việc của người giữ engine; sửa xong chạy manifest --write và tăng VERSION.")
+    if modified or missing or (strict and new):
+        print("Kết luận: engine khác bản manifest. Sửa engine là việc của người giữ engine; sửa xong chạy selftest, "
+              "manifest --write và ghi CHANGELOG. VERSION chỉ tăng khi phát hành, xem AGENTS.md mục Sửa engine.")
         return 1
-    print("Kết luận: engine khớp manifest%s." % (", có file mới chưa ghi vào manifest" if new else ""))
+    print("Kết luận: engine khớp manifest%s." % (", có file mới chưa ghi vào manifest; --strict coi đây là lỗi" if new else ""))
     return 0
 
 
@@ -2716,9 +2972,9 @@ def resolve_ref(token):
     if not t:
         return None, None
     if "/" in t:
-        return t, (REPO / t).exists()
-    for base in ("engine/knowledge", "domain", "engine/templates", "engine/verification", "engine/protocol", ""):
-        if (REPO / base / t).exists():
+        return t, data_path(t).exists()
+    for base in ("engine/knowledge", "domain/", "engine/templates", "engine/verification", "engine/protocol", ""):
+        if (data_path(base) / t if base else REPO / t).exists():
             return t, True
     return t, False
 
@@ -2737,6 +2993,12 @@ def doctor():
     cwd = Path.cwd()
     ok = (cwd / "AGENTS.md").exists() and (cwd / "engine").is_dir()
     add("Chạy từ gốc repo", "Đạt" if ok else "Lỗi", str(cwd), "-" if ok else 'cd "%s"' % REPO)
+    sj = read(REPO / ".claude" / "settings.json") or ""
+    if "po-hook.py" in sj:
+        hb = ROOT / ".po" / "hooks" / "UserPromptSubmit.last"
+        add("Hook ghi lượt PO", "Đạt" if hb.exists() else "Cảnh báo",
+            ("chạy lần cuối %s" % (read(hb) or "").strip()) if hb.exists() else "chưa chạy lần nào trên máy này, approve sẽ từ chối",
+            "-" if hb.exists() else "Mở Claude Code ở gốc repo và gõ một câu; kiểm python3 chạy được, xem .claude/settings.json")
     lark = shutil.which("lark-cli")
     add("lark-cli trên PATH", "Đạt" if lark else "Cảnh báo", lark or "không thấy, không publish Lark được", "-" if lark else "Cài lark-cli, xem /publish-lark")
     rc, out = git("status", "--porcelain", "--", "intents", "memory")
@@ -2776,7 +3038,7 @@ def doctor():
     add("domain.md đủ mục 1 đến 6", "Lỗi" if miss or not dl else "Đạt",
         ("thiếu mục %s" % ", ".join(miss)) if dl and miss else ("không thấy domain/domain.md" if not dl else "đủ"),
         "Viết theo DOMAIN-SETUP.md" if miss or not dl else "-")
-    kb = [rel(p, REPO) for p in sorted((REPO / "domain").rglob("*.md")) if "chưa viết" in (read(p) or "")] if (REPO / "domain").is_dir() else []
+    kb = [show(p) for p in sorted((ROOT / "domain").rglob("*.md")) if "chưa viết" in (read(p) or "")] if (ROOT / "domain").is_dir() else []
     add("KB còn chữ 'chưa viết'", "Cảnh báo" if kb else "Đạt", ", ".join(kb) or "không có", "Viết nốt KB hoặc ghi vùng chưa phủ" if kb else "-")
     S = load_stages()
     bad = []
@@ -2800,7 +3062,8 @@ def doctor():
     hits = []
     if names:
         rx = re.compile(r"(?<![A-Za-z0-9])(" + "|".join(re.escape(n) for n in names) + r")(?![A-Za-z0-9])", re.I)
-        targets = [p for p in engine_files() if p.startswith(("engine/", ".claude/commands/", ".claude/agents/")) or p == "AGENTS.md"]
+        targets = [p for p in engine_files() if (p.startswith(("engine/", ".claude/commands/", ".claude/agents/")) or p == "AGENTS.md")
+                   and not p.startswith("engine/tests/")]
         for p in targets:
             text = read(REPO / p)
             if text is None:
@@ -2821,9 +3084,24 @@ def doctor():
 
 
 # ================================================================ selftest
-def parse_expected(path):
+COMMANDS = ("status", "next", "check", "trace", "approve", "review-start", "archive", "replay", "feature-id",
+            "stories", "dor", "index", "migrate", "doctor", "manifest", "engine-check", "selftest")
+# Lệnh không có ca fixture, kèm lý do. Mọi lệnh khác phải có ít nhất một ca trong engine/tests/fixtures.
+UNTESTED = {"selftest": "chính là bộ chạy các ca",
+            "manifest": "đọc file engine của repo; CI chạy engine-check --strict trên repo thật ở mỗi lần push",
+            "engine-check": "như manifest"}
+# Lệnh không nhận thư mục intent: bộ chạy không chèn đường dẫn fixture vào sau tên lệnh.
+NO_INTENT = ("index", "doctor", "manifest", "engine-check", "selftest")
+HOOK_SCRIPT = REPO / "engine" / "scripts" / "po-hook.py"
+COMPAT = ("chỉ chép engine", "chép engine và chạy migrate", "phải sửa intent bằng tay")
+
+
+def parse_expected(path, errs=None):
+    """Ca kiểm của một fixture. Dòng không nhận ra và ca không có điều kiện nào đều ghi vào errs."""
+    errs = [] if errs is None else errs
+    name = "%s/%s" % (Path(path).parent.name, Path(path).name)
     cases, cur = [], None
-    for ln in (read(path) or "").splitlines():
+    for k, ln in enumerate((read(path) or "").splitlines(), 1):
         s = ln.strip()
         if not s or s.startswith("#"):
             continue
@@ -2832,24 +3110,39 @@ def parse_expected(path):
             parts = shlex.split(m.group(1))
             cur = {"cmd": parts[0], "args": parts[1:], "exit": None, "has": [], "not": [], "files": [], "label": m.group(1)}
             cases.append(cur)
-        elif cur is not None and s.startswith("mã thoát:"):
-            cur["exit"] = int(s.split(":", 1)[1].strip())
-        elif cur is not None and s.startswith("không có:"):
+            continue
+        if cur is None:
+            errs.append("%s:%d dòng nằm ngoài ca nào: %s" % (name, k, s[:60]))
+            continue
+        if s.startswith("mã thoát:"):
+            v = s.split(":", 1)[1].strip()
+            if v.isdigit():
+                cur["exit"] = int(v)
+            else:
+                errs.append("%s:%d mã thoát không phải số: %s" % (name, k, v))
+        elif s.startswith("không có:"):
             cur["not"].append(s.split(":", 1)[1].strip().replace("\\n", "\n"))
-        elif cur is not None and s.startswith("có:"):
+        elif s.startswith("có:"):
             cur["has"].append(s.split(":", 1)[1].strip().replace("\\n", "\n"))
-        elif cur is not None and s.startswith("tệp "):
+        elif s.startswith("tệp "):
             fm_ = re.match(r"tệp\s+(\S+)\s+(có|không có|giữ nguyên mục):\s*(.*)$", s)
             if fm_:
                 kind = {"có": "has", "không có": "not", "giữ nguyên mục": "keep"}[fm_.group(2)]
                 cur["files"].append((fm_.group(1), kind, fm_.group(3).replace("\\n", "\n")))
+            else:
+                errs.append("%s:%d dòng tệp sai cú pháp: %s" % (name, k, s[:60]))
+        else:
+            errs.append("%s:%d dòng không nhận ra: %s" % (name, k, s[:60]))
+    for c in cases:
+        if c["exit"] is None and not (c["has"] or c["not"] or c["files"]):
+            errs.append("%s: ca [%s] không có điều kiện nào, luôn đạt" % (name, c["label"]))
     return cases
 
 
-def file_errors(orig_dir, work_dir, checks):
+def file_errors(orig_dir, work_dir, checks, root=None):
     errs = []
     for path, kind, val in checks:
-        txt = read(Path(work_dir) / path)
+        txt = read(Path(root) / path[len("{root}/"):]) if root and path.startswith("{root}/") else read(Path(work_dir) / path)
         if kind == "has" and (txt is None or val not in txt):
             errs.append("%s thiếu chuỗi '%s'" % (path, val) if txt is not None else "không có tệp %s" % path)
         elif kind == "not" and txt is not None and val in txt:
@@ -2860,6 +3153,68 @@ def file_errors(orig_dir, work_dir, checks):
                 if story_section_text(orig, n) != story_section_text(txt, n):
                     errs.append("%s: mục %s đã bị đổi" % (path, n))
     return errs
+
+
+def doc_files():
+    out = []
+    for p in sorted(REPO.rglob("*.md")):
+        r = p.relative_to(REPO).as_posix()
+        if r.startswith(("intents/", "engine/tests/", ".git/", "node_modules/", ".po/")) or "/archive/" in r:
+            continue
+        out.append((r, p))
+    return out
+
+
+def doc_sync_problems():
+    """Tài liệu khớp script và engine: lệnh po-tools.py nhắc tới có thật, đường dẫn engine/ có thật,
+    bảng stage ở README mục 3.2 đủ mã và tên của engine/stages."""
+    out = []
+    for r, p in doc_files():
+        text = read(p) or ""
+        for k, ln in enumerate(text.splitlines(), 1):
+            for m in re.finditer(r"po-tools\.py\s+([a-z][a-z-]*)(?!\w)", ln):
+                if m.group(1) not in COMMANDS:
+                    out.append("%s:%d nhắc lệnh không có: po-tools.py %s" % (r, k, m.group(1)))
+            for m in re.finditer(r"`(engine/[^`\s]+)`", ln):
+                t = m.group(1).split("#")[0].rstrip(".,:;)")
+                if any(ch in t for ch in "<>*{}") or "..." in t:
+                    continue
+                if not (REPO / t).exists():
+                    out.append("%s:%d đường dẫn không có: %s" % (r, k, t))
+    readme = read(REPO / "README.md") or ""
+    for st in load_stages().list:
+        if "| %s %s |" % (st.code, st.name) not in readme:
+            out.append("README.md mục 3.2 thiếu dòng của stage %s %s" % (st.code, st.name))
+    return out
+
+
+def release_problems():
+    """VERSION khớp mục mới nhất của CHANGELOG và đầu MANIFEST; mỗi bản từ 2.1.0 có mục Nâng cấp và dòng Tương thích."""
+    out = []
+    ver = (read(REPO / "VERSION") or "").strip()
+    cl = read(REPO / "CHANGELOG.md") or ""
+    heads = re.findall(r"^## \[(\d+\.\d+\.\d+)\]", cl, re.M)
+    if not heads:
+        return ["CHANGELOG.md không có mục dạng '## [X.Y.Z]'"]
+    if heads[0] != ver:
+        out.append("VERSION ghi %s, mục mới nhất của CHANGELOG là %s" % (ver or "trống", heads[0]))
+    dup = sorted(set(h for h in heads if heads.count(h) > 1))
+    if dup:
+        out.append("CHANGELOG có mục trùng: %s" % ", ".join(dup))
+    mh = re.search(r"VERSION (\S+)", (read(MANIFEST) or "").split("\n", 1)[0])
+    if mh and mh.group(1) != ver:
+        out.append("MANIFEST.txt sinh với VERSION %s, VERSION hiện là %s: chạy manifest --write" % (mh.group(1), ver))
+    parts = re.split(r"^## \[", cl, flags=re.M)[1:]
+    for part in parts:
+        v = part.split("]", 1)[0]
+        if ver_tuple(v) < (2, 1, 0):
+            continue
+        if "### Nâng cấp" not in part:
+            out.append("CHANGELOG %s thiếu mục ### Nâng cấp" % v)
+        m = re.search(r"^Tương thích: (.+?)\.?\s*$", part, re.M)
+        if not m or m.group(1) not in COMPAT:
+            out.append("CHANGELOG %s thiếu dòng 'Tương thích: <%s>'" % (v, " | ".join(COMPAT)))
+    return out
 
 
 def selftest():
@@ -2902,36 +3257,65 @@ def selftest():
     fx_dirs = sorted(p for p in FIXTURES.iterdir() if p.is_dir()) if FIXTURES.is_dir() else []
     if not fx_dirs:
         fails.append("Không có fixture nào trong %s" % rel(FIXTURES, REPO))
+    if not (TEST_ROOT / "domain" / "domain.md").exists():
+        fails.append("Thiếu %s: domain dùng chung cho mọi fixture" % rel(TEST_ROOT / "domain" / "domain.md", REPO))
+    covered = set()
     for fx in fx_dirs:
         exp = fx / "expected.txt"
         if not exp.exists():
             fails.append("%s: thiếu expected.txt" % fx.name)
             continue
-        cases = parse_expected(exp)
+        perr = []
+        cases = parse_expected(exp, perr)
+        fails += perr
         if not cases:
             fails.append("%s: expected.txt không có ca nào" % fx.name)
             continue
-        # mọi ca chạy trên bản sao tạm của fixture, theo thứ tự, để lệnh ghi không bao giờ sửa fixture thật
+        covered |= set(c["cmd"] for c in cases)
+        # mỗi fixture chạy trên gốc dữ liệu tạm: domain dùng chung ở engine/tests/root, cộng _root/ của fixture,
+        # fixture nằm ở intents/<tên>; lệnh ghi không bao giờ sửa fixture thật hay dữ liệu của repo
         tmp = Path(tempfile.mkdtemp(prefix="po-selftest-"))
         try:
-            work = tmp / fx.name
-            shutil.copytree(str(fx), str(work))
+            root = tmp / "root"
+            shutil.copytree(str(TEST_ROOT), str(root))
+            if (fx / "_root").is_dir():
+                shutil.copytree(str(fx / "_root"), str(root), dirs_exist_ok=True)
+            work = root / "intents" / fx.name
+            shutil.copytree(str(fx), str(work), ignore=shutil.ignore_patterns("_root", "expected.txt"))
+            env = dict(os.environ, PO_TOOLS_ROOT=str(root), PO_TOOLS_TODAY=TEST_TODAY)
+
+            def sub(a):
+                return a.replace("{root}", str(root)).replace("{intent}", str(work))
             for c in cases:
-                argv = [sys.executable, str(SCRIPT), c["cmd"], str(work)] + c["args"]
-                r = subprocess.run(argv, cwd=str(REPO), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                inp = None
+                if c["cmd"] == "@hook":
+                    argv = [sys.executable, str(HOOK_SCRIPT)]
+                    inp = sub(read(work / c["args"][0]) or "").encode("utf-8")
+                else:
+                    args = [sub(a) for a in c["args"]]
+                    if c["cmd"] not in NO_INTENT and not any("{root}" in a or "{intent}" in a for a in c["args"]):
+                        args = [str(work)] + args
+                    argv = [sys.executable, str(SCRIPT), c["cmd"]] + args
+                r = subprocess.run(argv, cwd=str(REPO), env=env, input=inp, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 out = r.stdout.decode("utf-8", "replace")
                 errs = []
                 if c["exit"] is not None and r.returncode != c["exit"]:
                     errs.append("mã thoát %d, cần %d" % (r.returncode, c["exit"]))
                 errs += ["thiếu chuỗi '%s'" % h for h in c["has"] if h not in out]
                 errs += ["có chuỗi không được có '%s'" % h for h in c["not"] if h in out]
-                errs += file_errors(fx, work, c["files"])
+                errs += file_errors(fx, work, c["files"], root)
                 if errs:
                     fails.append("%s [%s]: %s" % (fx.name, c["label"], "; ".join(errs)))
                 else:
                     passed += 1
         finally:
             shutil.rmtree(str(tmp), ignore_errors=True)
+    for cmd in COMMANDS:
+        if cmd not in covered and cmd not in UNTESTED:
+            fails.append("Lệnh %s chưa có ca nào trong engine/tests/fixtures. Thêm ca, hoặc ghi lý do vào UNTESTED" % cmd)
+    fails += ["Ca dùng lệnh không có: %s" % x for x in sorted(covered) if x not in COMMANDS and x != "@hook"]
+    fails += doc_sync_problems()
+    fails += release_problems()
     print("# Selftest\n")
     print("Ca fixture đạt: %d" % passed)
     print("\n## Lỗi (%d)" % len(fails))
@@ -3108,7 +3492,7 @@ def mig_questions_v1(text, intent_name, code):
     if not total:
         return None
     head = "Intent: %s · Cách trả lời: chưa chọn · Đã trả lời: 0/%d · Chuyển từ định dạng luồng v1 ngày %s; mã cũ OQ-NN giữ trong tiêu đề từng câu" % (
-        intent_name, total, datetime.date.today().isoformat())
+        intent_name, total, today().isoformat())
     at = next((n for n, l in enumerate(out) if l.startswith("# ")), -1)
     out.insert(at + 1, "")
     out.insert(at + 2, head)
@@ -3121,8 +3505,8 @@ def migrate(intent, words, feature=None, write_out=False):
     if so is None:
         print("Không thấy state.md trong %s." % intent)
         return 2
-    today = datetime.date.today().isoformat()
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+    day0 = today().isoformat()
+    t_now = now().strftime("%Y-%m-%d %H:%M")
     who = git_user() or "PO"
     S = stages()
     plan, writes = [], {}
@@ -3233,11 +3617,11 @@ def migrate(intent, words, feature=None, write_out=False):
     summary = "Chuẩn hoá dữ liệu lên engine %s: đường dẫn mới, Unit, PIC, AI Reviewer%s%s. Không đổi nội dung nghiệp vụ" % (
         (read(REPO / "VERSION") or "").strip(), ", mã tính năng %s" % fid if fid else "",
         "; chụp lại bản duyệt " + " · ".join(snap_names) if snap_names else "")
-    dtext, _ = add_decision(dtext, {"DEC": dec, "Ngày": now, "Stage": "migrate", "Quyết định": summary,
+    dtext, _ = add_decision(dtext, {"DEC": dec, "Ngày": t_now, "Stage": "migrate", "Quyết định": summary,
                                      "Nguyên văn": '"%s"' % words, "Người quyết": who, "Read when": "migrate, phiên bản, mã tính năng"})
     write(intent / "decisions.md", dtext)
     lines = (read(intent / "state.md") or "").splitlines()
-    append_log(lines, "- %s migrate lên engine %s bởi %s, %s" % (now, (read(REPO / "VERSION") or "").strip(), who, dec))
+    append_log(lines, "- %s migrate lên engine %s bởi %s, %s" % (t_now, (read(REPO / "VERSION") or "").strip(), who, dec))
     write(intent / "state.md", "\n".join(lines) + "\n")
     print("\nĐã ghi %d file, %s, nhật ký trong state.md. Chạy po-tools.py status để kiểm." % (len(writes) + len(snap_names), dec))
     return 0
@@ -3269,11 +3653,14 @@ def main(argv):
             pos, kv = parse_opts(args, flags=("--strict",))
             return check(pos[0], pos[1], strict=kv.get("--strict", False))
         if cmd == "approve" and len(args) >= 2:
-            pos, kv = parse_opts(args, flags=("--dry-run",), opts=("--words", "--who", "--version"))
+            pos, kv = parse_opts(args, flags=("--dry-run",), opts=("--words", "--who", "--version", "--accept-warnings", "--accept-review-gap"))
             if "--words" not in kv:
                 print("Thiếu --words \"<lời duyệt nguyên văn của PO>\".")
                 return 2
-            return approve(pos[0], pos[1], kv["--words"], kv.get("--who"), kv.get("--version"), kv.get("--dry-run", False))
+            return approve(pos[0], pos[1], kv["--words"], kv.get("--who"), kv.get("--version"), kv.get("--dry-run", False),
+                           kv.get("--accept-warnings"), kv.get("--accept-review-gap"))
+        if cmd == "review-start" and len(args) >= 2:
+            return review_start(args[0], args[1])
         if cmd == "replay" and args:
             return replay(args[0])
         if cmd == "feature-id":
@@ -3296,7 +3683,7 @@ def main(argv):
         if cmd == "manifest":
             return manifest("--write" in args)
         if cmd == "engine-check":
-            return engine_check()
+            return engine_check("--strict" in args)
         if cmd == "doctor":
             return doctor()
         if cmd == "selftest":

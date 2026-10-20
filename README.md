@@ -181,7 +181,9 @@ Tại gate, PO có 5 lựa chọn:
 - Add stage, chạy thêm một stage ngoài profile
 - Reject Initiative, chỉ ở 1.7
 
-Lời duyệt bằng câu tự nhiên được hiểu theo ý. "Ok nhưng đổi tên trường X" là Approve kèm chỉ thị. Nhờ thêm một việc mà không nói duyệt thì gate vẫn mở. Chọn nhầm thì ghi một dòng đính chính và trình lại.
+Lời duyệt bằng câu tự nhiên được hiểu theo ý. "Ok nhưng đổi tên trường X" là duyệt kèm chỉ thị: AI sửa trước, hỏi lại một câu, ghi Approve khi PO trả lời. Nhờ thêm một việc mà không nói duyệt thì gate vẫn mở. Chọn nhầm thì ghi một dòng đính chính và trình lại.
+
+Quyết định ở gate chỉ đến từ PO, theo cách AWS giữ kiểm có người thật ở mọi scope. Hook của Claude Code ghi mỗi lượt PO gõ hoặc chọn vào `.po/turns.jsonl`. Lệnh approve chỉ ghi khi lời duyệt có nguyên văn trong một lượt PO ghi sau lần sửa artifact cuối; kiểm máy còn cảnh báo, hoặc stage có reviewer mà artifact đổi sau review, thì approve đòi thêm lời chấp nhận của PO. Hook cũng chặn AI tự đánh dấu đã duyệt, sửa artifact đã duyệt ngoài change request, sửa dòng quyết định cũ. Công cụ không có hook thì PO tự chạy approve trong terminal.
 
 Sau Approve, lệnh `po-tools.py approve` làm toàn bộ phần ghi chép: đặt phiên bản, chụp bản duyệt vào `archive/`, ghi quyết định nguyên văn kèm tên người quyết và giờ, đổi trạng thái stage, in dòng tiến độ và stage kế. Bản nháp mang phiên bản 0.x. Lần duyệt đầu là 1.0. Mỗi lần duyệt lại sau change request tăng số phụ, 1.0 thành 1.1. Bản trong `archive/` không bao giờ bị sửa.
 
@@ -243,16 +245,17 @@ Mỗi gate có hai lớp kiểm. Lớp thứ nhất do máy làm, lớp thứ ha
 
 | Lớp | Công cụ | Kiểm gì |
 |---|---|---|
-| Máy | `po-tools.py check` | Heading bắt buộc theo template, thẻ nguồn, `[Qn]` và `[DECn]` có thật, thẻ US đủ chín mục, chữ mẫu còn sót, giới hạn từ của HLD Brief, mục cấm trong PRD, mã AC không trùng |
+| Máy | `po-tools.py check` | Heading bắt buộc theo template, thẻ nguồn, `[Qn]` và `[DECn]` có thật, thẻ US đủ chín mục, chữ mẫu còn sót, giới hạn từ của HLD Brief, mục cấm trong PRD, mã AC không trùng, US thiếu Ưu tiên, giao diện chưa có mã màn, chưa thấy AC nhánh lỗi |
 | Máy | `po-tools.py trace` | FR sang US, US sang FR, BR sang AC, US trong PRD; báo GAP và ORPHAN; dừng với lỗi khi không đọc được mã nào |
 | Phán đoán | Checklist trong `engine/verification/` | Phần cần đọc hiểu; mục có nhãn BLOCK chưa đạt thì gate không mở |
-| Phán đoán | AI Reviewer | Agent AI độc lập, không thấy hội thoại; kết luận READY hoặc NOT-READY với finding Critical, Major, Minor |
+| Phán đoán | AI Reviewer | Agent AI độc lập, không thấy hội thoại, dùng tiêu chí của Product Lead bên AWS; kết luận READY hoặc NOT-READY với finding Critical, Major, Minor |
+| Chặn | Hook `engine/scripts/po-hook.py` | Lời duyệt phải có trong lượt PO; AI không tự đánh dấu đã duyệt, không sửa artifact đã duyệt ngoài change request, không sửa dòng quyết định cũ; reviewer chỉ ghi file review của mình |
 
-AI Reviewer chỉ nhận đường dẫn file và kết quả kiểm bằng máy. Từ lần review thứ hai, reviewer nhận sổ finding của stage thay cho file review cũ; finding PO đã chấp nhận rủi ro hoặc bác bỏ không bị chấm lại. READY khi không có Critical và tối đa hai Major. AI không tự sửa theo finding; PO quyết sửa hoặc ghi Accepted risk.
+AI Reviewer chỉ nhận đường dẫn file và kết quả kiểm bằng máy. Trước khi gọi reviewer, `po-tools.py review-start` ghi dấu của artifact; artifact đổi sau mốc đó thì approve đòi review lại hoặc lời chấp nhận của PO. Từ lần review thứ hai, reviewer nhận sổ finding của stage thay cho file review cũ; finding PO đã chấp nhận rủi ro hoặc bác bỏ không bị chấm lại. READY khi không có Critical, và tối đa hai Major đã có cách xử lý rõ. Finding chỉ dựa trên khẩu vị tối đa là Minor. AI không tự sửa theo finding; PO quyết sửa hoặc ghi Accepted risk.
 
 Phase check chạy ở ranh giới phase: Ideation ở 1.7, hoặc ở gate chung của 1.1 và 1.4 với profile M; Inception ở 2.42. `po-tools.py status` phát hiện thêm artifact đã duyệt bị sửa ngoài change request, artifact dựa trên bản cũ của đầu vào, và nguồn KB quá hạn đối chiếu.
 
-Bản thân script có bộ intent mẫu trong `engine/tests/`. Lệnh `po-tools.py selftest` chạy toàn bộ trước khi phát hành engine mới.
+Bản thân script có dữ liệu kiểm thử trong `engine/tests/fixtures/`: mỗi thư mục là một intent nhỏ dựng sẵn một tình huống, kèm `expected.txt` ghi lệnh cần chạy và kết quả đúng; `engine/tests/root/` là domain mẫu dùng chung, để kiểm thử không phụ thuộc domain đang cài. Thư mục này dành cho người giữ engine, PO không cần đọc. Lệnh `po-tools.py selftest` chạy lại toàn bộ sau mỗi lần sửa script hoặc file stage, kiểm thêm mọi lệnh đều có ca kiểm, tài liệu chỉ nhắc lệnh và đường dẫn có thật, VERSION khớp CHANGELOG. GitHub Actions chạy lệnh này trên Python 3.9 và bản mới nhất ở mỗi lần push. Quy trình sửa engine ở `AGENTS.md` mục Sửa engine.
 
 ## 6. Đầu ra chuẩn cho các phase sau
 
@@ -330,7 +333,7 @@ Tiêu chí chấp nhận là hợp đồng giữa PO và QA. Business rule đị
 - AC1.2 Khi bỏ trống field bắt buộc ở màn Tạo nhóm, hệ thống báo lỗi và không cho lưu, theo cột Yêu cầu của bảng UI
 ```
 
-Độ phủ bắt buộc: luồng chính và mỗi nhánh đáng kể trong thẻ US có ít nhất một tiêu chí; mỗi business rule có ít nhất một tiêu chí trỏ tới. Validate của cùng một màn gom thành một tiêu chí trỏ về bảng UI, không mỗi dòng bảng một tiêu chí, để số test case không phình theo số field. Checklist của 2.42 chặn khi còn business rule chưa có tiêu chí chấp nhận.
+Độ phủ bắt buộc: luồng chính và mỗi nhánh đáng kể trong thẻ US có ít nhất một tiêu chí; mỗi US có ít nhất một tiêu chí cho nhánh lỗi hoặc bị từ chối, như AC1.1 ở trên, và mỗi ngưỡng số có tiêu chí ở giá trị biên, theo AWS requirements-guide; mỗi business rule có ít nhất một tiêu chí trỏ tới. Validate của cùng một màn gom thành một tiêu chí trỏ về bảng UI, không mỗi dòng bảng một tiêu chí, để số test case không phình theo số field. Checklist của 2.42 chặn khi còn business rule chưa có tiêu chí chấp nhận hoặc US chưa có tiêu chí cho nhánh lỗi. Trước gate 2.42, QA PIC góp ý danh sách tiêu chí có kiểm thử được không, không chặn, có hạn; ý kiến ghi ở mục Comments của PRD và trình nguyên văn ở gate. AWS giao việc này cho quality agent ở 2.4; PO-Workflow làm ở 2.42 vì tiêu chí chấp nhận viết ở đây.
 
 ### 6.6 Story List
 
@@ -341,6 +344,7 @@ Sau khi PRD được duyệt, lệnh `/po-stories` sinh `intents/<intent>/storie
 | Project key, Project name, Project type | Dự án Jira, lấy từ frontmatter `domain/domain.md` |
 | Issue Type | `Story` |
 | Summary | Tên user story |
+| Priority | Từ dòng Ưu tiên của US trong PRD: Must thành Highest, Should thành High, Could thành Medium |
 | Description | Mô tả, điều kiện trước, kịch bản, tiêu chí chấp nhận, giao diện và validate, business rule, dữ liệu, NFR, ngoài phạm vi, tham chiếu tới PRD và tag. Cú pháp Jira, mã đầy đủ |
 | Epic Link | Mã Epic ở dòng Jira Epic của `intent.md`; nhiều Epic thì ghi `U2: <mã Epic>` để gán theo Unit |
 | Labels, 3 cột | Mã tính năng, mã story, mã tính năng kèm Unit |
@@ -350,14 +354,16 @@ Trên Jira, Design gắn mã màn hình và link thiết kế, Tech gom story v�
 
 ### 6.7 Điều kiện giao Dev
 
-Một story được giao cho Dev khi đạt đủ 4 điều kiện:
+Một story được giao cho Dev khi đạt đủ 6 điều kiện:
 
 1. PRD đã duyệt.
 2. US có ít nhất một tiêu chí chấp nhận.
 3. Mọi business rule của US có ít nhất một tiêu chí chấp nhận trỏ tới.
 4. US không còn `❓PO`, và Open Issues của PRD không còn câu chặn gắn với US đó.
+5. US có bảng giao diện thì trỏ mã màn `SCR` do Design PIC đặt ở HLD Brief mục 8.
+6. US nêu ở Pre-Condition là phải xong trước cũng đạt các điều kiện trên.
 
-Lệnh `po-tools.py dor intents/<intent>` in story nào đạt, story nào chưa và vì sao; kết quả cũng ghi ở cột Comment của file CSV. Độ phủ test case do QA theo dõi trên Jira.
+Đây là bản hẹp phía PO của Definition of Ready bên AWS. Hai mục còn lại của AWS là thiết kế đã được xem và story đã được ước lượng; Design và Dev làm hai việc này trên Jira. Lệnh `po-tools.py dor intents/<intent>` in story nào đạt, story nào chưa và vì sao; kết quả cũng ghi ở cột Comment của file CSV. Độ phủ test case do QA theo dõi trên Jira.
 
 ### 6.8 Phiên bản, tag và chỉ mục
 
@@ -398,7 +404,8 @@ File CSV lưu trong `intents/<intent>/stories/` của repo PO, mỗi phiên bả
 | `domain/` | Domain pack: manifest `domain.md`, KB, corner checklist, template của công ty | Sản phẩm |
 | `intents/` | Hồ sơ từng yêu cầu | Sản phẩm |
 | `memory/` | `team.md` bài học dùng chung; `project.md` bài học của sản phẩm | Cả hai |
-| `.claude/` | Phần cấu hình riêng cho Claude Code: lối tắt cho các lệnh gạch chéo và cho AI Reviewer, trỏ tới file trong `engine/` | Công cụ |
+| `.claude/` | Phần cấu hình riêng cho Claude Code: lối tắt cho các lệnh gạch chéo và cho AI Reviewer, trỏ tới file trong `engine/`; quyền và hook trong `settings.json` | Công cụ |
+| `.po/` | Sổ lượt người và giờ chạy hook trên máy đang dùng; không commit | Công cụ |
 | `AGENTS.md`, `CLAUDE.md` | Luật cho AI; `CLAUDE.md` nhập lại `AGENTS.md` | Engine |
 
 Thư mục `engine/`, phần cấu hình trong `.claude/` và `AGENTS.md` không chứa dữ kiện sản phẩm, kể cả tên sản phẩm; `po-tools.py doctor` báo lỗi khi gặp tên sản phẩm ghi trong `domain.md`. Stage không có lệnh riêng; `/po` là lối vào duy nhất, như lệnh `/aidlc` của AWS. Dùng công cụ AI khác thì yêu cầu AI đọc `AGENTS.md`, sau đó đọc file trong `engine/commands/` hoặc `engine/stages/`; phần cấu hình riêng cho công cụ khác chỉ dựng khi thật sự dùng công cụ đó.
@@ -414,12 +421,12 @@ intents/<YYMMDD-slug>/
 ├── inputs/          yêu cầu gốc và tài liệu đầu vào
 ├── ideation/  inception/   artifact theo stage
 ├── stories/         Story List để import lên Jira, mỗi phiên bản PRD một file
-├── reviews/         review của AI Reviewer và sổ finding
+├── reviews/         review của AI Reviewer, dấu artifact lúc review, sổ finding
 ├── verification/    phase check, kết quả kiểm bằng máy
 └── archive/         bản đã duyệt và bản trước change request, không sửa
 ```
 
-Repo của sản phẩm khác nhận bản engine mới theo 3 bước: chạy `po-tools.py engine-check` để biết file engine nào đã bị sửa tay; chép đè các file trong `engine/MANIFEST.txt`; gộp `memory/team.md` theo dòng. Intent tạo từ bản engine cũ được chuyển bằng `po-tools.py migrate`: lệnh đổi đường dẫn và thuật ngữ trong file đang dùng, cấp mã tính năng, chuyển file câu hỏi theo định dạng cũ, chụp lại bản duyệt kèm một dòng quyết định, và không sửa `archive/` hoặc `reviews/`.
+Repo của sản phẩm khác nhận bản engine mới theo 3 bước: chạy `po-tools.py engine-check` để biết file engine nào đã bị sửa tay; chép đè các file trong `engine/MANIFEST.txt`; gộp `memory/team.md` theo dòng. Dòng Tương thích của bản đó trong CHANGELOG cho biết có phải chạy migrate hay sửa intent bằng tay không. Sau khi chép, chạy `po-tools.py selftest`: dữ liệu kiểm thử đi kèm engine và dùng domain mẫu riêng, nên kết quả không phụ thuộc domain của repo đó. Intent tạo từ bản engine cũ được chuyển bằng `po-tools.py migrate`: lệnh đổi đường dẫn và thuật ngữ trong file đang dùng, cấp mã tính năng, chuyển file câu hỏi theo định dạng cũ, chụp lại bản duyệt kèm một dòng quyết định, và không sửa `archive/` hoặc `reviews/`.
 
 ## 9. Mức độ trưởng thành
 
@@ -482,7 +489,10 @@ Số liệu nên thu từ khi thử ở mức team, đều lấy được từ f
 | Core và harness | `engine/` là phần trung lập; `.claude/` là phần cấu hình riêng cho Claude Code; `AGENTS.md` cho mọi công cụ |
 | Product Agent, Product Lead | AI trong phiên làm vai Product; AI Reviewer là agent review độc lập |
 | proto-Unit | Unit, nhóm user story theo giá trị và ưu tiên |
-| Engine điều phối, sensor, hook | Không cài. `po-tools.py` làm phần tất định: check thay sensor, approve và next cho điều phối, status phát hiện lệch. Hook mở phiên và quy tắc chặn sửa `archive/` ở `.claude/settings.json` |
+| Engine điều phối, sensor | Không cài. `po-tools.py` làm phần tất định: check thay sensor, approve và next cho điều phối, status phát hiện lệch |
+| Hook, HUMAN_TURN, guard | `engine/scripts/po-hook.py` bằng Python: ghi lượt PO, approve đòi lời PO có trong sổ như HUMAN_TURN; chặn tự đánh dấu đã duyệt, sửa artifact đã duyệt ngoài CR, sửa quyết định cũ, reviewer ghi ngoài phạm vi. AWS tắt sẵn phần lớn guard ở 10/11 scope nhưng giữ kiểm có người thật; PO-Workflow bật các guard này vì đã gặp sự cố một bản đã duyệt bị ghi đè 15 lần. Bỏ qua: sổ audit 119 sự kiện, sensor chạy mỗi lần ghi, statusline |
+| Review receipt, reviewer scope | `review-start` ghi dấu artifact; approve đòi review lại khi artifact đổi. Tiêu chí review lấy từ Product Lead của AWS; reviewer tự khai Verdict Dictated |
+| Test suite, CI, release metadata | Fixture tự chứa với domain mẫu; selftest bắt lệnh chưa có ca kiểm, tài liệu nhắc lệnh hay đường dẫn không có, VERSION lệch CHANGELOG; CI chạy selftest và `engine-check --strict`; CHANGELOG có dòng Tương thích. Bỏ qua: chia tầng smoke, unit, integration, shard, live test, build binary |
 | Memory team và project | `memory/team.md` và `memory/project.md` |
 | Construction, Operation | Ngoài phạm vi |
 

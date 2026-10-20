@@ -15,13 +15,14 @@ Story là đơn vị nghiệm thu. PO chia story ở 2.4 theo `story-splitting.m
 
 ## Story List
 
-Sau khi PRD được duyệt, `/po-stories` sinh `intents/<intent>/stories/story-list-prd-v<phiên bản>.csv`. Mỗi US một dòng, 11 cột theo mẫu import CSV của Jira:
+Sau khi PRD được duyệt, `/po-stories` sinh `intents/<intent>/stories/story-list-prd-v<phiên bản>.csv`. Mỗi US một dòng, 12 cột theo mẫu import CSV của Jira:
 
 | Cột | Nội dung | Nguồn |
 |---|---|---|
 | Project key, Project name, Project type | Dự án Jira | Frontmatter `domain/domain.md`: `jira_project_key`, `jira_project_name`, `jira_project_type` |
 | Issue Type | `Story` | Cố định |
 | Summary | Tên user story | Tiêu đề `## US<n>` trong PRD |
+| Priority | Must thành Highest, Should thành High, Could thành Medium | Dòng Ưu tiên của US trong PRD; thiếu thì để trống |
 | Description | Mô tả, điều kiện trước, kịch bản, tiêu chí chấp nhận, giao diện và validate, business rule, dữ liệu, NFR, ngoài phạm vi, tham chiếu tới PRD và tag. Viết theo cú pháp Jira, mã đầy đủ | Khối US trong PRD |
 | Epic Link | Mã Epic | Dòng Jira Epic của `intent.md`. Intent có nhiều Epic thì ghi thêm `U2: <mã Epic>` để gán theo Unit |
 | Labels, 3 cột | Mã tính năng, mã story, mã tính năng kèm Unit | PRD, bảng Units |
@@ -49,8 +50,10 @@ Checkpoint là buổi làm việc trên HLD Brief ở 2.41, trước PRD; điề
 2. US có ít nhất một tiêu chí chấp nhận.
 3. Mọi business rule của US có ít nhất một tiêu chí chấp nhận trỏ tới.
 4. US không còn `❓PO`, và Open Issues của PRD không còn câu chặn gắn với US đó.
+5. US có bảng giao diện thì trỏ mã màn `SCR` của HLD Brief mục 8.
+6. US nêu ở Pre-Condition là phải xong trước cũng đạt các điều kiện trên.
 
-Kiểm bằng `python3 engine/scripts/po-tools.py dor intents/<intent>`. Kết quả cũng ghi ở cột Comment của CSV. Độ phủ test case, tức mọi AC có test case, do QA theo dõi trên Jira; script không kiểm.
+Đây là bản hẹp phía PO của Definition of Ready bên AWS. AWS có thêm hai mục mà PO-Workflow để cho team khác: thiết kế đã được xem, do Design PIC xác nhận trên Jira; story đã được ước lượng, do Dev làm trên Jira. Kiểm bằng `python3 engine/scripts/po-tools.py dor intents/<intent>`. Kết quả cũng ghi ở cột Comment của CSV. Độ phủ test case, tức mọi AC có test case, do QA theo dõi trên Jira; script không kiểm.
 
 ## Phiên bản và thay đổi
 

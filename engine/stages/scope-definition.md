@@ -34,7 +34,7 @@ intent-statement; vùng KB chưa phủ theo `domain.md` mục 3; `decisions.md`.
 3. Phụ thuộc giữa các hạng mục.
 4. Ưu tiên theo rủi ro trước, giá trị trước, hay phụ thuộc trước.
 5. Mốc cứng nào gắn với hạng mục nào.
-6. Thứ người đọc dễ tưởng là có mà không làm. Thứ từng nằm trong yêu cầu rồi bị loại.
+6. Thứ người đọc dễ tưởng là có mà không làm. Thứ từng nằm trong yêu cầu nhưng sau đó bị loại.
 7. Hạng mục nào trùng tính năng đã có: tra KB, nêu mã, hỏi mở rộng hay làm mới. Vùng KB chưa phủ thì ghi `❓PO`.
 
 ## Generate

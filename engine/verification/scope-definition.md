@@ -11,6 +11,8 @@
 - [ ] Chia theo cơ chế, không theo màn hình. Có hạng mục nền. Hạng mục chạm mọi thứ tách riêng
 - [ ] Phụ thuộc một chiều, không có vòng
 - [ ] Mỗi Unit có MoSCoW, portal, nguồn
+- [ ] Must không kéo theo Could hoặc Won't. MVP vẫn có xử lý lỗi cơ bản và đạt NFR tối thiểu về bảo mật, toàn vẹn dữ liệu
+- [ ] Có mốc cứng thì phạm vi Must làm kịp mốc theo ước lượng thô, hoặc đã nêu rủi ro trễ mốc; AWS gọi là scope-vs-timeline validation
 
 ## Nguồn và câu hỏi
 - [ ] **[BLOCK]** Thẻ nguồn ở mọi khối. Assumptions & Open Questions có

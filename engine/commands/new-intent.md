@@ -21,7 +21,7 @@ Thư mục con của stage tạo khi stage chạy, không tạo trước. Thư m
 
 Cấp mã tính năng ngay sau khi tạo `intent.md`: `python3 engine/scripts/po-tools.py feature-id --assign intents/<slug>`. Mã có dạng `<mã sản phẩm>-F<NNN>` theo `engine/standards/id-conventions.md`, mã sản phẩm lấy từ `domain/domain.md`. Mã này đi theo intent tới PRD, story trên Jira, test case, nhánh code; không đổi sau khi đã cấp.
 
-Có mô tả yêu cầu trong tham số lệnh thì ghi nguyên văn vào `inputs/request-<YYYYMMDD>.md`. Chưa có thì chép `engine/templates/request.md` vào `inputs/request.md` và nói PO: gửi mẫu này cho người yêu cầu điền, hoặc đặt sẵn email, biên bản họp, ảnh vào `inputs/`, rồi gọi `/po`.
+Có mô tả yêu cầu trong tham số lệnh thì ghi nguyên văn vào `inputs/request-<YYYYMMDD>.md`. Chưa có thì chép `engine/templates/request.md` vào `inputs/request.md` và nói PO: gửi mẫu này cho người yêu cầu điền, hoặc đặt sẵn email, biên bản họp, ảnh vào `inputs/`, sau đó gọi `/po`.
 
 ## 0.2 Detection
 Quét nhanh để chọn profile, không phải Impact Analysis:

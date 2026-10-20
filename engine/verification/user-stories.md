@@ -2,6 +2,7 @@
 
 - [ ] **[BLOCK]** Mỗi US là một mục tiêu hoàn chỉnh của một vai, theo `engine/standards/story-splitting.md` mục 1
 - [ ] **[BLOCK]** Không US nào chia theo màn hình, theo tầng kỹ thuật, theo từng business rule, hoặc là việc kỹ thuật thuần, theo mục 7 của nguyên tắc
+- [ ] Mọi vai trong story thuộc danh sách vai của `domain.md` mục 1, hoặc được khai báo là vai mới
 - [ ] US viết một câu tự nhiên theo vai, có vế "để ...". Tên có chữ "và" nối hai việc đã tách, hoặc thẻ ghi lý do giữ
 - [ ] Đã xét dấu hiệu quá lớn ở mục 4 của nguyên tắc: hơn một vai hưởng giá trị, luồng hơn 7 bước, gồm cả cấu hình và sử dụng, chạm hơn 2 module. Story giữ dấu hiệu thì thẻ ghi lý do
 - [ ] Không có story quá nhỏ: mỗi story có giá trị riêng và kiểm được độc lập

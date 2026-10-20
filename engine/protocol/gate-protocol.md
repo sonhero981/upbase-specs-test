@@ -1,22 +1,29 @@
 # Gate Protocol
 
-Mọi stage kết thúc bằng một approval gate. Bám theo AWS AI-DLC `stage-protocol.md` mục 1 và 2. Gate để chặn sai sót ở từng tầng, không phải thủ tục.
+Mọi stage kết thúc bằng một approval gate. Bám theo AWS AI-DLC `stage-protocol.md` mục 1 và 2. Gate để chặn sai sót ở từng tầng.
 
 ## Trước khi mở gate
-- `po-tools.py check` không còn cảnh báo, hoặc cảnh báo còn lại đã có lý do. Checklist của stage đã đạt mục blocking. Review độc lập đã xong nếu stage có.
-- Đánh dấu stage `[?]` trong `state.md`.
+- `po-tools.py check` không còn cảnh báo, hoặc cảnh báo còn lại đã có lý do để trình PO. Checklist của stage đã đạt mục blocking. Review độc lập đã xong nếu stage có, và artifact không đổi sau lần review đó.
+- Đánh dấu stage `[?]` trong `state.md`. Chỉ `po-tools.py approve` được đánh `[x]`; hook của Claude Code chặn AI sửa tay.
+
+## Có người thật tại gate
+AWS AI-DLC giữ kiểm này ở mọi scope, kể cả khi hạ các guard khác: duyệt chỉ hợp lệ khi có lượt trả lời của người sau khi gate được trình. PO-Workflow làm theo cách tương tự:
+- Hook `engine/scripts/po-hook.py` ghi mỗi lượt PO gõ và mỗi lựa chọn PO bấm trong hộp chọn vào `.po/turns.jsonl`. File này không commit, AI không sửa được.
+- `po-tools.py approve` chỉ ghi khi `--words` có nguyên văn trong một lượt PO ghi sau lần sửa artifact cuối cùng. Không thấy thì từ chối và giải thích.
+- Kiểm máy còn cảnh báo thì approve từ chối, trừ khi PO chấp nhận; lời chấp nhận đưa vào `--accept-warnings`. Stage có reviewer mà artifact đổi sau review thì approve từ chối, trừ khi PO quyết duyệt không review lại; lời đó đưa vào `--accept-review-gap`. Hai lời này cũng phải có trong lượt PO và được ghi vào DEC.
+- Dùng công cụ không có hook: PO tự chạy lệnh approve trong terminal. Script coi người gõ lệnh trong terminal là PO.
 
 ## Thứ tự tại gate
 1. Thông điệp hoàn thành.
 2. Câu hỏi bài học, nếu profile bật learnings, hỏi thành một lượt riêng.
 3. Câu hỏi duyệt.
 
-PO cần đọc kết quả trước rồi mới biết điều gì đáng nhớ. Hỏi bài học trước thông điệp hoàn thành là hỏi khi PO chưa thấy stage làm ra gì.
+PO cần đọc kết quả trước, sau đó mới biết điều gì đáng nhớ. Hỏi bài học trước thông điệp hoàn thành là hỏi khi PO chưa thấy stage làm ra gì.
 
 ## Thông điệp hoàn thành, năm phần, đúng thứ tự
 1. Tiêu đề: `# <Tên stage> hoàn thành`.
-2. Bảng artifact: tên file, nội dung tóm tắt bằng số (số FR, số US, số câu đã trả lời). Số lấy từ script khi có, không tự đếm. Không có lời dặn kiểu "xin xem lại".
-3. Kết quả review nếu có: READY hoặc NOT-READY, rồi từng finding còn mở trong sổ finding: mã, mức, vị trí, vấn đề, hành động.
+2. Bảng artifact: tên file, nội dung tóm tắt bằng số (số FR, số US, số câu đã trả lời). Số lấy từ script khi có, không tự đếm. Không có lời dặn như "xin xem lại".
+3. Kết quả review nếu có: READY hoặc NOT-READY, sau đó từng finding còn mở trong sổ finding: mã, mức, vị trí, vấn đề, hành động.
 4. Đường dẫn để mở: thư mục của stage.
 5. Một câu nói duyệt xong thì sao: stage kế là gì, ai làm gì tiếp.
 
@@ -42,12 +49,12 @@ Profile M: stage 1.1 và 1.4 duyệt chung một gate. Thông điệp hoàn thà
 
 ## Đọc câu trả lời của PO
 - Một lựa chọn rõ ("1", "approve", "duyệt", "ok"): ghi đúng lựa chọn đó.
-- Duyệt kèm chỉ thị ("ok nhưng đổi tên trường X"): ghi Approve, làm việc được yêu cầu, nói một dòng đã làm gì. Không hỏi lại.
+- Duyệt kèm chỉ thị ("ok nhưng đổi tên trường X"): làm việc được yêu cầu, nói một dòng đã làm gì, hỏi lại một câu "Duyệt bản đã sửa?". Ghi Approve khi PO trả lời. Lời duyệt phải đến sau lần sửa cuối, nên không ghi Approve trước và sửa sau.
 - Duyệt kèm dừng ("duyệt, hôm nay dừng"): ghi Approve, ghi *Parked* vào `state.md`, nói cách tiếp tục bằng `/po`.
 - Yêu cầu sửa không kèm duyệt: ghi Request Changes, lời PO là phản hồi. Chỉ hỏi "sửa gì" khi PO chưa nói.
 - Nhờ một việc mà không duyệt ("thêm giúp một dòng ví dụ"): làm việc đó, giữ gate mở, trình lại. Không ghi Approve.
 - Chọn ô "Khác" mà không viết gì: không ghi nhận, hỏi lại một câu.
-- Câu hỏi: trả lời rồi kết thúc lượt. Lượt kế tiếp mới là quyết định.
+- Câu hỏi: trả lời, sau đó kết thúc lượt. Lượt kế tiếp mới là quyết định.
 - Không rõ ("hmm", "để xem"): hỏi một câu ngắn. Không suy đoán là duyệt.
 - Làm lại stage, nhảy stage, bắt đầu intent mới: không phải câu trả lời gate. Làm theo `/po`.
 
@@ -58,7 +65,7 @@ Chạy một lệnh, làm trọn mọi việc ghi chép:
 python3 engine/scripts/po-tools.py approve intents/<slug> <slug-stage> --words "<lời PO nguyên văn>"
 ```
 
-Script làm theo thứ tự, và từ chối nếu stage không ở `[?]`:
+Script từ chối nếu stage không ở `[?]`, nếu lời duyệt không có trong lượt PO, nếu kiểm máy còn cảnh báo hoặc review không ứng với bản hiện tại mà PO chưa chấp nhận, xem mục Có người thật tại gate. Qua được thì làm theo thứ tự:
 1. Frontmatter artifact: `version` theo quy tắc phiên bản dưới đây, `status: approved`, `approved_at`.
 2. Chụp bản duyệt vào `archive/<slug>/<artifact>-v<version>-<YYYYMMDD>.md`. Từ chối ghi đè. File trong archive không bao giờ sửa.
 3. `decisions.md`: một dòng DEC, cột *Nguyên văn* là lời PO không sửa chữ, cột *Người quyết* là tên trong `git config user.name`, kèm giờ.

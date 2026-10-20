@@ -41,7 +41,7 @@ Không hỏi kỹ thuật cho Dev. Depth Minimal ở S: chỉ câu chặn.
 `requirements.md` theo template:
 1. Intent summary.
 2. Functional requirements, nhóm theo khả năng. `FR1`, `FR1.1`. Mỗi FR: câu khẳng định kiểm chứng được, ưu tiên MoSCoW, cờ Existing, New hay Changed kèm mã KB, thẻ nguồn.
-3. Non-functional requirements, chỉ khi đo được.
+3. Non-functional requirements có chỉ số đo được. Yêu cầu phi chức năng PO nêu mà chưa có chỉ số thì ghi OQ để chốt chỉ số, không bỏ, theo AWS: NFR mơ hồ là việc cần sửa.
 4. Constraints: nghiệp vụ, tenant và hằng số, tích hợp, dữ liệu cũ.
 5. Assumptions & Open Questions: `OQ1`... có cờ Chặn và owner.
 6. Out of scope.
@@ -52,7 +52,7 @@ FR viết điều phải đúng, không viết cách làm. Không có FR mô t�
 Theo `stage-protocol.md` bước 4b: liệt kê giả định trong requirements, PO chọn chấp nhận hay chuyển thành câu hỏi, trước khi gọi reviewer.
 
 ## Verify
-`po-tools.py check`, rồi checklist của stage. Quét góc nội bộ: mỗi góc áp dụng phải thành FR, assumption có lý do, hoặc out of scope. Reviewer ai-reviewer ở M, L.
+`po-tools.py check`, sau đó checklist của stage. Quét góc nội bộ: mỗi góc áp dụng phải thành FR, assumption có lý do, hoặc out of scope. Reviewer ai-reviewer ở M, L.
 
 ## Gate
 Trình: số FR theo nhóm, NFR, OQ còn chặn, FR trùng thứ đã có, vùng `❓PO`, finding review. Stage kế: 2.31 ở M, L; 2.42 ở S.

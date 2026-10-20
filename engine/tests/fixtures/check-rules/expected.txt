@@ -1,0 +1,16 @@
+# HLD Brief vượt 1500 từ ở phần AI viết. PRD có mục Database, US1 thiếu Ưu tiên, bảng giao diện chưa có mã màn,
+# AC chỉ có luồng thành công.
+[check hld-brief]
+mã thoát: 0
+có: ## Giới hạn từ (1)
+có: quá giới hạn 1500
+
+[check prd-generation]
+mã thoát: 0
+có: PRD không có mục thiết kế kỹ thuật như Database, API: 'Database'
+có: US1 chưa có dòng Ưu tiên
+có: US1 có bảng giao diện nhưng chưa trỏ mã màn SCR
+có: US1 chưa thấy AC cho nhánh lỗi hoặc bị từ chối
+
+[check prd-generation --strict]
+mã thoát: 1

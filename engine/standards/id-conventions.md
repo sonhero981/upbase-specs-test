@@ -31,6 +31,7 @@ Artifact nội bộ và PRD dùng mã ngắn cho dễ đọc: `US1`, `AC1.1`, `B
 | `US1` | `US-APP-F012-01` |
 | `AC1.1` | `AC-APP-F012-01.1` |
 | `BR1.2`, hoặc `BR-1.2` ở PRD cũ | `BR-APP-F012-01.2` |
+| `SCR2` | `SCR-APP-F012-02` |
 
 `po-tools.py stories` đổi mã khi sinh Story List. Không đổi tay. Từ story trên Jira trở đi, mọi team chỉ dùng mã đầy đủ.
 
@@ -51,4 +52,8 @@ FR (nội bộ PO) → US → AC → TC
                       SCR → AC
 ```
 
-Mọi BR có ít nhất một AC. Mọi AC có ít nhất một TC trước khi giao Dev. Nhánh và commit truy về tính năng và story qua trailer.
+Mọi BR có ít nhất một AC. Mọi AC có ít nhất một TC; QA viết TC sau khi story lên Jira và theo dõi độ phủ trên Jira, điều kiện giao Dev không chờ TC. Nhánh và commit truy về tính năng và story qua trailer.
+
+## Khi Dev dùng AWS AI-DLC
+
+AI-DLC sinh mã riêng ở Construction, ví dụ `BR1.1` trong `rules.md` của stage 3.1, cùng dạng với mã ngắn trong PRD nhưng khác nghĩa. Nếu team Dev dùng AI-DLC, mọi tài liệu và story phía Dev trỏ tới yêu cầu của PO bằng mã đầy đủ như `BR-APP-F012-01.1`, không dùng mã ngắn của PRD. Chưa xác định team Dev có dùng AI-DLC hay không; khi đã rõ thì thêm bảng quy đổi vào mục này.
