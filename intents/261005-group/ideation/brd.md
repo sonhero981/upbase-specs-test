@@ -1,13 +1,14 @@
 ---
 intent: 261005-group
 artifact: brd
-version: 0.3
+version: 0.4
 status: approved
 approved: 2026-10-12 (v0.3); 2026-10-06 (v0.2)
 review: lần 01 NOT-READY, Request Changes (DEC78); lần 02 READY, Approve (DEC79), ngày 2026-10-12
 gate: v1 Gate 1 ngày 2026-10-05, cập nhật v0.2 sau Gate 2 và Bước 7
 migrated-from: pre-aidlc:.claude/projects/Group/docs/brd/brd-v0.2-20261006.md
 note: Artifact phase Ideation theo luồng v1. Thay cho intent-statement, scope-document và initiative-brief của v2
+approved_at: 2026-10-22T07:49
 ---
 # [BRD] Group — Nhóm học viên
 
@@ -26,7 +27,8 @@ note: Artifact phase Ideation theo luồng v1. Thay cho intent-statement, scope-
 |---|---|---|
 | `v0.1` | 05/10/2026 | Bản đầu, 19 US. ⚠️ **Không được lưu lại** — xem ghi chú dưới |
 | `v0.2` | 06/10/2026 | Gộp toàn bộ quyết định từ Gate 1, Bước 5, Gate 2 và Bước 7 |
-| **`v0.3`** | 12/10/2026 | Cập nhật theo CR1 *(09/10)* và review AI Reviewer lần 01. Không đổi phạm vi |
+| `v0.3` | 12/10/2026 | Cập nhật theo CR1 *(09/10)* và review AI Reviewer lần 01. Không đổi phạm vi |
+| **`v0.4`** | 21/10/2026 | CR6: bỏ giới hạn số cấp nhóm; một người được đồng thời là quản lý, mentor và thành viên bằng một tài khoản học viên; báo cáo theo nhóm đặt ở chi tiết nhóm, báo cáo trên dashboard để sau |
 
 **Đổi gì ở `v0.2`:**
 
@@ -74,10 +76,10 @@ Hệ quả đã thấy ở tính năng khác: dự án Gamification phải hoãn
 
 | | |
 |---|---|
-| **Portal** | Cả hai. Phần lớn việc ở **UpLMS Ops**: dựng nhóm, thành viên, đồng bộ HRM, gán nội dung, quản lý, nhật ký, lưu trữ, báo cáo — `US1` đến `US16`, `US18` đến `US20`. **UpLMS** chỉ có `US17`, học viên xem quản lý của mình. Màn theo dõi nhánh `US16` nằm ở **UpLMS Ops**, quản lý đăng nhập bằng tài khoản nhân sự vận hành, chính tài khoản được gán ở `US9` — chốt 09/10/2026 *(`DEC73`)* |
+| **Portal** | Cả hai. Phần lớn việc ở **UpLMS Ops**: dựng nhóm, thành viên, đồng bộ HRM, gán nội dung, quản lý, nhật ký, lưu trữ, báo cáo — `US1` đến `US16`, `US18` đến `US20`. **UpLMS** chỉ có `US17`, học viên xem quản lý của mình. Màn theo dõi nhánh `US16` nằm ở **UpLMS Ops** *(`DEC73`)*. Quản lý và mentor là tài khoản học viên của chính người đó: được gán vai nào thì đăng nhập UpLMS Ops để dùng đúng màn của vai đó *(21/10/2026, `DEC101`)* |
 | **UpBase hay mọi tenant** | Làm cho UpBase, nhưng dữ liệu và hạ tầng cho **mọi tenant**. Nhóm, quan hệ thành viên, quan hệ quản lý và mentor đều thuộc về một tổ chức; mô hình không mang giả định riêng của UpBase. Đã kiểm chiều tenant ở Impact Matrix §9 |
 | **Tầng** | Tầng **LMS đang có**, mở rộng từ Lớp và User. Không thuộc tầng năng lực định hướng |
-| **Hằng số** | Số cấp tối đa của cây: mặc định **6**, **cấu hình được theo tổ chức**, không đóng cứng *(`BR-1.4`)*. Độ dài tên nhóm 255 và mô tả 1000 ký tự là giới hạn field, cố định *(`F-11`)* |
+| **Hằng số** | Không giới hạn số cấp của cây nhóm *(21/10/2026, `DEC100`)*. Độ dài tên nhóm 255 và mô tả 1000 ký tự là giới hạn field, cố định *(`F-11`)* |
 | **Chỗ đóng cứng UpBase chạm tới** | Nguồn cơ cấu là **Lark**, qua cơ chế đồng bộ HRIS một chiều đang có — KB `15-product-direction.md` §6 xếp đây là chỗ đóng cứng mức cao, vì mỗi tenant một HRIS. Dự án này **mở rộng** cơ chế đó sang tầng cơ cấu, không gỡ nó. Nhóm tự tạo không phụ thuộc Lark |
 
 ---
@@ -164,7 +166,8 @@ Phòng ban đông nhất có **55 người** (`ECOM / Fulfillment HCM`). Hơn m�
 | **Quan hệ mentor** | Gán mentor cho nhóm. Mentor của nhóm **chính là** mentor của lớp mà nhóm được giao, phụ trách đúng người từ nhóm đó; mentor đầu tiên vào lớp là người chịu trách nhiệm chính, đổi lại được. Không có cơ chế phạm vi dữ liệu riêng — chốt 06/10/2026 *(`CF-6`)* |
 | **Phạm vi dữ liệu** | Quản lý chỉ xem được nhóm mình quản lý |
 | **Thành viên theo thời gian** | Ghi mọi thay đổi thành viên kèm thời điểm, giữ không giới hạn. **Nền của báo cáo**, không chỉ để tra tay |
-| **Báo cáo theo nhóm** | Cộng dồn số liệu học theo nhóm và theo cả nhánh, xem được ở hiện tại hoặc tại một mốc quá khứ |
+| **Báo cáo theo nhóm** | Cộng dồn số liệu học theo nhóm và theo cả nhánh, xem được ở hiện tại hoặc tại một mốc quá khứ. Đặt ở tab Báo cáo của chi tiết nhóm, ba danh sách: theo thành viên, theo nhóm con, theo khoá *(`DEC104`)* |
+| **Một người nhiều vai** | Trong một nhóm, một người được đồng thời là quản lý, mentor và thành viên. Thông báo gửi quản lý không gửi cho chính người đó mà lên quản lý của nhóm cha gần nhất, hết cây thì quản trị viên hệ thống *(`DEC101`, `DEC102`)* |
 | **Người nghỉ việc** | Gỡ khỏi nhóm theo đồng bộ. Lượt ghi danh **đánh dấu kết thúc**, không xoá dữ liệu |
 | **Vòng đời nhân sự** | Rời nhóm mà chưa học khoá nào → hệ thống tự xử lý. Đang học dở hoặc đã xong → báo quản lý |
 | **Hai mail event mới** | `MAIL-GRP-01` — báo quản lý khi người rời nhóm còn nghĩa vụ học · `MAIL-GRP-02` — báo người được gán làm quản lý, nhận chuyển phụ trách, hoặc được chỉ định quản lý chính, để họ biết có nhánh phải theo dõi *(thêm 09/10/2026, CR1)*. 30 mail hiện có không có cái nào cho hai việc này |
@@ -185,12 +188,15 @@ Phòng ban đông nhất có **55 người** (`ECOM / Fulfillment HCM`). Hơn m�
 | **Chia dữ liệu học theo nhánh cho từng quản lý** | PO chốt 05/10: tiến độ treo vào lượt ghi danh, không chia theo nhánh được. Xem §6 |
 | **Nhóm động theo điều kiện** | PO chốt 06/10 *(`OQ-24`)*: đúng **hai** cách vào nhóm — đồng bộ từ HRM theo cây tổ chức, và tự tạo thủ công |
 | **Chức năng chuyển lớp** | PO chốt 06/10 *(`OQ-29`)*: hệ thống chưa có. Muốn chuyển thì xoá khỏi lớp cũ, thêm lớp mới, **học lại từ đầu** |
+| **Tổ chức tự thêm loại quan hệ** | PO chốt 12/10 *(`DEC84`)*: loại quan hệ cố định, gồm quản lý và mentor |
 
 ## Potential scope
 
 | Có thể làm sau | Ghi chú |
 |---|---|
 | **Dùng nhóm làm nguồn người nhận cho thông báo Ops** | PO đã chốt hướng này, nhưng chức năng gửi thông báo chưa mở lại |
+| **Báo cáo theo nhóm trên dashboard** | Đợt này chỉ làm tab Báo cáo trong chi tiết nhóm *(`DEC104`)* |
+| **Chặn tự chấm bài khi một người vừa là mentor vừa là thành viên của lớp** | Đợt này tạm cho phép, rủi ro đã chấp nhận *(`DEC103`)* |
 
 > Hai mục từng nằm ở đây đã được quyết dứt điểm ngày 06/10: **nhóm động theo điều kiện** chuyển sang *Out of scope* · **xử lý vòng đời nhân sự** chuyển vào *In scope*, thành `US19` và `US20`.
 
@@ -225,11 +231,9 @@ Tiến độ học vẫn treo vào **lượt ghi danh của Lớp** như hiện 
 | `C2` | Người vừa ở Lớp vừa ở Nhóm, cùng được gán một khoá, vẫn chỉ sinh **một lượt ghi danh** |
 | `C3` | Mọi thay đổi thành viên phải **lưu kèm thời điểm**, đủ để dựng lại trạng thái tại một mốc quá khứ.<br>🔴 **Đây là nền của báo cáo, không phải một màn hình tra cứu.** `O4` và `O5` đều phụ thuộc hoàn toàn vào đây — xem mục *Báo cáo phải đọc qua lớp nào* |
 
-## Số cấp tối đa
+## Số cấp của cây
 
-PO chốt ngày 05/10/2026: **6 cấp**, cấu hình được theo tổ chức, đếm từ nhóm gốc là cấp 1. Cây thật trên Lark hiện sâu 4 cấp, dư 2 để mở rộng mà không phải đổi cấu hình.
-
-Giới hạn này là **van an toàn chống nhập sai**, không phải để bảo vệ hiệu năng.
+PO chốt ngày 21/10/2026: **không giới hạn số cấp** *(`DEC100`)*, thay quyết định 6 cấp ngày 05/10/2026. Cây thật trên Lark hiện sâu 4 cấp. Chặn vòng lặp khi di chuyển nhánh vẫn giữ.
 
 ## Vòng đời của một nhóm
 
@@ -350,7 +354,7 @@ Lý do nằm ở cách dữ liệu đang lưu: tiến độ treo vào **lượt 
 | `US13` | Là vận hành, tôi cần được cảnh báo khi một nhóm trống quản lý và chuyển được toàn bộ quan hệ sang người khác | Hạng mục 18 |
 | `US14` | Là vận hành, tôi cần lưu trữ một nhóm để nó ngừng nhận nội dung mới mà vẫn giữ lịch sử, và chỉ xoá được nhóm tạo nhầm chưa có lịch sử gì | Hạng mục 12 · `OQ-07` |
 | `US15` | Là vận hành, tôi cần tra được nhật ký thay đổi thành viên khi có vấn đề cần làm rõ, không giới hạn thời gian | Hạng mục 11 · `OQ-08` · `BA-05` · giải `O5` |
-| `US16` | Là quản lý, tôi cần xem toàn bộ dữ liệu học của người trong nhánh mình phụ trách, và chỉ những người đó. Màn này ở **UpLMS Ops**, đăng nhập bằng tài khoản nhân sự vận hành đã được gán ở `US9` | Hạng mục 16 · `OQ-09` · giải `O3` · `DEC73` |
+| `US16` | Là quản lý, tôi cần xem toàn bộ dữ liệu học của người trong nhánh mình phụ trách, và chỉ những người đó. Màn này ở **UpLMS Ops**; quản lý đăng nhập bằng tài khoản học viên của mình | Hạng mục 16 · `OQ-09` · giải `O3` · `DEC73` · `DEC101` |
 
 ### `MAIL-GRP-02` — mail event thứ hai, thêm 09/10/2026 theo CR1
 
@@ -425,7 +429,7 @@ Câu chữ cụ thể để PRD.
 
 # 8. Tác động tới hệ thống hiện tại
 
-> Bảng dưới là bản quét sơ bộ lúc viết BRD, chỉ liệt kê module bị chạm tới và lý do chạm, lấy từ KB. Mức ảnh hưởng, 12 vùng và 6 conflict đã quyết nằm ở `inception/impact-analysis/impact-matrix.md` v0.3; vùng 9 *(mail `MAIL-GRP-02`)* thêm ở CR1 ngày 09/10/2026.
+> Bảng dưới là bản quét sơ bộ lúc viết BRD, chỉ liệt kê module bị chạm tới và lý do chạm, lấy từ KB. Mức ảnh hưởng, 12 vùng và 6 conflict đã quyết nằm ở `inception/impact-analysis/impact-matrix.md` v0.5; vùng 9 *(mail `MAIL-GRP-02`)* thêm ở CR1 ngày 09/10/2026, vùng 13 đến 15 thêm ở CR6 ngày 21/10/2026.
 
 | Module | Chạm vào vì |
 |---|---|
@@ -436,6 +440,8 @@ Câu chữ cụ thể để PRD.
 | **Báo cáo** | Mọi báo cáo theo nhóm phải tính theo quy tắc cha bao trùm toàn bộ nhánh con |
 | **Gamification** | `US16` của dự án đó *(bộ lọc bảng xếp hạng theo nhóm)* đang chờ chức năng này |
 | **Thông báo Ops** | Dùng nhóm làm nguồn người nhận, khi chức năng đó mở lại |
+| **Chấm điểm** | Danh sách mentor của lớp và người chấm nhận tài khoản học viên; người vừa là mentor vừa là thành viên tạm được tự chấm bài của mình *(CR6, `DEC101`, `DEC103`)* |
+| **Đăng nhập UpLMS Ops** | Tài khoản học viên được gán quản lý hoặc mentor vào được UpLMS Ops, chỉ thấy màn của vai đó *(CR6, `DEC101`)* |
 
 ---
 
@@ -445,8 +451,9 @@ Câu chữ cụ thể để PRD.
 |---|---|---|
 | `A1` | Cơ chế đồng bộ người dùng từ Lark mở rộng được sang đồng bộ cơ cấu, không phải dựng lại từ đầu | Dev, khi làm |
 | `A2` | Cây tổ chức trên Lark là nguồn đủ tin cậy, không cần đối soát thủ công sau mỗi lần đồng bộ | PO |
-| `A3` | Số cấp 6 đủ cho ít nhất hai tới ba năm tới | PO |
+| ~~`A3`~~ | ~~Số cấp 6 đủ cho ít nhất hai tới ba năm tới~~ Không còn áp dụng: bỏ giới hạn số cấp *(`DEC100`)* | PO |
 | `A4` | Người quản lý luôn là một tài khoản có trong hệ thống, không phải người ngoài | PO |
+| `A5` | Danh sách mentor của lớp và người chấm bài nhận được tài khoản học viên mà không phải đổi luồng chấm hiện có | Tech PIC |
 
 ---
 
@@ -494,9 +501,19 @@ Danh sách đầy đủ: `inception/requirements-analysis/requirements-analysis-
 
 | # | Quyết định | Vào đâu trong tài liệu |
 |---|---|---|
-| ~~`DEC73`~~ ✅ | Màn theo dõi nhánh `US16` ở **UpLMS Ops**, quản lý dùng tài khoản nhân sự vận hành như `US9` | §1 *Product boundary* · §7 |
+| ~~`DEC73`~~ ✅ | Màn theo dõi nhánh `US16` ở **UpLMS Ops**, quản lý dùng tài khoản nhân sự vận hành như `US9`. Phần tài khoản thay bởi `DEC101` ngày 21/10/2026: quản lý dùng tài khoản học viên | §1 *Product boundary* · §7 |
 | ~~`DEC74`~~ ✅ | Thêm mail event **`MAIL-GRP-02`** báo người được gán quản lý, nhận chuyển phụ trách, hoặc được chỉ định quản lý chính; quan hệ kế thừa không gửi | §5 In scope · §7 *`MAIL-GRP-02`* |
 | ~~`DEC75`~~ ✅ | `MAIL-GRP-01` thêm câu cảnh báo: gỡ khỏi lớp sẽ xoá tiến độ, không khôi phục được | §7 *`MAIL-GRP-01`* |
+
+## Đã đóng ở CR6 — 21/10/2026
+
+| # | Quyết định | Vào đâu trong tài liệu |
+|---|---|---|
+| ~~`DEC100`~~ ✅ | Không giới hạn số cấp của cây nhóm | §1 *Product boundary* · §6 *Số cấp của cây* |
+| ~~`DEC101`~~ ✅ | Một người được đồng thời là quản lý, mentor, thành viên bằng một tài khoản học viên; tài khoản đó vào UpLMS Ops cho đúng màn của vai | §1 *Product boundary* · §5 In scope · §7 `US16` |
+| ~~`DEC102`~~ ✅ | Thông báo gửi quản lý không gửi cho chính người đó, lên quản lý của nhóm cha gần nhất | §5 In scope |
+| ~~`DEC103`~~ ✅ | Tạm cho tự chấm khi vừa là mentor vừa là thành viên | §5 Potential scope |
+| ~~`DEC104`~~ ✅ | Báo cáo theo nhóm ở tab Báo cáo trong chi tiết nhóm; dashboard để sau | §5 In scope · Potential scope |
 
 ---
 
@@ -509,9 +526,9 @@ Danh sách đầy đủ: `inception/requirements-analysis/requirements-analysis-
 | Câu hỏi đã đóng | `inception/requirements-analysis/requirements-analysis-questions.md` — `OQ-xx`, `BA-xx` |
 | Nghiên cứu LMS khác | `ideation/market-research/competitive-analysis.md` v0.2 — TalentLMS · Docebo · Moodle · bốn bài TalentLMS; nguyên văn ở `inputs/talentlms-help-articles-20261007.md` |
 | Dữ liệu HRM | `inputs/lark-users-by-department.csv` — 384 nhân sự, 53 phòng ban |
-| Quyết định đã chốt | `decisions.md` — `DEC1` đến `DEC78`; bản v1 ở `archive/v1/project-decisions.md` |
-| Phạm vi hiện hành chi tiết | `inception/prd/prd.md` v0.2 — 20 US, 128 business rule, publish Lark 09/10/2026 |
-| Ảnh hưởng | `inception/impact-analysis/impact-matrix.md` v0.3 — 12 vùng, 6 conflict đã quyết |
+| Quyết định đã chốt | `decisions.md` — `DEC1` đến `DEC106`; bản v1 ở `archive/v1/project-decisions.md` |
+| Phạm vi hiện hành chi tiết | `inception/prd/prd.md` v0.6 — 20 US, 132 business rule, 105 tiêu chí chấp nhận |
+| Ảnh hưởng | `inception/impact-analysis/impact-matrix.md` v0.5 — 15 vùng, 6 conflict đã quyết |
 | Nguyên tắc mô hình hoá | KB `domain/16-domain-principles.md` — nguyên tắc 6, ranh giới Nhóm với Lớp |
 | KB liên quan | `domain/` — `04-class.md` · `06-user-account.md` · `12-data-model.md` · `14-api-surface.md` · `15-product-direction.md` §6 và §7 |
 | Intent liên quan | `intents/260923-gamification/` — `US16` của intent đó *(bộ lọc bảng xếp hạng theo nhóm)* chờ chức năng này · `intents/261006-report-phase-1/` — tham chiếu `US16` và `US18` |

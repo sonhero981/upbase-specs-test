@@ -1,9 +1,9 @@
 ---
 intent: 261005-group
 artifact: traceability
-version: 0.2
-date: 2026-10-20
-note: Bảng RC làm tay ở gate 2.4 ngày 12/10/2026, vì intent dùng họ mã v1 (RC thay FR). Bảng BR sang AC lấy từ po-tools.py trace ngày 20/10/2026, CR3
+version: 0.3
+date: 2026-10-21
+note: Bảng RC làm tay ở gate 2.4 ngày 12/10/2026, vì intent dùng họ mã v1 (RC thay FR). Bảng BR sang AC lấy từ po-tools.py trace ngày 20/10/2026, CR3; cập nhật ngày 21/10/2026 theo CR6
 ---
 # Traceability: Nhóm học viên (Group)
 
@@ -34,6 +34,10 @@ Intent này dùng mã `RC` của bản làm rõ yêu cầu thay cho `FR`.
 | `RC-18` quản lý bị khoá hoặc rời thì cảnh báo, chuyển quan hệ | `US13` | OK | |
 | `RC-19` loại quan hệ mentor, dùng chung cơ chế gán và phạm vi dữ liệu | `US12` | OK, đổi nghĩa | Theo `CF-6` mentor không có phạm vi dữ liệu riêng; đi theo nhóm vào lớp, `BR-12.1` đến `BR-12.6` |
 | `RC-20` báo email người được gán quản lý | `US9` · `US11` · `US13` | OK | `BR-9.6` `BR-9.7` `BR-11.7` `BR-13.6` `BR-13.7`, mail `MAIL-GRP-02` |
+| `RC-21` một người nhiều vai, một tài khoản học viên vào UpLMS Ops | `US9` · `US12` · `US16` | OK | `BR-9.8` `BR-12.7` `BR-16.7` |
+| `RC-22` thông báo gửi quản lý không gửi cho chính người đó | `US20` | OK | `BR-20.8` |
+| `RC-23` tạm cho tự chấm khi vừa là mentor vừa là thành viên | `US12` | OK | `BR-12.8` |
+| `RC-24` báo cáo ở tab Báo cáo trong chi tiết nhóm | `US18` | OK | `BR-18.8` |
 
 Không có GAP: 20 trên 20 RC có US.
 
@@ -48,18 +52,18 @@ Không có GAP: 20 trên 20 RC có US.
 | `US6` | `RC-07` · `RC-10` | OK |
 | `US7` | `RC-08` | OK |
 | `US8` | `RC-09` | OK |
-| `US9` | `RC-07` · `RC-13` · `RC-20` | OK |
+| `US9` | `RC-07` · `RC-13` · `RC-20` · `RC-21` | OK |
 | `US10` | `RC-04` · `RC-14` | OK |
 | `US11` | `RC-15` · `RC-20` | OK |
-| `US12` | `RC-19` | OK |
+| `US12` | `RC-19` · `RC-21` · `RC-23` | OK |
 | `US13` | `RC-18` · `RC-20` | OK |
 | `US14` | `RC-12` | OK |
 | `US15` | `RC-11` | OK |
-| `US16` | `RC-07` · `RC-16` | OK |
+| `US16` | `RC-07` · `RC-16` · `RC-21` | OK |
 | `US17` | `RC-17` | OK |
-| `US18` | `RC-07` · `RC-11` một phần | OK qua `O4` · `BA-05a`. Không có RC riêng cho báo cáo cộng dồn |
+| `US18` | `RC-07` · `RC-11` một phần · `RC-24` | OK |
 | `US19` | — | OK qua `OQ-22` · `OQ-23` · `OQ-37`. Không có RC |
-| `US20` | — | OK qua `OQ-22` · `OQ-38` · `MAIL-GRP-01`. Không có RC |
+| `US20` | `RC-22` | OK. Phần báo quản lý khi rời nhóm truy qua `OQ-22` · `OQ-38` · `MAIL-GRP-01` |
 
 Ba US cuối truy về objective và quyết định ở Bước 5, Bước 7 của v1, không truy về bảng RC vì bảng đó chỉ được bổ sung một lần ở CR1 (`RC-20`). Không phải ORPHAN về phạm vi; là chỗ bảng yêu cầu chưa theo kịp quyết định.
 
@@ -73,12 +77,9 @@ CR3 ngày 20/10/2026 thêm 104 tiêu chí chấp nhận cho 20 user story. Mỗi
 |---|---|---|
 | `BR-1.1` | `AC1.2` | OK |
 | `BR-1.2` | `AC1.4` | OK |
-| `BR-1.3` | `AC1.5` | OK |
-| `BR-1.4` | `AC1.5` | OK |
 | `BR-1.5` | `AC1.6` | OK |
 | `BR-1.6` | `AC1.1` | OK |
 | `BR-2.1` | `AC2.2` | OK |
-| `BR-2.2` | `AC2.3` | OK |
 | `BR-2.3` | `AC2.4` | OK |
 | `BR-2.4` | `AC2.5` | OK |
 | `BR-2.5` | `AC2.5` | OK |
@@ -133,6 +134,7 @@ CR3 ngày 20/10/2026 thêm 104 tiêu chí chấp nhận cho 20 user story. Mỗi
 | `BR-9.5` | `AC9.4` | OK |
 | `BR-9.6` | `AC9.5` | OK |
 | `BR-9.7` | `AC9.5` | OK |
+| `BR-9.8` | `AC9.2` · `AC9.6` | OK |
 | `BR-10.1` | `AC10.1` | OK |
 | `BR-10.2` | `AC10.2` | OK |
 | `BR-10.3` | `AC10.3` | OK |
@@ -151,6 +153,8 @@ CR3 ngày 20/10/2026 thêm 104 tiêu chí chấp nhận cho 20 user story. Mỗi
 | `BR-12.4` | `AC12.3` | OK |
 | `BR-12.5` | `AC12.4` | OK |
 | `BR-12.6` | `AC12.4` | OK |
+| `BR-12.7` | `AC12.6` | OK |
+| `BR-12.8` | `AC12.6` | OK |
 | `BR-13.1` | `AC13.1` | OK |
 | `BR-13.2` | `AC13.2` | OK |
 | `BR-13.3` | `AC13.3` | OK |
@@ -187,6 +191,7 @@ CR3 ngày 20/10/2026 thêm 104 tiêu chí chấp nhận cho 20 user story. Mỗi
 | `BR-18.5` | `AC18.4` | OK |
 | `BR-18.6` | `AC18.5` | OK |
 | `BR-18.7` | `AC18.6` | OK |
+| `BR-18.8` | `AC18.1` | OK |
 | `BR-19.1` | `AC19.1` | OK |
 | `BR-19.2` | `AC19.1` | OK |
 | `BR-19.3` | `AC19.2` | OK |
@@ -201,6 +206,7 @@ CR3 ngày 20/10/2026 thêm 104 tiêu chí chấp nhận cho 20 user story. Mỗi
 | `BR-20.5` | `AC20.3` | OK |
 | `BR-20.6` | `AC20.1` | OK |
 | `BR-20.7` | `AC20.1` | OK |
+| `BR-20.8` | `AC20.5` | OK |
 
 ## Kết luận
-Đạt. 0 GAP, 0 ORPHAN ở cả lớp RC sang US và lớp BR sang AC (130 BR, 104 AC, kiểm lại ngày 20/10/2026). Ghi chú để xử lý ở CR kế tiếp, không chặn: thêm ba dòng RC cho báo cáo cộng dồn theo nhóm (`US18`), tự gỡ khoá chưa học khi rời nhóm (`US19`), báo quản lý khi rời nhóm còn nghĩa vụ học (`US20`) để bảng yêu cầu khớp với 20 US. Ngày kiểm: 12/10/2026.
+Đạt. 0 GAP, 0 ORPHAN ở cả lớp RC sang US và lớp BR sang AC (132 BR, 105 AC, kiểm lại ngày 21/10/2026 sau CR6). Ghi chú để xử lý ở CR kế tiếp, không chặn: CR6 đã thêm `RC-24` cho `US18` và `RC-22` cho một phần `US20`; còn thiếu một dòng RC cho tự gỡ khoá chưa học khi rời nhóm (`US19`) và phần báo quản lý khi rời nhóm còn nghĩa vụ học của `US20`. Ngày kiểm: 21/10/2026.

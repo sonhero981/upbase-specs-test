@@ -1,13 +1,12 @@
-# Kiểm bằng máy: 2.42 PRD Generation · 2026-10-20 · trước review lần 03
+# Kiểm bằng máy: prd-generation · CR6 · 2026-10-21 · trước review lần 05
 
 ```
 # Kiểm máy: 261005-group · 2.42 PRD Generation
 
-- inception/prd/prd.md: version 0.3, status in-review
-- inception/prd/prd.md: template là của công ty (domain/templates/prd.md), không kiểm heading
-- inception/prd/prd.md: 130 mã BR được định nghĩa
-- inception/prd/prd.md: 104 mã AC
-- inception/prd/traceability.md: version 0.2, status ?
+- inception/prd/prd.md: version 0.6, status draft
+- inception/prd/prd.md: 132 mã BR được định nghĩa
+- inception/prd/prd.md: 105 mã AC
+- inception/prd/traceability.md: version 0.3, status ?
 
 Không có cảnh báo.
 

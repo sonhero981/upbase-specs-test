@@ -1,22 +1,25 @@
 ---
 intent: 261005-group
 artifact: requirements
-version: 0.3
+version: 0.4
 status: approved
 approved: 2026-10-09 (v0.3); 2026-10-05 (v0.2)
-cr: CR1 ngày 2026-10-09, thêm RC-20
+cr: CR6 ngày 2026-10-21, sửa RC-01, thêm RC-21 đến RC-24; CR1 ngày 2026-10-09, thêm RC-20
 ids: RC-01 đến RC-19 theo họ mã v1, không đổi
 migrated-from: pre-aidlc:.claude/projects/Group/working/ai-drafts/clarified-requirements-20261005.md
+approved_at: 2026-10-22T07:49
 ---
 # Làm rõ yêu cầu — Group
 
-**Ngày:** 05/10/2026 · **Phiên bản:** v0.3 — cập nhật 09/10/2026 theo CR1, thêm `RC-20`. v0.2 ngày 05/10 sau khi PO trả lời 5 câu hỏi chặn
+**Ngày:** 05/10/2026 · **Phiên bản:** v0.4 — cập nhật 21/10/2026 theo CR6: `RC-01` bỏ giới hạn số cấp, thêm `RC-21` đến `RC-24`. v0.3 ngày 09/10/2026 theo CR1, thêm `RC-20`. v0.2 ngày 05/10 sau khi PO trả lời 5 câu hỏi chặn
 **Input:** `working/raw-inputs/yeu-cau-goc-20261005.md` — 19 hạng mục, hai nhóm `Group` và `User Group Relationship`
 **Mục đích PO nêu:** tổ chức các nhóm học tập, để gán, theo dõi và đánh giá theo từng nhóm
 
 ---
 
-## 1. Nền để mở rộng — đã xác nhận
+## 1. Nền để mở rộng — đã bị thay
+
+> ⚠️ **Mục này không còn đúng.** Cùng ngày 05/10, `BA-01` thay câu trả lời `OQ-01`: bỏ hẳn `Group Management` và Recipients List, coi như chưa có gì; dự án làm mới, không mở rộng chức năng cũ. Phần dưới giữ để còn lịch sử. Dữ liệu của chức năng cũ xử lý ra sao là câu hỏi mở #9 của PRD.
 
 PO trả lời `OQ-01` ngày 05/10:
 
@@ -79,7 +82,7 @@ Chi tiết: `working/ai-drafts/nghien-cuu-lms-khac-20261005.md`
 
 | ID | Requirement | Type | Source | Confidence | Ghi chú |
 |---|---|---|---|---|---|
-| `RC-01` | Cây nhóm nhiều cấp, số cấp tối đa cấu hình được. Mỗi nhóm có mã, tên, mô tả, nhóm cha | Data · Functional | Mục 1 | High | `Department Management` đã chết nên không dùng lại được. Mở rộng từ `Group Management` đang phẳng |
+| `RC-01` | Cây nhóm nhiều cấp, **không giới hạn số cấp** *(CR6, DEC100; trước là số cấp tối đa cấu hình được)*. Mỗi nhóm có mã, tên, mô tả, nhóm cha [DEC100] | Data · Functional | Mục 1 | High | `Department Management` đã chết nên không dùng lại được. Làm mới, không mở rộng `Group Management` *(`BA-01`)* |
 | `RC-02` | Quan hệ người và nhóm là nhiều-nhiều. Nhiều cây gốc song song để thể hiện cơ cấu ma trận | Data | Mục 2 | High | `Group Management` hiện gán được user, nhưng chưa rõ có cho một người ở nhiều nhóm không — xem `OQ-16` |
 | `RC-03` | Phân loại nhóm theo nguồn: đồng bộ HRM và tự tạo. Nguồn quyết định quyền sửa | Business Rule | Mục 3 | Medium | HRM là **Lark**. Đã đồng bộ được học viên, Lark cũng đã có sẵn cây tổ chức. Cần mở rộng sang đồng bộ cây |
 | `RC-04` | Tạo, sửa, di chuyển nhóm. Di chuyển nhánh thì nhánh con đi theo và quan hệ quản lý tính lại | Functional | Mục 4 | High | |
@@ -99,6 +102,10 @@ Chi tiết: `working/ai-drafts/nghien-cuu-lms-khac-20261005.md`
 | `RC-18` | Quản lý bị khoá hoặc rời nhóm thì cảnh báo nhóm trống quản lý, cho chuyển quan hệ sang người khác | Functional | Mục 18 | Medium | |
 | `RC-19` | Khai thêm loại quan hệ ngoài quản lý, ví dụ mentor, dùng chung cơ chế gán và phạm vi dữ liệu | Data · Functional | Mục 19 | Medium | Yêu cầu thiết kế mở rộng được từ đầu |
 | `RC-20` | Người được gán làm quản lý của nhóm, nhận chuyển toàn bộ phụ trách, hoặc được chỉ định làm quản lý chính trên hồ sơ, được báo bằng email để biết mình đã có nhánh phải theo dõi | Functional · Notification | CR1 · nghiên cứu LMS v0.2 §9.2b | High | Thêm 09/10/2026 theo CR1 (DEC74). Không có nó thì màn theo dõi nhánh (`RC-16`, `US16`) không có cửa vào. Mail event mới `MAIL-GRP-02`, cùng hạ tầng với `MAIL-GRP-01`. Quan hệ kế thừa từ nhóm cha không gửi |
+| `RC-21` | Trong một nhóm, một người được đồng thời là quản lý, mentor và thành viên, bằng một tài khoản học viên. Tài khoản học viên được gán quản lý hoặc mentor đăng nhập UpLMS Ops và chỉ thấy các màn của vai đó [DEC101] | Role-Permission · Data | CR6 · DEC101 | High | Quản lý cũng phải học. Thay một phần `CF-2`: quản lý, mentor không còn bắt buộc là tài khoản nhân sự vận hành |
+| `RC-22` | Thông báo gửi quản lý của một người không gửi cho chính người đó; không còn ai thì gửi quản lý của nhóm cha gần nhất, hết cây thì quản trị viên [DEC102] | Business Rule · Notification | CR6 · DEC102 | High | Áp cho mọi thông báo gửi quản lý, hiện là `MAIL-GRP-01` |
+| `RC-23` | Người vừa là mentor vừa là thành viên của cùng một lớp được tự chấm bài của mình [DEC103] | Business Rule | CR6 · DEC103 | Medium | Tạm thời, rủi ro chấp nhận. Chạm module Chấm điểm |
+| `RC-24` | Báo cáo theo nhóm đặt ở tab Báo cáo của chi tiết nhóm, ba danh sách: theo thành viên, theo nhóm con, theo khoá; chọn được mốc quá khứ, mặc định hiện tại [DEC104] | Screen · Reporting | CR6 · DEC104 · `BA-05a` | High | Thay phần đặt trong dashboard của `CF-1`; dashboard để sau |
 
 ---
 
@@ -165,9 +172,9 @@ Khung nhóm và cây · thành viên thủ công và theo lô · quan hệ quả
 | Đồng bộ HRM hai chiều | Yêu cầu chỉ nói đồng bộ *từ* HRM |
 | Nhóm cho nhân sự vận hành | `Department Management` đã phục vụ staff. Dự án này nhắm học viên |
 
-### Potential scope — chờ `OQ-01`
+### Potential scope
 
-Toàn bộ phần khung nhóm (`RC-01`, `RC-04`, `RC-05`, `RC-10`) có thể chuyển từ *làm mới* sang *mở rộng cái đã có*, tuỳ `Group Management` và `Department Management` còn sống hay không.
+~~Toàn bộ phần khung nhóm (`RC-01`, `RC-04`, `RC-05`, `RC-10`) có thể chuyển từ *làm mới* sang *mở rộng cái đã có*, tuỳ `Group Management` và `Department Management` còn sống hay không.~~ Đã quyết ở `BA-01`: làm mới hoàn toàn.
 
 ---
 

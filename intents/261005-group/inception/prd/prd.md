@@ -2,16 +2,16 @@
 intent: 261005-group
 feature: LMS-F002
 artifact: prd
-inputs: requirements@0.3, impact-matrix@0.4
+inputs: requirements@0.4, impact-matrix@0.5
 version: 0.6
-status: draft
+status: approved
 approved: 2026-10-12 (v0.3); 2026-10-09 (v0.2); 2026-10-06 (v0.1)
-cr: CR5 ngày 2026-10-20, chuyển sang template PRD chuẩn, không đổi US, AC, BR; CR4 ngày 2026-10-20, cập nhật thông tin tài liệu ở bảng đầu sau khi duyệt v0.4; CR3 ngày 2026-10-20, thêm khối tiêu chí chấp nhận và dòng Ưu tiên cho 20 US; CR2 ngày 2026-10-12, chạm US3 US7 US19 US20, danh sách US, Vấn đề tồn đọng; CR1 ngày 2026-10-09, chạm US9 US13 US16 US20
+cr: CR6 ngày 2026-10-21, bỏ giới hạn số cấp, một người nhiều vai bằng một tài khoản học viên, thông báo cho quản lý cấp gần nhất, tạm cho tự chấm, US18 thành tab Báo cáo; CR5 ngày 2026-10-20, chuyển sang template PRD chuẩn, không đổi US, AC, BR; CR4 ngày 2026-10-20, cập nhật thông tin tài liệu ở bảng đầu sau khi duyệt v0.4; CR3 ngày 2026-10-20, thêm khối tiêu chí chấp nhận và dòng Ưu tiên cho 20 US; CR2 ngày 2026-10-12, chạm US3 US7 US19 US20, danh sách US, Vấn đề tồn đọng; CR1 ngày 2026-10-09, chạm US9 US13 US16 US20
 gate: v1 Gate 4
 lark: Jg7ld8UCzoeMiAxW5ielxlC4gGg
 lark-title: [PRD] Group
 migrated-from: pre-aidlc:.claude/projects/Group/docs/prd/prd-group-v0.1-20261006.md
-approved_at: 2026-10-20T11:26
+approved_at: 2026-10-22T07:49
 ---
 # [PRD] Nhóm học viên
 
@@ -36,7 +36,7 @@ approved_at: 2026-10-20T11:26
 | v0.3 | 12/10/2026 | Bùi Đức Huy | Sau review user story: người thuộc **nhiều nhóm cùng giao một lớp** thì rời một nhóm vẫn giữ lượt ghi danh khi nhóm kia còn giao (`BR-3.7` · `BR-19.7`, mở rộng `BR-7.9`, thêm điều kiện không bắn `MAIL-GRP-01`) · cột Nguồn của danh sách user story dẫn thêm `RC-02` `RC-07` `RC-20` và trỏ bảng truy vết · Vấn đề tồn đọng #2 ghi lý do ma trận quyền không chặn viết PRD, thêm #7 ba góc chưa có luật. 130 business rule | `US3` · `US7` · `US19` · `US20` |
 | v0.4 | 20/10/2026 | Bùi Đức Huy | Thêm khối tiêu chí chấp nhận cho cả 20 user story, 104 tiêu chí, mỗi business rule có ít nhất một tiêu chí kiểm nó. Tiêu chí cho nhánh lỗi hoặc bị từ chối có ở mọi user story mà PRD đã định nghĩa nhánh đó; tám user story còn lại ghi ở Vấn đề tồn đọng #8. Thêm dòng Ưu tiên cho từng user story. Vấn đề tồn đọng #3 và #4 chuyển sang đã quyết. Không đổi business rule, màn, field | `US1` đến `US20` |
 | v0.5 | 20/10/2026 | Bùi Đức Huy | Cập nhật thông tin tài liệu ở bảng đầu sau khi duyệt v0.4: trạng thái tài liệu và người duyệt. Không đổi nội dung | — |
-| v0.6 | 20/10/2026 | Bùi Đức Huy | CR5: chuyển sang template PRD chuẩn của PO-Workflow. Giữ nguyên mọi user story, tiêu chí chấp nhận, business rule, màn, field. Thêm mục Chuyển đổi và triển khai, lấy từ bản phân tích ảnh hưởng; mục Trường hợp ngoại lệ cho từng user story; mục Giả định; câu hỏi mở #9, #10, #11. Bỏ bảng trạng thái tài liệu và mục Comments | Cấu trúc toàn tài liệu |
+| v0.6 | 20/10/2026 | Bùi Đức Huy | CR5: chuyển sang template PRD chuẩn của PO-Workflow. Giữ nguyên mọi user story, tiêu chí chấp nhận, business rule, màn, field. Thêm mục Chuyển đổi và triển khai, lấy từ bản phân tích ảnh hưởng; mục Trường hợp ngoại lệ cho từng user story; mục Giả định; câu hỏi mở #9, #10, #11. Bỏ bảng trạng thái tài liệu và mục Comments CR6: bỏ giới hạn số cấp của cây nhóm (bỏ ba business rule về số cấp tối đa của `US1`, `US2` và hai tiêu chí chấp nhận kiểm chúng; mã cũ không cấp lại); một người được đồng thời là quản lý, mentor và thành viên của một nhóm bằng một tài khoản học viên, tài khoản đó vào UpLMS Ops cho đúng màn của vai; thông báo gửi quản lý không gửi cho chính người đó; người vừa là mentor vừa là thành viên tạm được tự chấm; `US18` thành tab Báo cáo trong chi tiết nhóm thay cho dashboard | Cấu trúc toàn tài liệu · `US1` · `US2` · `US9` · `US11` · `US12` · `US13` · `US16` · `US18` · `US20` |
 
 ---
 
@@ -111,9 +111,9 @@ Phòng ban đông nhất có **55 người** *(`ECOM / Fulfillment HCM`)*. Hơn 
 |---|---|
 | **Nhân sự vận hành** | Dựng nhóm, quản lý thành viên, giao nội dung cho nhóm, gán người quản lý |
 | **L&D** | Giao bài học theo nhóm thay vì theo danh sách người |
-| **Quản lý trực tiếp** | Xem tiến độ học của người trong nhánh mình phụ trách, trên UpLMS Ops. Nhận email khi được gán làm quản lý và khi có người rời nhóm còn nghĩa vụ học |
+| **Quản lý trực tiếp** | Xem tiến độ học của người trong nhánh mình phụ trách, trên UpLMS Ops, bằng chính tài khoản học viên của mình. Có thể đồng thời là thành viên của nhóm mình quản lý. Nhận email khi được gán làm quản lý và khi có người rời nhóm còn nghĩa vụ học |
 | **Học viên** | Nhận nội dung qua nhóm. Xem ai là quản lý của mình |
-| **Mentor** | Đi theo nhóm vào lớp, phụ trách đúng nhóm đó |
+| **Mentor** | Đi theo nhóm vào lớp, phụ trách đúng nhóm đó. Dùng tài khoản học viên của mình để chấm bài trên UpLMS Ops; có thể đồng thời là thành viên của nhóm |
 | Hệ thống nhân sự *(Lark)* | Nguồn cơ cấu tổ chức. Hệ gốc, UpLnD chỉ đọc |
 
 ---
@@ -156,6 +156,8 @@ Hai chỉ số theo dõi rủi ro, dùng để bắt lỗi sau phát hành:
 | **Chia dữ liệu học theo nhánh cho từng quản lý** | Tiến độ treo vào lượt ghi danh của Lớp, không chia theo nhánh được |
 | **Nhóm động theo điều kiện** | Đúng hai cách vào nhóm: đồng bộ từ hệ thống nhân sự theo cây tổ chức, và tự tạo thủ công. Không có cách thứ ba |
 | **Chức năng chuyển lớp** | Hệ thống chưa có. Muốn chuyển thì xoá khỏi lớp cũ, thêm vào lớp mới, học lại từ đầu |
+| **Báo cáo theo nhóm trên dashboard** | Đợt này báo cáo theo nhóm chỉ nằm ở tab Báo cáo trong chi tiết nhóm. Dashboard để sau |
+| **Chặn tự chấm bài** | Người vừa là mentor vừa là thành viên của cùng một lớp tạm được tự chấm bài của mình. Chặn để sau |
 | **Cơ chế phạm vi dữ liệu nhiều mức** | Đơn giản hoá ở đợt này: quản lý chỉ xem được nhóm mình quản lý. Không phụ thuộc vào một module chưa làm |
 
 ---
@@ -238,11 +240,9 @@ Nhóm cha vẫn bao trùm toàn bộ nhánh con **ở mức đọc** — báo c�
 
 Người thuộc nhiều nhánh *(cơ cấu ma trận)* thì có nhiều nhóm sâu nhất, mỗi nhánh một cái.
 
-## Số cấp tối đa
+## Số cấp của cây
 
-**6 cấp**, cấu hình được theo tổ chức, đếm từ nhóm gốc là cấp 1. Cây thật hiện sâu 4 cấp, dư 2 để mở rộng mà không phải đổi cấu hình.
-
-Giới hạn này là **van an toàn chống nhập sai**, không phải để bảo vệ hiệu năng.
+**Không giới hạn số cấp.** Cây thật hiện sâu 4 cấp. Di chuyển nhánh vẫn bị chặn khi tạo vòng lặp (`BR-2.1`).
 
 ## Mentor đi theo nhóm vào lớp
 
@@ -260,10 +260,20 @@ Mỗi màn **khai rõ nó đọc theo phạm vi nào** — màn quản lý nhóm
 
 ## Tài khoản tách theo vai trò
 
-Một người trong tổ chức có thể đồng thời là học viên thật, tài khoản kiểm thử, và nhân sự trả lời bình luận. **Mỗi vai một tài khoản riêng.**
+Một người trong tổ chức có thể đồng thời là học viên thật, tài khoản kiểm thử, và nhân sự trả lời bình luận. **Tài khoản kiểm thử và tài khoản trả lời bình luận là tài khoản riêng.** Quản lý và mentor của nhóm thì dùng **chính tài khoản học viên** của người đó, xem mục dưới.
 
 Hệ quả: tài khoản kiểm thử bị loại khỏi **mọi** báo cáo và **mọi** logic của chức năng nhóm.
 
+
+## Một người nhiều vai trong một nhóm
+
+Trong một nhóm, một người được đồng thời là **quản lý, mentor và thành viên**, vì quản lý nhiều lúc cũng phải học. Cả ba vai dùng **một tài khoản học viên**.
+
+| Điều | Luật |
+|---|---|
+| Vào UpLMS Ops | Tài khoản học viên được gán quản lý hoặc mentor đăng nhập được UpLMS Ops và **chỉ thấy màn của vai đó**: quản lý thấy màn theo dõi nhánh (`US16`), mentor thấy màn chấm bài của lớp mình làm mentor (`BR-12.7`) |
+| Thông báo gửi quản lý | **Không bao giờ gửi cho chính người mà thông báo nói tới.** Bỏ người đó khỏi danh sách nhận; không còn ai thì gửi quản lý của nhóm cha gần nhất có quản lý; hết cây thì gửi quản trị viên hệ thống. Áp cho mọi thông báo gửi quản lý, hiện là `MAIL-GRP-01` (`BR-20.8`) |
+| Chấm bài | Người vừa là mentor vừa là thành viên của cùng một lớp **tạm được tự chấm bài của mình** (`BR-12.8`). Đây là rủi ro đã chấp nhận: điểm và chứng chỉ của người đó không có người chấm độc lập |
 ---
 
 # 5. Units
@@ -341,7 +351,7 @@ Cột Nguồn dẫn hạng mục của yêu cầu gốc và, nơi yêu cầu đ�
 
 | US | User story | Ưu tiên | Unit | Nguồn |
 |---|---|---|---|---|
-| `US18` | Xem số liệu học cộng dồn theo nhóm và theo cả nhánh, ở hiện tại hoặc tại một mốc quá khứ | Must | U7 | Giải quyết `O4` · `RC-07` nhóm cha bao trùm nhánh con · `RC-11` dựng lại quá khứ |
+| `US18` | Xem báo cáo của một nhóm ở tab Báo cáo trong chi tiết nhóm, theo thành viên, theo nhóm con và theo khoá, ở hiện tại hoặc tại một mốc quá khứ | Must | U7 | Giải quyết `O4` · `RC-24` · `RC-07` nhóm cha bao trùm nhánh con · `RC-11` dựng lại quá khứ |
 
 ### Vòng đời nhân sự
 
@@ -377,8 +387,6 @@ Sửa nhóm: mở chi tiết nhóm, bấm sửa. Nhóm đồng bộ từ hệ th
 
 - `BR-1.1` Mã nhóm **duy nhất** trong phạm vi một tổ chức. Không sửa được sau khi tạo
 - `BR-1.2` Nhóm cha phải **cùng nguồn** với nhóm con. Nhóm tự tạo không nhận nhóm cha là nhóm đồng bộ, và ngược lại
-- `BR-1.3` Một nhánh sâu **tối đa 6 cấp**, đếm từ nhóm gốc là cấp 1. Tạo nhóm làm nhánh vượt 6 cấp → chặn, báo *Nhánh này đã đạt số cấp tối đa*
-- `BR-1.4` Số cấp tối đa **cấu hình được theo tổ chức**, không đóng cứng trong mã
 - `BR-1.5` Nhóm nguồn `Đồng bộ` **không sửa được** mọi field trên UpLMS Ops
 - `BR-1.6` Nhóm mới tạo luôn có nguồn `Tự tạo` và trạng thái `Đang dùng`. Người dùng không chọn hai giá trị này
 
@@ -388,7 +396,6 @@ Sửa nhóm: mở chi tiết nhóm, bấm sửa. Nhóm đồng bộ từ hệ th
 - `AC1.2` Khi nhập mã nhóm đã tồn tại trong tổ chức, hệ thống báo *Mã nhóm đã tồn tại* và không cho lưu. Khi sửa một nhóm đã tạo, ô mã nhóm bị khoá. Theo `BR-1.1`
 - `AC1.3` Khi bỏ trống tên, nhập tên dài 256 ký tự hoặc mô tả dài 1001 ký tự, hệ thống không cho lưu theo cột Yêu cầu của bảng UI; tên đúng 255 ký tự và mô tả đúng 1000 ký tự thì lưu được
 - `AC1.4` Khi chọn nhóm cha cho nhóm tự tạo, ô chọn chỉ liệt kê nhóm tự tạo đang ở trạng thái `Đang dùng`, không có nhóm đồng bộ. Theo `BR-1.2`
-- `AC1.5` Khi tạo nhóm con dưới một nhóm đang ở cấp 6, hệ thống chặn và báo *Nhánh này đã đạt số cấp tối đa*; tạo nhóm ở cấp 6 thì được. Khi tổ chức đổi số cấp tối đa trong cấu hình, giới hạn mới áp dụng ngay. Theo `BR-1.3` · `BR-1.4`
 - `AC1.6` Khi mở chi tiết một nhóm nguồn `Đồng bộ`, nút Sửa không hiện, thay bằng dòng *Nhóm này đồng bộ từ hệ thống nhân sự, không chỉnh sửa trên UpLMS*. Theo `BR-1.5`
 
 ### Giao diện và validate
@@ -439,12 +446,11 @@ Là nhân sự vận hành, tôi cần di chuyển một nhánh sang nhóm cha k
 
 Ở màn danh sách dạng cây, người vận hành kéo một nhóm thả vào nhóm khác. Hoặc mở chi tiết nhóm, sửa field nhóm cha.
 
-Hệ thống kiểm tra trước khi áp: không tạo vòng, không vượt số cấp. Hỏi xác nhận rồi mới di chuyển.
+Hệ thống kiểm tra trước khi áp: không tạo vòng. Hỏi xác nhận rồi mới di chuyển.
 
 ### Business rule
 
 - `BR-2.1` Không cho di chuyển một nhóm vào **chính nó** hoặc vào **nhánh con của nó**. Chặn và báo *Không thể di chuyển một nhóm vào nhánh con của chính nó*
-- `BR-2.2` Di chuyển làm nhánh vượt **6 cấp** → chặn, báo rõ nhánh sẽ sâu bao nhiêu cấp
 - `BR-2.3` Nhóm nguồn `Đồng bộ` **không di chuyển được** bằng tay. Cơ cấu đổi thì đổi ở hệ thống nhân sự
 - `BR-2.4` Di chuyển nhánh **giữ nguyên toàn bộ thành viên** của mọi nhóm trong nhánh
 - `BR-2.5` Di chuyển nhánh **không đổi nội dung đã giao**. Nội dung giao cho nhóm cũ ở cấp trên không tự áp cho nhánh vừa chuyển sang
@@ -454,7 +460,6 @@ Hệ thống kiểm tra trước khi áp: không tạo vòng, không vượt s�
 
 - `AC2.1` Khi kéo một nhóm tự tạo thả vào vị trí hợp lệ, vị trí thả hiện viền xanh; hộp xác nhận hiện tên nhánh, số nhóm con, số người bị ảnh hưởng, nhóm cha cũ và mới; xác nhận xong thì nhánh nằm dưới nhóm cha mới. Theo bảng UI
 - `AC2.2` Khi thả một nhóm vào chính nó hoặc vào nhánh con của nó, vị trí thả hiện viền đỏ, hệ thống chặn và báo *Không thể di chuyển một nhóm vào nhánh con của chính nó*. Theo `BR-2.1`
-- `AC2.3` Khi di chuyển làm nhánh sâu 7 cấp, hệ thống chặn và báo nhánh sẽ sâu bao nhiêu cấp; di chuyển làm nhánh sâu đúng 6 cấp thì được. Theo `BR-2.2`
 - `AC2.4` Khi chọn một nhóm nguồn `Đồng bộ`, không kéo thả được nhóm đó và field nhóm cha không sửa được. Theo `BR-2.3`
 - `AC2.5` Khi di chuyển xong, mọi nhóm trong nhánh giữ nguyên thành viên, nội dung đã giao cho các nhóm đó không đổi, và nội dung giao cho nhóm cha mới không tự áp cho nhánh vừa chuyển. Theo `BR-2.4` · `BR-2.5`
 - `AC2.6` Khi di chuyển xong, nhật ký có một dòng ghi nhánh nào, từ đâu sang đâu, ai làm, lúc nào. Theo `BR-2.6`
@@ -475,7 +480,6 @@ Không có.
 
 | Góc | Xử lý |
 | --- | --- |
-| `CG-4` Cây chạm đúng 6 cấp, sau đó di chuyển một nhánh xuống sâu hơn | Có luật: `BR-2.2` |
 | `CG-5` Di chuyển nhánh tạo vòng lặp, A là cha B và B lại là cha A | Có luật: `BR-2.1` |
 
 ### Ngoài phạm vi của US
@@ -941,7 +945,7 @@ Là nhân sự vận hành, tôi cần gán một hoặc nhiều người quản
 ### Tiền điều kiện
 
 - Nhóm ở trạng thái `Đang dùng`
-- Người được gán có tài khoản nhân sự vận hành
+- Người được gán có tài khoản học viên đang hoạt động
 
 ### Luồng chính
 
@@ -959,19 +963,23 @@ Chọn một hoặc nhiều người, lưu. Từ đó họ xem được dữ li�
 - `BR-9.6` Gán **trực tiếp** thì gửi email `MAIL-GRP-02` cho người được gán. Quan hệ **kế thừa** từ nhóm cha không gửi, vì không có thao tác gán nào xảy ra
 - `BR-9.7` `MAIL-GRP-02` là **mail event mới**, dùng chung hạ tầng với `MAIL-GRP-01`. Một thao tác gán nhiều người thì mỗi người nhận một email của riêng mình. Luật này tính theo số **người nhận** trong một lần gán; `BR-13.6` tính theo số **nhóm** trong một lần chuyển phụ trách, hai trục độc lập, không mâu thuẫn
 
+- `BR-9.8` Quản lý là **tài khoản học viên** của chính người đó. Trong một nhóm, một người được đồng thời là quản lý, mentor và thành viên; gán vai này không gỡ vai kia
+
 ### Tiêu chí chấp nhận
 
 - `AC9.1` Khi gán nhiều người làm quản lý cho một nhóm, tất cả cùng hiện trong tab Người phụ trách với nguồn quan hệ là gán trực tiếp. Một người được gán thêm cho nhóm ở nhánh khác thì quan hệ ở các nhóm cũ giữ nguyên. Theo `BR-9.1` · `BR-9.2`
-- `AC9.2` Khi tìm người để gán quản lý, ô chọn chỉ hiện tài khoản nhân sự vận hành đang hoạt động; tài khoản học viên và tài khoản đã khoá không xuất hiện. Theo bảng UI
+- `AC9.2` Khi tìm người để gán quản lý, ô chọn hiện tài khoản học viên đang hoạt động; tài khoản kiểm thử, tài khoản trả lời bình luận và tài khoản đã khoá không xuất hiện. Theo `BR-9.8` · bảng UI
 - `AC9.3` Khi quản lý của một nhóm mở màn theo dõi nhánh, họ thấy người của nhóm đó và của mọi nhóm con. Theo `BR-9.3`
 - `AC9.4` Khi gán quản lý cho một nhóm nguồn `Đồng bộ`, thao tác thành công như với nhóm tự tạo. Người được gán không tự trở thành mentor của nhóm. Theo `BR-9.4` · `BR-9.5`
 - `AC9.5` Khi gán trực tiếp hai người trong một thao tác, mỗi người nhận một email `MAIL-GRP-02` riêng, ghi nhóm, người gán, thời điểm, số người trong nhánh và đường dẫn tới màn theo dõi nhánh. Nhóm con kế thừa quan hệ đó thì không gửi thêm email; gán lại người đã là quản lý của chính nhóm đó thì không gửi. Theo `BR-9.6` · `BR-9.7`
+
+- `AC9.6` Khi gán quản lý cho một người đang là thành viên của chính nhóm đó, người đó giữ nguyên tư cách thành viên và lượt ghi danh; gỡ vai quản lý cũng không gỡ họ khỏi nhóm. Theo `BR-9.8`
 
 ### Giao diện và validate
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| tab Người phụ trách | Chọn nhiều | **Người quản lý** | Tìm theo tên và email. Chỉ hiện tài khoản nhân sự vận hành đang hoạt động |
+| tab Người phụ trách | Chọn nhiều | **Người quản lý** | Tìm theo tên và email. Hiện tài khoản học viên đang hoạt động; không hiện tài khoản kiểm thử, tài khoản trả lời bình luận, tài khoản đã khoá |
 | tab Người phụ trách | Danh sách | — | Mỗi dòng: tên · email · **nguồn quan hệ** *(gán trực tiếp hay kế thừa từ nhóm cha)* |
 | tab Người phụ trách | Khối kế thừa | — | Nhóm chưa gán ai thì hiện quản lý kế thừa, kèm chữ: *Kế thừa từ nhóm `<tên nhóm cha>`* |
 | tab Người phụ trách | Cảnh báo | — | Nhóm không có quản lý nào, kể cả kế thừa, thì hiện dòng cảnh báo. Xem `US13` |
@@ -1069,7 +1077,7 @@ Là nhân sự vận hành, tôi cần chỉ định quản lý đích danh trê
 ### Tiền điều kiện
 
 - Học viên đã có tài khoản
-- Người được chỉ định có tài khoản nhân sự vận hành
+- Người được chỉ định có tài khoản học viên đang hoạt động
 
 ### Luồng chính
 
@@ -1132,7 +1140,7 @@ Là nhân sự vận hành, tôi cần gán mentor cho nhóm, để mentor đi t
 ### Tiền điều kiện
 
 - Nhóm ở trạng thái `Đang dùng`
-- Người được gán có tài khoản nhân sự vận hành
+- Người được gán có tài khoản học viên đang hoạt động
 
 ### Luồng chính
 
@@ -1143,25 +1151,30 @@ Khi nhóm được giao một lớp, mentor của nhóm tự thành mentor trong
 ### Business rule
 
 - `BR-12.1` Mentor gắn vào **nhóm**. Khi nhóm được giao một lớp, mentor của nhóm **tự thành mentor trong lớp đó**
-- `BR-12.2` Mentor đến từ nhóm **chỉ phụ trách những người đến từ nhóm đó**, không phụ trách cả lớp
+- `BR-12.2` Mentor đến từ nhóm **chỉ phụ trách những người đến từ nhóm đó**, không phụ trách cả lớp. "Phụ trách" là cách giao việc, không chặn quyền: bài của người từ nhóm A mặc định giao cho mentor của nhóm A; mentor chính vẫn xem cả lớp và giao lại bài chấm cho mentor bất kỳ trong lớp, như module Chấm điểm đang có
 - `BR-12.3` Một lớp nhận nhiều nhóm thì có nhiều mentor, mỗi người phụ trách phần của mình
 - `BR-12.4` **Mentor đầu tiên được thêm vào lớp là người chịu trách nhiệm chính.** Đổi lại được sau
 - `BR-12.5` Gỡ mentor khỏi nhóm thì **cũng gỡ khỏi các lớp** mà quan hệ đó sinh ra, trừ khi họ được thêm tay vào lớp từ trước
 - `BR-12.6` Mentor thêm tay vào lớp **không bị ảnh hưởng** bởi thay đổi ở nhóm
 
+- `BR-12.7` Mentor của nhóm là **tài khoản học viên** của chính người đó. Tài khoản này đăng nhập được UpLMS Ops và chỉ thấy màn chấm bài của các lớp mình là mentor. Danh sách mentor của lớp và danh sách người chấm nhận tài khoản học viên này
+- `BR-12.8` Người vừa là mentor vừa là thành viên của cùng một lớp **tạm được tự chấm bài của mình**. Rủi ro đã chấp nhận; chặn tự chấm để sau
+
 ### Tiêu chí chấp nhận
 
 - `AC12.1` Khi nhóm có mentor được giao một lớp, mentor đó xuất hiện ở tab Mentor của lớp với cột *Phụ trách nhóm* ghi tên nhóm; mentor thêm tay thì cột này để trống. Theo `BR-12.1`
-- `AC12.2` Khi lớp nhận nhóm A và nhóm B, mỗi nhóm một mentor, tab Mentor có hai dòng và mỗi mentor chỉ phụ trách người đến từ nhóm của mình. Theo `BR-12.2` · `BR-12.3`
+- `AC12.2` Khi lớp nhận nhóm A và nhóm B, mỗi nhóm một mentor, tab Mentor có hai dòng; bài của người từ nhóm A mặc định giao cho mentor của nhóm A, bài của người từ nhóm B cho mentor của nhóm B. Mentor chính của lớp vẫn xem được mọi bài và giao lại cho mentor khác trong lớp. Theo `BR-12.2` · `BR-12.3`
 - `AC12.3` Khi lớp chưa có mentor và nhóm đầu tiên được giao, mentor của nhóm đó mang nhãn người chịu trách nhiệm chính; người vận hành đổi được nhãn này sang mentor khác. Theo `BR-12.4`
 - `AC12.4` Khi gỡ mentor khỏi nhóm, mentor đó bị gỡ khỏi các lớp sinh ra từ quan hệ này. Mentor đã được thêm tay vào lớp từ trước thì không bị gỡ và không bị ảnh hưởng bởi thay đổi ở nhóm. Theo `BR-12.5` · `BR-12.6`
-- `AC12.5` Khi tìm người để gán mentor, ô chọn chỉ hiện tài khoản nhân sự vận hành; gán mentor không gửi email nào. Theo bảng UI
+- `AC12.5` Khi tìm người để gán mentor, ô chọn hiện tài khoản học viên đang hoạt động; gán mentor không gửi email nào. Theo bảng UI
+
+- `AC12.6` Khi mentor đăng nhập UpLMS Ops bằng tài khoản học viên, họ chỉ thấy màn chấm bài của các lớp mình là mentor, không thấy màn quản trị khác; khi họ cũng là thành viên của lớp đó, bài của chính họ có trong danh sách chấm và họ chấm được. Theo `BR-12.7` · `BR-12.8`
 
 ### Giao diện và validate
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| tab Người phụ trách | Chọn nhiều | **Mentor** | Tìm theo tên và email. Chỉ hiện tài khoản nhân sự vận hành |
+| tab Người phụ trách | Chọn nhiều | **Mentor** | Tìm theo tên và email. Hiện tài khoản học viên đang hoạt động; không hiện tài khoản kiểm thử, tài khoản trả lời bình luận, tài khoản đã khoá |
 | Chi tiết lớp — tab Mentor | Cột thêm | **Phụ trách nhóm** | Mentor đến từ nhóm thì hiện tên nhóm. Mentor thêm tay thì để trống |
 | Chi tiết lớp — tab Mentor | Nhãn | — | Người chịu trách nhiệm chính có nhãn riêng |
 
@@ -1181,7 +1194,6 @@ Khi nhóm được giao một lớp, mentor của nhóm tự thành mentor trong
 
 ### Ngoài phạm vi của US
 
-- Mentor là học viên khác thay vì nhân sự vận hành
 - Phân công mentor theo từng người trong nhóm
 
 ---
@@ -1226,8 +1238,8 @@ Khi một người rời vị trí, người vận hành mở màn danh sách nh
 |---|---|---|---|
 | Danh sách nhóm | Nhãn cảnh báo | — | Nhóm không có quản lý nào, kể cả kế thừa, hiện nhãn *Chưa có quản lý* |
 | Danh sách nhóm | Bộ lọc | — | Thêm lựa chọn *Chỉ nhóm chưa có quản lý* |
-| Hồ sơ nhân sự vận hành | Khối | **Đang phụ trách** | Liệt kê nhóm họ quản lý và nhóm họ làm mentor |
-| Hồ sơ nhân sự vận hành | Nút | **Chuyển toàn bộ phụ trách** | Chọn người thay thế, xem trước danh sách sẽ chuyển, xác nhận |
+| Hồ sơ học viên trên UpLMS Ops | Khối | **Đang phụ trách** | Liệt kê nhóm họ quản lý và nhóm họ làm mentor |
+| Hồ sơ học viên trên UpLMS Ops | Nút | **Chuyển toàn bộ phụ trách** | Chọn người thay thế, xem trước danh sách sẽ chuyển, xác nhận |
 | Chuyển phụ trách | Hộp xác nhận | — | Hiện: số nhóm · số người bị ảnh hưởng · người nhận. Nút *Chuyển* và *Huỷ* |
 
 ### Dữ liệu
@@ -1390,11 +1402,11 @@ Trên **UpLMS Ops**, quản lý mở màn theo dõi, thấy danh sách người 
 - `BR-16.4` Màn này đọc theo **quan hệ quản lý**, không đọc theo vai trò hệ thống. Người vừa là quản lý nhóm vừa có vai trò xem toàn công ty thì ở màn này **chỉ thấy nhánh mình**
 - `BR-16.5` **Không hiện tài khoản kiểm thử**
 - `BR-16.6` **Không hiện người đã nghỉ việc** ở chế độ xem hiện tại
-- `BR-16.7` Màn theo dõi nhánh nằm ở **UpLMS Ops**. Quản lý đăng nhập bằng tài khoản nhân sự vận hành, chính tài khoản đã được gán ở `US9`. Không có bản ở portal học viên; học viên chỉ xem được quản lý của mình qua `US17`
+- `BR-16.7` Màn theo dõi nhánh nằm ở **UpLMS Ops**. Quản lý đăng nhập bằng **tài khoản học viên** của mình, chính tài khoản đã được gán ở `US9`; ở UpLMS Ops tài khoản này chỉ thấy màn theo dõi nhánh, cộng màn chấm bài nếu cũng là mentor. Không có bản ở portal học viên; học viên chỉ xem được quản lý của mình qua `US17`
 
 ### Tiêu chí chấp nhận
 
-- `AC16.1` Khi quản lý mở màn theo dõi nhánh trên UpLMS Ops bằng tài khoản nhân sự vận hành đã được gán, màn hiện người trong toàn bộ nhánh mình phụ trách, gồm cả nhóm con, sắp theo số khoá quá hạn giảm dần. Học viên không có màn này trên UpLMS. Theo `BR-16.1` · `BR-16.7`
+- `AC16.1` Khi quản lý đăng nhập UpLMS Ops bằng tài khoản học viên đã được gán làm quản lý, họ chỉ thấy màn theo dõi nhánh; màn này hiện người trong toàn bộ nhánh mình phụ trách, gồm cả nhóm con, sắp theo số khoá quá hạn giảm dần. Học viên không có màn này trên UpLMS. Theo `BR-16.1` · `BR-16.7`
 - `AC16.2` Khi bấm vào một người, hồ sơ mở ra với toàn bộ dữ liệu học, kể cả khoá nhận qua nhánh khác. Người thuộc hai nhánh thì quản lý của cả hai nhánh đều thấy đủ dữ liệu đó. Theo `BR-16.2` · `BR-16.3`
 - `AC16.3` Khi một người vừa quản lý một nhóm vừa có vai trò xem toàn công ty mở màn này, họ chỉ thấy người trong nhánh mình phụ trách. Theo `BR-16.4`
 - `AC16.4` Khi xem ở chế độ hiện tại, danh sách không có tài khoản kiểm thử và không có người đã nghỉ việc. Theo `BR-16.5` · `BR-16.6`
@@ -1489,11 +1501,11 @@ Không có góc nào từ Impact Matrix chạm US này.
 
 ---
 
-## US18: Báo cáo cộng dồn theo nhóm
+## US18: Báo cáo theo nhóm trong chi tiết nhóm
 
 ### User story
 
-Là nhân sự vận hành, tôi cần xem số liệu học cộng dồn theo nhóm và theo cả nhánh, ở thời điểm hiện tại hoặc tại một mốc quá khứ, để báo cáo theo cơ cấu tổ chức.
+Là nhân sự vận hành, tôi cần xem báo cáo học của một nhóm ngay trong chi tiết nhóm, theo thành viên, theo nhóm con và theo khoá, ở thời điểm hiện tại hoặc tại một mốc quá khứ, để báo cáo theo cơ cấu tổ chức.
 
 **Ưu tiên:** Must
 
@@ -1503,37 +1515,41 @@ Là nhân sự vận hành, tôi cần xem số liệu học cộng dồn theo n
 
 ### Luồng chính
 
-Người vận hành mở dashboard, chọn nhóm thay vì chọn lớp, xem số liệu của cả phòng. Muốn biết quý trước thế nào thì chọn mốc thời gian lùi về.
+`Chi tiết nhóm → tab Báo cáo`
+
+Người vận hành mở chi tiết một nhóm, vào tab Báo cáo và chọn một trong ba danh sách: theo thành viên, theo nhóm con, theo khoá. Muốn biết quý trước thế nào thì chọn mốc thời gian lùi về. Báo cáo không nằm trên dashboard.
 
 ### Business rule
 
 - `BR-18.1` Báo cáo tính theo **thành viên tại mốc thời gian đã chọn**, không theo danh sách hôm nay
 - `BR-18.2` Chọn mốc quá khứ thì mọi chỉ số tính theo trạng thái **tại mốc đó**, gồm cả người sau này đã nghỉ việc
-- `BR-18.3` Nhóm cha gồm **toàn bộ người ở nhánh con** khi bật công tắc
+- `BR-18.3` Số liệu của một nhóm gồm **toàn bộ người ở nhánh con**, như mọi màn đọc dữ liệu khác (`BR-5.3`). [đề xuất] Không có công tắc bật tắt nhánh con
 - `BR-18.4` **Không tính tài khoản kiểm thử** ở mọi chỉ số
 - `BR-18.5` Chế độ xem hiện tại **loại người đã nghỉ việc**. Chế độ xem quá khứ **vẫn tính họ**, nếu lúc đó họ còn làm
-- `BR-18.6` Bảng so sánh chỉ hiện **nhóm cùng cấp cùng cha**. So một phòng với cả khối là so sai đơn vị
+- `BR-18.6` Danh sách theo nhóm con chỉ gồm **nhóm con trực tiếp** của nhóm đang xem; mỗi dòng cộng dồn cả nhánh của nhóm con đó. Các dòng vì vậy luôn cùng cấp, cùng cha
 - `BR-18.7` Mốc quá khứ lùi được **tối đa tới ngày bật tính năng**. Trước đó không có dữ liệu thành viên theo thời gian
+- `BR-18.8` Báo cáo nằm ở **tab Báo cáo của chi tiết nhóm**, gồm ba danh sách: theo thành viên, theo nhóm con, theo khoá. Đợt này không sửa dashboard
 
 ### Tiêu chí chấp nhận
 
-- `AC18.1` Khi chọn một nhóm ở dashboard, bộ lọc không bắt buộc chọn khoá và lớp, ô chọn nhóm không có nhóm lưu trữ, công tắc *Gồm nhánh con* mặc định bật, và khối số liệu hiện số người có nghĩa vụ, số hoàn thành, tỉ lệ hoàn thành, số quá hạn, số chưa bắt đầu, tiến độ trung bình. Theo bảng UI
-- `AC18.2` Khi công tắc *Gồm nhánh con* bật, số liệu của nhóm cha gồm người ở mọi nhóm con. Theo `BR-18.3`
-- `AC18.3` Khi chọn một ngày trong quá khứ, mọi chỉ số tính theo danh sách thành viên và trạng thái tại ngày đó, gồm cả người sau này nghỉ việc. Sau khi thêm người mới và có người nghỉ việc, chạy lại cùng mốc vẫn ra đúng số cũ. Theo `BR-18.1` · `BR-18.2`
-- `AC18.4` Khi xem chế độ hiện tại, người đã nghỉ việc không được tính; tài khoản kiểm thử không được tính ở bất kỳ chỉ số nào, ở cả chế độ hiện tại và quá khứ. Theo `BR-18.4` · `BR-18.5`
-- `AC18.5` Khi xem bảng so sánh, các dòng là nhóm cùng cấp và cùng nhóm cha, không có nhóm khác cấp. Theo `BR-18.6`
+- `AC18.1` Khi mở tab Báo cáo của một nhóm, màn có ba danh sách theo thành viên, theo nhóm con và theo khoá, ô chọn mốc mặc định là hiện tại; dashboard không có bộ lọc nhóm nào. Theo `BR-18.8` · bảng UI
+- `AC18.2` Khi xem danh sách theo thành viên của một nhóm cha, danh sách gồm thành viên của mọi nhóm con, mỗi người một dòng với cột Nhóm là nhóm của họ. Theo `BR-18.3`
+- `AC18.3` Khi chọn một ngày trong quá khứ, cả ba danh sách tính theo danh sách thành viên và trạng thái tại ngày đó, gồm cả người sau này nghỉ việc. Sau khi thêm người mới và có người nghỉ việc, chạy lại cùng mốc vẫn ra đúng số cũ. Theo `BR-18.1` · `BR-18.2`
+- `AC18.4` Khi xem chế độ hiện tại, người đã nghỉ việc không được tính; tài khoản kiểm thử không được tính ở bất kỳ danh sách nào, ở cả chế độ hiện tại và quá khứ. Theo `BR-18.4` · `BR-18.5`
+- `AC18.5` Khi xem danh sách theo nhóm con, mỗi dòng là một nhóm con trực tiếp với số liệu cộng dồn cả nhánh của nó; nhóm không có nhóm con thì danh sách này trống và ghi rõ nhóm không có nhóm con. Theo `BR-18.6`
 - `AC18.6` Khi chọn mốc thời gian, ngày bật tính năng là ngày sớm nhất chọn được; ngày trước đó không chọn được. Theo `BR-18.7`
 
 ### Giao diện và validate
 
-| Thay đổi | Section | Field | Validate |
+| Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| **Sửa** | Dashboard | Bộ lọc | **Làm động.** Bỏ ràng buộc bắt buộc phải chọn khoá và lớp. Lọc theo gì cũng được |
-| **Thêm** | Dashboard | Bộ lọc **Nhóm** | Chọn một nhóm, có tìm kiếm. Nhóm lưu trữ không hiện |
-| **Thêm** | Dashboard | Công tắc **Gồm nhánh con** | Mặc định **bật** |
-| **Thêm** | Dashboard | Chọn **Mốc thời gian** | Hai lựa chọn: *Hiện tại* hoặc *Một ngày trong quá khứ*. Mặc định hiện tại |
-| **Thêm** | Dashboard | Khối số liệu | Số người có nghĩa vụ · số hoàn thành · tỉ lệ hoàn thành · **số quá hạn** · **số chưa bắt đầu** · tiến độ trung bình |
-| **Thêm** | Dashboard | Bảng so sánh | So các **nhóm cùng cấp, cùng nhóm cha**. Mỗi dòng một nhóm con, cùng bộ chỉ số |
+| Chi tiết nhóm | Tab | **Báo cáo** | Tab mới, cạnh các tab Thành viên, Nội dung được giao, Người phụ trách |
+| tab Báo cáo | Chọn | **Mốc thời gian** | Hai lựa chọn: *Hiện tại* hoặc *Một ngày trong quá khứ*. Mặc định hiện tại. Ngày sớm nhất là ngày bật tính năng |
+| tab Báo cáo | Chọn | **Xem theo** | Ba lựa chọn: *Thành viên* · *Nhóm con* · *Khoá*. [đề xuất] Mặc định *Thành viên* |
+| Theo thành viên | Danh sách | Cột | [đề xuất] Họ tên · Nhóm · Số khoá có nghĩa vụ · Hoàn thành · Đang học · Quá hạn · Chưa bắt đầu · Tiến độ trung bình |
+| Theo nhóm con | Danh sách | Cột | [đề xuất] Tên nhóm con · Số người có nghĩa vụ · Hoàn thành · Tỉ lệ hoàn thành · Quá hạn · Chưa bắt đầu · Tiến độ trung bình |
+| Theo khoá | Danh sách | Cột | [đề xuất] Khoá · Lớp · Số người có nghĩa vụ · Hoàn thành · Tỉ lệ hoàn thành · Quá hạn · Chưa bắt đầu |
+| Cả ba danh sách | Phân trang | — | Danh sách dài được phân trang |
 
 > Tách **chưa bắt đầu** khỏi **quá hạn** vì hai thứ đòi hai cách xử lý: chưa bắt đầu thì nhắc, quá hạn thì phải quyết gia hạn hay cho trượt.
 
@@ -1557,6 +1573,7 @@ Không có.
 - Hẹn giờ gửi báo cáo định kỳ qua email
 - Xuất báo cáo ra tệp
 - So sánh hai mốc thời gian cạnh nhau
+- Báo cáo theo nhóm trên dashboard
 
 ---
 
@@ -1642,6 +1659,7 @@ Hệ thống phát hiện tình huống, gửi email. Quản lý đọc, vào h�
 - `BR-20.5` Một lần rời nhóm chỉ gửi **một email**, gộp mọi khoá còn lại. Không gửi mỗi khoá một email
 - `BR-20.6` Lượt ghi danh **giữ nguyên** cho tới khi có người xử lý. Không treo, không khoá
 - `BR-20.7` Đây là **mail event mới**, chưa có trong các mail tự động hiện có
+- `BR-20.8` Người rời nhóm **không bao giờ là người nhận** email nói về chính mình, kể cả khi họ là quản lý chính hoặc quản lý của nhóm đó. Bỏ họ khỏi danh sách nhận theo `BR-20.2` và `BR-20.3`; không còn ai thì gửi quản lý của nhóm cha gần nhất có quản lý; hết cây thì theo `BR-20.4`. Luật này áp cho mọi thông báo gửi quản lý của một người
 
 ### Tiêu chí chấp nhận
 
@@ -1649,6 +1667,7 @@ Hệ thống phát hiện tình huống, gửi email. Quản lý đọc, vào h�
 - `AC20.2` Khi người đó có quản lý chính, quản lý chính ở dòng người nhận và các quản lý khác ở dòng đồng gửi. Khi không có quản lý chính, mọi quản lý theo nhóm ở dòng người nhận. Khi không có quản lý nào, quản trị viên hệ thống nhận email. Theo `BR-20.2` · `BR-20.3` · `BR-20.4`
 - `AC20.3` Khi người đó còn ba khoá đang học, hệ thống gửi đúng một email liệt kê cả ba khoá kèm tình trạng từng khoá, đường dẫn tới hồ sơ người đó và câu cảnh báo cố định về việc gỡ khỏi lớp sẽ xoá tiến độ. Theo `BR-20.5`
 - `AC20.4` Khi người rời nhóm vì nghỉ việc, chưa học khoá nào, hoặc vẫn thuộc một nhóm khác đang giao đúng lớp đó, không có email nào được gửi cho khoá đó. Theo bảng Nội dung email
+- `AC20.5` Khi người rời nhóm A đồng thời là quản lý duy nhất của nhóm A, họ không nhận email; quản lý của nhóm cha gần nhất có quản lý nhận thay; không nhóm nào trên nhánh có quản lý khác thì quản trị viên hệ thống nhận. Theo `BR-20.8`
 
 ### Giao diện và validate
 
@@ -1659,7 +1678,7 @@ Không có màn mới hoặc màn bị sửa.
 | | |
 |---|---|
 | **Khi nào bắn** | Một người rời nhóm mà còn ít nhất một khoá đang học dở hoặc đã học xong |
-| **Gửi cho** | **Quản lý chính** ở dòng người nhận. Các quản lý khác ở dòng đồng gửi |
+| **Gửi cho** | **Quản lý chính** ở dòng người nhận. Các quản lý khác ở dòng đồng gửi. Không bao giờ gửi cho chính người rời nhóm; không còn ai thì lên quản lý của nhóm cha gần nhất *(`BR-20.8`)* |
 | **Nội dung** | Ai rời nhóm nào, sang nhóm nào · danh sách khoá còn lại kèm tình trạng từng khoá · đường dẫn tới hồ sơ người đó · một câu cảnh báo cố định: *"Gỡ khỏi lớp sẽ xoá tiến độ đã học và không khôi phục được. Giữ nguyên lớp nếu muốn người này học tiếp."* |
 | **Không bắn khi** | Người đó chưa học khoá nào *(`US19` tự xử lý)* · người đó nghỉ việc *(lượt ghi danh chỉ đánh dấu kết thúc)* · với từng khoá: người đó **vẫn thuộc một nhóm khác đang giao đúng lớp đó** *(`BR-3.7`, lượt ghi danh giữ nguyên, không có gì phải quyết)* |
 
@@ -1706,7 +1725,8 @@ Bốn NFR trên chưa có chỉ số đo: câu hỏi mở #11.
 | Cách bật | [đề xuất] Bật làm hai lần. Lần một: đồng bộ cây và thành viên, chưa giao nội dung nào. Lần hai: mở chức năng giao nội dung. Bật cùng lúc thì lần đồng bộ đầu có thể kích hoạt luật đứng và gửi mail hàng loạt | Impact Matrix mục 8 |
 | Chạy song song | Đường thêm học viên vào lớp bằng tay và đường giao qua nhóm chạy song song lâu dài, không phải giai đoạn chuyển tiếp. Ràng buộc `C2` giữ cho hai đường không sinh hai lượt ghi danh | Impact Matrix mục 8 · `C2` · `BR-7.3` |
 | Quay lui | Tắt được luật đứng, nhưng lượt ghi danh đã sinh không thu hồi tự động, vì lượt ghi danh thuộc về Lớp | Impact Matrix mục 8 |
-| Tenant và cấu hình | Số cấp tối đa cấu hình theo tổ chức (`BR-1.4`). Nguồn nhóm và loại quan hệ do hệ thống định nghĩa cố định (câu hỏi mở #3, đã quyết). Dữ liệu nhóm tách theo tổ chức như dữ liệu hiện có. [đề xuất] Đồng bộ cơ cấu từ hệ thống nhân sự là chỗ gắn riêng với UpBase: định nghĩa một dạng dữ liệu cơ cấu chuẩn, hệ thống nhân sự hiện tại là một nguồn đổ vào, để tổ chức khác dùng hệ thống nhân sự khác không phải làm lại | Impact Matrix mục 9 |
+| Tenant và cấu hình | Không giới hạn số cấp của cây nhóm, không có hằng số số cấp. Nguồn nhóm và loại quan hệ do hệ thống định nghĩa cố định (câu hỏi mở #3, đã quyết). Dữ liệu nhóm tách theo tổ chức như dữ liệu hiện có. [đề xuất] Đồng bộ cơ cấu từ hệ thống nhân sự là chỗ gắn riêng với UpBase: định nghĩa một dạng dữ liệu cơ cấu chuẩn, hệ thống nhân sự hiện tại là một nguồn đổ vào, để tổ chức khác dùng hệ thống nhân sự khác không phải làm lại | Impact Matrix mục 9 |
+| Quyền vào UpLMS Ops | Tài khoản học viên được gán quản lý hoặc mentor phải vào được UpLMS Ops và chỉ thấy màn của vai đó. Mentor đang được thêm tay vào lớp từ danh sách Staff giữ nguyên như hiện nay (`BR-12.6`) | DEC101 · `BR-12.7` · `BR-16.7` |
 | Hướng dẫn người dùng | User Guide và thông báo phát hành nói rõ báo cáo theo mốc quá khứ chỉ có dữ liệu từ ngày bật tính năng | Câu hỏi mở #5 · `BR-18.7` |
 
 ---
@@ -1717,6 +1737,7 @@ Bốn NFR trên chưa có chỉ số đo: câu hỏi mở #11.
 | --- | --- | --- | --- |
 | A1 | Cách vận hành đang xoay xở, ở phần Bằng chứng của mục 1, đúng như suy luận từ hệ thống; chưa khảo sát trực tiếp | Mục tiêu `O1`, `O2` và ngưỡng của SC1, SC2 có thể đặt sai trọng tâm | Mục 1 · câu hỏi mở #1 |
 | A2 | Ngưỡng của các tiêu chí thành công ở mục 2 phù hợp, dù chưa có số liệu nền | Đánh giá sau phát hành kết luận sai về hiệu quả của tính năng | Mục 2 |
+| A4 | Danh sách mentor của lớp và danh sách người chấm nhận được tài khoản học viên mà không phải đổi luồng chấm bài hiện có | Phải sửa thêm luồng chấm bài; phạm vi lớn hơn | `BR-12.7` · Impact Matrix vùng 14 |
 | A3 | Cơ cấu tổ chức chỉ đổi vài lần một năm, nên đồng bộ theo lô là đủ | Cơ cấu đổi thường xuyên hơn thì nhóm đồng bộ lệch với hệ thống nhân sự giữa hai lần chạy | `BR-5.9` |
 
 ---
@@ -1726,7 +1747,7 @@ Bốn NFR trên chưa có chỉ số đo: câu hỏi mở #11.
 | # | Nội dung | Người trả lời | Chặn việc gì |
 |---|---|---|---|
 | 1 | **Số liệu vận hành thật** — một tháng giao bài bao nhiêu lần, mỗi lần mất bao lâu, đã từng sót người chưa | Người viết | Phần Bằng chứng ở mục 1 còn `❓PO`; giả định A1 |
-| 2 | **Ma trận phân quyền hiện có** — chưa ai đọc được, nó nằm trong dữ liệu chứ không nằm trong cấu trúc | Dev | `US16` ở phía Dev: phạm vi dữ liệu dựng trên nền chưa nhìn thấy. **Không chặn viết PRD**, vì màn theo dõi nhánh đọc theo **quan hệ quản lý**, không theo vai trò hệ thống *(`BR-16.4`; phạm vi tách theo màn chốt 06/10, đơn giản hoá phạm vi chốt 05/10)*. Dev xin bản export ma trận quyền trước khi làm `US16` để nối hai phạm vi |
+| 2 | **Ma trận phân quyền hiện có** — chưa ai đọc được, nó nằm trong dữ liệu chứ không nằm trong cấu trúc | Dev | `US16` ở phía Dev: phạm vi dữ liệu dựng trên nền chưa nhìn thấy. **Không chặn viết PRD**, vì màn theo dõi nhánh đọc theo **quan hệ quản lý**, không theo vai trò hệ thống *(`BR-16.4`; phạm vi tách theo màn chốt 06/10, đơn giản hoá phạm vi chốt 05/10)*. Dev xin bản export ma trận quyền trước khi làm `US16` để nối hai phạm vi. Từ CR6 thêm việc: tài khoản học viên được vào UpLMS Ops cho đúng màn của vai quản lý hoặc mentor |
 | 3 | ~~**Loại quan hệ** *(quản lý, mentor)* do hệ thống định nghĩa cố định hay tổ chức tự thêm được~~ **Đã quyết 12/10/2026:** loại quan hệ do hệ thống định nghĩa cố định, gồm quản lý và mentor; tổ chức không tự thêm loại mới | PO | Không chặn |
 | 4 | ~~**Tài khoản kiểm thử và tài khoản trả lời bình luận tạo bằng cách nào**, khi chúng không phải nhân sự nên không có trong cây tổ chức~~ **Đã quyết 12/10/2026:** hai loại tài khoản này được tạo hoặc chọn thẳng trong UpLMS Ops, không qua cây tổ chức trên Lark | PO | Không chặn |
 | 5 | **Mốc lùi tối đa của báo cáo quá khứ** là ngày bật tính năng *(`BR-18.7`)*. Cần nói rõ với người dùng, đừng để họ tưởng có dữ liệu cũ hơn | Người viết | Không chặn, nhưng phải truyền đạt |
@@ -1736,6 +1757,9 @@ Bốn NFR trên chưa có chỉ số đo: câu hỏi mở #11.
 | 9 | **Dữ liệu nhóm của chức năng cũ** đang có thật hay rỗng, và xử lý ra sao: giữ, chuyển đổi hay bỏ. PO đã quyết bỏ hẳn chức năng Group Management và Recipients List cũ, coi như chưa có, nhưng chưa quyết phần dữ liệu (`OQ-25` của bản phân tích ảnh hưởng) | PO · Dev | Không chặn viết PRD. Chặn bước chuẩn bị dữ liệu ở mục 8 trước khi bật |
 | 10 | **Hai góc mới có luật một phần**: `CG-2` giao nội dung cho nhóm cha không có thành viên trực tiếp, nhánh con có người, chưa có tiêu chí chấp nhận cho công tắc *Chảy xuống nhánh con* (`US7`); `CG-8` cây tổ chức đổi lớn giữa hai lần đồng bộ, chưa quyết có cảnh báo trước khi áp hay không (`US5`) | PO | Không chặn. Có luật thì bổ sung tiêu chí chấp nhận qua change request |
 | 11 | **NFR chưa có chỉ số đo**: bốn NFR riêng ở `US5`, `US7`, `US16`, `US18` ghi "không chặn giao diện" hoặc "phân trang", chưa có thời gian xử lý tối đa hay cỡ trang | Tech PIC | Không chặn. Tech PIC đề xuất chỉ số trong `tech-design.md` ở 2.43 |
+| 12 | **Ba góc của một người nhiều vai** chưa có luật, ghi đề xuất: một người tự chỉ định mình làm quản lý chính của chính mình thì [đề xuất] chặn · khối *Quản lý của tôi* của người vừa là thành viên vừa là quản lý nhóm mình thì [đề xuất] không hiện chính họ, hiện quản lý cấp gần nhất theo cùng luật `BR-20.8` · tài khoản nhân sự vận hành hiện có còn được gán làm quản lý, mentor của nhóm không, [đề xuất] không, chỉ tài khoản học viên | PO | Không chặn. PO chốt ở họp Decision Brief; có luật thì bổ sung tiêu chí chấp nhận qua change request |
+| 13 | **Người vào nhóm muộn ở lớp có thời hạn Flexible**: lớp `Flexible` mà học viên chưa kích hoạt thì không đặt được thời hạn riêng (`KB-CLASS-03`), nên người vào nhóm sau sáu tháng vẫn nhận đủ N ngày. Đúng hay sai là câu nghiệp vụ, bản phân tích ảnh hưởng ghi cần chốt (`BI-7`) | PO | Không chặn. Có luật thì bổ sung tiêu chí chấp nhận cho `US7` qua change request |
+| 14 | **Bài tự chấm và bước review của mentor chính**: người vừa là mentor vừa là thành viên tạm được tự chấm (`BR-12.8`); bài tự chấm đi theo luồng chấm hiện có, PRD không thêm luật. Chưa rõ bài tự chấm có bắt buộc qua bước review của mentor chính không, và khi chính mentor chính tự chấm thì không ai review. Luật "gán mentor không gửi email" mới ghi ở `AC12.5`, chưa có business rule riêng | Tech PIC · QA PIC · PO | Không chặn. Rủi ro PO đã chấp nhận; Tech PIC và QA PIC nêu cách xử lý trong file thiết kế, cần luật thì bổ sung qua change request |
 
 ---
 

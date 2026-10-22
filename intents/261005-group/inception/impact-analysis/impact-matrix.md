@@ -1,23 +1,24 @@
 ---
 intent: 261005-group
 artifact: impact-matrix
-version: 0.4
+version: 0.5
 status: approved
 approved: 2026-10-12 (v0.4); 2026-10-09 (v0.3); 2026-10-06 (v0.2)
-cr: CR2 ngày 2026-10-12, CG-3 đã giải và OQ-31; CR1 ngày 2026-10-09, vùng 9 và BI-6
+cr: CR6 ngày 2026-10-21, bỏ giới hạn cấp, một người nhiều vai, tự chấm, báo cáo trong chi tiết nhóm, vùng 13 đến 15; CR2 ngày 2026-10-12, CG-3 đã giải và OQ-31; CR1 ngày 2026-10-09, vùng 9 và BI-6
 gate: v1 Gate 2
 migrated-from: pre-aidlc:.claude/projects/Group/working/impact-analysis/impact-matrix-v0.2-20261006.md
+approved_at: 2026-10-22T07:49
 ---
 # Impact Matrix — Group
 
 | | |
 | --- | --- |
 | **Project** | Group |
-| **Version** | **v0.4** — 12/10/2026, CR2. v0.3 ngày 09/10/2026, CR1. v0.2 ngày 06/10/2026 |
+| **Version** | **v0.5** — 21/10/2026, CR6. v0.4 ngày 12/10/2026, CR2. v0.3 ngày 09/10/2026, CR1. v0.2 ngày 06/10/2026 |
 | **Ngày** | Dựng 05/10/2026 · duyệt Gate 2 ngày 06/10/2026 |
 | **Nguồn input** | `brd-v0.1-20261005.md` · `related-features-map-20261005.md` · KB `04` `05` `06` `09` `11` `12` `13` `14` `15` `16` · **Swagger đọc 05/10/2026** · **schema Lark tải và đọc 05/10/2026** |
 | **Trạng thái** | ✅ **Approved** — v0.4 ngày 12/10/2026 (CR2) · v0.3 ngày 09/10/2026 (CR1) · Gate 2 ngày 06/10/2026. 6/6 conflict đã quyết, 15/15 coverage gap có luật hoặc có chỗ ghi |
-| **Cập nhật** | 12/10/2026 — CR2: `CG-3` đã giải bằng `BR-3.7` `BR-19.7`; `OQ-31` ghi rõ không chặn PRD. 09/10/2026 — CR1: thêm `MAIL-GRP-02` vào vùng 9 và `BI-6`. Trước đó 06/10/2026 ghi quyết định Gate 2 |
+| **Cập nhật** | 21/10/2026 — CR6: bỏ giới hạn số cấp; một người được đồng thời là quản lý, mentor, thành viên bằng một tài khoản học viên, tài khoản đó vào UpLMS Ops; tạm cho tự chấm; `US18` thành tab Báo cáo trong chi tiết nhóm, không sửa dashboard. Xem mục 4 vùng 6, 10, 13 đến 15 và `CF-1`, `CF-2`. 12/10/2026 — CR2: `CG-3` đã giải bằng `BR-3.7` `BR-19.7`; `OQ-31` ghi rõ không chặn PRD. 09/10/2026 — CR1: thêm `MAIL-GRP-02` vào vùng 9 và `BI-6`. Trước đó 06/10/2026 ghi quyết định Gate 2 |
 
 > Bản phân tích **nội bộ**, không phải mục trong PRD. Kết quả chảy vào PRD ở `Solution` · `Out of scope` · `Acceptance criteria`.
 
@@ -106,7 +107,7 @@ Từ BRD `v0.1`: **20 User Story**, 5 mục tiêu, 3 ràng buộc bất biến.
 
 | Thành phần mới | Nội dung |
 |---|---|
-| **Nhóm nhiều cấp** | Tối đa 6 cấp, nhiều cây gốc song song, phân loại theo nguồn *(đồng bộ HRM / tự tạo)* |
+| **Nhóm nhiều cấp** | Không giới hạn số cấp *(CR6)*, nhiều cây gốc song song, phân loại theo nguồn *(đồng bộ HRM / tự tạo)* |
 | **Luật đứng** | Gán nội dung cho nhóm → người trong nhóm vào lớp. Người gia nhập sau vẫn tự nhận nếu công tắc bật |
 | **Quan hệ quản lý và mentor** | Gán cho nhóm · suy ra theo cây · chỉ định đích danh trên hồ sơ |
 | **Phạm vi dữ liệu theo nhánh** | Quản lý chỉ xem được người trong nhánh mình phụ trách |
@@ -126,13 +127,16 @@ Ba ràng buộc bất biến: `C1` nhóm chỉ chứa người · `C2` một lư
 | 3 | **Screen / report** | ✅ | Màn nhóm *(cây + bảng)*, màn thành viên, màn gán nội dung, màn quản lý, màn báo cáo theo nhóm, màn tra nhật ký. Phía LMS: khối quản lý trên hồ sơ học viên | 🔴 **High** | BRD §7 |
 | 4 | **Data** | ✅ | `users` **chưa có bất kỳ quan hệ cơ cấu nào**. Phải thêm: quan hệ cha con giữa nhóm · nguồn nhóm · quan hệ quản lý và mentor · **thành viên kèm thời điểm** · trạng thái lưu trữ | 🔴 **High** | KB `12` §2 |
 | 5 | **API** | ✅ | `Group Management` hiện có **9 endpoint nhưng `CreateGroupDto` chỉ gồm `name` + `users`**. Không kế thừa được gì. Thêm nhóm endpoint gán nội dung và báo cáo | 🟡 Medium | Swagger 05/10 |
-| 6 | **Role / permission** | ✅ | Phạm vi dữ liệu theo nhánh là **chiều mới** trong Casbin. Chưa ai đọc được ma trận quyền hiện tại — KB `06` Q1 treo từ 23/09 | 🔴 **High** | KB `12` §1.3 |
+| 6 | **Role / permission** | ✅ | Phạm vi dữ liệu theo nhánh là **chiều mới** trong Casbin. Chưa ai đọc được ma trận quyền hiện tại — KB `06` Q1 treo từ 23/09. **CR6:** tài khoản học viên được gán quản lý hoặc mentor đăng nhập được UpLMS Ops, chỉ thấy màn theo dõi nhánh và màn chấm bài của lớp; đây là loại tài khoản mới vào Ops, trước nay chỉ tài khoản nhân sự vận hành vào được | 🔴 **High** | KB `12` §1.3 |
 | 7 | **Business rule** | ✅ | 8 rule hiện có bị chạm. Nặng nhất: `KB-CLASS-01` *(Foundation)*, `KB-SIS-01` *(filter bắt buộc)*, `KB-USER-TA-01` *(`Test Account`)* | 🔴 **High** | §5 · §6 |
 | 8 | **NFR** | ✅ | Truy vấn *cha bao trùm toàn nhánh* chạy ở **mọi màn đọc dữ liệu**, không chỉ màn nhóm. Thêm lớp thành viên theo thời gian vào đường đọc của mọi báo cáo | 🟡 Medium | BRD `C3` |
 | 9 | **Notification / Email** | ✅ | 🔴 **Mail #11 đang bật.** Gán nhóm vào lớp → mỗi người một mail *"Chào mừng vào khoá học"*. Lớp Lesson có Foundation thì thêm mail #23–#26 về sau. Mail #12 *(hết hạn)* cũng nhân theo số người.<br>**CR1 09/10/2026:** dự án thêm **hai** mail event mới, không phải một: `MAIL-GRP-01` *(người rời nhóm còn nghĩa vụ học, `US20`)* và `MAIL-GRP-02` *(được gán quản lý hoặc nhận chuyển phụ trách, `US9` `US13`)*. Cả hai gửi cho nhân sự vận hành, số lượng nhỏ, không phải mail hàng loạt | 🔴 **High** | KB `13` · CR1 |
-| 10 | **Reporting** | ✅ | `Report LMS` *(6 endpoint)* và `Sis Dashboard` *(10)* **đều lấy `class_id` làm khoá**. Không có chiều nào theo người hay theo nhóm. `US18` không tận dụng được gì | 🔴 **High** | Swagger · KB `11` |
-| 11 | **Test** | ✅ | Vùng phải test lại: thêm gỡ học viên khỏi lớp · lớp Foundation · mail #11 #12 #23–26 · mọi dashboard · phân quyền · đồng bộ Lark · Comment Replier | 🟡 Medium | — |
+| 10 | **Reporting** | ✅ | `Report LMS` *(6 endpoint)* và `Sis Dashboard` *(10)* **đều lấy `class_id` làm khoá**. Không có chiều nào theo người hay theo nhóm. `US18` không tận dụng được gì. **CR6:** `US18` không sửa dashboard nữa; báo cáo nằm ở tab Báo cáo của chi tiết nhóm, ba danh sách theo thành viên, nhóm con, khoá. Rủi ro `R-3` và ràng buộc `KB-SIS-01` không còn chạm | 🔴 **High** | Swagger · KB `11` |
+| 11 | **Test** | ✅ | Vùng phải test lại: thêm gỡ học viên khỏi lớp · lớp Foundation · mail #11 #12 #23–26 · mọi dashboard *(CR6: không còn sửa dashboard; thêm luồng chấm bài với người chấm là tài khoản học viên)* · phân quyền · đồng bộ Lark · Comment Replier | 🟡 Medium | — |
 | 12 | **Release** | ✅ | Đồng bộ lần đầu chạm **384 người × 53 phòng ban** cùng lúc. Phải tách khỏi lần bật luật đứng, nếu không là một đợt mail hàng loạt | 🟡 Medium | §8 |
+| 13 | **Account / login** *(CR6)* [DEC101] | ✅ | Một người dùng **một tài khoản học viên** cho cả ba vai quản lý, mentor, thành viên. Thay một phần `CF-2`: quản lý, mentor không còn là tài khoản nhân sự vận hành. Tài khoản kiểm thử và tài khoản trả lời bình luận vẫn tách riêng | 🔴 **High** | DEC101 · KB `06` |
+| 14 | **Grading và Class** *(CR6)* [DEC101] [DEC103] | ✅ | Danh sách mentor của lớp lấy từ Staff (`KB-GRAD-07`, KB `04`): nay phải nhận tài khoản học viên. Người chấm có thể chấm bài của chính mình khi vừa là mentor vừa là thành viên của lớp; tạm cho phép, rủi ro chấp nhận | 🔴 **High** | DEC101 · DEC103 · KB `04` `05` |
+| 15 | **Notification** *(CR6)* [DEC102] | ✅ | Thông báo gửi quản lý của một người không gửi cho chính người đó, đi lên quản lý của nhóm cha gần nhất. Hiện chạm `MAIL-GRP-01` | 🟡 Medium | DEC102 |
 
 ### Vùng xét mà **không** bị ảnh hưởng
 
@@ -140,7 +144,7 @@ Ba ràng buộc bất biến: `C1` nhóm chỉ chứa người · `C2` một lư
 |---|---|
 | Course · Section · Learning Outcome | Nhóm không chạm nội dung. Nguyên tắc 6 — `C1` |
 | Question Bank · Quiz · Test | Nhóm dừng ở mức *ai vào lớp nào*, không chạm bài kiểm tra |
-| Grading | Mentor của lớp lấy từ Staff, không lấy từ nhóm. Quan hệ mentor của nhóm là **khái niệm khác** |
+| ~~Grading~~ | ~~Mentor của lớp lấy từ Staff, không lấy từ nhóm.~~ **CR6: nay bị ảnh hưởng**, xem vùng 14 |
 | Certificate | Cấp theo lượt ghi danh, không theo nhóm |
 | Storyline | `hidden`, không liên quan |
 | `Schedules` · `Room` · `Class Schedule` | ⚠️ `❓PO` — nằm trong **vùng KB chưa phủ** *(KB `14` §2.1, 45+ operation)*. Không kết luận "không ảnh hưởng", chỉ ghi là **chưa tra được** |
@@ -153,8 +157,8 @@ Ba ràng buộc bất biến: `C1` nhóm chỉ chứa người · `C2` một lư
 
 | # | Chiều | Conflict | Trạng thái |
 | --- | --- | --- | --- |
-| ~~`CF-1`~~ | Business rule | Dashboard bắt buộc lọc theo `Course` + `Class code`, `US18` không có hai thứ đó | ✅ **PO chốt 06/10: bộ lọc làm ĐỘNG**, lọc theo gì cũng được, đặt trong dashboard hiện có |
-| ~~`CF-2`~~ | Process | Hai luật đứng cùng tác động một lớp — Comment Replier và Nhóm | ✅ **PO chốt 06/10: tách tài khoản theo vai trò.** Xem phân tích dưới |
+| ~~`CF-1`~~ | Business rule | Dashboard bắt buộc lọc theo `Course` + `Class code`, `US18` không có hai thứ đó | ✅ **PO chốt 06/10: bộ lọc làm ĐỘNG**, lọc theo gì cũng được, đặt trong dashboard hiện có. **CR6 (DEC104): không làm trên dashboard nữa**, `US18` thành tab Báo cáo trong chi tiết nhóm; dashboard để sau |
+| ~~`CF-2`~~ | Process | Hai luật đứng cùng tác động một lớp — Comment Replier và Nhóm | ✅ **PO chốt 06/10: tách tài khoản theo vai trò.** Xem phân tích dưới. **CR6 (DEC101):** quản lý và mentor dùng chính tài khoản học viên; tách tài khoản chỉ còn áp cho tài khoản kiểm thử và tài khoản trả lời bình luận |
 | ~~`CF-3`~~ | Data | Nhóm đồng bộ có cho sửa tay không | ✅ **PO chốt 06/10: KHÔNG cho sửa.** Thêm gỡ thủ công chỉ áp cho nhóm tự tạo |
 | ~~`CF-4`~~ | Data | **Người nghỉ việc: gỡ khỏi nhóm hay giữ lại** | ✅ **PO chốt 06/10: gỡ khỏi nhóm, lượt ghi danh ĐÁNH DẤU kết thúc chứ không xoá** *(`OQ-36`)*. Thay thế `BA-06` ngày 05/10 |
 | ~~`CF-5`~~ | Permission | Một người mang nhiều Role thì phạm vi dữ liệu hợp lại thế nào | ✅ **PO chốt 06/10: TÁCH THEO MÀN.** Mỗi màn khai rõ đọc theo phạm vi nào |
@@ -284,7 +288,7 @@ Không tự chọn. Để Bước 7 so sánh.
 | `CG-1` | **Nhóm rỗng** được gán nội dung. Sau đó có người vào | Luật đứng phải chạy tại thời điểm người vào, không phải lúc gán |
 | `CG-2` | **Nhóm cha rỗng nhưng nhánh con có người.** Gán cho cha, chảy xuống con | Quy tắc *cha bao trùm con* áp cho gán nội dung hay chỉ cho báo cáo |
 | `CG-3` | Một người thuộc **nhiều nhóm cùng được gán một khoá** | ✅ **Đã giải 12/10/2026, CR2:** gỡ khỏi một nhóm thì lượt ghi danh **giữ nguyên** khi còn nhóm khác đang giao; một lượt nhiều nguồn. PRD `BR-3.7` · `BR-19.7` · `BR-7.9`. Trước đó: `C2` nói một lượt ghi danh, nhưng gỡ khỏi một nhóm thì lượt đó còn không |
-| `CG-4` | Cây chạm **đúng 6 cấp**, rồi di chuyển một nhánh xuống sâu hơn | Chặn ở đâu, báo gì |
+| ~~`CG-4`~~ | ~~Cây chạm **đúng 6 cấp**, rồi di chuyển một nhánh xuống sâu hơn~~ | Không còn áp dụng: bỏ giới hạn số cấp *(CR6, DEC100)* |
 | `CG-5` | Di chuyển nhánh tạo **vòng lặp** — A là cha B, B lại là cha A | `OQ-06` đã ghi: giới hạn số cấp **không** giải được việc này |
 
 ### Exception
@@ -329,7 +333,7 @@ Không tự chọn. Để Bước 7 so sánh.
 | Câu hỏi | Trả lời | Xử lý |
 | --- | --- | --- |
 | Có nhúng thêm logic riêng UpBase vào code không? | ⚠️ **Có, hai chỗ** | Xem bảng dưới |
-| Có hằng số cứng mới không? | **Số cấp tối đa = 6** | ✅ Đã chốt **cấu hình được theo tổ chức**, không đóng cứng |
+| Có hằng số cứng mới không? | ~~Số cấp tối đa = 6~~ Không còn: bỏ giới hạn số cấp *(CR6)* | ✅ Không có hằng số số cấp |
 | Bảng mới có `tenant_id` không? | Phải có | `groups` hiện **đã có** `tenant_id`. Mọi bảng mới phải theo |
 | Enum mới: hệ thống hay tenant định nghĩa? | **Nguồn nhóm** *(đồng bộ HRM / tự tạo)* và **loại quan hệ** *(quản lý / mentor)* | Nguồn nhóm là **hệ thống định nghĩa**. Loại quan hệ nên để **tenant tự thêm** — tổ chức khác có thể cần `coach`, `buddy` |
 
@@ -348,13 +352,14 @@ Không tự chọn. Để Bước 7 so sánh.
 | --- | --- | --- | --- |
 | `R-1` | **Bắn mail hàng loạt khi bật** | 🔴 Cao | Tách cutover làm hai lần. Chốt quy tắc mail cho đường gán qua nhóm trước khi làm |
 | `R-2` | **Ghi danh nhân đôi vì Foundation** mà người gán không biết | 🔴 Cao | Báo trước khi gán: *"lớp này có Foundation, N người sẽ vào 2 lớp"* |
-| `R-3` | **Báo cáo theo nhóm không làm được** vì `KB-SIS-01` | 🔴 Cao | `CF-1` phải quyết ở Bước 7 trước khi viết PRD |
+| ~~`R-3`~~ | **Báo cáo theo nhóm không làm được** vì `KB-SIS-01` | 🔴 Cao | `CF-1` phải quyết ở Bước 7 trước khi viết PRD. **CR6:** không còn, báo cáo không đặt trên dashboard |
 | `R-4` | **Thiết kế phạm vi dữ liệu trên nền chưa ai nhìn thấy** — ma trận quyền Casbin | 🟠 | Xin bản export policy. KB `06` Q1 treo từ 23/09, đã hai tuần |
 | `R-5` | **Lịch sử thành viên chỉ có từ ngày bật.** Báo cáo lùi xa hơn không có dữ liệu | 🟠 | Nói rõ với người dùng, không để họ tưởng có dữ liệu cũ |
 | `R-6` | **Hai luật đứng đụng nhau** — Comment Replier và Nhóm | 🟠 | `CF-2` phải quyết |
 | `R-7` | **Từ "Mentor" trùng tên, khác nghĩa** — Ops chọn nhầm người, Dev dựng nhầm quan hệ | 🟠 | `CF-6` — đổi tên khái niệm mới trước khi viết PRD |
 | `R-8` | Vùng `Schedules` · `Room` chưa tra được, KB không phủ | 🟡 | Ghi `❓PO`, không kết luận không ảnh hưởng |
-
+| `R-9` | **Tài khoản học viên vào UpLMS Ops** *(CR6)*: phân quyền mới, chưa ai đọc được ma trận quyền hiện có [DEC101] | 🟠 | Tech PIC mô tả cách giới hạn màn trong `tech-design.md` ở 2.43 |
+| `R-10` | **Tự chấm bài** *(CR6)*: người vừa là mentor vừa là thành viên chấm bài của mình, điểm và chứng chỉ không có người chấm độc lập [DEC103] | 🟠 | PO chấp nhận tạm thời (DEC103); chặn để sau |
 ---
 
 ## 11. Open Questions

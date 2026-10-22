@@ -5,7 +5,7 @@ feature: LMS-F002
 owner: Tech PIC
 version: 0.1
 status: draft
-inputs: prd@0.5
+inputs: prd@0.6
 ---
 # Tech Design: Nhóm học viên (Group)
 
