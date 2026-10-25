@@ -18,36 +18,36 @@ status: Running
 Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]` đang sửa · `[x]` đã duyệt · `[S]` bỏ qua kèm lý do. Ghi chú `v1:` trỏ tới artifact kế thừa từ luồng v1.
 
 ### IDEATION
-- [x] 1.1 intent-capture · v1: ideation/brd.md v0.3 §1 đến §4. Duyệt lại theo v2 2026-10-12 (DEC79), review 02 READY; R-05 R-06 rủi ro chấp nhận. Gate 1 của v1 duyệt 2026-10-05. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại
+- [x] 1.1 intent-capture · v1: ideation/brd.md v0.3 §1 đến §4. Duyệt lại theo v2 2026-10-12 (DEC79), review 02 READY; R-05 R-06 rủi ro chấp nhận. Gate 1 của v1 duyệt 2026-10-05. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại
 - [x] 1.2 market-research · v1: ideation/market-research/competitive-analysis.md v0.2, duyệt 2026-10-09 kèm chỉ thị mở CR1
-- [x] 1.4 scope-definition · v1: ideation/brd.md v0.3 §5 đến §7. Duyệt lại theo v2 2026-10-12 (DEC79); R-04 Proto-Unit rủi ro chấp nhận, bảng Unit ở PRD. Gate 1 của v1 duyệt 2026-10-05. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại
-- [x] 1.7 approval-handoff · v1: ideation/brd.md v0.3, không có bản một trang. Duyệt lại theo v2 2026-10-12 (DEC79), phase check Ideation ở verification/phase-check-ideation.md, archive/approval-handoff/brd-v0.3-20261012.md. Bản v0.2 của v1 ngày 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại
+- [x] 1.4 scope-definition · v1: ideation/brd.md v0.3 §5 đến §7. Duyệt lại theo v2 2026-10-12 (DEC79); R-04 Proto-Unit rủi ro chấp nhận, bảng Unit ở PRD. Gate 1 của v1 duyệt 2026-10-05. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại
+- [x] 1.7 approval-handoff · v1: ideation/brd.md v0.3, không có bản một trang. Duyệt lại theo v2 2026-10-12 (DEC79), phase check Ideation ở verification/phase-check-ideation.md, archive/approval-handoff/brd-v0.3-20261012.md. Bản v0.2 của v1 ngày 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại
 ### INCEPTION
-- [x] 2.3 requirements-analysis · v1: inception/requirements-analysis/requirements.md v0.3 duyệt 2026-10-09 (CR1, thêm RC-20). v0.2 duyệt 2026-10-05. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại
-- [x] 2.31 impact-analysis · v1: inception/impact-analysis/impact-matrix.md v0.4 duyệt 2026-10-12 (CR2, CG-3 đã giải, OQ-31; DEC82). v0.3 duyệt 2026-10-09 (CR1, vùng 9 và BI-6). v0.2 Gate 2 duyệt 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại
+- [x] 2.3 requirements-analysis · v1: inception/requirements-analysis/requirements.md v0.3 duyệt 2026-10-09 (CR1, thêm RC-20). v0.2 duyệt 2026-10-05. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại
+- [x] 2.31 impact-analysis · v1: inception/impact-analysis/impact-matrix.md v0.4 duyệt 2026-10-12 (CR2, CG-3 đã giải, OQ-31; DEC82). v0.3 duyệt 2026-10-09 (CR1, vùng 9 và BI-6). v0.2 Gate 2 duyệt 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại
 - [S] 2.32 solution-options · v1 không làm so sánh phương án; Bước 7 dùng để chốt nhóm câu hỏi D
-- [x] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story và 20 US, v0.3. Duyệt lại theo v2 2026-10-12 (DEC82) sau một lần Request Changes (DEC80, CR2); truy vết tay ở inception/prd/traceability.md. 20 US chốt ở 9A của v1 ngày 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại
-- [x] 2.42 prd-generation · v1: inception/prd/prd.md v0.3 duyệt 2026-10-12 (CR2, chạm US3 US7 US19 US20, danh sách US, tồn đọng; DEC82). v0.2 duyệt 2026-10-09 (CR1, chạm US9 US11 US13 US16 US20). v0.1 duyệt và publish Lark 2026-10-06. Đang sửa theo CR3 từ 2026-10-20: thêm khối AC và dòng Ưu tiên (DEC92). CR4 ngày 2026-10-20: chỉ bảng đầu, chờ duyệt v0.5 (DEC95). CR5 ngày 2026-10-20: chuyển sang template PRD chuẩn, prd.md v0.6 draft, chờ PO duyệt (DEC98). CR6 gộp vào bản v0.6 cùng CR5
-- [-] 2.43 design-alignment · mở 2026-10-20 (DEC97); sau CR5 và CR6, ba file thiết kế trỏ prd@0.6 từ 2026-10-22. Chờ Design PIC, Tech PIC, QA PIC viết, không đặt hạn
+- [x] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story và 20 US, v0.3. Duyệt lại theo v2 2026-10-12 (DEC82) sau một lần Request Changes (DEC80, CR2); truy vết tay ở inception/prd/traceability.md. 20 US chốt ở 9A của v1 ngày 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại
+- [x] 2.42 prd-generation · v1: inception/prd/prd.md v0.3 duyệt 2026-10-12 (CR2, chạm US3 US7 US19 US20, danh sách US, tồn đọng; DEC82). v0.2 duyệt 2026-10-09 (CR1, chạm US9 US11 US13 US16 US20). v0.1 duyệt và publish Lark 2026-10-06. Đang sửa theo CR3 từ 2026-10-20: thêm khối AC và dòng Ưu tiên (DEC92). CR4 ngày 2026-10-20: chỉ bảng đầu, chờ duyệt v0.5 (DEC95). CR5 ngày 2026-10-20: chuyển sang template PRD chuẩn, prd.md v0.6 draft, chờ PO duyệt (DEC98). CR6 gộp vào bản v0.6 cùng CR5. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại
+- [-] 2.43 design-alignment · mở 2026-10-20 (DEC97); sau CR5 và CR6, ba file thiết kế trỏ prd@0.6 từ 2026-10-22. Chờ Design PIC, Tech PIC, QA PIC viết, không đặt hạn. CR7 ngày 2026-10-25: PO chốt PRD final qua CR7, không viết Decision Brief lúc này (DEC122); giữ mở
 
 ## Current
 | | |
 |---|---|
-| Stage | 2.43 design-alignment: chờ Design PIC, Tech PIC, QA PIC viết file thiết kế từ PRD v0.6, không đặt hạn |
-| Next action | Gửi ba PIC đường dẫn PRD v0.6 và quy ước; khi đủ ba file, gọi /po 261005-group để viết Decision Brief |
+| Stage | 2.43 design-alignment |
+| Next action | Làm tiếp 2.43 Design Alignment |
 | Blocking questions open | 0 |
-| Open CR | none. CR5 và CR6 đóng 2026-10-22 (DEC107 đến DEC113) |
+| Open CR | none. CR7 đóng 2026-10-25 (DEC124 đến DEC130) |
 | Parked | no |
 
 ## Versions
 | Artifact | Version | Status | Approved | Lark |
 |---|---|---|---|---|
-| brd | v0.4 | approved | v0.4: 2026-10-22 · v0.4: 2026-10-22 · v0.4: 2026-10-22 · v0.3: 2026-10-12 · v0.2: 2026-10-06 | — |
+| brd | v0.5 | approved | v0.5: 2026-10-25 · v0.5: 2026-10-25 · v0.5: 2026-10-25 · v0.4: 2026-10-22 · v0.4: 2026-10-22 · v0.4: 2026-10-22 · v0.3: 2026-10-12 · v0.2: 2026-10-06 | — |
 | competitive-analysis | v0.2 | approved | 2026-10-09 | — |
-| requirements | v0.4 | approved | 2026-10-22 | — |
-| impact-matrix | v0.5 | approved | v0.5: 2026-10-22 · v0.4: 2026-10-12 · v0.3: 2026-10-09 | — |
+| requirements | v0.5 | approved | 2026-10-25 | — |
+| impact-matrix | v0.6 | approved | v0.6: 2026-10-25 · v0.5: 2026-10-22 · v0.4: 2026-10-12 · v0.3: 2026-10-09 | — |
 | initiative-brief | — | không có, v1 dùng BRD | — | — |
-| prd | v0.6 | approved | v0.6: 2026-10-22 · v0.6: 2026-10-22 · v0.5: 2026-10-20 · v0.4: 2026-10-20 · v0.3: 2026-10-12 · v0.2: 2026-10-09 | v0.5 · Jg7ld8UCzoeMiAxW5ielxlC4gGg, revision 75, publish 2026-10-20 |
+| prd | v0.7 | approved | v0.7: 2026-10-25 · v0.7: 2026-10-25 · v0.6: 2026-10-22 · v0.6: 2026-10-22 · v0.5: 2026-10-20 · v0.4: 2026-10-20 · v0.3: 2026-10-12 · v0.2: 2026-10-09 | v0.5 · Jg7ld8UCzoeMiAxW5ielxlC4gGg, revision 75, publish 2026-10-20 |
 
 ## Log
 - 2026-10-05 created ở luồng v1, cỡ L
@@ -96,3 +96,12 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-22 07:49 2.4 approved v0.6 bởi buidhui
 - 2026-10-22 07:49 2.42 approved v0.6 bởi buidhui
 - 2026-10-22 PO duyệt CR5 và CR6 bằng terminal (DEC107 đến DEC113). Đóng CR5, CR6; R-13 R-14 rủi ro chấp nhận. Ba file thiết kế đổi inputs sang prd@0.6; 2.43 về [-] chờ ba PIC. Lark vẫn v0.5: chờ PO quyết còn publish Lark không
+- 2026-10-25 Mở CR7 (DEC114 đến DEC122): Design PIC và Tech PIC đã nộp file thiết kế, QA tạm bỏ qua; viết lại PRD theo thiết kế, không viết Decision Brief. Chụp pre-CR7 bốn artifact. Sửa BRD v0.5, requirements v0.5 (RC-25 đến RC-28), impact-matrix v0.6 (vùng 16 đến 18, R-11 đến R-13, OQ-42, OQ-43), PRD v0.7 (21 US, 149 BR, 116 AC, thêm US21), traceability v0.4. check PRD sạch, trace 0 GAP. 1.1 đến 2.42 về [?]
+- 2026-10-25 14:24 1.1 approved v0.5 bởi buidhui
+- 2026-10-25 14:24 1.4 approved v0.5 bởi buidhui
+- 2026-10-25 14:24 1.7 approved v0.5 bởi buidhui
+- 2026-10-25 14:24 2.3 approved v0.5 bởi buidhui
+- 2026-10-25 14:24 2.31 approved v0.6 bởi buidhui
+- 2026-10-25 14:24 2.4 approved v0.7 bởi buidhui
+- 2026-10-25 14:24 2.42 approved v0.7 bởi buidhui
+- 2026-10-25 Review AI Reviewer lần 06: NOT-READY, 3 Major 14 Minor; PO Request Changes (DEC123), sửa R-15 đến R-31, R-29 rủi ro chấp nhận. Review lần 07: READY, 6 Minor; PO Approve, chấp nhận 6 Minor (DEC130). PO duyệt bảy stage bằng terminal (DEC124 đến DEC130). Đóng CR7. Lark vẫn v0.5
