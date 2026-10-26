@@ -76,7 +76,7 @@ G: Epic `UpLMS_User & Organization_Group`. R: `UpLMS_User & Organization_Role & 
 Phụ thuộc: story 1 đi trước mọi story; story 4 đi cùng việc bỏ nhóm cũ của thông báo; story 7 cần cấu hình Lark; story 9 đến 11 cần cấu hình Keycloak; story 13 cần đồng bộ và giao nội dung.
 
 ## 7. Độ lớn so với mốc
-47 điểm, so với mốc là story 3 (3 điểm); đợt này 45, story 14 ở backlog. Không có mốc cứng nên không cần cắt phạm vi. Story lớn nhất là giao nội dung và tự ghi danh, 5 điểm. Story nào không lọt một sprint thì PO tách qua change request.
+47 điểm, so với mốc là story 3 (3 điểm); đợt này 45, story 14 ở backlog. Không có mốc cứng nên không cần cắt phạm vi. Story lớn nhất là giao nội dung và tự ghi danh, 5 điểm. Story không lọt một sprint thì tách qua change request.
 
 ## 8. Rủi ro
 | # | Rủi ro | Ai nêu | Cách giảm | Chấp nhận |
