@@ -1,9 +1,9 @@
 ---
 intent: 261005-group
 artifact: brd
-version: 0.5
-status: approved
-cr: CR7 ngày 2026-10-25, thông báo theo nhóm vào In scope, bỏ phòng ban và đơn vị kinh doanh của nhân sự, đồng bộ theo sự kiện kèm chạy toàn bộ mỗi đêm, chữ giao diện tiếng Anh; CR6 ngày 2026-10-21
+version: 0.6
+status: draft
+cr: CR8 ngày 2026-10-26, báo cáo theo nhóm đợt này chỉ ở hiện tại, mốc quá khứ để sau; CR7 ngày 2026-10-25, thông báo theo nhóm vào In scope, bỏ phòng ban và đơn vị kinh doanh của nhân sự, đồng bộ theo sự kiện kèm chạy toàn bộ mỗi đêm, chữ giao diện tiếng Anh; CR6 ngày 2026-10-21
 approved: 2026-10-12 (v0.3); 2026-10-06 (v0.2)
 review: lần 01 NOT-READY, Request Changes (DEC78); lần 02 READY, Approve (DEC79), ngày 2026-10-12
 gate: v1 Gate 1 ngày 2026-10-05, cập nhật v0.2 sau Gate 2 và Bước 7
@@ -17,8 +17,8 @@ approved_at: 2026-10-25T14:24
 | --- | --- |
 | **Tính năng** | Group |
 | **Người viết** | Bùi Đức Huy (PO) |
-| **Version** | **v0.5** — 25/10/2026, CR7 |
-| **Trạng thái** | `Draft` — v0.5 chờ duyệt lại sau CR7. v0.4 duyệt 22/10/2026; v0.3 duyệt 12/10/2026 sau review AI Reviewer; v0.2 qua Gate 1 *(05/10)*, Gate 2 *(06/10)*, Bước 7 *(06/10)* |
+| **Version** | **v0.6** — 26/10/2026, CR8 |
+| **Trạng thái** | `Draft` — v0.6 chờ duyệt lại sau CR8. v0.5 duyệt 25/10/2026. v0.4 duyệt 22/10/2026; v0.3 duyệt 12/10/2026 sau review AI Reviewer; v0.2 qua Gate 1 *(05/10)*, Gate 2 *(06/10)*, Bước 7 *(06/10)* |
 
 > Bản nháp nội bộ để chốt hướng trước khi viết PRD.
 
@@ -30,7 +30,8 @@ approved_at: 2026-10-25T14:24
 | `v0.2` | 06/10/2026 | Gộp toàn bộ quyết định từ Gate 1, Bước 5, Gate 2 và Bước 7 |
 | `v0.3` | 12/10/2026 | Cập nhật theo CR1 *(09/10)* và review AI Reviewer lần 01. Không đổi phạm vi |
 | `v0.4` | 21/10/2026 | CR6: bỏ giới hạn số cấp nhóm; một người được đồng thời là quản lý, mentor và thành viên bằng một tài khoản học viên; báo cáo theo nhóm đặt ở chi tiết nhóm, báo cáo trên dashboard để sau |
-| **`v0.5`** | 25/10/2026 | CR7, sau khi Design PIC và Tech PIC nộp file thiết kế: thông báo Ops chọn người nhận theo nhóm chuyển từ Potential scope vào In scope, thành `US21`; bỏ phòng ban và đơn vị kinh doanh của nhân sự vận hành; đồng bộ cơ cấu theo sự kiện kèm một lần chạy toàn bộ mỗi đêm; chữ giao diện bằng tiếng Anh *(`DEC116` đến `DEC118`)* |
+| `v0.5` | 25/10/2026 | CR7, sau khi Design PIC và Tech PIC nộp file thiết kế: thông báo Ops chọn người nhận theo nhóm chuyển từ Potential scope vào In scope, thành `US21`; bỏ phòng ban và đơn vị kinh doanh của nhân sự vận hành; đồng bộ cơ cấu theo sự kiện kèm một lần chạy toàn bộ mỗi đêm; chữ giao diện bằng tiếng Anh *(`DEC116` đến `DEC118`)* |
+| **`v0.6`** | 26/10/2026 | CR8: đợt này báo cáo theo nhóm chỉ ở thời điểm hiện tại; báo cáo tại một mốc quá khứ chuyển sang Potential scope *(`DEC135`)* |
 
 **Đổi gì ở `v0.2`:**
 
@@ -169,7 +170,7 @@ Phòng ban đông nhất có **55 người** (`ECOM / Fulfillment HCM`). Hơn m�
 | **Quan hệ mentor** | Gán mentor cho nhóm. Mentor của nhóm **chính là** mentor của lớp mà nhóm được giao, phụ trách đúng người từ nhóm đó; mentor đầu tiên vào lớp là người chịu trách nhiệm chính, đổi lại được. Không có cơ chế phạm vi dữ liệu riêng — chốt 06/10/2026 *(`CF-6`)* |
 | **Phạm vi dữ liệu** | Quản lý chỉ xem được nhóm mình quản lý |
 | **Thành viên theo thời gian** | Ghi mọi thay đổi thành viên kèm thời điểm, giữ không giới hạn. **Nền của báo cáo**, không chỉ để tra tay |
-| **Báo cáo theo nhóm** | Cộng dồn số liệu học theo nhóm và theo cả nhánh, xem được ở hiện tại hoặc tại một mốc quá khứ. Đặt ở tab Báo cáo của chi tiết nhóm, ba danh sách: theo thành viên, theo nhóm con, theo khoá *(`DEC104`)* |
+| **Báo cáo theo nhóm** | Cộng dồn số liệu học theo nhóm và theo cả nhánh, ở thời điểm hiện tại. Đặt ở tab Báo cáo của chi tiết nhóm, ba danh sách: theo thành viên, theo nhóm con, theo khoá *(`DEC104`, `DEC135`)* |
 | **Một người nhiều vai** | Trong một nhóm, một người được đồng thời là quản lý, mentor và thành viên. Thông báo gửi quản lý không gửi cho chính người đó mà lên quản lý của nhóm cha gần nhất, hết cây thì quản trị viên hệ thống *(`DEC101`, `DEC102`)* |
 | **Người nghỉ việc** | Gỡ khỏi nhóm theo đồng bộ. Lượt ghi danh **đánh dấu kết thúc**, không xoá dữ liệu |
 | **Vòng đời nhân sự** | Rời nhóm mà chưa học khoá nào → hệ thống tự xử lý. Đang học dở hoặc đã xong → báo quản lý |
@@ -200,6 +201,7 @@ Phòng ban đông nhất có **55 người** (`ECOM / Fulfillment HCM`). Hơn m�
 | Có thể làm sau | Ghi chú |
 |---|---|
 | **Báo cáo theo nhóm trên dashboard** | Đợt này chỉ làm tab Báo cáo trong chi tiết nhóm *(`DEC104`)* |
+| **Báo cáo theo nhóm tại một mốc quá khứ** | Đợt này chỉ làm báo cáo ở thời điểm hiện tại. Dữ liệu trạng thái học chỉ có từ khi làm phần này; lịch sử thành viên vẫn ghi từ đầu *(`DEC135`, PRD `US22`)* |
 | **Chặn tự chấm bài khi một người vừa là mentor vừa là thành viên của lớp** | Đợt này tạm cho phép, rủi ro đã chấp nhận *(`DEC103`)* |
 
 > Mục *Dùng nhóm làm nguồn người nhận cho thông báo Ops* chuyển vào In scope ngày 25/10/2026 *(`DEC116`)*.
@@ -547,8 +549,8 @@ Danh sách đầy đủ: `inception/requirements-analysis/requirements-analysis-
 | Câu hỏi đã đóng | `inception/requirements-analysis/requirements-analysis-questions.md` — `OQ-xx`, `BA-xx` |
 | Nghiên cứu LMS khác | `ideation/market-research/competitive-analysis.md` v0.2 — TalentLMS · Docebo · Moodle · bốn bài TalentLMS; nguyên văn ở `inputs/talentlms-help-articles-20261007.md` |
 | Dữ liệu HRM | `inputs/lark-users-by-department.csv` — 384 nhân sự, 53 phòng ban |
-| Quyết định đã chốt | `decisions.md` — `DEC1` đến `DEC123`; bản v1 ở `archive/v1/project-decisions.md` |
-| Phạm vi hiện hành chi tiết | `inception/prd/prd.md` v0.7 — 21 US |
+| Quyết định đã chốt | `decisions.md` — `DEC1` đến `DEC135`; bản v1 ở `archive/v1/project-decisions.md` |
+| Phạm vi hiện hành chi tiết | `inception/prd/prd.md` v0.8 — 22 US, `US22` để sau |
 | Thiết kế của các team | `inception/ux-design/ux-design.md` · `inception/tech-design/be-technical-design.md` · `inception/tech-design/fe-technical-design.md` |
 | Ảnh hưởng | `inception/impact-analysis/impact-matrix.md` v0.6 — 18 vùng, 6 conflict đã quyết |
 | Nguyên tắc mô hình hoá | KB `domain/16-domain-principles.md` — nguyên tắc 6, ranh giới Nhóm với Lớp |

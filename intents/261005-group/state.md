@@ -18,16 +18,16 @@ status: Running
 Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]` đang sửa · `[x]` đã duyệt · `[S]` bỏ qua kèm lý do. Ghi chú `v1:` trỏ tới artifact kế thừa từ luồng v1.
 
 ### IDEATION
-- [x] 1.1 intent-capture · v1: ideation/brd.md v0.3 §1 đến §4. Duyệt lại theo v2 2026-10-12 (DEC79), review 02 READY; R-05 R-06 rủi ro chấp nhận. Gate 1 của v1 duyệt 2026-10-05. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại
+- [?] 1.1 intent-capture · v1: ideation/brd.md v0.3 §1 đến §4. Duyệt lại theo v2 2026-10-12 (DEC79), review 02 READY; R-05 R-06 rủi ro chấp nhận. Gate 1 của v1 duyệt 2026-10-05. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại
 - [x] 1.2 market-research · v1: ideation/market-research/competitive-analysis.md v0.2, duyệt 2026-10-09 kèm chỉ thị mở CR1
-- [x] 1.4 scope-definition · v1: ideation/brd.md v0.3 §5 đến §7. Duyệt lại theo v2 2026-10-12 (DEC79); R-04 Proto-Unit rủi ro chấp nhận, bảng Unit ở PRD. Gate 1 của v1 duyệt 2026-10-05. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại
-- [x] 1.7 approval-handoff · v1: ideation/brd.md v0.3, không có bản một trang. Duyệt lại theo v2 2026-10-12 (DEC79), phase check Ideation ở verification/phase-check-ideation.md, archive/approval-handoff/brd-v0.3-20261012.md. Bản v0.2 của v1 ngày 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại
+- [?] 1.4 scope-definition · v1: ideation/brd.md v0.3 §5 đến §7. Duyệt lại theo v2 2026-10-12 (DEC79); R-04 Proto-Unit rủi ro chấp nhận, bảng Unit ở PRD. Gate 1 của v1 duyệt 2026-10-05. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại
+- [?] 1.7 approval-handoff · v1: ideation/brd.md v0.3, không có bản một trang. Duyệt lại theo v2 2026-10-12 (DEC79), phase check Ideation ở verification/phase-check-ideation.md, archive/approval-handoff/brd-v0.3-20261012.md. Bản v0.2 của v1 ngày 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại
 ### INCEPTION
-- [x] 2.3 requirements-analysis · v1: inception/requirements-analysis/requirements.md v0.3 duyệt 2026-10-09 (CR1, thêm RC-20). v0.2 duyệt 2026-10-05. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại
-- [x] 2.31 impact-analysis · v1: inception/impact-analysis/impact-matrix.md v0.4 duyệt 2026-10-12 (CR2, CG-3 đã giải, OQ-31; DEC82). v0.3 duyệt 2026-10-09 (CR1, vùng 9 và BI-6). v0.2 Gate 2 duyệt 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại
+- [?] 2.3 requirements-analysis · v1: inception/requirements-analysis/requirements.md v0.3 duyệt 2026-10-09 (CR1, thêm RC-20). v0.2 duyệt 2026-10-05. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại
+- [?] 2.31 impact-analysis · v1: inception/impact-analysis/impact-matrix.md v0.4 duyệt 2026-10-12 (CR2, CG-3 đã giải, OQ-31; DEC82). v0.3 duyệt 2026-10-09 (CR1, vùng 9 và BI-6). v0.2 Gate 2 duyệt 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại
 - [S] 2.32 solution-options · v1 không làm so sánh phương án; Bước 7 dùng để chốt nhóm câu hỏi D
-- [x] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story và 20 US, v0.3. Duyệt lại theo v2 2026-10-12 (DEC82) sau một lần Request Changes (DEC80, CR2); truy vết tay ở inception/prd/traceability.md. 20 US chốt ở 9A của v1 ngày 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại
-- [x] 2.42 prd-generation · v1: inception/prd/prd.md v0.3 duyệt 2026-10-12 (CR2, chạm US3 US7 US19 US20, danh sách US, tồn đọng; DEC82). v0.2 duyệt 2026-10-09 (CR1, chạm US9 US11 US13 US16 US20). v0.1 duyệt và publish Lark 2026-10-06. Đang sửa theo CR3 từ 2026-10-20: thêm khối AC và dòng Ưu tiên (DEC92). CR4 ngày 2026-10-20: chỉ bảng đầu, chờ duyệt v0.5 (DEC95). CR5 ngày 2026-10-20: chuyển sang template PRD chuẩn, prd.md v0.6 draft, chờ PO duyệt (DEC98). CR6 gộp vào bản v0.6 cùng CR5. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại
+- [?] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story và 20 US, v0.3. Duyệt lại theo v2 2026-10-12 (DEC82) sau một lần Request Changes (DEC80, CR2); truy vết tay ở inception/prd/traceability.md. 20 US chốt ở 9A của v1 ngày 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại
+- [?] 2.42 prd-generation · v1: inception/prd/prd.md v0.3 duyệt 2026-10-12 (CR2, chạm US3 US7 US19 US20, danh sách US, tồn đọng; DEC82). v0.2 duyệt 2026-10-09 (CR1, chạm US9 US11 US13 US16 US20). v0.1 duyệt và publish Lark 2026-10-06. Đang sửa theo CR3 từ 2026-10-20: thêm khối AC và dòng Ưu tiên (DEC92). CR4 ngày 2026-10-20: chỉ bảng đầu, chờ duyệt v0.5 (DEC95). CR5 ngày 2026-10-20: chuyển sang template PRD chuẩn, prd.md v0.6 draft, chờ PO duyệt (DEC98). CR6 gộp vào bản v0.6 cùng CR5. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại
 - [-] 2.43 design-alignment · mở 2026-10-20 (DEC97); sau CR5 và CR6, ba file thiết kế trỏ prd@0.6 từ 2026-10-22. Chờ Design PIC, Tech PIC, QA PIC viết, không đặt hạn. CR7 ngày 2026-10-25: PO chốt PRD final qua CR7, không viết Decision Brief lúc này (DEC122); giữ mở
 
 ## Current
@@ -36,7 +36,7 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 | Stage | 2.43 design-alignment |
 | Next action | Làm tiếp 2.43 Design Alignment |
 | Blocking questions open | 0 |
-| Open CR | none. CR7 đóng 2026-10-25 (DEC124 đến DEC130) |
+| Open CR | CR8 mở 2026-10-26 (DEC135) |
 | Parked | no |
 
 ## Versions
@@ -108,3 +108,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-26 PO chọn đóng 2.43 trước khi sinh Story List, đi tiếp khi thiếu test-design, ký qua tin nhắn (DEC131); quy tắc Story List: label mã tính năng và đợt, điểm đổi thang tổng 61, ba Epic (DEC132). Viết decision-brief.md v0.1: 6 điểm cần quyết, 8 chỗ thiết kế lệch PRD v0.7, 1.497 từ
 - 2026-10-26 PO gộp 21 user story thành 13 story Jira, điểm tổng 36, label mã tính năng và ORD-1 đến ORD-6 (DEC133). Cập nhật Decision Brief mục 6, 7
 - 2026-10-26 Tạo 13 story Jira UPLND-402 đến UPLND-414 qua MCP jira, gắn ba Epic UPLNDEP-10, -11, -12, label mã tính năng và ORD-1 đến ORD-13, comment điểm và căn cứ (DEC134). 2.43 vẫn chờ ba PIC ký
+- 2026-10-26 Mở CR8 (DEC135): đợt này báo cáo theo nhóm chỉ ở hiện tại; tách mốc quá khứ và job chụp thành US22, Should, để sau. Chụp pre-CR8. BRD v0.6, requirements v0.6, impact-matrix v0.7, PRD v0.8 (22 US, 153 BR, 116 AC), traceability v0.5. check sạch, trace 0 GAP. 1.1 đến 2.42 về [?]

@@ -1,10 +1,10 @@
 ---
 intent: 261005-group
 artifact: impact-matrix
-version: 0.6
-status: approved
+version: 0.7
+status: draft
 approved: 2026-10-12 (v0.4); 2026-10-09 (v0.3); 2026-10-06 (v0.2)
-cr: CR7 ngày 2026-10-25, vùng 16 đến 18, OQ-25 đóng, OQ-42 và OQ-43; CR6 ngày 2026-10-21, bỏ giới hạn cấp, một người nhiều vai, tự chấm, báo cáo trong chi tiết nhóm, vùng 13 đến 15; CR2 ngày 2026-10-12, CG-3 đã giải và OQ-31; CR1 ngày 2026-10-09, vùng 9 và BI-6
+cr: CR8 ngày 2026-10-26, báo cáo quá khứ và job chụp để sau; CR7 ngày 2026-10-25, vùng 16 đến 18, OQ-25 đóng, OQ-42 và OQ-43; CR6 ngày 2026-10-21, bỏ giới hạn cấp, một người nhiều vai, tự chấm, báo cáo trong chi tiết nhóm, vùng 13 đến 15; CR2 ngày 2026-10-12, CG-3 đã giải và OQ-31; CR1 ngày 2026-10-09, vùng 9 và BI-6
 gate: v1 Gate 2
 migrated-from: pre-aidlc:.claude/projects/Group/working/impact-analysis/impact-matrix-v0.2-20261006.md
 approved_at: 2026-10-25T14:24
@@ -14,11 +14,11 @@ approved_at: 2026-10-25T14:24
 | | |
 | --- | --- |
 | **Project** | Group |
-| **Version** | **v0.6** — 25/10/2026, CR7. v0.5 ngày 21/10/2026, CR6. v0.4 ngày 12/10/2026, CR2. v0.3 ngày 09/10/2026, CR1. v0.2 ngày 06/10/2026 |
+| **Version** | **v0.7** — 26/10/2026, CR8. v0.6 ngày 25/10/2026, CR7. v0.5 ngày 21/10/2026, CR6. v0.4 ngày 12/10/2026, CR2. v0.3 ngày 09/10/2026, CR1. v0.2 ngày 06/10/2026 |
 | **Ngày** | Dựng 05/10/2026 · duyệt Gate 2 ngày 06/10/2026 |
 | **Nguồn input** | `brd-v0.1-20261005.md` · `related-features-map-20261005.md` · KB `04` `05` `06` `09` `11` `12` `13` `14` `15` `16` · **Swagger đọc 05/10/2026** · **schema Lark tải và đọc 05/10/2026** |
 | **Trạng thái** | ✅ **Approved** — v0.4 ngày 12/10/2026 (CR2) · v0.3 ngày 09/10/2026 (CR1) · Gate 2 ngày 06/10/2026. 6/6 conflict đã quyết, 15/15 coverage gap có luật hoặc có chỗ ghi |
-| **Cập nhật** | 25/10/2026 — CR7, từ file thiết kế của Design PIC và Tech PIC: thêm vùng 16 Staff, 17 thông báo Ops, 18 tích hợp và job nền; `OQ-25` đóng, dữ liệu cũ bỏ; cắt chuyển bằng hai cờ cấu hình theo tổ chức; thêm `R-11` đến `R-13`, `OQ-42`, `OQ-43`. 21/10/2026 — CR6: bỏ giới hạn số cấp; một người được đồng thời là quản lý, mentor, thành viên bằng một tài khoản học viên, tài khoản đó vào UpLMS Ops; tạm cho tự chấm; `US18` thành tab Báo cáo trong chi tiết nhóm, không sửa dashboard. Xem mục 4 vùng 6, 10, 13 đến 15 và `CF-1`, `CF-2`. 12/10/2026 — CR2: `CG-3` đã giải bằng `BR-3.7` `BR-19.7`; `OQ-31` ghi rõ không chặn PRD. 09/10/2026 — CR1: thêm `MAIL-GRP-02` vào vùng 9 và `BI-6`. Trước đó 06/10/2026 ghi quyết định Gate 2 |
+| **Cập nhật** | 26/10/2026 — CR8: báo cáo theo nhóm đợt này chỉ ở hiện tại; báo cáo quá khứ và job chụp trạng thái cuối ngày để sau, vùng 18 và `R-5`, `R-13` ghi theo. 25/10/2026 — CR7, từ file thiết kế của Design PIC và Tech PIC: thêm vùng 16 Staff, 17 thông báo Ops, 18 tích hợp và job nền; `OQ-25` đóng, dữ liệu cũ bỏ; cắt chuyển bằng hai cờ cấu hình theo tổ chức; thêm `R-11` đến `R-13`, `OQ-42`, `OQ-43`. 21/10/2026 — CR6: bỏ giới hạn số cấp; một người được đồng thời là quản lý, mentor, thành viên bằng một tài khoản học viên, tài khoản đó vào UpLMS Ops; tạm cho tự chấm; `US18` thành tab Báo cáo trong chi tiết nhóm, không sửa dashboard. Xem mục 4 vùng 6, 10, 13 đến 15 và `CF-1`, `CF-2`. 12/10/2026 — CR2: `CG-3` đã giải bằng `BR-3.7` `BR-19.7`; `OQ-31` ghi rõ không chặn PRD. 09/10/2026 — CR1: thêm `MAIL-GRP-02` vào vùng 9 và `BI-6`. Trước đó 06/10/2026 ghi quyết định Gate 2 |
 
 > Bản phân tích **nội bộ**, không phải mục trong PRD. Kết quả chảy vào PRD ở `Solution` · `Out of scope` · `Acceptance criteria`.
 
@@ -139,7 +139,7 @@ Ba ràng buộc bất biến: `C1` nhóm chỉ chứa người · `C2` một lư
 | 15 | **Notification** *(CR6)* [DEC102] | ✅ | Thông báo gửi quản lý của một người không gửi cho chính người đó, đi lên quản lý của nhóm cha gần nhất. Hiện chạm `MAIL-GRP-01` | 🟡 Medium | DEC102 |
 | 16 | **Staff** *(CR7)* [DEC116] | ✅ | Bỏ hẳn phòng ban và đơn vị kinh doanh của nhân sự vận hành cùng dữ liệu. API nhân sự, vị trí, cơ sở và tệp nhập nhân sự, nhập vị trí bỏ trường phòng ban: **phá tương thích**. Form nhân sự và form support group đang gọi API phòng ban, FE đổi cùng đợt | 🔴 **High** | DEC116 · `be-technical-design.md` đầu việc 1, 3 |
 | 17 | **Thông báo Ops** *(CR7)* [DEC116] | ✅ | Thông báo chọn người nhận theo nhóm mới, gồm cả nhánh con, bỏ tài khoản kiểm thử và tài khoản đã khoá. Nhóm cũ của thông báo bỏ cùng dữ liệu; API tạo, sửa, xem, chọn nhóm của thông báo đổi **phá tương thích**. Thành `US21` | 🟡 Medium | DEC4 · DEC116 · `be-technical-design.md` đầu việc 17 |
-| 18 | **Tích hợp và job nền** *(CR7)* [DEC117] [DEC119] | ✅ | Đồng bộ cơ cấu nhận sự kiện phòng ban và sự kiện người từ Lark, đọc lại trạng thái hiện tại rồi áp; ứng dụng Lark phải bật nhận sự kiện phòng ban và quyền đọc phòng ban. Thêm một lần đồng bộ toàn bộ mỗi đêm. Thêm job chụp trạng thái lượt ghi danh cuối mỗi ngày cho báo cáo quá khứ. Client Keycloak của Ops phải cho danh tính học viên đăng nhập | 🟡 Medium | DEC117 · DEC119 · `be-technical-design.md` đầu việc 16, 18, 19 |
+| 18 | **Tích hợp và job nền** *(CR7)* [DEC117] [DEC119] | ✅ | Đồng bộ cơ cấu nhận sự kiện phòng ban và sự kiện người từ Lark, đọc lại trạng thái hiện tại rồi áp; ứng dụng Lark phải bật nhận sự kiện phòng ban và quyền đọc phòng ban. Thêm một lần đồng bộ toàn bộ mỗi đêm. Job chụp trạng thái lượt ghi danh cuối mỗi ngày cho báo cáo quá khứ để sau, làm cùng báo cáo quá khứ *(CR8, DEC135)*. Client Keycloak của Ops phải cho danh tính học viên đăng nhập | 🟡 Medium | DEC117 · DEC119 · `be-technical-design.md` đầu việc 16, 18, 19 |
 
 ### Vùng xét mà **không** bị ảnh hưởng
 
@@ -357,7 +357,7 @@ Không tự chọn. Để Bước 7 so sánh.
 | `R-2` | **Ghi danh nhân đôi vì Foundation** mà người gán không biết | 🔴 Cao | Báo trước khi gán: *"lớp này có Foundation, N người sẽ vào 2 lớp"* |
 | ~~`R-3`~~ | **Báo cáo theo nhóm không làm được** vì `KB-SIS-01` | 🔴 Cao | `CF-1` phải quyết ở Bước 7 trước khi viết PRD. **CR6:** không còn, báo cáo không đặt trên dashboard |
 | `R-4` | **Thiết kế phạm vi dữ liệu trên nền chưa ai nhìn thấy** — ma trận quyền Casbin | 🟠 | Xin bản export policy. KB `06` Q1 treo từ 23/09, đã hai tuần |
-| `R-5` | **Lịch sử thành viên chỉ có từ ngày bật.** Báo cáo lùi xa hơn không có dữ liệu | 🟠 | Nói rõ với người dùng, không để họ tưởng có dữ liệu cũ |
+| `R-5` | **Lịch sử thành viên chỉ có từ ngày bật.** Báo cáo lùi xa hơn không có dữ liệu | 🟠 | Nói rõ với người dùng, không để họ tưởng có dữ liệu cũ. **CR8:** báo cáo quá khứ để sau; dữ liệu trạng thái học chỉ có từ khi làm phần đó, PO chấp nhận [DEC135] |
 | `R-6` | **Hai luật đứng đụng nhau** — Comment Replier và Nhóm | 🟠 | `CF-2` phải quyết |
 | `R-7` | **Từ "Mentor" trùng tên, khác nghĩa** — Ops chọn nhầm người, Dev dựng nhầm quan hệ | 🟠 | `CF-6` — đổi tên khái niệm mới trước khi viết PRD |
 | `R-8` | Vùng `Schedules` · `Room` chưa tra được, KB không phủ | 🟡 | Ghi `❓PO`, không kết luận không ảnh hưởng |
@@ -365,7 +365,7 @@ Không tự chọn. Để Bước 7 so sánh.
 | `R-10` | **Tự chấm bài** *(CR6)*: người vừa là mentor vừa là thành viên chấm bài của mình, điểm và chứng chỉ không có người chấm độc lập [DEC103] | 🟠 | PO chấp nhận tạm thời (DEC103); chặn để sau |
 | `R-11` | **Bỏ phòng ban và đơn vị kinh doanh phá tương thích API Staff** *(CR7)*: màn hoặc tích hợp khác còn gọi API phòng ban sẽ lỗi [DEC116] | 🟠 | Tech PIC rà mọi nơi gọi; FE đổi form nhân sự và form support group cùng đợt |
 | `R-12` | **Lỡ sự kiện từ Lark** *(CR7)*: nhóm đồng bộ lệch với cây trên Lark tới lần chạy toàn bộ kế tiếp [DEC117] | 🟡 | Đồng bộ toàn bộ mỗi đêm; lệch tối đa một ngày |
-| `R-13` | **Job chụp trạng thái cuối ngày lỡ một ngày** *(CR7)*: báo cáo quá khứ của ngày đó lệch tối đa một ngày [DEC119] | 🟡 | Ghi log và cảnh báo khi job lỗi; PO chấp nhận mức lệch này |
+| `R-13` | **Job chụp trạng thái cuối ngày lỡ một ngày** *(CR7)*: báo cáo quá khứ của ngày đó lệch tối đa một ngày [DEC119] | 🟡 | Ghi log và cảnh báo khi job lỗi; PO chấp nhận mức lệch này. CR8: chỉ áp dụng khi làm báo cáo quá khứ |
 ---
 
 ## 11. Open Questions

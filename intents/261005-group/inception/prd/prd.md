@@ -2,12 +2,12 @@
 intent: 261005-group
 feature: LMS-F002
 artifact: prd
-inputs: requirements@0.5, impact-matrix@0.6, ux-design@0.1, fe-technical-design@2.2, be-technical-design (23/10/2026)
-version: 0.7
-status: approved
+inputs: requirements@0.6, impact-matrix@0.7, ux-design@0.1, fe-technical-design@2.2, be-technical-design (23/10/2026)
+version: 0.8
+status: draft
 services: UpLMS Ops backend (app ops), UpLMS backend (app lms), event-processor-service, background-job-service, notification-service, thư viện dùng chung và migration cơ sở dữ liệu, giao diện UpLMS Ops, giao diện UpLMS
 approved: 2026-10-12 (v0.3); 2026-10-09 (v0.2); 2026-10-06 (v0.1)
-cr: CR7 ngày 2026-10-25, viết lại theo file thiết kế của Design PIC và Tech PIC, thêm US21 thông báo theo nhóm; CR6 ngày 2026-10-21, bỏ giới hạn số cấp, một người nhiều vai bằng một tài khoản học viên, thông báo cho quản lý cấp gần nhất, tạm cho tự chấm, US18 thành tab Báo cáo; CR5 ngày 2026-10-20, chuyển sang template PRD chuẩn, không đổi US, AC, BR; CR4 ngày 2026-10-20, cập nhật thông tin tài liệu ở bảng đầu sau khi duyệt v0.4; CR3 ngày 2026-10-20, thêm khối tiêu chí chấp nhận và dòng Ưu tiên cho 20 US; CR2 ngày 2026-10-12, chạm US3 US7 US19 US20, danh sách US, Vấn đề tồn đọng; CR1 ngày 2026-10-09, chạm US9 US13 US16 US20
+cr: CR8 ngày 2026-10-26, báo cáo theo nhóm đợt này chỉ ở hiện tại, tách mốc quá khứ thành US22 để sau; CR7 ngày 2026-10-25, viết lại theo file thiết kế của Design PIC và Tech PIC, thêm US21 thông báo theo nhóm; CR6 ngày 2026-10-21, bỏ giới hạn số cấp, một người nhiều vai bằng một tài khoản học viên, thông báo cho quản lý cấp gần nhất, tạm cho tự chấm, US18 thành tab Báo cáo; CR5 ngày 2026-10-20, chuyển sang template PRD chuẩn, không đổi US, AC, BR; CR4 ngày 2026-10-20, cập nhật thông tin tài liệu ở bảng đầu sau khi duyệt v0.4; CR3 ngày 2026-10-20, thêm khối tiêu chí chấp nhận và dòng Ưu tiên cho 20 US; CR2 ngày 2026-10-12, chạm US3 US7 US19 US20, danh sách US, Vấn đề tồn đọng; CR1 ngày 2026-10-09, chạm US9 US13 US16 US20
 gate: v1 Gate 4
 lark: Jg7ld8UCzoeMiAxW5ielxlC4gGg
 lark-title: [PRD] Group
@@ -39,6 +39,7 @@ approved_at: 2026-10-25T14:24
 | v0.5 | 20/10/2026 | Bùi Đức Huy | Cập nhật thông tin tài liệu ở bảng đầu sau khi duyệt v0.4: trạng thái tài liệu và người duyệt. Không đổi nội dung | — |
 | v0.6 | 20/10/2026 | Bùi Đức Huy | CR5: chuyển sang template PRD chuẩn của PO-Workflow. Giữ nguyên mọi user story, tiêu chí chấp nhận, business rule, màn, field. Thêm mục Chuyển đổi và triển khai, lấy từ bản phân tích ảnh hưởng; mục Trường hợp ngoại lệ cho từng user story; mục Giả định; câu hỏi mở #9, #10, #11. Bỏ bảng trạng thái tài liệu và mục Comments CR6: bỏ giới hạn số cấp của cây nhóm (bỏ ba business rule về số cấp tối đa của `US1`, `US2` và hai tiêu chí chấp nhận kiểm chúng; mã cũ không cấp lại); một người được đồng thời là quản lý, mentor và thành viên của một nhóm bằng một tài khoản học viên, tài khoản đó vào UpLMS Ops cho đúng màn của vai; thông báo gửi quản lý không gửi cho chính người đó; người vừa là mentor vừa là thành viên tạm được tự chấm; `US18` thành tab Báo cáo trong chi tiết nhóm thay cho dashboard | Cấu trúc toàn tài liệu · `US1` · `US2` · `US9` · `US11` · `US12` · `US13` · `US16` · `US18` · `US20` |
 | v0.7 | 25/10/2026 | Bùi Đức Huy | CR7: viết lại theo file thiết kế của Design PIC và Tech PIC; QA tạm bỏ qua. Mã màn `SCR` và trường hợp biên `EC` vào từng user story; chữ giao diện tiếng Anh; thêm `US21` thông báo gửi theo nhóm; bỏ phòng ban và đơn vị kinh doanh của nhân sự vận hành; đồng bộ cơ cấu theo sự kiện kèm một lần chạy toàn bộ mỗi đêm; báo cáo quá khứ đọc từ bản chụp trạng thái cuối ngày, gom theo cây hiện tại; năm loại ghi nhật ký ngoài `US15` thành nhật ký hệ thống; bản điện thoại cho màn của quản lý và khối quản lý của học viên; không tự chỉ định mình làm quản lý chính, không chuyển phụ trách cho chính mình; hộp xác nhận xoá nhóm; quyền chỉ xem nhóm. Đóng câu hỏi mở #7 một phần, #9, #12, #14. Sau review lần 06: email báo người rời nhóm gửi quản lý không có đường dẫn hồ sơ; tài khoản đã khoá không tính là quản lý, mentor có hiệu lực; không xoá nhóm có nhóm con, khôi phục cả nhánh; định nghĩa trạng thái lượt ghi danh; đếm người không trùng; tính ngày theo giờ Việt Nam | `US1` đến `US21` · mục 1, 3, 4, 5, 7, 8, 9, 10 |
+| v0.8 | 26/10/2026 | Bùi Đức Huy | CR8: đợt này báo cáo theo nhóm chỉ ở thời điểm hiện tại (`US18`). Phần báo cáo tại một mốc quá khứ và việc chụp trạng thái học cuối ngày tách thành `US22`, ưu tiên Should, để sau; ba business rule về mốc quá khứ chuyển sang `US22` với mã mới, mã cũ không cấp lại | `US18` · `US22` · mục 2, 3, 4, 5, 7, 8, 10 |
 
 ---
 
@@ -130,7 +131,7 @@ Phòng ban đông nhất có **55 người** *(`ECOM / Fulfillment HCM`)*. Hơn 
 | SC2 | Người mới vào nhóm tự nhận nội dung, không ai phải nhớ gán bổ sung | Số người nhận nội dung tự động sau khi gia nhập | **0** trường hợp phải gán bổ sung thủ công cho người mới, với nhóm đã bật công tắc tự ghi danh | O2 | Task Success |
 | SC3 | Quản lý thật sự dùng công cụ theo dõi | Số quản lý mở màn theo dõi nhánh mình | **≥ 50%** người được gán quản lý mở màn đó ít nhất một lần mỗi tháng | O3 | Engagement |
 | SC4 | Báo cáo theo cơ cấu dùng được thay cho việc ghép tay | Số lượt xem báo cáo cộng dồn theo nhóm | Có số liệu nền sau tháng đầu; đặt ngưỡng ở lần rà tiếp theo | O4 | Task Success |
-| SC5 | Báo cáo quá khứ ra đúng con số đã xem trước đó | Chạy lại báo cáo của cùng một nhóm, cùng một mốc ngày T ở hai thời điểm khác nhau, so hai kết quả. Loại trừ thay đổi do di chuyển nhánh giữa hai lần chạy, vì báo cáo gom theo cây nhóm hiện tại (`BR-18.2`) | **0** chênh lệch | O5 | Task Success |
+| SC5 | Báo cáo quá khứ ra đúng con số đã xem trước đó | Chạy lại báo cáo của cùng một nhóm, cùng một mốc ngày T ở hai thời điểm khác nhau, so hai kết quả. Loại trừ thay đổi do di chuyển nhánh giữa hai lần chạy, vì báo cáo gom theo cây nhóm hiện tại (`BR-22.2`) | **0** chênh lệch | O5, đo khi làm `US22` | Task Success |
 
 Hai chỉ số theo dõi rủi ro, dùng để bắt lỗi sau phát hành:
 
@@ -162,7 +163,8 @@ Hai chỉ số theo dõi rủi ro, dùng để bắt lỗi sau phát hành:
 | **Chặn tự chấm bài** | Người vừa là mentor vừa là thành viên của cùng một lớp tạm được tự chấm bài của mình. Chặn để sau |
 | **Cơ chế phạm vi dữ liệu nhiều mức** | Đơn giản hoá ở đợt này: quản lý chỉ xem được nhóm mình quản lý. Không phụ thuộc vào một module chưa làm |
 | **Màn xem nhật ký hệ thống** | Năm loại thao tác ngoài thay đổi thành viên ghi vào nhật ký hệ thống, chưa có màn xem ở đợt này. Xem `BR-15.5` |
-| **Lịch sử của cây nhóm** | Báo cáo theo mốc quá khứ gom theo cây nhóm hiện tại, không dựng lại cây của ngày đã chọn. Xem `BR-18.2` |
+| **Báo cáo tại một mốc quá khứ ở đợt này** | Đợt này chỉ làm báo cáo ở thời điểm hiện tại. Mốc quá khứ thuộc `US22`, để sau; dữ liệu quá khứ chỉ có từ khi làm `US22` |
+| **Lịch sử của cây nhóm** | Báo cáo theo mốc quá khứ gom theo cây nhóm hiện tại, không dựng lại cây của ngày đã chọn. Xem `BR-22.2` |
 | **Đường dẫn từ UpLMS sang UpLMS Ops** | Quản lý vào UpLMS Ops qua email và địa chỉ UpLMS Ops. Xem `BR-16.7` |
 
 ---
@@ -209,7 +211,7 @@ Bốn thứ phải đúng, bất kể làm theo cách nào:
 | **Nguồn của mỗi nhóm** | Quyết định ai sửa được gì. Nhóm đồng bộ không cho sửa tay | Hai giá trị: đồng bộ từ hệ thống nhân sự · tự tạo |
 | **Nguồn của mỗi lượt ghi danh** | Phân biệt người vào lớp qua nhóm với người được thêm tay. Cần cho `C2` | — |
 | **Trạng thái lượt ghi danh** | Người nghỉ việc đánh dấu kết thúc chứ không xoá | Báo cáo hiện tại loại ra, báo cáo quá khứ vẫn tính |
-| **Trạng thái học của từng lượt ghi danh cuối mỗi ngày** | Báo cáo theo mốc quá khứ đọc chỉ số từ đây (`BR-18.2`) | Chụp cuối mỗi ngày, chỉ ghi khi có thay đổi. Có từ ngày việc chụp chạy lần đầu |
+| **Trạng thái học của từng lượt ghi danh cuối mỗi ngày** | Báo cáo theo mốc quá khứ đọc chỉ số từ đây (`BR-22.2`) | Chụp cuối mỗi ngày, chỉ ghi khi có thay đổi. Bắt đầu khi làm `US22`, để sau |
 
 > 🚫 **PRD này không khai bảng, không khai endpoint.** Thiết kế dữ liệu và giao diện lập trình là việc của Dev. PO ghi *cái gì phải đúng*, Dev quyết *làm thế nào*.
 
@@ -301,7 +303,7 @@ UpLMS Ops thiết kế cho máy tính. Ba màn có thêm bản điện thoại r
 | **U4 — Quan hệ người** | `US9` · `US10` · `US11` · `US12` · `US13` | U1 | ✅ Quản lý và mentor |
 | **U5 — Phạm vi và hiển thị** | `US16` · `US17` | U4 | ✅ Mang lại `O3` |
 | **U6 — Vòng đời nhân sự** | `US19` · `US20` | U2 · U3 | ❌ Cần cả đồng bộ lẫn luật đứng mới có tình huống để xử lý |
-| **U7 — Nền tảng** | `US14` · `US15` · `US18` | U1 | ❌ Chạm mọi Unit khác. `US18` mang lại `O4`, `US15` mang lại `O5` |
+| **U7 — Nền tảng** | `US14` · `US15` · `US18` · `US22` | U1 | ❌ Chạm mọi Unit khác. `US18` mang lại `O4`, `US15` mang lại `O5` |
 | **U8 — Thông báo theo nhóm** | `US21` | U1 | ❌ Phải ra cùng đợt bỏ nhóm cũ của thông báo, nếu chức năng thông báo đang bật: câu hỏi mở #15 |
 
 **Thứ tự đề xuất:** U1 cùng U8 → U3 → U7 → U2 → U4 → U5 → U6
@@ -331,7 +333,7 @@ Phụ thuộc đi một chiều, không có vòng.
 
 # 6. Yêu cầu theo user story
 
-Quy ước mã: user story `US1` tới `US21`, liên tục. Business rule `BR-<số US>.<số thứ tự>`, ví dụ `BR-1.1`, và tiêu chí chấp nhận `AC<số US>.<số thứ tự>`, duy nhất trong tài liệu.
+Quy ước mã: user story `US1` tới `US22`, liên tục. Business rule `BR-<số US>.<số thứ tự>`, ví dụ `BR-1.1`, và tiêu chí chấp nhận `AC<số US>.<số thứ tự>`, duy nhất trong tài liệu.
 
 Quy ước giao diện từ CR7: mã màn `SCR1` đến `SCR29` và trường hợp biên `EC-01` đến `EC-27` lấy từ `ux-design.md`. Trạng thái mặc định, rỗng, đang tải, lỗi tải, lỗi lưu của từng màn theo bảng *State của từng màn* ở `ux-design.md` mục 2; PRD chỉ ghi trạng thái nào mang luật nghiệp vụ. Chuỗi tiếng Anh viết trong dấu `code`, nghĩa tiếng Việt trong ngoặc.
 
@@ -370,7 +372,8 @@ Cột Nguồn dẫn hạng mục của yêu cầu gốc và, nơi yêu cầu đ�
 
 | US | User story | Ưu tiên | Unit | Nguồn |
 |---|---|---|---|---|
-| `US18` | Xem báo cáo của một nhóm ở tab `Report` trong chi tiết nhóm, theo thành viên, theo nhóm con và theo khoá, ở hiện tại hoặc tại một mốc quá khứ | Must | U7 | Giải quyết `O4` · `RC-24` · `RC-07` nhóm cha bao trùm nhánh con · `RC-11` dựng lại quá khứ |
+| `US18` | Xem báo cáo của một nhóm ở tab `Report` trong chi tiết nhóm, theo thành viên, theo nhóm con và theo khoá, ở thời điểm hiện tại | Must | U7 | Giải quyết `O4` · `RC-24` · `RC-07` nhóm cha bao trùm nhánh con |
+| `US22` | Xem báo cáo của một nhóm tại một ngày trong quá khứ. Để sau | Should | U7 | Giải quyết `O5` · `RC-11` dựng lại quá khứ |
 
 ### Vòng đời nhân sự
 
@@ -732,7 +735,7 @@ Người vận hành không khởi động cũng không can thiệp. Họ chỉ 
 | `CG-7` Đồng bộ lỗi giữa chừng, một phần cây đã cập nhật | Có luật: `BR-5.9`, lần đồng bộ toàn bộ mỗi đêm sửa chênh lệch; tiêu chí `AC5.1` |
 | Lỡ sự kiện từ hệ thống nhân sự | Có luật: `BR-5.9`; nhóm đồng bộ lệch tới lần chạy toàn bộ của đêm đó |
 | `CG-8` Cây tổ chức đổi lớn giữa hai lần đồng bộ, một khối bị giải thể | Có luật một phần: `BR-5.8`, phòng ban biến mất thì nhóm chuyển `Lưu trữ`. Chưa quyết có cảnh báo trước khi áp thay đổi lớn hay không: câu hỏi mở #10 |
-| `CG-15` Người nghỉ việc làm thay đổi số liệu của kỳ báo cáo đã công bố | Có luật: `BR-5.7`, ghi rời nhóm kèm thời điểm, không xoá quan hệ; báo cáo quá khứ đọc theo `BR-18.2` |
+| `CG-15` Người nghỉ việc làm thay đổi số liệu của kỳ báo cáo đã công bố | Có luật: `BR-5.7`, ghi rời nhóm kèm thời điểm, không xoá quan hệ; báo cáo quá khứ đọc theo `BR-22.2` |
 
 ### Ngoài phạm vi của US
 
@@ -1605,11 +1608,11 @@ Không có.
 
 ---
 
-## US18: Báo cáo theo nhóm trong chi tiết nhóm
+## US18: Báo cáo theo nhóm ở thời điểm hiện tại
 
 ### User story
 
-Là nhân sự vận hành, tôi cần xem báo cáo học của một nhóm ngay trong chi tiết nhóm, theo thành viên, theo nhóm con và theo khoá, ở thời điểm hiện tại hoặc tại một mốc quá khứ, để báo cáo theo cơ cấu tổ chức.
+Là nhân sự vận hành, tôi cần xem báo cáo học của một nhóm ngay trong chi tiết nhóm, theo thành viên, theo nhóm con và theo khoá, ở thời điểm hiện tại, để báo cáo theo cơ cấu tổ chức.
 
 **Ưu tiên:** Must
 
@@ -1621,36 +1624,31 @@ Là nhân sự vận hành, tôi cần xem báo cáo học của một nhóm nga
 
 `SCR4` Chi tiết nhóm → tab `Report` (`SCR16`)
 
-Người vận hành mở chi tiết một nhóm, vào tab `Report` và chọn `View by`: `Members`, `Sub-groups` hoặc `Courses`. Muốn biết quý trước thế nào thì chọn `On a date` và một ngày trước hôm nay. Báo cáo không nằm trên dashboard.
+Người vận hành mở chi tiết một nhóm, vào tab `Report` và chọn `View by`: `Members`, `Sub-groups` hoặc `Courses`. Số liệu tính ở thời điểm mở báo cáo. Báo cáo tại một ngày trong quá khứ thuộc `US22`, để sau. Báo cáo không nằm trên dashboard.
 
 ### Business rule
 
-- `BR-18.1` Báo cáo tính theo **thành viên tại mốc thời gian đã chọn**, không theo danh sách hôm nay
-- `BR-18.2` Chọn mốc quá khứ là ngày T thì danh sách thành viên tính theo thành viên **còn hiệu lực cuối ngày T**, chỉ số lấy từ **bản chụp trạng thái học cuối ngày T**, gồm cả người sau này đã nghỉ việc. Nhóm và nhánh con **gom theo cây nhóm hiện tại**, không dựng lại cây của ngày T
 - `BR-18.3` Số liệu của một nhóm gồm **toàn bộ người ở nhánh con**, như mọi màn đọc dữ liệu khác (`BR-5.3`), đếm người không trùng (`BR-6.2`). Không có công tắc bật tắt nhánh con
 - `BR-18.4` **Không tính tài khoản kiểm thử** ở mọi chỉ số
-- `BR-18.5` Chế độ xem hiện tại **loại người đã nghỉ việc**. Chế độ xem quá khứ **vẫn tính họ**, nếu lúc đó họ còn làm
+- `BR-18.5` Báo cáo tính theo **thành viên hiện tại** của nhóm và nhánh con, **loại người đã nghỉ việc**
 - `BR-18.6` Danh sách theo nhóm con chỉ gồm **nhóm con trực tiếp** của nhóm đang xem; mỗi dòng cộng dồn cả nhánh của nhóm con đó. Các dòng vì vậy luôn cùng cấp, cùng cha
-- `BR-18.7` Mốc quá khứ phải **trước hôm nay**. Ngày sớm nhất chọn được là **ngày việc chụp trạng thái cuối ngày chạy lần đầu**; trước đó không có dữ liệu. Việc chụp lỡ một ngày thì số liệu ngày đó lấy theo bản chụp gần nhất trước đó, **lệch tối đa một ngày**. Mọi mốc ngày (hôm nay, cuối ngày T, giờ chạy việc chụp) tính theo **giờ Việt Nam, UTC+7**
 - `BR-18.8` Báo cáo nằm ở **tab `Report` của chi tiết nhóm**, gồm ba danh sách: theo thành viên, theo nhóm con, theo khoá. Đợt này không sửa dashboard
 - `BR-18.9` Trạng thái của một lượt ghi danh dùng ở `US16` và `US18`, mỗi lượt thuộc đúng một trạng thái: **Hoàn thành** là lượt đã hoàn thành khoá; **Quá hạn** là lượt chưa hoàn thành mà hạn học đã qua; **Đang học** là lượt đã có hoạt động học, chưa hoàn thành, chưa quá hạn; **Chưa bắt đầu** là lượt chưa có hoạt động học nào (`BR-19.1`), chưa quá hạn. Lớp có thời hạn linh hoạt mà học viên chưa kích hoạt thì chưa có hạn học, không tính quá hạn. **Số khoá có nghĩa vụ** là số lượt ghi danh đang tính của người đó. **Tiến độ** của một lượt là số phần học đã xong trên tổng số phần của khoá
 
 ### Tiêu chí chấp nhận
 
-- `AC18.1` Khi mở tab `Report` của một nhóm, màn có `View by` với ba lựa chọn `Members`, `Sub-groups`, `Courses`, mặc định `Members`, ô chọn mốc mặc định là `Current`; dashboard không có bộ lọc nhóm nào. Nhóm chưa có thành viên hoặc chưa được giao nội dung thì báo trạng thái rỗng. Theo `BR-18.8` · bảng UI
+- `AC18.1` Khi mở tab `Report` của một nhóm, màn có `View by` với ba lựa chọn `Members`, `Sub-groups`, `Courses`, mặc định `Members`, và số liệu tính ở thời điểm hiện tại; màn chưa có ô chọn mốc thời gian; dashboard không có bộ lọc nhóm nào. Nhóm chưa có thành viên hoặc chưa được giao nội dung thì báo trạng thái rỗng. Theo `BR-18.8` · bảng UI
 - `AC18.2` Khi xem danh sách theo thành viên của một nhóm cha, danh sách gồm thành viên của mọi nhóm con, mỗi người một dòng với cột Nhóm là nhóm của họ. Theo `BR-18.3`
-- `AC18.3` Khi chọn một ngày T trong quá khứ, cả ba danh sách tính theo thành viên còn hiệu lực cuối ngày T và bản chụp trạng thái học cuối ngày T, gồm cả người sau này nghỉ việc. Sau khi thêm người mới và có người nghỉ việc, chạy lại cùng mốc vẫn ra đúng số cũ. Một nhánh di chuyển sau ngày T được gom theo vị trí hiện tại trên cây. Theo `BR-18.1` · `BR-18.2`
-- `AC18.4` Khi xem chế độ hiện tại, người đã nghỉ việc không được tính; tài khoản kiểm thử không được tính ở bất kỳ danh sách nào, ở cả chế độ hiện tại và quá khứ. Khi một người có một lượt đã hoàn thành, một lượt quá hạn ở lớp thời hạn cố định và một lượt chưa kích hoạt ở lớp thời hạn linh hoạt, danh sách tính 3 khoá có nghĩa vụ: 1 hoàn thành, 1 quá hạn, 1 chưa bắt đầu. Theo `BR-18.4` · `BR-18.5` · `BR-18.9`
+- `AC18.4` Khi một người đã nghỉ việc hoặc là tài khoản kiểm thử, người đó không được tính ở bất kỳ danh sách nào. Khi một người có một lượt đã hoàn thành, một lượt quá hạn ở lớp thời hạn cố định và một lượt chưa kích hoạt ở lớp thời hạn linh hoạt, danh sách tính 3 khoá có nghĩa vụ: 1 hoàn thành, 1 quá hạn, 1 chưa bắt đầu. Theo `BR-18.4` · `BR-18.5` · `BR-18.9`
 - `AC18.5` Khi xem danh sách theo nhóm con, mỗi dòng là một nhóm con trực tiếp với số liệu cộng dồn cả nhánh của nó; nhóm không có nhóm con thì danh sách này trống và ghi rõ nhóm không có nhóm con. Theo `BR-18.6`
-- `AC18.6` Khi chọn `On a date`, ngày sớm nhất chọn được là ngày việc chụp trạng thái chạy lần đầu, ngày muộn nhất là hôm qua; ngày ngoài khoảng đó không chọn được, và dưới ô chọn có dòng giải thích dữ liệu bắt đầu từ ngày nào (`EC-21`). Theo `BR-18.7`
 
 ### Giao diện và validate
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
 | `SCR4` Chi tiết nhóm | Tab | **Report** *(Báo cáo)* | Tab mới, cạnh các tab `Members`, `Assigned Classes`, `People in Charge`. Người chỉ có quyền xem vẫn xem được |
-| `SCR16` tab `Report` | Chọn | **Mốc thời gian** | Hai lựa chọn: `Current` *(Hiện tại)* hoặc `On a date` *(Một ngày trong quá khứ)*. Mặc định `Current`. Ngày chọn được từ ngày việc chụp trạng thái chạy lần đầu tới hôm qua, kèm dòng giải thích |
 | `SCR16` tab `Report` | Chọn | **View by** *(Xem theo)* | Ba lựa chọn: `Members` · `Sub-groups` · `Courses`. Mặc định `Members` |
+| `SCR16` tab `Report` | Mốc thời gian | — | Chưa có ô chọn mốc ở đợt này; số liệu luôn là hiện tại. Ô chọn mốc thêm ở `US22` |
 | `SCR16` tab `Report` | Đang tính | — | Hiện đang tính, không chặn màn. Tính lỗi thì báo lỗi |
 | `SCR16` `Members` | Danh sách | Cột | Họ tên · Nhóm · Số khoá có nghĩa vụ · Hoàn thành · Đang học · Quá hạn · Chưa bắt đầu · Tiến độ trung bình |
 | `SCR16` `Sub-groups` | Danh sách | Cột | Tên nhóm con · Số người có nghĩa vụ · Hoàn thành · Tỉ lệ hoàn thành · Quá hạn · Chưa bắt đầu · Tiến độ trung bình |
@@ -1666,19 +1664,16 @@ Không có.
 ### NFR
 
 - Báo cáo một khối lớn cộng dồn qua nhiều cấp. Không chặn giao diện khi tính
-- Bản chụp trạng thái học của mọi lượt ghi danh thuộc người đang trong nhóm chạy nền cuối mỗi ngày; lỗi thì ghi log và cảnh báo
 
 ### Trường hợp ngoại lệ
 
 | Góc | Xử lý |
 | --- | --- |
-| `CG-15` Người nghỉ việc làm thay đổi số liệu của kỳ báo cáo đã công bố | Có luật: `BR-18.2`, báo cáo theo mốc quá khứ tính cả người sau này đã nghỉ việc |
-| `EC-21` Người dùng chọn mốc trước ngày đầu có dữ liệu, hoặc hôm nay | Có luật: `BR-18.7`; tiêu chí `AC18.6`. Cần nói rõ với người dùng: câu hỏi mở #5 và mục 8 |
-| Nhánh di chuyển sau mốc quá khứ đã chọn | Có luật: `BR-18.2`, gom theo cây hiện tại (DEC119) |
-| Việc chụp trạng thái lỡ một ngày | Có luật: `BR-18.7`, lệch tối đa một ngày |
+| `CG-15` Người nghỉ việc làm thay đổi số liệu của kỳ báo cáo đã công bố | Báo cáo hiện tại loại người đã nghỉ việc (`BR-18.5`). Đọc lại số liệu của kỳ đã công bố thuộc `US22`, để sau |
 
 ### Ngoài phạm vi của US
 
+- Báo cáo tại một ngày trong quá khứ: `US22`, để sau
 - Hẹn giờ gửi báo cáo định kỳ qua email
 - Xuất báo cáo ra tệp
 - So sánh hai mốc thời gian cạnh nhau
@@ -1875,6 +1870,67 @@ Nhóm cũ của chức năng thông báo bỏ hẳn cùng dữ liệu, xem mục
 - Hẹn giờ gửi thông báo theo nhóm
 - Đổi cách soạn và gửi thông báo ngoài phần chọn người nhận
 
+## US22: Báo cáo theo nhóm tại một mốc quá khứ
+
+### User story
+
+Là nhân sự vận hành, tôi cần xem báo cáo của một nhóm tại một ngày trong quá khứ, để đọc lại đúng số liệu của một kỳ đã công bố sau khi thành viên đã thay đổi.
+
+**Ưu tiên:** Should. Để sau, không làm ở đợt này (DEC135)
+
+### Tiền điều kiện
+
+- `US18` đã xong
+- Việc chụp trạng thái học cuối ngày đã chạy ít nhất một ngày
+
+### Luồng chính
+
+`SCR16` tab `Report` → ô chọn mốc → `On a date`
+
+Người vận hành chọn một ngày trước hôm nay; cả ba danh sách của `US18` tính theo thành viên và trạng thái học tại ngày đó. Dữ liệu chỉ có từ ngày việc chụp trạng thái cuối ngày chạy lần đầu, tức khi làm user story này; giai đoạn từ lúc bật tính năng tới lúc đó không có dữ liệu.
+
+### Business rule
+
+- `BR-22.1` Báo cáo tính theo **thành viên tại mốc thời gian đã chọn**, không theo danh sách hôm nay
+- `BR-22.2` Chọn mốc quá khứ là ngày T thì danh sách thành viên tính theo thành viên **còn hiệu lực cuối ngày T**, chỉ số lấy từ **bản chụp trạng thái học cuối ngày T**, gồm cả người sau này đã nghỉ việc, nếu lúc đó họ còn làm. Tài khoản kiểm thử không được tính. Nhóm và nhánh con **gom theo cây nhóm hiện tại**, không dựng lại cây của ngày T
+- `BR-22.3` Mốc quá khứ phải **trước hôm nay**. Ngày sớm nhất chọn được là **ngày việc chụp trạng thái cuối ngày chạy lần đầu**; trước đó không có dữ liệu. Việc chụp lỡ một ngày thì số liệu ngày đó lấy theo bản chụp gần nhất trước đó, **lệch tối đa một ngày**. Mọi mốc ngày (hôm nay, cuối ngày T, giờ chạy việc chụp) tính theo **giờ Việt Nam, UTC+7**
+
+### Tiêu chí chấp nhận
+
+- `AC22.1` Khi chọn một ngày T trong quá khứ, cả ba danh sách tính theo thành viên còn hiệu lực cuối ngày T và bản chụp trạng thái học cuối ngày T, gồm cả người sau này nghỉ việc, không gồm tài khoản kiểm thử. Sau khi thêm người mới và có người nghỉ việc, chạy lại cùng mốc vẫn ra đúng số cũ. Một nhánh di chuyển sau ngày T được gom theo vị trí hiện tại trên cây. Theo `BR-22.1` · `BR-22.2`
+- `AC22.2` Khi chọn `On a date`, ngày sớm nhất chọn được là ngày việc chụp trạng thái chạy lần đầu, ngày muộn nhất là hôm qua; ngày ngoài khoảng đó không chọn được, và dưới ô chọn có dòng giải thích dữ liệu bắt đầu từ ngày nào (`EC-21`). Theo `BR-22.3`
+
+### Giao diện và validate
+
+| Màn hình | Giao diện | Field | Yêu cầu |
+|---|---|---|---|
+| `SCR16` tab `Report` | Chọn | **Mốc thời gian** | Hai lựa chọn: `Current` *(Hiện tại)* hoặc `On a date` *(Một ngày trong quá khứ)*. Mặc định `Current`. Ngày chọn được từ ngày việc chụp trạng thái chạy lần đầu tới hôm qua, kèm dòng giải thích |
+
+### Dữ liệu
+
+| Thông tin | Mới / Có sẵn | Ghi chú |
+|---|---|---|
+| Trạng thái học của từng lượt ghi danh cuối mỗi ngày | Mới | Chụp cuối mỗi ngày, chỉ ghi khi có thay đổi. Bắt đầu khi làm user story này |
+
+### NFR
+
+- Bản chụp trạng thái học của mọi lượt ghi danh thuộc người đang trong nhóm chạy nền cuối mỗi ngày; lỗi thì ghi log và cảnh báo
+
+### Trường hợp ngoại lệ
+
+| Góc | Xử lý |
+| --- | --- |
+| `CG-15` Người nghỉ việc làm thay đổi số liệu của kỳ báo cáo đã công bố | Có luật: `BR-22.2`, báo cáo theo mốc quá khứ tính cả người sau này đã nghỉ việc |
+| `EC-21` Người dùng chọn mốc trước ngày đầu có dữ liệu, hoặc hôm nay | Có luật: `BR-22.3`; tiêu chí `AC22.2`. Cần nói rõ với người dùng: câu hỏi mở #5 và mục 8 |
+| Nhánh di chuyển sau mốc quá khứ đã chọn | Có luật: `BR-22.2`, gom theo cây hiện tại |
+| Việc chụp trạng thái lỡ một ngày | Có luật: `BR-22.3`, lệch tối đa một ngày |
+| Giai đoạn từ lúc bật tính năng tới lúc làm user story này | Không có dữ liệu trạng thái học; PO chấp nhận (DEC135). Lịch sử thành viên của giai đoạn đó vẫn có ở nhật ký `US15` |
+
+### Ngoài phạm vi của US
+
+- So sánh hai mốc thời gian cạnh nhau
+- Dựng lại trạng thái học của các ngày trước khi việc chụp chạy lần đầu
+
 ---
 
 # 7. Yêu cầu phi chức năng
@@ -1887,7 +1943,8 @@ Tính năng chưa có NFR áp cho toàn bộ; knowledge base của sản phẩm 
 | `US7` | Giao nội dung cho nhóm lớn không chặn giao diện; ghi danh chạy nền, báo khi xong |
 | `US16` | Danh sách người trong nhánh có phân trang; `SCR24`, `SCR25` dùng được ở 375 px |
 | `US17` | Khối `My Managers` dùng được ở 375 px |
-| `US18` | Báo cáo cộng dồn cho khối lớn không chặn giao diện khi tính; bản chụp trạng thái học chạy nền cuối mỗi ngày, lỗi thì cảnh báo |
+| `US18` | Báo cáo cộng dồn cho khối lớn không chặn giao diện khi tính |
+| `US22` | Bản chụp trạng thái học chạy nền cuối mỗi ngày, lỗi thì cảnh báo |
 
 Mức tiếp cận theo `ux-design.md` mục 4: WCAG 2.2 AA. Các NFR về thời gian xử lý chưa có chỉ số đo: câu hỏi mở #11.
 
@@ -1900,16 +1957,16 @@ Mức tiếp cận theo `ux-design.md` mục 4: WCAG 2.2 AA. Các NFR về thờ
 | Dữ liệu hiện có | Chức năng Group Management và Recipients List cũ bị bỏ hẳn, coi như chưa có. Dữ liệu nhóm cũ, nhóm của thông báo, phòng ban và đơn vị kinh doanh của nhân sự vận hành **bỏ hẳn, không chuyển đổi**. Quay lui phần này chỉ tạo lại cấu trúc rỗng, không lấy lại dữ liệu | Impact Matrix mục 8 · DEC24 · DEC116 |
 | Module Staff | Bỏ phòng ban và đơn vị kinh doanh khỏi nhân sự vận hành. API nhân sự, vị trí, cơ sở và tệp nhập nhân sự, nhập vị trí bỏ trường phòng ban: **phá tương thích**. FE đổi form nhân sự và form support group cùng đợt | DEC116 · Impact Matrix vùng 16 |
 | Thông báo Ops | API tạo, sửa, xem, chọn nhóm của thông báo đổi sang nhóm mới: **phá tương thích**. Thông báo đã gửi theo nhóm cũ mất thông tin nhóm | DEC116 · Impact Matrix vùng 17 · `US21` |
-| Đồng bộ lần đầu | Chạy lệnh đồng bộ toàn bộ một lần, dựng 53 nhóm và 384 quan hệ thành viên. Mốc thời gian của các quan hệ này là ngày bật tính năng, không phải ngày người đó vào công ty. Báo cáo theo mốc quá khứ có dữ liệu từ ngày việc chụp trạng thái cuối ngày chạy lần đầu | Impact Matrix mục 8 · `BR-18.7` · DEC119 |
+| Đồng bộ lần đầu | Chạy lệnh đồng bộ toàn bộ một lần, dựng 53 nhóm và 384 quan hệ thành viên. Mốc thời gian của các quan hệ này là ngày bật tính năng, không phải ngày người đó vào công ty. Báo cáo theo mốc quá khứ (`US22`, để sau) chỉ có dữ liệu từ ngày việc chụp trạng thái cuối ngày chạy lần đầu | Impact Matrix mục 8 · `BR-22.3` · DEC119 |
 | Cách bật | Bật làm hai lần bằng **hai cờ cấu hình theo tổ chức**, cả hai mặc định tắt: cờ đồng bộ cơ cấu và cờ giao nội dung. Lần một: bật cờ đồng bộ, dựng cây và thành viên, chưa giao nội dung nào. Lần hai: bật cờ giao nội dung. Cờ giao nội dung còn tắt thì hệ thống từ chối mọi thao tác giao lớp cho nhóm. Bật cùng lúc thì lần đồng bộ đầu có thể kích hoạt luật đứng và gửi mail hàng loạt. Đợt này chưa có màn cấu hình hai cờ; nhân sự kỹ thuật bật theo từng tổ chức | Impact Matrix mục 8 · DEC121 |
 | Cấu hình ngoài hệ thống | Ứng dụng Lark bật nhận sự kiện phòng ban và quyền đọc phòng ban. Client Keycloak của UpLMS Ops cho danh tính học viên đăng nhập | Impact Matrix vùng 18 |
-| Việc nền theo lịch | Một lần đồng bộ toàn bộ mỗi đêm (`BR-5.9`). Một lần chụp trạng thái học cuối mỗi ngày cho báo cáo quá khứ (`BR-18.2`) | DEC117 · DEC119 |
+| Việc nền theo lịch | Một lần đồng bộ toàn bộ mỗi đêm (`BR-5.9`). Việc chụp trạng thái học cuối mỗi ngày bắt đầu khi làm `US22` (`BR-22.2`) | DEC117 · DEC119 · DEC135 |
 | Chạy song song | Đường thêm học viên vào lớp bằng tay và đường giao qua nhóm chạy song song lâu dài, không phải giai đoạn chuyển tiếp. Ràng buộc `C2` giữ cho hai đường không sinh hai lượt ghi danh | Impact Matrix mục 8 · `C2` · `BR-7.3` |
 | Quay lui | Tắt được luật đứng, nhưng lượt ghi danh đã sinh không thu hồi tự động, vì lượt ghi danh thuộc về Lớp | Impact Matrix mục 8 |
 | Tenant và cấu hình | Không giới hạn số cấp của cây nhóm, không có hằng số số cấp. Nguồn nhóm và loại quan hệ do hệ thống định nghĩa cố định (câu hỏi mở #3, đã quyết). Dữ liệu nhóm tách theo tổ chức như dữ liệu hiện có. Đồng bộ cơ cấu từ hệ thống nhân sự là chỗ gắn riêng với UpBase; thiết kế BE đặt một lớp chuyển đổi nguồn nhân sự, Lark là một nguồn, để tổ chức khác dùng hệ thống nhân sự khác không phải làm lại | Impact Matrix mục 9 · thiết kế BE |
 | Quyền vào UpLMS Ops | Tài khoản học viên được gán quản lý hoặc mentor phải vào được UpLMS Ops và chỉ thấy màn của vai đó. Mentor đang được thêm tay vào lớp từ danh sách Staff giữ nguyên như hiện nay (`BR-12.6`). Quản lý vào qua email và địa chỉ UpLMS Ops, không có đường dẫn từ UpLMS. Dev kiểm UpLMS Ops chạy được trên trình duyệt điện thoại cho `SCR24`, `SCR25` | DEC101 · DEC120 · DEC121 · `BR-12.7` · `BR-16.7` |
 | Vùng đã kiểm, không chạm | `CG-12` danh mục khoá học và `CG-13` ngân hàng câu hỏi: nhóm không chạm trực tiếp, theo bản phân tích ảnh hưởng | Impact Matrix mục 7 |
-| Hướng dẫn người dùng | User Guide và thông báo phát hành nói rõ: báo cáo theo mốc quá khứ chỉ có dữ liệu từ ngày việc chụp trạng thái chạy lần đầu, mốc phải trước hôm nay, gom theo cây nhóm hiện tại | Câu hỏi mở #5 · `BR-18.7` |
+| Hướng dẫn người dùng | User Guide và thông báo phát hành nói rõ: đợt này báo cáo theo nhóm chỉ ở thời điểm hiện tại; khi có báo cáo theo mốc quá khứ, dữ liệu chỉ có từ ngày việc chụp trạng thái chạy lần đầu | Câu hỏi mở #5 · `BR-22.3` |
 
 ---
 
@@ -1933,7 +1990,7 @@ Mức tiếp cận theo `ux-design.md` mục 4: WCAG 2.2 AA. Các NFR về thờ
 | 2 | **Ma trận phân quyền hiện có** — chưa ai đọc được, nó nằm trong dữ liệu chứ không nằm trong cấu trúc. **Thiết kế BE trả lời:** phạm vi theo dõi nhánh chỉ dựa trên quan hệ quản lý, quyền vào UpLMS Ops dùng một vai mới chỉ mở màn theo dõi nhánh và màn chấm bài, không đụng ma trận hiện có | Dev | `US16` ở phía Dev: phạm vi dữ liệu dựng trên nền chưa nhìn thấy. **Không chặn viết PRD**, vì màn theo dõi nhánh đọc theo **quan hệ quản lý**, không theo vai trò hệ thống *(`BR-16.4`; phạm vi tách theo màn chốt 06/10, đơn giản hoá phạm vi chốt 05/10)*. Dev xin bản export ma trận quyền trước khi làm `US16` để nối hai phạm vi. Từ CR6 thêm việc: tài khoản học viên được vào UpLMS Ops cho đúng màn của vai quản lý hoặc mentor |
 | 3 | ~~**Loại quan hệ** *(quản lý, mentor)* do hệ thống định nghĩa cố định hay tổ chức tự thêm được~~ **Đã quyết 12/10/2026:** loại quan hệ do hệ thống định nghĩa cố định, gồm quản lý và mentor; tổ chức không tự thêm loại mới | PO | Không chặn |
 | 4 | ~~**Tài khoản kiểm thử và tài khoản trả lời bình luận tạo bằng cách nào**, khi chúng không phải nhân sự nên không có trong cây tổ chức~~ **Đã quyết 12/10/2026:** hai loại tài khoản này được tạo hoặc chọn thẳng trong UpLMS Ops, không qua cây tổ chức trên Lark | PO | Không chặn |
-| 5 | **Mốc lùi tối đa của báo cáo quá khứ** là ngày việc chụp trạng thái cuối ngày chạy lần đầu *(`BR-18.7`, DEC119)*. Cần nói rõ với người dùng, đừng để họ tưởng có dữ liệu cũ hơn | Người viết | Không chặn, nhưng phải truyền đạt |
+| 5 | **Mốc lùi tối đa của báo cáo quá khứ** là ngày việc chụp trạng thái cuối ngày chạy lần đầu, tức khi làm `US22` *(`BR-22.3`, DEC135)*. Cần nói rõ với người dùng, đừng để họ tưởng có dữ liệu cũ hơn | Người viết | Không chặn, nhưng phải truyền đạt |
 | 6 | **Hộp xác nhận gỡ học viên khỏi lớp** bên chức năng Lớp đã có cảnh báo mất tiến độ chưa | Dev | Không chặn. Thuộc chức năng Lớp, ngoài phạm vi dự án này; `MAIL-GRP-01` đã có câu cảnh báo riêng |
 | 7 | **Một góc còn chưa có luật**: quyền quản lý bị thu hồi khi họ đang xem `My Team`. Hai góc khác đã giải ở CR7: đồng bộ lỗi nửa chừng do lần đồng bộ toàn bộ mỗi đêm sửa (`BR-5.9`, DEC117); tên gọi đặt là `Learner Groups` (DEC121) | Dev | Không chặn. Dev đề xuất khi làm `US16` |
 | 8 | **Nhánh lỗi hoặc bị từ chối**: CR7 đưa trạng thái lỗi, rỗng, bị khoá của từng màn từ `ux-design.md` vào bảng giao diện, và các nhánh bị chặn có trong thiết kế thành tiêu chí, ví dụ gán trùng quản lý (`AC9.2`), chuyển phụ trách khi chưa chọn người nhận (`AC13.6`), lưu công tắc lỗi (`AC8.1`). Nhánh nào còn thiếu thì QA đề xuất khi viết `test-design.md`; QA tạm bỏ qua ở CR7 (DEC114) | QA · PO | Không chặn. Nhánh nào làm đổi yêu cầu thì PO bổ sung qua change request |
