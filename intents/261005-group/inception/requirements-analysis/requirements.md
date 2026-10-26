@@ -2,12 +2,12 @@
 intent: 261005-group
 artifact: requirements
 version: 0.6
-status: draft
+status: approved
 approved: 2026-10-09 (v0.3); 2026-10-05 (v0.2)
 cr: CR8 ngày 2026-10-26, ghi chú RC-11 và RC-24; CR7 ngày 2026-10-25, thêm RC-25 đến RC-30; CR6 ngày 2026-10-21, sửa RC-01, thêm RC-21 đến RC-24; CR1 ngày 2026-10-09, thêm RC-20
 ids: RC-01 đến RC-19 theo họ mã v1, không đổi
 migrated-from: pre-aidlc:.claude/projects/Group/working/ai-drafts/clarified-requirements-20261005.md
-approved_at: 2026-10-25T14:24
+approved_at: 2026-10-26T15:42
 ---
 # Làm rõ yêu cầu — Group
 

@@ -4,7 +4,7 @@ feature: LMS-F002
 artifact: prd
 inputs: requirements@0.6, impact-matrix@0.7, ux-design@0.1, fe-technical-design@2.2, be-technical-design (23/10/2026)
 version: 0.8
-status: draft
+status: approved
 services: UpLMS Ops backend (app ops), UpLMS backend (app lms), event-processor-service, background-job-service, notification-service, thư viện dùng chung và migration cơ sở dữ liệu, giao diện UpLMS Ops, giao diện UpLMS
 approved: 2026-10-12 (v0.3); 2026-10-09 (v0.2); 2026-10-06 (v0.1)
 cr: CR8 ngày 2026-10-26, báo cáo theo nhóm đợt này chỉ ở hiện tại, tách mốc quá khứ thành US22 để sau; CR7 ngày 2026-10-25, viết lại theo file thiết kế của Design PIC và Tech PIC, thêm US21 thông báo theo nhóm; CR6 ngày 2026-10-21, bỏ giới hạn số cấp, một người nhiều vai bằng một tài khoản học viên, thông báo cho quản lý cấp gần nhất, tạm cho tự chấm, US18 thành tab Báo cáo; CR5 ngày 2026-10-20, chuyển sang template PRD chuẩn, không đổi US, AC, BR; CR4 ngày 2026-10-20, cập nhật thông tin tài liệu ở bảng đầu sau khi duyệt v0.4; CR3 ngày 2026-10-20, thêm khối tiêu chí chấp nhận và dòng Ưu tiên cho 20 US; CR2 ngày 2026-10-12, chạm US3 US7 US19 US20, danh sách US, Vấn đề tồn đọng; CR1 ngày 2026-10-09, chạm US9 US13 US16 US20
@@ -12,7 +12,7 @@ gate: v1 Gate 4
 lark: Jg7ld8UCzoeMiAxW5ielxlC4gGg
 lark-title: [PRD] Group
 migrated-from: pre-aidlc:.claude/projects/Group/docs/prd/prd-group-v0.1-20261006.md
-approved_at: 2026-10-25T14:24
+approved_at: 2026-10-26T15:42
 ---
 # [PRD] Nhóm học viên
 

@@ -2,12 +2,12 @@
 intent: 261005-group
 artifact: impact-matrix
 version: 0.7
-status: draft
+status: approved
 approved: 2026-10-12 (v0.4); 2026-10-09 (v0.3); 2026-10-06 (v0.2)
 cr: CR8 ngày 2026-10-26, báo cáo quá khứ và job chụp để sau; CR7 ngày 2026-10-25, vùng 16 đến 18, OQ-25 đóng, OQ-42 và OQ-43; CR6 ngày 2026-10-21, bỏ giới hạn cấp, một người nhiều vai, tự chấm, báo cáo trong chi tiết nhóm, vùng 13 đến 15; CR2 ngày 2026-10-12, CG-3 đã giải và OQ-31; CR1 ngày 2026-10-09, vùng 9 và BI-6
 gate: v1 Gate 2
 migrated-from: pre-aidlc:.claude/projects/Group/working/impact-analysis/impact-matrix-v0.2-20261006.md
-approved_at: 2026-10-25T14:24
+approved_at: 2026-10-26T15:42
 ---
 # Impact Matrix — Group
 

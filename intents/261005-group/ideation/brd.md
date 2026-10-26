@@ -2,14 +2,14 @@
 intent: 261005-group
 artifact: brd
 version: 0.6
-status: draft
+status: approved
 cr: CR8 ngày 2026-10-26, báo cáo theo nhóm đợt này chỉ ở hiện tại, mốc quá khứ để sau; CR7 ngày 2026-10-25, thông báo theo nhóm vào In scope, bỏ phòng ban và đơn vị kinh doanh của nhân sự, đồng bộ theo sự kiện kèm chạy toàn bộ mỗi đêm, chữ giao diện tiếng Anh; CR6 ngày 2026-10-21
 approved: 2026-10-12 (v0.3); 2026-10-06 (v0.2)
 review: lần 01 NOT-READY, Request Changes (DEC78); lần 02 READY, Approve (DEC79), ngày 2026-10-12
 gate: v1 Gate 1 ngày 2026-10-05, cập nhật v0.2 sau Gate 2 và Bước 7
 migrated-from: pre-aidlc:.claude/projects/Group/docs/brd/brd-v0.2-20261006.md
 note: Artifact phase Ideation theo luồng v1. Thay cho intent-statement, scope-document và initiative-brief của v2
-approved_at: 2026-10-25T14:24
+approved_at: 2026-10-26T15:42
 ---
 # [BRD] Group — Nhóm học viên
 
