@@ -117,3 +117,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-26 15:42 2.4 approved v0.8 bởi buidhui
 - 2026-10-26 15:42 2.42 approved v0.8 bởi buidhui
 - 2026-10-26 PO duyệt CR8 bằng terminal (DEC136 đến DEC142), không review lại. Đóng CR8. PRD v0.8; Jira UPLND-409 báo cáo hiện tại, UPLND-420 báo cáo quá khứ ở backlog. Lark vẫn v0.5
+- 2026-10-26 Ước lượng lại theo baseline UPLND-404, 3 điểm (DEC143): tổng 47, đợt này 45; cập nhật comment 14 story trên Jira và bảng mục 6 của Decision Brief

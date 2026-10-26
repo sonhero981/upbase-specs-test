@@ -146,6 +146,7 @@ Nhật ký quyết định của intent. Chuyển từ `archive/v1/project-decis
 | DEC140 | 2026-10-26 15:42 | 2.31 | Approve Impact Analysis, impact-matrix.md v0.7; chấp nhận 291 cảnh báo kiểm máy | "duyệt" · "duyệt" | buidhui | impact-analysis |
 | DEC141 | 2026-10-26 15:42 | 2.4 | Approve User Stories, prd.md v0.8; duyệt khi review không ứng với bản hiện tại | "duyệt" · "duyệt" | buidhui | user-stories |
 | DEC142 | 2026-10-26 15:42 | 2.42 | Approve PRD Generation, prd.md v0.8; duyệt khi review không ứng với bản hiện tại | "duyệt" · "duyệt" | buidhui | prd-generation |
+| DEC143 | 2026-10-26 | Story List | **Ước lượng story point theo baseline UPLND-404** (Quản lý thành viên nhóm, 3 điểm), thay cách co thang của DEC133. Chọn mốc vì team đã làm các màn cùng mẫu, không phụ thuộc hệ thống ngoài, có cả BE và FE; không neo ở story 1 điểm vì không còn chỗ đi xuống, so sánh chênh nhiều lần kém chính xác, và story 1 điểm duy nhất (UPLND-405) còn nhiều điều chưa biết. Tổng 47 điểm, đợt này 45; comment của 14 story ghi điểm, ngày công từng làn và so sánh với baseline | "hãy lấy baseline là 1 story, cho tôi lý do chọn story đó làm baseline, từ story đó hãy ước lượng story point cho các story khác" · "giữ và cập nhật vào comment trong jira, phần căn cứ ước lượng nói rõ so sánh như thế nào với baseline nữa" | buidhui | Story List, Jira |
 
 ## Change requests
 | CR | Ngày | Nguồn | Nội dung | Stage mở lại | Artifact đổi | Trạng thái |

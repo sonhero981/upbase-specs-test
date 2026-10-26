@@ -56,19 +56,19 @@ PO đã nhận cả bảy đề xuất ở PRD v0.7; không còn đề xuất ch
 
 | # | Story | US | Epic | Điểm | Label |
 |---|---|---|---|---|---|
-| 1 | Nền kỹ thuật chung | — | G | 3 | `LMS-F002` · `ORD-1` |
+| 1 | Nền kỹ thuật chung | — | G | 5 | `LMS-F002` · `ORD-1` |
 | 2 | Tạo, sửa và xem danh sách nhóm | US1 · US6 | G | 3 | `ORG.GRP.01` · `ORD-2` |
 | 3 | Quản lý thành viên nhóm: thủ công, theo lô, nhật ký | US3 · US4 · US15 | G | 3 | `ORG.GRP.05` · `ORD-3` |
 | 4 | Thông báo gửi theo nhóm | US21 | G | 1 | `LMS-F002` · `ORD-4` |
 | 5 | Giao nội dung cho nhóm và tự ghi danh | US7 · US8 | G | 5 | `ORG.GRP.08` · `ORD-5` |
 | 6 | Di chuyển, lưu trữ, khôi phục, xoá nhóm | US2 · US14 | G | 3 | `ORG.GRP.12` · `ORD-6` |
-| 7 | Đồng bộ nhóm từ hệ thống nhân sự | US5 | G | 3 | `ORG.GRP.03` · `ORD-7` |
+| 7 | Đồng bộ nhóm từ hệ thống nhân sự | US5 | G | 5 | `ORG.GRP.03` · `ORD-7` |
 | 8 | Báo cáo theo nhóm ở thời điểm hiện tại | US18 | G | 2 | `ORG.GRP.07` · `ORD-8` |
-| 9 | Gán quản lý nhóm, kế thừa, chuyển phụ trách | US9 · US10 · US13 | R | 3 | `ORG.ROL.01` · `ORD-9` |
-| 10 | Gán mentor cho nhóm | US12 | R | 2 | `ORG.ROL.02` · `ORD-10` |
+| 9 | Gán quản lý nhóm, kế thừa, chuyển phụ trách | US9 · US10 · US13 | R | 5 | `ORG.ROL.01` · `ORD-9` |
+| 10 | Gán mentor cho nhóm | US12 | R | 3 | `ORG.ROL.02` · `ORD-10` |
 | 11 | Quản lý trên hồ sơ học viên | US11 · US17 | U | 2 | `ORG.USR.01` · `ORD-11` |
-| 12 | Quản lý theo dõi nhánh mình phụ trách | US16 | R | 3 | `ORG.ROL.03` · `ORD-12` |
-| 13 | Xử lý khi người rời nhóm | US19 · US20 | G | 2 | `LMS-F002` · `ORD-13` |
+| 12 | Quản lý theo dõi nhánh mình phụ trách | US16 | R | 5 | `ORG.ROL.03` · `ORD-12` |
+| 13 | Xử lý khi người rời nhóm | US19 · US20 | G | 3 | `LMS-F002` · `ORD-13` |
 | 14 | Báo cáo theo nhóm tại một mốc quá khứ, để sau | US22 | G | 2 | `ORG.GRP.07` · `ORD-14` |
 
 G: Epic `UpLMS_User & Organization_Group`. R: `UpLMS_User & Organization_Role & Permission`. U: `UpLMS_User & Organization_User (Student)`.
@@ -76,7 +76,7 @@ G: Epic `UpLMS_User & Organization_Group`. R: `UpLMS_User & Organization_Role & 
 Phụ thuộc: story 1 đi trước mọi story; story 4 đi cùng việc bỏ nhóm cũ của thông báo; story 7 cần cấu hình Lark; story 9 đến 11 cần cấu hình Keycloak; story 13 cần đồng bộ và giao nội dung.
 
 ## 7. Độ lớn so với mốc
-14 story, 37 điểm theo thang của team; story 14 ở backlog, chưa làm đợt này. Không có mốc cứng nên không cần cắt phạm vi. Story lớn nhất là giao nội dung và tự ghi danh, 5 điểm. Story nào không lọt một sprint thì PO tách qua change request.
+47 điểm, so với mốc là story 3 (3 điểm); đợt này 45, story 14 ở backlog. Không có mốc cứng nên không cần cắt phạm vi. Story lớn nhất là giao nội dung và tự ghi danh, 5 điểm. Story nào không lọt một sprint thì PO tách qua change request.
 
 ## 8. Rủi ro
 | # | Rủi ro | Ai nêu | Cách giảm | Chấp nhận |
