@@ -36,7 +36,7 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 | Stage | Mọi stage của profile đã duyệt. CR-012, CR-013, CR-014 đã đóng |
 | Next action | PO trả lời OQ-42, OQ-49, OQ-52 trước Unit Campaign. Dev cập nhật technical design theo PRD v0.15 |
 | Blocking questions open | 0 chặn gate; 15 câu hỏi mở trong PRD |
-| Open CR | none, CR-012 và CR-013 đóng 2026-10-12 |
+| Open CR | CR-015 parked, làm sau bản ra mắt (DEC166). Chưa mở lại stage nào, PRD v0.15 giữ nguyên cho bản đầu |
 | Parked | no |
 
 ## Versions
@@ -68,3 +68,7 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-19 15:04 migrate lên engine 2.1.0 bởi buidhui, DEC163
 - 2026-10-19 15:11 migrate lên engine 2.1.0 bởi buidhui, DEC164
 - 2026-10-20 09:26 migrate lên engine 2.1.0 bởi buidhui, DEC165
+- 2026-10-25 CR-015 ghi nhận: lên hạng bằng EXP. Parked tới sau bản ra mắt, chưa archive, chưa sửa artifact. Phân tích ở inputs/change-requests.md, DEC166
+- 2026-10-25 CR-015 thêm trần ngưỡng cho EXP mỗi hạng, mặc định 5.000 (DEC167). Vẫn parked
+- 2026-10-26 Tạo Improvement UPLND-401 trên Jira cho CR-015, gắn epic UPLNDEP-8, backlog
+- 2026-10-26 PRD v0.15 thêm ghi chú CR-015 ở US10 (callout và một dòng Out of scope), không đổi rule bản ra mắt, giữ version

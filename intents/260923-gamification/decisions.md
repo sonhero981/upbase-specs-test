@@ -169,6 +169,8 @@ Nhật ký quyết định của intent. Chuyển từ `archive/v1/project-decis
 | DEC163 | 2026-10-19 15:04 | migrate | Chuẩn hoá dữ liệu lên engine 2.1.0: đường dẫn mới, Unit, PIC, AI Reviewer, mã tính năng LMS-F001; chụp lại bản duyệt archive/prd-generation/prd-v0.15-20261019.md. Không đổi nội dung nghiệp vụ | "chuẩn hoá theo engine mới" | buidhui | migrate, phiên bản, mã tính năng |
 | DEC164 | 2026-10-19 15:11 | migrate | Chuẩn hoá dữ liệu lên engine 2.1.0: đường dẫn mới, Unit, PIC, AI Reviewer, mã tính năng LMS-F001. Không đổi nội dung nghiệp vụ | "chuẩn hoá theo engine mới" | buidhui | migrate, phiên bản, mã tính năng |
 | DEC165 | 2026-10-20 09:26 | migrate | Chuẩn hoá dữ liệu lên engine 2.1.0: đường dẫn mới, Unit, PIC, AI Reviewer, mã tính năng LMS-F001; luồng 2.43 thay 2.41 HLD Brief. Không đổi nội dung nghiệp vụ | "chuyển sang luồng 2.43, bỏ HLD Brief" | buidhui | migrate, phiên bản, mã tính năng |
+| DEC166 | 2026-10-25 | CR-015 | **Lên hạng bằng EXP, thay ba tiêu chí bội số.** Mỗi hành động có số EXP riêng, kể cả đạt huy hiệu (PO chọn khác đề xuất ba nguồn có sẵn của Claude). Ngưỡng tăng dần `nền + (n−1) × bước`. Hạ ngưỡng thì giữ EXP, lên ở lần nhận EXP kế tiếp, nới `BR-10.4a`. **Làm sau bản ra mắt**, bản đầu giữ PRD v0.15. Chưa sửa artifact, phân tích và rule ở `inputs/change-requests.md` — Lý do: có một thước đo tích luỹ, trả lại thanh tiến độ tới hạng kế tiếp | "phần level muốn improve lên theo hướng là sẽ tích lũy kinh nghiệm (exp) để lên hạng thay vì các tiêu chí độc lập như bây giờ thì sẽ quy về các tiêu chí ghi đạt sẽ được nhận kinh nghiệm, đủ kinh nghiệm thì sẽ lên hạng" · "EXP riêng từng hành động" · "Tăng dần (Recommended)" · "Giữ EXP, lên ở lần kế (Recommended)" · "Sau bản ra mắt" | PO | CR-015, US10, hạng |
+| DEC167 | 2026-10-25 | CR-015 | **Thêm trần ngưỡng:** EXP cần cho một hạng là `min(nền + (n−1) × bước, trần ngưỡng)`, mặc định trần ngưỡng `5.000`, bỏ trống thì tăng mãi. Bổ sung DEC166 — Lý do: với bước `500` và khoảng `3.000` EXP mỗi tháng, quanh hạng `20` học viên chờ hơn 3 tháng mới lên một hạng | "thêm trần ngưỡng" | PO | CR-015, US10, hạng |
 
 ## Change requests
 Phân tích chi tiết từng CR ở `inputs/change-requests.md` (nguyên văn PO, nhận định, điểm re-entry, trả lời của PO).
@@ -189,6 +191,7 @@ Phân tích chi tiết từng CR ở `inputs/change-requests.md` (nguyên văn P
 | CR-012 | Bảng xếp hạng theo huy hiệu chỉ còn ở All time, thêm bảng Activities | `inputs/change-requests.md` | Đóng 12/10/2026, PRD v0.14 duyệt (DEC157). Trước đó: Mở. Gộp CR-012 vào CR-013 (PO 08/10/2026), chạy lại từ BRD; chờ duyệt lại BRD v0.7, Impact v0.3, Solution v0.2, PRD v0.10 |
 | CR-013 | Campaign trở lại, học viên bỏ khoảng ngày tự do | `inputs/change-requests.md` | Đóng 12/10/2026, bốn gate duyệt lại (DEC145 đến DEC147, DEC157). Trước đó: Mở. Gộp CR-012 vào CR-013 (PO 08/10/2026), chạy lại từ BRD; chờ duyệt lại BRD v0.7, Impact v0.3, Solution v0.2, PRD v0.10 |
 | CR-014 | Phần xem trước bảng xếp hạng bên Ops giữ khoảng ngày tự do | DEC161 | Đóng 14/10/2026, PRD v0.15 duyệt (DEC162) |
+| CR-015 | Lên hạng bằng điểm kinh nghiệm (EXP) | `inputs/change-requests.md` | Parked 25/10/2026, làm sau bản ra mắt (DEC166). Jira: [UPLND-401](https://jira.upbase.asia/browse/UPLND-401), Improvement, epic UPLNDEP-8. Re-entry đề xuất 1.4, xác nhận khi mở lại |
 
 ## Accepted risks
 | DEC | Finding | Vì sao chấp nhận |

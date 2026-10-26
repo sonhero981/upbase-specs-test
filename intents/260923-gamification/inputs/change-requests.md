@@ -11,6 +11,7 @@
 | **CR-011** | 2026-10-06 | **Trang cấu hình Ops tự lưu, bỏ nút lưu.** Chỉ giữ hai xác nhận dạng popover. Tắt `Points` hoặc `Badges` thì tiêu chí lên hạng tương ứng khoá theo. Bỏ giới hạn trên của số điểm. Bỏ ô chọn múi giờ và nhãn trạng thái | PO làm design màn `Enable - Setting`, thấy lệch với PRD và TD-FE | ✅ **Đã áp dụng** — PRD v0.9, re-entry từ PRD do PO confirm |
 | **CR-012** | 2026-10-08 | **Bảng xếp hạng: `Badges` chỉ còn ở `All time` như `Level`, thêm bảng `Activities`.** Kèm câu chữ check-in thay cho "login", và mấy chỗ vá đi cùng | PO review design màn cấu hình huy hiệu và chuỗi check-in | ✅ **Đã áp dụng** — gộp với `CR-013`, re-entry từ BRD do PO confirm |
 | **CR-013** | 2026-10-08 | **Đưa chiến dịch (campaign) trở lại phạm vi**, đảo một phần `CR-007`. Học viên bỏ bộ chọn khoảng ngày tự do, chỉ còn khung cố định. Campaign chọn khoảng thời gian và loại hành động tính điểm, **số điểm theo cấu hình chung** | PO chỉ định: khoảng ngày tự do phía học viên là lỗ hổng để spam tính toán | ✅ **Đã áp dụng** — BRD v0.7 · Impact v0.3 · Solution v0.2 · PRD v0.10, re-entry từ BRD do PO confirm |
+| **CR-015** | 2026-10-25 | **Lên hạng bằng điểm kinh nghiệm (EXP).** Mỗi hành động có số EXP riêng, kể cả đạt huy hiệu. Ngưỡng tăng dần `nền + (n−1) × bước`. Thay mô hình ba tiêu chí bội số | PO muốn có một thước đo tích luỹ để lên hạng | ⏸ **Parked** — làm sau bản ra mắt. Chưa sửa artifact nào. Jira [UPLND-401](https://jira.upbase.asia/browse/UPLND-401) |
 
 ---
 
@@ -747,3 +748,103 @@ Kèm bốn lựa chọn qua câu hỏi chốt:
 | d | **Không thông báo** khi campaign bắt đầu hay kết thúc | Thông báo hiện chỉ dành cho thành tích (`S10`) |
 | e | Học viên bị `Block` hoặc rời tổ chức **vẫn nằm trong kết quả đã đóng băng** | Theo `A14` đã chốt cho snapshot |
 
+
+---
+
+# CR-015 — Lên hạng bằng điểm kinh nghiệm (EXP)
+
+## Nguyên văn PO — 25/10/2026
+
+> *"phần level muốn improve lên theo hướng là sẽ tích lũy kinh nghiệm (exp) để lên hạng thay vì các tiêu chí độc lập như bây giờ thì sẽ quy về các tiêu chí ghi đạt sẽ được nhận kinh nghiệm, đủ kinh nghiệm thì sẽ lên hạng, hãy phân tích giúp tôi và điều chỉnh theo hướng này"*
+
+## Trạng thái trước CR
+
+Mô hình bội số của `US10`, PRD v0.15. Ba tiêu chí độc lập, mỗi tiêu chí một bội số: mỗi `3.000` điểm, mỗi `5` khoá hoàn thành, mỗi `5` huy hiệu. Mỗi mốc chạm được ở bất kỳ tiêu chí nào cho một hạng (`BR-10.2`). Chỉ tính mốc mới vượt qua (`BR-10.4a`). Tắt `Points` hoặc `Badges` thì tiêu chí tương ứng khoá theo (`BR-10.7`), và không tắt được tiêu chí đang chạy cuối cùng (`BR-10.8`).
+
+## Nhận định
+
+**Cái được.**
+
+1. **Có lại thanh tiến độ tới hạng kế tiếp.** Ba tiêu chí độc lập không gộp được thành một thanh, nên PRD v0.15 đã đưa thanh này ra ngoài phạm vi (`US1`, `OQ-43`). Học viên ở hạng `4` không biết mình gần hạng `5` tới đâu. Với EXP, câu trả lời là một con số duy nhất, ví dụ `1,250 / 2,000 EXP`. Thấy đích gần là động lực mạnh nhất cho mục tiêu "mốc ngắn hạn" của BRD.
+2. **Rule gọn hơn.** `BR-10.2`, `BR-10.8` và phép tính `floor(sau / m) − floor(trước / m)` trong technical design thay bằng một luồng: nhận EXP, đủ ngưỡng thì lên hạng.
+3. **Hạng chạy độc lập với `Points`** (theo lựa chọn EXP riêng từng hành động). Tắt điểm thì học viên vẫn lên hạng. `BR-10.7` chỉ còn ràng buộc với `Badges`.
+
+**Rủi ro.**
+
+1. **EXP trùng vai với Points.** Cùng một hành động sinh ra hai con số, học viên dễ thấy hai số chạy song song mà không hiểu khác nhau ở đâu. Claude đề xuất lấy EXP từ ba nguồn có sẵn (1 điểm = 1 EXP, cộng thêm cho khoá và huy hiệu) để Ops chỉ khai một bảng. PO chọn EXP riêng từng hành động. Giảm nhẹ bằng hai rule: học viên chỉ thấy EXP dưới dạng tiến độ trong hạng hiện tại, không thấy tổng EXP; EXP khai cùng khối với bảng điểm, mỗi hành động một cột điểm và một cột EXP.
+2. **Ops khai thêm tám ô số:** năm ô EXP theo hành động và ba ô ngưỡng. Mặc định gợi ý ở dưới để Ops không phải tự nghĩ.
+3. **Đổi mô hình sau ra mắt.** Học viên đã có hạng theo mô hình cũ. Cần rule chuyển đổi, xem mục Rule mới, điểm 9.
+
+## PO trả lời — 25/10/2026
+
+| Câu hỏi | PO chọn |
+|---|---|
+| EXP lấy từ nguồn nào | **EXP riêng từng hành động.** Claude đề xuất ba nguồn có sẵn, PO chọn khác |
+| Ngưỡng EXP mỗi hạng | **Tăng dần** `nền + (n−1) × bước` (Recommended) |
+| Hạ ngưỡng khi học viên đã có EXP vượt ngưỡng mới | **Giữ EXP, lên ở lần nhận EXP kế tiếp** (Recommended). Nới `BR-10.4a` |
+| Thời điểm | **Sau bản ra mắt.** Bản đầu giữ mô hình bội số của PRD v0.15 |
+
+## Rule mới
+
+| # | Rule | Nguồn |
+|---|---|---|
+| 1 | Mỗi hành động có một số EXP riêng, Ops khai cạnh số điểm: vào hệ thống hằng ngày · hoàn thành hoạt động · hoàn thành khoá · qua bài Test · **đạt huy hiệu** | PO |
+| 2 | Lên hạng khi EXP tích trong hạng hiện tại đủ ngưỡng. Ngưỡng từ hạng `n` lên `n+1` là `min(nền + (n−1) × bước, trần ngưỡng)`: tăng dần tới trần ngưỡng rồi đứng yên, cùng dạng công thức điểm check-in. Ops chỉnh `nền`, `bước` và `trần ngưỡng`. `bước = 0` thì mọi hạng cùng ngưỡng. Trần ngưỡng là số nguyên `>= nền`, bỏ trống nghĩa là ngưỡng tăng mãi. Trần ngưỡng khác trần hạng: trần ngưỡng giới hạn EXP cần cho một hạng, trần hạng giới hạn hạng cao nhất | PO, trần ngưỡng thêm ngày 25/10 |
+| 3 | Đổi số EXP của hành động: áp dụng từ thời điểm lưu, theo `C4` | Giữ nguyên tắc chung |
+| 4 | Đổi `nền`, `bước` hoặc `trần ngưỡng`: hạng và EXP đang tích trong hạng giữ nguyên. Ngưỡng mới áp từ lần xét kế tiếp. EXP đang có đã vượt ngưỡng mới thì lên hạng ở lần nhận EXP kế tiếp, có thể lên nhiều hạng một lúc | PO, nới `BR-10.4a` |
+| 5 | Hạng chỉ lên, không tụt (`BR-10.3`). Trần hạng giữ như cũ | Giữ |
+| 6 | EXP chỉ tích khi `Gamification` và `Levels` cùng bật. Không độc lập với `Points`. EXP của huy hiệu dừng khi `Badges` tắt vì không còn huy hiệu được trao | Claude, theo `BR-10.4a` và `BR-14.5` |
+| 7 | Chống cộng trùng, loại `Test Account`, chấm lại không cộng: EXP đi cùng sự kiện ghi nhận nên chịu đúng các rule của điểm (`C5`, `BR-REGRADE`) | Claude |
+| 8 | Học viên chỉ thấy EXP dưới dạng tiến độ trong hạng: `{EXP trong hạng} / {ngưỡng} EXP`. Không hiện tổng EXP. Ops thấy tổng EXP ở `US12` và từng lần cộng EXP ở `US22` | Claude, giảm nhẹ rủi ro 1 |
+| 9 | **Chuyển đổi lúc áp dụng sau ra mắt:** học viên giữ hạng đang có, EXP trong hạng bắt đầu từ `0`. Không quy đổi lịch sử cũ thành EXP, vì quy đổi sẽ làm hàng loạt học viên lên nhiều hạng cùng lúc | Claude |
+
+## Mặc định Claude đặt, chưa hỏi PO — duyệt ở Gate
+
+| # | Mặc định | Lý do |
+|---|---|---|
+| a | EXP check-in **cố định mỗi ngày**, không tăng theo chuỗi | Chuỗi đã thưởng bằng điểm. Thêm chuỗi vào EXP thì Ops phải khai thêm ba ô |
+| b | **Một số EXP chung cho mọi huy hiệu**, không chia theo loại hay mốc | Ít ô cấu hình. Chia theo mốc là việc phát triển sau |
+| c | Số EXP nhỏ nhất `0`. Hành động `0` EXP thì không góp. Mọi hành động đều `0` thì khối `Levels` hiện cảnh báo cố định, thay cho `BR-10.8` | Giữ một cơ chế cảnh báo, bỏ rule "không tắt được tiêu chí cuối" |
+| d | Lên nhiều hạng một lúc: lịch sử ghi **một dòng cho mỗi hạng**, toast chỉ hiện **hạng cuối** | Không làm ngập thông báo |
+| e | Chạm trần thì ngừng tích EXP, thanh tiến độ hiện `Max level`. Nâng trần thì tích lại từ `0` | Không lên bù, cùng tinh thần `BR-10.4a` |
+| f | Bảng xếp hạng `Level` xếp theo hạng, cùng hạng thì theo EXP trong hạng, rồi theo thời điểm đạt | Thứ hạng mịn hơn, bớt đồng hạng |
+| g | Không có bảng xếp hạng theo EXP, campaign không tính EXP | Bảng `Points` đã đo cùng hành vi |
+| h | Lịch sử học viên (`US3`) ghi kèm số EXP ở mỗi dòng có EXP, để học viên đối chiếu với thanh tiến độ. Toast điểm giữ nguyên | Học viên phải tự kiểm được thanh tiến độ |
+
+**Giá trị mặc định gợi ý**, chỉnh lại sau giai đoạn chạy ngầm:
+
+| Hành động | Điểm (hiện có) | EXP |
+|---|---|---|
+| Vào hệ thống hằng ngày | `10` đến `40` theo chuỗi | `10` |
+| Hoàn thành hoạt động | `10` | `20` |
+| Hoàn thành khoá | `150` | `500` |
+| Qua bài Test | `25` | `50` |
+| Đạt huy hiệu | — | `300` |
+| Ngưỡng | — | nền `1.000`, bước `500`, trần ngưỡng `5.000` |
+
+Ước tính, chưa có số liệu thật: học xong khoá đầu tiên có khoảng `900` EXP, lên hạng `2` sau một hai lần vào hệ thống. Học viên học đều có khoảng `3.000` EXP mỗi tháng (check-in `200` · hoạt động `800` · khoá `1.000` · bài Test `100` · huy hiệu `900`).
+
+| Mốc | Không có trần ngưỡng | Trần ngưỡng `5.000` |
+|---|---|---|
+| Hạng `5` | `7.000` EXP, khoảng 2,5 tháng | Như bên trái |
+| Hạng `10` | `27.000` EXP, khoảng 9 tháng | Như bên trái |
+| Một hạng sau hạng `10` | Tăng mãi, quanh hạng `20` cần `10.000` EXP, hơn 3 tháng một hạng | Luôn `5.000` EXP, khoảng 1,7 tháng một hạng |
+| Hạng `20` | `104.500` EXP, khoảng 3 năm | `77.000` EXP, khoảng 2 năm |
+
+Lý do thêm trần ngưỡng: không có trần thì học viên chăm nhất lại là người chờ lâu nhất mới thấy mình lên hạng. Hạng đầu vẫn nhanh để kéo học viên mới, hạng cao vẫn hiếm, nhưng nhịp lên hạng của người học lâu năm không chậm mãi.
+
+## Tác động
+
+| Artifact | Phần bị chạm |
+|---|---|
+| BRD | `S6` "ngưỡng lên hạng dựa trên nhiều chỉ số" và dòng ngưỡng lên hạng ở mục 6 |
+| Impact Matrix | Data: cấu hình EXP theo hành động, ngưỡng, EXP của học viên, EXP trong sổ giao dịch |
+| PRD | `US10` viết lại · `US8` thêm cột EXP · `US9` EXP huy hiệu · `US1` ô hạng, panel `How to level up?` có thanh tiến độ, đảo mục `[đề xuất]` bỏ thanh tiến độ trong `OQ-43` · `US3` EXP trong lịch sử · `US6`, `US11` cách xếp bảng `Level` · `US12` cột EXP · `US22` EXP trong nhật ký · `BR-10.2`, `BR-10.4a`, `BR-10.7`, `BR-10.8` |
+| Technical design backend | `gamification_level_criteria` thay bằng cấu hình EXP và ba giá trị ngưỡng (nền, bước, trần ngưỡng) · `gamification_learner_stats` thêm EXP · sổ giao dịch ghi EXP · API `/levels` · `/me` trả lại tiến độ hạng |
+| Technical design frontend | `LevelsBlock`, khối `Points` thêm cột EXP, `HowToDrawer` view `level` |
+| Design | Khối `Levels` bên Ops có ba ô ngưỡng và trần hạng, khối `Points` thêm cột EXP, panel `How to level up?` |
+| Kịch bản demo trên Lark | Phần 1.3 và phần 4 mô tả mô hình bội số |
+
+## Điểm re-entry đề xuất — xác nhận khi mở lại
+
+**1.4 scope-definition**, vì `S6` của BRD mô tả ngưỡng theo nhiều chỉ số. Cascade nhẹ: 1.4 sửa một dòng `S6`, 2.31 thêm phần Data, 2.32 giữ, 2.42 sửa các US ở bảng trên. PO xác nhận impact preview khi CR được mở lại sau ra mắt.
