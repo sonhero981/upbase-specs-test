@@ -14,12 +14,12 @@ Nhóm học viên gom người thành cây nhóm, giao lớp cho cả nhóm bằ
 ## 2. Điểm cần quyết
 | # | Vấn đề | Ai nêu | Lựa chọn và hệ quả | Đề xuất |
 |---|---|---|---|---|
-| D1 | Chưa có kế hoạch test cho 116 tiêu chí | PO | (a) Đi tiếp: story lên Jira ngay, QA viết test case song song đợt 1. Rủi ro là story vào sprint trước khi có test case. (b) Chờ QA viết xong rồi mới giao story: chậm toàn bộ | (a), kèm luật: một story chỉ vào sprint khi QA đã có test case cho mọi tiêu chí của story đó |
+| D1 | Chưa có kế hoạch test cho 116 tiêu chí | PO | (a) Đi tiếp: story lên Jira ngay, QA viết test case song song `ORD-1`. Rủi ro là story vào sprint trước khi có test case. (b) Chờ QA viết xong rồi mới giao story: chậm toàn bộ | (a), kèm luật: một story chỉ vào sprint khi QA đã có test case cho mọi tiêu chí của story đó |
 | D2 | Nhóm đồng bộ từ hệ thống nhân sự có lưu trữ tay được không | Tech, Design | (a) Chặn như mọi thao tác sửa khác của nhóm đồng bộ; nhóm chỉ chuyển lưu trữ khi phòng ban biến mất khỏi nguồn. Thiết kế BE đang chặn. (b) Cho lưu trữ tay: lần đồng bộ sau có thể đưa nhóm về trạng thái đang dùng, gây lệch | (a). Design bỏ nút `Archive` ở nhóm đồng bộ |
 | D3 | Màn tạo, sửa nhóm là modal hay drawer | Design, Tech | UX vẽ modal; bản demo FE đã dựng drawer | Giữ drawer đã dựng nếu Design đồng ý |
-| D4 | Gán story vào ba Epic trên Jira | PO | Bảng ở mục 6. Bốn story quan hệ người (gán quản lý, kế thừa quản lý, gán mentor, chuyển phụ trách) và màn theo dõi nhánh vào Epic Role & Permission vì chúng cấp quyền và phạm vi xem; nếu xếp theo màn thao tác thì ba story đầu sang Epic Group | Theo bảng mục 6 |
+| D4 | Gán story vào ba Epic trên Jira | PO | Bảng ở mục 6. Story quản lý nhóm, mentor và theo dõi nhánh vào Epic Role & Permission vì chúng cấp quyền và phạm vi xem; nếu xếp theo màn thao tác thì hai story đầu sang Epic Group | Theo bảng mục 6 |
 | D5 | Story kỹ thuật chung gom nhiều việc không liên quan | PO | Một story gồm: bỏ nhóm cũ, nhóm của thông báo, phòng ban và đơn vị kinh doanh; tạo bảng nhóm mới; hai cờ cấu hình theo tổ chức; vai phụ trách nhóm để vào UpLMS Ops; lệnh sửa cây; cấu hình Lark và Keycloak | Giữ một story; Tech PIC chia sub-task |
-| D6 | Chức năng gửi thông báo trên UpLMS Ops hiện đang bật hay chưa | PO | Đang bật: việc bỏ nhóm cũ của thông báo làm hỏng chức năng này nếu story thông báo theo nhóm (`US21`) ra sau. Chưa bật: `US21` ra đợt nào cũng được | Tech PIC trả lời. Bảng mục 6 đang xếp `US21` ở đợt 1 để an toàn |
+| D6 | Chức năng gửi thông báo trên UpLMS Ops hiện đang bật hay chưa | PO | Đang bật: việc bỏ nhóm cũ của thông báo làm hỏng chức năng này nếu story thông báo theo nhóm (`US21`) ra sau. Chưa bật: `US21` ra đợt nào cũng được | Tech PIC trả lời. Mục 6 đang xếp `US21` ở `ORD-1` để an toàn |
 
 ## 3. Đề xuất sửa PRD
 PO đã nhận cả bảy đề xuất ở PRD v0.7; không còn đề xuất chờ quyết.
@@ -52,21 +52,30 @@ PO đã nhận cả bảy đề xuất ở PRD v0.7; không còn đề xuất ch
 - Thiết kế kỹ thuật: `tech-design.md` còn khung trống; nội dung của Tech nằm ở hai file BE và FE nên máy không đối chiếu được. Đọc tay: hai file phủ cả 21 user story.
 
 ## 6. Phụ thuộc và thứ tự làm
-Điểm theo thang của team, Tech PIC chốt lại ở Planning Poker.
+13 story trên Jira, gộp từ 21 user story. Mỗi story một label mã tính năng và một label thứ tự. Điểm theo thang của team, Tech PIC chốt ở Planning Poker.
 
-| Đợt | Story (Epic) | Điểm | Phụ thuộc |
-|---|---|---|---|
-| 1 | Story kỹ thuật chung (G) · `US1` tạo, sửa nhóm (G) · `US6` danh sách nhóm (G) · `US3` thêm, gỡ thủ công (G) · `US15` nhật ký thành viên (G) · `US21` thông báo theo nhóm (G) | 5 · 2 · 3 · 3 · 1 · 2 | Nhật ký phải có từ đầu để không mất lịch sử. `US21` đi cùng việc bỏ nhóm cũ của thông báo |
-| 2 | `US7` giao nội dung (G) · `US8` tự ghi danh (G) · `US4` nhập tệp (G) · `US2` di chuyển nhánh (G) · `US14` lưu trữ (G) | 5 · 2 · 2 · 3 · 2 | Cần khung nhóm của đợt 1 |
-| 3 | `US5` đồng bộ nhân sự (G) · `US18` báo cáo theo nhóm (G) | 5 · 5 | Cấu hình Lark xong trước. Việc chụp trạng thái cuối ngày nên chạy sớm vì báo cáo quá khứ chỉ có dữ liệu từ ngày nó chạy lần đầu |
-| 4 | `US9` gán quản lý (R) · `US10` kế thừa quản lý (R) · `US11` quản lý chính (U) · `US12` gán mentor (R) · `US13` chuyển phụ trách (R) | 3 · 1 · 2 · 3 · 2 | Cấu hình Keycloak cho tài khoản học viên vào UpLMS Ops |
-| 5 | `US16` theo dõi nhánh (R) · `US17` học viên xem quản lý (U) | 5 · 1 | Cần quan hệ quản lý của đợt 4 |
-| 6 | `US19` rời nhóm chưa học (G) · `US20` báo quản lý khi rời nhóm (G) | 2 · 2 | Cần đồng bộ và giao nội dung |
+| # | Story | US | Epic | Điểm | Label |
+|---|---|---|---|---|---|
+| 1 | Nền kỹ thuật chung | — | G | 3 | `LMS-F002` · `ORD-1` |
+| 2 | Tạo, sửa và xem danh sách nhóm | US1 · US6 | G | 3 | `ORG.GRP.01` · `ORD-1` |
+| 3 | Quản lý thành viên nhóm: thủ công, theo lô, nhật ký | US3 · US4 · US15 | G | 3 | `ORG.GRP.05` · `ORD-1` |
+| 4 | Thông báo gửi theo nhóm | US21 | G | 1 | `LMS-F002` · `ORD-1` |
+| 5 | Giao nội dung cho nhóm và tự ghi danh | US7 · US8 | G | 5 | `ORG.GRP.08` · `ORD-2` |
+| 6 | Di chuyển, lưu trữ, khôi phục, xoá nhóm | US2 · US14 | G | 3 | `ORG.GRP.12` · `ORD-2` |
+| 7 | Đồng bộ nhóm từ hệ thống nhân sự | US5 | G | 3 | `ORG.GRP.03` · `ORD-3` |
+| 8 | Báo cáo theo nhóm | US18 | G | 3 | `ORG.GRP.07` · `ORD-3` |
+| 9 | Gán quản lý nhóm, kế thừa, chuyển phụ trách | US9 · US10 · US13 | R | 3 | `ORG.ROL.01` · `ORD-4` |
+| 10 | Gán mentor cho nhóm | US12 | R | 2 | `ORG.ROL.02` · `ORD-4` |
+| 11 | Quản lý trên hồ sơ học viên | US11 · US17 | U | 2 | `ORG.USR.01` · `ORD-4` |
+| 12 | Quản lý theo dõi nhánh mình phụ trách | US16 | R | 3 | `ORG.ROL.03` · `ORD-5` |
+| 13 | Xử lý khi người rời nhóm | US19 · US20 | G | 2 | `LMS-F002` · `ORD-6` |
 
 G: Epic `UpLMS_User & Organization_Group`. R: `UpLMS_User & Organization_Role & Permission`. U: `UpLMS_User & Organization_User (Student)`.
 
+Phụ thuộc: `ORD-1` dựng nền và nhật ký từ đầu để không mất lịch sử, story thông báo đi cùng việc bỏ nhóm cũ của thông báo. `ORD-2` cần khung nhóm. `ORD-3` cần cấu hình Lark; việc chụp trạng thái cuối ngày nên chạy sớm. `ORD-4` cần cấu hình Keycloak cho tài khoản học viên vào UpLMS Ops. `ORD-5` cần quan hệ quản lý. `ORD-6` cần đồng bộ và giao nội dung.
+
 ## 7. Độ lớn so với mốc
-22 story, 61 điểm theo thang của team. Không có mốc cứng nên không cần cắt phạm vi. Bốn story lớn nhất (`US5` đồng bộ, `US7` giao nội dung, `US16` theo dõi nhánh, `US18` báo cáo) mỗi story 5 điểm. Nếu Planning Poker cho thấy story nào không lọt một sprint, PO tách user story trong PRD qua change request, không tách trực tiếp trên Jira.
+13 story, 36 điểm theo thang của team. Không có mốc cứng nên không cần cắt phạm vi. Story lớn nhất là giao nội dung và tự ghi danh, 5 điểm. Story nào không lọt một sprint thì PO tách qua change request.
 
 ## 8. Rủi ro
 | # | Rủi ro | Ai nêu | Cách giảm | Chấp nhận |
@@ -76,7 +85,7 @@ G: Epic `UpLMS_User & Organization_Group`. R: `UpLMS_User & Organization_Role & 
 | 3 | Lỡ sự kiện từ Lark làm nhóm đồng bộ lệch tới lần chạy toàn bộ của đêm đó | Tech | Đồng bộ toàn bộ mỗi đêm | Đã chấp nhận, lệch tối đa một ngày |
 | 4 | Việc chụp trạng thái cuối ngày lỡ một ngày làm báo cáo quá khứ lệch | Tech | Ghi log, cảnh báo khi lỗi | Đã chấp nhận, lệch tối đa một ngày |
 | 5 | Người vừa là mentor vừa là thành viên tự chấm bài của mình | PO | Chặn tự chấm để đợt sau | Đã chấp nhận |
-| 6 | UpLMS Ops chưa chạy được trên điện thoại cho màn theo dõi nhánh | Design | Dev kiểm sớm ở đợt 5 | Chưa |
+| 6 | UpLMS Ops chưa chạy được trên điện thoại cho màn theo dõi nhánh | Design | Dev kiểm sớm, trước `ORD-5` | Chưa |
 
 ## 9. Ý kiến phản đối
 Không có.

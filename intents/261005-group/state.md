@@ -106,3 +106,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-25 14:24 2.42 approved v0.7 bởi buidhui
 - 2026-10-25 Review AI Reviewer lần 06: NOT-READY, 3 Major 14 Minor; PO Request Changes (DEC123), sửa R-15 đến R-31, R-29 rủi ro chấp nhận. Review lần 07: READY, 6 Minor; PO Approve, chấp nhận 6 Minor (DEC130). PO duyệt bảy stage bằng terminal (DEC124 đến DEC130). Đóng CR7. Lark vẫn v0.5
 - 2026-10-26 PO chọn đóng 2.43 trước khi sinh Story List, đi tiếp khi thiếu test-design, ký qua tin nhắn (DEC131); quy tắc Story List: label mã tính năng và đợt, điểm đổi thang tổng 61, ba Epic (DEC132). Viết decision-brief.md v0.1: 6 điểm cần quyết, 8 chỗ thiết kế lệch PRD v0.7, 1.497 từ
+- 2026-10-26 PO gộp 21 user story thành 13 story Jira, điểm tổng 36, label mã tính năng và ORD-1 đến ORD-6 (DEC133). Cập nhật Decision Brief mục 6, 7
