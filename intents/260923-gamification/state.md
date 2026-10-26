@@ -72,3 +72,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-25 CR-015 thêm trần ngưỡng cho EXP mỗi hạng, mặc định 5.000 (DEC167). Vẫn parked
 - 2026-10-26 Tạo Improvement UPLND-401 trên Jira cho CR-015, gắn epic UPLNDEP-8, backlog
 - 2026-10-26 PRD v0.15 thêm ghi chú CR-015 ở US10 (callout và một dòng Out of scope), không đổi rule bản ra mắt, giữ version
+- 2026-10-26 CR-015: ô EXP chuyển vào khối Levels theo design, thêm giải thích nền, bước, trần ngưỡng và câu chữ khối Levels (DEC168). Cập nhật Jira UPLND-401

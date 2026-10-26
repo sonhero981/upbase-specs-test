@@ -771,7 +771,7 @@ Mô hình bội số của `US10`, PRD v0.15. Ba tiêu chí độc lập, mỗi 
 
 **Rủi ro.**
 
-1. **EXP trùng vai với Points.** Cùng một hành động sinh ra hai con số, học viên dễ thấy hai số chạy song song mà không hiểu khác nhau ở đâu. Claude đề xuất lấy EXP từ ba nguồn có sẵn (1 điểm = 1 EXP, cộng thêm cho khoá và huy hiệu) để Ops chỉ khai một bảng. PO chọn EXP riêng từng hành động. Giảm nhẹ bằng hai rule: học viên chỉ thấy EXP dưới dạng tiến độ trong hạng hiện tại, không thấy tổng EXP; EXP khai cùng khối với bảng điểm, mỗi hành động một cột điểm và một cột EXP.
+1. **EXP trùng vai với Points.** Cùng một hành động sinh ra hai con số, học viên dễ thấy hai số chạy song song mà không hiểu khác nhau ở đâu. Claude đề xuất lấy EXP từ ba nguồn có sẵn (1 điểm = 1 EXP, cộng thêm cho khoá và huy hiệu) để Ops chỉ khai một bảng. PO chọn EXP riêng từng hành động. Giảm nhẹ bằng hai rule: học viên chỉ thấy EXP dưới dạng tiến độ trong hạng hiện tại, không thấy tổng EXP; EXP khai trong khối `Levels`, tách khỏi khối `Points`, nên Ops hiểu EXP là cấu hình của hạng.
 2. **Ops khai thêm tám ô số:** năm ô EXP theo hành động và ba ô ngưỡng. Mặc định gợi ý ở dưới để Ops không phải tự nghĩ.
 3. **Đổi mô hình sau ra mắt.** Học viên đã có hạng theo mô hình cũ. Cần rule chuyển đổi, xem mục Rule mới, điểm 9.
 
@@ -788,7 +788,7 @@ Mô hình bội số của `US10`, PRD v0.15. Ba tiêu chí độc lập, mỗi 
 
 | # | Rule | Nguồn |
 |---|---|---|
-| 1 | Mỗi hành động có một số EXP riêng, Ops khai cạnh số điểm: vào hệ thống hằng ngày · hoàn thành hoạt động · hoàn thành khoá · qua bài Test · **đạt huy hiệu** | PO |
+| 1 | Mỗi hành động có một số EXP riêng: vào hệ thống hằng ngày · hoàn thành hoạt động · hoàn thành khoá · qua bài Test · **đạt huy hiệu**. Ops khai **trong khối `Levels`**, nhóm `EXP per action`, không nằm trong khối `Points`. Lý do: EXP chạy độc lập với `Points`, đặt trong khối `Points` thì tắt điểm sẽ khoá theo các ô EXP | PO, vị trí chốt theo design ngày 26/10 |
 | 2 | Lên hạng khi EXP tích trong hạng hiện tại đủ ngưỡng. Ngưỡng từ hạng `n` lên `n+1` là `min(nền + (n−1) × bước, trần ngưỡng)`: tăng dần tới trần ngưỡng rồi đứng yên, cùng dạng công thức điểm check-in. Ops chỉnh `nền`, `bước` và `trần ngưỡng`. `bước = 0` thì mọi hạng cùng ngưỡng. Trần ngưỡng là số nguyên `>= nền`, bỏ trống nghĩa là ngưỡng tăng mãi. Trần ngưỡng khác trần hạng: trần ngưỡng giới hạn EXP cần cho một hạng, trần hạng giới hạn hạng cao nhất | PO, trần ngưỡng thêm ngày 25/10 |
 | 3 | Đổi số EXP của hành động: áp dụng từ thời điểm lưu, theo `C4` | Giữ nguyên tắc chung |
 | 4 | Đổi `nền`, `bước` hoặc `trần ngưỡng`: hạng và EXP đang tích trong hạng giữ nguyên. Ngưỡng mới áp từ lần xét kế tiếp. EXP đang có đã vượt ngưỡng mới thì lên hạng ở lần nhận EXP kế tiếp, có thể lên nhiều hạng một lúc | PO, nới `BR-10.4a` |
@@ -833,16 +833,83 @@ Mô hình bội số của `US10`, PRD v0.15. Ba tiêu chí độc lập, mỗi 
 
 Lý do thêm trần ngưỡng: không có trần thì học viên chăm nhất lại là người chờ lâu nhất mới thấy mình lên hạng. Hạng đầu vẫn nhanh để kéo học viên mới, hạng cao vẫn hiếm, nhưng nhịp lên hạng của người học lâu năm không chậm mãi.
 
+## Nền, bước và trần ngưỡng liên quan với nhau thế nào
+
+Ba giá trị cùng quyết định **lượng EXP học viên cần tích trong một hạng để lên hạng kế tiếp**. Mỗi giá trị lo một việc:
+
+| Giá trị | Trả lời câu hỏi | Ảnh hưởng tới |
+|---|---|---|
+| `nền` | Lên hạng đầu tiên, từ `1` lên `2`, cần bao nhiêu EXP | Học viên mới có thấy mình lên hạng sớm không |
+| `bước` | Mỗi hạng sau cần thêm bao nhiêu EXP so với hạng trước | Các hạng giữa khó lên dần nhanh hay chậm |
+| `trần ngưỡng` | Một hạng cần nhiều nhất bao nhiêu EXP | Học viên lâu năm còn lên hạng đều đặn không |
+
+Công thức: **EXP cần để đi từ hạng `n` lên `n+1` = `min(nền + (n−1) × bước, trần ngưỡng)`**.
+
+Đọc theo ba đoạn:
+
+1. **Hạng `1` lên `2`:** cần đúng `nền`.
+2. **Các hạng sau:** mỗi hạng cần thêm `bước` so với hạng trước. Lượng EXP cần tăng đều như bậc thang, mỗi bậc cao hơn bậc trước một `bước`.
+3. **Khi chạm trần ngưỡng:** lượng EXP cần dừng ở `trần ngưỡng`, mọi hạng sau đều cần đúng con số này.
+
+Ví dụ với nền `1.000`, bước `500`, trần ngưỡng `5.000`:
+
+| Lên hạng | Cách tính | EXP cần | Đoạn |
+|---|---|---|---|
+| `1 → 2` | `1.000 + 0 × 500` | `1.000` | Nền |
+| `2 → 3` | `1.000 + 1 × 500` | `1.500` | Tăng theo bước |
+| `3 → 4` | `1.000 + 2 × 500` | `2.000` | Tăng theo bước |
+| `9 → 10` | `1.000 + 8 × 500` | `5.000` | Vừa chạm trần ngưỡng |
+| `10 → 11` | `1.000 + 9 × 500 = 5.500`, lấy trần | `5.000` | Đứng yên ở trần |
+| `50 → 51` | lấy trần | `5.000` | Đứng yên ở trần |
+
+Hạng bắt đầu đứng yên tính bằng `(trần ngưỡng − nền) ÷ bước + 1`. Với bộ số trên là `(5.000 − 1.000) ÷ 500 + 1 = 9`, nghĩa là từ hạng `9` lên `10` trở đi mỗi hạng cần `5.000` EXP.
+
+**Ops chỉnh giá trị nào khi muốn gì:**
+
+| Muốn | Chỉnh |
+|---|---|
+| Học viên mới lên hạng đầu nhanh hơn | Giảm `nền` |
+| Hạng giữa khó lên hơn | Tăng `bước` |
+| Học viên lâu năm lên hạng nhanh hơn | Giảm `trần ngưỡng` |
+| Mọi hạng cần như nhau | `bước = 0`, hoặc `trần ngưỡng = nền` |
+| Ngưỡng tăng mãi không dừng | Bỏ trống `trần ngưỡng` |
+
+**Ràng buộc nhập liệu:** `nền` là số nguyên `>= 1`, bắt buộc. `bước` là số nguyên `>= 0`, bắt buộc. `trần ngưỡng` là số nguyên `>= nền`, bỏ trống được. Nhập `trần ngưỡng` nhỏ hơn `nền` thì không lưu, ô báo lỗi `Must be at least the starting EXP.`
+
+**Trần ngưỡng khác trần hạng (`Maximum level`).** Trần ngưỡng giới hạn lượng EXP cần cho **một hạng**. Trần hạng giới hạn **hạng cao nhất** học viên đạt được. Hai giá trị độc lập: trần ngưỡng `5.000` và trần hạng `100` nghĩa là từ hạng `10` mỗi hạng cần `5.000` EXP, và học viên dừng ở hạng `100`.
+
+## Câu chữ khối Levels — theo design ngày 26/10
+
+Thứ tự ba nhóm theo luồng Ops suy nghĩ: hành động cho bao nhiêu EXP, cần bao nhiêu EXP để lên hạng, hạng tối đa.
+
+| Vị trí | Thành phần | Chữ |
+|---|---|---|
+| Đầu khối | Tiêu đề | `Levels` |
+| Đầu khối | Mô tả | `Users earn EXP as they learn and move up a level each time they collect enough.` |
+| Nhóm 1 | Tiêu đề | `EXP per action` |
+| Nhóm 1 | Mô tả | `Users earn this much EXP each time they complete the action. Set 0 to give no EXP for an action.` |
+| Nhóm 1 | Năm ô | `On each daily check-in` · `On each activity completion` · `On each course completion` · `On each successful test completion` · `On each badge earned`. Bốn nhãn đầu trùng câu của khối `Points` |
+| Nhóm 1 | Đơn vị sau ô | `EXP` |
+| Nhóm 2 | Tiêu đề | `EXP to level up` |
+| Nhóm 2 | Ô `nền` | Nhãn `Starting EXP` · Mô tả `EXP needed to go from Level 1 to Level 2.` |
+| Nhóm 2 | Ô `bước` | Nhãn `Increase per level` · Mô tả `Each level needs this much more EXP than the one before. Set 0 to keep every level the same.` |
+| Nhóm 2 | Ô `trần ngưỡng` | Nhãn `EXP cap per level` · Mô tả `No level needs more EXP than this. Leave empty for no cap.` |
+| Nhóm 2 | Dòng xem trước | Tự cập nhật theo ba ô. Ví dụ `Level 2: 1,000 EXP · Level 3: 1,500 EXP · Level 10 onwards: 5,000 EXP`. Không có trần ngưỡng thì phần cuối là `Level 10: 5,000 EXP` |
+| Nhóm 3 | Tiêu đề | `Maximum level` |
+| Nhóm 3 | Mô tả | `The highest level users can reach. Turn this off for no limit.` |
+
+Design ngày 26/10 cần sửa: nhãn `Archived Badge` sai nghĩa, đổi thành `On each badge earned`; mô tả dưới ô `Điểm nền` chép nhầm của `Maximum level`; mô tả nhóm hành động còn là câu của mô hình bội số (`Users gain one level each time they reach any of these milestones`); thiếu ô `bước`, ô `trần ngưỡng` và dòng xem trước.
+
 ## Tác động
 
 | Artifact | Phần bị chạm |
 |---|---|
 | BRD | `S6` "ngưỡng lên hạng dựa trên nhiều chỉ số" và dòng ngưỡng lên hạng ở mục 6 |
 | Impact Matrix | Data: cấu hình EXP theo hành động, ngưỡng, EXP của học viên, EXP trong sổ giao dịch |
-| PRD | `US10` viết lại · `US8` thêm cột EXP · `US9` EXP huy hiệu · `US1` ô hạng, panel `How to level up?` có thanh tiến độ, đảo mục `[đề xuất]` bỏ thanh tiến độ trong `OQ-43` · `US3` EXP trong lịch sử · `US6`, `US11` cách xếp bảng `Level` · `US12` cột EXP · `US22` EXP trong nhật ký · `BR-10.2`, `BR-10.4a`, `BR-10.7`, `BR-10.8` |
+| PRD | `US10` viết lại, gồm năm ô EXP theo hành động, ba ô ngưỡng và câu chữ ở mục Câu chữ khối Levels · `US8` không đổi · `US1` ô hạng, panel `How to level up?` có thanh tiến độ, đảo mục `[đề xuất]` bỏ thanh tiến độ trong `OQ-43` · `US3` EXP trong lịch sử · `US6`, `US11` cách xếp bảng `Level` · `US12` cột EXP · `US22` EXP trong nhật ký · `BR-10.2`, `BR-10.4a`, `BR-10.7`, `BR-10.8` |
 | Technical design backend | `gamification_level_criteria` thay bằng cấu hình EXP và ba giá trị ngưỡng (nền, bước, trần ngưỡng) · `gamification_learner_stats` thêm EXP · sổ giao dịch ghi EXP · API `/levels` · `/me` trả lại tiến độ hạng |
-| Technical design frontend | `LevelsBlock`, khối `Points` thêm cột EXP, `HowToDrawer` view `level` |
-| Design | Khối `Levels` bên Ops có ba ô ngưỡng và trần hạng, khối `Points` thêm cột EXP, panel `How to level up?` |
+| Technical design frontend | `LevelsBlock` thêm nhóm `EXP per action`, nhóm `EXP to level up` kèm dòng xem trước · `PointsBlock` không đổi · `HowToDrawer` view `level` |
+| Design | Khối `Levels` bên Ops: thứ tự ba nhóm EXP theo hành động, EXP để lên hạng, hạng tối đa. Design ngày 26/10 đã đặt ô EXP trong khối `Levels`; còn thiếu ô `bước`, ô `trần ngưỡng`, dòng xem trước, và câu chữ cần sửa theo mục Câu chữ khối Levels · panel `How to level up?` |
 | Kịch bản demo trên Lark | Phần 1.3 và phần 4 mô tả mô hình bội số |
 
 ## Điểm re-entry đề xuất — xác nhận khi mở lại
