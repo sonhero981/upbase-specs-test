@@ -2120,7 +2120,7 @@ từ thời điểm đổi trở đi"]
 
 *Mỗi mốc chạm được ở bất kỳ tiêu chí nào đều cho một hạng. Không phải chỉ lấy tiêu chí cao nhất.*
 
-> 🔜 **Đợt sau ra mắt: lên hạng bằng điểm kinh nghiệm (EXP).** `CR-015`, Jira [UPLND-401](https://jira.upbase.asia/browse/UPLND-401). Mô hình ba tiêu chí bội số trong US này là rule của bản ra mắt, Dev làm theo mô hình này. Sau ra mắt, hạng chuyển sang tích luỹ EXP: mỗi hành động cho một số EXP riêng, kể cả đạt huy hiệu; EXP trong hạng đủ `min(nền + (n−1) × bước, trần ngưỡng)` thì lên hạng. CR đang parked, chưa phải yêu cầu của bản này. PRD sẽ cập nhật khi mở lại CR. Rule chi tiết ở `inputs/change-requests.md`, mục `CR-015`.
+> 🔜 **Đợt sau ra mắt: lên hạng theo điểm tích luỹ, ngưỡng tăng dần.** `CR-015`, Jira [UPLND-401](https://jira.upbase.asia/browse/UPLND-401). Mô hình ba tiêu chí bội số trong US này là rule của bản ra mắt, Dev làm theo mô hình này. Sau ra mắt, hạng lên theo điểm tích luỹ: điểm trong hạng đủ `min(nền + (n−1) × bước, trần ngưỡng)` thì lên hạng, và đạt huy hiệu được cộng điểm. CR đang parked, chưa phải yêu cầu của bản này. PRD sẽ cập nhật khi mở lại CR. Rule chi tiết ở `inputs/change-requests.md`, mục `CR-015`.
 
 ### 1/ User story
 
@@ -2235,7 +2235,7 @@ Xét hạng chạy sau mỗi lần cộng điểm và sau mỗi lần trao huy h
 | Thêm tiêu chí lên hạng ngoài ba tiêu chí | Cần chỉ số đếm tương ứng, là việc phát triển |
 | Hạ hạng, hoặc đặt lại hạng thủ công cho một học viên | `BR-10.3`. Hạng chỉ lên |
 | Thưởng thêm khi lên hạng, ví dụ tặng điểm | Chưa yêu cầu |
-| Lên hạng bằng điểm kinh nghiệm (EXP) | Làm sau bản ra mắt theo `CR-015`, Jira [UPLND-401](https://jira.upbase.asia/browse/UPLND-401) |
+| Lên hạng theo điểm tích luỹ, ngưỡng tăng dần | Làm sau bản ra mắt theo `CR-015`, Jira [UPLND-401](https://jira.upbase.asia/browse/UPLND-401) |
 
 ### 6/ Conner case
 
