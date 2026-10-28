@@ -1,0 +1,47 @@
+{
+  "stage": "functional-design",
+  "unit": "u5-learner-home",
+  "bolt": "B04",
+  "note": "B04/U5 map sang US1 trong PRD ('Màn Gamification') theo bolt-plan.md. Task brief ghi nhầm 'US5' — PO/tech lead cần xác nhận nếu phạm vi thực sự bao gồm US5 (check-in scoring, BE logic). USn-ACk = dòng k của bảng AC US1 (PRD v0.14, đếm từ 1). TC-401…422 phủ US1 FE scope.",
+  "upstream_ids": [
+    "US1-AC1", "US1-AC2", "US1-AC3", "US1-AC4", "US1-AC5",
+    "US1-AC6", "US1-AC7", "US1-AC8", "US1-AC9", "US1-AC10",
+    "US1-AC11", "US1-AC12",
+    "US1-BR1.1", "US1-BR1.2", "US1-BR1.3", "US1-BR1.5",
+    "US1-BR1.6", "US1-BR1.7", "US1-BR1.8", "US1-NFR"
+  ],
+  "coverage": [
+    { "id": "US1-AC1",   "prd": "Menu item 'Gamification'; Visibility tắt → menu biến, URL → not-found", "status": "OK", "target": "BR-1.1, WF-1, TC-402, TC-403" },
+    { "id": "US1-AC2",   "prd": "Tiêu đề 'Gamification', phụ đề cố định",                              "status": "OK", "target": "WF-2" },
+    { "id": "US1-AC3",   "prd": "4 ô tóm tắt: Streaks, Points, Badges, Level",                         "status": "OK", "target": "BR-1.2, BR-1.6, BR1.14, WF-2, TC-404" },
+    { "id": "US1-AC4",   "prd": "Ô Streaks: tooltip 'Days in a row you've visited.', không click",     "status": "OK", "target": "BR1.14, WF-2, TC-405, TC-412" },
+    { "id": "US1-AC5",   "prd": "Ô Points: click → panel How to collect points?",                      "status": "OK", "target": "WF-3, TC-406" },
+    { "id": "US1-AC6",   "prd": "Ô Badges: click → My Profile tab Badges",                             "status": "OK", "target": "WF-2, TC-411" },
+    { "id": "US1-AC7",   "prd": "Ô Level: click → panel How to level up?",                             "status": "OK", "target": "WF-4, TC-409" },
+    { "id": "US1-AC8",   "prd": "Panel How to collect: dòng hành động + điểm, tắt thì ẩn",            "status": "OK", "target": "BR1.15, WF-3, TC-407, TC-408" },
+    { "id": "US1-AC9",   "prd": "Panel How to level up: tiêu chí 'Every', tắt/khoá thì ẩn",           "status": "OK", "target": "BR1.16, BR-10.2, WF-4, TC-410" },
+    { "id": "US1-AC10",  "prd": "Nút ✕ đóng cả hai panel",                                             "status": "OK", "target": "WF-3, WF-4, TC-413" },
+    { "id": "US1-AC11",  "prd": "My Learning widget: Points + Level, click → Gamification",            "status": "OK", "target": "BR1.13, WF-5, TC-414, TC-415" },
+    { "id": "US1-AC12",  "prd": "My Learning: không đổi phần hiện có",                                 "status": "OK", "target": "WF-5" },
+    { "id": "US1-BR1.1", "prd": "Màn chỉ tồn tại khi cả hai công tắc bật",                            "status": "OK", "target": "BR-1.1, WF-1" },
+    { "id": "US1-BR1.2", "prd": "Điểm tích luỹ",                                                        "status": "OK", "target": "BR-1.2" },
+    { "id": "US1-BR1.3", "prd": "Hạng chỉ lên",                                                         "status": "OK", "target": "BR-1.3 (BE giữ; FE chỉ đọc)" },
+    { "id": "US1-BR1.5", "prd": "Test Account bị chặn",                                                 "status": "OK", "target": "BR-1.5, TC-419" },
+    { "id": "US1-BR1.6", "prd": "Điểm là số nguyên",                                                    "status": "OK", "target": "BR-1.6, TC-404" },
+    { "id": "US1-BR1.7", "prd": "Ảnh huy hiệu fallback",                                                "status": "N/A", "reason": "Áp dụng ở B10 (U9 badge gallery); ghi nhận trong entities.md và rules.md B04 để traceability" },
+    { "id": "US1-BR1.8", "prd": "Ẩn theo công tắc chức năng",                                          "status": "OK", "target": "BR-1.8, BR1.11, TC-416, TC-417, TC-418, TC-421, TC-422" },
+    { "id": "US1-NFR",   "prd": "Đọc giá trị đã lưu sẵn, không tính lại khi mở màn",                 "status": "OK", "target": "BR1.11, BR1.12 (lazy rules)" }
+  ],
+  "reverse": [
+    { "id": "BR-9.10", "status": "N/A", "target": "Tính ở LearnerGamificationApi (BE); FE chỉ đọc badges count từ /me" },
+    { "id": "BR-10.2", "status": "OK",  "target": "BR1.16 — FE bắt buộc dùng 'Every' trong panel level-up" },
+    { "id": "BR-10.1", "status": "N/A", "target": "Hạng bắt đầu từ 1 (BE init); FE đọc từ /me `level`" },
+    { "id": "C-13-today", "status": "N/A", "reason": "Field today/timezone trong C-13 dùng cho U2 LmsCheckinTrigger (B06), không phải B04" },
+    { "id": "C-13-boards", "status": "partial", "reason": "boards/default_board trong C-13 dùng cho US6 leaderboard — B04 FE cần làm rõ mức render leaderboard (xem OQ trong functional-spec.md)" }
+  ],
+  "open_questions": [
+    { "id": "OQ-B04-1", "question": "Leaderboard section trên GamificationPage: B04 FE render đến đâu? Chỉ placeholder hay full bảng (US6)?", "owner": "PO + tech lead" },
+    { "id": "OQ-B04-2", "question": "Tooltip ô Streaks: 'Days in a row you've visited.' — PO duyệt text tiếng Anh?", "owner": "PO" },
+    { "id": "OQ-B04-3", "question": "Achievement History button: cả Points lẫn Levels tắt → không có lối vào lịch sử. Đây có phải hành vi mong muốn?", "owner": "PO" }
+  ]
+}

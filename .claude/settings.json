@@ -1,0 +1,74 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python engine/scripts/po-tools.py *)",
+      "Bash(python engine/tech/scripts/tech-tools.py *)",
+      "Bash(python scripts/setup.py *)",
+      "Bash(python scripts/doctor.py *)"
+    ],
+    "deny": [
+      "Edit(intents/*/archive/**)",
+      "Write(intents/*/archive/**)",
+      "Edit(.po/**)",
+      "Write(.po/**)",
+      "Edit(intents/*/reviews/*.digest)",
+      "Write(intents/*/reviews/*.digest)",
+      "Edit(engine/tech/aidlc/**)",
+      "Write(engine/tech/aidlc/**)",
+      "Edit(.claude/settings.json)",
+      "Write(.claude/settings.json)"
+    ],
+    "additionalDirectories": [
+      "../lms-be/",
+      "../ops-fe/",
+      "../lms-fe/",
+      "../lms-package/"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/engine/scripts/po-tools.py\" status"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/engine/scripts/po-hook.py\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/engine/scripts/po-hook.py\""
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/engine/scripts/po-hook.py\""
+          }
+        ]
+      }
+    ]
+  }
+}

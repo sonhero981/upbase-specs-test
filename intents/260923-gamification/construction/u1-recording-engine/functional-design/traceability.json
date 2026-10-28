@@ -1,0 +1,29 @@
+{
+  "stage": "functional-design",
+  "unit": "u1-recording-engine",
+  "note": "US13 không có bảng AC UI/UX (US chạy ngầm). USn-ACk = gạch BR thứ k của mục 4/ Acceptance criteria US13 (PRD v0.14), theo thứ tự xuất hiện; US13-NFR = mục NFR. BR theo rules.md.",
+  "upstream_ids": ["US13-AC1", "US13-AC2", "US13-AC3", "US13-AC4", "US13-AC5", "US13-AC6", "US13-AC7", "US13-AC8", "US13-AC9", "US13-AC10", "US13-AC11", "US13-AC12", "US13-NFR"],
+  "coverage": [
+    { "id": "US13-AC1", "prd": "BR-13.1", "status": "OK", "target": "BR13.1" },
+    { "id": "US13-AC2", "prd": "BR-13.2", "status": "OK", "target": "BR13.2, BR13.18, BR13.20" },
+    { "id": "US13-AC3", "prd": "BR-13.4", "status": "OK", "target": "BR13.4, BR13.19" },
+    { "id": "US13-AC4", "prd": "BR-13.5", "status": "OK", "target": "BR13.5" },
+    { "id": "US13-AC5", "prd": "BR-13.6", "status": "excluded", "reason": "Check-in thuộc U2 (CheckinService); BR13.6 ghi ở rules.md chỉ để trỏ, nghiệm thu ở U2 (TC-107)" },
+    { "id": "US13-AC6", "prd": "BR-13.7", "status": "OK", "target": "BR13.7, BR13.26" },
+    { "id": "US13-AC7", "prd": "BR-13.8", "status": "OK", "target": "BR13.8, BR13.21, BR13.22, BR13.25" },
+    { "id": "US13-AC8", "prd": "BR-13.9", "status": "OK", "target": "BR13.9, BR13.17" },
+    { "id": "US13-AC9", "prd": "BR-13.10", "status": "OK", "target": "BR13.10" },
+    { "id": "US13-AC10", "prd": "BR-13.12", "status": "OK", "target": "BR13.12" },
+    { "id": "US13-AC11", "prd": "BR-13.11", "status": "OK", "target": "BR13.11" },
+    { "id": "US13-AC12", "prd": "BR-13.13", "status": "OK", "target": "BR13.13" },
+    { "id": "US13-NFR", "prd": "NFR US13, 2.43 Q14", "status": "OK", "target": "BR13.7, BR13.19" }
+  ],
+  "reverse": [
+    { "id": "BR13.6", "status": "N/A", "target": "Trỏ sang U2; AC US13-AC5 excluded" },
+    { "id": "BR13.14", "status": "N/A", "target": "Rule nền BR-TEST của PRD (Solution › TDD), Q2, Q3; TC-119…121" },
+    { "id": "BR13.15", "status": "N/A", "target": "Rule nền BR-REGRADE của PRD; TC-122, TC-123" },
+    { "id": "BR13.16", "status": "N/A", "target": "Rule nền BR-SKIP của PRD, Q4b; TC-124" },
+    { "id": "BR13.23", "status": "N/A", "target": "BR-3.11 của US3 (ghi ở U1 vì U1 chủ sổ giao dịch, S-02); nghiệm thu ở U7, U4" },
+    { "id": "BR13.24", "status": "N/A", "target": "Cổng thông báo theo S-03; thông báo thật nghiệm thu ở U6 (US2)" }
+  ]
+}

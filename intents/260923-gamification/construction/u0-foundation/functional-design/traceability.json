@@ -1,0 +1,32 @@
+{
+  "stage": "functional-design",
+  "unit": "u0-foundation",
+  "note": "AC dạng USn-ACk (dòng thứ k bảng UI/UX của USn, PRD v0.14). BR theo rules.md.",
+  "upstream_ids": ["US14-AC1", "US14-AC2", "US14-AC3", "US14-AC4", "US14-AC5", "US14-AC6", "US14-AC7", "US14-AC8", "US14-AC9", "US15-AC1", "US15-AC2", "US15-AC3", "US15-AC4", "US15-AC5"],
+  "coverage": [
+    { "id": "US14-AC1", "status": "OK", "target": "BR14.1, BR14.5, BR14.6" },
+    { "id": "US14-AC2", "status": "OK", "target": "BR14.2" },
+    { "id": "US14-AC3", "status": "OK", "target": "BR14.2" },
+    { "id": "US14-AC4", "status": "OK", "target": "BR14.13" },
+    { "id": "US14-AC5", "status": "OK", "target": "BR14.13, BR14.5", "note": "Không có phần campaign (2.43 A4)" },
+    { "id": "US14-AC6", "status": "OK", "target": "BR14.13" },
+    { "id": "US14-AC7", "status": "OK", "target": "BR14.13" },
+    { "id": "US14-AC8", "status": "OK", "target": "BR14.10, BR14.11" },
+    { "id": "US14-AC9", "status": "OK", "target": "BR14.12" },
+    { "id": "US15-AC1", "status": "OK", "target": "BR15.1, BR15.5" },
+    { "id": "US15-AC2", "status": "OK", "target": "BR15.2, BR15.7" },
+    { "id": "US15-AC3", "status": "OK", "target": "BR15.7" },
+    { "id": "US15-AC4", "status": "excluded", "reason": "Quyền xem danh sách học viên hiện trên màn role ở Unit có endpoint learners (ADR-002)" },
+    { "id": "US15-AC5", "status": "OK", "target": "BR15.3" }
+  ],
+  "reverse": [
+    { "id": "BR14.8", "reason": "Ràng buộc dữ liệu C1 (cấu hình theo tổ chức), không có dòng AC riêng; kiểm ở TC-12" },
+    { "id": "BR14.9", "reason": "Data Field múi giờ của US14, không có dòng AC UI; kiểm ở TC-12" },
+    { "id": "BR15.6", "reason": "Hành vi của hệ phân quyền sẵn có; kiểm ở TC-19" },
+    { "id": "BR14.3", "reason": "Ngoài lát: chưa có luồng ghi nhận" },
+    { "id": "BR14.4", "reason": "Ngoài lát: chưa có thông báo (US2)" },
+    { "id": "BR14.7", "reason": "Ngoài lát: chưa có khối US8–US11" },
+    { "id": "BR15.4", "reason": "Phân quyền chỉ áp Ops; kiểm học viên không bị ảnh hưởng ở TC-20" },
+    { "id": "BR15.8", "reason": "Ngoài lát: khối Campaign (US20)" }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "stage": "domain-design",
+  "note": "Intent v1: upstream = 19 US của phạm vi (DEC-T15). US14, US15 giữ mức dòng AC (USn-ACk) từ v1.0; 17 US mới ở mức US, dòng AC map ở 3.1 theo Unit. Target là component/entity trong components.md v1.1.",
+  "upstream_ids": [
+    "US1",
+    "US2",
+    "US3",
+    "US4",
+    "US5",
+    "US6",
+    "US7",
+    "US8",
+    "US9",
+    "US10",
+    "US11",
+    "US12",
+    "US13",
+    "US19",
+    "US20",
+    "US21",
+    "US22",
+    "US14",
+    "US14-AC1",
+    "US14-AC2",
+    "US14-AC3",
+    "US14-AC4",
+    "US14-AC5",
+    "US14-AC6",
+    "US14-AC7",
+    "US14-AC8",
+    "US14-AC9",
+    "US15",
+    "US15-AC1",
+    "US15-AC2",
+    "US15-AC3",
+    "US15-AC4",
+    "US15-AC5"
+  ],
+  "excluded": [
+    {
+      "id": "US16",
+      "reason": "PRD: chưa làm (chờ nhóm từ HRM)"
+    },
+    {
+      "id": "US17",
+      "reason": "PRD: chưa làm"
+    },
+    {
+      "id": "US18",
+      "reason": "PRD: chưa làm"
+    }
+  ],
+  "coverage": [
+    {
+      "id": "US1",
+      "status": "OK",
+      "target": "LmsGamificationFeature, LmsAppShellIntegration, LmsGamificationVisibility, LearnerGamificationApi, GamificationEngine"
+    },
+    {
+      "id": "US2",
+      "status": "OK",
+      "target": "AchievementNotifier, LmsAchievementRealtime, GamificationEngine"
+    },
+    {
+      "id": "US3",
+      "status": "OK",
+      "target": "LearnerGamificationApi, GamificationEngine (AchievementHistory), LmsGamificationFeature"
+    },
+    {
+      "id": "US4",
+      "status": "OK",
+      "target": "LearnerGamificationApi, LmsGamificationFeature, LmsAppShellIntegration, GamificationConfig (Badge)"
+    },
+    {
+      "id": "US5",
+      "status": "OK",
+      "target": "CheckinService (Checkin), LmsCheckinTrigger, GamificationEngine"
+    },
+    {
+      "id": "US6",
+      "status": "OK",
+      "target": "LeaderboardService, LeaderboardComputation (LeaderboardSnapshot), LearnerGamificationApi, LmsGamificationFeature, LeaderboardComputation"
+    },
+    {
+      "id": "US7",
+      "status": "OK",
+      "target": "LeaderboardService, LearnerGamificationApi, LmsGamificationFeature, LeaderboardComputation"
+    },
+    {
+      "id": "US8",
+      "status": "OK",
+      "target": "GamificationConfig (PointRule), GamificationSettingsOpsApi, OpsSettingsPage"
+    },
+    {
+      "id": "US9",
+      "status": "OK",
+      "target": "GamificationConfig (BadgeType, Badge), BadgeBackfill, ResourceLibrary, GamificationSettingsOpsApi, OpsSettingsPage"
+    },
+    {
+      "id": "US10",
+      "status": "OK",
+      "target": "GamificationConfig (LevelCriterion), GamificationEngine, GamificationSettingsOpsApi, OpsSettingsPage"
+    },
+    {
+      "id": "US11",
+      "status": "OK",
+      "target": "GamificationConfig (GamificationSetting.lb_show_*), GamificationSettingsOpsApi, GamificationOpsDataApi (xem trước), OpsSettingsPage"
+    },
+    {
+      "id": "US12",
+      "status": "OK",
+      "target": "GamificationOpsDataApi, LeaderboardService, OpsLearnerListPage, LeaderboardComputation"
+    },
+    {
+      "id": "US13",
+      "status": "OK",
+      "target": "LearningFlowHooks, GamificationEngine, FailedEventRetry, GamificationRecordPublisher, FailedEventStore (FailedEvent), LearnerDirectory"
+    },
+    {
+      "id": "US19",
+      "status": "OK",
+      "target": "CampaignLeaderboard, LearnerGamificationApi, LmsGamificationFeature, LeaderboardComputation"
+    },
+    {
+      "id": "US20",
+      "status": "OK",
+      "target": "CampaignService (Campaign), CampaignOpsApi, OpsCampaignPanels"
+    },
+    {
+      "id": "US21",
+      "status": "OK",
+      "target": "CampaignLeaderboard, GamificationOpsDataApi, OpsCampaignPanels, LeaderboardComputation (CampaignParticipant ở CampaignLeaderboard)"
+    },
+    {
+      "id": "US22",
+      "status": "OK",
+      "target": "GamificationOpsDataApi, GamificationEngine (AchievementHistory), OpsAchievementLogPage"
+    },
+    {
+      "id": "US14",
+      "status": "OK",
+      "target": "GamificationConfig"
+    },
+    {
+      "id": "US14-AC1",
+      "status": "OK",
+      "target": "GamificationConfig, OpsSettingsPage"
+    },
+    {
+      "id": "US14-AC2",
+      "status": "OK",
+      "target": "OpsSettingsPage"
+    },
+    {
+      "id": "US14-AC3",
+      "status": "OK",
+      "target": "OpsSettingsPage"
+    },
+    {
+      "id": "US14-AC4",
+      "status": "OK",
+      "target": "OpsSettingsPage"
+    },
+    {
+      "id": "US14-AC5",
+      "status": "OK",
+      "target": "OpsSettingsPage",
+      "note": "Phần số campaign đang chạy ngoài lát (2.43 A4)"
+    },
+    {
+      "id": "US14-AC6",
+      "status": "OK",
+      "target": "OpsSettingsPage"
+    },
+    {
+      "id": "US14-AC7",
+      "status": "OK",
+      "target": "OpsSettingsPage, GamificationConfig",
+      "note": "Lần đầu = visibility_first_enabled_at (ADR-005)"
+    },
+    {
+      "id": "US14-AC8",
+      "status": "OK",
+      "target": "OpsSettingsPage, GamificationSettingsOpsApi"
+    },
+    {
+      "id": "US14-AC9",
+      "status": "OK",
+      "target": "OpsSettingsPage"
+    },
+    {
+      "id": "US15",
+      "status": "OK",
+      "target": "OpsAccessControl"
+    },
+    {
+      "id": "US15-AC1",
+      "status": "OK",
+      "target": "OpsAccessControl, RolePermissionScreen"
+    },
+    {
+      "id": "US15-AC2",
+      "status": "OK",
+      "target": "GamificationSettingsOpsApi, OpsSettingsPage"
+    },
+    {
+      "id": "US15-AC3",
+      "status": "OK",
+      "target": "GamificationSettingsOpsApi, OpsSettingsPage"
+    },
+    {
+      "id": "US15-AC5",
+      "status": "OK",
+      "target": "OpsPermissionCatalog, OpsSettingsPage"
+    },
+    {
+      "id": "US15-AC4",
+      "status": "OK",
+      "target": "GamificationOpsDataApi, OpsPermissionCatalog",
+      "note": "Quyền gr_view_gamification_learners có endpoint ở US12, US21, US22 (cả intent)"
+    }
+  ]
+}

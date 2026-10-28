@@ -1,0 +1,67 @@
+# Khai báo workspace: sản phẩm đang cài, các repo code, và người.
+# Đây là file duy nhất phải sửa khi thêm repo hoặc thêm người vào workflow.
+# Sửa xong chạy: python scripts/setup.py
+
+product:
+  id: uplnd
+  name: "UpLnD — LMS của UpBase"
+  domain_pack: domain/           # KB, corner checklist, template PRD của sản phẩm
+  intent_prefix: ""              # để trống: intent đặt tên <yymmdd-slug>
+
+tools:
+  openspec: "1.14.1"             # Stores + custom schema đang beta, giữ đúng version này
+  python: ">=3.10"
+
+people:
+  po: "Lucas"
+  fe_lead: "Nguyễn Hùng Sơn"
+  be_lead: "Đoàn Quang Cường"
+  qa_lead: ""
+  design_pic: ""
+
+# Repo code trong workflow. Thêm repo = thêm một mục ở đây rồi chạy scripts/setup.py:
+# script sẽ ghi additionalDirectories vào .claude/settings.json và tạo khung codekb rỗng.
+# Sau đó chạy 2.1 Reverse Engineering cho repo mới để điền codekb.
+repos:
+  - id: lms-be
+    path: ../lms-be
+    remote: "UpBase-Tech/lms-be"
+    kind: backend
+    role: "Backend NestJS (Nx, TypeORM, Kafka, socket)"
+    owner: "Đoàn Quang Cường"
+    conventions: "CLAUDE.md → openspec/README.md, openspec/conventions/*"
+    gate: "curl verify (openspec/conventions/verification.md), MR theo git.md"
+
+  - id: ops-fe
+    path: ../ops-fe
+    remote: "UpBase-Tech/ops-fe"
+    kind: frontend
+    role: "App vận hành (Vite + React Router)"
+    owner: "Nguyễn Hùng Sơn"
+    conventions: ".claude/CLAUDE.md, .claude/rules/, .claude/inventory/"
+    gate: "/ui-gate (SCSS), pnpm typecheck:ops-fe"
+
+  - id: lms-fe
+    path: ../lms-fe
+    remote: "UpBase-Tech/lms-fe"
+    kind: frontend
+    role: "App học viên: lms-pro, lms-test, lms-zoom (Next.js 14)"
+    owner: "Nguyễn Hùng Sơn"
+    conventions: ".claude/CLAUDE.md, .claude/rules/01–08, .claude/inventory/01–05"
+    gate: "/ui-gate build|review (input: ui-map), check-types"
+
+  - id: lms-package
+    path: ../lms-package
+    remote: "UpBase-Tech/lms-package"
+    kind: library
+    role: "Package dùng chung @upbase-tech/* (GitHub Packages)"
+    owner: "Nguyễn Hùng Sơn"
+    conventions: ".claude/CLAUDE.md"
+    gate: "build, bump version semver, PR vào main"
+
+# Thứ tự implement một change chạm nhiều repo.
+build_order: [lms-package, lms-be, ops-fe, lms-fe]
+
+publish:
+  docs: "Lark wiki"              # đích publish tài liệu, chi tiết ở domain/domain.md mục 4
+  user_guide: "GitBook"

@@ -1,351 +1,434 @@
-# User Guide: PO-Workflow
+# Hướng dẫn sử dụng PO-Workflow
 
-PO-Workflow giúp PO và BA đi từ yêu cầu thô tới PRD theo template công ty, rồi tới User Guide sau khi Dev hoàn thành. Bạn trao đổi với AI bằng tiếng Việt và không cần biết lập trình. Từ 09/10/2026 mọi yêu cầu chạy theo luồng chuẩn hoá từ AWS AI-DLC; ba dự án Group, Gamification và Report-Phase-1 đã chuyển sang luồng này và giữ họ mã cũ trong tài liệu của chúng.
+Tài liệu này hướng dẫn thao tác. Phương pháp và lý do của từng stage ở [README.md](README.md); thuật ngữ và họ mã ở [GLOSSARY.md](GLOSSARY.md).
 
-Tài liệu này hướng dẫn thao tác. Tài liệu liên quan:
+| Người đọc | Đọc mục |
+|---|---|
+| PO | 1 tới 7, 10 tới 12 |
+| Design PIC, Tech PIC, QA PIC | 1, 8 |
+| Dev và agent AI của Dev | 9 |
+| Người phụ trách quy trình | 2, 11, và [DOMAIN-SETUP.md](DOMAIN-SETUP.md) |
 
-- [README.md](README.md): phương pháp và lý do của từng stage
-- [GLOSSARY.md](GLOSSARY.md): thuật ngữ và họ mã
+
+> Cài đặt lần đầu và cách thêm repo: [SETUP.md](SETUP.md). Thao tác của phần Tech: [engine/tech/knowledge/workflow.md](engine/tech/knowledge/workflow.md).
 
 ## Mục lục
 
-1. [Workflow làm gì](#1-workflow-làm-gì)
+1. [Quy trình tóm tắt](#1-quy-trình-tóm-tắt)
 2. [Cài đặt](#2-cài-đặt)
 3. [Cấu trúc thư mục](#3-cấu-trúc-thư-mục)
-4. [Chạy một intent từ đầu tới PRD](#4-chạy-một-intent-từ-đầu-tới-prd)
-5. [Trả lời AI: câu hỏi, tóm tắt, gate](#5-trả-lời-ai-câu-hỏi-tóm-tắt-gate)
-6. [Tham khảo lệnh](#6-tham-khảo-lệnh)
-7. [Knowledge](#7-knowledge)
-8. [Xử lý vấn đề thường gặp](#8-xử-lý-vấn-đề-thường-gặp)
-9. [Git và lead các team](#9-git-và-lead-các-team)
+4. [Chạy một intent tới PRD](#4-chạy-một-intent-tới-prd)
+5. [Trả lời AI](#5-trả-lời-ai)
+6. [Đổi yêu cầu giữa chừng](#6-đổi-yêu-cầu-giữa-chừng)
+7. [Bàn giao sau khi chốt](#7-bàn-giao-sau-khi-chốt)
+8. [Dành cho Design PIC, Tech PIC, QA PIC](#8-dành-cho-design-pic-tech-pic-qa-pic)
+9. [Dành cho Dev](#9-dành-cho-dev)
+10. [Lệnh](#10-lệnh)
+11. [Domain pack](#11-domain-pack)
+12. [Xử lý tình huống](#12-xử-lý-tình-huống)
 
-## 1. Workflow làm gì
+## 1. Quy trình tóm tắt
 
-Một yêu cầu là một intent. Intent đi qua hai phase: Ideation để xác định vấn đề và phạm vi, Inception để tạo yêu cầu, user story và PRD. Có mười stage, mỗi stage sinh một artifact và kết thúc bằng một gate do bạn duyệt. Trong số đó chỉ Initiative Brief, HLD Brief, PRD và User Guide là tài liệu bàn giao; còn lại là bản phân tích nội bộ.
+Một yêu cầu là một intent. Intent đi qua 2 phase: Ideation xác định vấn đề và phạm vi; Inception chuyển phạm vi thành yêu cầu, phân tích ảnh hưởng, đề xuất và chọn phương án giải pháp, chia user story, viết PRD chi tiết, sau đó các team thiết kế từ PRD và chốt trên Decision Brief. Mỗi stage sinh một artifact và dừng ở một gate cho tới khi PO duyệt.
 
-| Stage | Artifact | Gate | Nơi lưu trong intent |
+| Stage | Artifact | Gate | Thư mục trong intent |
 |---|---|---|---|
 | 1.1 Intent Capture & Framing | `intent-statement.md` | L: gate riêng. M: duyệt chung với 1.4 | `ideation/intent-capture/` |
-| 1.2 Market Research | `competitive-analysis.md` | chỉ khi bạn muốn so sánh với sản phẩm khác | `ideation/market-research/` |
-| 1.4 Scope Definition | `scope-document.md`, danh sách Proto-Unit | gate | `ideation/scope-definition/` |
-| 1.7 Approval & Handoff | Initiative Brief, một trang | gate, có lựa chọn dừng intent | `ideation/approval-handoff/` |
-| 2.3 Requirements Analysis | `requirements.md`, mã `FR1`, `NFR1` | gate | `inception/requirements-analysis/` |
-| 2.31 Impact Analysis | `related-features-map.md`, `impact-matrix.md` | gate | `inception/impact-analysis/` |
-| 2.32 Solution Options | `solution-options.md` | gate, chỉ khi có nhiều hướng giải | `inception/solution-options/` |
-| 2.4 User Stories | `stories.md`, mã `US1` | gate | `inception/user-stories/` |
-| 2.41 HLD Brief & Alignment | HLD Brief, tối đa ba trang | alignment gate, ba lead ký | `inception/hld-brief/` |
-| 2.42 PRD Generation | PRD, `traceability.md` | gate | `inception/prd/` |
-| Sau khi Dev xong | User Guide | | `user-guide/` |
+| 1.2 Market Research | `competitive-analysis.md` | Chỉ khi cần so sánh với sản phẩm khác | `ideation/market-research/` |
+| 1.4 Scope Definition | `scope-document.md`, danh sách Unit | Có | `ideation/scope-definition/` |
+| 1.7 Approval & Handoff | Initiative Brief một trang | Có, kèm lựa chọn dừng intent | `ideation/approval-handoff/` |
+| 2.3 Requirements Analysis | `requirements.md`, mã `FR1`, `NFR1` | Có | `inception/requirements-analysis/` |
+| 2.31 Impact Analysis | `related-features-map.md`, `impact-matrix.md` | Có | `inception/impact-analysis/` |
+| 2.32 Solution Options | `solution-options.md` | Chỉ khi có nhiều hướng giải | `inception/solution-options/` |
+| 2.4 User Stories | `stories.md`, mã `US1` | Có | `inception/user-stories/` |
+| 2.42 PRD Generation | PRD, `traceability.md` | Có | `inception/prd/` |
+| 2.43 Design Alignment, M và L | Ba file thiết kế do các team viết, Decision Brief | Alignment gate, 3 PIC ký | `inception/ux-design/`, `tech-design/`, `test-design/`, `decision-brief/` |
+| Sau gate 2.43, hoặc sau PRD với profile S | Story List để import lên Jira | Không | `stories/` |
+| Sau khi Dev làm xong | User Guide | Không | `user-guide/` |
 
-Stage 2.31, 2.32, 2.41 và 2.42 là phần PO-Workflow thêm, đóng gói thành plugin `po-workflow`. Sáu stage còn lại lấy từ AWS AI-DLC.
+Profile quyết định số stage. Khi tạo intent, AI đề xuất profile kèm lý do; PO có quyền đổi. Phân vân giữa hai profile thì chọn profile lớn hơn.
 
-### Cấu trúc đầu ra cuối cùng
-
-PRD là tài liệu bàn giao cuối. Bên trong, Proto-Unit chứa user story, user story chứa acceptance criteria và business rule; Traceability nối FR, US, BR để không sót.
-
-```mermaid
-flowchart TB
-    subgraph PRD["PRD"]
-        direction TB
-        subgraph PU1["Proto-Unit PU1, gợi ý chia việc cho Dev"]
-            direction LR
-            US1["US1<br/>User story · Pre - Condition · Scenario<br/>Acceptance criteria: bảng UI, BR1.1, BR1.2<br/>Out of scope · Conner case"]
-            US2["US2<br/>sáu mục như US1"]
-        end
-        subgraph PU2["Proto-Unit PU2"]
-            US3["US3"]
-        end
-        TR["Traceability<br/>FR → US → BR"]
-    end
-```
-
-Thứ tự tạo ra các phần này ngược lại: Proto-Unit có từ 1.4, FR từ 2.3, US từ 2.4, acceptance criteria chỉ viết ở 2.42. Unit do Dev xác định ở stage 2.7 sau khi nhận PRD, nên trong PRD chỉ có Proto-Unit.
-
-### Profile quyết định số stage
-
-Khi tạo intent, AI đề xuất profile kèm lý do và bạn có quyền đổi. Khi phân vân giữa S và M, chọn M.
-
-| Profile | Độ lớn và độ phức tạp | Stage chạy | Gate |
+| Profile | Khi nào | Stage chạy | Số gate |
 |---|---|---|---|
-| S | Nhỏ: một màn, không đổi data model, không đổi rule có sẵn, không ảnh hưởng module khác | 2.3 rồi 2.42, PRD rút gọn một US | 2 |
-| M | Vừa: tối đa hai module, thêm field nhưng không đổi quan hệ bảng, không conflict, hướng giải đã rõ | 1.1 và 1.4 duyệt chung, 2.3, 2.31, 2.4, 2.41, 2.42 | 6 |
-| L | Lớn hoặc phức tạp: từ ba module, hoặc đổi data model, hoặc có conflict, hoặc nhiều hướng giải | Đủ mười stage; 1.2 và 2.32 chỉ khi cần | 8 đến 10 |
+| S | Một màn, không đổi data model, không đổi rule có sẵn, không chạm module khác | 2.3 và 2.42, PRD rút gọn | 2 |
+| M | Tối đa 2 module, thêm field nhưng không đổi quan hệ bảng, không conflict, hướng giải đã rõ | 1.1 và 1.4 duyệt chung, 2.3, 2.31, 2.4, 2.42, 2.43 | 6 |
+| L | Từ 3 module, đổi data model, có conflict, nhiều hướng giải, tích hợp ngoài hoặc migration | Đủ 10 stage; 1.2 và 2.32 khi cần | 8 tới 10 |
 
-### Gate là gì
+Gate là điểm dừng bắt buộc. AI không chuyển sang stage tiếp theo khi chưa có lời duyệt rõ ràng, vì mỗi artifact là nền cho artifact sau: lỗi ở requirements không được chặn sẽ đi thẳng vào Impact Matrix và PRD.
 
-Gate là điểm dừng bắt buộc. AI không chuyển sang stage sau cho tới khi bạn duyệt rõ ràng. Mỗi artifact là nền cho artifact sau, nên một lỗi ở requirements không được chặn sẽ đi thẳng vào Impact Matrix và PRD, và khi phát hiện thì phải làm lại toàn bộ.
+Đầu ra cho các team gồm PRD, Decision Brief và Story List để import lên Jira. Chuẩn chung về cách chia story, mã, tiêu chí chấp nhận và điều kiện giao Dev ở README mục 6 và trong `engine/standards/`.
 
 ## 2. Cài đặt
 
-### 2.1 VS Code và Claude Code
+### 2.1 Công cụ AI
 
-1. Tải VS Code tại https://code.visualstudio.com
-2. Trong VS Code nhấn `Ctrl+Shift+X` (Windows) hoặc `Cmd+Shift+X` (Mac), tìm Claude Code của Anthropic, bấm Install
-3. Bấm icon Claude ở thanh bên trái, chọn Sign in with Anthropic
-4. Gõ `Xin chào` vào ô chat; AI trả lời bằng tiếng Việt là cài đặt xong
+Quy trình nằm trong `engine/` và `AGENTS.md`, không phụ thuộc công cụ. Với Claude Code, bản terminal, ứng dụng desktop hoặc extension cho IDE đều dùng được; các lệnh `/po`, `/new-intent` có sẵn trong `.claude/commands/`. Với công cụ khác, yêu cầu AI đọc `AGENTS.md`, sau đó đọc `engine/commands/<lệnh>.md` hoặc `engine/stages/<stage>.md` và làm theo.
+
+Mở công cụ AI tại thư mục gốc của repo, nơi có `AGENTS.md` và `engine/`. Mở sai thư mục thì AI không thấy domain pack và lệnh không chạy.
 
 ### 2.2 Git
 
-Windows tải tại https://git-scm.com/download/win, giữ mặc định, chỉ chọn "Use Visual Studio Code as Git's default editor". Mac đã có sẵn, hoặc chạy `xcode-select --install`.
+Trên Windows, tải tại https://git-scm.com/download/win và giữ cài đặt mặc định. Trên Mac, Git có sẵn, hoặc chạy `xcode-select --install`.
 
-Cấu hình một lần:
+Cấu hình một lần. Tên này được ghi vào cột Người quyết của mọi quyết định, nên dùng tên thật:
 
 ```bash
-git config --global user.name "Tên của bạn"
-git config --global user.email "email@upbase.vn"
+git config --global user.name "Họ Tên"
+git config --global user.email "email@congty.vn"
 ```
 
-### 2.3 Mở đúng thư mục
+### 2.3 Python
 
-Vào File, chọn Open Folder, chọn thư mục `po-workflow`. Claude Code chỉ đọc được file trong thư mục đang mở; mở sai thì AI không thấy KB và các lệnh không chạy. Kiểm tra: panel Explorer hiện `po-workflow`, bên dưới có `.claude/` và `CLAUDE.md`.
+Script `engine/scripts/po-tools.py` và hook `engine/scripts/po-hook.py` cần Python 3.9 trở lên. Không có Python thì quy trình vẫn chạy, nhưng AI phải kiểm thủ công thay cho các bước kiểm bằng máy, và hook không chặn được AI tự ghi duyệt.
 
-### 2.4 Python cho script kiểm tra
+Mở Claude Code ở thư mục gốc của repo để hook trong `.claude/settings.json` chạy. Hook ghi mỗi câu PO gõ và mỗi lựa chọn PO bấm, lưu vào `.po/turns.jsonl` trên máy (file này không được commit); lệnh duyệt dựa vào sổ này để biết lời duyệt là của PO.
 
-Script `.claude/scripts/po-tools.py` cần Python 3.9 trở lên, Mac có sẵn. Không có Python, workflow vẫn chạy; AI kiểm tra thủ công.
+Kiểm môi trường sau khi cài và mỗi khi thấy bất thường:
 
-### 2.5 Lark CLI cho publish
+```bash
+python3 engine/scripts/po-tools.py doctor
+```
 
-`lark-cli` nằm ở `~/.local/node/bin`. Lần đầu dùng, hoặc khi AI báo token hết hạn, chạy `lark-cli auth login` rồi cấp quyền trong trình duyệt. Đây là việc bình thường, không phải lỗi.
+Lệnh kiểm tên git, Python, `lark-cli`, thư mục đang mở, hook ghi lượt PO đã chạy chưa, file chưa commit, nguồn KB quá hạn đối chiếu, domain pack, mã tính năng trùng, và tên sản phẩm xuất hiện trong engine. Mỗi dòng không đạt có gợi ý cách sửa.
 
-### 2.6 Chụp màn hình cho User Guide, tuỳ chọn
+### 2.4 Lark CLI
 
-`.mcp.json` đã cấu hình sẵn Playwright. Lần đầu mở project, Claude Code hỏi approve MCP server, chọn đồng ý. Không dùng thì khi viết User Guide gõ `skip-screenshot`.
+`/publish-lark` cần `lark-cli` chạy được từ terminal. Lần đầu dùng, hoặc khi AI báo token hết hạn, chạy `lark-cli auth login` và cấp quyền trong trình duyệt.
+
+### 2.5 Chụp màn hình cho User Guide
+
+`.mcp.json` cấu hình sẵn Playwright để chụp màn hình. Lần đầu mở repo, Claude Code hỏi có cho phép MCP server này không; chọn đồng ý. Nếu không dùng Playwright, gõ `skip-screenshot` khi viết User Guide.
 
 ## 3. Cấu trúc thư mục
 
 ```
 po-workflow/
-├── CLAUDE.md                  AI đọc mỗi phiên: phạm vi, quy ước, nguồn tra cứu
-├── README.md                  phương pháp, từng stage, mapping sang AWS AI-DLC
+├── AGENTS.md                  luật cho mọi công cụ AI
+├── CLAUDE.md                  một dòng, nhập AGENTS.md cho Claude Code
+├── README.md                  phương pháp, chuẩn bàn giao, mức độ sẵn sàng áp dụng
 ├── USER-GUIDE.md              file này
-├── DOMAIN-SETUP.md            dựng quy trình cho một sản phẩm khác
+├── DOMAIN-SETUP.md            đưa một sản phẩm mới vào quy trình
 ├── GLOSSARY.md                thuật ngữ, tên stage, họ mã
-└── .claude/
-    ├── commands/              mỗi stage một lệnh, cộng tiện ích
-    ├── protocol/              nghi thức chung: stage, gate, review, câu hỏi, profile
-    ├── templates/             mẫu artifact chung của engine
-    ├── verification/          checklist từng stage và tiện ích
-    ├── agents/product-lead.md reviewer độc lập
-    ├── knowledge/
-    │   ├── domain/            domain pack: domain.md, KB UpLnD 16 file, corner checklist, templates/ PRD và User Guide của công ty
-    │   └── product/           kiến thức vai PO từ AWS, không phụ thuộc sản phẩm
-    ├── memory/team.md         bài học đã giữ lại tại gate
-    ├── scripts/po-tools.py    truy vết, chụp archive, kiểm trạng thái
-    └── intents/
-        └── 261009-ten-intent/
-            ├── intent.md          bối cảnh, Figma, Jira, Lark
-            ├── state.md           đang ở stage nào, việc kế tiếp
-            ├── decisions.md       mọi quyết định, lời bạn nguyên văn
-            ├── memory.md          AI ghi quan sát, bạn đọc tại gate
-            ├── inputs/            đặt tài liệu đầu vào ở đây
-            └── ideation/  inception/  reviews/  verification/  archive/  design/  user-guide/
+├── CHANGELOG.md · VERSION     phiên bản engine và cách nâng cấp
+├── engine/                    quy trình, không phụ thuộc sản phẩm và công cụ
+│   ├── stages/                mỗi stage một file
+│   ├── commands/              lệnh: po, new-intent, po-status, po-review, po-replay, po-stories, change-request, publish-lark, generate-user-guide, new-domain
+│   ├── protocol/              nghi thức chung: stage, gate, review, câu hỏi, profile
+│   ├── templates/             mẫu artifact, mẫu yêu cầu
+│   ├── verification/          checklist của từng stage và từng lệnh
+│   ├── agents/ai-reviewer.md  reviewer độc lập
+│   ├── standards/             quy ước mã, quy tắc bàn giao, quyết định nơi lưu story
+│   ├── knowledge/             kiến thức vai PO lấy từ AWS
+│   ├── scripts/               po-tools.py kiểm tra, truy vết, duyệt, sinh story, chỉ mục; po-hook.py hook của Claude Code
+│   └── tests/                 dữ liệu kiểm thử của script, PO không cần đọc
+├── domain/                    domain pack: domain.md, KB, corner checklist, template User Guide
+├── memory/
+│   ├── team.md                bài học dùng chung, đi theo engine
+│   └── project.md             bài học của sản phẩm đang cài
+├── .claude/                   cấu hình riêng cho Claude Code: lối tắt cho lệnh, trỏ tới engine/; quyền và hook
+├── .po/                       sổ lượt người trên máy này, không commit
+└── intents/
+    ├── INDEX.md               chỉ mục PRD đã duyệt cho Dev
+    └── 261009-ten-intent/
+        ├── intent.md          bối cảnh, mã tính năng, Figma, Jira, Lark
+        ├── state.md           đang ở stage nào, việc kế tiếp
+        ├── decisions.md       quyết định nguyên văn, người quyết định
+        ├── memory.md          quan sát của AI, PO đọc tại gate
+        ├── inputs/            tài liệu đầu vào
+        ├── ideation/  inception/
+        ├── stories/           Story List để import lên Jira
+        └── reviews/  verification/  archive/  design/  user-guide/
 ```
 
-Hai file quan trọng nhất trong mỗi intent là `state.md`, cho biết intent đang ở đâu và ai phải làm gì tiếp, và `decisions.md`, bộ nhớ của intent mà AI tra để không hỏi lại câu đã có đáp án. Không xoá hai file này.
+`state.md` cho biết intent đang ở đâu và ai làm gì tiếp. `decisions.md` là bộ nhớ của intent; AI tra file này để không hỏi lại câu đã có đáp án. Không xoá hai file này. `archive/` chứa bản đã duyệt và không được sửa.
 
-## 4. Chạy một intent từ đầu tới PRD
+## 4. Chạy một intent tới PRD
 
-### Bước 0: tạo intent
+### 4.1 Tạo intent
 
 ```
 /new-intent Báo cáo giai đoạn 1
 ```
 
-Tên đặt tự do. AI tạo thư mục `.claude/intents/261009-bao-cao-giai-doan-1/`, đọc nhanh KB để ước lượng vùng bị ảnh hưởng, rồi hỏi một câu để chốt profile, ví dụ "Profile M: 7 stage, 6 gate. Đồng ý, đổi profile, hay đổi depth?".
+AI tạo thư mục `intents/<YYMMDD>-bao-cao-giai-doan-1/`, cấp mã tính năng, đọc nhanh KB để ước lượng vùng bị chạm, sau đó hỏi một câu để chốt profile, ví dụ "Profile M: 7 stage, 6 gate. Đồng ý, đổi profile, hay đổi depth?".
 
-Sau đó bạn đặt tài liệu đầu vào như mô tả yêu cầu, email, biên bản họp, ảnh vào `inputs/`. Có thể viết mô tả ngay trong lệnh; AI lưu nguyên văn. Có link Figma hay Jira thì điền vào `intent.md`.
+Đặt tài liệu đầu vào như mô tả yêu cầu, email, biên bản họp, ảnh vào `inputs/`. Chưa có mô tả thì AI chép mẫu `inputs/request.md` gồm hiện trạng, điều muốn thay đổi, trong và ngoài phạm vi, điều không được thay đổi, mốc, câu hỏi mở. Gửi mẫu cho người yêu cầu điền. Mục "Điều không được thay đổi" tác động nhiều nhất tới phân tích ảnh hưởng ở sản phẩm đang vận hành. Ghi link Figma, Jira vào `intent.md`.
 
-### Bước 1 trở đi: gọi /po
+### 4.2 Gọi /po
 
 ```
 /po 261009-bao-cao-giai-doan-1
 ```
 
-Mỗi lần gọi, AI đọc `state.md` rồi chạy stage kế tiếp hoặc tiếp tục stage đang dở. Làm nhiều intent song song thì luôn ghi tên intent trong lệnh.
+Mỗi lần gọi, AI đọc `state.md` và chạy stage kế tiếp hoặc tiếp tục stage đang làm dở. Khi làm nhiều intent song song, luôn ghi tên intent trong lệnh. Không có lệnh riêng cho từng stage; muốn chạy một stage cụ thể thì nói "chạy 2.3" hoặc "làm lại 2.4".
 
-Mỗi stage đi qua bảy bước; cách trả lời ở mục 5:
+Mỗi stage đi qua 7 bước: AI đọc nền, hỏi, tóm tắt để PO xác nhận, viết artifact, tự kiểm, ghi quan sát, trình gate. Cách trả lời ở mục 5.
 
-1. AI đọc nền
-2. Hỏi bằng questions file
-3. Tóm tắt để bạn xác nhận
-4. Viết artifact
-5. Tự kiểm bằng checklist và reviewer
-6. Ghi bài học
-7. Trình gate
+### 4.3 Ideation, profile M và L
 
-### Ideation, profile M và L
+Ở 1.1 và 1.4, AI hỏi về vấn đề, cách người dùng xử lý hiện tại, mục tiêu đo được, stakeholder, sau đó hỏi về phạm vi In, Out, Potential và cách chia nhu cầu thành Unit. Profile M duyệt hai artifact này chung một gate.
 
-Ở 1.1 và 1.4, AI hỏi về vấn đề, cách người dùng xử lý hiện tại, mục tiêu đo được, stakeholder, rồi về phạm vi In, Out, Potential và cách chia hạng mục thành Proto-Unit. Profile M duyệt hai artifact này chung một gate.
+1.2 chỉ chạy khi PO muốn so sánh với sản phẩm khác; danh sách mặc định ghi trong `domain/domain.md`.
 
-1.2 chỉ chạy khi bạn muốn so sánh với TalentLMS, Docebo, Moodle hay sản phẩm khác; không cần thì AI ghi bỏ qua.
+Stage 1.7 chỉ có ở profile L: AI tóm tắt thành Initiative Brief một trang. Gate này có thêm lựa chọn Reject Initiative để dừng intent. Khi cần, đẩy lên Lark với tên `[Brief] <tên tính năng>`.
 
-Ở 1.7, profile L, AI tóm tắt toàn bộ thành Initiative Brief một trang và hỏi ba câu. Gate này có ba lựa chọn: đi tiếp, sửa, hoặc Reject Initiative để dừng intent. Khi cần, publish lên Lark với tên `[Brief] <tên tính năng>`.
+### 4.4 Inception
 
-### Inception
+Ở 2.3 Requirements Analysis, AI tra KB trước, chỉ hỏi phần còn thiếu, sau đó viết yêu cầu có mã `FR1`, `FR1.1`, `NFR1`. AI nêu ngay yêu cầu trùng tính năng đã có, kèm mã KB. Profile S bắt đầu từ đây.
 
-2.3 Requirements Analysis. AI tra KB trước, chỉ hỏi phần còn thiếu, rồi viết yêu cầu có mã `FR1`, `FR1.1`, `NFR1`. Yêu cầu trùng tính năng đã có được nêu ngay kèm mã KB. Profile S bắt đầu từ đây.
+Ở 2.31 Impact Analysis, AI trình Related Features Map: module, màn, bảng, endpoint, thông báo, rule liên quan. PO rà soát và bổ sung phần thiếu, vì nhận ra phần thiếu trong một bản nháp nhanh hơn tự liệt kê từ đầu. Sau đó AI dựng Impact Matrix 12 vùng và chuyển mọi conflict cho PO quyết định.
 
-2.31 Impact Analysis. AI trình Related Features Map trước: module, màn, bảng, endpoint, mail, rule nào liên quan. Bạn xem và bổ sung phần thiếu. Đây là bước dễ đóng góp nhất, vì bạn chỉ cần nhận ra phần thiếu thay vì liệt kê từ đầu. Sau đó AI dựng Impact Matrix 12 vùng, tìm conflict, FR còn thiếu, coverage gap, transition, tenant. Gặp conflict, AI hỏi bạn quyết định, không tự giải quyết.
+2.32 Solution Options chỉ chạy khi có nhiều hướng giải. Nếu PO đã có định hướng, AI nhận xét và đề xuất thêm; nếu chưa, AI dựng 2 tới 3 option, so sánh theo 7 tiêu chí và đưa khuyến nghị. Duyệt gate là chọn option.
 
-2.32 Solution Options, khi có nhiều hướng giải. AI hỏi bạn đã có định hướng chưa. Nếu có, AI nhận xét và đề xuất thêm; nếu chưa, AI dựng hai đến ba option, so sánh theo bảy tiêu chí và đưa khuyến nghị có điều kiện. Duyệt gate là chọn option.
+Ở 2.4 User Stories, AI chia story theo `engine/standards/story-splitting.md`: dựng bản đồ story theo vai và bước trong hành trình, xét dấu hiệu story quá lớn, đề xuất cách tách. Mỗi US gắn một Unit, mỗi FR có US phủ. Mỗi US có một thẻ 9 mục: vai và mục tiêu, bối cảnh, luồng chính, nhánh đáng kể, rule đã biết, dữ liệu và vùng chạm, ngoài phạm vi, phụ thuộc, chưa rõ. Thẻ chưa có tiêu chí chấp nhận. PO duyệt cả danh sách lẫn từng thẻ.
 
-2.4 User Stories. Danh sách US gắn vào Proto-Unit, mỗi FR có US phủ. Mỗi US là một thẻ chín mục, đủ để lead đọc và viết HLD nhưng chưa có acceptance criteria. Bạn duyệt cả danh sách lẫn thẻ. Chín mục:
+Ở 2.42 PRD Generation, AI tra Impact Matrix, data model, API spec, KB, sau đó lập bảng Field Intake về field, rule, validate cho từng màn; PO điền và duyệt. Sau đó AI viết PRD theo template chuẩn `engine/templates/prd.md`: mục 1 tới 5 tóm tắt từ artifact đã duyệt, mục 6 viết từng US với mười mục con, mục 7 tới 10 gom yêu cầu phi chức năng, yêu cầu chuyển đổi lấy từ Impact Matrix, giả định và câu hỏi mở. Mỗi US có dòng Ưu tiên, business rule viết theo mẫu EARS, danh sách tiêu chí chấp nhận mã `AC1.1` ghi rõ business rule mà nó kiểm, và mục Trường hợp ngoại lệ lấy từ coverage gap của Impact Matrix. Với điểm phụ thuộc thiết kế hoặc kỹ thuật chưa rõ, AI ghi đề xuất kèm câu hỏi gắn tên PIC để các team trả lời ở 2.43. Trước gate, AI chạy kiểm truy vết FR, US, BR, AC và sửa phần thiếu.
 
-- Vai và mục tiêu
-- Bối cảnh
-- Luồng chính
-- Nhánh đáng kể
-- Rule đã biết
-- Dữ liệu và vùng chạm
-- Ngoài phạm vi
-- Phụ thuộc
-- Chưa rõ
+2.43 Design Alignment chạy với profile M và L. Sau khi PRD được duyệt, AI tạo ba file thiết kế từ template, chỉ điền phần đầu file; PO gửi ba PIC đường dẫn PRD và file của họ, kèm hạn; cách viết của PIC ở mục 8. Khi các team viết xong, PO gọi lại `/po`: AI đối chiếu ba file với PRD, báo phần còn thiếu, và viết Decision Brief chỉ gồm điểm cần quyết. Họp trên Decision Brief; quyết định đổi yêu cầu được xử lý qua change request. Gate duyệt khi cả 3 PIC ghi Đồng ý hoặc Có ý kiến ở bảng Ký; PIC quá hạn chưa ký thì PO được chọn Accept as-is kèm lý do. Story List chỉ sinh sau khi gate này được duyệt.
 
-2.41 HLD Brief & Alignment. AI viết bản tối đa ba trang từ mọi thứ đã duyệt, chừa ba mục cho lead Design, Dev, QA, mỗi mục có khung sẵn và vài dòng điểm cần lưu ý cho vai đó; Tech lead điền tám ý, từ hướng tiếp cận tới điều cần PO quyết. Bạn gửi lead đường dẫn file trong repo; họ ghi mục của mình và ký ở mục 12, xem mục 9 của tài liệu này. Sau họp, gọi lại `/po`; AI trình diff và mở alignment gate. Đủ ba chữ ký mới duyệt được; sau khi duyệt, AI publish bản cuối lên Lark với tên `[HLD] <tên tính năng>`.
+## 5. Trả lời AI
 
-2.42 PRD Generation. AI tra KB, Swagger, Impact Matrix rồi tổng hợp một bảng Field Intake về field, rule, validate cho từng màn; bạn điền. Sau đó AI viết PRD: phần đầu chép từ HLD Brief, phần Specific Requirement chi tiết từng US với sáu mục theo template công ty, bám theo mục 4, 8, 9, 10 của brief; điểm brief chưa đề cập, AI ghi đề xuất kèm câu hỏi gắn tên lead. Trước gate, AI chạy kiểm truy vết FR, US, BR; có thiếu sót thì sửa trước. Sau khi duyệt:
-
-```
-/publish-lark <intent> prd     đẩy PRD lên Lark wiki
-/generate-user-guide <intent>  viết User Guide sau khi Dev xong
-/change-request <intent>       khi yêu cầu đổi giữa chừng
-```
-
-## 5. Trả lời AI: câu hỏi, tóm tắt, gate
-
-### Questions file
+### 5.1 Questions file
 
 Mỗi stage có một file câu hỏi, ví dụ `requirements-analysis-questions.md`. Mỗi câu gồm:
 
-- Lựa chọn A, B, C, và `X. Khác`; lựa chọn AI đề xuất có ghi nguồn
-- Dòng `Chặn: có` khi thiếu đáp án thì AI không viết tiếp được
+- Nhãn người trả lời: `[PO]`, `[Người yêu cầu]`, `[Design]`, `[Tech]`, `[QA]`, hoặc vai khác ghi trong `domain.md`
+- Tối đa 4 lựa chọn và `X. Khác`; lựa chọn AI đề xuất có ghi nguồn
+- Dòng `Chặn: có` khi AI không viết tiếp được nếu thiếu đáp án
 - Dòng `[Answer]:` để ghi câu trả lời
 
-Lần đầu AI hỏi bạn muốn trả lời theo cách nào, rồi dùng cách đó cho cả intent:
+Lần đầu, AI hỏi PO muốn trả lời theo cách nào và dùng cách đó cho cả intent:
 
-| Cách | Bạn làm gì |
+| Cách | PO làm gì |
 |---|---|
-| Guide me | AI hỏi từng câu trong chat, bạn trả lời, AI ghi vào file |
-| Edit file | Bạn mở file, điền sau `[Answer]:`, báo "xong" |
-| Chat | Bạn viết tự nhiên một lượt, AI tách ra từng câu |
+| Guide me | AI hỏi từng câu trong chat, PO chọn, AI ghi vào file |
+| Edit file | PO mở file, điền sau `[Answer]:`, báo "xong" |
+| Chat | PO viết tự nhiên một lượt, AI tách ra từng câu |
 
-AI ghi câu trả lời nguyên văn, không diễn giải. Trả lời mơ hồ hoặc mâu thuẫn với câu trước thì AI hỏi lại một câu ngắn.
+AI ghi câu trả lời nguyên văn. Câu trả lời mơ hồ hoặc mâu thuẫn với câu trước thì AI hỏi lại một câu ngắn. Câu cùng nhãn đứng cạnh nhau, để PO chuyển cả nhóm cho đúng người, hoặc họp theo nhóm, sau đó điền theo cách Edit file.
 
-### Tóm tắt xác nhận
+PO có thể để AI chọn theo đề xuất ở một câu hỏi. AI ghi `[uỷ quyền]` kèm nguyên văn và báo đã chọn gì. Uỷ quyền chỉ áp dụng cho câu hỏi của stage đang chạy, không áp dụng cho bước xác nhận tóm tắt, xác nhận giả định hoặc gate.
 
-Trước khi viết artifact, AI tóm tắt mọi câu trả lời thành gạch đầu dòng và hỏi Looks correct hay Request changes. Đây là bước phát hiện hiểu nhầm với chi phí thấp nhất.
+### 5.2 Tóm tắt và giả định
 
-### Gate
+Trước khi viết artifact, AI tóm tắt mọi câu trả lời và hỏi Looks correct hoặc Request changes. Ở 1.1 và 2.3, AI liệt kê thêm các giả định để PO chấp nhận hoặc chuyển thành câu hỏi. Đây là bước phát hiện hiểu nhầm với chi phí thấp nhất.
 
-AI trình thông điệp hoàn thành năm phần: artifact ở đâu, điểm chính, giả định và câu hỏi mở, finding của reviewer, dòng tiến độ. Bạn trả lời:
+### 5.3 Gate
 
-| Trả lời | Nghĩa |
+AI trình thông điệp hoàn thành gồm: tiêu đề stage hoàn thành, bảng artifact tóm tắt bằng số, kết quả review và finding còn mở, đường dẫn để mở, stage kế tiếp và ai làm gì tiếp. Trước khi hỏi duyệt, AI hỏi PO có bài học nào cần giữ. PO trả lời một trong năm lựa chọn:
+
+| Lựa chọn | Kết quả |
 |---|---|
-| Approve | Đồng ý, đi tiếp. AI chụp bản duyệt vào `archive/`, ghi DEC |
-| Request Changes | Nói rõ sửa gì, AI sửa và trình lại |
-| Accept as-is | Từ lần trình thứ ba, nhận bản hiện tại kèm lý do ghi lại |
-| Add [stage] | Chạy thêm một stage ngoài profile, ví dụ thêm 2.32 |
+| Approve | Đi tiếp. Script đặt phiên bản, chụp bản duyệt vào `archive/`, ghi quyết định |
+| Request Changes | AI sửa theo nội dung PO nêu và trình lại |
+| Accept as-is | Từ lần Request Changes thứ ba, nhận bản hiện tại kèm điều kiện và lý do |
+| Add stage | Chạy thêm một stage ngoài profile, ví dụ thêm 2.32 |
 | Reject Initiative | Chỉ ở 1.7, dừng intent |
 
-Bạn có thể trả lời bằng lời tự nhiên: "ok nhưng đổi tên trường X" là duyệt kèm chỉ thị, AI thực hiện rồi báo một dòng. "Duyệt, hôm nay dừng ở đây" là duyệt và tạm dừng. Trả lời không rõ thì AI hỏi lại, không tự coi là duyệt.
+AI hiểu lời duyệt viết bằng câu tự nhiên theo ý của PO. "Ok nhưng đổi tên trường X" là duyệt kèm chỉ thị: AI sửa, báo một dòng và hỏi lại "Duyệt bản đã sửa?"; AI chỉ ghi duyệt sau khi PO trả lời. Câu trả lời không rõ thì AI hỏi lại và không tự coi đó là lời duyệt.
 
-### Bài học
+AI không tự duyệt được. Mỗi câu PO gõ và mỗi lựa chọn PO bấm được hook ghi vào `.po/turns.jsonl` trên máy; lệnh approve chỉ ghi khi lời duyệt có nguyên văn trong một lượt của PO sau lần sửa artifact cuối. Nếu script từ chối, AI nêu lý do và hỏi lại PO. PO được hỏi thêm một câu trong ba trường hợp sau:
+- Bước kiểm bằng máy còn cảnh báo: PO sửa, hoặc trả lời chấp nhận kèm lý do.
+- Artifact đổi sau lần AI Reviewer xem: chạy review lại, hoặc PO xác nhận duyệt mà không cần review lại.
+- Dùng công cụ AI không có hook: PO tự chạy lệnh approve trong terminal theo lệnh AI đưa.
 
-Tại gate, AI hỏi "Có gì cần nhớ cho lần sau không?" kèm vài quan sát. Bạn chọn dòng cần giữ hoặc trả lời "không có". Dòng được giữ ghi vào `.claude/memory/team.md` và áp dụng từ intent sau.
+Bản nháp mang phiên bản 0.x. Lần duyệt đầu là 1.0; mỗi lần duyệt lại sau change request tăng số phụ.
 
-## 6. Tham khảo lệnh
+### 5.4 Bài học
+
+Tại gate, AI nêu một số quan sát và hỏi PO điều gì cần giữ cho lần sau. Dòng PO chọn được ghi vào `memory/project.md`. AI hỏi thêm một câu: bài học có đúng cho mọi sản phẩm không; nếu có, AI chuyển bài học sang `memory/team.md`, file đi theo engine. Bài học có hiệu lực từ stage kế tiếp và không áp dụng ngược cho stage đã duyệt.
+
+## 6. Đổi yêu cầu giữa chừng
+
+Mọi thay đổi chạm stage đã duyệt đi qua `/change-request`. Lệnh cũng tự kích hoạt khi PO nói "đổi yêu cầu" hoặc "bổ sung". AI làm theo thứ tự:
+
+1. Ghi `CR<n>` vào `decisions.md` kèm nguyên văn của PO.
+2. Chụp artifact bị chạm vào `archive/` với nhãn pre-CR.
+3. Đề xuất stage phải quay lại và các gate phải duyệt lại, chờ PO xác nhận.
+4. Chạy xuôi từ stage đó, chỉ sửa phần bị chạm.
+
+Khi Decision Brief đổi, các PIC ký lại. Khi PRD đổi, phiên bản tăng, các team xem lại file thiết kế theo bản mới, Story List được sinh lại và PRD được đẩy lại lên Lark sau khi duyệt.
+
+## 7. Bàn giao sau khi chốt
+
+### 7.1 Sinh Story List
+
+```
+/po-stories <intent>
+```
+
+AI trình bản xem trước danh sách: mỗi US trong PRD một story, kèm ưu tiên, Unit, Epic và kết quả điều kiện giao Dev. Khi PO đồng ý, AI ghi `intents/<intent>/stories/story-list-prd-v<phiên bản>.csv`. AI chỉ ghi file khi PRD đã duyệt; với profile M, L, chỉ ghi sau gate 2.43. Mã màn của từng story lấy từ `ux-design.md`. File có 12 cột theo mẫu import CSV của Jira, gồm cột Priority đổi từ dòng Ưu tiên của US: Must thành Highest, Should thành High, Could thành Medium. PO import lên Jira bằng chức năng import CSV.
+
+Trước lần sinh Story List đầu tiên, kiểm 2 điểm:
+- `domain/domain.md` có `jira_project_key` và `jira_project_name` ở frontmatter. Hai khoá này được khai báo khi dựng domain pack, theo DOMAIN-SETUP.md mục 5.
+- Dòng Jira Epic trong `intent.md` có mã Epic. Intent có nhiều Epic thì ghi thêm `U2: <mã Epic>` để story của Unit đó gắn đúng Epic.
+
+### 7.2 Gắn tag và cập nhật chỉ mục
+
+Mỗi lần duyệt PRD hoặc Decision Brief, script in tên tag gợi ý: `<intent>/prd-v1.0` hoặc `<intent>/decision-brief-v1.0`. PO commit artifact vừa duyệt, gắn tag và đẩy tag lên. File CSV commit cùng PRD với profile S, cùng Decision Brief với profile M, L. Ví dụ với PRD:
+
+```bash
+git tag <intent>/prd-v1.0
+git push origin <intent>/prd-v1.0
+python3 engine/scripts/po-tools.py index --write
+```
+
+Lệnh cuối cập nhật `intents/INDEX.md` với mã tính năng, bản PRD đã duyệt, ngày duyệt, service bị chạm, tag, link Lark và số story đạt điều kiện giao Dev. Commit file này.
+
+### 7.3 Trước khi giao Dev
+
+```bash
+python3 engine/scripts/po-tools.py dor intents/<intent>
+```
+
+Script in story nào đạt, story nào chưa và vì sao, theo 7 điều kiện: PRD đã duyệt; với profile M, L thì 2.43 đã duyệt; US có tiêu chí chấp nhận; mọi business rule có tiêu chí chấp nhận trỏ tới; US không còn `❓PO` và không còn câu chặn trong Open Issues; US có bảng giao diện thì có màn trong `ux-design.md`; US nêu ở Pre-Condition là phải xong trước cũng đạt. Kết quả cũng ghi ở cột Comment của file CSV. Chỉ giao Dev các story đạt. Độ phủ test case do QA theo dõi trên Jira.
+
+### 7.4 Trước khi mở quyền repo cho các team
+
+Các PIC cần quyền ghi repo của PO để viết file thiết kế và ký Decision Brief, nên họ cũng thấy `decisions.md`, `memory.md` và questions file. Rà thông tin nhạy cảm như tài khoản staging trước khi mở quyền. Workflow gitleaks trong `.github/` quét mỗi lần đẩy lên.
+
+## 8. Dành cho Design PIC, Tech PIC, QA PIC
+
+PIC làm việc ở 2 nơi: file thiết kế của mình trên repo của PO sau khi PRD được duyệt, và story trên Jira sau gate 2.43. PIC có thể sửa repo bằng Claude Code, công cụ AI khác hoặc giao diện web của GitHub. Không cần chạy quy trình của PO.
+
+### 8.1 Viết file thiết kế và ký Decision Brief, stage 2.43
+
+PIC đọc PRD đã duyệt một lần, viết thiết kế của mình vào file riêng, sau đó cùng chốt trên Decision Brief. Không có bước xem thẻ US trước PRD.
+
+1. Pull, đọc `intents/<intent>/inception/prd/prd.md`. Mở file của mình: Design PIC `inception/ux-design/ux-design.md`, Tech PIC `inception/tech-design/tech-design.md`, QA PIC `inception/test-design/test-design.md`. Template ở `engine/templates/`.
+2. Chỉ sửa file của mình. Mọi phần trỏ về mã trong PRD: `US<n>`, `AC<n>.<m>`, `BR<n>.<m>`. Ghi `inputs: prd@<version>` đúng bản PRD đã đọc.
+3. Design PIC đặt mã màn `SCR<n>` ở bảng Danh sách màn, mỗi màn ghi US nó phục vụ; Story List lấy mã màn từ bảng này. Tech PIC ghi service hoặc repo bị chạm bằng đúng tên Dev dùng, và ghi story nào quá lớn để làm trong một sprint. QA PIC ghi cách kiểm cho từng AC.
+4. Ý kiến về PRD ghi ở mục Ý kiến về PRD trong file của mình: Đồng ý, Đề xuất sửa hoặc Phản đối, kèm mã và lý do. Không sửa PRD. Câu hỏi cho PO hoặc team khác ghi ở mục Rủi ro và câu hỏi cần chốt.
+5. Commit với message `design(<intent>): ux`, `tech` hoặc `test`, sau đó push.
+6. Sau khi AI viết Decision Brief, dự họp và ký ở bảng Ký của `inception/decision-brief/decision-brief.md`: Chưa xem, Có ý kiến, Đồng ý, Yêu cầu sửa. Nếu chọn Yêu cầu sửa, ghi rõ nội dung cần sửa.
+
+PIC không mở được repo thì gửi nội dung cho PO. PO dán nguyên văn, mở đầu bằng "(ghi theo <tên>, <ngày>)", và lưu tin nhắn xác nhận vào `decisions.md`.
+
+### 8.2 Làm việc trên story Jira
+
+Sau gate 2.43, hoặc sau gate 2.42 với profile S, PO import Story List lên Jira. Mỗi US trong PRD là một story; phần Description chép từ PRD, gồm tiêu chí chấp nhận và business rule có mã đầy đủ.
+
+| Người | Việc trên story |
+|---|---|
+| Design PIC | Gắn mã màn hình `SCR` và link thiết kế |
+| Tech PIC | Gom story vào Unit of work, chia sub-task, ước lượng story point, ghi nhánh code |
+| QA PIC | Viết test case mã `TC`, mỗi test case ghi mã AC mà nó kiểm và bản PRD đã dùng khi chạy |
+
+Quy tắc:
+
+1. Không sửa phần Description. Nội dung nghiệp vụ chỉ đổi khi PRD đổi qua change request; khi đó PO sửa story theo danh sách story đổi mà script in ra.
+2. Câu hỏi nghiệp vụ ghi bằng comment trên story, gắn người phải trả lời. Câu trả lời làm đổi PRD thì PO đi qua change request.
+3. Cột Comment của story ghi kết quả điều kiện giao Dev lúc import. Với story chưa đạt, chờ PO xử lý các lý do ghi ở cột này trước khi nhận việc.
+
+### 8.3 Mã và cách trỏ
+
+Từ story trên Jira trở đi, mọi team chỉ dùng mã đầy đủ. Design cấp `SCR-<tính năng>-<NN>`; QA cấp `TC-<tính năng>-<NN>`, mỗi test case ghi tiêu chí chấp nhận `AC-<tính năng>-<NN>.<n>` mà nó kiểm. Mã đã cấp không đổi, không dùng lại. Chi tiết ở `engine/standards/id-conventions.md`; quy tắc bàn giao ở `engine/standards/handoff-rules.md`.
+
+## 9. Dành cho Dev
+
+Bản trên Lark dành cho người đọc. Việc được giao qua story trên Jira. Agent AI của Dev đọc PRD trong repo theo tag của bản đã duyệt, nên luôn lấy đúng bản đã chốt.
+
+1. Đọc `intents/INDEX.md` để biết tính năng nào đã có PRD duyệt, tag nào, service nào bị chạm, bao nhiêu story đạt điều kiện giao Dev.
+2. Lấy đúng bản theo tag, bằng `git show <tag>:<đường dẫn>` hoặc qua GitHub MCP server của công cụ đang dùng.
+3. Đặt tên nhánh `feat/<tính năng>-<mô tả>`, ví dụ `feat/APP-F012-quiz-retake`.
+4. Thêm trailer vào commit: `Feature: <tính năng>`, và `Story: <US>` khi commit thuộc một story.
+
+Unit trong PRD là cách PO nhóm user story theo giá trị và ưu tiên. Dev chia việc trong phase Construction theo kiến trúc và có thể chia khác. Thiết kế kỹ thuật của Dev ghi ở tài liệu riêng của Dev và gắn link vào story trên Jira; mục nghiệp vụ trong PRD giữ nguyên.
+
+## 10. Lệnh
 
 | Lệnh | Dùng khi |
 |---|---|
-| `/new-intent <tên>` | Tạo intent mới, chọn profile |
-| `/po <intent>` | Chạy stage kế tiếp hoặc tiếp tục. Lệnh chính |
-| `/po-status [intent]` | Bảng trạng thái mọi intent, kiểm lệch giữa state và file |
-| `/po-review <file>` | Review độc lập bằng agent Product Lead; thêm `--shadow` cho tài liệu người khác viết |
-| `/change-request <intent>` | Đổi hoặc bổ sung yêu cầu giữa chừng; tự kích hoạt khi bạn nói "tôi đổi yêu cầu", "bổ sung" |
-| `/publish-lark <intent> <artifact>` | Đẩy Initiative Brief, HLD Brief, PRD đã duyệt lên Lark |
-| `/generate-user-guide <intent>` | Viết User Guide sau khi Dev xong |
-| `/new-domain <sản phẩm>` | Dựng khung domain pack cho sản phẩm mới, chạy trong repo mới. Xem DOMAIN-SETUP.md |
+| `/new-intent <tên>` | Tạo intent, cấp mã tính năng, chọn profile |
+| `/po <intent>` | Chạy stage kế tiếp hoặc tiếp tục stage đang làm dở |
+| `/po-status [intent]` | Xem trạng thái mọi intent, phát hiện lệch giữa `state.md` và file |
+| `/po-review <file>` | Review độc lập bằng AI Reviewer; thêm `--shadow` cho tài liệu người khác viết |
+| `/po-replay <intent>` | Tóm lược diễn biến của intent theo dòng thời gian: quyết định, review, việc còn chặn. Dùng khi chuyển intent cho PO khác |
+| `/po-stories <intent>` | Sinh Story List để import lên Jira từ PRD đã duyệt; profile M, L chạy sau gate 2.43 |
+| `/change-request <intent>` | Đổi hoặc bổ sung yêu cầu sau khi đã duyệt |
+| `/publish-lark <intent> <artifact>` | Đẩy Initiative Brief, PRD hoặc Decision Brief đã duyệt lên Lark |
+| `/generate-user-guide <intent>` | Viết User Guide sau khi Dev làm xong |
+| `/new-domain <sản phẩm>` | Dựng khung domain pack trong repo của sản phẩm mới |
 
-Lệnh của từng stage như `/intent-capture` hay `/prd-generation` vẫn tồn tại, nhưng nên gọi qua `/po` để state được cập nhật đúng.
+Lệnh của script, chạy từ thư mục gốc:
 
-### Đổi yêu cầu giữa chừng
+| Lệnh | Việc |
+|---|---|
+| `po-tools.py doctor` | Kiểm môi trường và domain pack |
+| `po-tools.py status` | Trạng thái mọi intent, artifact bị sửa ngoài change request, mã tính năng trùng, nguồn quá hạn |
+| `po-tools.py next <intent>` | Stage cần làm tiếp và số câu hỏi còn trống |
+| `po-tools.py check <intent> <stage>` | Kiểm bằng máy trước gate |
+| `po-tools.py trace <intent>` | Truy vết FR, US, BR, AC |
+| `po-tools.py review-start <intent> <stage>` | Ghi dấu artifact trước khi gọi AI Reviewer |
+| `po-tools.py approve <intent> <stage> --words "<lời PO>"` | Ghi chép sau khi PO duyệt; lời PO phải có trong sổ lượt người, trừ khi PO tự chạy trong terminal |
+| `po-tools.py replay <intent>` | Tóm lược diễn biến của intent cho người tiếp nhận |
+| `po-tools.py stories <intent> [--write]` | Xem trước hoặc ghi Story List cho Jira |
+| `po-tools.py dor <intent>` | Kiểm điều kiện giao Dev |
+| `po-tools.py index --write` | Cập nhật `intents/INDEX.md` |
+| `po-tools.py migrate <intent> [--feature <mã>] [--write]` | Chuyển intent tạo từ bản engine cũ |
+| `po-tools.py engine-check` | Liệt kê file engine đã bị sửa tay, trước khi nâng cấp |
+| `po-tools.py selftest` | Chạy dữ liệu kiểm thử của script, sau khi nâng cấp hoặc sửa engine |
 
-Không sửa rời rạc từng chỗ. AI làm theo thứ tự:
+## 11. Domain pack
 
-1. Ghi `CR1` vào `decisions.md` kèm nguyên văn của bạn
-2. Chụp artifact bị ảnh hưởng vào `archive/`
-3. Đề xuất stage phải quay lại và gate phải duyệt lại, chờ bạn xác nhận
-4. Chạy xuôi từ đó, chỉ sửa phần bị chạm
+Mọi dữ kiện riêng của sản phẩm nằm trong `domain/`. AI đọc `domain/domain.md` đầu mỗi phiên. File này có 6 mục:
 
-HLD Brief đổi thì lead ký lại; PRD đổi thì publish lại Lark sau khi duyệt.
+| Mục | Nội dung |
+|---|---|
+| 1. Sản phẩm và phạm vi | Sản phẩm là gì, phần nào ngoài phạm vi |
+| 2. Nguồn sống và bản chốt | Nguồn nào còn cập nhật, đọc ở đâu, đối chiếu lần cuối ngày nào |
+| 3. Bản đồ KB | File KB nào trả lời câu gì, stage nào dùng |
+| 4. Dữ kiện cho từng stage | Sản phẩm so sánh, shared entity dễ vỡ, nguồn field, nơi đăng Lark, đích User Guide |
+| 5. Ví dụ dùng trong engine | Ví dụ thật của sản phẩm để AI hiểu đúng quy tắc |
+| 6. Thành phần của domain pack | Danh sách file |
 
-## 7. Knowledge
+Cùng thư mục có KB theo module, `corner-checklist.md` liệt kê corner case thường bị bỏ sót của sản phẩm, và `templates/` chứa template User Guide của công ty cùng bản gốc template PRD cũ để đối chiếu. PRD dùng template chuẩn `engine/templates/prd.md`. Kiến thức vai PO không phụ thuộc sản phẩm nằm ở `engine/knowledge/`.
 
-Toàn bộ phần riêng của sản phẩm nằm trong domain pack `.claude/knowledge/domain/`. File AI đọc đầu tiên là `domain.md`, manifest cho biết sản phẩm là gì, nguồn nào còn sống, KB nào trả lời câu gì, và mỗi stage cần dữ kiện gì. KB sản phẩm có 16 file, bắt đầu từ `00-index.md`:
+Ba giới hạn của KB:
 
-- `01` đến `11`: nghiệp vụ theo module
-- `12`: data model
-- `13`: mail event
-- `14`: API surface, kể cả vùng KB chưa phủ
-- `15`: định hướng sản phẩm và ràng buộc đa tenant
-- `16`: nguyên tắc mô hình hoá
+- KB thường không phủ toàn hệ thống. Vùng chưa phủ ghi trong bản đồ KB; trước khi kết luận một vùng không bị ảnh hưởng, AI đối chiếu với danh sách này.
+- Rule do AI trích từ văn xuôi chưa được duyệt. PO xác nhận trước khi dùng làm ràng buộc trong PRD.
+- KB là bản chụp. Yêu cầu chạm vùng nào thì AI đọc lại nguồn sống của vùng đó. Bản chốt không còn nguồn gốc thì AI hỏi PO thay vì suy đoán. `doctor` cảnh báo nguồn quá 30 ngày chưa đối chiếu.
 
-Cùng thư mục có `corner-checklist.md`, danh sách corner case thường bị bỏ sót, viết riêng cho LMS, như lớp đã kết thúc, học viên bị Block, một người nhiều nhóm, dữ liệu cũ trước ngày bật tính năng, mail hàng loạt; AI quét nó ở 2.3 và 2.42. Thư mục con `templates/` chứa template PRD và User Guide theo chuẩn công ty.
-
-Kiến thức vai PO nằm trong `.claude/knowledge/product/`, chép từ AWS AI-DLC và không phụ thuộc sản phẩm. Muốn dùng quy trình cho một sản phẩm hay công ty khác, đọc [DOMAIN-SETUP.md](DOMAIN-SETUP.md) rồi chạy `/new-domain` trong một repo mới; engine giữ nguyên, chỉ thay domain pack.
-
-### Quy ước ký hiệu
+Ký hiệu chung trong artifact:
 
 | Ký hiệu | Nghĩa |
 |---|---|
-| `BR-COURSE-01` | Business rule có trong User Guide chính thức, độ tin cậy cao |
-| `KB-COURSE-01` | AI trích từ văn xuôi, chưa được duyệt, cần bạn xác nhận |
 | `❓PO` | Chưa rõ, không dùng làm căn cứ |
-| `[suy ra]` | AI suy luận, không phải câu chữ trực tiếp |
-| Hidden | Tính năng đã có code nhưng tạm ẩn, vẫn phải xét khi phân tích |
+| `[suy ra]` | AI suy luận ra; nguồn không nói trực tiếp |
+| `[Q3]`, `[DEC5]`, `[KB-04 §3]` | Thẻ nguồn: câu trả lời, quyết định, đoạn KB |
+| Hidden | Tính năng có code nhưng đang ẩn, vẫn phải xét khi phân tích ảnh hưởng |
 
-### Ba giới hạn cần nhớ
+Để đưa một sản phẩm khác vào quy trình, đọc [DOMAIN-SETUP.md](DOMAIN-SETUP.md), sau đó chạy `/new-domain` trong repo mới. Engine giữ nguyên, chỉ thay domain pack và `memory/project.md`.
 
-KB chỉ phủ khoảng một nửa hệ thống. Ops có 25 nhóm chức năng và LMS có 8 nhóm không có trong User Guide. Trước khi kết luận "vùng này không bị ảnh hưởng", xem `14-api-surface.md` mục 1 và 2.
-
-Rule `KB-*` chưa được duyệt. 110 rule loại này do AI trích ra, cần bạn xác nhận trước khi dùng làm ràng buộc trong PRD.
-
-KB là bản chụp, không phải bản gốc. Schema DB trên [Lark Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd), Swagger staging và GitBook là nguồn sống: yêu cầu ảnh hưởng tới dữ liệu thì AI tự đọc lại. 30 mail event và SIS là bản chốt, không còn file gốc, nên AI sẽ hỏi bạn thay vì tự suy. Nguồn sống nên kiểm lại mỗi tháng một lần: mở phiên mới và yêu cầu "đọc lại schema DB trên Lark, đối chiếu với KB 12".
-
-## 8. Xử lý vấn đề thường gặp
+## 12. Xử lý tình huống
 
 | Tình huống | Cách xử lý |
 |---|---|
-| AI chọn nhầm intent | Trả lời "sai intent, tôi muốn làm intent X"; AI chuyển ngay |
-| AI hỏi lại câu đã trả lời | Kiểm `decisions.md` và questions file, có thể câu trả lời chưa được ghi |
-| Không biết đang ở đâu | `/po-status` |
-| AI viết dài, sai trọng tâm | Nhắc trực tiếp. AI có xu hướng mở rộng phạm vi; kéo về trọng tâm |
-| Tài liệu dài, AI bắt đầu sót | Gõ `/compact` rồi gọi lại `/po`; state lưu trên đĩa nên không mất dữ liệu |
-| Reviewer báo NOT-READY nhưng bạn chấp nhận | Nói rõ finding nào chấp nhận, AI ghi Accepted risk vào `decisions.md` |
-| Lead chưa ký HLD Brief | Chờ, hoặc Accept as-is kèm lý do; lý do được ghi lại |
-| Lark không kết nối được | AI đề nghị bạn cấp quyền lại qua trình duyệt; đây là việc bình thường |
-| Không chụp được màn hình | Gõ `skip-screenshot`, AI để placeholder và liệt kê ảnh còn thiếu |
-| Muốn biết AI dựa vào đâu | Hỏi trực tiếp. Mọi artifact nội bộ có thẻ nguồn và mục nguồn đã đọc |
+| AI chọn nhầm intent | Báo intent đúng; AI chuyển ngay |
+| AI hỏi lại câu đã trả lời | Kiểm `decisions.md` và questions file; câu trả lời có thể chưa được ghi |
+| Không biết intent đang ở đâu | `/po-status` |
+| AI viết dài hoặc mở rộng phạm vi | Yêu cầu AI quay về phạm vi đã duyệt |
+| Phiên làm việc dài, AI bắt đầu bỏ sót | Nén phiên, sau đó gọi lại `/po`. Trạng thái và câu trả lời đã ghi vào file thì không mất; nén ngay sau một gate là an toàn nhất |
+| Xung đột git ở `state.md`, `decisions.md` hoặc `memory/` | Với `decisions.md`, giữ dòng của cả hai bên và đánh lại số DEC trùng; với `state.md`, lấy trạng thái mới hơn, sau đó chạy `/po-status`. Gỡ xung đột trong trình soạn thảo: hook chặn AI sửa dòng DEC cũ |
+| Script từ chối ghi duyệt vì không thấy lời PO | Trả lời lại câu hỏi duyệt. Vẫn bị từ chối thì chạy `po-tools.py doctor`, xem dòng Hook ghi lượt PO; hoặc tự chạy lệnh approve trong terminal |
+| Hook chặn AI sửa một file | Đọc lý do AI báo lại. Artifact đã duyệt thì chạy `/change-request`; quyết định đổi thì thêm dòng DEC mới |
+| Vô tình sửa tay artifact đã duyệt | `/po-status` báo lệch. Thay đổi có chủ đích thì chạy `/change-request`; nếu không, lấy lại bản trong `archive/` |
+| Chọn nhầm tại gate | Báo ngay; AI ghi một dòng đính chính và trình lại gate |
+| Reviewer báo NOT-READY nhưng PO chấp nhận | Nêu finding nào chấp nhận; AI ghi Accepted risk vào `decisions.md` |
+| PIC chưa viết file thiết kế hoặc chưa ký Decision Brief | Chờ tới hạn. Quá hạn mà thiếu file: PO quyết định viết Decision Brief với phần đã có, ghi DEC. Quá hạn mà thiếu chữ ký: PO chọn Accept as-is ngay tại gate, lý do ghi DEC |
+| Story không đạt điều kiện giao Dev | Chạy `po-tools.py dor`, xử lý theo lý do script in ra |
+| Lark báo hết hạn đăng nhập | Chạy `lark-cli auth login` |
+| Không chụp được màn hình | Gõ `skip-screenshot`; AI để trống vị trí ảnh và liệt kê ảnh còn thiếu |
 
-Khi AI trả lời "không chắc", đó là hành vi đúng. Workflow yêu cầu AI đánh dấu `❓PO` và open question thay vì đoán. Nhiều `❓PO` nghĩa là yêu cầu còn thiếu thông tin, không phải AI làm kém.
+Các hành vi sau đúng với thiết kế:
 
-## 9. Git và lead các team
+| Hiện tượng | Nguyên nhân |
+|---|---|
+| AI dừng, không sang stage sau | Đang chờ PO duyệt gate |
+| AI không tự ghi duyệt khi đã sửa thêm sau câu duyệt của PO | Lời duyệt phải đến sau lần sửa cuối; AI hỏi lại một câu |
+| AI hỏi nhiều câu `Chặn: có` | Thiếu thông tin làm đổi phạm vi, rule, dữ liệu hoặc luồng |
+| Artifact có nhiều `❓PO` | KB chưa phủ vùng đó và AI không được đoán |
+| AI không tự sửa theo finding của reviewer | PO quyết định sửa hoặc chấp nhận rủi ro |
 
-```bash
-git pull                      # lấy bản mới nhất trước khi làm
-git add .
-git commit -m "HLD Brief báo cáo giai đoạn 1, bản chờ ký"
-git push
-```
-
-Gặp xung đột khi pull thì hỏi AI; không tự sửa nếu chưa quen.
-
-### Lead Design, Dev, QA ghi vào HLD Brief
-
-Lead làm trực tiếp trên repo, không cần Claude Code; sửa trên GitHub web cũng được.
-
-1. Pull, mở `.claude/intents/<intent>/inception/hld-brief/hld-brief.md`.
-2. Chỉ sửa mục của mình: Design mục 8, Tech mục 9, QA mục 10, và dòng của mình ở mục 12 với một trong bốn trạng thái Chưa xem, Có ý kiến, Đồng ý, Yêu cầu sửa. Đầu mỗi mục có vài dòng in nghiêng AI gợi ý điểm cần lưu ý cho vai của bạn; trả lời chúng rồi điền khung bên dưới; ý không áp dụng ghi "không áp dụng" thay vì bỏ trống. Có ý kiến về mục khác thì ghi ở cuối mục của mình dưới tiêu đề "Ý kiến với mục N". Chọn Yêu cầu sửa thì ghi rõ cần sửa gì.
-3. Commit ngay, message `hld(<intent>): design direction`, `tech direction` hoặc `qa direction`, rồi push.
-
-Lead không mở được repo thì gửi nội dung cho PO. PO dán nguyên văn, mở đầu bằng "(ghi theo tên, ngày)", và lưu tin nhắn xác nhận vào `decisions.md`.
+Người mới nên chạy một intent profile S với một yêu cầu nhỏ có thật trước, thử Request Changes ở một gate, đọc lại `decisions.md` và `state.md`, sau đó mới chạy intent profile M có 2.43 với các PIC.

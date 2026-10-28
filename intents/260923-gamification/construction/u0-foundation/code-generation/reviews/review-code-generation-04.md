@@ -1,0 +1,24 @@
+# Review code-generation 04 (plan v1.2, re-review)
+
+Reviewer: aidlc-architecture-reviewer-agent · Stage 3.5 Part 1, Bolt B01 (U0) · Vòng 2 · Kiểm lại R-19…R-22 trên `code-generation-plan.md`, `unit-test-instructions.md`, lms-be `origin/feature/gamification` @9006b80 và ops-fe working tree.
+
+**Kết luận: NOT-READY**
+
+**Tình trạng finding review 03**
+
+| Mã | Mức trước | Giờ | Ghi chú đã kiểm |
+|---|---|---|---|
+| R-19 | Nên sửa | Chưa sửa đúng (xem R-24) | Có task BE-5b, bỏ Q1, thêm Q3, khôi phục U0-IC3, TC-12/13 và hai test cache; ref mới đều đúng dòng. Nhưng cách nối `CacheService` trong plan sẽ không hoạt động (R-24). |
+| R-20 | Nên sửa | Đã sửa | BE-9, BE-10, U0-IC4 (hai quyền), ED-01 (V, E, N), `unit-test-instructions` bước 5 đã bỏ role L; TC-27 chuyển sang B05; OPS-8 giữ nhánh L "kiểm ở B05". |
+| R-21 | Nên sửa | Đã sửa | OPS-3 đúng hiện trạng (`index.ts:5` `USE_MOCK = false`, `:41-49` PATCH, literal `700001` ở `:24`); OPS-1 bỏ `updated_at` (`gamification.ts:7`), thêm `running_campaign_count`; OPS-9b chạy lại `/fe:review`; OPS-9c giữ change cũ (đã có banner `[DEMO cũ]` trong `context.md`). |
+| R-22 | Ghi nhận | Đã sửa | Mục "TC của B01": chạy TC-1…TC-21 (TC-24 phần khối chung); hoãn TC-22…TC-30 kèm Bolt. |
+
+| Mã | Mức (Chặn/Nên sửa/Ghi nhận) | Vị trí | Vấn đề | Hành động |
+|---|---|---|---|---|
+| R-24 | Chặn | Plan BE-5b (cột File: `gamification-setting.module.ts:10-11`), Q3 | Cách nối cache không chạy được. `GamificationConfigService` được khai ở `GamificationConfigModule` (`libs/modules/src/lib/gamification/config/gamification-config.module.ts`: `providers: [GamificationConfigService]`, không có `imports`). Trong NestJS, `CacheService` phải thấy được ở chính module khai provider. `RedisCacheModule` không phải module global (chỉ `CACHE_MANAGER` global qua `CacheModule isGlobal`; `CacheService` được `exports` của `RedisCacheModule`, `redis-cache.module.ts:68`). Plan chỉ thêm `RedisCacheModule` vào `GamificationSettingModule` (ops, `gamification-setting.module.ts:10-11`) và đặt `CacheService` là `@Optional()`, nên `GamificationConfigService` nhận `undefined`, cache tắt im lặng, không lỗi build; TC-12 (key Redis) và TC-13 chỉ lộ ra khi kiểm trên staging. Ngoài ra việc xoá cache đặt ở `BaseGamificationSettingService.update()` cần `CacheService` ở base (hoặc truyền qua cả năm service con, mỗi cái gọi `super(configService, dataSource)`); plan không liệt kê các file này. | Sửa BE-5b: import `RedisCacheModule` ở `GamificationConfigModule` (hoặc dùng `ModuleRef.get(CacheService, { strict: false })` nếu muốn event-processor không cần Redis), và quyết định rõ cho event-processor (module này được `GamificationEngineModule` import, `app.module.ts` của event-processor). Chuyển việc xoá cache vào một hàm của `GamificationConfigService` (ví dụ `invalidateSettings()`) để base chỉ gọi service đã inject sẵn, tránh sửa năm constructor. Cập nhật Q3. |
+| R-25 | Nên sửa | Plan BE-5b, BE-8 | (a) Giá trị lấy từ Redis là JSON thường: các trường `Date` của `GamificationSetting` (`first_enabled_at`, `last_enabled_at`, và cột mới `visibility_first_enabled_at`) thành chuỗi ISO và mất kiểu entity; `getSetting()` trả kiểu `GamificationSetting` cho engine (B02: All time từ `first_enabled_at`, chuỗi bắt đầu từ `last_enabled_at`) nên cần bước dựng lại (ví dụ `settingRepo.create` + ép `Date`); plan không nêu và không có test. (b) BE-8 mô tả spec `gamification-general-setting.service.spec.ts` mock `GamificationConfigService`, nhưng hai test cache ("hit không gọi DB", "update xoá khoá sau commit") thuộc `GamificationConfigService`/`Base.update`, không kiểm được qua spec đó. | Thêm bước hydrate Date và test cho nó; tách hai test cache sang spec của `GamificationConfigService` (mock `CacheService`, `settingRepo`) hoặc đổi cách mô tả BE-8. |
+| R-26 | Ghi nhận | Plan BE-5, dòng "Không làm ở B01" | BE-5 vẫn ghi "Không cache (Q1)" trong khi Q1 đã bỏ và BE-5b thêm cache; mâu thuẫn trong cùng bảng. | Sửa câu của BE-5 trỏ tới BE-5b. |
+
+**Kiểm `file:line` mới của BE-5b (đã mở @9006b80):** `gamification-config.service.ts:40-48` (constructor), `:71-77` (`getSetting`), `base-gamification-setting.service.ts:54-67` (khối transaction và `return this.get()`), `gamification-setting.module.ts:10-11` (`imports`), `cache.service.ts:34,44,56` (`getCache`, `setCache`, `deleteCache`), `gamification.constants.ts:82-87` (`GAMIFICATION_REDIS_KEYS.CONFIG`): đều đúng dòng. Khoá thực tế `tenant:{id}:gamification:config:settings` khớp U0-IC3 và TC-12 (`buildTenantCacheKey`). Ops app đã import `RedisCacheModule` ở app (`app.module.ts:118`) nhưng điều đó không làm provider ở module khác thấy được `CacheService`.
+
+**Tóm tắt:** R-20, R-21, R-22 đã sửa đúng và R-19 được thêm đủ task, TC, khoá. Chặn còn lại là cách nối cache (R-24): import `RedisCacheModule` sai module và `@Optional()` khiến cache tắt im lặng. Sửa R-24, R-25 rồi duyệt lại.

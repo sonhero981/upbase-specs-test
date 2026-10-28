@@ -1,0 +1,43 @@
+{
+  "stage": "functional-design",
+  "unit": "u8-badges-config",
+  "note": "US9 có bảng AC UI/UX đầy đủ. USn-ACk = dòng k của bảng AC US9 (PRD v0.14, đếm từ 1). TC-301…322 phủ US9.",
+  "upstream_ids": [
+    "US9-AC1", "US9-AC2", "US9-AC3", "US9-AC4", "US9-AC5",
+    "US9-AC6", "US9-AC7", "US9-AC8", "US9-AC9", "US9-AC10",
+    "US9-AC11", "US9-AC12", "US9-AC13",
+    "US9-BR9.1", "US9-BR9.2", "US9-BR9.3", "US9-BR9.4",
+    "US9-BR9.5", "US9-BR9.6", "US9-BR9.7", "US9-BR9.8",
+    "US9-BR9.9", "US9-BR9.10", "US9-NFR"
+  ],
+  "coverage": [
+    { "id": "US9-AC1",   "prd": "Toggle Badges đầu màn",                 "status": "OK", "target": "BR-9.6, BR9.12, WF-2" },
+    { "id": "US9-AC2",   "prd": "Dòng giải thích dưới toggle Badges",    "status": "OK", "target": "BR-9.6, BR9.14, WF-3" },
+    { "id": "US9-AC3",   "prd": "Mô tả chức năng cố định",               "status": "OK", "target": "BR-9.6, WF-3" },
+    { "id": "US9-AC4",   "prd": "Bốn loại huy hiệu và tên",              "status": "OK", "target": "BR-9.1, WF-3" },
+    { "id": "US9-AC5",   "prd": "Toggle riêng từng loại",                "status": "OK", "target": "BR-9.5, BR9.12, WF-2" },
+    { "id": "US9-AC6",   "prd": "Dòng 'Awarded at' không dùng 'every'",  "status": "OK", "target": "BR9.14, TC-305, TC-306" },
+    { "id": "US9-AC7",   "prd": "Mốc chỉ đọc",                           "status": "OK", "target": "BR-9.2, TC-307" },
+    { "id": "US9-AC8",   "prd": "Tên mốc chỉnh được, về mặc định khi rỗng", "status": "OK", "target": "BR-9.3, BR-9.8, BR9.12" },
+    { "id": "US9-AC9",   "prd": "Hình từ kho hoặc tải lên, định dạng/kích thước", "status": "OK", "target": "BR9.13, WF-4, C-05" },
+    { "id": "US9-AC10",  "prd": "Mô tả không bắt buộc",                  "status": "OK", "target": "BR-9.3, TC-314" },
+    { "id": "US9-AC11",  "prd": "Loại tắt → mốc disabled",               "status": "OK", "target": "BR9.11, TC-315" },
+    { "id": "US9-AC12",  "prd": "Không tạo/xoá/thêm mốc",               "status": "OK", "target": "BR-9.7, TC-316" },
+    { "id": "US9-AC13",  "prd": "Tự lưu, không nút lưu",                 "status": "OK", "target": "BR9.12, TC-317, TC-318" },
+    { "id": "US9-BR9.1", "prd": "4 loại cố định",                        "status": "OK", "target": "BR-9.1" },
+    { "id": "US9-BR9.2", "prd": "Mốc không sửa",                         "status": "OK", "target": "BR-9.2" },
+    { "id": "US9-BR9.3", "prd": "Tên/hình/mô tả chỉnh được",             "status": "OK", "target": "BR-9.3" },
+    { "id": "US9-BR9.4", "prd": "Đổi nội dung áp ngay",                  "status": "OK", "target": "BR-9.4, TC-319" },
+    { "id": "US9-BR9.5", "prd": "Tắt loại → ẩn HV",                      "status": "OK", "target": "BR-9.5, TC-320" },
+    { "id": "US9-BR9.6", "prd": "Tắt Badges → khoá tiêu chí",            "status": "OK", "target": "BR-9.6, TC-302, TC-321" },
+    { "id": "US9-BR9.7", "prd": "Không tạo/xoá huy hiệu",               "status": "OK", "target": "BR-9.7" },
+    { "id": "US9-BR9.8", "prd": "Tên/hình luôn có giá trị",              "status": "OK", "target": "BR-9.8, TC-309, TC-313" },
+    { "id": "US9-BR9.9", "prd": "Bật → trao bù (BE)",                    "status": "OK", "target": "BR-9.9, TC-322" },
+    { "id": "US9-BR9.10","prd": "Đếm chỉ loại đang bật",                 "status": "N/A", "reason": "Tính ở LearnerGamificationApi (U5, B04), không phải U8" },
+    { "id": "US9-NFR",   "prd": "Cấu hình đọc nhiều, cần cache",          "status": "N/A", "reason": "GamificationConfig Redis cache (GamificationConfig component, 3.2 U8 NFR)" }
+  ],
+  "reverse": [
+    { "id": "BR-9.9",   "status": "N/A", "target": "BadgeBackfill (BE cuongdq); nghiệm thu qua TC-322, A-04" },
+    { "id": "BR-9.10",  "status": "N/A", "target": "LearnerGamificationApi U5 (B04); ảnh hưởng FE chỉ ở US1-AC6" }
+  ]
+}

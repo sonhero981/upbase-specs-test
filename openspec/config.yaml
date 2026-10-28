@@ -1,0 +1,29 @@
+schema: bolt
+
+context: |
+  Repo upbase-specs là nguồn tài liệu duy nhất của Upbase LMS: intent của PO (intents/<slug>/) + phần Tech
+  (stage AWS AI-DLC trong intent: inception/<stage>/, construction/<unit>/<stage>/; nghi thức engine/tech/protocol/tech-protocol.md) + store OpenSpec này.
+  Mỗi change ở đây là MỘT Bolt (schema bolt), mở ở stage 3.5 code-generation (Part 1) sau khi plan đã duyệt.
+  4 repo code (chi tiết engine/tech/knowledge/system-map.md) chỉ giữ change cùng tên với schema run: context, task, tiến độ.
+  Requirement gốc là artifact đã duyệt của intent (đọc theo origin/main); change lệch intent hoặc artifact thiết kế thì intent / artifact thắng.
+  Viết artifact bằng tiếng Việt, giữ nguyên tech term tiếng Anh.
+
+rules:
+  proposal:
+    - Chỉ tạo change khi tech-state.md của intent có 2.9 bolt-plan [x]; tên change <slug>-<bnn>-<tên-ngắn>.
+    - Trỏ đường dẫn tới construction/<unit>/ và contract-summary, không chép thiết kế.
+  specs:
+    - Mỗi US của Bolt thành 1 hoặc nhiều Requirement (một behavior mỗi Requirement, mô tả ≤ 500 ký tự); mỗi dòng AC là 1 Scenario WHEN/THEN; BR kiểm được thì thành Scenario, giữ mã BR; ghi TC-… liên quan.
+    - Chỗ chưa rõ ghi [NEEDS CLARIFICATION - nội dung câu hỏi], không tự đoán.
+  tasks:
+    - Nhóm theo repo, thứ tự package → be → fe; task thô, mỗi nhóm kết thúc bằng "PR <repo> merge"; nhóm cuối Demo.
+
+operations:
+  apply:
+    guidance:
+      - Change ở store không code trực tiếp; code ở repo dev bằng change cùng tên (schema run).
+      - Tick task thô ở đây khi PR của repo tương ứng đã merge.
+      - Không mở code khi contract trong inception/contract-design/contract-summary.md chưa Agreed (dòng "Approved by") hoặc change còn [NEEDS CLARIFICATION].
+  archive:
+    guidance:
+      - Archive change Bolt khi PR mọi repo đã merge và demo theo DoD xong; cập nhật bảng Bolts trong tech-state.md.

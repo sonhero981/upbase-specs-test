@@ -7,8 +7,8 @@ argument-hint: <tên sản phẩm> [tên công ty]
 Dựng phần khung của một domain pack. Phần cần người, như duyệt KB, viết corner checklist, chọn template công ty, vẫn là người làm; lệnh này chỉ tạo khung, hỏi đúng câu, và ghi đúng chỗ. Đọc `DOMAIN-SETUP.md` trước khi chạy.
 
 ## 0. Kiểm an toàn
-- `.claude/intents/` còn intent nào thì dừng: domain mới dựng ở repo mới, không đè lên repo đang có việc. Nói PO clone sang thư mục mới rồi chạy lại.
-- `.claude/knowledge/domain/domain.md` đang có thì hỏi PO: giữ `templates/` làm điểm xuất phát hay bỏ. Mọi thứ khác trong thư mục domain sẽ bị xoá; xác nhận rồi mới xoá.
+- `intents/` còn intent nào thì dừng: domain mới dựng ở repo mới, không đè lên repo đang có việc. Nói PO clone sang thư mục mới rồi chạy lại.
+- `domain/domain.md` đang có thì hỏi PO: giữ `templates/` làm điểm xuất phát hay bỏ. Mọi thứ khác trong thư mục domain sẽ bị xoá; xác nhận rồi mới xoá.
 
 ## 1. Hỏi PO, một lượt
 Hộp chọn hoặc chat, ghi nguyên văn:
@@ -24,17 +24,17 @@ Hộp chọn hoặc chat, ghi nguyên văn:
 10. Tên mục của template mà công ty cấm đổi
 
 ## 2. Dựng khung
-- Xoá `.claude/knowledge/domain/` trừ `templates/` nếu PO giữ; tạo lại thư mục
+- Xoá `domain/` trừ `templates/` nếu PO giữ; tạo lại thư mục
 - Viết `domain.md` theo sáu mục của `DOMAIN-SETUP.md` mục 5, điền từ câu trả lời; điểm chưa biết ghi `❓PO`, không tự điền. Mục 3 bản đồ KB liệt kê các file sẽ viết với tên và câu hỏi mỗi file trả lời, chưa có nội dung
 - Viết `00-index.md` khung: bảng nguồn từ câu 4 với cột đối chiếu lần cuối để trống, danh sách file KB dự kiến, mục Trạng thái tính năng trống, mục câu hỏi để sau trống
 - Tạo từng file KB trong bản đồ với frontmatter `status: chưa viết`, một dòng mô tả câu hỏi file sẽ trả lời
-- Chép `.claude/knowledge/product/corner-checklist-aws.md` thành `corner-checklist.md`, thêm đầu file dòng "Chưa viết lại cho <sản phẩm>, xem DOMAIN-SETUP.md mục 6"
+- Chép `engine/knowledge/corner-checklist-aws.md` thành `corner-checklist.md`, thêm đầu file dòng "Chưa viết lại cho <sản phẩm>, xem DOMAIN-SETUP.md mục 6"
 - `templates/prd.md`: từ câu 9 và 10; ghi danh sách tên mục bắt buộc giữ vào `domain.md` mục 4 phần 2.42
-- `.claude/memory/team.md` về bản trống: giữ đoạn mở đầu và các heading, xoá mọi dòng bài học, thêm dòng ghi ngày khởi tạo domain
-- `.claude/intents/` chỉ còn `.gitkeep`
+- `memory/team.md` về bản trống: giữ đoạn mở đầu và các heading, xoá mọi dòng bài học, thêm dòng ghi ngày khởi tạo domain
+- `intents/` chỉ còn `.gitkeep`
 
 ## 3. Dựng KB cùng PO
 Không tự làm cả KB trong một lượt. Theo `DOMAIN-SETUP.md` mục 4: hỏi PO bắt đầu từ nguồn nào, chắt lọc thành một file, trình PO duyệt, ghi ngày đối chiếu vào `00-index.md`, rồi sang file sau. Mã rule `BR-<MODULE>-NN` cho rule có trong tài liệu chính thức, `KB-<MODULE>-NN` cho rule AI trích. Vùng nguồn không phủ ghi vào `api-surface` mục vùng chưa phủ.
 
 ## 4. Kết thúc
-Trình PO: thư mục đã tạo, file nào còn `chưa viết`, câu nào trong `domain.md` còn `❓PO`, và ba việc kế tiếp: duyệt KB từng file, viết lại corner checklist, chạy thử một intent profile S. Chạy `python3 .claude/scripts/po-tools.py status` để chắc engine đọc được cây mới. Tự kiểm theo checklist cuối `DOMAIN-SETUP.md`.
+Trình PO: thư mục đã tạo, file nào còn `chưa viết`, câu nào trong `domain.md` còn `❓PO`, và ba việc kế tiếp: duyệt KB từng file, viết lại corner checklist, chạy thử một intent profile S. Chạy `python3 engine/scripts/po-tools.py status` để chắc engine đọc được cây mới. Tự kiểm theo checklist cuối `DOMAIN-SETUP.md`.

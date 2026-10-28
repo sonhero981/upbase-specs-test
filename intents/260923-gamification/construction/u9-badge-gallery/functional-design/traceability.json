@@ -1,0 +1,188 @@
+{
+  "intent": "260923-gamification",
+  "unit": "u9-badge-gallery",
+  "artifact": "traceability",
+  "stage": "3.1 functional-design",
+  "bolt": "B10",
+  "version": "1.0",
+  "status": "draft",
+  "author": "FE lead Nguyễn Hùng Sơn (tech lead tác giả)",
+
+  "upstream": {
+    "prd": {
+      "version": "v0.14",
+      "approved": "2026-10-12",
+      "user_stories": ["US4"]
+    },
+    "unit_of_work": {
+      "version": "v2.0",
+      "unit": "U9",
+      "slug": "u9-badge-gallery",
+      "us_covered": "US4",
+      "components": [
+        "LearnerGamificationApi",
+        "LmsGamificationFeature",
+        "LmsAppShellIntegration"
+      ],
+      "depends_on": ["U5 u5-learner-home", "U8 u8-badges-config"]
+    },
+    "contracts": {
+      "C-18": {
+        "title": "GET /lms/api/v1/gamification/me/badges",
+        "provider": "lms-be LearnerGamificationApi",
+        "consumer": "lms-fe LmsGamificationFeature (tab Badges)",
+        "status": "Agreed"
+      }
+    },
+    "dependency_functional_designs": {
+      "B09_u8_badges_config": {
+        "path": "intents/260923-gamification/construction/u8-badges-config/functional-design/entities.md",
+        "consumed_for": "Badge schema, BadgeType enum, milestone values, BR-9.x rules"
+      },
+      "B04_u5_learner_home": {
+        "path": "intents/260923-gamification/construction/u5-learner-home/functional-design/functional-spec.md",
+        "consumed_for": "Navigation entry point (ô Badges click → navigate), BR-1.7 definition, BR-1.8 visibility table, TC numbering context"
+      }
+    }
+  },
+
+  "prd_requirements": [
+    {
+      "id": "US4-AC-entry",
+      "text": "Một tab trong màn My Profile, cạnh My profile và Security. Vào từ ô {n} Badges trên màn Gamification.",
+      "covered_by": ["functional-spec.md WF-1", "rules.md BR4.16", "TC-501"]
+    },
+    {
+      "id": "US4-AC-header",
+      "text": "{Tên loại} ({đã đạt}/{tổng mốc}), ví dụ Check-in Badges (2/8).",
+      "covered_by": ["functional-spec.md WF-2 Sections", "rules.md BR4.13", "TC-503"]
+    },
+    {
+      "id": "US4-AC-image-earned",
+      "text": "Đã đạt hiện màu, chưa đạt hiện xám. Ảnh lấy theo cấu hình ở US9. Ảnh gốc bị xoá thì rơi về ảnh mặc định.",
+      "covered_by": ["rules.md BR-4.2", "rules.md BR-1.7", "TC-504", "TC-505", "TC-512"]
+    },
+    {
+      "id": "US4-AC-name",
+      "text": "Hiện dưới hình, với cả huy hiệu chưa đạt. Không giấu tên.",
+      "covered_by": ["rules.md BR4.15", "TC-506"]
+    },
+    {
+      "id": "US4-AC-hover",
+      "text": "Khung huy hiệu nổi lên, hiện mốc dưới tên, dạng {mốc} {đơn vị}. Huy hiệu có mô tả thì hiện thêm mô tả.",
+      "covered_by": ["functional-spec.md WF-3", "rules.md BR4.14", "TC-507", "TC-508", "TC-509"]
+    },
+    {
+      "id": "US4-AC-no-date",
+      "text": "Không hiện ngày đạt ở đây.",
+      "covered_by": ["rules.md BR-4.2", "functional-spec.md Phạm vi"]
+    },
+    {
+      "id": "US4-AC-order",
+      "text": "Nhóm theo loại, trong mỗi loại sắp theo mốc tăng dần.",
+      "covered_by": ["entities.md BadgeItem", "functional-spec.md WF-2", "TC-510"]
+    },
+    {
+      "id": "US4-AC-type-disabled",
+      "text": "Không hiện cả nhóm khi loại đang tắt.",
+      "covered_by": ["rules.md BR-4.4", "TC-513"]
+    },
+    {
+      "id": "US4-AC-badges-off",
+      "text": "Tab Badges biến mất khỏi My Profile khi chức năng Badges tắt.",
+      "covered_by": ["rules.md BR-4.4", "TC-514"]
+    },
+    {
+      "id": "US4-AC-zero-earned",
+      "text": "Vẫn hiện đủ tám mốc, tất cả màu xám, bộ đếm (0/8).",
+      "covered_by": ["rules.md BR-4.1", "TC-511"]
+    },
+    {
+      "id": "BR-4.1",
+      "covered_by": ["rules.md BR-4.1", "TC-502"]
+    },
+    {
+      "id": "BR-4.2",
+      "covered_by": ["rules.md BR-4.2", "TC-504", "TC-505"]
+    },
+    {
+      "id": "BR-4.4",
+      "covered_by": ["rules.md BR-4.4", "TC-513", "TC-514"]
+    },
+    {
+      "id": "BR-4.5",
+      "covered_by": ["rules.md BR-4.5", "TC-515"]
+    },
+    {
+      "id": "BR-4.6",
+      "covered_by": ["rules.md BR-4.6", "TC-516"]
+    },
+    {
+      "id": "BR-4.7",
+      "covered_by": ["rules.md BR-4.7"]
+    },
+    {
+      "id": "BR-1.7",
+      "covered_by": ["rules.md BR-1.7", "functional-spec.md WF-4", "TC-512"]
+    }
+  ],
+
+  "test_cases": {
+    "range": "TC-501 to TC-519",
+    "rationale": "B10 = U9, dãy 5xx bắt đầu TC-501",
+    "items": [
+      {"id": "TC-501", "summary": "Click ô Badges trên GamificationPage → navigate My Profile tab Badges"},
+      {"id": "TC-502", "summary": "Tab Badges load thành công → hiện 4 section loại đúng badge"},
+      {"id": "TC-503", "summary": "Header section format '{Type} Badges ({earned_count}/{total})'"},
+      {"id": "TC-504", "summary": "is_earned = true → hình màu, opacity 100%"},
+      {"id": "TC-505", "summary": "is_earned = false → hình grayscale + opacity thấp"},
+      {"id": "TC-506", "summary": "Tên badge hiện dưới hình cho cả earned và locked"},
+      {"id": "TC-507", "summary": "Hover badge earned → tooltip {milestone} {unit}"},
+      {"id": "TC-508", "summary": "Hover badge locked → tooltip {milestone} {unit}"},
+      {"id": "TC-509", "summary": "Badge có description → tooltip hiện thêm mô tả"},
+      {"id": "TC-510", "summary": "Thứ tự badge trong loại: milestone tăng dần"},
+      {"id": "TC-511", "summary": "Loại chưa đạt huy hiệu nào → 8 mốc xám, header (0/8)"},
+      {"id": "TC-512", "summary": "Ảnh badge 404 → fallback ảnh mặc định, badge vẫn render"},
+      {"id": "TC-513", "summary": "Loại huy hiệu tắt → section của loại đó không hiện"},
+      {"id": "TC-514", "summary": "Badges tổng tắt → tab Badges biến mất"},
+      {"id": "TC-515", "summary": "Test Account → tab Badges không hiện"},
+      {"id": "TC-516", "summary": "Không có thao tác write nào trên tab"},
+      {"id": "TC-517", "summary": "Loading state: skeleton grid khi fetch C-18"},
+      {"id": "TC-518", "summary": "Network error: inline error + nút Retry"},
+      {"id": "TC-519", "summary": "Retry sau network error → re-fetch và render bình thường"}
+    ]
+  },
+
+  "rules_summary": {
+    "prd_rules_applied": ["BR-4.1", "BR-4.2", "BR-4.4", "BR-4.5", "BR-4.6", "BR-4.7", "BR-1.7"],
+    "fe_technical_rules": ["BR4.11", "BR4.12", "BR4.13", "BR4.14", "BR4.15", "BR4.16"],
+    "referenced_from_dependencies": ["BR-9.2", "BR-9.4", "BR-9.5", "BR-9.6", "BR-9.7", "BR-9.8", "BR-1.8"]
+  },
+
+  "open_questions": [
+    {
+      "id": "OQ-B10-1",
+      "question": "Route/state chính xác để navigate từ GamificationPage sang My Profile + active tab Badges?",
+      "ask": "Tech lead",
+      "blocks": "code-gen"
+    },
+    {
+      "id": "OQ-B10-2",
+      "question": "Mobile hover tooltip UX: tap-to-reveal, longpress, hay tự động?",
+      "ask": "Designer / PO",
+      "blocks": "mobile UX"
+    },
+    {
+      "id": "OQ-B10-3",
+      "question": "DEFAULT_BADGE_IMAGE path/URL cụ thể trong lms-fe là gì?",
+      "ask": "Tech lead",
+      "blocks": "code-gen"
+    },
+    {
+      "id": "OQ-B10-4",
+      "question": "Grid 5 cột collapse mobile: 2 cột hay scroll horizontal?",
+      "ask": "Designer",
+      "blocks": "CSS layout"
+    }
+  ]
+}

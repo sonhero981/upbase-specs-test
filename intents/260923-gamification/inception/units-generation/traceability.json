@@ -1,0 +1,136 @@
+{
+  "stage": "units-generation",
+  "note": "Khoá theo US của phạm vi đợt (intent v1, không có stories.md). Target = Unit ID có trong story map.",
+  "upstream_ids": [
+    "US1",
+    "US2",
+    "US3",
+    "US4",
+    "US5",
+    "US6",
+    "US7",
+    "US8",
+    "US9",
+    "US10",
+    "US11",
+    "US12",
+    "US13",
+    "US14",
+    "US15",
+    "US19",
+    "US20",
+    "US21",
+    "US22"
+  ],
+  "coverage": [
+    {
+      "id": "US1",
+      "status": "OK",
+      "target": "U5"
+    },
+    {
+      "id": "US2",
+      "status": "OK",
+      "target": "U6"
+    },
+    {
+      "id": "US3",
+      "status": "OK",
+      "target": "U7"
+    },
+    {
+      "id": "US4",
+      "status": "OK",
+      "target": "U9"
+    },
+    {
+      "id": "US5",
+      "status": "OK",
+      "target": "U2"
+    },
+    {
+      "id": "US6",
+      "status": "OK",
+      "target": "U11"
+    },
+    {
+      "id": "US7",
+      "status": "OK",
+      "target": "U12"
+    },
+    {
+      "id": "US8",
+      "status": "OK",
+      "target": "U3"
+    },
+    {
+      "id": "US9",
+      "status": "OK",
+      "target": "U8"
+    },
+    {
+      "id": "US10",
+      "status": "OK",
+      "target": "U10"
+    },
+    {
+      "id": "US11",
+      "status": "OK",
+      "target": "U13"
+    },
+    {
+      "id": "US12",
+      "status": "OK",
+      "target": "U14"
+    },
+    {
+      "id": "US13",
+      "status": "OK",
+      "target": "U1"
+    },
+    {
+      "id": "US14",
+      "status": "OK",
+      "target": "U0"
+    },
+    {
+      "id": "US15",
+      "status": "OK",
+      "target": "U0"
+    },
+    {
+      "id": "US19",
+      "status": "OK",
+      "target": "U16"
+    },
+    {
+      "id": "US20",
+      "status": "OK",
+      "target": "U15"
+    },
+    {
+      "id": "US21",
+      "status": "OK",
+      "target": "U17"
+    },
+    {
+      "id": "US22",
+      "status": "OK",
+      "target": "U4"
+    }
+  ],
+  "excluded": [
+    {
+      "id": "US16",
+      "reason": "PRD: chưa làm"
+    },
+    {
+      "id": "US17",
+      "reason": "PRD: chưa làm"
+    },
+    {
+      "id": "US18",
+      "reason": "PRD: chưa làm"
+    }
+  ]
+}
