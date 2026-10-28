@@ -1,17 +1,17 @@
 ---
 intent: 261005-group
 artifact: requirements
-version: 0.5
+version: 0.6
 status: approved
 approved: 2026-10-09 (v0.3); 2026-10-05 (v0.2)
-cr: CR7 ngày 2026-10-25, thêm RC-25 đến RC-30; CR6 ngày 2026-10-21, sửa RC-01, thêm RC-21 đến RC-24; CR1 ngày 2026-10-09, thêm RC-20
+cr: CR8 ngày 2026-10-26, ghi chú RC-11 và RC-24; CR7 ngày 2026-10-25, thêm RC-25 đến RC-30; CR6 ngày 2026-10-21, sửa RC-01, thêm RC-21 đến RC-24; CR1 ngày 2026-10-09, thêm RC-20
 ids: RC-01 đến RC-19 theo họ mã v1, không đổi
 migrated-from: pre-aidlc:.claude/projects/Group/working/ai-drafts/clarified-requirements-20261005.md
-approved_at: 2026-10-25T14:24
+approved_at: 2026-10-26T15:42
 ---
 # Làm rõ yêu cầu — Group
 
-**Ngày:** 05/10/2026 · **Phiên bản:** v0.5 — cập nhật 25/10/2026 theo CR7: thêm `RC-25` đến `RC-28` từ file thiết kế của các team, `RC-29` và `RC-30` để `US19`, `US20` truy về yêu cầu. v0.4 ngày 21/10/2026 theo CR6: `RC-01` bỏ giới hạn số cấp, thêm `RC-21` đến `RC-24`. v0.3 ngày 09/10/2026 theo CR1, thêm `RC-20`. v0.2 ngày 05/10 sau khi PO trả lời 5 câu hỏi chặn
+**Ngày:** 05/10/2026 · **Phiên bản:** v0.6 — cập nhật 26/10/2026 theo CR8: báo cáo tại mốc quá khứ để sau. v0.5 ngày 25/10/2026 theo CR7: thêm `RC-25` đến `RC-28` từ file thiết kế của các team, `RC-29` và `RC-30` để `US19`, `US20` truy về yêu cầu. v0.4 ngày 21/10/2026 theo CR6: `RC-01` bỏ giới hạn số cấp, thêm `RC-21` đến `RC-24`. v0.3 ngày 09/10/2026 theo CR1, thêm `RC-20`. v0.2 ngày 05/10 sau khi PO trả lời 5 câu hỏi chặn
 **Input:** `working/raw-inputs/yeu-cau-goc-20261005.md` — 19 hạng mục, hai nhóm `Group` và `User Group Relationship`
 **Mục đích PO nêu:** tổ chức các nhóm học tập, để gán, theo dõi và đánh giá theo từng nhóm
 
@@ -92,7 +92,7 @@ Chi tiết: `working/ai-drafts/nghien-cuu-lms-khac-20261005.md`
 | `RC-08` | Gán nội dung cho nhóm, có tuỳ chọn chảy xuống nhánh con, mặc định tắt | Functional | Mục 8 | High | Gán cho nhóm là **luật đứng**, không phải sao chép một lần. Vẫn đi qua Lớp để sinh lượt ghi danh |
 | `RC-09` | Cấu hình từng nhóm: người vào sau có tự nhận nội dung đã gán không, toàn bộ hay chỉ còn hiệu lực | Business Rule | Mục 9 | Medium | Chạm logic ghi danh hiện có |
 | `RC-10` | Danh sách nhóm dạng cây hoặc bảng, lọc theo nguồn, cấp, trạng thái, người quản lý | Screen | Mục 10 | High | |
-| `RC-11` | Nhật ký thay đổi thành viên, đủ để dựng lại ai thuộc nhóm nào tại một thời điểm quá khứ | Data · NFR | Mục 11 | High | Yêu cầu lưu lịch sử có dấu thời gian, giống ràng buộc `C3` ở Gamification |
+| `RC-11` | Nhật ký thay đổi thành viên, đủ để dựng lại ai thuộc nhóm nào tại một thời điểm quá khứ | Data · NFR | Mục 11 | High | Yêu cầu lưu lịch sử có dấu thời gian, giống ràng buộc `C3` ở Gamification. CR8: phần dựng lại ai thuộc nhóm nào vẫn làm qua nhật ký; báo cáo tại mốc quá khứ để sau [DEC135] |
 | `RC-12` | Lưu trữ nhóm: ngừng nhận nội dung mới, giữ lịch sử. Xoá nhóm: xử lý thành viên và nội dung đã gán | Business Rule | Mục 12 | Medium | *"Xử lý"* chưa định nghĩa — xem `OQ-07` |
 | `RC-13` | Một nhóm có một hoặc nhiều người quản lý, là người dùng chứ không phải vai trò | Data | Mục 13 | High | |
 | `RC-14` | Quản lý suy ra theo cây: không chỉ định đích danh thì lấy quản lý của nhóm cha gần nhất. Tính động | Business Rule | Mục 14 | High | Quan hệ tính lúc đọc, không lưu cứng |
@@ -105,7 +105,7 @@ Chi tiết: `working/ai-drafts/nghien-cuu-lms-khac-20261005.md`
 | `RC-21` | Trong một nhóm, một người được đồng thời là quản lý, mentor và thành viên, bằng một tài khoản học viên. Tài khoản học viên được gán quản lý hoặc mentor đăng nhập UpLMS Ops và chỉ thấy các màn của vai đó [DEC101] | Role-Permission · Data | CR6 · DEC101 | High | Quản lý cũng phải học. Thay một phần `CF-2`: quản lý, mentor không còn bắt buộc là tài khoản nhân sự vận hành |
 | `RC-22` | Thông báo gửi quản lý của một người không gửi cho chính người đó; không còn ai thì gửi quản lý của nhóm cha gần nhất, hết cây thì quản trị viên [DEC102] | Business Rule · Notification | CR6 · DEC102 | High | Áp cho mọi thông báo gửi quản lý, hiện là `MAIL-GRP-01` |
 | `RC-23` | Người vừa là mentor vừa là thành viên của cùng một lớp được tự chấm bài của mình [DEC103] | Business Rule | CR6 · DEC103 | Medium | Tạm thời, rủi ro chấp nhận. Chạm module Chấm điểm |
-| `RC-24` | Báo cáo theo nhóm đặt ở tab Báo cáo của chi tiết nhóm, ba danh sách: theo thành viên, theo nhóm con, theo khoá; chọn được mốc quá khứ, mặc định hiện tại [DEC104] | Screen · Reporting | CR6 · DEC104 · `BA-05a` | High | Thay phần đặt trong dashboard của `CF-1`; dashboard để sau |
+| `RC-24` | Báo cáo theo nhóm đặt ở tab Báo cáo của chi tiết nhóm, ba danh sách: theo thành viên, theo nhóm con, theo khoá; chọn được mốc quá khứ, mặc định hiện tại [DEC104] | Screen · Reporting | CR6 · DEC104 · `BA-05a` | High | Thay phần đặt trong dashboard của `CF-1`; dashboard để sau. CR8: đợt này chỉ ở thời điểm hiện tại, mốc quá khứ để sau [DEC135] |
 | `RC-25` | Khi tạo hoặc sửa thông báo trên UpLMS Ops, chọn được nhóm mới làm người nhận; người nhận gồm thành viên của nhóm và mọi nhóm con, không gồm tài khoản kiểm thử và tài khoản đã khoá [DEC116] | Functional · Notification | CR7 · DEC4 · DEC116 · `be-technical-design.md` đầu việc 17 | High | Nhóm cũ của thông báo bỏ hẳn; API thông báo đổi phá tương thích |
 | `RC-26` | Bỏ hẳn phòng ban và đơn vị kinh doanh của nhân sự vận hành cùng dữ liệu; module Staff không còn hai khái niệm này [DEC116] | Data · Transition | CR7 · DEC5 · DEC116 · `be-technical-design.md` đầu việc 1, 3 | High | API nhân sự, vị trí, cơ sở và tệp nhập nhân sự đổi phá tương thích; FE đổi cùng đợt |
 | `RC-27` | Đồng bộ cơ cấu chạy theo sự kiện thay đổi phòng ban và người trên hệ thống nhân sự, cộng một lần đồng bộ toàn bộ tự chạy mỗi đêm để sửa chênh lệch [DEC117] | NFR · Integration | CR7 · DEC117 · `be-technical-design.md` đầu việc 16 | High | Thay "đồng bộ theo lô" của `BR-5.9` |

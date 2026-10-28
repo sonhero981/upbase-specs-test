@@ -4,7 +4,7 @@ artifact: requirements
 version: 0.1
 status: draft
 note: Bản làm rõ v1 ngày 2026-10-06, 24 requirement ứng viên, chờ PO trả lời 12 câu chặn
-migrated-from: .claude/projects/Report-Phase-1/working/ai-drafts/clarified-requirements-20261006.md
+migrated-from: pre-aidlc:.claude/projects/Report-Phase-1/working/ai-drafts/clarified-requirements-20261006.md
 ---
 # Làm rõ yêu cầu — Report Phase 1
 

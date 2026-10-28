@@ -1,9 +1,9 @@
 ---
 intent: 261005-group
 artifact: traceability
-version: 0.4
-date: 2026-10-25
-note: Bảng RC làm tay ở gate 2.4 ngày 12/10/2026, vì intent dùng họ mã v1 (RC thay FR). Bảng BR sang AC lấy từ po-tools.py trace ngày 20/10/2026, CR3; cập nhật ngày 21/10/2026 theo CR6 và ngày 25/10/2026 theo CR7
+version: 0.5
+date: 2026-10-26
+note: Bảng RC làm tay ở gate 2.4 ngày 12/10/2026, vì intent dùng họ mã v1 (RC thay FR). Bảng BR sang AC lấy từ po-tools.py trace ngày 20/10/2026, CR3; cập nhật ngày 21/10/2026 theo CR6, ngày 25/10/2026 theo CR7 và ngày 26/10/2026 theo CR8
 ---
 # Traceability: Nhóm học viên (Group)
 
@@ -24,7 +24,7 @@ Intent này dùng mã `RC` của bản làm rõ yêu cầu thay cho `FR`.
 | `RC-08` gán nội dung, chảy xuống nhánh con, mặc định tắt | `US7` | OK | |
 | `RC-09` người vào sau tự nhận nội dung, toàn bộ hay chỉ còn hiệu lực | `US8` | OK | `BR-8.3` chọn ghi danh luôn người đang thiếu hay chỉ từ giờ |
 | `RC-10` danh sách cây hoặc bảng, bộ lọc | `US6` | OK | |
-| `RC-11` nhật ký dựng lại được quá khứ | `US15` · `US18` | OK | Nhật ký `US15`; báo cáo theo mốc `BR-18.1` |
+| `RC-11` nhật ký dựng lại được quá khứ | `US15` · `US22` | OK, một phần Deferred | Nhật ký `US15` làm đợt này; báo cáo theo mốc `BR-22.1` thuộc `US22`, để sau (CR8) |
 | `RC-12` lưu trữ, xoá nhóm | `US14` | OK | Xoá chỉ với nhóm chưa có lịch sử, `BR-14.1` |
 | `RC-13` một hoặc nhiều quản lý, là người dùng | `US9` | OK | |
 | `RC-14` quản lý suy ra theo cây, tính động | `US10` | OK | |
@@ -67,7 +67,8 @@ Không có GAP: 29 trên 30 RC có US; `RC-26` là N/A, nằm ở mục 8 của 
 | `US15` | `RC-11` | OK |
 | `US16` | `RC-07` · `RC-16` · `RC-21` · `RC-28` | OK |
 | `US17` | `RC-17` · `RC-28` | OK |
-| `US18` | `RC-07` · `RC-11` một phần · `RC-24` | OK |
+| `US18` | `RC-07` · `RC-24` | OK |
+| `US22` | `RC-11` | Deferred, để sau (CR8) |
 | `US19` | `RC-29` | OK |
 | `US20` | `RC-22` · `RC-30` | OK |
 | `US21` | `RC-25` | OK |
@@ -75,7 +76,7 @@ Không có GAP: 29 trên 30 RC có US; `RC-26` là N/A, nằm ở mục 8 của 
 Từ CR7, mọi US truy về ít nhất một RC.
 
 ## BR sang US
-Mã business rule mang số US (`BR-<US>.<n>`), nên gắn vào US theo mã. Kiểm bằng máy ngày 25/10/2026 sau CR7: 153 BR định nghĩa trong 21 US, mọi mã trỏ tới US có thật, không BR nào được nhắc mà không định nghĩa.
+Mã business rule mang số US (`BR-<US>.<n>`), nên gắn vào US theo mã. Kiểm bằng máy ngày 25/10/2026 sau CR8: 153 BR định nghĩa trong 22 US, mọi mã trỏ tới US có thật, không BR nào được nhắc mà không định nghĩa.
 
 ## BR sang AC
 CR3 ngày 20/10/2026 thêm 104 tiêu chí chấp nhận cho 20 user story; sau CR7 ngày 25/10/2026 có 116 tiêu chí cho 21 user story. Mỗi business rule có ít nhất một tiêu chí kiểm nó. Các tiêu chí không gắn business rule kiểm validate của bảng giao diện hoặc nội dung email, ví dụ `AC1.3` · `AC6.5` · `AC20.4`.
@@ -204,13 +205,10 @@ CR3 ngày 20/10/2026 thêm 104 tiêu chí chấp nhận cho 20 user story; sau C
 | `BR-17.3` | `AC17.1` | OK |
 | `BR-17.4` | `AC17.3` | OK |
 | `BR-17.5` | `AC17.5` | OK |
-| `BR-18.1` | `AC18.3` | OK |
-| `BR-18.2` | `AC18.3` | OK |
 | `BR-18.3` | `AC18.2` | OK |
 | `BR-18.4` | `AC18.4` | OK |
 | `BR-18.5` | `AC18.4` | OK |
 | `BR-18.6` | `AC18.5` | OK |
-| `BR-18.7` | `AC18.6` | OK |
 | `BR-18.8` | `AC18.1` | OK |
 | `BR-18.9` | `AC18.4` | OK |
 | `BR-19.1` | `AC19.1` | OK |
@@ -235,6 +233,9 @@ CR3 ngày 20/10/2026 thêm 104 tiêu chí chấp nhận cho 20 user story; sau C
 | `BR-21.4` | `AC21.1` | OK |
 | `BR-21.5` | `AC21.1` | OK |
 | `BR-21.6` | `AC21.3` | OK |
+| `BR-22.1` | `AC22.1` | OK |
+| `BR-22.2` | `AC22.1` | OK |
+| `BR-22.3` | `AC22.2` | OK |
 
 ## Kết luận
-Đạt. 0 GAP, 0 ORPHAN ở cả lớp RC sang US và lớp BR sang AC (153 BR, 116 AC, kiểm lại ngày 25/10/2026 sau CR7 và review lần 06). `RC-26` là N/A vì là việc chuyển đổi dữ liệu, nằm ở PRD mục 8. Mọi US truy về ít nhất một RC. Ngày kiểm: 25/10/2026.
+Đạt. 0 GAP, 0 ORPHAN ở cả lớp RC sang US và lớp BR sang AC (153 BR, 116 AC, kiểm lại ngày 26/10/2026 sau CR8). `RC-26` là N/A vì là việc chuyển đổi dữ liệu, nằm ở PRD mục 8. `US22` là Deferred, để sau theo DEC135. Mọi US truy về ít nhất một RC. Ngày kiểm: 26/10/2026.

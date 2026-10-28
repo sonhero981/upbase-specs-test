@@ -1,5 +1,7 @@
 # Open Questions — Report Phase 1
 
+Intent: 261006-report-phase-1 · Cách trả lời: chưa chọn · Đã trả lời: 0/16 · Chuyển từ định dạng luồng v1 ngày 2026-10-19; mã cũ OQ-NN giữ trong tiêu đề từng câu
+
 **Ngày:** 06/10/2026
 **Nguồn:** `working/ai-drafts/clarified-requirements-20261006.md`
 
@@ -28,7 +30,7 @@ Mỗi câu có sẵn lựa chọn và đề xuất. Đồng ý với đề xuấ
 
 Chi tiết từng câu, kèm lựa chọn và đề xuất:
 
-### `OQ-01` — Phase 1 gồm những gì, và "báo cáo" khác "dashboard" ở đâu
+## Q1. [PO] OQ-01 · Phase 1 gồm những gì, và "báo cáo" khác "dashboard" ở đâu
 
 **Câu hỏi.**
 1. Bảng bốn chiều là **toàn bộ** Phase 1, hay là bức tranh chung để từ đó cắt ra Phase 1?
@@ -45,11 +47,10 @@ Chi tiết từng câu, kèm lựa chọn và đề xuất:
 
 **Đề xuất.** Phase 1 làm dashboard **trạng thái hiện tại** kèm lối bấm sang danh sách. Cắt theo phụ thuộc như `clarified-requirements` §8: khoá học, lớp học, người học trước; chiều nhóm/quản lý đi cùng hoặc ngay sau Group. Bốn thứ a b c d để phase sau, trừ khi đang có người cần ngay — nếu có thì cho biết ai cần cái nào.
 
-**Blocks:** Yes
+Chặn: có
+[Answer]:
 
----
-
-### `OQ-02` — Chiều nhóm/quản lý xử lý thế nào với dự án Group
+## Q2. [PO] OQ-02 · Chiều nhóm/quản lý xử lý thế nào với dự án Group
 
 **Câu hỏi.** Group `US16` *(quản lý xem danh sách người mình phụ trách)* và `US18` *(báo cáo cộng dồn theo nhóm)* đã duyệt ngày 06/10. Chọn một:
 
@@ -63,11 +64,10 @@ Chi tiết từng câu, kèm lựa chọn và đề xuất:
 
 **Đề xuất: b.** Chiều nhóm của Report vốn phải chờ Group xây xong nhóm và quan hệ quản lý mới chạy được, nên làm sau Group là tự nhiên. Không phải mở lại một PRD vừa duyệt. Bảng so sánh đầy đủ: `clarified-requirements` §4.1.
 
-**Blocks:** Yes
+Chặn: có
+[Answer]:
 
----
-
-### `OQ-03` — Kỹ năng và năng lực lấy từ đâu
+## Q3. [PO] OQ-03 · Kỹ năng và năng lực lấy từ đâu
 
 **Câu hỏi.** *"Kỹ năng vừa đạt và còn thiếu"* và *"nhóm thiếu năng lực nào nhiều nhất"* cần biết ba thứ: năng lực là gì, thế nào là đạt, **thiếu so với cái gì**. Hệ thống chưa có khung năng lực. Chọn một:
 
@@ -82,11 +82,10 @@ Chi tiết từng câu, kèm lựa chọn và đề xuất:
 
 **Đề xuất: d.** Nếu muốn có tín hiệu ngay ở Phase 1 thì chọn b, nhưng trên giao diện gọi là *"kết quả theo chủ đề"*, không gọi là *"năng lực"*.
 
-**Blocks:** Yes
+Chặn: có
+[Answer]:
 
----
-
-### `OQ-04` — "Điểm và hạng" là của Gamification hay là điểm học tập
+## Q4. [PO] OQ-04 · "Điểm và hạng" là của Gamification hay là điểm học tập
 
 **Câu hỏi.** Chọn một:
 
@@ -95,11 +94,10 @@ Chi tiết từng câu, kèm lựa chọn và đề xuất:
 | a | **Điểm và hạng của Gamification** | Dùng lại khối điểm và hạng mà Gamification `US1` *(Trang Thành tích của tôi)* đã đặt trên My Learning. Khối ẩn khi tắt công tắc `Gamification` hoặc `Visibility in UpLMS` *(Gamification `BR-1.1`)* |
 | b | **Điểm học tập** *(điểm khoá, điểm bài Test)* và **thứ hạng trong lớp** | Khái niệm mới. Thêm một quyết định: học viên có thấy thứ hạng của người khác không |
 
-**Blocks:** Yes
+Chặn: có
+[Answer]:
 
----
-
-### `OQ-05` — "Việc cần làm hôm nay" lấy từ đâu
+## Q5. [PO] OQ-05 · "Việc cần làm hôm nay" lấy từ đâu
 
 **Câu hỏi.** Hệ thống **không có hạn theo từng Activity**. Hạn chỉ có ở cấp khoá *(thời hạn lượt ghi danh)* và ở bài kiểm tra có cửa sổ mở/đóng *(`KB-MAIL-07`)*. Nên nếu *"việc hôm nay"* chỉ gồm thứ đến hạn hôm nay, **phần lớn ngày danh sách sẽ trống**. Chọn một:
 
@@ -114,11 +112,10 @@ Và một câu phụ: **khoá linh động chưa Activate** có hiện thành vi
 
 **Đề xuất: b.** Cách a trống phần lớn ngày. Cách b dùng chung phép tính nhịp với định nghĩa *"chậm"* ở `OQ-06`, nên định nghĩa một lần, dùng hai chỗ. Câu phụ thì PO quyết.
 
-**Blocks:** Yes
+Chặn: có
+[Answer]:
 
----
-
-### `OQ-06` — Trạng thái học của một lượt ghi danh
+## Q6. [PO] OQ-06 · Trạng thái học của một lượt ghi danh
 
 **Câu hỏi.** Báo cáo cần ba chữ *chưa bắt đầu*, *chậm*, *quá hạn*. Group cũng dùng *quá hạn* và *chưa bắt đầu* ở `US16` · `US18`, nhưng **không định nghĩa ở đâu**. Đề xuất định nghĩa một lần ở đây, Group dùng lại:
 
@@ -143,11 +140,10 @@ Còn một cách định nghĩa *chậm* khác: **không học hoạt động n�
 
 **Đề xuất:** bảng trên. Chốt xong nên ghi vào KB để mọi dự án sau dùng chung — việc này cần PO đồng ý.
 
-**Blocks:** Yes
+Chặn: có
+[Answer]:
 
----
-
-### `OQ-07` — "Lớp có vấn đề" gồm dấu hiệu nào
+## Q7. [PO] OQ-07 · "Lớp có vấn đề" gồm dấu hiệu nào
 
 **Câu hỏi.** Chọn các dấu hiệu:
 
@@ -163,11 +159,10 @@ Còn một cách định nghĩa *chậm* khác: **không học hoạt động n�
 
 **Đề xuất:** dấu hiệu **1 đến 5** cho Phase 1 — dữ liệu đã có và mỗi dấu hiệu chỉ rõ ai phải xử lý. Dấu hiệu 6 và 7 chờ `OQ-10`. Mỗi lớp trong danh sách hiện **dấu hiệu nào đã bật**, không chỉ một nhãn *"có vấn đề"*. Ngưỡng mặc định đề xuất ở bước Field Intake, cấu hình theo tổ chức.
 
-**Blocks:** Yes
+Chặn: có
+[Answer]:
 
----
-
-### `OQ-08` — Ai xem chiều khoá học và chiều lớp học, phạm vi tới đâu
+## Q8. [PO] OQ-08 · Ai xem chiều khoá học và chiều lớp học, phạm vi tới đâu
 
 **Câu hỏi.** Hai chiều này nằm bên Ops. Chọn một:
 
@@ -183,11 +178,10 @@ Và một câu phụ: **khoá học có "người phụ trách" không?** KB kh�
 
 **Đề xuất: c.** Hiện chấm điểm đã chạy theo kiểu này: mentor chỉ xem bài được giao, mentor chính xem toàn lớp *(`KB-GRAD-03`)*.
 
-**Blocks:** Yes
+Chặn: có
+[Answer]:
 
----
-
-### `OQ-09` — "Hàng chờ duyệt" là hàng nào
+## Q9. [PO] OQ-09 · "Hàng chờ duyệt" là hàng nào
 
 **Câu hỏi.** Trong hệ thống có những luồng chờ người duyệt sau. *"Hàng chờ duyệt"* là cái nào?
 
@@ -198,11 +192,10 @@ Và một câu phụ: **khoá học có "người phụ trách" không?** KB kh�
 | c | Đơn trong mảng lịch dạy: xin dạy, xin nghỉ, đổi chế độ dạy | KB chưa phủ |
 | d | Một luồng duyệt **chưa có trong hệ thống**, ví dụ duyệt nội dung khoá trước khi Publish | Nếu là d thì đây là một chức năng mới, không còn là một chỉ số |
 
-**Blocks:** Yes
+Chặn: có
+[Answer]:
 
----
-
-### `OQ-10` — "Buổi chưa xếp lịch" và mảng lịch dạy
+## Q10. [PO] OQ-10 · "Buổi chưa xếp lịch" và mảng lịch dạy
 
 **Câu hỏi.**
 1. Mảng lịch dạy *(buổi học, giáo viên, phòng học)* có thuộc phạm vi dự án này không?
@@ -212,11 +205,10 @@ Và một câu phụ: **khoá học có "người phụ trách" không?** KB kh�
 
 **Đề xuất.** Chỉ đưa vào khi mảng này **đang được dùng thật**. Hệ thống này đã sáu lần có endpoint mà không có tính năng *(KB `14` §2.2)*, nên đừng dựng chỉ số trên một vùng chưa biết còn sống hay không.
 
-**Blocks:** Yes
+Chặn: có
+[Answer]:
 
----
-
-### `OQ-11` — Quản lý "xử lý" gì từ danh sách người
+## Q11. [PO] OQ-11 · Quản lý "xử lý" gì từ danh sách người
 
 **Câu hỏi.** Bấm chỉ số sang danh sách rồi, quản lý làm được gì ngay trên đó?
 
@@ -232,28 +224,44 @@ Group `US16` đã loại: giao bài, sửa thời hạn học, xuất tệp.
 
 **Đề xuất: a** cho Phase 1. Cách b nên làm ở phase sau, vì nó khép được vòng *thấy → nhắc → theo dõi*, nhưng cần thêm một loại thông báo mới và luật chống nhắc dồn dập.
 
-**Blocks:** Yes
+Chặn: có
+[Answer]:
 
----
-
-### `OQ-12` — Vấn đề gốc
+## Q12. [PO] OQ-12 · Vấn đề gốc
 
 **Câu hỏi.** Yêu cầu nêu chỉ số, chưa nêu vấn đề. `clarified-requirements` §3 có bốn vấn đề AI suy ra, mỗi chiều một vấn đề. Đúng không, thiếu gì? Có số liệu minh hoạ thêm không — ví dụ bao nhiêu bài chờ chấm quá một tuần, bao nhiêu lớp kết thúc với tỉ lệ hoàn thành thấp?
 
 **Vì sao quan trọng.** Đây là phần `Problem` và `Analytics` của BRD, và là căn cứ để chọn chỉ số nào cốt lõi khi cắt Phase 1.
 
-**Blocks:** Yes
-
----
+Chặn: có
+[Answer]:
 
 ## Nhóm B — không chặn BRD, cần trước Bước 5 hoặc trước Field Intake
 
-| # | Câu hỏi | Vì sao quan trọng | Đề xuất | Owner | Blocks |
-|---|---|---|---|---|---|
-| `OQ-13` | *"Câu hỏi chưa trả lời"* có phải là **bình luận gốc của học viên trong Thảo luận chưa được nhân sự hoặc nhóm Comment Replier phản hồi**? Học viên trả lời nhau có tính là đã trả lời không? | Quyết định con số đếm cái gì | Đúng như câu hỏi. Học viên trả lời nhau **không** tính là đã trả lời | PO | No |
-| `OQ-14` | *"Sắp hết hạn"* là trong bao nhiêu ngày? | Ngưỡng mặc định khi tạo tổ chức | Mặc định **7 ngày**, cấu hình theo tổ chức. Áp cho cả thời hạn khoá và cửa sổ bài kiểm tra | PO | No |
-| `OQ-15` | *"Nội dung đang chạy"* có phải là khoá có ít nhất một lớp đang diễn ra? Cần thêm danh sách trạng thái lớp chính thức: KB đang có hai hệ khái niệm — `DRAFT` · `PUBLIC` · `ENDED` và *đã bắt đầu / chưa bắt đầu* *(KB `04` §11 Q1)* | Không có trạng thái lớp chính thức thì không xác định được lớp nào đang diễn ra | Đúng như câu hỏi | PO | No |
-| `OQ-16` | *"Tỷ lệ hoàn thành theo nội dung"* tính ở cấp khoá, hay xuống tới Section và Activity để thấy học viên bỏ dở ở đâu? | Độ chi tiết quyết định số màn | Cấp khoá, bấm vào thì xuống Section | PO | No |
+## Q13. [PO] OQ-13 · "Câu hỏi chưa trả lời" có phải là bình luận gốc của học viên trong Thảo luận chưa được nhân sự hoặc nhóm Comment Replier phản hồi? Học viên trả lời nhau có tính là đã trả lời không?
+Vì sao hỏi: Quyết định con số đếm cái gì
+Đề xuất: Đúng như câu hỏi. Học viên trả lời nhau không tính là đã trả lời
+Chặn: không
+[Answer]:
+
+## Q14. [PO] OQ-14 · "Sắp hết hạn" là trong bao nhiêu ngày?
+Vì sao hỏi: Ngưỡng mặc định khi tạo tổ chức
+Đề xuất: Mặc định 7 ngày, cấu hình theo tổ chức. Áp cho cả thời hạn khoá và cửa sổ bài kiểm tra
+Chặn: không
+[Answer]:
+
+## Q15. [PO] OQ-15 · "Nội dung đang chạy" có phải là khoá có ít nhất một lớp đang diễn ra? Cần thêm danh sách trạng thái lớp chính thức: KB đang có hai hệ khái niệm — DRAFT · PUBLIC · ENDED và đã bắt đầu / chưa bắt đầu (KB 04 §11 Q1)
+Vì sao hỏi: Không có trạng thái lớp chính thức thì không xác định được lớp nào đang diễn ra
+Đề xuất: Đúng như câu hỏi
+Chặn: không
+[Answer]:
+
+## Q16. [PO] OQ-16 · "Tỷ lệ hoàn thành theo nội dung" tính ở cấp khoá, hay xuống tới Section và Activity để thấy học viên bỏ dở ở đâu?
+Vì sao hỏi: Độ chi tiết quyết định số màn
+Đề xuất: Cấp khoá, bấm vào thì xuống Section
+Chặn: không
+[Answer]:
+
 
 ---
 

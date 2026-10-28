@@ -1,5 +1,6 @@
 ---
 intent: 261006-report-phase-1
+feature: LMS-F003
 title: Report Phase 1, báo cáo và dashboard bốn chiều
 created: 2026-10-06
 migrated: 2026-10-09

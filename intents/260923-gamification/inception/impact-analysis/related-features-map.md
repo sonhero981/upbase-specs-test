@@ -4,7 +4,7 @@ artifact: related-features-map
 version: 0.2
 status: approved
 approved: 2026-09-23
-migrated-from: .claude/projects/Gamification/working/impact-analysis/related-map-v0.2-20260923.md
+migrated-from: pre-aidlc:.claude/projects/Gamification/working/impact-analysis/related-map-v0.2-20260923.md
 ---
 # Related Features & Docs Map — Gamification
 

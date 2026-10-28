@@ -6,7 +6,7 @@ status: approved
 approved_at: 2026-10-12
 approved: 2026-10-12 (v0.8, Approved, 11 finding review là rủi ro chấp nhận); 2026-09-23 (v0.6, Approved with Notes, Gate 1)
 note: v0.8 mang CR-013 và S25 nhật ký ghi nhận bên Ops. Phạm vi đúng của CR-008 đến CR-012 nằm ở PRD
-migrated-from: .claude/projects/Gamification/docs/brd/brd-v0.7-20261008.md
+migrated-from: pre-aidlc:.claude/projects/Gamification/docs/brd/brd-v0.7-20261008.md
 ---
 # [BRD] Gamification — Điểm, huy hiệu, hạng và bảng xếp hạng
 

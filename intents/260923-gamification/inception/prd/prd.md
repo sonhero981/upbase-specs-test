@@ -1,30 +1,31 @@
 ---
 intent: 260923-gamification
+feature: LMS-F001
 artifact: prd
-version: 0.14
+version: 0.15
 status: approved
-approved_at: 2026-10-12
-approved: 2026-10-12 (v0.14, Approved with Notes, kèm ba quyết định R-16 R-17 R-18); 2026-09-23 (v0.2, Approved with Notes)
-note: v0.14 mang CR-009 đến CR-013, design 01/10 và 12/10, US22, technical design backend; sửa theo review Product Lead lần 01 và 02
-lark: KeT8dkIStofZ0axlTW5l4S94gre
+approved_at: 2026-10-14
+approved: 2026-10-14 (v0.15, CR-014); 2026-10-12 (v0.14, Approved with Notes, kèm ba quyết định R-16 R-17 R-18); 2026-09-23 (v0.2, Approved with Notes)
+note: v0.14 mang CR-009 đến CR-013, design 01/10 và 12/10, US22, technical design backend; sửa theo review AI Reviewer lần 01 và 02
+lark: Hjuxd3my6oG0UuxBGNOllABAgye
 lark-title: [PRD] Gamification
-lark-version: 0.8
-migrated-from: .claude/projects/Gamification/docs/prd/prd-gamification-v0.10-20261008.md
+lark-version: 0.15
+migrated-from: pre-aidlc:.claude/projects/Gamification/docs/prd/prd-gamification-v0.10-20261008.md
 ---
 # [PRD] Gamification — Điểm, huy hiệu, hạng và bảng xếp hạng
 
 | | |
 | --- | --- |
-| **Target release** | 2 Sprints |
+| **Target release** |  |
 | **Epic** | [Gamification](https://jira.upbase.asia/browse/UPLNDEP-8) · [Leaderboard](https://jira.upbase.asia/browse/UPLNDEP-9) |
 | **Story** | ❓ *link Jira* |
 | **Related** | [BRD](https://github.com/buidhui/po_workflow/blob/main/intents/260923-gamification/ideation/brd.md) · [Impact Matrix](https://github.com/buidhui/po_workflow/blob/main/intents/260923-gamification/inception/impact-analysis/impact-matrix.md) · [Solution Options](https://github.com/buidhui/po_workflow/blob/main/intents/260923-gamification/inception/solution-options/solution-options.md) |
-| **Document status** | ✅ **v0.14 PO duyệt ngày 12/10/2026** — mang `CR-009` đến `CR-013`, design đã chốt, nhật ký ghi nhận bên Ops và technical design backend. Bản v0.2 đã được PO duyệt 23/09/2026 |
+| **Document status** | ✅ **v0.15 PO duyệt ngày 14/10/2026** — mang `CR-009` đến `CR-013`, design đã chốt, nhật ký ghi nhận bên Ops và technical design backend. Bản v0.2 đã được PO duyệt 23/09/2026 |
 | **Document owner** | Bùi Đức Huy (PO) |
-| **Designer** | ❓ *cần điền* |
-| **Tech lead** | ❓ *cần điền* |
-| **QA** | ❓ *cần điền* |
-| **Reviewer** | ❓ *cần điền* |
+| **Designer** |  |
+| **Tech lead** |  |
+| **QA** |  |
+| **Reviewer** |  |
 
 ---
 
@@ -46,8 +47,9 @@ migrated-from: .claude/projects/Gamification/docs/prd/prd-gamification-v0.10-202
 | v0.12 | Cuong (Dev) · Bùi Đức Huy | Thêm **technical design backend**. Dựng lại các mục nghiệp vụ của phần giải pháp bị thay mất khi thêm technical design: nguyên tắc nền, cách bắt sự kiện, năm luồng, mười hai ràng buộc `C1` đến `C12`, ba rule nền, định nghĩa chỉ số. Ghi các chỗ technical design còn lệch so với phạm vi hiện tại | — | 12/10/2026 |
 | v0.13 | Bùi Đức Huy | Dòng 0 điểm, sinh ra khi `Points` hoặc một hành động đang tắt, **ẩn với học viên** ở lịch sử ghi nhận và **hiện cho vận hành** ở nhật ký ghi nhận. Ghi rõ tài khoản kiểm thử nhận diện bằng trường `is_operator` | — | 12/10/2026 |
 | v0.14 | Bùi Đức Huy | Sửa theo review và các quyết định ngày 12/10. Viết lại `US1` thành **màn Gamification**, kèm bảng ẩn hiện theo công tắc và khối điểm, hạng trên My Learning. Viết lại `US4` theo tab Badges. Tắt `Points` thì ẩn điểm với học viên. Điểm nền check-in không giới hạn trên, trần theo điểm nền. Chuỗi tính lại từ `1` khi bật lại `Points` hoặc check-in. Lên hạng chỉ tính mốc mới vượt qua. Hoạt động chỉ gồm Learning Activity. Biên thời gian của bảng xếp hạng. Campaign theo design: ba bảng, `Activities` tuỳ chọn, bỏ mô tả. Câu chữ thông báo theo design. Thêm bảng truy vết phạm vi, dọn tham chiếu cũ. Khi duyệt, chốt thêm: trao bù huy hiệu khi bật `Badges` hoặc bật lại một loại, không thông báo · dòng lịch sử, thông báo và bảng `Points` của campaign ẩn theo chức năng · bảng quyền bên Ops, tắt `Gamification` vẫn xem được dữ liệu đã có | — | 12/10/2026 |
+| v0.15 | Bùi Đức Huy | Phần xem trước bảng xếp hạng bên Ops giữ **bộ chọn khoảng ngày tự do** kèm nút nhanh, mặc định `All time` (`BR-11.8`). Phía học viên vẫn chỉ có khung cố định | `CR-014` | 14/10/2026 |
 
-> ✅ **`Approved with Notes` — PO duyệt bản v0.14 ngày 12/10/2026.** Bản v0.2 được duyệt ngày 23/09/2026. Còn **15 câu hỏi mở** ở mục `Vấn đề tồn đọng`. `OQ-42`, `OQ-49`, `OQ-52` cần trả lời trước khi bàn giao Unit Campaign. `OQ-45` là phần design còn thiếu. Các câu còn lại không chặn bàn giao Unit đầu tiên.
+> ✅ **`Approved with Notes` — PO duyệt bản v0.15 ngày 14/10/2026.** Bản v0.2 được duyệt ngày 23/09/2026. Còn **15 câu hỏi mở** ở mục `Vấn đề tồn đọng`. `OQ-42`, `OQ-49`, `OQ-52` cần trả lời trước khi bàn giao Unit Campaign. `OQ-45` là phần design còn thiếu. Các câu còn lại không chặn bàn giao Unit đầu tiên.
 
 ---
 
@@ -190,10 +192,10 @@ Các màn chốt ngày 01/10/2026, thêm và cập nhật ngày 12/10/2026. Ản
 | **How to level up** | `US1` · `US10` | Panel trượt từ phải, ba tiêu chí lên hạng |
 | **Achievement history** | `US3` | Panel trượt từ phải, nội dung dạng câu văn |
 | **User Profile — Badges** | `US4` | Tab trong `My Profile`, bộ đếm `({đã đạt}/{tổng mốc})`, huy hiệu chưa đạt hiện xám |
-| **Ops — Enable Setting** | `US8` · `US9` · `US10` · `US11` · `US14` · `US20` | Một trang bốn khối, mốc huy hiệu chỉ đọc, khối `Campaign` ở cuối. **Tự lưu, không có nút lưu.** Không có ô chọn múi giờ. ⚠️ Cần sửa: thiếu công tắc `Show badges`; phần xem trước còn bộ chọn khoảng ngày; ba dòng mốc huy hiệu còn chữ `every`; câu check-in còn viết cứng `up to 40 on day 7` |
+| **Ops — Enable Setting** | `US8` · `US9` · `US10` · `US11` · `US14` · `US20` | Một trang bốn khối, mốc huy hiệu chỉ đọc, khối `Campaign` ở cuối. **Tự lưu, không có nút lưu.** Không có ô chọn múi giờ. ⚠️ Cần sửa: thiếu công tắc `Show badges`; ba dòng mốc huy hiệu còn chữ `every`; câu check-in còn viết cứng `up to 40 on day 7` |
 | **Ops — Disable** | `US14` | `Gamification` tắt thì mọi khối khác biến mất. ⚠️ Khối `Campaign` cần hiện ở chế độ chỉ xem (`BR-15.8`) |
 | **Thông báo thành tích** | `US2` | Thẻ ở góc dưới bên phải, xếp chồng theo chiều dọc, thanh đếm ngược ở đáy |
-| **Ops — Campaign Settings** | `US20` | Drawer nửa màn hình tạo và sửa campaign: tên, ngày bắt đầu, ngày kết thúc, bốn loại hành động, ô `Activity` |
+| **Ops — Campaign Settings** | `US20` | Panel tạo và sửa campaign: tên, ngày bắt đầu, ngày kết thúc, bốn loại hành động, ô `Activity` |
 | **Ops — Kết quả campaign** | `US21` | Panel ba tab `Points` · `Activities` · `Courses`. ⚠️ Cần sửa: bỏ dòng `You`, thêm nút xuất Excel |
 | **Campaign phía học viên** | `US19` | ❓ **Chưa có design** |
 | **Ops — Achievement history** | `US22` | ❓ **Chưa có design** — nhật ký ghi nhận toàn tổ chức, dạng bảng có bộ lọc |
@@ -322,7 +324,7 @@ Mỗi chỗ **tự tính** — huy hiệu và hạng đếm trọn đời, bản
 ## Backend
 
 > ⚠️ **Dev cập nhật lại theo PRD v0.14.** Technical design backend này được viết theo phạm vi trước change request `CR-012`, `CR-013` và trước `US22`. Những chỗ lệch, PO đã chốt, Dev quyết cách làm:
-> - **Học viên không có khoảng ngày tự do** (`BR-6.15`). Nhánh `from/to` tính lúc chọn ở luồng bảng xếp hạng chỉ còn đúng cho màn danh sách học viên bên Ops (`US12`)
+> - **Học viên không có khoảng ngày tự do** (`BR-6.15`). Nhánh `from/to` tính lúc chọn ở luồng bảng xếp hạng chỉ còn đúng cho phía Ops: danh sách học viên (`US12`) và phần xem trước bảng xếp hạng (`BR-11.8`)
 > - **Check-in chỉ tính khi học viên chủ động mở hoặc quay lại UpLMS** (`BR-5.1`). Request nền tự chạy không tính, nên không ghi nhận ở mọi request đã xác thực
 > - **Năm bảng xếp hạng**: thêm `Activities`; `Level` và `Badges` chỉ có ở `All time` (`BR-6.2b`)
 > - **Chỉ số đếm không phụ thuộc công tắc `Points`**, đếm mọi lần xảy ra trong lúc `Gamification` bật (mục Định nghĩa chỉ số ở trên)
@@ -1034,7 +1036,7 @@ Field của item đang disable thì skip validate, giữ value.
 
 #### 7.5. `LeaderboardPreview`
 
-> ⚠️ **Dev cập nhật lại theo thay đổi ngày 08/10/2026:** preview đi theo phía học viên — **chỉ năm khung cố định, không có `RangePicker`**, năm tab với `Level` và `Badges` chỉ ở `All time`. Thêm công tắc `Show activities` vào `LeaderboardBlock` (`US11`).
+> ⚠️ **Dev cập nhật lại theo thay đổi ngày 14/10/2026 (`CR-014`):** preview **giữ `RangePicker` tự do** kèm năm nút nhanh, mặc định `All time` (`BR-11.8`); năm tab với `Level` và `Badges` chỉ ở `All time`. Thêm công tắc `Show activities` vào `LeaderboardBlock` (`US11`).
 
 - Tab + RangePicker + top + `Show All`, read-only, không có `MyPosition`.
 - Gọi leaderboard endpoint phía Ops; tab theo config **đã save**. Có thay đổi chưa save ở `Show …` → hiện `Save to update preview`.
@@ -1778,7 +1780,7 @@ Bảng hiện thứ hạng, tên và chỉ số của từng học viên, kèm n
   | Múi giờ | Múi giờ của tổ chức (`BR-14.9`). Tổ chức hiện tại mặc định **UTC+7** |
   | Bảng `Level`: học viên vẫn ở hạng `1` | Coi như **chưa có chỉ số**: vẫn nằm trong danh sách, ô thứ hạng để trống, theo `BR-6.6` |
 - `BR-6.15` 🔑 **Học viên không chọn được khoảng ngày tự do.** Khoảng tự chọn phải tính lúc chọn, nên ai cũng gọi được một phép tính nặng tuỳ ý, và gọi liên tục là làm chậm cả hệ thống. Chỉ còn khung cố định thì mọi thứ phía học viên đều tính sẵn, học viên gọi bao nhiêu lần cũng chỉ là đọc.
-  > Nhu cầu xem một đợt có chủ đích thì dùng campaign (`US19`). Vận hành vẫn có bộ chọn khoảng ngày tự do ở `US12`.
+  > Nhu cầu xem một đợt có chủ đích thì dùng campaign (`US19`). Vận hành vẫn có bộ chọn khoảng ngày tự do ở `US12` và ở phần xem trước bảng xếp hạng (`BR-11.8`).
 - `BR-6.7` Tài khoản có `Test Account = Yes` **không xuất hiện**, vì không phát sinh dữ liệu gamification.
 - `BR-6.8` Học viên bị `Block` hoặc đã rời tổ chức **không xuất hiện trong bảng đang chạy**. Kết quả campaign đã đóng băng thì giữ nguyên, xem `US21`.
 - `BR-6.9` Bảng **công khai tên và ảnh** của học viên với mọi học viên khác trong tổ chức.
@@ -2118,6 +2120,8 @@ từ thời điểm đổi trở đi"]
 
 *Mỗi mốc chạm được ở bất kỳ tiêu chí nào đều cho một hạng. Không phải chỉ lấy tiêu chí cao nhất.*
 
+> 🔜 **Đợt sau ra mắt: lên hạng theo điểm tích luỹ, ngưỡng tăng dần.** `CR-015`, Jira [UPLND-401](https://jira.upbase.asia/browse/UPLND-401). Mô hình ba tiêu chí bội số trong US này là rule của bản ra mắt, Dev làm theo mô hình này. Sau ra mắt, hạng lên theo điểm tích luỹ: điểm trong hạng đủ `min(nền + (n−1) × bước, trần ngưỡng)` thì lên hạng, và đạt huy hiệu được cộng điểm. CR đang parked, chưa phải yêu cầu của bản này. PRD sẽ cập nhật khi mở lại CR. Rule chi tiết ở `inputs/change-requests.md`, mục `CR-015`.
+
 ### 1/ User story
 
 Là nhân sự vận hành, tôi cần đặt mỗi bao nhiêu điểm, bao nhiêu khoá, bao nhiêu huy hiệu thì học viên lên một hạng, và đặt trần hạng, để phân tầng mức độ tham gia.
@@ -2231,6 +2235,7 @@ Xét hạng chạy sau mỗi lần cộng điểm và sau mỗi lần trao huy h
 | Thêm tiêu chí lên hạng ngoài ba tiêu chí | Cần chỉ số đếm tương ứng, là việc phát triển |
 | Hạ hạng, hoặc đặt lại hạng thủ công cho một học viên | `BR-10.3`. Hạng chỉ lên |
 | Thưởng thêm khi lên hạng, ví dụ tặng điểm | Chưa yêu cầu |
+| Lên hạng theo điểm tích luỹ, ngưỡng tăng dần | Làm sau bản ra mắt theo `CR-015`, Jira [UPLND-401](https://jira.upbase.asia/browse/UPLND-401) |
 
 ### 6/ Conner case
 
@@ -2275,6 +2280,10 @@ Bên dưới là năm công tắc chọn bảng hiện ra: hạng, điểm, số
 | Cấu hình bảng xếp hạng | Bảng cuối cùng | Công tắc | Khi chỉ còn **một bảng đang chạy**, công tắc của nó **không tắt được**. Trỏ chuột vào thì hiện lý do: cần ít nhất một bảng. Xem `BR-11.5`. Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
 | Cấu hình bảng xếp hạng | Cảnh báo | Không còn bảng nào chạy | Xảy ra khi các bảng đang bật đều bị khoá do chức năng nguồn tắt. Khối `Leaderboard` hiện **dòng cảnh báo cố định**: học viên không còn bảng nào để xem. Xem `BR-11.5`. Chuỗi tiếng Anh: `❓PO`, xem `OQ-50` |
 | Cấu hình bảng xếp hạng | Cách lưu | | **Tự lưu, không có nút lưu.** Công tắc lưu khi bấm. Theo `BR-14.10` |
+| Cấu hình bảng xếp hạng | Phần xem trước | Bố cục | Cuối khối `Leaderboard`: các tab của bảng đang bật, top 3 nổi bật, 5 dòng đầu rồi đường kẻ `Show All`. **Không có khối vị trí của tôi** vì vận hành không phải người thi |
+| Cấu hình bảng xếp hạng | Phần xem trước | Chọn khoảng ngày | **Bộ chọn khoảng ngày tự do** `Start time → End time`, kèm nút nhanh `All time` · `This week` · `This month` · `This quarter` · `This year`, giống `US12`. Mặc định `All time` |
+| Cấu hình bảng xếp hạng | Phần xem trước | Bảng `Level`, `Badges` | Chỉ hiện ở `All time`, ẩn khi chọn khoảng khác, theo `BR-11.2` |
+| Cấu hình bảng xếp hạng | Phần xem trước | Khoảng tự chọn | Tính lúc chọn, có trạng thái đang tải. Các nút nhanh đọc kết quả đã tính sẵn |
 
 **Business requirement — Business rule**
 
@@ -2296,6 +2305,8 @@ Bên dưới là năm công tắc chọn bảng hiện ra: hạng, điểm, số
   - Tắt một chức năng nguồn mà khiến khối không còn bảng nào chạy thì **vẫn cho tắt**. Khối `Leaderboard` hiện cảnh báo cố định cho tới khi có lại ít nhất một bảng chạy. Cùng cách xử lý với `BR-10.8`.
 - `BR-11.6` Tắt công tắc `Leaderboard` thì **toàn bộ trang bảng xếp hạng biến khỏi UpLMS**, gồm cả khối vị trí của tôi ở `US7`. Dữ liệu điểm vẫn ghi bình thường.
 - `BR-11.7` Đổi cấu hình cột **áp dụng ngay ở lần học viên mở trang tiếp theo**. Không phải chờ chu kỳ tính lại 8 tiếng, vì đây là thay đổi hiển thị chứ không phải thay đổi số liệu.
+- `BR-11.8` 🔑 **Phần xem trước bên Ops cho chọn khoảng ngày tự do**, khác phía học viên chỉ có khung cố định (`BR-6.15`). Lý do giống `BR-12.4`: người dùng Ops ít, phải có quyền, và vận hành cần xem số liệu khoảng bất kỳ khi vận hành. PO chốt ngày 14/10 ở change request `CR-014`.
+  > Hệ quả: khi chọn khoảng tự do, vận hành thấy một bảng mà học viên không bao giờ thấy. Phần này là công cụ xem số liệu của vận hành, không còn là bản xem trước đúng nghĩa.
 
 **Data Field**
 
@@ -2845,7 +2856,7 @@ Là nhân sự vận hành, tôi cần tạo campaign có thời hạn riêng v�
 
 ### 3/ Scenario
 
-Ở cuối trang cấu hình Gamification trên Ops có khối `Campaign`, liệt kê các campaign kèm trạng thái. Bấm `+ Campaign` thì mở drawer `Campaign Settings` rộng nửa màn hình, trượt từ phải.
+Ở cuối trang cấu hình Gamification trên Ops có khối `Campaign`, liệt kê các campaign kèm trạng thái. Bấm `+ Campaign` thì mở panel `Campaign Settings` trượt từ phải.
 
 Tạo mới: nhập tên, ngày bắt đầu, ngày kết thúc, chọn loại hành động được tính điểm, và chọn campaign có bảng `Activities` hay không.
 
@@ -2858,11 +2869,11 @@ Campaign chưa bắt đầu thì sửa mọi thứ và xoá được. Đang ch�
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
 | Danh sách campaign | Đầu khối | Tiêu đề và phụ đề | `Campaign` · `Run time-bound learning challenges with results that are locked once they end.` |
-| Danh sách campaign | Đầu khối | Nút `+ Campaign` | Mở drawer `Campaign Settings` (nửa màn hình) để tạo mới |
+| Danh sách campaign | Đầu khối | Nút `+ Campaign` | Mở panel `Campaign Settings` để tạo mới |
 | Danh sách campaign | Bảng | Cột | `Name` · `Duration` · `Status` · `Contribution` · `Action`. `Contribution` liệt kê cấu phần, ví dụ `Point (Checkin; Activity); Activity; Course` |
 | Danh sách campaign | Bảng | Cột `Action` | Chưa bắt đầu: sửa, xoá. Đang chạy: xem kết quả, sửa tên. Đã kết thúc: xem kết quả. Design chưa có nút xoá, xem `OQ-45` |
 | Danh sách campaign | Bảng | Trạng thái | Ba trạng thái: `Not started` · `In Progress` · `Expired`. **Tính từ ngày hiện tại**, theo múi giờ tổ chức |
-| Tạo campaign | Drawer | Tiêu đề | `Campaign Settings`, drawer rộng **nửa màn hình**, trượt từ cạnh phải |
+| Tạo campaign | Panel | Tiêu đề | `Campaign Settings`, trượt từ cạnh phải |
 | Tạo campaign | Form | Tên | Bắt buộc. Độ dài tối đa: `❓PO`, xem `OQ-52` |
 | Tạo campaign | Form | Ngày bắt đầu | Bắt buộc. **Sớm nhất là ngày mai**, để campaign vừa tạo còn sửa và xoá được trước khi chạy. `[đề xuất]` |
 | Tạo campaign | Form | Ngày kết thúc | Bắt buộc. Không nhỏ hơn ngày bắt đầu. **Bắt đầu và kết thúc cùng một ngày là hợp lệ.** `[đề xuất]` |
@@ -3036,16 +3047,16 @@ Từ danh sách học viên ở `US12`, bấm tên một người thì mở nh�
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| Nhật ký ghi nhận | Điểm vào | Vị trí | Mục `Achievement History` trong khu vực Gamification trên Ops, cạnh danh sách học viên. Cách thể hiện: `❓PO`, chờ design, xem `OQ-45` |
-| Nhật ký ghi nhận | Trang | Tiêu đề và breadcrumb | `Achievement History` — **viết hoa chữ `H`** ở breadcrumb (`LMS / Gamification / Achievement History`), ở mục menu và ở tiêu đề trang. `CR-UI 2026-10-23` |
+| Nhật ký ghi nhận | Điểm vào | Vị trí | Mục `Achievement history` trong khu vực Gamification trên Ops, cạnh danh sách học viên. Cách thể hiện: `❓PO`, chờ design, xem `OQ-45` |
 | Nhật ký ghi nhận | Bảng | Cột `Time` | `HH:mm dd/mm/yyyy`, theo múi giờ tổ chức |
-| Nhật ký ghi nhận | Bảng | Cột `Student` | Ảnh đại diện và tên học viên. **Nhãn cột là `Student`** (không phải `Learner`). `CR-UI 2026-10-23` |
-| Nhật ký ghi nhận | Bảng | Cột `Event` | Một trong ba: `Points` · `Badge` · `Level up` (nhãn badge ở cột giữ nguyên; chỉ nhãn trong bộ lọc đổi, xem dòng Lọc — Loại sự kiện) |
-| Nhật ký ghi nhận | Bảng | Cột `Details` | Nguồn cụ thể của lần ghi nhận, theo bảng chuỗi bên dưới. **Số điểm gộp vào cuối chuỗi** với sự kiện `Points` — **bỏ cột `Points` riêng**. `CR-UI 2026-10-23` |
+| Nhật ký ghi nhận | Bảng | Cột `Learner` | Ảnh đại diện và tên học viên |
+| Nhật ký ghi nhận | Bảng | Cột `Event` | Một trong ba: `Points` · `Badge` · `Level up` |
+| Nhật ký ghi nhận | Bảng | Cột `Details` | Nguồn cụ thể của lần ghi nhận, theo bảng chuỗi bên dưới |
+| Nhật ký ghi nhận | Bảng | Cột `Points` | Số điểm với sự kiện `Points`. Để trống với `Badge` và `Level up` |
 | Nhật ký ghi nhận | Bảng | Thứ tự | **Mới nhất lên trước** |
 | Nhật ký ghi nhận | Bảng | Tên dài | Tên hoạt động và tên khoá cắt ở `60` ký tự rồi thêm `…`, trỏ chuột vào hiện đầy đủ. Giống `US3` |
-| Nhật ký ghi nhận | Lọc | Học viên | Ô tìm theo tên, placeholder `Search by student name`. Chọn một học viên thì chỉ hiện lịch sử của người đó. `CR-UI 2026-10-23` |
-| Nhật ký ghi nhận | Lọc | Loại sự kiện | Dropdown `All events`, ba lựa chọn: `Earned Points` · `Unlocked Badges` · `Leveled Up` (nhãn lọc khác nhãn badge ở cột `Event`, vốn vẫn là `Points` · `Badge` · `Level up`). Với `Earned Points`, lọc thêm được theo hành động: check-in · hoạt động · khoá · bài Test. `CR-UI 2026-10-23` · `[đề xuất]` |
+| Nhật ký ghi nhận | Lọc | Học viên | Ô tìm theo tên. Chọn một học viên thì chỉ hiện lịch sử của người đó |
+| Nhật ký ghi nhận | Lọc | Loại sự kiện | Chọn nhiều trong ba loại. Với `Points`, lọc thêm được theo hành động: check-in · hoạt động · khoá · bài Test. `[đề xuất]` |
 | Nhật ký ghi nhận | Lọc | Khoảng ngày | Bộ chọn khoảng ngày tự do kèm nút nhanh `All time` · `This week` · `This month` · `This quarter` · `This year`, giống `US12`. Mặc định `All time` |
 | Nhật ký ghi nhận | Phân trang | Số dòng mỗi trang | Theo chuẩn các màn danh sách khác của Ops |
 | Nhật ký ghi nhận | Xuất file | | **Không có** |
@@ -3056,22 +3067,20 @@ Từ danh sách học viên ở `US12`, bấm tên một người thì mở nh�
 
 | Sự kiện | Chuỗi |
 |---|---|
-| Check-in | `Daily check-in · day {d} of streak · +{điểm}` |
-| Hoàn thành hoạt động | `Completed activity {tên hoạt động} in {tên khoá} · +{điểm}` |
-| Hoàn thành khoá | `Completed course {tên khoá} · +{điểm}` |
-| Qua bài Test | `Passed test {tên bài Test} in {tên khoá} · +{điểm}` |
+| Check-in | `Daily check-in · day {d} of streak` |
+| Hoàn thành hoạt động | `Completed activity {tên hoạt động} in {tên khoá}` |
+| Hoàn thành khoá | `Completed course {tên khoá}` |
+| Qua bài Test | `Passed test {tên bài Test} in {tên khoá}` |
 | Đạt huy hiệu | `Unlocked {tên huy hiệu} · {mốc} {đơn vị}` |
 | Lên hạng | `Reached Level {n}` |
-| Dòng 0 điểm | Chuỗi như hành động tương ứng nhưng **thay `· +{điểm}` bằng ` · points off`**, ví dụ `Completed activity {tên hoạt động} in {tên khoá} · points off` |
+| Dòng 0 điểm | Chuỗi như hành động tương ứng, thêm ` · points off` ở cuối, ví dụ `Completed activity {tên hoạt động} in {tên khoá} · points off` |
 
 > Viết ngắn, không thành câu như phía học viên, vì vận hành quét cột chứ không đọc từng dòng. `{đơn vị}` giống `US3`: `check-in days` · `activities` · `passed tests` · `completed courses`.
->
-> **Số điểm gộp vào cuối chuỗi `Details` dạng `· +{điểm}`** (`CR-UI 2026-10-23`), thay cho cột `Points` cũ đã bỏ. Phần `+{điểm}` **in đậm**. Chỉ các dòng sự kiện `Points` (check-in · hoạt động · khoá · bài Test) có hậu tố này; `Badge` và `Level up` không có điểm nên không thêm.
 
 **Business requirement — Business rule**
 
 - `BR-22.1` Nhật ký có **đúng ba loại sự kiện như phía học viên** (`US3`): nhận điểm · đạt huy hiệu · lên hạng. Cùng nguồn dữ liệu, cùng số điểm đã ghi. Vận hành và học viên nhìn cùng một sự thật.
-- `BR-22.1a` 🔑 **Khác học viên ở một chỗ: dòng 0 điểm vẫn hiện.** Khi học viên hỏi *"sao tuần đó tôi không có điểm"*, vận hành nhìn là thấy lý do: hành động đang tắt. Chuỗi `Details` kết thúc bằng ` · points off` (thay cho số `0` ở cột `Points` cũ đã bỏ, `CR-UI 2026-10-23`). PO chốt ngày 12/10.
+- `BR-22.1a` 🔑 **Khác học viên ở một chỗ: dòng 0 điểm vẫn hiện.** Khi học viên hỏi *"sao tuần đó tôi không có điểm"*, vận hành nhìn là thấy lý do: hành động đang tắt. Cột `Points` ghi `0`. PO chốt ngày 12/10.
 - `BR-22.2` 🔑 **Hiện đầy đủ cả khi `Visibility in UpLMS` đang tắt.** Giai đoạn chạy ngầm là lúc vận hành cần nhật ký nhất.
 - `BR-22.3` **Chỉ đọc.** Vận hành không sửa, không xoá, không cộng bù điểm thủ công, theo giả định `A12` (vận hành không sửa điểm thủ công) và `BR-3.5` (lịch sử không sửa, không xoá được).
 - `BR-22.4` Phạm vi **toàn tổ chức**. Tài khoản `Test Account` không có dòng nào, theo `C10`.
@@ -3113,7 +3122,7 @@ Danh sách tải theo trang. Dữ liệu là của **cả tổ chức** và **gi
 | ~~OQ-07~~ | ✅ **Đã chốt 23/09: sổ giao dịch điểm giữ toàn bộ, không dọn.** Xem `BR-3.9` | PO | — |
 | ~~OQ-08~~ | ✅ **Đã chốt 06/10: múi giờ lấy theo tenant**, không có ô chọn trên màn Gamification. Cách lưu do Dev quyết trong technical design. Xem `BR-14.9` | PO | — |
 | ~~OQ-09~~ | ✅ **Đã rõ:** mọi học viên bắt đầu ở `0` điểm và **hạng `1`**, theo `BR-10.1` | — | — |
-| **OQ-10** | Metadata đầu tài liệu còn trống: `Story` · `Designer` · `Tech lead` · `QA` · `Reviewer`. `Target release` và `Epic` đã có | PO | Bàn giao |
+| **OQ-10** | Metadata đầu tài liệu còn trống: `Story` · `Designer` · `Tech PIC` · `QA` · `Reviewer`. `Target release` và `Epic` đã có | PO | Bàn giao |
 | **OQ-11** | Link Figma và tài khoản staging để đối chiếu giao diện | PO | `US1`–`US12` |
 | **OQ-12** | Học viên có tắt hoặc chỉnh được thông báo thành tích không? | PO | `US2` |
 | ~~OQ-16~~ | ✅ **Đã chốt 12/10 theo design:** `Level up! You've just reached Level {n}`. Xem `US2` | PO | — |
@@ -3123,7 +3132,7 @@ Danh sách tải theo trang. Dữ liệu là của **cả tổ chức** và **gi
 | **OQ-42** | **Tắt `Gamification` khi có campaign đang chạy thì vẫn cho tắt, đúng không?** Quy định cũ bắt phải dừng chiến dịch trước, nhưng nay campaign đang chạy không dừng được và nhiều campaign được chồng thời gian — giữ quy định cũ thì gần như không bao giờ tắt được. Xem `BR-20.8` | PO | `US14` · `US20` |
 | **OQ-43** | **Các mục ghi `[đề xuất]` trong PRD.** Chính: tooltip ô chuỗi và nút `Achievement History` khi `Points` tắt (`US1`) · khối điểm và hạng trên My Learning (`US1`) · bỏ thanh tiến độ tới hạng kế tiếp (`US1`) · hiện mô tả khi trỏ vào huy hiệu (`US4`) · câu chữ khi điểm nền từ `40` trở lên (`US1`, `US8`) · sắp xếp và cột file Excel (`US12`) · thời điểm của lần ghi nhận lại sau lỗi (`BR-13.8`) · các mục của campaign và nhật ký Ops (`US19` đến `US22`) · bật lại giữa ngày (`BR-5.15`) · thứ tự tab và bảng mặc định (`US6`) · tên trong lịch sử khi nội dung đổi tên hoặc bị xoá (`BR-3.11`) · một huy hiệu chỉ góp một lần vào tiêu chí lên hạng (`BR-9.10`) · ngày bắt đầu sớm nhất và thời điểm xét trạng thái campaign (`US20`) · khối `Campaign` chỉ xem khi tắt `Gamification` (`BR-15.8`) | PO | `US1` · `US4` · `US8` · `US12` · `US13` · `US19` đến `US22` |
 | ~~OQ-44~~ | ✅ **Đã chốt 12/10:** bảng campaign tính sẵn 8 tiếng một lần, kết thúc thì đóng băng bằng tác vụ riêng | PO | — |
-| **OQ-45** | **Design còn thiếu hoặc lệch PRD.** Màn Gamification: thêm tab `Activities`, bỏ bộ chọn khoảng ngày, thêm lối vào campaign · Trang cấu hình Ops: thêm `Show badges`, bỏ bộ chọn khoảng ngày ở phần xem trước, đổi `every` thành `at` ở ba dòng mốc, câu check-in dùng số theo điểm nền · Kết quả campaign: bỏ dòng `You`, thêm nút xuất Excel · Danh sách campaign: thêm nút xoá; khối `Campaign` vẫn hiện ở chế độ chỉ xem khi tắt `Gamification` · Chưa có design: campaign phía học viên, nhật ký Ops (`US22`), khối trên My Learning | PO | `US1` · `US6` · `US11` · `US19` đến `US22` |
+| **OQ-45** | **Design còn thiếu hoặc lệch PRD.** Màn Gamification: thêm tab `Activities`, bỏ bộ chọn khoảng ngày, thêm lối vào campaign · Trang cấu hình Ops: thêm `Show badges`, đổi `every` thành `at` ở ba dòng mốc, câu check-in dùng số theo điểm nền · Kết quả campaign: bỏ dòng `You`, thêm nút xuất Excel · Danh sách campaign: thêm nút xoá; khối `Campaign` vẫn hiện ở chế độ chỉ xem khi tắt `Gamification` · Chưa có design: campaign phía học viên, nhật ký Ops (`US22`), khối trên My Learning | PO | `US1` · `US6` · `US11` · `US19` đến `US22` |
 | **OQ-46** | **Vận hành thấy lần cộng điểm bị lỗi ở đâu?** `BR-13.8` chốt *"ghi lại chỗ lỗi để vận hành thấy và xử lý"*, nhưng chưa có màn nào hiện chúng. PO chốt ngày 09/10 không hiện ở nhật ký ghi nhận (`US22`) | PO | `US13` |
 | ~~OQ-47~~ | ✅ **Đã chốt 12/10: dòng 0 điểm ẩn với học viên, hiện cho vận hành.** Xem `BR-3.1a`, `BR-22.1a` | PO | — |
 | ~~OQ-48~~ | ✅ **Đã chốt 12/10: trường `Test Account` chính là `users.is_operator`.** Technical design lọc đúng. Xem `C10` | PO | — |
