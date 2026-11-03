@@ -2120,7 +2120,7 @@ từ thời điểm đổi trở đi"]
 
 *Mỗi mốc chạm được ở bất kỳ tiêu chí nào đều cho một hạng. Không phải chỉ lấy tiêu chí cao nhất.*
 
-> 🔜 **Đợt sau ra mắt: lên hạng theo điểm tích luỹ, ngưỡng tăng dần.** `CR-015`, Jira [UPLND-401](https://jira.upbase.asia/browse/UPLND-401). Mô hình ba tiêu chí bội số trong US này là rule của bản ra mắt, Dev làm theo mô hình này. Sau ra mắt, hạng lên theo điểm tích luỹ: điểm trong hạng đủ `min(nền + (n−1) × bước, trần ngưỡng)` thì lên hạng, và đạt huy hiệu được cộng điểm. CR đang parked, chưa phải yêu cầu của bản này. PRD sẽ cập nhật khi mở lại CR. Rule chi tiết ở `inputs/change-requests.md`, mục `CR-015`.
+> 🔜 **Đợt sau ra mắt: lên hạng theo điểm tích luỹ, ngưỡng tăng dần.** `CR-015`, Jira [UPLND-401](https://jira.upbase.asia/browse/UPLND-401). Mô hình ba tiêu chí bội số trong US này là rule của bản ra mắt, Dev làm theo mô hình này. Sau ra mắt, hạng lên theo điểm tích luỹ: điểm trong hạng đủ `min(điểm lên hạng chuẩn + (n−1) × điểm cộng thêm mỗi hạng, điểm lên hạng tối đa)` thì lên hạng, và đạt huy hiệu được cộng điểm. CR đang parked, chưa phải yêu cầu của bản này. PRD sẽ cập nhật khi mở lại CR. Rule chi tiết ở `inputs/change-requests.md`, mục `CR-015`.
 
 ### 1/ User story
 
