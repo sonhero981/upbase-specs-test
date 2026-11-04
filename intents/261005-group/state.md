@@ -23,20 +23,20 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - [x] 1.4 scope-definition · v1: ideation/brd.md v0.3 §5 đến §7. Duyệt lại theo v2 2026-10-12 (DEC79); R-04 Proto-Unit rủi ro chấp nhận, bảng Unit ở PRD. Gate 1 của v1 duyệt 2026-10-05. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại
 - [x] 1.7 approval-handoff · v1: ideation/brd.md v0.3, không có bản một trang. Duyệt lại theo v2 2026-10-12 (DEC79), phase check Ideation ở verification/phase-check-ideation.md, archive/approval-handoff/brd-v0.3-20261012.md. Bản v0.2 của v1 ngày 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại
 ### INCEPTION
-- [x] 2.3 requirements-analysis · v1: inception/requirements-analysis/requirements.md v0.3 duyệt 2026-10-09 (CR1, thêm RC-20). v0.2 duyệt 2026-10-05. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại
-- [x] 2.31 impact-analysis · v1: inception/impact-analysis/impact-matrix.md v0.4 duyệt 2026-10-12 (CR2, CG-3 đã giải, OQ-31; DEC82). v0.3 duyệt 2026-10-09 (CR1, vùng 9 và BI-6). v0.2 Gate 2 duyệt 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại
+- [?] 2.3 requirements-analysis · v1: inception/requirements-analysis/requirements.md v0.3 duyệt 2026-10-09 (CR1, thêm RC-20). v0.2 duyệt 2026-10-05. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại; CR9 ngày 2026-11-04: requirements v0.7 draft: mã tự sinh, Graph/Table và phạm vi nhật ký theo nhóm, chờ review và duyệt lại
+- [?] 2.31 impact-analysis · v1: inception/impact-analysis/impact-matrix.md v0.4 duyệt 2026-10-12 (CR2, CG-3 đã giải, OQ-31; DEC82). v0.3 duyệt 2026-10-09 (CR1, vùng 9 và BI-6). v0.2 Gate 2 duyệt 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại; CR9 ngày 2026-11-04: impact-matrix v0.8 draft: đối chiếu tác động mã tự sinh, Graph/Table và phạm vi nhật ký, chờ review và duyệt lại
 - [S] 2.32 solution-options · v1 không làm so sánh phương án; Bước 7 dùng để chốt nhóm câu hỏi D
 - [x] 2.4 user-stories · v1: inception/prd/prd.md §Danh sách user story và 20 US, v0.3. Duyệt lại theo v2 2026-10-12 (DEC82) sau một lần Request Changes (DEC80, CR2); truy vết tay ở inception/prd/traceability.md. 20 US chốt ở 9A của v1 ngày 2026-10-06. CR6 ngày 2026-10-21: sửa phần bị chạm, chờ duyệt lại. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại
-- [x] 2.42 prd-generation · v1: inception/prd/prd.md v0.3 duyệt 2026-10-12 (CR2, chạm US3 US7 US19 US20, danh sách US, tồn đọng; DEC82). v0.2 duyệt 2026-10-09 (CR1, chạm US9 US11 US13 US16 US20). v0.1 duyệt và publish Lark 2026-10-06. Đang sửa theo CR3 từ 2026-10-20: thêm khối AC và dòng Ưu tiên (DEC92). CR4 ngày 2026-10-20: chỉ bảng đầu, chờ duyệt v0.5 (DEC95). CR5 ngày 2026-10-20: chuyển sang template PRD chuẩn, prd.md v0.6 draft, chờ PO duyệt (DEC98). CR6 gộp vào bản v0.6 cùng CR5. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại
-- [-] 2.43 design-alignment · mở 2026-10-20 (DEC97); sau CR5 và CR6, ba file thiết kế trỏ prd@0.6 từ 2026-10-22. Chờ Design PIC, Tech PIC, QA PIC viết, không đặt hạn. CR7 ngày 2026-10-25: PO chốt PRD final qua CR7, không viết Decision Brief lúc này (DEC122); giữ mở
+- [?] 2.42 prd-generation · v1: inception/prd/prd.md v0.3 duyệt 2026-10-12 (CR2, chạm US3 US7 US19 US20, danh sách US, tồn đọng; DEC82). v0.2 duyệt 2026-10-09 (CR1, chạm US9 US11 US13 US16 US20). v0.1 duyệt và publish Lark 2026-10-06. Đang sửa theo CR3 từ 2026-10-20: thêm khối AC và dòng Ưu tiên (DEC92). CR4 ngày 2026-10-20: chỉ bảng đầu, chờ duyệt v0.5 (DEC95). CR5 ngày 2026-10-20: chuyển sang template PRD chuẩn, prd.md v0.6 draft, chờ PO duyệt (DEC98). CR6 gộp vào bản v0.6 cùng CR5. CR7 ngày 2026-10-25: sửa phần bị chạm, chờ duyệt lại. CR8 ngày 2026-10-26: báo cáo quá khứ tách US22 để sau, chờ duyệt lại; CR9 ngày 2026-11-03: prd v0.9 draft, sửa riêng phần đã rà soát của US2, US6, US7, US14; chờ duyệt và review độc lập
+- [ ] 2.43 design-alignment · mở 2026-10-20 (DEC97); sau CR5 và CR6, ba file thiết kế trỏ prd@0.6 từ 2026-10-22. Chờ Design PIC, Tech PIC, QA PIC viết, không đặt hạn. CR7 ngày 2026-10-25: PO chốt PRD final qua CR7, không viết Decision Brief lúc này (DEC122); giữ mở; CR9: chờ PRD sửa được duyệt, sau đó các PIC đối chiếu phần bị chạm
 
 ## Current
 | | |
 |---|---|
-| Stage | 2.43 design-alignment |
-| Next action | Làm tiếp 2.43 Design Alignment |
-| Blocking questions open | 0 |
-| Open CR | none. CR8 đóng 2026-10-26 (DEC136 đến DEC142) |
+| Stage | 2.3 requirements-analysis |
+| Next action | Review và duyệt lại phần sửa CR9 của requirements v0.7, impact-matrix v0.8 và PRD v0.11; giữ các mục PO để sau |
+| Blocking questions open | Xem câu hỏi mở #21 của PRD: còn định nghĩa cần PO chốt cho US7 |
+| Open CR | CR9: sửa phần PRD đã rà soát; CR8 đã đóng 2026-10-26 |
 | Parked | no |
 
 ## Versions
@@ -44,10 +44,10 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 |---|---|---|---|---|
 | brd | v0.6 | approved | v0.6: 2026-10-26 · v0.6: 2026-10-26 · v0.6: 2026-10-26 · v0.5: 2026-10-25 · v0.5: 2026-10-25 · v0.5: 2026-10-25 · v0.4: 2026-10-22 · v0.4: 2026-10-22 · v0.4: 2026-10-22 · v0.3: 2026-10-12 · v0.2: 2026-10-06 | — |
 | competitive-analysis | v0.2 | approved | 2026-10-09 | — |
-| requirements | v0.6 | approved | 2026-10-26 | — |
-| impact-matrix | v0.7 | approved | v0.7: 2026-10-26 · v0.6: 2026-10-25 · v0.5: 2026-10-22 · v0.4: 2026-10-12 · v0.3: 2026-10-09 | — |
+| requirements | v0.7 | draft, chờ duyệt lại theo CR9 | 2026-10-26 | — |
+| impact-matrix | v0.8 | draft, chờ duyệt lại theo CR9 | v0.7: 2026-10-26 · v0.6: 2026-10-25 · v0.5: 2026-10-22 · v0.4: 2026-10-12 · v0.3: 2026-10-09 | — |
 | initiative-brief | — | không có, v1 dùng BRD | — | — |
-| prd | v0.8 | approved | v0.8: 2026-10-26 · v0.8: 2026-10-26 · v0.7: 2026-10-25 · v0.7: 2026-10-25 · v0.6: 2026-10-22 · v0.6: 2026-10-22 · v0.5: 2026-10-20 · v0.4: 2026-10-20 · v0.3: 2026-10-12 · v0.2: 2026-10-09 | v0.5 · Jg7ld8UCzoeMiAxW5ielxlC4gGg, revision 75, publish 2026-10-20 |
+| prd | v0.11 | draft, chờ duyệt lại theo CR9 | v0.8: 2026-10-26 · v0.8: 2026-10-26 · v0.7: 2026-10-25 · v0.7: 2026-10-25 · v0.6: 2026-10-22 · v0.6: 2026-10-22 · v0.5: 2026-10-20 · v0.4: 2026-10-20 · v0.3: 2026-10-12 · v0.2: 2026-10-09 | v0.5 · Jg7ld8UCzoeMiAxW5ielxlC4gGg, revision 75, publish 2026-10-20 |
 
 ## Log
 - 2026-10-05 created ở luồng v1, cỡ L
@@ -119,3 +119,23 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-26 PO duyệt CR8 bằng terminal (DEC136 đến DEC142), không review lại. Đóng CR8. PRD v0.8; Jira UPLND-409 báo cáo hiện tại, UPLND-420 báo cáo quá khứ ở backlog. Lark vẫn v0.5
 - 2026-10-26 Ước lượng lại theo baseline UPLND-404, 3 điểm (DEC143): tổng 47, đợt này 45; cập nhật comment 14 story trên Jira và bảng mục 6 của Decision Brief
 - 2026-10-27 Bỏ quy ước 1 điểm bằng 1 ngày và số ngày công khỏi comment 14 story Jira (DEC144)
+
+- 2026-11-03 Mở CR9 theo yêu cầu PO chỉ sửa phần đã rà soát. Lưu pre-CR9, cập nhật PRD v0.9 draft trong US2, US6, US7, US14 và câu hỏi mở #21. Không sửa các phần chưa chốt, file thiết kế, Story List hoặc bản publish. 2.42 chờ duyệt và review độc lập; 2.43 chờ PRD sửa được duyệt.
+
+- 2026-11-03 Kiểm bản sửa CR9: check prd-generation không cảnh báo; kiểm lớp AC có GAP 0, ORPHAN 0. Trace đầy đủ không hỗ trợ cấu trúc intent cũ thiếu stories.md, không chạy --write. Đối chiếu pre-CR9 xác nhận chỉ nội dung US2, US6, US7, US14, lịch sử phiên bản, metadata và câu hỏi mở #21 thay đổi; các user story khác và mục 1 đến 5, 7 đến 9, 11 giữ nguyên từng ký tự. Chưa có review độc lập cho bản v0.9.
+
+- 2026-11-03 Bổ sung CR9 theo DEC148: chỉ sửa Add Member trong US3 theo ảnh Add Student do PO đưa, kèm tiêu chí và lịch sử phiên bản. Lưu bản pre-CR9-add-member. Giữ nguyên bảng Members, các quy tắc thêm gỡ và các nội dung đã sửa trước đó; PRD v0.9 tiếp tục chờ duyệt.
+
+- 2026-11-04 Đối chiếu bốn ảnh PO cung cấp, DEC149: cập nhật riêng US3 Members/Add members và bảng giao diện US7 Assigned Classes/Assign classes. PRD v0.10 draft; bổ sung câu hỏi mở #22 về cách đếm Enrolled by group và Joined date khi nhiều quan hệ. Bản trước sửa pre-CR9-ui-review-20261104; giữ nguyên các phần khác, thiết kế và bản publish. Chi tiết khác biệt và đề xuất ở mục 12 của bản rà soát.
+
+- 2026-11-04 DEC150: PO chốt Enrolled by group đếm lượt ghi danh có nguồn nhóm đang xem. Lưu pre-CR9-enrollment-count; chỉ cập nhật US7 cùng metadata, lịch sử phiên bản và phần đã quyết của câu hỏi mở #22. PRD v0.11 draft; các trường hợp nhánh con, rời nhóm, đổi Cascade chưa tự chốt.
+
+- 2026-11-04 Rà soát toàn bộ nhận xét UAT tại inputs/uat-coverage-20261104.md. Đã phát hiện các phần còn thiếu: tự sinh mã, mặc định Table/nhãn Graph, số Subgroups, tạo subgroup theo ngữ cảnh, Overview chi tiết nhóm, Membership log thành tab giới hạn nhóm và định nghĩa Account status. DEC151 xác nhận Graph chỉ đổi tên. Chưa sửa thêm PRD trong bước kiểm độ phủ; các mục mơ hồ và option xoá đã để sau không được tự đưa vào phạm vi sửa.
+
+- 2026-11-04 DEC153: giữ cột Reason và bỏ Performed by khỏi bảng Membership log, giữ dữ liệu người thao tác để truy vết. Lưu pre-CR9-log-columns; cập nhật US15 và dòng tổng quan dữ liệu liên quan. PRD v0.12 draft; UAT Coverage đồng bộ quyết định, không khôi phục phần PO đã xoá hoặc chốt thay các mục để sau.
+
+- 2026-11-04 DEC154: đồng bộ Reason theo đúng PRD và sửa các phần UAT giữ lại còn lệch. Lưu pre-CR9-uat-sync cho requirements, impact-matrix và PRD. Mở 2.3 và 2.31 chờ duyệt lại vì mã nhóm chuyển sang tự sinh; cập nhật PRD v0.13, requirements v0.7 và impact-matrix v0.8 draft. Không thay mục đã xoá/để sau hoặc tự điền Account status.
+
+- 2026-11-04 Kiểm đồng bộ CR9: PRD v0.13 check không cảnh báo, lớp AC GAP 0/ORPHAN 0; trace đầy đủ không hỗ trợ intent cũ thiếu stories.md. Requirements có 76 cảnh báo, impact-analysis có 291 cảnh báo về mục template/thẻ nguồn/cột FR của cấu trúc cũ; không mở rộng sửa toàn bộ để tránh chạm phần không liên quan. UAT Coverage đã bỏ các nhãn Reason đề xuất cũ và cập nhật trạng thái đúng bản PRD hiện tại.
+
+- 2026-11-04 DEC155: theo yêu cầu PO, gộp các mốc nháp thành v0.9, v0.10, v0.11. PRD hiện tại đổi số từ v0.13 draft thành v0.11 draft; nội dung nghiệp vụ không đổi. Cập nhật tham chiếu hiện tại trong UAT Coverage và bản rà soát. Lưu pre-CR9-version-merge; giữ nguyên các bản archive và ghi chép lịch sử trước khi gộp.

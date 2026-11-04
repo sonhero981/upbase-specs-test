@@ -1,17 +1,17 @@
 ---
 intent: 261005-group
 artifact: requirements
-version: 0.6
-status: approved
+version: 0.7
+status: draft
 approved: 2026-10-09 (v0.3); 2026-10-05 (v0.2)
-cr: CR8 ngày 2026-10-26, ghi chú RC-11 và RC-24; CR7 ngày 2026-10-25, thêm RC-25 đến RC-30; CR6 ngày 2026-10-21, sửa RC-01, thêm RC-21 đến RC-24; CR1 ngày 2026-10-09, thêm RC-20
+cr: CR9 ngày 2026-11-04, mã nhóm tự tạo do hệ thống cấp, nhãn Graph và mặc định Table, nhật ký giới hạn theo nhóm; CR8 ngày 2026-10-26, ghi chú RC-11 và RC-24; CR7 ngày 2026-10-25, thêm RC-25 đến RC-30; CR6 ngày 2026-10-21, sửa RC-01, thêm RC-21 đến RC-24; CR1 ngày 2026-10-09, thêm RC-20
 ids: RC-01 đến RC-19 theo họ mã v1, không đổi
 migrated-from: pre-aidlc:.claude/projects/Group/working/ai-drafts/clarified-requirements-20261005.md
 approved_at: 2026-10-26T15:42
 ---
 # Làm rõ yêu cầu — Group
 
-**Ngày:** 05/10/2026 · **Phiên bản:** v0.6 — cập nhật 26/10/2026 theo CR8: báo cáo tại mốc quá khứ để sau. v0.5 ngày 25/10/2026 theo CR7: thêm `RC-25` đến `RC-28` từ file thiết kế của các team, `RC-29` và `RC-30` để `US19`, `US20` truy về yêu cầu. v0.4 ngày 21/10/2026 theo CR6: `RC-01` bỏ giới hạn số cấp, thêm `RC-21` đến `RC-24`. v0.3 ngày 09/10/2026 theo CR1, thêm `RC-20`. v0.2 ngày 05/10 sau khi PO trả lời 5 câu hỏi chặn
+**Ngày:** 05/10/2026 · **Phiên bản:** v0.7 bản nháp, cập nhật 04/11/2026 theo CR9: tự sinh mã nhóm tự tạo, Graph/Table và giới hạn nhật ký theo nhóm. v0.6 cập nhật 26/10/2026 theo CR8: báo cáo tại mốc quá khứ để sau. v0.5 ngày 25/10/2026 theo CR7: thêm `RC-25` đến `RC-28` từ file thiết kế của các team, `RC-29` và `RC-30` để `US19`, `US20` truy về yêu cầu. v0.4 ngày 21/10/2026 theo CR6: `RC-01` bỏ giới hạn số cấp, thêm `RC-21` đến `RC-24`. v0.3 ngày 09/10/2026 theo CR1, thêm `RC-20`. v0.2 ngày 05/10 sau khi PO trả lời 5 câu hỏi chặn
 **Input:** `working/raw-inputs/yeu-cau-goc-20261005.md` — 19 hạng mục, hai nhóm `Group` và `User Group Relationship`
 **Mục đích PO nêu:** tổ chức các nhóm học tập, để gán, theo dõi và đánh giá theo từng nhóm
 
@@ -85,14 +85,14 @@ Chi tiết: `working/ai-drafts/nghien-cuu-lms-khac-20261005.md`
 | `RC-01` | Cây nhóm nhiều cấp, **không giới hạn số cấp** *(CR6, DEC100; trước là số cấp tối đa cấu hình được)*. Mỗi nhóm có mã, tên, mô tả, nhóm cha [DEC100] | Data · Functional | Mục 1 | High | `Department Management` đã chết nên không dùng lại được. Làm mới, không mở rộng `Group Management` *(`BA-01`)* |
 | `RC-02` | Quan hệ người và nhóm là nhiều-nhiều. Nhiều cây gốc song song để thể hiện cơ cấu ma trận | Data | Mục 2 | High | `Group Management` hiện gán được user, nhưng chưa rõ có cho một người ở nhiều nhóm không — xem `OQ-16` |
 | `RC-03` | Phân loại nhóm theo nguồn: đồng bộ HRM và tự tạo. Nguồn quyết định quyền sửa | Business Rule | Mục 3 | Medium | HRM là **Lark**. Đã đồng bộ được học viên, Lark cũng đã có sẵn cây tổ chức. Cần mở rộng sang đồng bộ cây |
-| `RC-04` | Tạo, sửa, di chuyển nhóm. Di chuyển nhánh thì nhánh con đi theo và quan hệ quản lý tính lại | Functional | Mục 4 | High | |
+| `RC-04` | Tạo, sửa, di chuyển nhóm. Mã nhóm tự tạo do hệ thống tự sinh, duy nhất trong tổ chức và không cho người dùng sửa; giữ nguyên mã nhóm đã tồn tại và quy tắc nhận diện nhóm đồng bộ. Di chuyển nhánh thì nhánh con đi theo và quan hệ quản lý tính lại | Functional · Business Rule | Mục 4 · CR9, UAT Coverage được PO giữ lại | High | Không tự chốt định dạng mã hoặc chọn cách sinh mã kỹ thuật  [DEC154] |
 | `RC-05` | Thêm gỡ thành viên thủ công, một hoặc nhiều người, có tìm kiếm | Functional | Mục 5 | High | |
 | `RC-06` | Thêm gỡ thành viên theo lô: tệp mẫu, tải lên, đối soát từng dòng, báo lỗi theo dòng | Functional | Mục 6 | High | |
 | `RC-07` | Phạm vi nhóm cha bao trùm toàn bộ nhánh con ở mọi màn đọc dữ liệu | Business Rule | Mục 7 | High | **Rule nền**, chi phối mọi báo cáo. Ảnh hưởng hiệu năng truy vấn |
 | `RC-08` | Gán nội dung cho nhóm, có tuỳ chọn chảy xuống nhánh con, mặc định tắt | Functional | Mục 8 | High | Gán cho nhóm là **luật đứng**, không phải sao chép một lần. Vẫn đi qua Lớp để sinh lượt ghi danh |
 | `RC-09` | Cấu hình từng nhóm: người vào sau có tự nhận nội dung đã gán không, toàn bộ hay chỉ còn hiệu lực | Business Rule | Mục 9 | Medium | Chạm logic ghi danh hiện có |
-| `RC-10` | Danh sách nhóm dạng cây hoặc bảng, lọc theo nguồn, cấp, trạng thái, người quản lý | Screen | Mục 10 | High | |
-| `RC-11` | Nhật ký thay đổi thành viên, đủ để dựng lại ai thuộc nhóm nào tại một thời điểm quá khứ | Data · NFR | Mục 11 | High | Yêu cầu lưu lịch sử có dấu thời gian, giống ràng buộc `C3` ở Gamification. CR8: phần dựng lại ai thuộc nhóm nào vẫn làm qua nhật ký; báo cáo tại mốc quá khứ để sau [DEC135] |
+| `RC-10` | Danh sách nhóm có Table và Graph; Graph chỉ là nhãn mới của cây hiện có. Lần đầu mở mặc định Table, nhớ lựa chọn gần nhất; hai dạng dùng chung bộ lọc nguồn, trạng thái, người quản lý. Không có Level hoặc Show archived riêng | Screen | Mục 10 · CR9, UAT Coverage được PO giữ lại | High | Cách đếm Subgroups và Group by Parent để sau  [DEC154] |
+| `RC-11` | Nhật ký thay đổi thành viên, đủ để dựng lại ai thuộc nhóm nào tại một thời điểm quá khứ. Khi mở từ nhóm, chỉ xem phạm vi nhóm đang chọn, không đổi nhóm trong ngữ cảnh đó; giữ nhãn Reason, không hiện cột Performed by nhưng vẫn lưu người thao tác | Data · NFR | Mục 11 | High | Yêu cầu lưu lịch sử có dấu thời gian, giống ràng buộc `C3` ở Gamification. CR8: phần dựng lại ai thuộc nhóm nào vẫn làm qua nhật ký; báo cáo tại mốc quá khứ để sau [DEC135]  [DEC154] |
 | `RC-12` | Lưu trữ nhóm: ngừng nhận nội dung mới, giữ lịch sử. Xoá nhóm: xử lý thành viên và nội dung đã gán | Business Rule | Mục 12 | Medium | *"Xử lý"* chưa định nghĩa — xem `OQ-07` |
 | `RC-13` | Một nhóm có một hoặc nhiều người quản lý, là người dùng chứ không phải vai trò | Data | Mục 13 | High | |
 | `RC-14` | Quản lý suy ra theo cây: không chỉ định đích danh thì lấy quản lý của nhóm cha gần nhất. Tính động | Business Rule | Mục 14 | High | Quan hệ tính lúc đọc, không lưu cứng |
@@ -198,3 +198,7 @@ Khung nhóm và cây · thành viên thủ công và theo lô · quan hệ quả
 → Chạy đủ 9 bước, đủ 4 Gate.
 
 Chi tiết câu hỏi mở: `working/open-questions/open-questions-20261005.md`
+
+## Cập nhật theo CR9 ngày 04/11/2026
+
+Chỉ cập nhật RC-04 tạo sửa di chuyển nhóm, RC-10 danh sách nhóm và RC-11 nhật ký theo phần UAT Coverage được PO giữ lại. Không thay phạm vi sản phẩm hoặc quy tắc ghi danh. Các mục Subgroups, Group by Parent, log nhánh con và thay đổi lối nhật ký từ hồ sơ người được để sau. [DEC154]
