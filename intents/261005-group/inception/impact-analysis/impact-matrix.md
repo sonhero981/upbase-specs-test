@@ -1,10 +1,10 @@
 ---
 intent: 261005-group
 artifact: impact-matrix
-version: 0.7
-status: approved
+version: 0.8
+status: draft
 approved: 2026-10-12 (v0.4); 2026-10-09 (v0.3); 2026-10-06 (v0.2)
-cr: CR8 ngày 2026-10-26, báo cáo quá khứ và job chụp để sau; CR7 ngày 2026-10-25, vùng 16 đến 18, OQ-25 đóng, OQ-42 và OQ-43; CR6 ngày 2026-10-21, bỏ giới hạn cấp, một người nhiều vai, tự chấm, báo cáo trong chi tiết nhóm, vùng 13 đến 15; CR2 ngày 2026-10-12, CG-3 đã giải và OQ-31; CR1 ngày 2026-10-09, vùng 9 và BI-6
+cr: CR9 ngày 2026-11-04, đối chiếu mã nhóm tự sinh, Graph/Table và phạm vi nhật ký theo nhóm; CR8 ngày 2026-10-26, báo cáo quá khứ và job chụp để sau; CR7 ngày 2026-10-25, vùng 16 đến 18, OQ-25 đóng, OQ-42 và OQ-43; CR6 ngày 2026-10-21, bỏ giới hạn cấp, một người nhiều vai, tự chấm, báo cáo trong chi tiết nhóm, vùng 13 đến 15; CR2 ngày 2026-10-12, CG-3 đã giải và OQ-31; CR1 ngày 2026-10-09, vùng 9 và BI-6
 gate: v1 Gate 2
 migrated-from: pre-aidlc:.claude/projects/Group/working/impact-analysis/impact-matrix-v0.2-20261006.md
 approved_at: 2026-10-26T15:42
@@ -14,7 +14,7 @@ approved_at: 2026-10-26T15:42
 | | |
 | --- | --- |
 | **Project** | Group |
-| **Version** | **v0.7** — 26/10/2026, CR8. v0.6 ngày 25/10/2026, CR7. v0.5 ngày 21/10/2026, CR6. v0.4 ngày 12/10/2026, CR2. v0.3 ngày 09/10/2026, CR1. v0.2 ngày 06/10/2026 |
+| **Version** | **v0.8 draft** — 04/11/2026, CR9. **v0.7** — 26/10/2026, CR8. v0.6 ngày 25/10/2026, CR7. v0.5 ngày 21/10/2026, CR6. v0.4 ngày 12/10/2026, CR2. v0.3 ngày 09/10/2026, CR1. v0.2 ngày 06/10/2026 |
 | **Ngày** | Dựng 05/10/2026 · duyệt Gate 2 ngày 06/10/2026 |
 | **Nguồn input** | `brd-v0.1-20261005.md` · `related-features-map-20261005.md` · KB `04` `05` `06` `09` `11` `12` `13` `14` `15` `16` · **Swagger đọc 05/10/2026** · **schema Lark tải và đọc 05/10/2026** |
 | **Trạng thái** | ✅ **Approved** — v0.4 ngày 12/10/2026 (CR2) · v0.3 ngày 09/10/2026 (CR1) · Gate 2 ngày 06/10/2026. 6/6 conflict đã quyết, 15/15 coverage gap có luật hoặc có chỗ ghi |
@@ -401,3 +401,15 @@ Cộng với **4 câu nhóm D còn mở**: `OQ-21` · `OQ-22` · `OQ-23` · `OQ-
 | **Mail** | KB `13` — #11 #12 #23 #24 #25 #26 *(đang bật)* · #17–#20 #32–#35 *(đang tắt)* |
 | **Quyết định** | `project-decisions.md` — Bước 2 · Bước 3 · Gate 1 · Bước 5 |
 | **⚠️ Chưa tra được** | • **Ma trận quyền Casbin** — `casbin_rule` không đọc được từ schema, chưa có bản export. KB `06` Q1 treo từ 23/09<br>• **Vùng `Schedules` · `Room Management` · `Class Schedule`** — 45+ operation, KB chưa phủ. Không kết luận có ảnh hưởng hay không<br>• **Cơ chế `transfer` học viên giữa lớp** — chỉ thấy qua endpoint, không có tài liệu nào mô tả<br>• **Dữ liệu thật trong `groups`** — chưa biết rỗng hay có |
+
+
+## Đối chiếu phần UAT giữ lại theo CR9 ngày 04/11/2026
+
+| Vùng bị chạm | Tác động nghiệp vụ và yêu cầu phải giữ | Phạm vi sửa |
+|---|---|---|
+| Tạo và sửa nhóm thủ công | Hệ thống cấp mã duy nhất trong tổ chức, người dùng không nhập hoặc sửa mã. Tạo đồng thời không sinh mã trùng. Không đổi mã nhóm đã tồn tại hoặc cách nhận diện nhóm đồng bộ từ hệ thống nhân sự | Bỏ validate nhập mã ở luồng tạo; giữ hiển thị mã để tra cứu và giữ tính bất biến sau tạo. Không quy định thuật toán, tiền tố, độ dài hoặc cơ chế lưu dữ liệu  [DEC154] |
+| Danh sách nhóm | Table là mặc định lần mở đầu; Graph chỉ đổi nhãn của dạng cây hiện có; giữ mở nhánh, kéo thả, điều kiện di chuyển và bộ lọc chung. Badge Manual/Synced nhất quán giữa nguồn và danh sách | Không tạo sơ đồ mới, không mở thêm phạm vi dữ liệu, không tự bổ sung Subgroups hoặc Group by Parent khi chưa chốt  [DEC154] |
+| Nhật ký mở từ nhóm | Phạm vi cố định theo nhóm đang chọn; các bộ lọc còn lại không được làm lộ log của nhóm khác. Giữ quyền đọc nhật ký, chỉ đọc, không xoá lịch sử | Reason giữ năm giá trị hiện có. Không hiện Performed by nhưng tiếp tục lưu người thao tác. Không tự đổi lối vào từ hồ sơ người hoặc chốt log nhánh con  [DEC154] |
+| Các phần khác | Không thay lượt ghi danh, tiến độ, mail hoặc báo cáo do đồng bộ các chi tiết này | Các quy tắc đã duyệt và bản sửa CR9 trước đó giữ nguyên. Không thay file thiết kế của các PIC  [DEC154] |
+
+Tự sinh mã là thay đổi hành vi của yêu cầu tạo nhóm, nên CR9 mở lại Requirements Analysis và Impact Analysis, sau đó đối chiếu PRD. Không dùng việc đổi chi tiết giao diện làm lý do bỏ qua hai bước này. Các artifact sửa là bản nháp, chưa được duyệt lại. [DEC154]
