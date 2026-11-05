@@ -78,3 +78,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-11-03 CR-015 đổi tên ba giá trị ngưỡng (điểm lên hạng chuẩn, điểm cộng thêm mỗi hạng, điểm lên hạng tối đa) và chốt câu chữ khối Levels (DEC171). Cập nhật Jira UPLND-401
 - 2026-11-05 CR-015 phần xem trước khối Levels đổi thành bảng ba cột: lần lên hạng, điểm cần, độ khó so với lần trước theo phần trăm (DEC172). Cập nhật Jira UPLND-401 và user guide Ops
 - 2026-11-05 CR-015 bảng xem trước: cột 1 bỏ chữ Level, cột 3 đổi tên thành Difficulty vs previous (DEC173). Cập nhật Jira UPLND-401 và user guide Ops
+- 2026-11-05 CR-015 bảng xem trước: cột 3 so với lần lên hạng đầu thay vì lần ngay trước, tên Difficulty vs level 1, ví dụ +100% … +900% (DEC174). Cập nhật Jira UPLND-401 và user guide Ops
