@@ -807,6 +807,8 @@ Mô hình bội số của `US10`, PRD v0.15. Ba tiêu chí độc lập, mỗi 
 | Huy hiệu góp vào hạng thế nào | **Thêm hành động `On each badge earned` trong khối `Points`.** Claude đề xuất huy hiệu không góp vào hạng, PO chọn khác |
 | Bảng xếp hạng `Level` | **Giữ.** Claude đề xuất bỏ vì gần trùng bảng `Points`, PO chọn khác. Lý do PO: *"để 2 bảng xếp hạng point và level cũng không sao, vì level là all time còn point còn xem được khoảng và theo campgain"* |
 
+**05/11/2026:** dòng xem trước dưới ba ô điểm lên hạng đổi thành bảng ba cột: lần lên hạng, số điểm cần, độ khó so với lần trước tính bằng phần trăm, `DEC172`.
+
 **03/11/2026:** đổi tên ba giá trị cho Ops dễ hiểu: `nền` thành **điểm lên hạng chuẩn**, `bước` thành **điểm cộng thêm mỗi hạng**, `trần ngưỡng` thành **điểm lên hạng tối đa**. Câu chữ khối `Levels` viết lại theo PO, bỏ tiêu đề nhóm. Công thức không đổi, `DEC171`.
 
 ## Rule mới
@@ -837,7 +839,7 @@ Mô hình bội số của `US10`, PRD v0.15. Ba tiêu chí độc lập, mỗi 
 | e | Campaign chọn được loại hành động `On each badge earned` như bốn loại khác | Rule 4: hành động điểm nào cũng chịu cùng rule |
 | f | Lên nhiều hạng một lúc: lịch sử ghi **một dòng cho mỗi hạng**, toast chỉ hiện **hạng cuối** | Không làm ngập thông báo |
 | g | Chạm trần hạng thì ngừng tích điểm trong hạng, thanh tiến độ hiện `Max level`. Nâng trần hạng thì tích lại từ `0`. Điểm vẫn cộng bình thường | Không lên bù |
-| h | Điểm lên hạng tối đa bằng điểm lên hạng chuẩn thì ô điểm cộng thêm mỗi hạng **vẫn sửa được**, dưới ô hiện `Has no effect while the cap equals the standard level-up points.` Dòng xem trước hiện `Every level: {n} pts` | Trang tự lưu từng ô; khoá theo quan hệ giữa hai số thì Ops phải sửa đúng thứ tự mới mở được ô |
+| h | Điểm lên hạng tối đa bằng điểm lên hạng chuẩn thì ô điểm cộng thêm mỗi hạng **vẫn sửa được**, dưới ô hiện `Has no effect while the cap equals the standard level-up points.` Bảng xem trước còn một dòng `Every level` | Trang tự lưu từng ô; khoá theo quan hệ giữa hai số thì Ops phải sửa đúng thứ tự mới mở được ô |
 
 **Giá trị mặc định gợi ý**, chỉnh lại sau giai đoạn chạy ngầm:
 
@@ -906,7 +908,7 @@ Hạng bắt đầu đứng yên tính bằng `(điểm lên hạng tối đa �
 
 ## Câu chữ
 
-**Khối `Levels`.** Không có tiêu đề nhóm cho ba ô điểm lên hạng; mỗi nhãn đều có chữ `level-up` nên đứng riêng vẫn hiểu. Thứ tự: ba ô điểm lên hạng, dòng xem trước, rồi hạng tối đa. Design ngày 26/10 có nhóm năm ô EXP theo hành động; nhóm này bỏ.
+**Khối `Levels`.** Không có tiêu đề nhóm cho ba ô điểm lên hạng; mỗi nhãn đều có chữ `level-up` nên đứng riêng vẫn hiểu. Thứ tự: ba ô điểm lên hạng, bảng xem trước, rồi hạng tối đa. Design ngày 26/10 có nhóm năm ô EXP theo hành động; nhóm này bỏ.
 
 | Vị trí | Thành phần | Chữ |
 |---|---|---|
@@ -916,9 +918,49 @@ Hạng bắt đầu đứng yên tính bằng `(điểm lên hạng tối đa �
 | Ô 1 | Điểm lên hạng chuẩn | Nhãn `Standard level-up points` · Mô tả `Points needed for each level-up before extra points are added.` |
 | Ô 2 | Điểm cộng thêm mỗi hạng | Nhãn `Extra points per level` · Mô tả `Each next level needs this many more points than the one before. Set 0 to keep every level the same.` · Nhắc khi ô 3 bằng ô 1: `Has no effect while the cap equals the standard level-up points.` |
 | Ô 3 | Điểm lên hạng tối đa | Nhãn `Level-up points cap` · Mô tả `Points needed to level up stop increasing at this number. Leave empty to keep increasing.` · Lỗi khi nhỏ hơn ô 1: `Must be at least the standard level-up points.` |
-| Dưới ô 3 | Dòng xem trước | Tự cập nhật theo ba ô. Ví dụ `Level 2: 250 pts · Level 3: 500 pts · Level 4: 750 pts · Level 11 onwards: 2,500 pts`. Ô 3 bằng ô 1: `Every level: {n} pts` |
+| Dưới ô 3 | Bảng xem trước | Bảng ba cột, quy tắc ở mục *Bảng xem trước* ngay dưới |
 | Sau ba ô | Tiêu đề | `Maximum level` |
 | Sau ba ô | Mô tả | `The highest level users can reach. Turn this off for no limit.` |
+
+**Bảng xem trước** (PO 05/11, `DEC172`, thay dòng xem trước một hàng chữ)
+
+Bảng đặt ngay dưới ô 3, cho Ops thấy số điểm từng lần lên hạng và độ dốc của thang hạng trước khi rời ô.
+
+| Cột | Tiêu đề | Nội dung |
+|---|---|---|
+| 1 | `Level` | Lần lên hạng, dạng `Level {n} → {n+1}` |
+| 2 | `Points needed` | Số điểm cần cho lần lên hạng đó, tính theo công thức ở rule 2, dạng `{điểm} pts`, phân cách hàng nghìn bằng dấu phẩy |
+| 3 | `vs previous` | Độ khó so với lần lên hạng ngay trước, tính bằng `(điểm dòng này − điểm dòng trước) ÷ điểm dòng trước`, làm tròn tới số nguyên gần nhất (`.5` làm tròn lên), dạng `+{x}%`. Dòng đầu hiện `—`. Lớn hơn `0` nhưng làm tròn ra `0` thì hiện `+<1%` |
+
+Số dòng:
+
+| Trường hợp | Bảng hiện |
+|---|---|
+| Có điểm lên hạng tối đa, chạm mức tối đa trong 10 lần lên hạng đầu | Từng dòng tới lần lên hạng chạm mức tối đa, rồi một dòng `Level {k} onwards` · `{điểm tối đa} pts` · `Same as previous` |
+| Có điểm lên hạng tối đa, cần hơn 10 lần lên hạng mới chạm | 8 dòng đầu, một dòng `…`, dòng chạm mức tối đa, rồi dòng `Level {k} onwards` |
+| Bỏ trống điểm lên hạng tối đa | 10 dòng đầu, rồi dòng `Level 11 onwards` · `+{điểm cộng thêm} pts each level` · `—` |
+| Điểm cộng thêm `= 0`, hoặc điểm tối đa bằng điểm chuẩn | Một dòng `Every level` · `{điểm chuẩn} pts` · `—` |
+| `Maximum level` đang bật và hạng tối đa đến trước các mốc trên | Bảng dừng ở dòng `Level {max−1} → {max}`, không có dòng `onwards` |
+
+Bảng cập nhật ngay khi Ops gõ, trước khi ô được lưu, để thấy hệ quả trước khi rời ô. Ô nào đang lỗi thì bảng tính theo giá trị đã lưu của ô đó.
+
+Ví dụ với điểm lên hạng chuẩn `250`, điểm cộng thêm mỗi hạng `250`, điểm lên hạng tối đa `2.500`:
+
+| `Level` | `Points needed` | `vs previous` |
+|---|---|---|
+| `Level 1 → 2` | `250 pts` | `—` |
+| `Level 2 → 3` | `500 pts` | `+100%` |
+| `Level 3 → 4` | `750 pts` | `+50%` |
+| `Level 4 → 5` | `1,000 pts` | `+33%` |
+| `Level 5 → 6` | `1,250 pts` | `+25%` |
+| `Level 6 → 7` | `1,500 pts` | `+20%` |
+| `Level 7 → 8` | `1,750 pts` | `+17%` |
+| `Level 8 → 9` | `2,000 pts` | `+14%` |
+| `Level 9 → 10` | `2,250 pts` | `+13%` |
+| `Level 10 → 11` | `2,500 pts` | `+11%` |
+| `Level 11 onwards` | `2,500 pts` | `Same as previous` |
+
+Cột 3 dùng phần trăm vì chênh lệch tuyệt đối luôn bằng đúng điểm cộng thêm mỗi hạng, không cho Ops thêm thông tin. Phần trăm cho thấy thang hạng dốc ở các hạng đầu, thoải dần, rồi phẳng khi chạm mức tối đa.
 
 **Khối `Points`**, thêm một dòng:
 
@@ -944,8 +986,8 @@ Hạng bắt đầu đứng yên tính bằng `(điểm lên hạng tối đa �
 | Impact Matrix | Data: hành động điểm mới cho huy hiệu, ba giá trị ngưỡng, điểm trong hạng của học viên |
 | PRD | `US10` viết lại · `US8` thêm `On each badge earned` · `US2` toast huy hiệu kèm điểm · `US1` ô hạng và panel `How to level up?` có thanh tiến độ, đảo mục `[đề xuất]` bỏ thanh tiến độ trong `OQ-43`; panel `How to collect points?` thêm dòng huy hiệu · `US3` dòng huy hiệu kèm điểm · `US6`, `US11` cách xếp bảng `Level` · `US19`, `US20` thêm loại hành động huy hiệu · `US22` điểm huy hiệu trong nhật ký · `BR-10.2`, `BR-10.4a`, `BR-10.7`, `BR-10.8` |
 | Technical design backend | `gamification_level_criteria` thay bằng ba giá trị ngưỡng · `point_rules` thêm hành động `BADGE` · `gamification_learner_stats` thêm điểm trong hạng · xét hạng sau mỗi lần cộng điểm · API `/levels` · `/me` trả lại tiến độ hạng |
-| Technical design frontend | `LevelsBlock` còn nhóm `Points to level up` kèm dòng xem trước và trạng thái khoá khi `Points` tắt · `PointsBlock` thêm dòng huy hiệu · `HowToDrawer` view `level` và `collect` · toast huy hiệu |
-| Design | Khối `Levels`: bỏ nhóm năm ô EXP, thêm ô điểm cộng thêm mỗi hạng, ô điểm lên hạng tối đa, dòng xem trước, sửa câu chữ theo mục Câu chữ · khối `Points` thêm dòng huy hiệu · panel `How to level up?` |
+| Technical design frontend | `LevelsBlock` còn nhóm `Points to level up` kèm bảng xem trước và trạng thái khoá khi `Points` tắt · `PointsBlock` thêm dòng huy hiệu · `HowToDrawer` view `level` và `collect` · toast huy hiệu |
+| Design | Khối `Levels`: bỏ nhóm năm ô EXP, thêm ô điểm cộng thêm mỗi hạng, ô điểm lên hạng tối đa, bảng xem trước, sửa câu chữ theo mục Câu chữ · khối `Points` thêm dòng huy hiệu · panel `How to level up?` |
 | Kịch bản demo trên Lark | Phần 1.3 và phần 4 mô tả mô hình bội số |
 
 ## Điểm re-entry đề xuất — xác nhận khi mở lại
