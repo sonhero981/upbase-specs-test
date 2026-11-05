@@ -11,7 +11,7 @@
 | **CR-011** | 2026-10-06 | **Trang cấu hình Ops tự lưu, bỏ nút lưu.** Chỉ giữ hai xác nhận dạng popover. Tắt `Points` hoặc `Badges` thì tiêu chí lên hạng tương ứng khoá theo. Bỏ giới hạn trên của số điểm. Bỏ ô chọn múi giờ và nhãn trạng thái | PO làm design màn `Enable - Setting`, thấy lệch với PRD và TD-FE | ✅ **Đã áp dụng** — PRD v0.9, re-entry từ PRD do PO confirm |
 | **CR-012** | 2026-10-08 | **Bảng xếp hạng: `Badges` chỉ còn ở `All time` như `Level`, thêm bảng `Activities`.** Kèm câu chữ check-in thay cho "login", và mấy chỗ vá đi cùng | PO review design màn cấu hình huy hiệu và chuỗi check-in | ✅ **Đã áp dụng** — gộp với `CR-013`, re-entry từ BRD do PO confirm |
 | **CR-013** | 2026-10-08 | **Đưa chiến dịch (campaign) trở lại phạm vi**, đảo một phần `CR-007`. Học viên bỏ bộ chọn khoảng ngày tự do, chỉ còn khung cố định. Campaign chọn khoảng thời gian và loại hành động tính điểm, **số điểm theo cấu hình chung** | PO chỉ định: khoảng ngày tự do phía học viên là lỗ hổng để spam tính toán | ✅ **Đã áp dụng** — BRD v0.7 · Impact v0.3 · Solution v0.2 · PRD v0.10, re-entry từ BRD do PO confirm |
-| **CR-015** | 2026-10-25 | **Lên hạng theo điểm tích luỹ, ngưỡng tăng dần** `min(nền + (n−1) × bước, trần ngưỡng)`. Thêm hành động điểm cho huy hiệu. Thay mô hình ba tiêu chí bội số. Ngày 25/10 và 26/10 dùng EXP riêng, ngày 27/10 gộp vào điểm | PO muốn một thước đo tích luỹ để lên hạng | ⏸ **Parked** — làm sau bản ra mắt. Chưa sửa artifact nào ngoài ghi chú trong PRD. Jira [UPLND-401](https://jira.upbase.asia/browse/UPLND-401) |
+| **CR-015** | 2026-10-25 | **Lên hạng theo điểm tích luỹ, ngưỡng tăng dần** `min(điểm lên hạng chuẩn + (n−1) × điểm cộng thêm mỗi hạng, điểm lên hạng tối đa)`. Thêm hành động điểm cho huy hiệu. Thay mô hình ba tiêu chí bội số. Ngày 25/10 và 26/10 dùng EXP riêng, ngày 27/10 gộp vào điểm | PO muốn một thước đo tích luỹ để lên hạng | ⏸ **Parked** — làm sau bản ra mắt. Chưa sửa artifact nào ngoài ghi chú trong PRD. Jira [UPLND-401](https://jira.upbase.asia/browse/UPLND-401) |
 
 ---
 
@@ -807,16 +807,22 @@ Mô hình bội số của `US10`, PRD v0.15. Ba tiêu chí độc lập, mỗi 
 | Huy hiệu góp vào hạng thế nào | **Thêm hành động `On each badge earned` trong khối `Points`.** Claude đề xuất huy hiệu không góp vào hạng, PO chọn khác |
 | Bảng xếp hạng `Level` | **Giữ.** Claude đề xuất bỏ vì gần trùng bảng `Points`, PO chọn khác. Lý do PO: *"để 2 bảng xếp hạng point và level cũng không sao, vì level là all time còn point còn xem được khoảng và theo campgain"* |
 
+**05/11/2026, lần 2:** cột 1 bỏ chữ `Level`, chỉ còn `1 → 2`. Cột 3 đổi tên thành `Difficulty vs previous`, `DEC173`.
+
+**05/11/2026:** dòng xem trước dưới ba ô điểm lên hạng đổi thành bảng ba cột: lần lên hạng, số điểm cần, độ khó so với lần trước tính bằng phần trăm, `DEC172`.
+
+**03/11/2026:** đổi tên ba giá trị cho Ops dễ hiểu: `nền` thành **điểm lên hạng chuẩn**, `bước` thành **điểm cộng thêm mỗi hạng**, `trần ngưỡng` thành **điểm lên hạng tối đa**. Câu chữ khối `Levels` viết lại theo PO, bỏ tiêu đề nhóm. Công thức không đổi, `DEC171`.
+
 ## Rule mới
 
 | # | Rule | Nguồn |
 |---|---|---|
 | 1 | **Hạng lên theo điểm tích luỹ.** Bỏ ba tiêu chí bội số và bỏ khái niệm EXP. Mọi điểm học viên nhận trong lúc `Levels` bật đều góp vào hạng | PO 27/10 |
-| 2 | Điểm cần để đi từ hạng `n` lên `n+1` là `min(nền + (n−1) × bước, trần ngưỡng)`. Ops chỉnh ba giá trị trong khối `Levels`. Quan hệ của ba giá trị ở mục *Nền, bước và trần ngưỡng* | PO 25/10 |
+| 2 | Điểm cần để đi từ hạng `n` lên `n+1` là `min(điểm lên hạng chuẩn + (n−1) × điểm cộng thêm mỗi hạng, điểm lên hạng tối đa)`. Ops chỉnh ba giá trị trong khối `Levels`. Quan hệ của ba giá trị ở mục *Ba giá trị quyết định điểm lên hạng* | PO 25/10 |
 | 3 | Học viên tích **điểm trong hạng**. Đủ ngưỡng thì lên hạng, phần dư chuyển sang hạng mới. Ví dụ hạng `3` có `700 / 750 pts`, nhận `+150` thành `850`: lên hạng `4`, còn `100 / 1,000 pts` | Claude |
 | 4 | **Thêm hành động điểm `On each badge earned`** trong khối `Points`: mỗi lần đạt huy hiệu được một số điểm. Hành động này có công tắc và ô số như bốn hành động khác, chịu cùng rule bảng xếp hạng và campaign | PO 27/10 |
 | 5 | Đổi số điểm của hành động: áp dụng từ thời điểm lưu, theo `C4` | Giữ |
-| 6 | Đổi `nền`, `bước` hoặc `trần ngưỡng`: hạng và điểm trong hạng giữ nguyên. Ngưỡng mới áp từ lần xét kế tiếp. Điểm trong hạng đã vượt ngưỡng mới thì lên hạng ở lần nhận điểm kế tiếp, có thể lên nhiều hạng một lúc | PO 25/10, nới `BR-10.4a` |
+| 6 | Đổi điểm lên hạng chuẩn, điểm cộng thêm mỗi hạng hoặc điểm lên hạng tối đa: hạng và điểm trong hạng giữ nguyên. Ngưỡng mới áp từ lần xét kế tiếp. Điểm trong hạng đã vượt ngưỡng mới thì lên hạng ở lần nhận điểm kế tiếp, có thể lên nhiều hạng một lúc | PO 25/10, nới `BR-10.4a` |
 | 7 | Hạng chỉ lên, không tụt (`BR-10.3`). Trần hạng `Maximum level` giữ như cũ | Giữ |
 | 8 | **`Levels` cần `Points`.** Tắt `Points` thì `Levels` khoá: ngừng xét lên hạng, ba ô ngưỡng giữ giá trị và không thao tác được, học viên giữ hạng. Bật lại `Points` thì `Levels` chạy lại như trước, theo nguyên tắc khoá của `BR-10.7` | Claude, theo `BR-10.7` |
 | 9 | Điểm chỉ góp vào hạng khi `Gamification`, `Points` và `Levels` cùng bật. Không lên bù cho giai đoạn tắt, theo tinh thần `BR-10.4a` | Claude |
@@ -835,7 +841,7 @@ Mô hình bội số của `US10`, PRD v0.15. Ba tiêu chí độc lập, mỗi 
 | e | Campaign chọn được loại hành động `On each badge earned` như bốn loại khác | Rule 4: hành động điểm nào cũng chịu cùng rule |
 | f | Lên nhiều hạng một lúc: lịch sử ghi **một dòng cho mỗi hạng**, toast chỉ hiện **hạng cuối** | Không làm ngập thông báo |
 | g | Chạm trần hạng thì ngừng tích điểm trong hạng, thanh tiến độ hiện `Max level`. Nâng trần hạng thì tích lại từ `0`. Điểm vẫn cộng bình thường | Không lên bù |
-| h | Trần ngưỡng bằng nền thì ô `bước` **vẫn sửa được**, dưới ô hiện `Has no effect while the points cap equals the starting points.` Dòng xem trước hiện `Every level: {n} pts` | Trang tự lưu từng ô; khoá theo quan hệ giữa hai số thì Ops phải sửa đúng thứ tự mới mở được ô |
+| h | Điểm lên hạng tối đa bằng điểm lên hạng chuẩn thì ô điểm cộng thêm mỗi hạng **vẫn sửa được**, dưới ô hiện `Has no effect while the cap equals the standard level-up points.` Bảng xem trước còn một dòng `Every level` | Trang tự lưu từng ô; khoá theo quan hệ giữa hai số thì Ops phải sửa đúng thứ tự mới mở được ô |
 
 **Giá trị mặc định gợi ý**, chỉnh lại sau giai đoạn chạy ngầm:
 
@@ -843,7 +849,7 @@ Mô hình bội số của `US10`, PRD v0.15. Ba tiêu chí độc lập, mỗi 
 |---|---|
 | Bốn hành động điểm hiện có | Giữ: check-in `10` đến `40` theo chuỗi · hoạt động `10` · khoá `150` · bài Test `25` |
 | `On each badge earned` | `50` |
-| Ngưỡng | nền `250` · bước `250` · trần ngưỡng `2.500` |
+| Điểm lên hạng | chuẩn `250` · cộng thêm mỗi hạng `250` · tối đa `2.500` |
 
 Với bộ số này, điểm cần để lên hạng kế là `250 × n` cho tới hạng `10`, rồi đứng yên ở `2.500`.
 
@@ -855,69 +861,108 @@ Với bộ số này, điểm cần để lên hạng kế là `250 × n` cho t�
 | Hạng `5` | `2.500` | 1,5 tháng |
 | Hạng `10` | `11.250` | 7 tháng |
 | Mỗi hạng từ hạng `11` | `2.500` một hạng | 1,6 tháng một hạng |
-| Hạng `20` | `36.250` | khoảng 1,9 năm. Không có trần ngưỡng thì `47.500`, khoảng 2,5 năm |
+| Hạng `20` | `36.250` | khoảng 1,9 năm. Không có điểm lên hạng tối đa thì `47.500`, khoảng 2,5 năm |
 
-## Nền, bước và trần ngưỡng liên quan với nhau thế nào
+## Ba giá trị quyết định điểm lên hạng
 
 Ba giá trị cùng quyết định **số điểm học viên cần tích trong một hạng để lên hạng kế tiếp**. Mỗi giá trị lo một việc:
 
-| Giá trị | Trả lời câu hỏi | Ảnh hưởng tới |
-|---|---|---|
-| `nền` | Lên hạng đầu tiên, từ `1` lên `2`, cần bao nhiêu điểm | Học viên mới có thấy mình lên hạng sớm không |
-| `bước` | Mỗi hạng sau cần thêm bao nhiêu điểm so với hạng trước | Các hạng giữa khó lên dần nhanh hay chậm |
-| `trần ngưỡng` | Một hạng cần nhiều nhất bao nhiêu điểm | Học viên lâu năm còn lên hạng đều đặn không |
+| Giá trị | Nhãn trên UI | Trả lời câu hỏi | Ảnh hưởng tới |
+|---|---|---|---|
+| **Điểm lên hạng chuẩn** | `Standard level-up points` | Một lần lên hạng cần bao nhiêu điểm khi chưa cộng thêm gì. Lần lên hạng đầu tiên, từ `1` lên `2`, cần đúng số này | Học viên mới có thấy mình lên hạng sớm không |
+| **Điểm cộng thêm mỗi hạng** | `Extra points per level` | Mỗi hạng sau cần nhiều hơn hạng ngay trước nó bao nhiêu điểm | Các hạng giữa khó lên dần nhanh hay chậm |
+| **Điểm lên hạng tối đa** | `Level-up points cap` | Số điểm cần cho một lần lên hạng tăng tới đâu thì dừng | Học viên lâu năm còn lên hạng đều đặn không |
 
-Công thức: **điểm cần để đi từ hạng `n` lên `n+1` = `min(nền + (n−1) × bước, trần ngưỡng)`**.
+Công thức: **điểm cần để đi từ hạng `n` lên `n+1` = `min(điểm lên hạng chuẩn + (n−1) × điểm cộng thêm mỗi hạng, điểm lên hạng tối đa)`**.
 
-Đọc theo ba đoạn:
+`(n−1) × điểm cộng thêm mỗi hạng` không phải hệ số nhân. Nó chỉ đếm số lần điểm cộng thêm đã được cộng dồn: ở hạng `n`, điểm cộng thêm đã cộng `n−1` lần. Đọc theo ba đoạn:
 
-1. **Hạng `1` lên `2`:** cần đúng `nền`.
-2. **Các hạng sau:** mỗi hạng cần thêm `bước` so với hạng trước. Số điểm cần tăng đều như bậc thang, mỗi bậc cao hơn bậc trước một `bước`.
-3. **Khi chạm trần ngưỡng:** số điểm cần dừng ở `trần ngưỡng`, mọi hạng sau đều cần đúng con số này.
+1. **Hạng `1` lên `2`:** cần đúng điểm lên hạng chuẩn.
+2. **Các hạng sau:** mỗi hạng cần nhiều hơn hạng ngay trước nó đúng điểm cộng thêm mỗi hạng. Số điểm cần tăng đều như bậc thang.
+3. **Khi chạm điểm lên hạng tối đa:** số điểm cần dừng ở đó, mọi hạng sau đều cần đúng con số này.
 
-Ví dụ với nền `250`, bước `250`, trần ngưỡng `2.500`:
+Ví dụ với điểm lên hạng chuẩn `250`, điểm cộng thêm mỗi hạng `250`, điểm lên hạng tối đa `2.500`:
 
 | Lên hạng | Cách tính | Điểm cần | Đoạn |
 |---|---|---|---|
-| `1 → 2` | `250 + 0 × 250` | `250` | Nền |
-| `2 → 3` | `250 + 1 × 250` | `500` | Tăng theo bước |
-| `3 → 4` | `250 + 2 × 250` | `750` | Tăng theo bước |
-| `10 → 11` | `250 + 9 × 250` | `2.500` | Vừa chạm trần ngưỡng |
-| `11 → 12` | `250 + 10 × 250 = 2.750`, lấy trần | `2.500` | Đứng yên ở trần |
-| `50 → 51` | lấy trần | `2.500` | Đứng yên ở trần |
+| `1 → 2` | `250` | `250` | Điểm chuẩn |
+| `2 → 3` | `250 + 250` | `500` | Cộng thêm một lần |
+| `3 → 4` | `250 + 250 + 250` | `750` | Cộng thêm hai lần |
+| `10 → 11` | `250 + 9 × 250` | `2.500` | Vừa chạm điểm tối đa |
+| `11 → 12` | `250 + 10 × 250 = 2.750`, lấy điểm tối đa | `2.500` | Đứng yên ở điểm tối đa |
+| `50 → 51` | lấy điểm tối đa | `2.500` | Đứng yên ở điểm tối đa |
 
-Hạng bắt đầu đứng yên tính bằng `(trần ngưỡng − nền) ÷ bước + 1`. Với bộ số trên là `(2.500 − 250) ÷ 250 + 1 = 10`, nghĩa là từ hạng `10` lên `11` trở đi mỗi hạng cần `2.500` điểm.
+Hạng bắt đầu đứng yên tính bằng `(điểm lên hạng tối đa − điểm lên hạng chuẩn) ÷ điểm cộng thêm mỗi hạng + 1`. Với bộ số trên là `(2.500 − 250) ÷ 250 + 1 = 10`, nghĩa là từ hạng `10` lên `11` trở đi mỗi hạng cần `2.500` điểm.
 
 **Ops chỉnh giá trị nào khi muốn gì:**
 
 | Muốn | Chỉnh |
 |---|---|
-| Học viên mới lên hạng đầu nhanh hơn | Giảm `nền` |
-| Hạng giữa khó lên hơn | Tăng `bước` |
-| Học viên lâu năm lên hạng nhanh hơn | Giảm `trần ngưỡng` |
-| Mọi hạng cần như nhau | `bước = 0`, hoặc `trần ngưỡng = nền` |
-| Ngưỡng tăng mãi không dừng | Bỏ trống `trần ngưỡng` |
+| Học viên mới lên hạng đầu nhanh hơn | Giảm điểm lên hạng chuẩn |
+| Hạng giữa khó lên hơn | Tăng điểm cộng thêm mỗi hạng |
+| Học viên lâu năm lên hạng nhanh hơn | Giảm điểm lên hạng tối đa |
+| Mọi hạng cần như nhau | Điểm cộng thêm mỗi hạng `= 0`, hoặc điểm lên hạng tối đa bằng điểm lên hạng chuẩn |
+| Số điểm cần tăng mãi không dừng | Bỏ trống điểm lên hạng tối đa |
 
-**Ràng buộc nhập liệu:** `nền` là số nguyên `>= 1`, bắt buộc. `bước` là số nguyên `>= 0`, bắt buộc. `trần ngưỡng` là số nguyên `>= nền`, bỏ trống được. Nhập `trần ngưỡng` nhỏ hơn `nền` thì không lưu, ô báo lỗi `Must be at least the starting points.`
+**Ràng buộc nhập liệu:** điểm lên hạng chuẩn là số nguyên `>= 1`, bắt buộc. Điểm cộng thêm mỗi hạng là số nguyên `>= 0`, bắt buộc. Điểm lên hạng tối đa là số nguyên `>=` điểm lên hạng chuẩn, bỏ trống được. Nhập nhỏ hơn điểm lên hạng chuẩn thì không lưu, ô báo lỗi `Must be at least the standard level-up points.`
 
-**Trần ngưỡng khác trần hạng (`Maximum level`).** Trần ngưỡng giới hạn số điểm cần cho **một hạng**. Trần hạng giới hạn **hạng cao nhất** học viên đạt được. Hai giá trị độc lập: trần ngưỡng `2.500` và trần hạng `100` nghĩa là từ hạng `10` mỗi hạng cần `2.500` điểm, và học viên dừng ở hạng `100`.
+**Điểm lên hạng tối đa khác hạng tối đa (`Maximum level`).** Điểm lên hạng tối đa giới hạn số điểm cần cho **một lần lên hạng**. `Maximum level` giới hạn **hạng cao nhất** học viên đạt được. Hai giá trị độc lập: điểm lên hạng tối đa `2.500` và `Maximum level` `100` nghĩa là từ hạng `10` mỗi hạng cần `2.500` điểm, và học viên dừng ở hạng `100`.
 
 ## Câu chữ
 
-**Khối `Levels`.** Thứ tự: điểm để lên hạng, rồi hạng tối đa. Design ngày 26/10 có nhóm năm ô EXP theo hành động; nhóm này bỏ.
+**Khối `Levels`.** Không có tiêu đề nhóm cho ba ô điểm lên hạng; mỗi nhãn đều có chữ `level-up` nên đứng riêng vẫn hiểu. Thứ tự: ba ô điểm lên hạng, bảng xem trước, rồi hạng tối đa. Design ngày 26/10 có nhóm năm ô EXP theo hành động; nhóm này bỏ.
 
 | Vị trí | Thành phần | Chữ |
 |---|---|---|
 | Đầu khối | Tiêu đề | `Levels` |
 | Đầu khối | Mô tả | `Users move up a level each time they collect enough points.` |
 | Đầu khối | Khi `Points` tắt | `Turn on Points to use levels. Levels are based on the points users collect.` |
-| Nhóm 1 | Tiêu đề | `Points to level up` |
-| Nhóm 1 | Ô `nền` | Nhãn `Starting points` · Mô tả `Points needed to go from Level 1 to Level 2.` |
-| Nhóm 1 | Ô `bước` | Nhãn `Increase per level` · Mô tả `Each level needs this many more points than the one before. Set 0 to keep every level the same.` |
-| Nhóm 1 | Ô `trần ngưỡng` | Nhãn `Points cap per level` · Mô tả `No level needs more points than this. Leave empty for no cap.` |
-| Nhóm 1 | Dòng xem trước | Tự cập nhật theo ba ô. Ví dụ `Level 2: 250 pts · Level 3: 500 pts · Level 11 onwards: 2,500 pts`. Trần ngưỡng bằng nền: `Every level: {n} pts` |
-| Nhóm 2 | Tiêu đề | `Maximum level` |
-| Nhóm 2 | Mô tả | `The highest level users can reach. Turn this off for no limit.` |
+| Ô 1 | Điểm lên hạng chuẩn | Nhãn `Standard level-up points` · Mô tả `Points needed for each level-up before extra points are added.` |
+| Ô 2 | Điểm cộng thêm mỗi hạng | Nhãn `Extra points per level` · Mô tả `Each next level needs this many more points than the one before. Set 0 to keep every level the same.` · Nhắc khi ô 3 bằng ô 1: `Has no effect while the cap equals the standard level-up points.` |
+| Ô 3 | Điểm lên hạng tối đa | Nhãn `Level-up points cap` · Mô tả `Points needed to level up stop increasing at this number. Leave empty to keep increasing.` · Lỗi khi nhỏ hơn ô 1: `Must be at least the standard level-up points.` |
+| Dưới ô 3 | Bảng xem trước | Bảng ba cột, quy tắc ở mục *Bảng xem trước* ngay dưới |
+| Sau ba ô | Tiêu đề | `Maximum level` |
+| Sau ba ô | Mô tả | `The highest level users can reach. Turn this off for no limit.` |
+
+**Bảng xem trước** (PO 05/11, `DEC172`, `DEC173`, thay dòng xem trước một hàng chữ)
+
+Bảng đặt ngay dưới ô 3, cho Ops thấy số điểm từng lần lên hạng và độ dốc của thang hạng trước khi rời ô.
+
+| Cột | Tiêu đề | Nội dung |
+|---|---|---|
+| 1 | `Level` | Lần lên hạng, dạng `{n} → {n+1}`, không có chữ `Level` |
+| 2 | `Points needed` | Số điểm cần cho lần lên hạng đó, tính theo công thức ở rule 2, dạng `{điểm} pts`, phân cách hàng nghìn bằng dấu phẩy |
+| 3 | `Difficulty vs previous` | Độ khó so với lần lên hạng ngay trước, tính bằng `(điểm dòng này − điểm dòng trước) ÷ điểm dòng trước`, làm tròn tới số nguyên gần nhất (`.5` làm tròn lên), dạng `+{x}%`. Dòng đầu hiện `—`. Lớn hơn `0` nhưng làm tròn ra `0` thì hiện `+<1%` |
+
+Số dòng:
+
+| Trường hợp | Bảng hiện |
+|---|---|
+| Có điểm lên hạng tối đa, chạm mức tối đa trong 10 lần lên hạng đầu | Từng dòng tới lần lên hạng chạm mức tối đa, rồi một dòng `{k} onwards` · `{điểm tối đa} pts` · `Same as previous` |
+| Có điểm lên hạng tối đa, cần hơn 10 lần lên hạng mới chạm | 8 dòng đầu, một dòng `…`, dòng chạm mức tối đa, rồi dòng `{k} onwards` |
+| Bỏ trống điểm lên hạng tối đa | 10 dòng đầu, rồi dòng `11 onwards` · `+{điểm cộng thêm} pts each level` · `—` |
+| Điểm cộng thêm `= 0`, hoặc điểm tối đa bằng điểm chuẩn | Một dòng `Every level` · `{điểm chuẩn} pts` · `—` |
+| `Maximum level` đang bật và hạng tối đa đến trước các mốc trên | Bảng dừng ở dòng `{max−1} → {max}`, không có dòng `onwards` |
+
+Bảng cập nhật ngay khi Ops gõ, trước khi ô được lưu, để thấy hệ quả trước khi rời ô. Ô nào đang lỗi thì bảng tính theo giá trị đã lưu của ô đó.
+
+Ví dụ với điểm lên hạng chuẩn `250`, điểm cộng thêm mỗi hạng `250`, điểm lên hạng tối đa `2.500`:
+
+| `Level` | `Points needed` | `Difficulty vs previous` |
+|---|---|---|
+| `1 → 2` | `250 pts` | `—` |
+| `2 → 3` | `500 pts` | `+100%` |
+| `3 → 4` | `750 pts` | `+50%` |
+| `4 → 5` | `1,000 pts` | `+33%` |
+| `5 → 6` | `1,250 pts` | `+25%` |
+| `6 → 7` | `1,500 pts` | `+20%` |
+| `7 → 8` | `1,750 pts` | `+17%` |
+| `8 → 9` | `2,000 pts` | `+14%` |
+| `9 → 10` | `2,250 pts` | `+13%` |
+| `10 → 11` | `2,500 pts` | `+11%` |
+| `11 onwards` | `2,500 pts` | `Same as previous` |
+
+Cột 3 dùng phần trăm vì chênh lệch tuyệt đối luôn bằng đúng điểm cộng thêm mỗi hạng, không cho Ops thêm thông tin. Phần trăm cho thấy thang hạng dốc ở các hạng đầu, thoải dần, rồi phẳng khi chạm mức tối đa.
 
 **Khối `Points`**, thêm một dòng:
 
@@ -943,8 +988,8 @@ Hạng bắt đầu đứng yên tính bằng `(trần ngưỡng − nền) ÷ b
 | Impact Matrix | Data: hành động điểm mới cho huy hiệu, ba giá trị ngưỡng, điểm trong hạng của học viên |
 | PRD | `US10` viết lại · `US8` thêm `On each badge earned` · `US2` toast huy hiệu kèm điểm · `US1` ô hạng và panel `How to level up?` có thanh tiến độ, đảo mục `[đề xuất]` bỏ thanh tiến độ trong `OQ-43`; panel `How to collect points?` thêm dòng huy hiệu · `US3` dòng huy hiệu kèm điểm · `US6`, `US11` cách xếp bảng `Level` · `US19`, `US20` thêm loại hành động huy hiệu · `US22` điểm huy hiệu trong nhật ký · `BR-10.2`, `BR-10.4a`, `BR-10.7`, `BR-10.8` |
 | Technical design backend | `gamification_level_criteria` thay bằng ba giá trị ngưỡng · `point_rules` thêm hành động `BADGE` · `gamification_learner_stats` thêm điểm trong hạng · xét hạng sau mỗi lần cộng điểm · API `/levels` · `/me` trả lại tiến độ hạng |
-| Technical design frontend | `LevelsBlock` còn nhóm `Points to level up` kèm dòng xem trước và trạng thái khoá khi `Points` tắt · `PointsBlock` thêm dòng huy hiệu · `HowToDrawer` view `level` và `collect` · toast huy hiệu |
-| Design | Khối `Levels`: bỏ nhóm năm ô EXP, thêm ô `bước`, ô `trần ngưỡng`, dòng xem trước, sửa câu chữ theo mục Câu chữ · khối `Points` thêm dòng huy hiệu · panel `How to level up?` |
+| Technical design frontend | `LevelsBlock` còn nhóm `Points to level up` kèm bảng xem trước và trạng thái khoá khi `Points` tắt · `PointsBlock` thêm dòng huy hiệu · `HowToDrawer` view `level` và `collect` · toast huy hiệu |
+| Design | Khối `Levels`: bỏ nhóm năm ô EXP, thêm ô điểm cộng thêm mỗi hạng, ô điểm lên hạng tối đa, bảng xem trước, sửa câu chữ theo mục Câu chữ · khối `Points` thêm dòng huy hiệu · panel `How to level up?` |
 | Kịch bản demo trên Lark | Phần 1.3 và phần 4 mô tả mô hình bội số |
 
 ## Điểm re-entry đề xuất — xác nhận khi mở lại

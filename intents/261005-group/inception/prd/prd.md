@@ -2,12 +2,12 @@
 intent: 261005-group
 feature: LMS-F002
 artifact: prd
-inputs: requirements@0.6, impact-matrix@0.7, ux-design@0.1, fe-technical-design@2.2, be-technical-design (23/10/2026)
-version: 0.8
-status: approved
+inputs: requirements@0.7, impact-matrix@0.8, ux-design@0.1, fe-technical-design@2.2, be-technical-design (23/10/2026), inputs/prd-group-revision-analysis-20261103.md, inputs/uat-coverage-20261104.md
+version: 0.11
+status: draft
 services: UpLMS Ops backend (app ops), UpLMS backend (app lms), event-processor-service, background-job-service, notification-service, thư viện dùng chung và migration cơ sở dữ liệu, giao diện UpLMS Ops, giao diện UpLMS
 approved: 2026-10-12 (v0.3); 2026-10-09 (v0.2); 2026-10-06 (v0.1)
-cr: CR8 ngày 2026-10-26, báo cáo theo nhóm đợt này chỉ ở hiện tại, tách mốc quá khứ thành US22 để sau; CR7 ngày 2026-10-25, viết lại theo file thiết kế của Design PIC và Tech PIC, thêm US21 thông báo theo nhóm; CR6 ngày 2026-10-21, bỏ giới hạn số cấp, một người nhiều vai bằng một tài khoản học viên, thông báo cho quản lý cấp gần nhất, tạm cho tự chấm, US18 thành tab Báo cáo; CR5 ngày 2026-10-20, chuyển sang template PRD chuẩn, không đổi US, AC, BR; CR4 ngày 2026-10-20, cập nhật thông tin tài liệu ở bảng đầu sau khi duyệt v0.4; CR3 ngày 2026-10-20, thêm khối tiêu chí chấp nhận và dòng Ưu tiên cho 20 US; CR2 ngày 2026-10-12, chạm US3 US7 US19 US20, danh sách US, Vấn đề tồn đọng; CR1 ngày 2026-10-09, chạm US9 US13 US16 US20
+cr: CR9 ngày 2026-11-03, sửa các phần đã rà soát của US2 di chuyển nhánh, US3 thêm thành viên, US6 danh sách nhóm, US7 giao và gỡ lớp, US14 hiển thị nhóm lưu trữ; CR8 ngày 2026-10-26, báo cáo theo nhóm đợt này chỉ ở hiện tại, tách mốc quá khứ thành US22 để sau; CR7 ngày 2026-10-25, viết lại theo file thiết kế của Design PIC và Tech PIC, thêm US21 thông báo theo nhóm; CR6 ngày 2026-10-21, bỏ giới hạn số cấp, một người nhiều vai bằng một tài khoản học viên, thông báo cho quản lý cấp gần nhất, tạm cho tự chấm, US18 thành tab Báo cáo; CR5 ngày 2026-10-20, chuyển sang template PRD chuẩn, không đổi US, AC, BR; CR4 ngày 2026-10-20, cập nhật thông tin tài liệu ở bảng đầu sau khi duyệt v0.4; CR3 ngày 2026-10-20, thêm khối tiêu chí chấp nhận và dòng Ưu tiên cho 20 US; CR2 ngày 2026-10-12, chạm US3 US7 US19 US20, danh sách US, Vấn đề tồn đọng; CR1 ngày 2026-10-09, chạm US9 US13 US16 US20
 gate: v1 Gate 4
 lark: Jg7ld8UCzoeMiAxW5ielxlC4gGg
 lark-title: [PRD] Group
@@ -40,6 +40,9 @@ approved_at: 2026-10-26T15:42
 | v0.6 | 20/10/2026 | Bùi Đức Huy | CR5: chuyển sang template PRD chuẩn của PO-Workflow. Giữ nguyên mọi user story, tiêu chí chấp nhận, business rule, màn, field. Thêm mục Chuyển đổi và triển khai, lấy từ bản phân tích ảnh hưởng; mục Trường hợp ngoại lệ cho từng user story; mục Giả định; câu hỏi mở #9, #10, #11. Bỏ bảng trạng thái tài liệu và mục Comments CR6: bỏ giới hạn số cấp của cây nhóm (bỏ ba business rule về số cấp tối đa của `US1`, `US2` và hai tiêu chí chấp nhận kiểm chúng; mã cũ không cấp lại); một người được đồng thời là quản lý, mentor và thành viên của một nhóm bằng một tài khoản học viên, tài khoản đó vào UpLMS Ops cho đúng màn của vai; thông báo gửi quản lý không gửi cho chính người đó; người vừa là mentor vừa là thành viên tạm được tự chấm; `US18` thành tab Báo cáo trong chi tiết nhóm thay cho dashboard | Cấu trúc toàn tài liệu · `US1` · `US2` · `US9` · `US11` · `US12` · `US13` · `US16` · `US18` · `US20` |
 | v0.7 | 25/10/2026 | Bùi Đức Huy | CR7: viết lại theo file thiết kế của Design PIC và Tech PIC; QA tạm bỏ qua. Mã màn `SCR` và trường hợp biên `EC` vào từng user story; chữ giao diện tiếng Anh; thêm `US21` thông báo gửi theo nhóm; bỏ phòng ban và đơn vị kinh doanh của nhân sự vận hành; đồng bộ cơ cấu theo sự kiện kèm một lần chạy toàn bộ mỗi đêm; báo cáo quá khứ đọc từ bản chụp trạng thái cuối ngày, gom theo cây hiện tại; năm loại ghi nhật ký ngoài `US15` thành nhật ký hệ thống; bản điện thoại cho màn của quản lý và khối quản lý của học viên; không tự chỉ định mình làm quản lý chính, không chuyển phụ trách cho chính mình; hộp xác nhận xoá nhóm; quyền chỉ xem nhóm. Đóng câu hỏi mở #7 một phần, #9, #12, #14. Sau review lần 06: email báo người rời nhóm gửi quản lý không có đường dẫn hồ sơ; tài khoản đã khoá không tính là quản lý, mentor có hiệu lực; không xoá nhóm có nhóm con, khôi phục cả nhánh; định nghĩa trạng thái lượt ghi danh; đếm người không trùng; tính ngày theo giờ Việt Nam | `US1` đến `US21` · mục 1, 3, 4, 5, 7, 8, 9, 10 |
 | v0.8 | 26/10/2026 | Bùi Đức Huy | CR8: đợt này báo cáo theo nhóm chỉ ở thời điểm hiện tại (`US18`). Phần báo cáo tại một mốc quá khứ và việc chụp trạng thái học cuối ngày tách thành `US22`, ưu tiên Should, để sau; ba business rule về mốc quá khứ chuyển sang `US22` với mã mới, mã cũ không cấp lại | `US18` · `US22` · mục 2, 3, 4, 5, 7, 8, 10 |
+| v0.9 | 03/11/2026 | Lê Hương Giang | Rà soát giao diện và giao lớp: cập nhật Add members theo ảnh tham chiếu; làm rõ chuyển nhánh có người học và thông báo xác nhận; dùng bộ lọc chung, bỏ Show archived và Level; thêm Parent group, đưa nguồn thành badge cạnh tên; thống nhất Preview và chặn gỡ lớp khi phát sinh hoạt động học | US2 di chuyển nhánh · US3 thêm thành viên · US6 danh sách nhóm · US7 giao và gỡ lớp · US14 hiển thị nhóm lưu trữ |
+| v0.10 | 04/11/2026 | Lê Hương Giang | Đồng bộ Members và Add members theo ảnh mới: bỏ Staff code, thay Department bằng Subgroup, tìm theo tên hoặc email; làm rõ các cột giao lớp và định nghĩa Enrolled by group là số lượt ghi danh có nguồn từ nhóm đang xem | US3 danh sách và thêm thành viên · US7 giao lớp |
+| v0.11 | 04/11/2026 | Lê Hương Giang | Hoàn thiện phần UAT được giữ lại: mã nhóm tự tạo do hệ thống cấp; đổi Tree thành Graph, mặc định Table; nhật ký giới hạn theo nhóm đang chọn, giữ Reason và bỏ cột Performed by; tiếp tục lưu người thao tác để truy vết | US1 tạo sửa nhóm · US5 nhãn nguồn · US6 danh sách nhóm · US15 nhật ký thành viên · phần tổng quan dữ liệu phải lưu |
 
 ---
 
@@ -207,7 +210,7 @@ Bốn thứ phải đúng, bất kể làm theo cách nào:
 | Thông tin | Vì sao phải lưu | Ràng buộc |
 |---|---|---|
 | **Thời điểm một người vào và ra khỏi mỗi nhóm** | Báo cáo theo mốc quá khứ đọc từ đây. `O4` và `O5` phụ thuộc hoàn toàn | Không xoá, kể cả khi người đó nghỉ việc hoặc nhóm bị lưu trữ |
-| **Lý do vào, rời nhóm và người thao tác** | Ba trường hợp rời nhóm có ba luật khác nhau — xem mục dưới. Nhật ký `US15` hiện lý do và người thao tác | Phân biệt được: nghỉ việc · điều chuyển · gỡ thủ công. Mỗi thay đổi ghi người thao tác, hoặc *Hệ thống* khi đồng bộ tự làm |
+| **Lý do vào, rời nhóm và người thao tác** | Ba trường hợp rời nhóm có ba luật khác nhau — xem mục dưới. Nhật ký thành viên lưu lý do và người thao tác; bảng nhật ký hiển thị cột Reason | Phân biệt được: nghỉ việc · điều chuyển · gỡ thủ công. Mỗi thay đổi ghi người thao tác, hoặc *Hệ thống* khi đồng bộ tự làm |
 | **Nguồn của mỗi nhóm** | Quyết định ai sửa được gì. Nhóm đồng bộ không cho sửa tay | Hai giá trị: đồng bộ từ hệ thống nhân sự · tự tạo |
 | **Nguồn của mỗi lượt ghi danh** | Phân biệt người vào lớp qua nhóm với người được thêm tay. Cần cho `C2` | — |
 | **Trạng thái lượt ghi danh** | Người nghỉ việc đánh dấu kết thúc chứ không xoá | Báo cáo hiện tại loại ra, báo cáo quá khứ vẫn tính |
@@ -350,7 +353,7 @@ Cột Nguồn dẫn hạng mục của yêu cầu gốc và, nơi yêu cầu đ�
 | `US3` | Thêm và gỡ thành viên thủ công, để xử lý trường hợp lẻ | Must | U1 | Yêu cầu 5 · `RC-02` một người thuộc nhiều nhóm |
 | `US4` | Thêm và gỡ thành viên theo lô bằng tệp, để không phải thao tác từng người với nhóm hàng chục người | Should | U1 | Yêu cầu 6 |
 | `US5` | Nhóm đồng bộ từ hệ thống nhân sự được đánh dấu riêng và không cho sửa, để biết nhóm nào là bản sao của nguồn ngoài | Must | U2 | Yêu cầu 3 · `RC-27` đồng bộ theo sự kiện kèm chạy toàn bộ mỗi đêm |
-| `US6` | Xem danh sách nhóm dạng cây hoặc bảng kèm bộ lọc, để tìm được nhóm trong số hàng chục nhóm | Must | U1 | Yêu cầu 10 · `RC-07` nhóm cha bao trùm nhánh con |
+| `US6` | Xem danh sách nhóm dạng `Graph` hoặc bảng kèm bộ lọc, để tìm được nhóm trong số hàng chục nhóm | Must | U1 | Yêu cầu 10 · `RC-07` nhóm cha bao trùm nhánh con |
 | `US7` | Giao nội dung cho một nhóm, tuỳ chọn chảy xuống nhánh con, để giao bài cho cả phòng bằng một thao tác | Must | U3 | Yêu cầu 8 · giải quyết `O1` |
 | `US8` | Bật tắt việc người mới vào nhóm tự nhận nội dung đã giao, để kiểm soát ai phải học gì | Must | U3 | Yêu cầu 9 · giải quyết `O2` |
 | `US9` | Gán một hoặc nhiều người quản lý cho nhóm, để hệ thống biết ai phụ trách ai | Must | U4 | Yêu cầu 13 · `RC-20` báo email người được gán quản lý |
@@ -407,21 +410,21 @@ Là nhân sự vận hành, tôi cần tạo và sửa nhóm nhiều cấp, đ�
 
 `Organization › Learner Groups` (`SCR1`) → `Create group` → `SCR2`
 
-Người vận hành điền tên và mã, chọn nhóm cha nếu nhóm này nằm trong một nhánh sẵn có, rồi lưu. Để trống nhóm cha thì nhóm thành một gốc mới. Lưu xong, màn mở chi tiết của nhóm vừa tạo (`SCR4`).
+Người vận hành điền tên, chọn nhóm cha nếu nhóm này nằm trong một nhánh sẵn có, rồi lưu. Mã của nhóm tự tạo do hệ thống tự sinh, người dùng không nhập mã. Để trống nhóm cha thì nhóm thành một gốc mới. Lưu xong, màn mở chi tiết của nhóm vừa tạo (`SCR4`).
 
 Sửa nhóm: ở `SCR4` bấm `Edit`, mở lại `SCR2` với mã nhóm đã khoá. Nhóm đồng bộ từ hệ thống nhân sự thì nút `Edit` không hiện.
 
 ### Business rule
 
-- `BR-1.1` Mã nhóm **duy nhất** trong phạm vi một tổ chức. Không sửa được sau khi tạo
+- `BR-1.1` Mã nhóm duy nhất trong phạm vi một tổ chức và không sửa được sau khi tạo. Khi tạo nhóm thủ công, hệ thống tự sinh mã; người dùng không nhập hoặc thay mã. Không đổi mã của nhóm đã tồn tại hoặc quy tắc nhận diện nhóm đồng bộ từ hệ thống nhân sự do thay đổi này
 - `BR-1.2` Nhóm cha phải **cùng nguồn** với nhóm con. Nhóm tự tạo không nhận nhóm cha là nhóm đồng bộ, và ngược lại
 - `BR-1.5` Nhóm nguồn `Đồng bộ` **không sửa được** mọi field trên UpLMS Ops
 - `BR-1.6` Nhóm mới tạo luôn có nguồn `Tự tạo` và trạng thái `Đang dùng`. Người dùng không chọn hai giá trị này
 
 ### Tiêu chí chấp nhận
 
-- `AC1.1` Khi tạo nhóm với tên, mã hợp lệ và để trống nhóm cha, nhóm mới được tạo ở cấp gốc với nguồn `Tự tạo` và trạng thái `Đang dùng`; người dùng không chọn được hai giá trị này; lưu xong màn mở chi tiết nhóm vừa tạo. Theo `BR-1.6`
-- `AC1.2` Khi nhập mã nhóm đã tồn tại trong tổ chức, hệ thống báo *Mã nhóm đã tồn tại* và không cho lưu. Khi sửa một nhóm đã tạo, ô mã nhóm bị khoá. Theo `BR-1.1`
+- `AC1.1` Khi tạo nhóm với tên hợp lệ và để trống nhóm cha, nhóm mới được tạo với mã do hệ thống tự sinh và ở cấp gốc với nguồn `Tự tạo` và trạng thái `Đang dùng`; người dùng không chọn được hai giá trị này; lưu xong màn mở chi tiết nhóm vừa tạo. Theo `BR-1.6`
+- `AC1.2` Khi tạo nhóm thủ công, người dùng không phải nhập mã; sau khi tạo, nhóm có mã duy nhất trong tổ chức, kể cả khi nhiều người tạo nhóm cùng lúc. Khi sửa nhóm đã tạo, mã chỉ đọc. Mã của các nhóm đã tồn tại giữ nguyên. Theo `BR-1.1`
 - `AC1.3` Khi bỏ trống tên, nhập tên dài 256 ký tự hoặc mô tả dài 1001 ký tự, hệ thống không cho lưu theo cột Yêu cầu của bảng UI; tên đúng 255 ký tự và mô tả đúng 1000 ký tự thì lưu được
 - `AC1.4` Khi chọn nhóm cha cho nhóm tự tạo, ô chọn chỉ liệt kê nhóm tự tạo đang ở trạng thái `Đang dùng`; nhóm đồng bộ và nhóm lưu trữ không xuất hiện (`EC-05`). Theo `BR-1.2`
 - `AC1.6` Khi mở chi tiết một nhóm nguồn `Đồng bộ`, nút `Edit` không hiện, thay bằng dòng *Nhóm này đồng bộ từ hệ thống nhân sự, không chỉnh sửa trên UpLMS*. Theo `BR-1.5`
@@ -431,7 +434,7 @@ Sửa nhóm: ở `SCR4` bấm `Edit`, mở lại `SCR2` với mã nhóm đã kho
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
 | `SCR2` Tạo nhóm | Form | **Tên nhóm** | Bắt buộc. Tối đa 255 ký tự. Placeholder: *Nhập tên nhóm*. Bỏ trống hoặc chỉ có dấu cách → báo *Tên nhóm không được để trống* |
-| `SCR2` Tạo nhóm | Form | **Mã nhóm** | Bắt buộc. Duy nhất trong tổ chức. Trùng → báo *Mã nhóm đã tồn tại*, không cho lưu |
+| `SCR2` Tạo nhóm | Thông tin do hệ thống cấp | **Mã nhóm** | Hệ thống tự sinh khi tạo nhóm thủ công, duy nhất trong tổ chức. Không yêu cầu người dùng nhập mã; mã của nhóm đã tạo được hiển thị để tra cứu và không sửa được. Không tự áp cơ chế này để đổi mã của nhóm đồng bộ hoặc nhóm đã tồn tại |
 | `SCR2` Tạo nhóm | Form | **Mô tả** | Không bắt buộc. Tối đa 1000 ký tự. Ô nhập nhiều dòng |
 | `SCR2` Tạo nhóm | Form | **Nhóm cha** | Không bắt buộc. Chọn một, có tìm kiếm. Danh sách **chỉ hiện nhóm tự tạo** đang `Đang dùng`. Để trống → nhóm gốc. Tooltip: *Để trống nếu đây là nhóm cấp cao nhất* |
 | `SCR2` Tạo nhóm | Nút | **Save** *(Lưu)* | Mờ đi khi chưa đủ field bắt buộc. Lưu lỗi thì giữ form và báo lỗi |
@@ -474,7 +477,7 @@ Là nhân sự vận hành, tôi cần di chuyển một nhánh sang nhóm cha k
 
 ### Luồng chính
 
-Ở `SCR1` dạng Cây, người vận hành kéo một nhóm thả vào nhóm khác. Hoặc mở `SCR2`, sửa field nhóm cha; đây cũng là cách làm bằng bàn phím thay cho kéo thả.
+Ở `SCR1` dạng `Graph`, người vận hành kéo một nhóm thả vào nhóm khác. Hoặc mở `SCR2`, sửa field nhóm cha; đây cũng là cách làm bằng bàn phím thay cho kéo thả.
 
 Hệ thống kiểm tra trước khi áp: không tạo vòng, cùng nguồn. Hỏi xác nhận ở `SCR3` rồi mới di chuyển.
 
@@ -482,8 +485,8 @@ Hệ thống kiểm tra trước khi áp: không tạo vòng, cùng nguồn. H�
 
 - `BR-2.1` Không cho di chuyển một nhóm vào **chính nó** hoặc vào **nhánh con của nó**. Chặn và báo `Can't move a group into its own sub-group` *(Không thể di chuyển một nhóm vào nhánh con của chính nó)*
 - `BR-2.3` Nhóm nguồn `Đồng bộ` **không di chuyển được** bằng tay. Cơ cấu đổi thì đổi ở hệ thống nhân sự
-- `BR-2.4` Di chuyển nhánh **giữ nguyên toàn bộ thành viên** của mọi nhóm trong nhánh
-- `BR-2.5` Di chuyển nhánh **không đổi nội dung đã giao** và **không hồi tố**: người đang ở trong nhánh lúc di chuyển không tự vào lớp mà nhóm cha mới đang giao. Sau thời điểm di chuyển, nhánh vừa chuyển nằm dưới nhóm cha mới như mọi nhánh con khác: nhóm cha mới đang giao một lớp với `Cascade to sub-groups` và `Auto-enroll` cùng bật thì người vào nhánh đó sau thời điểm di chuyển được ghi danh vào lớp
+- `BR-2.4` Di chuyển nhánh giữ nguyên toàn bộ thành viên của mọi nhóm trong nhánh, các lượt ghi danh, tiến độ và kết quả học hiện có. Nhánh đã có người phát sinh hoạt động học vẫn được di chuyển nếu đáp ứng các điều kiện di chuyển khác
+- `BR-2.5` Di chuyển nhánh **không đổi nội dung đã giao** và **không hồi tố**: người đang ở trong nhánh lúc di chuyển không tự vào lớp mà nhóm cha mới đang giao. Sau thời điểm di chuyển, nhánh vừa chuyển nằm dưới nhóm cha mới như mọi nhánh con khác: nhóm cha mới đang giao một lớp với `Cascade to sub-groups` và `Auto-enroll` cùng bật thì người vào nhánh đó sau thời điểm di chuyển được ghi danh vào lớp. Quản lý kế thừa và phạm vi xem dữ liệu được tính lại theo vị trí mới của nhánh
 - `BR-2.6` Mỗi lần di chuyển ghi vào **nhật ký hệ thống**: nhánh nào, từ đâu sang đâu, ai làm, lúc nào. Nhật ký hệ thống chưa có màn xem ở đợt này (`BR-15.5`)
 
 ### Tiêu chí chấp nhận
@@ -491,15 +494,15 @@ Hệ thống kiểm tra trước khi áp: không tạo vòng, cùng nguồn. H�
 - `AC2.1` Khi kéo một nhóm tự tạo thả vào vị trí hợp lệ, vị trí thả hiện viền màu thành công; `SCR3` hiện tên nhánh, số nhóm con, số người bị ảnh hưởng, nhóm cha cũ và mới; xác nhận xong thì nhánh nằm dưới nhóm cha mới. Khi di chuyển lỗi, nhánh giữ nguyên vị trí cũ. Theo bảng UI
 - `AC2.2` Khi thả một nhóm vào chính nó hoặc vào nhánh con của nó, vị trí thả hiện viền màu lỗi kèm dòng `Can't move a group into its own sub-group`, và thả không có tác dụng (`EC-01`). Theo `BR-2.1`
 - `AC2.4` Khi chọn một nhóm nguồn `Đồng bộ`, nhóm đó không có tay kéo và field nhóm cha không sửa được. Khi kéo một nhóm tự tạo thả vào nhóm đồng bộ, vị trí thả hiện viền màu lỗi kèm lý do khác nguồn, và thả không có tác dụng (`EC-02`). Theo `BR-2.3` · `BR-1.2`
-- `AC2.5` Khi di chuyển xong, mọi nhóm trong nhánh giữ nguyên thành viên, nội dung đã giao cho các nhóm đó không đổi, và người đang ở trong nhánh không tự vào lớp mà nhóm cha mới đang giao. Khi nhóm cha mới giao một lớp với `Cascade to sub-groups` và `Auto-enroll` cùng bật, một người vào nhánh đó sau thời điểm di chuyển được ghi danh vào lớp. Theo `BR-2.4` · `BR-2.5`
+- `AC2.5` Khi di chuyển một nhánh đã có người đang học hoặc đã hoàn thành, mọi nhóm trong nhánh giữ nguyên thành viên, các lượt ghi danh, tiến độ, kết quả và nội dung đã giao; người đang ở trong nhánh không tự vào lớp mà nhóm cha mới đang giao. Quản lý kế thừa và phạm vi xem dữ liệu được tính lại theo vị trí mới. Khi nhóm cha mới giao một lớp với `Cascade to sub-groups` và `Auto-enroll` cùng bật, một người vào nhánh đó sau thời điểm di chuyển được ghi danh vào lớp. Theo `BR-2.4` · `BR-2.5`
 - `AC2.6` Khi di chuyển xong, nhật ký hệ thống có một dòng ghi nhánh nào, từ đâu sang đâu, ai làm, lúc nào; nhật ký thay đổi thành viên `SCR17` không có dòng mới. Theo `BR-2.6`
 
 ### Giao diện và validate
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| `SCR1` dạng Cây | Kéo thả | — | Chỉ có ở dạng Cây. Kéo một nhóm thả vào nhóm khác. Vị trí thả hợp lệ hiện viền màu thành công, không hợp lệ hiện viền màu lỗi kèm một dòng lý do cạnh con trỏ; không chỉ dựa vào màu |
-| `SCR3` Xác nhận di chuyển | Hộp xác nhận | — | Hiện: tên nhánh, **số nhóm con**, **số người bị ảnh hưởng**, nhóm cha cũ và mới. Nút `Move` *(Di chuyển)* và `Cancel` *(Huỷ)* |
+| `SCR1` dạng `Graph` | Kéo thả | — | Chỉ có ở dạng `Graph`. Kéo một nhóm thả vào nhóm khác. Vị trí thả hợp lệ hiện viền màu thành công, không hợp lệ hiện viền màu lỗi kèm một dòng lý do cạnh con trỏ; không chỉ dựa vào màu |
+| `SCR3` Xác nhận di chuyển | Hộp xác nhận | — | Hiện tên nhánh, số nhóm con, số thành viên không trùng bị ảnh hưởng, nhóm cha cũ và mới. Nội dung: `Move this branch from {A} to {B}? Existing enrollments, learning progress, and results will be preserved. Current members will not be automatically enrolled in classes assigned by the new parent group. Inherited managers and data access permissions will change based on the branch’s new location.` Trong đó {A} là nhóm cha cũ, {B} là nhóm cha mới. Nút `Move` *(Di chuyển)* và `Cancel` *(Huỷ)* |
 | `SCR2` Sửa nhóm | Form | **Nhóm cha** | Đổi giá trị rồi lưu. Cùng bộ kiểm tra như kéo thả, cũng đi qua `SCR3` |
 
 ### Dữ liệu
@@ -537,7 +540,7 @@ Là nhân sự vận hành, tôi cần thêm và gỡ thành viên thủ công, 
 
 `SCR4` Chi tiết nhóm → tab `Members` (`SCR6`) → `Add members` (`SCR7`)
 
-Người vận hành tìm theo tên, mã nhân viên hoặc email, chọn một hoặc nhiều người, xác nhận. Gỡ thì chọn người trong danh sách, bấm `Remove` trên thanh thao tác, xác nhận ở `SCR8`.
+Màn `Add members` dùng bảng chọn có các cột `Full name`, `Email`, `Current groups`; người vận hành tìm theo tên hoặc email, sắp xếp danh sách, chọn một hoặc nhiều người rồi bấm `Add`. Gỡ thì chọn người trong danh sách, bấm `Remove` trên thanh thao tác, xác nhận ở `SCR8`.
 
 ### Business rule
 
@@ -554,8 +557,8 @@ Người vận hành tìm theo tên, mã nhân viên hoặc email, chọn một 
 
 ### Tiêu chí chấp nhận
 
-- `AC3.1` Khi thêm một người đang thuộc nhóm khác, người đó được thêm và vẫn giữ các nhóm cũ. Trong `SCR7`, người đã ở trong nhóm hiện mờ với nhãn `Already in group` *(Đã trong nhóm)* và không chọn được (`EC-11`); nút `Add` mờ khi chưa chọn ai. Theo `BR-3.1`
-- `AC3.2` Khi tìm người để thêm hoặc bật mọi bộ lọc ở tab `Members`, tài khoản kiểm thử không xuất hiện. Khi lọc `Direct or sub-group` theo nhánh con ở nhóm cha, người thuộc nhóm con hiện trong bảng nhưng không chọn được để gỡ (`EC-10`). Theo `BR-3.2` · `BR-3.8`
+- `AC3.1` Khi thêm một người đang thuộc nhóm khác, người đó được thêm và vẫn giữ các nhóm cũ. Khi mở `SCR7`, màn có bố cục, cột và các điều khiển tìm kiếm theo bảng giao diện của Add members. Trong danh sách, người đã ở trong nhóm hiện mờ với nhãn `Already in group` *(Đã trong nhóm)* và không chọn được (`EC-11`); nút `Add` mờ khi chưa chọn ai. Theo `BR-3.1`
+- `AC3.2` Khi tìm người để thêm hoặc bật mọi bộ lọc ở tab `Members`, tài khoản kiểm thử không xuất hiện. Khi lọc `Direct or sub-group` theo nhánh con ở nhóm cha, người thuộc nhóm con hiện trong bảng nhưng không chọn được để gỡ (`EC-10`). Khi mở tab Members, bảng hiện cột Subgroup thay Department, không có Staff code; tìm theo tên hoặc email theo bảng giao diện. Theo `BR-3.2` · `BR-3.8`
 - `AC3.3` Khi mở tab `Members` của nhóm nguồn `Đồng bộ`, nút `Add members`, `Import` và `Remove` không hiện, thay bằng dòng *Thành viên nhóm này do hệ thống nhân sự quyết định*. Theo `BR-3.3`
 - `AC3.4` Khi gỡ một người chưa học khoá nào giao qua nhóm, người đó rời nhóm và bị gỡ khỏi các lớp chưa học. Khi người đó có khoá đang học dở hoặc đã học xong, `SCR8` ở biến thể cảnh báo, người đó vẫn rời nhóm, lượt ghi danh giữ nguyên và quản lý nhận email `MAIL-GRP-01`. Khi gỡ nhiều người cùng lúc, một hộp xác nhận nêu tổng số người gỡ và số người đang học (`EC-09`). Theo `BR-3.4`
 - `AC3.5` Khi gỡ một người khỏi nhóm A trong khi nhóm B của họ cũng giao đúng lớp đó, lượt ghi danh giữ nguyên với nguồn còn lại là nhóm B; hệ thống không gỡ khỏi lớp và không gửi `MAIL-GRP-01`. Khi gỡ một người đã nghỉ việc, lượt ghi danh giữ trạng thái đã kết thúc, không bị xoá. Theo `BR-3.7` · `BR-3.6`
@@ -565,12 +568,16 @@ Người vận hành tìm theo tên, mã nhân viên hoặc email, chọn một 
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| `SCR6` tab `Members` | Bảng | Cột | Họ tên · Mã nhân viên · Email · Phòng ban · Ngày vào nhóm · Trạng thái tài khoản. Phân trang 20 dòng |
+| `SCR6` tab `Members` | Bảng | Cột | Checkbox · `#` *(Số thứ tự)* · `Full name` *(Họ tên)* · `Email` · `Subgroup` *(Nhóm con)* · `Joined date` *(Ngày vào nhóm)* · `Account status` *(Trạng thái tài khoản)* · thao tác theo quyền. Không có cột Staff code hoặc Department. Mỗi người một dòng, phân trang 20 dòng. Nhóm con có tên dài được rút gọn, hover hoặc focus hiện đầy đủ tên và đường dẫn để phân biệt |
 | `SCR6` tab `Members` | Bộ lọc | — | Trạng thái tài khoản · `Direct or sub-group` *(vào trực tiếp hay thuộc nhánh con)* |
+| `SCR6` tab `Members` | Tìm kiếm | — | Placeholder: `Search by name or email`. Tìm theo họ tên hoặc email. Có nút `Search` và `Reset` |
+| `SCR6` tab `Members` | Cột | `Subgroup` | Thể hiện nhóm con trong nhánh đang xem mà người đó trực tiếp là thành viên; không hiển thị phòng ban nhân sự hoặc các nhóm ngoài nhánh thay cho nhóm con. Người là thành viên trực tiếp của nhóm đang mở hiện `—`, tooltip `Direct member`. Một người thuộc nhiều nhóm con thì hiện các nhóm tương ứng trên cùng dòng, không nhân bản người để đếm. Ngày vào nhóm của trường hợp nhiều quan hệ cần chốt ở câu hỏi mở #22 |
 | `SCR6` tab `Members` | Mặc định | — | **Ẩn người đã nghỉ việc.** Có công tắc `Show former employees` *(Hiện cả người đã nghỉ)* |
 | `SCR6` tab `Members` | Trạng thái rỗng | — | Nhóm chưa có thành viên: hiện nút `Add members` và `Import`. Lọc không ra: báo không có kết quả |
 | `SCR6` tab `Members` | Nhóm lưu trữ | — | Ẩn mọi thao tác thêm, nhập, gỡ |
-| `SCR7` Thêm thành viên | Bảng chọn | — | Theo mẫu màn `Add Student` của lớp: ô tìm theo họ tên, mã nhân viên, email; chọn nhiều; **phân trang 20 dòng** |
+| `SCR7` Thêm thành viên | Bố cục | — | Tiêu đề `Add members`; nút `Add` và `Cancel` ở phía trên bên phải. Theo bảng chọn thành viên hiện tại; không có các cột Staff code, Department, Phone, Date hoặc cột ID riêng |
+| `SCR7` Thêm thành viên | Bảng chọn | Cột | Checkbox · `#` *(Số thứ tự)* · `Full name` *(Họ tên)* · `Email` · `Current groups` *(Các nhóm hiện tại)*. Dùng `Full name` thống nhất với Members. Dùng số thứ tự thay vì Staff code hoặc ID. Current groups thể hiện các nhóm người đó đang trực tiếp là thành viên, không lặp các nhóm cha theo cây; có thể có nhiều nhóm. Tên dài rút gọn và hover hoặc focus hiện đầy đủ; chưa có nhóm thì hiện `—`. Cho chọn nhiều; phân trang 20 dòng |
+| `SCR7` Thêm thành viên | Tìm kiếm, lọc và sắp xếp | — | Ô tìm theo họ tên hoặc email, placeholder `Search by name or email`; ô `Sort by`; nút `Reset` và `Search`. Không có From date, To date hoặc tìm bằng Staff code. Các lựa chọn sắp xếp giữ theo màn hiện tại, không tự bổ sung lựa chọn chưa xác nhận |
 | `SCR7` Thêm thành viên | Danh sách kết quả | — | Người **đã ở trong nhóm** hiện mờ kèm nhãn `Already in group`, không chọn lại được. Thêm xong: đóng modal, bảng `SCR6` cập nhật, báo đã thêm N người |
 | `SCR8` Gỡ thành viên | Hộp xác nhận | — | Hai biến thể. Không ai đang học: hiện số người sẽ gỡ. Có người đang học nội dung giao qua nhóm này: cảnh báo trước, nêu số người đang học và việc quản lý sẽ nhận email, xem `BR-3.4` |
 | `SCR6` tab `Members` | Nút | **Add members / Import / Remove** | **Không hiện** với nhóm nguồn `Đồng bộ`. Thay bằng: *Thành viên nhóm này do hệ thống nhân sự quyết định* |
@@ -707,7 +714,7 @@ Người vận hành không khởi động cũng không can thiệp. Họ chỉ 
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| `SCR1` Danh sách nhóm | Nhãn | **Nguồn** | Nhóm đồng bộ có nhãn riêng ở mỗi dòng, cả dạng Cây và dạng Bảng. Nhóm tự tạo không có nhãn |
+| `SCR1` Danh sách nhóm | Nhãn | **Nguồn** | Nguồn hiển thị bằng nhãn `Synced` cho nhóm đồng bộ và `Manual` cho nhóm tự tạo, cạnh tên ở cả Graph và Table |
 | `SCR4` Chi tiết nhóm | Khối thông tin | — | Hiện: nguồn · **lần đồng bộ gần nhất** · số thành viên lần gần nhất |
 | `SCR4` Chi tiết nhóm | Mọi nút sửa | — | **Ẩn hết** với nhóm đồng bộ: sửa thông tin · thêm gỡ thành viên · di chuyển nhánh · xoá. Thay bằng một dòng giải thích |
 | `SCR4` Chi tiết nhóm | Vẫn cho làm | — | **Giao nội dung** · **gán quản lý** · **gán mentor** vẫn làm được bình thường trên nhóm đồng bộ |
@@ -749,7 +756,7 @@ Người vận hành không khởi động cũng không can thiệp. Họ chỉ 
 
 ### User story
 
-Là nhân sự vận hành, tôi cần xem danh sách nhóm dạng cây hoặc bảng kèm bộ lọc, để tìm được nhóm mình cần trong số hàng chục nhóm.
+Là nhân sự vận hành, tôi cần xem danh sách nhóm dạng `Graph` hoặc bảng kèm bộ lọc, để tìm được nhóm mình cần trong số hàng chục nhóm.
 
 **Ưu tiên:** Must
 
@@ -761,7 +768,7 @@ Là nhân sự vận hành, tôi cần xem danh sách nhóm dạng cây hoặc b
 
 Sidebar UpLMS Ops (`SCR26`) → `Organization › Learner Groups` (`SCR1`)
 
-Mặc định mở ở dạng Cây, hiện các nhóm gốc đã gấp lại. Bấm vào một nhóm để mở nhánh con. Chuyển sang dạng bảng khi cần lọc và sắp xếp.
+Lần đầu mở danh sách, mặc định là `Table`. Có thể chuyển sang `Graph`, là tên hiển thị mới của dạng cây phân cấp hiện có; các nhóm gốc bắt đầu ở trạng thái gấp, bấm vào nhóm để mở nhánh con. Hai dạng dùng cùng bộ lọc; hệ thống nhớ lựa chọn gần nhất của người dùng.
 
 ### Business rule
 
@@ -774,11 +781,11 @@ Mặc định mở ở dạng Cây, hiện các nhóm gốc đã gấp lại. B�
 
 ### Tiêu chí chấp nhận
 
-- `AC6.1` Khi mở danh sách nhóm lần đầu, dạng Cây hiện các nhóm gốc ở trạng thái gấp; mở một nhánh thì chỉ nhánh đó được tải. Lần sau mở lại, màn giữ dạng xem người dùng chọn gần nhất. Theo `BR-6.1`
+- `AC6.1` Khi mở danh sách nhóm lần đầu, dạng xem là `Table`. Khi chuyển sang `Graph`, các nhóm gốc bắt đầu ở trạng thái gấp; mở một nhánh thì chỉ nhánh đó được tải. Lần sau mở lại, màn giữ dạng xem người dùng chọn gần nhất. Graph là nhãn mới của dạng cây hiện có. Theo `BR-6.1`
 - `AC6.2` Khi xem số thành viên của một nhóm, con số gồm người ở mọi nhóm con và không tính tài khoản kiểm thử, người đã nghỉ việc. Khi một người thuộc hai nhóm con X và Y của nhóm cha P, người đó được tính một lần ở X, một lần ở Y và một lần ở P. Theo `BR-6.2` · `BR-6.3`
-- `AC6.3` Khi tìm theo tên hoặc mã và kết quả là một nhóm con, kết quả hiện đường dẫn đầy đủ từ gốc, ví dụ `ECOM / Trung tâm vận hành 1 / Growth 1`; đường dẫn quá dài bị cắt ở giữa và hiện đầy đủ trong tooltip (`EC-03`). Theo `BR-6.4`
-- `AC6.4` Khi công tắc `Show archived` đang tắt, nhóm `Lưu trữ` không xuất hiện ở danh sách và ở mọi ô chọn nhóm. Bật công tắc thì nhóm lưu trữ hiện chữ xám với nhãn `Archived`. Theo `BR-6.5`
-- `AC6.5` Khi dạng Bảng có 21 nhóm thoả bộ lọc, trang đầu hiện 20 dòng và có trang thứ hai; có đúng 20 nhóm thì chỉ có một trang. Khi lọc kết hợp nhiều điều kiện, bảng chỉ hiện nhóm thoả mọi điều kiện. Khi chưa có nhóm nào, màn hiện trạng thái rỗng kèm nút `Create group`; tìm hoặc lọc không ra thì báo không có kết quả. Theo bảng UI
+- `AC6.3` Khi tìm theo tên hoặc mã và kết quả là một nhóm con, kết quả hiện đường dẫn đầy đủ từ gốc, ví dụ `ECOM / Trung tâm vận hành 1 / Growth 1`; đường dẫn quá dài bị cắt ở giữa và hiện đầy đủ trong tooltip (`EC-03`). Khi xem dạng bảng, cột `Parent group` hiện nhóm cha trực tiếp; nhóm gốc hiện `No parent`. Ở dạng `Graph`, nhãn `Archived` nằm cạnh nhãn nguồn; tên dài được rút gọn và hover hoặc focus hiện đầy đủ, các nhãn không bị cắt theo tên. Theo `BR-6.4` · bảng giao diện
+- `AC6.4` Khi mở danh sách ở dạng `Graph` hoặc bảng, bộ lọc `Status` mặc định là `Active`, nhóm lưu trữ không xuất hiện. Chọn `Archived` thì kết quả là các nhóm lưu trữ; chọn `All` thì kết quả gồm cả hai trạng thái. Nhóm lưu trữ hiện chữ xám với nhãn `Archived`. Không có công tắc `Show archived` riêng. Nhóm lưu trữ không xuất hiện ở các ô chọn nhóm để thao tác, bất kể bộ lọc của danh sách. Theo `BR-6.5`
+- `AC6.5` Khi dạng Bảng có 21 nhóm thoả bộ lọc, trang đầu hiện 20 dòng và có trang thứ hai; có đúng 20 nhóm thì chỉ có một trang. Khi lọc kết hợp nhiều điều kiện ở dạng `Graph` hoặc bảng, kết quả chỉ gồm nhóm thoả mọi điều kiện; dạng `Graph` giữ đường dẫn tổ tiên để thể hiện vị trí của kết quả, không coi tổ tiên không khớp là kết quả lọc. Khi chưa có nhóm nào, màn hiện trạng thái rỗng kèm nút `Create group`; tìm hoặc lọc không ra thì báo không có kết quả. Theo bảng UI
 - `AC6.6` Khi người chỉ có quyền xem nhóm mở `SCR1` và `SCR4`, không có `Create group`, không kéo thả được, không có nút thao tác nào trên nhóm, công tắc chỉ đọc, và tab `Report` vẫn xem được. Người không có quyền xem nhóm không thấy mục `Organization` trên sidebar. Theo `BR-6.6`
 
 ### Giao diện và validate
@@ -786,16 +793,16 @@ Mặc định mở ở dạng Cây, hiện các nhóm gốc đã gấp lại. B�
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
 | `SCR26` Sidebar | Mục | **Organization › Learner Groups** | Lối vào danh sách nhóm. Tên `Learner Groups` tránh nhầm với nhân sự hỗ trợ trả lời bình luận và Recipients List cũ |
-| `SCR1` Danh sách nhóm | Công tắc | **Dạng xem** | Hai lựa chọn: *Cây* và *Bảng*. **Mặc định Cây**. Nhớ lựa chọn gần nhất của người dùng |
-| `SCR1` dạng Cây | Cây gấp mở | — | Mở đầu hiện các nhóm gốc, **đã gấp**. Bấm mũi tên để mở một nhánh — **chỉ tải nhánh đó**, không tải cả cây. Tải nhánh lỗi thì báo và cho thử lại ngay tại dòng đó. Điều hướng được bằng phím mũi tên, `Enter` mở nhánh |
-| `SCR1` dạng Cây | Mỗi dòng | — | Tên nhóm · số thành viên căn phải · nhãn nguồn nếu là nhóm đồng bộ · nhãn `No manager` nếu trống quản lý. Tên dài cắt một dòng kèm tooltip (`EC-04`) |
-| `SCR1` dạng Bảng | Cột | — | Tên nhóm · Mã · Nguồn · **Số thành viên** · Người quản lý · Trạng thái · Cập nhật lần cuối |
+| `SCR1` Danh sách nhóm | Công tắc | **Dạng xem** | Hai lựa chọn: `Table` và `Graph`. Mặc định `Table` trong lần mở đầu; Graph giữ cách thể hiện cây phân cấp hiện có. Nhớ lựa chọn gần nhất của người dùng |
+| `SCR1` dạng `Graph` | Cây gấp mở | — | Mở đầu hiện các nhóm gốc, **đã gấp**. Bấm mũi tên để mở một nhánh — **chỉ tải nhánh đó**, không tải cả cây. Tải nhánh lỗi thì báo và cho thử lại ngay tại dòng đó. Điều hướng được bằng phím mũi tên, `Enter` mở nhánh |
+| `SCR1` dạng `Graph` | Mỗi dòng | — | Tên nhóm · nhãn nguồn `Manual` *(Tự tạo)* hoặc `Synced` *(Đồng bộ từ hệ thống nhân sự)* · nhãn `Archived` nếu lưu trữ, đặt cạnh nhãn nguồn · nhãn `No manager` nếu trống quản lý · số thành viên căn phải. Tên dài rút gọn một dòng bằng dấu ba chấm; hover hoặc focus hiện đầy đủ tên. Các nhãn không bị cắt theo tên (`EC-04`) |
+| `SCR1` dạng Bảng | Cột | — | `Group name` *(Tên nhóm)* · `Code` *(Mã)* · `Parent group` *(Nhóm cha)* · `Members` *(Số thành viên)* · Người quản lý · `Status` *(Trạng thái)* · `Last updated` *(Cập nhật lần cuối)*. Nguồn hiển thị bằng nhãn `Manual` hoặc `Synced` cạnh tên nhóm, không có cột Source riêng. Parent group hiện nhóm cha trực tiếp; nhóm gốc hiện `No parent`; hover hoặc focus hiện đường dẫn đầy đủ của nhóm cha để phân biệt tên trùng |
 | `SCR1` cả hai dạng | **Số thành viên** | — | Đếm **gồm cả người ở nhánh con**, giống cách thư mục đếm cả nội dung bên trong. Tooltip: *Gồm thành viên của các nhóm con* |
 | `SCR1` cả hai dạng | Ô tìm kiếm | — | Tìm theo tên và mã. Kết quả hiện **đường dẫn đầy đủ từ gốc**, ví dụ `ECOM / Trung tâm vận hành 1 / Growth 1` |
-| `SCR1` dạng Bảng | Bộ lọc | — | Nguồn · Cấp · Trạng thái · Người quản lý. Kết hợp được nhiều điều kiện |
+| `SCR1` cả hai dạng | Bộ lọc | — | Nguồn · Trạng thái · Người quản lý. Không có bộ lọc Level *(Cấp)*. Kết hợp được nhiều điều kiện. `Status` có `Active`, `Archived`, `All`; mặc định `Active`. Dạng cây giữ đường dẫn tổ tiên của kết quả khớp bộ lọc để thể hiện vị trí |
 | `SCR1` dạng Bảng | Sắp xếp | — | Theo tên, số thành viên, ngày cập nhật |
 | `SCR1` dạng Bảng | Phân trang | — | Mặc định 20 dòng mỗi trang |
-| `SCR1` cả hai dạng | Nhóm lưu trữ | — | **Ẩn mặc định.** Có công tắc `Show archived` *(Hiện nhóm đã lưu trữ)*. Khi hiện thì chữ xám và có nhãn `Archived` *(Lưu trữ)* |
+| `SCR1` cả hai dạng | Nhóm lưu trữ | — | Ẩn mặc định theo bộ lọc `Status = Active`. Hiện khi chọn `Archived` hoặc `All`, chữ xám và có nhãn `Archived`. Không có công tắc Show archived riêng |
 | `SCR1` cả hai dạng | Trạng thái rỗng | — | Chưa có nhóm nào: nút `Create group`. Tìm không ra, lọc không ra: báo không có kết quả |
 
 ### Dữ liệu
@@ -873,7 +880,7 @@ Chỉ có **một cửa chặn thật**: lớp đã kết thúc. Sức chứa kh
 - `BR-7.7` Lớp có lớp Foundation gắn kèm thì người vào lớp chính **cũng vào Foundation**. Đây là hành vi sẵn có của Lớp, không phải luật mới
 - `BR-7.8` **Tài khoản kiểm thử bị bỏ qua** ở mọi bước của luật đứng
 - `BR-7.9` Lượt ghi danh sinh ra qua nhóm phải **ghi lại nguồn**, để phân biệt với người được thêm tay. **Một lượt có thể có nhiều nguồn** khi nhiều nhóm cùng giao một lớp: mỗi nhóm là một nguồn, người rời một nhóm thì chỉ bớt một nguồn, lượt còn nguyên khi còn nguồn khác *(`BR-3.7`)*
-- `BR-7.10` **Không gỡ được một lớp khỏi nhóm khi đã có người trong nhóm học lớp đó.** Cùng logic với việc gỡ học viên khỏi lớp
+- `BR-7.10` Không gỡ được một lớp khỏi nhóm khi đã có ít nhất một người trong nhóm phát sinh hoạt động học trong lớp đó, kể cả người đã hoàn thành. Chỉ có lượt ghi danh nhưng chưa phát sinh hoạt động học không phải điều kiện chặn gỡ. Hệ thống phải kiểm tra lại điều kiện trước khi hoàn tất thao tác gỡ
 - `BR-7.11` Giao nội dung cho nhóm **không hồi tố**: người đã rời nhóm trước thời điểm giao thì không vào lớp
 - `BR-7.12` Công tắc **Chảy xuống nhánh con đổi được sau khi giao**, trên dòng của lớp ở tab `Assigned Classes`. Bật thì thành viên nhánh con chưa có lượt ghi danh vào lớp; tắt thì **không gỡ ai**, chỉ dừng nhận thêm người từ nhánh con
 - `BR-7.13` Tổ chức chưa bật **cờ giao nội dung** (mục 8) thì nút `Assign classes` không hiện ở tab `Assigned Classes`, và hệ thống từ chối mọi yêu cầu giao lớp cho nhóm
@@ -881,23 +888,26 @@ Chỉ có **một cửa chặn thật**: lớp đã kết thúc. Sức chứa kh
 ### Tiêu chí chấp nhận
 
 - `AC7.1` Khi giao một lớp cho nhóm, mọi thành viên hiện tại vào lớp. Khi công tắc *Tự ghi danh người vào sau* đang bật, người vào nhóm sau đó cũng tự vào lớp. Người đã rời nhóm trước thời điểm giao thì không vào lớp. Theo `BR-7.1` · `BR-7.11`
-- `AC7.2` Khi mở ô chọn lớp, ô chỉ liệt kê lớp cụ thể đang nhận thêm học viên, tìm được theo tên lớp và tên khoá; lớp nháp, lớp công khai còn hạn xuất hiện, lớp đã kết thúc không xuất hiện. Trước khi xác nhận, khối xem trước hiện số người sẽ vào lớp, số người đã có trong lớp và số người bị bỏ qua kèm lý do. Khi nhóm cha không có thành viên trực tiếp, nhánh con có người và công tắc `Cascade to sub-groups` tắt, khối xem trước ghi 0 người sẽ vào lớp và gợi ý bật công tắc (`EC-16`, `CG-2`). Khi tổ chức chưa bật cờ giao nội dung, nút `Assign classes` không hiện. Theo `BR-7.2` · `BR-7.4` · `BR-7.13`
-- `AC7.3` Khi một người đã được thêm tay vào lớp và cũng thuộc nhóm được giao lớp đó, người đó chỉ có một lượt ghi danh. Khi hai nhóm cùng giao một lớp cho cùng một người, lượt đó ghi cả hai nhóm làm nguồn, và lượt sinh qua nhóm phân biệt được với lượt thêm tay. Theo `BR-7.3` · `BR-7.9`
+- `AC7.2` Khi mở ô chọn lớp, ô chỉ liệt kê lớp cụ thể đang nhận thêm học viên, tìm được theo tên lớp và tên khoá; lớp nháp, lớp công khai còn hạn xuất hiện, lớp đã kết thúc không xuất hiện. Trước khi xác nhận, khối xem trước dùng các nhãn `New enrollments`, `Already in class`, `Skipped` theo định nghĩa trong bảng giao diện; người đã có lượt ghi danh ở đúng lớp được tính vào `Already in class` dù chưa bắt đầu học, không tạo lượt ghi danh trùng. Khi nhóm cha không có thành viên trực tiếp, nhánh con có người và công tắc `Cascade to sub-groups` tắt, khối xem trước ghi 0 người sẽ vào lớp và gợi ý bật công tắc (`EC-16`, `CG-2`). Khi tổ chức chưa bật cờ giao nội dung, nút `Assign classes` không hiện. Theo `BR-7.2` · `BR-7.4` · `BR-7.13`
+- `AC7.3` Khi một người đã được thêm tay vào lớp và cũng thuộc nhóm được giao lớp đó, người đó chỉ có một lượt ghi danh. Khi hai nhóm cùng giao một lớp cho cùng một người, lượt đó ghi cả hai nhóm làm nguồn, và lượt sinh qua nhóm phân biệt được với lượt thêm tay. Khi lớp có 8 lượt chỉ mang nguồn thêm tay và 12 lượt có nguồn nhóm đang xem, cột Enrolled by group hiển thị 12. Một lượt có cả nguồn nhóm đang xem và nguồn nhóm khác chỉ được tính một lần trong cột của nhóm đang xem. Theo `BR-7.3` · `BR-7.9`
 - `AC7.4` Khi luật đứng chạy nền gặp lớp đã kết thúc, không ai được thêm vào lớp, hệ thống không báo lỗi và ghi một dòng vào nhật ký hệ thống; ở tab `Assigned Classes`, dòng lớp đó có nhãn `Ended`, công tắc `Auto-enroll` vẫn hiện kèm tooltip giải thích người vào sau không được thêm (`EC-15`). Tài khoản kiểm thử bị bỏ qua ở mọi bước của luật đứng. Theo `BR-7.4` · `BR-7.5` · `BR-7.8`
 - `AC7.5` Khi số học viên vượt sức chứa lớp, người vẫn được thêm, và tab `Students` của lớp (`SCR21`) hiện một dòng *Lớp này giới hạn N học viên, hiện có M người*, không có thông báo tức thời hay hộp xác nhận. Lớp có Foundation thì người vào lớp chính cũng vào Foundation. Khi giao cho nhóm lớn, modal đóng ngay, việc ghi danh chạy nền và màn báo khi xong (`EC-17`). Theo `BR-7.6` · `BR-7.7` · NFR của US này
-- `AC7.6` Khi đã có người trong nhóm học một lớp, nút `Remove` của lớp đó không hiện, thay bằng dòng `This class already has learners from this group and can't be removed` *(Đã có học viên từ nhóm này trong lớp, không gỡ được)* (`EC-14`). Khi bật `Cascade to sub-groups` ở dòng một lớp đã giao, thành viên nhánh con chưa có lượt vào lớp; tắt thì không ai bị gỡ. Theo `BR-7.10` · `BR-7.12`
+- `AC7.6` Khi có ít nhất một người trong nhóm phát sinh hoạt động học ở lớp, kể cả đã hoàn thành, nút `Remove` của lớp đó không hiện và màn hiện thông báo theo bảng giao diện (`EC-14`). Khi chỉ có lượt ghi danh mà chưa ai phát sinh hoạt động học, điều kiện này không chặn gỡ lớp. Khi hoạt động học phát sinh sau lúc mở màn hoặc hộp xác nhận nhưng trước khi hoàn tất thao tác, hệ thống từ chối gỡ và hiện cùng thông báo. Khi bật `Cascade to sub-groups` ở dòng một lớp đã giao, thành viên nhánh con chưa có lượt vào lớp; tắt thì không ai bị gỡ. Theo `BR-7.10` · `BR-7.12`
 
 ### Giao diện và validate
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
 | `SCR12` Giao nội dung | Chọn nhiều | **Lớp** | Bắt buộc. Có tìm kiếm theo tên lớp và tên khoá. Danh sách **chỉ hiện lớp đang nhận thêm học viên** (`BR-7.4`) — lớp đã kết thúc không xuất hiện. Không có lớp nào đang nhận thì báo trạng thái rỗng. Nút `Assign` mờ khi chưa chọn lớp |
+| `SCR12` Giao nội dung | Bảng chọn lớp | Cột | Checkbox · `#` *(Số thứ tự)* · `Class name` · `Course` · `Class duration` · `Capacity`. Thời hạn và sức chứa hiển thị theo thông tin của lớp; lớp không có ngày hết hạn hiện `No expiration date`. Capacity chỉ cung cấp thông tin, không chặn giao lớp theo BR-7.6 quy tắc vượt sức chứa |
+| `SCR12` Giao nội dung | Tìm kiếm | — | Placeholder `Search by class or course name`; nút `Reset` và `Search` |
 | `SCR12` Giao nội dung | Công tắc | **Cascade to sub-groups** *(Chảy xuống nhánh con)* | **Mặc định tắt.** Tooltip: *Bật thì người ở các nhóm con cũng vào lớp này* |
 | `SCR12` Giao nội dung | Công tắc | **Auto-enroll** *(Tự ghi danh người vào sau)* | **Mặc định tắt.** Chuỗi hiển thị: `New members of this group will be automatically enrolled in this class` *(Thành viên mới của nhóm sẽ tự được ghi danh vào lớp này)*. Tooltip: *Tắt thì chỉ người đang có trong nhóm vào lớp. Người gia nhập sau phải thêm tay* |
-| `SCR12` Giao nội dung | Khối xem trước | — | Trước khi xác nhận, hiện: **số người sẽ vào lớp** · số người **đã có trong lớp rồi** · số người bị bỏ qua và lý do. 0 người vì công tắc nhánh con tắt thì gợi ý bật (`EC-16`) |
-| `SCR11` tab `Assigned Classes` | Bảng | Cột | Tên lớp · Khoá học · Thời hạn lớp · Số người đã vào qua nhóm này · Ngày giao · Hai công tắc trên dòng. Lớp đã kết thúc có nhãn `Ended`. Chưa giao lớp nào: trạng thái rỗng kèm nút `Assign classes` |
+| `SCR12` Giao nội dung | Khối xem trước | — | Hiện `New enrollments` *(Lượt ghi danh mới)*: thành viên trong phạm vi giao chưa có lượt ghi danh ở lớp và sẽ được thêm khi xác nhận; `Already in class` *(Đã có trong lớp)*: thành viên đã có lượt ghi danh ở đúng lớp, dù được thêm tay hoặc qua nhóm khác, không có nghĩa đã bắt đầu học; `Skipped` *(Bị bỏ qua)*: trường hợp không được thêm, kèm lý do. Lý do hợp lệ của Skipped cần làm rõ ở câu hỏi mở #21; không tự coi hết sức chứa hoặc từng học cùng khoá ở lớp khác là lý do bỏ qua. Người ở nhánh con khi công tắc nhánh con tắt nằm ngoài phạm vi giao, không tính là Skipped. Số liệu phải phân biệt theo từng lớp; nếu cộng nhiều lớp thì đơn vị là lượt ghi danh, không phải số người không trùng. 0 người vì công tắc nhánh con tắt thì gợi ý bật (`EC-16`) |
+| `SCR11` tab `Assigned Classes` | Bảng | Cột | `#` *(Số thứ tự)* · `Class name` *(Tên lớp)* · `Course` *(Khoá học)* · `Class duration` *(Thời hạn lớp)* · `Enrolled by group` *(Số lượt ghi danh có nguồn từ nhóm này)* · `Assigned date` *(Ngày giao)* · `Cascade to sub-groups` · `Auto-enroll` · thao tác theo quyền. Enrolled by group đếm các lượt ghi danh trong lớp có nhóm đang xem trong danh sách nguồn; mỗi lượt chỉ tính một lần ở nhóm đó dù có thêm nguồn khác. Lượt chỉ có nguồn thêm tay hoặc nguồn nhóm khác không được tính. Tooltip: `Number of enrollments attributed to this group in this class.` Đây không phải tổng thành viên hoặc số người đã bắt đầu học; các điểm còn mở về phạm vi và vòng đời nguồn ở câu hỏi mở #22. Lớp đã kết thúc có nhãn `Ended`. Chưa giao lớp nào: trạng thái rỗng kèm nút `Assign classes` |
+| `SCR11` tab `Assigned Classes` | Tìm kiếm | — | Tìm theo tên lớp hoặc tên khoá; placeholder `Search by class or course name`; nút `Reset` và `Search` |
 | `SCR11` tab `Assigned Classes` | Công tắc trên dòng | **Cascade to sub-groups** | Đổi được sau khi giao (`BR-7.12`) |
-| `SCR11` tab `Assigned Classes` | Nút | **Remove** *(Gỡ lớp)* | **Ẩn khi đã có người trong nhóm học lớp đó.** Thay bằng: `This class already has learners from this group and can't be removed` |
+| `SCR11` tab `Assigned Classes` | Nút | **Remove** *(Gỡ lớp)* | Ẩn khi đã có người trong nhóm phát sinh hoạt động học ở lớp đó, kể cả đã hoàn thành. Thay bằng: `This class can't be removed because learners from this group have already started learning.` *(Không thể gỡ lớp vì đã có người học trong nhóm bắt đầu học.)* Chỉ có lượt ghi danh chưa đủ để chặn. Kiểm tra lại điều kiện trước khi hoàn tất; nếu mới phát sinh hoạt động học thì từ chối gỡ và hiện cùng thông báo |
 | `SCR11` tab `Assigned Classes` | Nhóm lưu trữ | — | Khoá công tắc và nút |
 | **`SCR21` Chi tiết lớp — tab `Students`** | Dòng cảnh báo | — | Lớp vượt sức chứa thì hiện **một dòng** ở đầu danh sách: *Lớp này giới hạn N học viên, hiện có M người.* Chỉ thông báo, **không chặn thao tác nào** |
 
@@ -906,7 +916,7 @@ Chỉ có **một cửa chặn thật**: lớp đã kết thúc. Sức chứa kh
 | Thông tin | Mới / Có sẵn | Ghi chú |
 |---|---|---|
 | Quan hệ nhóm với lớp, kèm hai công tắc | Mới | |
-| Nguồn của lượt ghi danh | **Có sẵn** | Hệ thống đã ghi nguồn lượt ghi danh. Cần thêm một giá trị cho đường đi qua nhóm |
+| Nguồn của lượt ghi danh | **Có sẵn** | Hệ thống đã ghi nguồn lượt ghi danh. Cần bổ sung nguồn qua nhóm và xác định nhóm cụ thể theo BR-7.9 quy tắc nhiều nguồn. Enrolled by group đếm lượt có nguồn của nhóm đang xem; chỉ có nhãn nguồn chung Qua nhóm không đủ để tính riêng từng nhóm |
 
 ### NFR
 
@@ -918,7 +928,7 @@ Chỉ có **một cửa chặn thật**: lớp đã kết thúc. Sức chứa kh
 | --- | --- |
 | `CG-2` · `EC-16` Nhóm cha không có thành viên trực tiếp, nhánh con có người, giao nội dung cho nhóm cha | Có luật: công tắc `Cascade to sub-groups` mặc định tắt, đổi được sau khi giao (`BR-7.12`); tiêu chí `AC7.2` |
 | `CG-3` Hai nhóm cùng giao một lớp cho cùng một người | Có luật: `BR-7.9` |
-| `EC-14` Gỡ lớp đã có người trong nhóm học | Có luật: `BR-7.10`; tiêu chí `AC7.6` |
+| `EC-14` Gỡ lớp đã có người trong nhóm phát sinh hoạt động học | Có luật: `BR-7.10`; tiêu chí `AC7.6`. Chỉ có lượt ghi danh chưa đủ để chặn |
 | `EC-15` Lớp đã giao nay đã kết thúc | Có luật: `BR-7.4`, `BR-7.5`; tiêu chí `AC7.4` |
 | `EC-17` Giao cho nhóm lớn, lớp có Foundation | NFR của US này; tiêu chí `AC7.5` |
 
@@ -1380,7 +1390,7 @@ Phòng ban giải thể hoặc nhóm tạm không dùng tới. Người vận h�
 | `SCR5` Xác nhận xoá | Hộp xác nhận | — | Nói rõ xoá không khôi phục được. Focus mặc định ở `Cancel`, `Esc` đóng hộp |
 | `SCR4` Chi tiết nhóm | Nút | **Restore** *(Khôi phục)* | Hiện với nhóm đang `Lưu trữ` mà nhóm cha không còn lưu trữ, mọi nút sửa khác ẩn. Đưa về `Đang dùng` cả nhánh đã lưu trữ theo cùng lần (`BR-14.9`) |
 | `SCR4` Chi tiết nhóm | Không tìm thấy | — | Đường dẫn tới nhóm không tồn tại hoặc đã xoá: trang không tìm thấy kèm nút về danh sách nhóm |
-| `SCR1` Danh sách nhóm | Hiển thị | — | Nhóm lưu trữ **ẩn mặc định**, chữ xám khi bật hiện, có nhãn `Archived` |
+| `SCR1` Danh sách nhóm | Hiển thị | — | Nhóm lưu trữ ẩn mặc định theo bộ lọc `Status = Active`; chọn `Archived` hoặc `All` để hiện. Nhóm hiện chữ xám, có nhãn `Archived` cạnh nhãn nguồn ở dạng `Graph` |
 | Mọi ô chọn nhóm | Danh sách | — | Nhóm lưu trữ **không xuất hiện** ở bất kỳ ô chọn nhóm nào |
 
 ### Dữ liệu
@@ -1417,7 +1427,7 @@ Là nhân sự vận hành, tôi cần tra được nhật ký thay đổi thàn
 
 ### Luồng chính
 
-Có người thắc mắc vì sao họ bị gán một khoá, hoặc vì sao số liệu báo cáo lệch. Người vận hành bấm `Membership log` ở chi tiết nhóm (`SCR4`) hoặc ở hồ sơ học viên (`SCR18`), mở nhật ký `SCR17`, lọc theo người hoặc theo nhóm, tìm ra thời điểm, lý do và người thao tác.
+Có người thắc mắc vì sao họ bị gán một khoá, hoặc vì sao số liệu báo cáo lệch. Người vận hành bấm `Membership log` ở chi tiết nhóm (`SCR4`) hoặc ở hồ sơ học viên (`SCR18`), mở nhật ký `SCR17` để tìm thời điểm, hành động và lý do thay đổi thành viên. Khi vào từ một nhóm, nhật ký bị giới hạn theo nhóm đang chọn; không đổi sang nhóm khác trong cùng ngữ cảnh. Khi vào từ hồ sơ học viên, giữ bộ lọc theo người như hiện có.
 
 ### Business rule
 
@@ -1429,23 +1439,22 @@ Có người thắc mắc vì sao họ bị gán một khoá, hoặc vì sao s�
 
 ### Tiêu chí chấp nhận
 
-- `AC15.1` Khi mở nhật ký, bảng hiện thời điểm, người bị thay đổi, nhóm, hành động `Joined` *(Vào nhóm)* hoặc `Left group` *(Rời nhóm)*, lý do thuộc năm giá trị và người thao tác; dòng do đồng bộ ghi người thao tác là *Hệ thống*; mặc định dòng mới nhất lên đầu. Theo `BR-15.2`
+- `AC15.1` Khi mở nhật ký, bảng hiện thời điểm, người bị thay đổi, nhóm, hành động `Joined` *(Vào nhóm)* hoặc `Left group` *(Rời nhóm)* và cột `Reason` *(Lý do)* thuộc năm giá trị; không có cột Performed by. Mặc định dòng mới nhất lên đầu. Theo `BR-15.2`
 - `AC15.2` Khi lọc theo một khoảng thời gian bất kỳ kể từ ngày bật tính năng, nhật ký trả đủ mọi dòng trong khoảng đó, không thiếu dòng cũ. Theo `BR-15.1`
 - `AC15.3` Khi xem một dòng nhật ký, không có thao tác sửa hay xoá dòng đó. Theo `BR-15.3`
 - `AC15.4` Khi đổi tên một nhóm, di chuyển một nhánh hoặc đổi công tắc tự ghi danh, nhật ký thành viên không có dòng mới; ba thao tác sau ghi vào nhật ký hệ thống. Theo `BR-15.4` · `BR-15.5`
-- `AC15.5` Khi vào nhật ký từ chi tiết nhóm, bộ lọc nhóm đã chọn sẵn nhóm đó; khi vào từ hồ sơ học viên, bộ lọc người đã chọn sẵn người đó. Theo bảng UI
+- `AC15.5` Khi vào nhật ký từ chi tiết một nhóm, chỉ xem được nhật ký trong phạm vi nhóm đang chọn; không thể xoá điều kiện nhóm hoặc đổi sang nhóm khác trong ngữ cảnh đó. Lối vào từ hồ sơ học viên giữ hành vi hiện có, lọc sẵn theo người; thay đổi lối này và việc bao gồm nhánh con được để sau. Theo bảng giao diện
 
 ### Giao diện và validate
 
 | Màn hình | Giao diện | Field | Yêu cầu |
 |---|---|---|---|
-| `SCR17` Nhật ký | Bảng | Cột | Thời điểm · Người bị thay đổi · Nhóm · Hành động · Lý do · Người thao tác. Phân trang 20 dòng |
+| `SCR17` Nhật ký | Bảng | Cột | Thời điểm · Người bị thay đổi · Nhóm · Hành động · `Reason` *(Lý do)*. Không có cột Performed by. Phân trang 20 dòng |
 | `SCR17` Nhật ký | Cột **Hành động** | — | Hai giá trị: `Joined` · `Left group` |
-| `SCR17` Nhật ký | Cột **Lý do** | — | Năm giá trị: `Thêm tay` · `Nhập tệp` · `Đồng bộ` · `Nghỉ việc` · `Điều chuyển` (`Transferred`). Chuỗi tiếng Anh của bốn giá trị đầu do Design dịch |
-| `SCR17` Nhật ký | Cột **Người thao tác** | — | Tài khoản đã làm. Khi do đồng bộ hoặc hệ thống tự làm thì hiện chữ *Hệ thống* |
-| `SCR17` Nhật ký | Bộ lọc | — | Khoảng thời gian · nhóm · người · lý do. Lọc không ra thì báo không có kết quả |
+| `SCR17` Nhật ký | Cột `Reason` *(Lý do)* | — | Năm giá trị: `Thêm tay` · `Nhập tệp` · `Đồng bộ` · `Nghỉ việc` · `Điều chuyển` (`Transferred`). Chuỗi tiếng Anh của bốn giá trị đầu do Design dịch |
+| `SCR17` Nhật ký | Bộ lọc | — | Khoảng thời gian · nhóm · người · Reason. Khi mở từ chi tiết nhóm, điều kiện nhóm được cố định theo nhóm đang chọn, không xoá hoặc đổi sang nhóm khác; các bộ lọc còn lại chỉ thu hẹp kết quả trong phạm vi đó. Khi vào từ hồ sơ học viên, giữ bộ lọc theo người hiện có. Lọc không ra thì báo không có kết quả |
 | `SCR17` Nhật ký | Sắp xếp | — | Mặc định mới nhất lên đầu |
-| `SCR17` Nhật ký | Lối vào | — | Nút `Membership log` ở chi tiết nhóm *(lọc sẵn theo nhóm đó)* và ở hồ sơ học viên *(lọc sẵn theo người đó)*. Cần quyền xem nhật ký nhóm |
+| `SCR17` Nhật ký | Lối vào | — | Nút `Membership log` ở chi tiết nhóm mở nhật ký với phạm vi cố định theo nhóm đang chọn. Lối vào ở hồ sơ học viên giữ bộ lọc theo người hiện có; việc đổi lối này được để sau. Cần quyền xem nhật ký nhóm |
 
 ### Dữ liệu
 
@@ -2005,7 +2014,10 @@ Mức tiếp cận theo `ux-design.md` mục 4: WCAG 2.2 AA. Các NFR về thờ
 | 17 | **Lưu trữ tay một nhóm đồng bộ**: thiết kế BE chặn, `ux-design.md` vẫn hiện nút `Archive` ở nhóm đồng bộ. [đề xuất] Chặn, như các thao tác sửa khác của nhóm đồng bộ (`BR-5.5`); nhóm đồng bộ chỉ chuyển `Lưu trữ` khi phòng ban biến mất khỏi nguồn (`BR-5.8`) | Design PIC · Tech PIC · PO | Không chặn. PO chốt khi duyệt PRD |
 | 18 | **Gửi trùng `MAIL-GRP-01`**: thiết kế BE chưa chống trùng, sự kiện rời nhóm xử lý lại có thể gửi email lần hai, trái `BR-20.5` | Tech PIC | Không chặn. Tech PIC thêm chống trùng hoặc ghi rủi ro |
 | 19 | **Màn của `US21` chưa có trong `ux-design.md`**: ô chọn nhóm ở màn tạo, sửa thông báo; khối nhóm đã chọn ở chi tiết; bộ lọc nhóm ở danh sách. Kèm một góc chưa có luật: nhóm đã chọn bị lưu trữ trước khi thông báo được gửi | Design PIC · PO | Không chặn viết PRD. Chặn dựng UI của `US21` |
-| 20 | **Quy tắc nhập liệu và giá trị biên còn thiếu**: độ dài và ký tự cho phép của mã nhóm, kiểm trùng có phân biệt hoa thường không; trần số dòng và dung lượng của tệp nhập; tiêu chí biên 20 và 21 dòng của phân trang ở `SCR6`, `SCR7`, `SCR17`, `SCR24`; tìm tên tiếng Việt có dấu và không dấu | Design PIC · QA PIC | Không chặn. Rủi ro PO chấp nhận ở gate CR7; Design PIC và QA PIC đề xuất con số, PO bổ sung qua change request |
+| 20 | **Quy tắc nhập liệu và giá trị biên còn thiếu**: định dạng và độ dài mã nhóm tự sinh; không yêu cầu người dùng nhập mã; trần số dòng và dung lượng của tệp nhập; tiêu chí biên 20 và 21 dòng của phân trang ở `SCR6`, `SCR7`, `SCR17`, `SCR24`; tìm tên tiếng Việt có dấu và không dấu | Design PIC · QA PIC | Không chặn. Rủi ro PO chấp nhận ở gate CR7; Design PIC và QA PIC đề xuất con số, PO bổ sung qua change request |
+| 21 | Khối xem trước giao lớp: lý do hợp lệ để tính `Skipped` khi tài khoản kiểm thử đã bị loại khỏi logic nhóm; định nghĩa hoạt động học làm chặn gỡ lớp; phạm vi người được xét khi có nhánh con hoặc nhiều nguồn; hệ quả với lượt ghi danh chưa học và mentor khi gỡ lớp | PO | Cần chốt để hoàn thiện tiêu chí kiểm thử của US7 giao và gỡ lớp; không tự bổ sung lý do bỏ qua hoặc quy tắc gỡ lượt ghi danh |
+| 22 | `Enrolled by group`: đã chốt đếm lượt ghi danh có nguồn của nhóm đang xem; không đếm mọi thành viên đã có trong lớp. Còn cần chốt phạm vi nhánh con và việc tính người đã rời nhóm hoặc lượt được giữ sau khi tắt Cascade. `Joined date`: khi một người thuộc nhiều nhóm con, ngày trên một dòng đại diện quan hệ nào? | PO | Còn chặn quy tắc phạm vi và vòng đời nguồn khi tính Enrolled by group, cùng ngày đại diện khi có nhiều quan hệ; không dùng số ghi danh để chặn Remove |
+| 23 | Để sau theo yêu cầu PO: cách đếm Subgroups, có làm Group by Parent hay không, log của nhóm có bao gồm nhánh con không và thay đổi lối nhật ký từ hồ sơ người | PO | Chưa quyết; không tự bổ sung hành vi mới cho các mục này trong đợt sửa hiện tại |
 
 ---
 

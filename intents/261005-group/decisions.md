@@ -183,3 +183,86 @@ Nhật ký quyết định của intent. Chuyển từ `archive/v1/project-decis
 | DEC94 | 2.42 `R-08` Minor: mục Preferences chưa đổi tên thành References theo template mới | Tên mục cũ của PRD đã publish; đổi tên mục chờ chủ template công ty xác nhận |
 | DEC94 | 2.42 `R-09` Minor: bảng đầu PRD thiếu hàng Mã tính năng | Mã LMS-F002 có trong frontmatter, Story List lấy mã từ đó; bổ sung ở lần sửa PRD sau |
 | DEC94 | 2.42 `R-10` Minor: tiêu đề TDD viết tắt, template gọi là Technical Direction | Cùng lý do R-08 |
+
+
+## Bổ sung ngày 03/11/2026: CR9 sửa PRD theo phần đã rà soát
+
+| DEC | Ngày | Stage | Quyết định | Nguyên văn | Người quyết | Read when |
+|---|---|---|---|---|---|---|
+| DEC145 | 2026-11-03 | 2.42 · CR9 | PO yêu cầu sửa trực tiếp PRD, chỉ phần đã rà soát. Mở sửa chi tiết ở US2 di chuyển nhánh · US6 danh sách nhóm · US7 giao và gỡ lớp · US14 hiển thị nhóm lưu trữ; không thay danh sách user story. Lưu trước sửa ở archive/prd-generation/prd-pre-CR9-20261103.md; bản sửa là v0.9 draft, chưa được duyệt. Các đề xuất chưa chốt như gom theo nhóm cha, bỏ cột Manager, thay Member list, đổi định nghĩa số người trên Assigned Classes và Reason không được tự áp dụng | “bây giờ sửa vào prd, chỉ sửa những phần đã review, tuyệt đối không sửa những phần không liên quan” | PO | prd-generation, design-alignment |
+| DEC146 | 2026-11-03 | 2.42 · CR9 | Điều kiện chặn gỡ lớp là phát sinh hoạt động học, không phải chỉ có lượt ghi danh; nội dung cập nhật cùng business rule, tiêu chí và câu thông báo. Giữ bộ nhãn xem trước do PO đề xuất; lý do Skipped chưa đủ định nghĩa vẫn là câu hỏi mở | “chặn khi phát sinh hoạt động học” · “Nhãn đề xuất: New enrollments/ already in class / skipped” | PO | US7 giao và gỡ lớp |
+| DEC147 | 2026-11-03 | 2.42 · CR9 | Dạng cây dùng bộ lọc như dạng bảng; bỏ công tắc Show archived trùng chức năng. Yêu cầu bổ sung thao tác xoá trong Edit group được để sau, không đưa vào bản sửa | “dạng cây sẽ áp dụng bộ lọc như dạng bảng” · “bỏ qua cái này đi, chưa chắc, làm sau” | PO | US6 danh sách nhóm, Edit group |
+
+### Change requests bổ sung
+
+| CR | Ngày | Nguồn | Nội dung | Stage mở lại | Artifact đổi | Trạng thái |
+|---|---|---|---|---|---|---|
+| CR9 | 2026-11-03 | Phản hồi PO trong phiên, DEC145 đến DEC147; inputs/prd-group-revision-analysis-20261103.md | Chỉ sửa chi tiết đã rà soát: di chuyển nhánh, danh sách cây/bảng, nhãn xem trước và điều kiện chặn gỡ lớp khi phát sinh hoạt động học. Không thay rule về rời nhóm hoặc cách xoá lượt ghi danh | 2.42 (Sửa phần bị chạm); 2.43 phải đối chiếu lại sau khi PRD được duyệt | prd v0.9 draft; state ghi nhận việc mở sửa | Đang mở; bản sửa chờ duyệt và review độc lập; các điểm chưa đủ định nghĩa ghi ở câu hỏi mở #21 của PRD |
+
+
+### Bổ sung phạm vi CR9: Add Member
+
+| DEC | Ngày | Stage | Quyết định | Nguyên văn | Người quyết | Read when |
+|---|---|---|---|---|---|---|
+| DEC148 | 2026-11-03 | 2.42 · CR9 | Add Member theo ảnh màn Add Student do PO cung cấp: cột Checkbox, ID, Member, Email, Phone, Date; Date gồm Created và Updated; giữ bố cục tìm kiếm, sắp xếp, khoảng ngày và nút Add, Cancel, Reset, Search. Bỏ Staff code và Department; không sửa bảng Members. Bổ sung phần SCR7 của US3 thêm thành viên vào CR9 đang mở; bản v0.9 tiếp tục là draft, chưa duyệt | “làm giống màn add student” | PO | US3 thêm thành viên, SCR7 Add Member |
+
+
+### Bổ sung ngày 04/11/2026: đối chiếu ảnh Members và Assigned Classes
+
+| DEC | Ngày | Stage | Quyết định | Nguyên văn | Người quyết | Read when |
+|---|---|---|---|---|---|---|
+| DEC149 | 2026-11-04 | 2.42 · CR9 | Cập nhật Members: thay Department thành Subgroup; đồng bộ Add members theo ảnh mới, bỏ Staff code, dùng Full name giống bảng Members. Ảnh mới thay mẫu Add Student ở DEC148 đối với bố cục và cột: không còn ID, Phone, Date và khoảng ngày. Chỉ sửa US3 và phần giao diện US7 liên quan ảnh mới; PRD v0.10 draft. Định nghĩa Enrolled by group chưa được PO chốt, ghi câu hỏi mở; không tự đổi công thức | “trong ảnh đã đổi cột department thành subgroup như feedback của team, cần thực hiện đổi PRD” · “Đồng bộ lại các cột trong bảng, sử dụng từ ngữ giống bảng khác, bỏ staff code (đã bỏ), sửa PRD theo giao diện hiện tại hoặc đề xuất chỉnh sửa gì không” | PO | US3 danh sách và thêm thành viên · US7 giao lớp |
+
+
+### Bổ sung ngày 04/11/2026: cách đếm Enrolled by group
+
+| DEC | Ngày | Stage | Quyết định | Nguyên văn | Người quyết | Read when |
+|---|---|---|---|---|---|---|
+| DEC150 | 2026-11-04 | 2.42 · CR9 | Enrolled by group đếm lượt ghi danh trong lớp có nguồn từ nhóm đang xem, không đếm mọi thành viên đã ở lớp. Cập nhật định nghĩa cột, tooltip, dữ liệu nguồn và tiêu chí kiểm tra trong US7 giao lớp; đóng phần lựa chọn cách đếm ở câu hỏi mở #22, giữ câu hỏi về phạm vi và vòng đời nguồn. PRD v0.11 draft, chưa duyệt | “Đếm lượt ghi danh có nguồn nhóm này” | PO | US7 giao lớp · SCR11 Assigned Classes |
+
+
+### Bổ sung ngày 04/11/2026: làm rõ Graph trong nhận xét UAT
+
+| DEC | Ngày | Stage | Quyết định | Nguyên văn | Người quyết | Read when |
+|---|---|---|---|---|---|---|
+| DEC151 | 2026-11-04 | Rà soát UAT · CR9 | Graph chỉ là tên mới của chế độ Tree hiện có, không phải yêu cầu sơ đồ mới. Ghi vào audit độ phủ để sửa nhãn của US6 danh sách nhóm cùng các điểm còn thiếu sau UAT; chưa sửa PRD trong bước audit này | “Chỉ đổi tên thành Graph” | PO | US6 danh sách nhóm · inputs/uat-coverage-20261104.md |
+
+
+### Bổ sung ngày 04/11/2026: PO rút gọn UAT Coverage
+
+| DEC | Ngày | Stage | Quyết định | Nguyên văn | Người quyết | Read when |
+|---|---|---|---|---|---|---|
+| DEC152 | 2026-11-04 | Rà soát UAT · CR9 | Membership log trong ngữ cảnh nhóm chỉ cho xem nhóm hiện tại đang chọn. Cách đếm Subgroups, Group by Parent, log nhánh con và lối nhật ký từ hồ sơ người chưa chốt, để sau. Dùng bản UAT Coverage do PO rút gọn làm phạm vi, không tự khôi phục các hàng đã bị xoá. Tên cột Reason còn đang được hỏi và đề xuất, chưa đổi PRD | “membership log chỉ cho xem nhóm hiện tại đang chọn” · “Chưa chốt câu trả lời, để sau” · “Tôi cập nhật UAT Coverage rồi” | PO | inputs/uat-coverage-20261104.md · US15 nhật ký |
+
+
+### Bổ sung ngày 04/11/2026: các cột Membership log
+
+| DEC | Ngày | Stage | Quyết định | Nguyên văn | Người quyết | Read when |
+|---|---|---|---|---|---|---|
+| DEC153 | 2026-11-04 | 2.42 · CR9 | Giữ tên cột Reason, bỏ cột Performed by khỏi bảng Membership log. Chỉ bỏ hiển thị, giữ yêu cầu lưu thông tin người thao tác để truy vết. Cập nhật phần tổng quan dữ liệu và US15 nhật ký; các nhãn tiếng Anh đề xuất cho giá trị Reason chưa được chốt. PRD v0.12 draft, chưa duyệt | “vậy đổi lại là reason đi, performed by không cần thiết” | PO | US15 nhật ký thành viên · inputs/uat-coverage-20261104.md |
+
+
+### Bổ sung ngày 04/11/2026: đồng bộ UAT Coverage với PRD
+
+| DEC | Ngày | Stage | Quyết định | Nguyên văn | Người quyết | Read when |
+|---|---|---|---|---|---|---|
+| DEC154 | 2026-11-04 | CR9 · 2.3 · 2.31 · 2.42 | Đồng bộ mục Reason của UAT Coverage với đúng năm giá trị trong PRD; bỏ bộ nhãn tiếng Anh đề xuất khác. Sửa những chỗ còn lệch của phần UAT được giữ lại: mã nhóm tự tạo do hệ thống cấp; Graph chỉ đổi tên, mặc định Table; nhật ký giới hạn nhóm đang chọn. Sửa liên quan requirements v0.7, impact-matrix v0.8, PRD v0.13, đều draft; không khôi phục mục đã xoá, không chốt thay mục để sau hoặc Account status | “5.1 trong UAT coverage phần reason đang khác, đổi lại và rà soát lại uat coverage với prd khác gì nhau thì thay đổi” | PO | UAT Coverage · tạo nhóm · danh sách nhóm · nhật ký |
+
+### Cập nhật phạm vi CR9 sau đồng bộ UAT
+
+| CR | Ngày | Nguồn | Nội dung bổ sung | Stage mở lại | Artifact đổi | Trạng thái |
+|---|---|---|---|---|---|---|
+| CR9 | 2026-11-04 | DEC154, UAT Coverage do PO rút gọn | Thay nhập mã tay bằng hệ thống cấp mã cho nhóm tự tạo; nhãn Graph, mặc định Table và giới hạn xem log theo nhóm hiện tại. Giữ đúng Reason, không hiện Performed by; không thay mục để sau | 2.3 · 2.31 · 2.42; 2.4 giữ danh sách user story, không chia lại; 2.43 chờ bản sửa được duyệt | requirements v0.7 draft · impact-matrix v0.8 draft · prd v0.13 draft · UAT Coverage | Đang mở, chờ kiểm tra/review và duyệt lại; không tự ghi duyệt |
+
+
+### Gộp số phiên bản nháp ngày 04/11/2026
+
+| DEC | Ngày | Stage | Quyết định | Nguyên văn | Người quyết | Read when |
+|---|---|---|---|---|---|---|
+| DEC155 | 2026-11-04 | CR9 · 2.42 | Gộp các mốc nháp thành ba phiên bản bàn giao: v0.9 giữ mốc 03/11; các nháp v0.10 và v0.11 cũ gộp thành v0.10; các nháp v0.12 và v0.13 cũ gộp thành v0.11 mới. PRD hiện tại là v0.11 draft. Nội dung nghiệp vụ không đổi. Các bản archive và dòng quyết định trước đó giữ nguyên để truy vết; số v0.13 trong DEC154 là số trước khi gộp | “bắt buộc phải đến v.013 à, không được gộp lại thành v09, v10, v11” | PO | phiên bản PRD hiện tại · CR9 |
+
+### Phiên bản hiện tại sau khi gộp
+
+| CR | Artifact hiện tại | Trạng thái |
+|---|---|---|
+| CR9 | requirements v0.7 draft · impact-matrix v0.8 draft · PRD v0.11 draft | Đang mở; số PRD đã được gộp theo DEC155, chưa duyệt lại |

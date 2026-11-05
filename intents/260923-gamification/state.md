@@ -75,3 +75,6 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-10-26 CR-015: ô EXP chuyển vào khối Levels theo design, thêm giải thích nền, bước, trần ngưỡng và câu chữ khối Levels (DEC168). Cập nhật Jira UPLND-401
 - 2026-10-27 CR-015 gộp EXP vào điểm: hạng lên theo điểm tích luỹ, thêm hành động điểm cho huy hiệu, giữ bảng Level (DEC169). Sửa ghi chú trong PRD
 - 2026-10-27 CR-015 ghi lý do giữ cả bảng Level và Points (DEC170), cập nhật Jira UPLND-401
+- 2026-11-03 CR-015 đổi tên ba giá trị ngưỡng (điểm lên hạng chuẩn, điểm cộng thêm mỗi hạng, điểm lên hạng tối đa) và chốt câu chữ khối Levels (DEC171). Cập nhật Jira UPLND-401
+- 2026-11-05 CR-015 phần xem trước khối Levels đổi thành bảng ba cột: lần lên hạng, điểm cần, độ khó so với lần trước theo phần trăm (DEC172). Cập nhật Jira UPLND-401 và user guide Ops
+- 2026-11-05 CR-015 bảng xem trước: cột 1 bỏ chữ Level, cột 3 đổi tên thành Difficulty vs previous (DEC173). Cập nhật Jira UPLND-401 và user guide Ops
