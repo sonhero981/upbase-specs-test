@@ -807,6 +807,8 @@ Mô hình bội số của `US10`, PRD v0.15. Ba tiêu chí độc lập, mỗi 
 | Huy hiệu góp vào hạng thế nào | **Thêm hành động `On each badge earned` trong khối `Points`.** Claude đề xuất huy hiệu không góp vào hạng, PO chọn khác |
 | Bảng xếp hạng `Level` | **Giữ.** Claude đề xuất bỏ vì gần trùng bảng `Points`, PO chọn khác. Lý do PO: *"để 2 bảng xếp hạng point và level cũng không sao, vì level là all time còn point còn xem được khoảng và theo campgain"* |
 
+**05/11/2026, lần 2:** cột 1 bỏ chữ `Level`, chỉ còn `1 → 2`. Cột 3 đổi tên thành `Difficulty vs previous`, `DEC173`.
+
 **05/11/2026:** dòng xem trước dưới ba ô điểm lên hạng đổi thành bảng ba cột: lần lên hạng, số điểm cần, độ khó so với lần trước tính bằng phần trăm, `DEC172`.
 
 **03/11/2026:** đổi tên ba giá trị cho Ops dễ hiểu: `nền` thành **điểm lên hạng chuẩn**, `bước` thành **điểm cộng thêm mỗi hạng**, `trần ngưỡng` thành **điểm lên hạng tối đa**. Câu chữ khối `Levels` viết lại theo PO, bỏ tiêu đề nhóm. Công thức không đổi, `DEC171`.
@@ -922,43 +924,43 @@ Hạng bắt đầu đứng yên tính bằng `(điểm lên hạng tối đa �
 | Sau ba ô | Tiêu đề | `Maximum level` |
 | Sau ba ô | Mô tả | `The highest level users can reach. Turn this off for no limit.` |
 
-**Bảng xem trước** (PO 05/11, `DEC172`, thay dòng xem trước một hàng chữ)
+**Bảng xem trước** (PO 05/11, `DEC172`, `DEC173`, thay dòng xem trước một hàng chữ)
 
 Bảng đặt ngay dưới ô 3, cho Ops thấy số điểm từng lần lên hạng và độ dốc của thang hạng trước khi rời ô.
 
 | Cột | Tiêu đề | Nội dung |
 |---|---|---|
-| 1 | `Level` | Lần lên hạng, dạng `Level {n} → {n+1}` |
+| 1 | `Level` | Lần lên hạng, dạng `{n} → {n+1}`, không có chữ `Level` |
 | 2 | `Points needed` | Số điểm cần cho lần lên hạng đó, tính theo công thức ở rule 2, dạng `{điểm} pts`, phân cách hàng nghìn bằng dấu phẩy |
-| 3 | `vs previous` | Độ khó so với lần lên hạng ngay trước, tính bằng `(điểm dòng này − điểm dòng trước) ÷ điểm dòng trước`, làm tròn tới số nguyên gần nhất (`.5` làm tròn lên), dạng `+{x}%`. Dòng đầu hiện `—`. Lớn hơn `0` nhưng làm tròn ra `0` thì hiện `+<1%` |
+| 3 | `Difficulty vs previous` | Độ khó so với lần lên hạng ngay trước, tính bằng `(điểm dòng này − điểm dòng trước) ÷ điểm dòng trước`, làm tròn tới số nguyên gần nhất (`.5` làm tròn lên), dạng `+{x}%`. Dòng đầu hiện `—`. Lớn hơn `0` nhưng làm tròn ra `0` thì hiện `+<1%` |
 
 Số dòng:
 
 | Trường hợp | Bảng hiện |
 |---|---|
-| Có điểm lên hạng tối đa, chạm mức tối đa trong 10 lần lên hạng đầu | Từng dòng tới lần lên hạng chạm mức tối đa, rồi một dòng `Level {k} onwards` · `{điểm tối đa} pts` · `Same as previous` |
-| Có điểm lên hạng tối đa, cần hơn 10 lần lên hạng mới chạm | 8 dòng đầu, một dòng `…`, dòng chạm mức tối đa, rồi dòng `Level {k} onwards` |
-| Bỏ trống điểm lên hạng tối đa | 10 dòng đầu, rồi dòng `Level 11 onwards` · `+{điểm cộng thêm} pts each level` · `—` |
+| Có điểm lên hạng tối đa, chạm mức tối đa trong 10 lần lên hạng đầu | Từng dòng tới lần lên hạng chạm mức tối đa, rồi một dòng `{k} onwards` · `{điểm tối đa} pts` · `Same as previous` |
+| Có điểm lên hạng tối đa, cần hơn 10 lần lên hạng mới chạm | 8 dòng đầu, một dòng `…`, dòng chạm mức tối đa, rồi dòng `{k} onwards` |
+| Bỏ trống điểm lên hạng tối đa | 10 dòng đầu, rồi dòng `11 onwards` · `+{điểm cộng thêm} pts each level` · `—` |
 | Điểm cộng thêm `= 0`, hoặc điểm tối đa bằng điểm chuẩn | Một dòng `Every level` · `{điểm chuẩn} pts` · `—` |
-| `Maximum level` đang bật và hạng tối đa đến trước các mốc trên | Bảng dừng ở dòng `Level {max−1} → {max}`, không có dòng `onwards` |
+| `Maximum level` đang bật và hạng tối đa đến trước các mốc trên | Bảng dừng ở dòng `{max−1} → {max}`, không có dòng `onwards` |
 
 Bảng cập nhật ngay khi Ops gõ, trước khi ô được lưu, để thấy hệ quả trước khi rời ô. Ô nào đang lỗi thì bảng tính theo giá trị đã lưu của ô đó.
 
 Ví dụ với điểm lên hạng chuẩn `250`, điểm cộng thêm mỗi hạng `250`, điểm lên hạng tối đa `2.500`:
 
-| `Level` | `Points needed` | `vs previous` |
+| `Level` | `Points needed` | `Difficulty vs previous` |
 |---|---|---|
-| `Level 1 → 2` | `250 pts` | `—` |
-| `Level 2 → 3` | `500 pts` | `+100%` |
-| `Level 3 → 4` | `750 pts` | `+50%` |
-| `Level 4 → 5` | `1,000 pts` | `+33%` |
-| `Level 5 → 6` | `1,250 pts` | `+25%` |
-| `Level 6 → 7` | `1,500 pts` | `+20%` |
-| `Level 7 → 8` | `1,750 pts` | `+17%` |
-| `Level 8 → 9` | `2,000 pts` | `+14%` |
-| `Level 9 → 10` | `2,250 pts` | `+13%` |
-| `Level 10 → 11` | `2,500 pts` | `+11%` |
-| `Level 11 onwards` | `2,500 pts` | `Same as previous` |
+| `1 → 2` | `250 pts` | `—` |
+| `2 → 3` | `500 pts` | `+100%` |
+| `3 → 4` | `750 pts` | `+50%` |
+| `4 → 5` | `1,000 pts` | `+33%` |
+| `5 → 6` | `1,250 pts` | `+25%` |
+| `6 → 7` | `1,500 pts` | `+20%` |
+| `7 → 8` | `1,750 pts` | `+17%` |
+| `8 → 9` | `2,000 pts` | `+14%` |
+| `9 → 10` | `2,250 pts` | `+13%` |
+| `10 → 11` | `2,500 pts` | `+11%` |
+| `11 onwards` | `2,500 pts` | `Same as previous` |
 
 Cột 3 dùng phần trăm vì chênh lệch tuyệt đối luôn bằng đúng điểm cộng thêm mỗi hạng, không cho Ops thêm thông tin. Phần trăm cho thấy thang hạng dốc ở các hạng đầu, thoải dần, rồi phẳng khi chạm mức tối đa.
 
