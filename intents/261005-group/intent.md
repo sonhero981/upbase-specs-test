@@ -31,7 +31,7 @@ Tenant: làm cho UpBase, dữ liệu và hạ tầng cho mọi tenant. Số cấ
 | Loại | Nguồn |
 |---|---|
 | Figma | chưa có |
-| Jira Epic / Story | Epic UPLNDEP-11 Group · UPLNDEP-12 Role & Permission · UPLNDEP-10 User (Student). 14 story UPLND-402 đến UPLND-414 và UPLND-420, tạo 26/10/2026 từ PRD v0.7, tách báo cáo theo CR8 (DEC133 đến DEC135): ORD-1 UPLND-403 · ORD-2 UPLND-402 · ORD-3 UPLND-404 · ORD-4 UPLND-405 · ORD-5 UPLND-406 · ORD-6 UPLND-407 · ORD-7 UPLND-408 · ORD-8 UPLND-409 · ORD-9 UPLND-410 · ORD-10 UPLND-411 · ORD-11 UPLND-412 · ORD-12 UPLND-413 · ORD-13 UPLND-414 · ORD-14 UPLND-420 (báo cáo mốc quá khứ, backlog) |
+| Jira Epic / Story | Epic UPLNDEP-11 Group · UPLNDEP-12 Role & Permission · UPLNDEP-10 User (Student). 14 story UPLND-402 đến UPLND-414 và UPLND-420, tạo 26/10/2026 từ PRD v0.7, tách báo cáo theo CR8 (DEC133 đến DEC135): ORD-1 UPLND-403 · ORD-2 UPLND-402 · ORD-3 UPLND-404 · ORD-4 UPLND-405 · ORD-5 UPLND-406 · ORD-6 UPLND-407 · ORD-7 UPLND-408 · ORD-8 UPLND-409 · ORD-9 UPLND-410 · ORD-10 UPLND-411 · ORD-11 UPLND-412 · ORD-12 UPLND-413 · ORD-13 UPLND-414 · ORD-14 UPLND-420 (báo cáo mốc quá khứ, backlog) · ORD-15 UPLND-472 (phân quyền chức năng Nhóm trên Ops, tạo 06/11/2026, DEC145) |
 | Design PIC · Tech PIC · QA PIC | Ghi theo vai, PIC điền tên khi ký Decision Brief (DEC86, DEC92) |
 | KB cần đọc | `04-class.md` (phân biệt với Lớp) · `06-user-account.md` · `12-data-model.md` · `14-api-surface.md` · `16-domain-principles.md` nguyên tắc 6, ranh giới Nhóm với Lớp |
 | Schema DB | [Lark Data Architecture](https://upbasevn.sg.larksuite.com/wiki/MaFpweI68iKNMvkTioLlJ1uJgQd), đã đối chiếu 05/10/2026 |
