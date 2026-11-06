@@ -139,3 +139,4 @@ Ký hiệu: `[ ]` chưa làm · `[-]` đang làm · `[?]` chờ duyệt · `[R]`
 - 2026-11-04 Kiểm đồng bộ CR9: PRD v0.13 check không cảnh báo, lớp AC GAP 0/ORPHAN 0; trace đầy đủ không hỗ trợ intent cũ thiếu stories.md. Requirements có 76 cảnh báo, impact-analysis có 291 cảnh báo về mục template/thẻ nguồn/cột FR của cấu trúc cũ; không mở rộng sửa toàn bộ để tránh chạm phần không liên quan. UAT Coverage đã bỏ các nhãn Reason đề xuất cũ và cập nhật trạng thái đúng bản PRD hiện tại.
 
 - 2026-11-04 DEC155: theo yêu cầu PO, gộp các mốc nháp thành v0.9, v0.10, v0.11. PRD hiện tại đổi số từ v0.13 draft thành v0.11 draft; nội dung nghiệp vụ không đổi. Cập nhật tham chiếu hiện tại trong UAT Coverage và bản rà soát. Lưu pre-CR9-version-merge; giữ nguyên các bản archive và ghi chép lịch sử trước khi gộp.
+- 2026-11-06 Tạo UPLND-472 phân quyền chức năng Nhóm trên Ops (DEC156); comment các story đổi thứ tự sang n/15. PRD chưa có US cho bộ quyền, chưa đưa vào CR9
