@@ -194,8 +194,10 @@ features/group/src/
       GroupFlowNode.tsx            #   node = hộp nhóm (Handle + nút đóng/mở nhánh)
       layout.ts                    #   dàn cây -> nodes/edges (top-down), levelsForZoom()
     GroupForm/                     # form tạo/sửa (RHF + Zod schema.ts)
-    GroupCreate/                   # Drawer bọc GroupForm (tạo)
-    GroupDetail/                   # header + info card + nút Sửa/Lưu trữ/Xoá/Khôi phục + antd Tabs + Drawer sửa
+      GroupFormFields.tsx          #   4 field SCR2, dùng chung cho form tạo và tab Info
+    GroupCreate/                   # Modal toàn màn 2 bước bọc GroupForm (tạo)
+    GroupDetail/                   # header + info card + nút Sửa/Lưu trữ/Xoá/Khôi phục + antd Tabs
+    tabs/GroupInfoTab.tsx          # tab Info (tab mặc định): sửa tại chỗ (useEditMode + EditModeActions), thay form SCR2
     GroupQuickDrawer/              # drawer xem nhanh khi bấm node ở dạng Cây (US6+US9)
     AddMemberModal/                # tìm + chọn người để thêm (US3)
     ImportMembersModal/            # nhập tệp + log lỗi (US4, mock)
@@ -325,7 +327,7 @@ export const GROUP_DETAIL_TAB = {
   REPORT: 'report', HISTORY: 'history',
 };
 ```
-- **Tạo/sửa** nhóm: Drawer (`GroupCreate` / Drawer trong `GroupDetail`), không có `/groups/create` hay `/groups/:id/edit`.
+- **Tạo** nhóm: modal toàn màn 2 bước (`GroupCreate`). **Sửa** nhóm: tab `Info` ở chi tiết, sửa tại chỗ (`GroupInfoTab`, theo mẫu `Class Information`). Không có `/groups/create` hay `/groups/:id/edit`.
 - **Chi tiết**: `/groups/:id/*`, `GroupDetail` đọc segment cuối để chọn tab, mặc định redirect `→ /groups/:id/members`.
 - **Nhật ký (US15)**: tab trong chi tiết (không route `/groups/log`).
 - ⛔ **`/my-team` (US16)**: chưa dựng (chờ auth tài khoản học viên vào Ops).
@@ -549,7 +551,7 @@ Một bảng quyết định ở `GroupInfoCard` / tabs, tránh rải điều ki
 
 Bấm một nhóm ở **dạng Cây** không điều hướng sang trang chi tiết mà mở **`GroupQuickDrawer`** (BaseDrawer bên phải):
 - Thông tin tóm tắt: nhãn nguồn/trạng thái, Mã, Số thành viên, Lần đồng bộ (nếu Đồng bộ), Mô tả.
-- Danh sách **quản lý** + nút **Gán quản lý** (mở `AssignSupervisorModal`) — gán được cả cho nhóm đồng bộ (`BR-9.4`).
+- Tab **Managers** (cạnh tab Members, không còn là khối dưới tab Overview — chốt 10/11/2026): danh sách **quản lý** + nút **Gán quản lý** (mở `AssignSupervisorModal`) — gán được cả cho nhóm đồng bộ (`BR-9.4`).
 - Nút **Mở chi tiết nhóm** → điều hướng `/groups/:id/members`.
 - Nhóm đồng bộ hiện banner khoá sửa.
 

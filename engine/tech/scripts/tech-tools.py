@@ -63,7 +63,9 @@ def unit_id(name):
 class Intent:
     def __init__(self, path):
         self.dir = Path(path).resolve()
-        self.store = self.dir.parents[2]
+        # Gốc store là thư mục tổ tiên có `openspec/`. Không đếm cứng số cấp: bố cục `intents/<slug>` (nay)
+        # và `.claude/intents/<slug>` (cũ) sâu khác nhau.
+        self.store = next((p for p in self.dir.parents if (p / "openspec").is_dir()), self.dir.parents[1])
         self.slug = self.dir.name
         self.problems = []
 

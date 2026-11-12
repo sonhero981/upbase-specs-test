@@ -132,6 +132,24 @@ Verify và build khi kết thúc từng repo:
 
 Việc nhỏ chỉ một repo, không có intent: repo FE dùng `/fix-bug` hoặc change `--schema spec-driven`; lms-be dùng `/opsx:new upbase-<ticket>-<slug>` (schema `be-feature`) hoặc `--schema be-bugfix`.
 
+Comet theo repo (cột `flow` trong `workspace.yaml`):
+
+| Repo | `flow` | Schema mặc định của repo | Ghi chú |
+|---|---|---|---|
+| ops-fe | `comet` | `fe-feature-comet`: bản của `fe-feature`, chỉ đổi `apply.requires` từ `assignment` sang `tasks` | Comet Classic chỉ nhận artifact `proposal`, `specs`, `design`, `tasks`; `assignment` nằm ngoài nên không đứng trong `apply.requires` được |
+| lms-fe · lms-package | `comet` | `run-comet`: `proposal` (con trỏ + mục tiêu), `specs` (bắt buộc với change có intent: Requirement `US<n>` và Scenario `AC <id>` kèm BR, TC, lấy từ specs của Bolt ở store để đọc cùng PRD), `design` (con trỏ tới thiết kế Tech đã duyệt), `tasks` | Schema `run` có artifact `context`, không dùng được với Comet. Thư mục `run` vẫn giữ vì lệnh `/fe`, `/opsx:*` trỏ vào templates của nó |
+| lms-be | `opsx`, `change_style: feature` | `be-feature` | Chưa dùng Comet: Comet 0.5.2 từ chối `comet state init` khi gốc repo có `yarn.lock`, và chủ repo chưa cần. Change theo feature, tên `upbase-<ticket>-<slug>`, người tạo bằng `/opsx:new`; không có schema `run`. `/bolt` chỉ tìm change giữ việc của Bolt (hoặc hỏi) và ghi vào cột "Change ở repo" của `handoff.md`, không tự tạo |
+
+- Máy cần Node ≥ 22.16 và `npm i -g @rpamis/comet`. Cài từng repo: `comet init --workflow classic --platform claude --scope project --skip-existing --codegraph skip --language en`, rồi trong `.comet/config.yaml` đặt `artifact_layout: legacy`, `auto_transition: false`, `memory.learning: false`. Cài ở gốc workspace không có tác dụng (Comet ở đó chỉ thấy `docs/openspec/`).
+- Cổng Tech là hook trong `.claude/hooks/` của từng repo `comet` (`comet-tech-gate.mjs`, `comet-file-policy.mjs`), nối qua `.claude/settings.json`. Hook chỉ chạy khi phiên Claude mở trong repo.
+- Intent đi đường ngắn chưa có `contract-summary.md` (vd `261005-group`, DEC-T1): cổng Tech chặn cho tới khi có contract. Owner repo muốn miễn thì tự tạo `<change>/.comet/tech-gate-waiver.md` (đủ `Cổng bị miễn:`, `Người quyết:`, `Lý do:`) ngoài Claude, ghi điều kiện thu hồi.
+- **Specs đọc cùng PRD** (yêu cầu của CTO): change có intent ở repo `comet` phải có `specs/<capability>/spec.md` theo định dạng specs của Bolt ở store (`### Requirement: US<n> …`, `#### Scenario: AC <id> … (BR-x.y)` WHEN/THEN, TC cuối dòng), không đặt `skip_specs: true`. Chỉ change không có intent (refactor, fix nhỏ) mới bỏ qua. Hook `comet-tech-gate` chặn rời pha Design nếu thiếu specs, còn `skip_specs`, hoặc file spec không có Scenario. Specs ở repo là bản lọc từ store nên có nguy cơ lệch khi store đổi: dựa vào "Store commit" ở `proposal.md` để phát hiện.
+- **Gói bàn giao thành file** (học từ `.comet/batches/*.json` của `product-ups`): `/bolt` ghi `handoff.md` vào change Bolt ở store (mẫu `engine/tech/templates/handoff.md`) thay vì chỉ in ra terminal. Phiên `/comet` ở mỗi repo đọc mục của repo mình trước `/comet-open` (schema `*-comet` có dặn ở artifact `proposal`), nên ba repo dùng chung Store commit, đường dẫn cần đọc và "Quyết định chung". File ghi `store_dirty` khi cây làm việc của store có sửa chưa commit, và `/bolt` cập nhật cột Trạng thái khi repo xong. `openspec validate` và `tech-tools check` bỏ qua file này (đã thử).
+- **Báo cáo verify theo mẫu** (học từ cách `product-ups` verify): mỗi schema `*-comet` có `templates/verify-report.md` và nhóm task kết thúc có một task báo cáo verify. Mẫu buộc: bảng đối chiếu từng Scenario của specs, cột baseline cho mỗi kiểm tra (chạy trên worktree tạm của nhánh nền để tách lỗi có sẵn khỏi lỗi do change), chứng minh hồi quy khi sửa lỗi (test thất bại trước khi sửa, hoàn tác thử thì thất bại lại), review độc lập có phân mức.
+- **Chọn lệnh theo loại việc**: Bolt tính năng đi luồng đầy đủ (`/bolt` rồi `/comet-open`); sửa lỗi cục bộ dùng `/comet-hotfix`; chỉnh nhẹ dùng `/comet-tweak`. Ở `product-ups` (180 change đã đo) khoảng 56% là hotfix, 34% full, 10% tweak, nên đừng ép mọi việc qua Design.
+- Pha Design của Comet chỉ nhận thiết kế Tech: `design.md` của change là con trỏ, không brainstorm lại (`rules.design` trong `openspec/config.yaml` của repo).
+- Change đã tạo từ trước bằng luồng `opsx` giữ luồng đó cho tới khi xong, trừ khi owner chủ động chuyển sang Comet.
+
 ## ui-map
 
 Wrapper và token của design system: `UpBase*` (lms-fe) và `@ops/ui` (ops-fe); token Tailwind ở lms-fe, SCSS ở ops-fe.

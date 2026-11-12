@@ -22,6 +22,10 @@ people:
 # Repo code trong workflow. Thêm repo = thêm một mục ở đây rồi chạy scripts/setup.py:
 # script sẽ ghi additionalDirectories vào .claude/settings.json và tạo khung codekb rỗng.
 # Sau đó chạy 2.1 Reverse Engineering cho repo mới để điền codekb.
+# `flow` quyết định /bolt code repo đó thế nào: `opsx` (mặc định) = subagent chạy opsx:apply; `comet` = bàn giao cho
+# phiên /comet mở trong repo (repo phải cài Comet, xem SETUP.md mục Comet).
+# Repo `opsx` còn có `change_style`: `bolt` (mặc định) = /bolt tạo change theo tên Bolt (schema run);
+# `feature` = change theo feature do người tạo (tên theo ticket, schema *-feature), /bolt chỉ tìm và ghi lại.
 repos:
   - id: lms-be
     path: ../lms-be
@@ -31,6 +35,8 @@ repos:
     owner: "Đoàn Quang Cường"
     conventions: "CLAUDE.md → openspec/README.md, openspec/conventions/*"
     gate: "curl verify (openspec/conventions/verification.md), MR theo git.md"
+    flow: opsx
+    change_style: feature
 
   - id: ops-fe
     path: ../ops-fe
@@ -40,6 +46,7 @@ repos:
     owner: "Nguyễn Hùng Sơn"
     conventions: ".claude/CLAUDE.md, .claude/rules/, .claude/inventory/"
     gate: "/ui-gate (SCSS), pnpm typecheck:ops-fe"
+    flow: comet
 
   - id: lms-fe
     path: ../lms-fe
@@ -49,6 +56,7 @@ repos:
     owner: "Nguyễn Hùng Sơn"
     conventions: ".claude/CLAUDE.md, .claude/rules/01–08, .claude/inventory/01–05"
     gate: "/ui-gate build|review (input: ui-map), check-types"
+    flow: comet
 
   - id: lms-package
     path: ../lms-package
@@ -58,6 +66,7 @@ repos:
     owner: "Nguyễn Hùng Sơn"
     conventions: ".claude/CLAUDE.md"
     gate: "build, bump version semver, PR vào main"
+    flow: comet
 
 # Thứ tự implement một change chạm nhiều repo.
 build_order: [lms-package, lms-be, ops-fe, lms-fe]

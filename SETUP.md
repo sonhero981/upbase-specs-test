@@ -9,9 +9,9 @@ Hướng dẫn cho **người mới** và cho việc **thêm một repo** vào w
 | PO | A → D | [USER-GUIDE.md](USER-GUIDE.md), rồi `/po` |
 | Tech lead (FE / BE) | A → D | [engine/tech/knowledge/workflow.md](engine/tech/knowledge/workflow.md), rồi `/tech` |
 | QA | A → D | workflow.md mục 2 (stage 2.81, 3.6) |
-| Dev code một repo | Không cần cài repo này. Làm trong repo của mình theo `openspec/` ở đó | workflow.md §4.2 |
+| Dev code một repo | Không cần cài repo này. Làm trong repo của mình theo `openspec/` ở đó; repo `flow: comet` thì thêm mục G | workflow.md §4.2 |
 | Người thêm sản phẩm mới | A → E | [DOMAIN-SETUP.md](DOMAIN-SETUP.md) |
-| Người giữ khung | A → F | [CHANGELOG.md](CHANGELOG.md), mục "Sửa engine" trong [AGENTS.md](AGENTS.md) |
+| Người giữ khung | A → G | [CHANGELOG.md](CHANGELOG.md), mục "Sửa engine" trong [AGENTS.md](AGENTS.md) |
 
 ## B. Cần có trên máy
 
@@ -24,6 +24,8 @@ Hướng dẫn cho **người mới** và cho việc **thêm một repo** vào w
 | Claude Code | bản mới | `claude --version` | [Hướng dẫn cài](https://docs.anthropic.com/en/docs/claude-code/setup) |
 
 Khuyến nghị thêm: `pip install pyyaml` (sensor `tech-tools.py` cần).
+
+Chỉ khi làm ở repo có `flow: comet` trong `workspace.yaml`: Node.js **≥ 22.16** (không phải LTS cũ) và Comet CLI, xem mục G.
 
 ## C. Cài — một lệnh
 
@@ -132,6 +134,19 @@ openspec validate --all --strict
 Engine lên version mới thì đọc mục tương ứng trong [CHANGELOG.md](CHANGELOG.md): mỗi bản có dòng *Tương thích* nói
 rõ chỉ cần chép engine, hay phải chạy migrate, hay phải sửa intent bằng tay.
 
+## G. Comet cho repo code (chỉ repo `flow: comet`)
+
+Repo code có `flow: comet` trong `workspace.yaml` chạy vòng đời change bằng Comet Classic (OpenSpec + Superpowers). Việc này làm **trong từng repo code**, không làm ở gốc repo khung hay gốc workspace (Comet ở đó không thấy `openspec/` của repo).
+
+1. Máy có Node.js ≥ 22.16 (`node --version`), rồi `npm install -g @rpamis/comet` và kiểm `comet --version`.
+2. Trong repo code, trên nhánh làm việc: `comet init --workflow classic --platform claude --scope project --skip-existing --codegraph skip --language en`.
+3. Trong `.comet/config.yaml` của repo đặt `artifact_layout: legacy`, `auto_transition: false`, `memory.learning: false`.
+4. Schema mặc định của repo phải là bản `*-comet` (`openspec/config.yaml`), xem `domain/tech-adjustments.md` mục `bolt`.
+5. Hook cổng Tech và chính sách file có trong `.claude/hooks/` của repo và được nối ở `.claude/settings.json`. Mở Claude Code **trong repo** (hook không chạy khi mở ở nơi khác), rồi `/comet-open <tên change>`.
+6. Kiểm: `comet doctor` ở repo không có dòng ✗.
+
+Repo có file `*.lock` ở gốc (như `yarn.lock`) hiện không chạy được `comet state init` (lỗi của Comet 0.5.2), nên để `flow: opsx`.
+
 ## Khi gặp lỗi
 
 | Lỗi | Cách sửa |
@@ -144,6 +159,9 @@ rõ chỉ cần chép engine, hay phải chạy migrate, hay phải sửa intent
 | Muốn đổi quyền, luật chặn hay hook | Sửa `scripts/settings.base.json` rồi chạy `python scripts/setup.py`. Sửa thẳng `.claude/settings.json` sẽ mất ở lần chạy sau |
 | `codekb <repo> còn rỗng` | Bình thường với repo mới. Chạy stage 2.1 Reverse Engineering |
 | Windows chặn chạy script | Chạy một lần: `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` |
+| `[cổng Tech] <change> chưa được đi tiếp` | Contract chưa `status: agreed` hoặc còn `NEEDS CLARIFICATION`. Chờ BE lead ký, hoặc owner repo tự tạo `<change>/.comet/tech-gate-waiver.md` ngoài Claude |
+| `comet state init` báo "旧 Runtime 含锁…" | Repo có `*.lock` ở gốc (lỗi Comet 0.5.2). Để `flow: opsx` cho repo đó |
+| `pnpm` hoặc `yarn` "command not found" sau khi đổi Node | `nvm` giữ gói global theo từng bản Node: cài lại `pnpm`, `yarn` cho bản Node đang dùng |
 | `engine-check` báo mục *Bị sửa* | Có người sửa tay file engine. Sửa engine thì sửa ở repo PO; ở đây lấy lại bản gốc: `git checkout po/main -- <file>` |
 | `engine-check` báo *Mới, chưa có trong manifest* | Trừ `engine/tech/` và `engine/commands/new-domain.md` là phần thêm của khung này, còn lại là file PO đã xoá: xoá tay rồi `po-tools.py manifest --write` |
 | `git push po` báo lỗi | Đúng như thiết kế: remote `po` chỉ nhận, không gửi. Công việc của khung này push lên `origin` |

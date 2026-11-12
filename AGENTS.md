@@ -112,7 +112,7 @@ Hai điểm nối với phần PO:
 - **Điều kiện vào.** `/tech` chỉ khởi tạo khi `state.md` của PO có `2.43 [x]`, mục 0 của `inception/tech-design/tech-design.md` kết luận ĐỦ và mục 8 không còn dòng Chặn chưa chốt. Tech Design 1 là bản sơ lược mô tả cấu trúc và làm rõ vấn đề, Tech PIC viết ở 2.43; thiết kế chi tiết chạy sau khi họp chốt. Không có stage riêng để kiểm PRD.
 - **Một sổ quyết định.** Quyết định của Tech ghi `DEC-T<n>` vào `decisions.md` của intent, cùng sổ với PO, cột *Read when* ghi stage Tech.
 
-Owner Bolt (dev fullstack) chạy cả Bolt FE + BE từ store bằng `/bolt [change]`; quyền sửa repo code lấy từ `repos:` trong `workspace.yaml`.
+Owner Bolt (dev fullstack) chạy cả Bolt FE + BE từ store bằng `/bolt [change]`; quyền sửa repo code lấy từ `repos:` trong `workspace.yaml`. Cột `flow` của repo quyết định cách code: `opsx` thì `/bolt` chạy subagent (cột `change_style`: `bolt` mặc định thì `/bolt` tạo change theo Bolt, `feature` thì change theo feature do người tạo và `/bolt` chỉ tìm rồi ghi lại); `comet` thì `/bolt` kiểm cổng, đặt branch rồi bàn giao, người mở phiên Claude trong repo và chạy `/comet` (Comet có điểm dừng chờ người và hook cổng Tech nằm trong repo, nên không chạy bằng subagent).
 
 ## Sửa engine
 
